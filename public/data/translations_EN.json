@@ -1,0 +1,298 @@
+{
+  "EN": {
+    "Actions": {
+      "CategoryAdd": "Add category",
+      "CategoryDelete": "Delete all categories",
+      "ClassAdd": "Add class",
+      "ClassDelete": "Delete all classes",
+      "No": "No",
+      "PupilAdd": "Add pupil",
+      "PupilDelete": "Delete all pupils",
+      "ReportAdd": "Add report",
+      "ReportDelete": "Delete all reports",
+      "SidebarItemDelete": "Delete",
+      "SidebarItemEdit": "Edit",
+      "TextAdd": "Add text",
+      "TextDelete": "Delete all texts",
+      "Expand": "Expand",
+      "Contract": "Contract"
+    },
+    "App": {
+      "Name": "School Report"
+    },
+    "AppError": {
+      "ErrorTxt": "Error Loading"
+    },
+    "Builder": {
+      "TextTitle": "Text:",
+      "Breadcrumb": "Build Report",
+      "WinTitle": "Build Report"
+    },
+    "BuildReportLayout": {
+      "WinTitle": "Build report '%REPORT_NAME%'"
+    },
+    "Categories": {
+      "BackToCategories": "Cancel",
+      "Breadcrumb": "Categories",
+      "CreateCategoryBtnLabel": "Create Category",
+      "Default": "Uncategorised",
+      "LabelPlaceholder": "Name of category...",
+      "PersistenceDeleted": "All categories deleted",
+      "PersistenceDeleteError": "Unable to delete categories",
+      "PersistenceEdit": "Category updated",
+      "PersistenceEditError": "Unable to save changes to category",
+      "PersistenceNew": "New category saved",
+      "PersistenceNewError": "Unable to save new category",
+      "UpdateCategoryBtnLabel": "Update Category",
+      "WinTitle": "Categories"
+    },
+    "Classes": {
+      "BackToClasses": "Cancel",
+      "Breadcrumb": "Classes",
+      "CreateClassBtnLabel": "Create Class",
+      "LabelPlaceholder": "Name of class...",
+      "PersistenceDeleted": "All classes deleted",
+      "PersistenceDeleteError": "Unable to delete classes",
+      "PersistenceEdit": "Class updated",
+      "PersistenceEditError": "Unable to save changes to class",
+      "PersistenceNew": "New class saved",
+      "PersistenceNewError": "Unable to save new class",
+      "UpdateClassBtnLabel": "Update Class",
+      "WinTitle": "Classes"
+    },
+    "DeleteCategoriesLayout": {
+      "BtnLabel": "Delete all categories",
+      "Headline": "Are you sure you want to delete ALL categories?",
+      "HeadlineDeleting": "Deleting ALL categories",
+      "WinTitle": "Delete all categories"
+    },
+    "DeleteClassesLayout": {
+      "BtnLabel": "Delete all classes",
+      "Headline": "Are you sure you want to delete ALL classes?",
+      "HeadlineDeleting": "Deleting ALL classes",
+      "WinTitle": "Delete all classes"
+    },
+    "DeletePupilsLayout": {
+      "Back": "Back to pupils list",
+      "BtnLabel": "Delete all pupils",
+      "Headline": "Are you sure you want to delete ALL pupils from '%CLASS_NAME%'?",
+      "HeadlineDeleting": "Deleting ALL pupils",
+      "WinTitle": "Delete all pupils from '%CLASS_NAME%'"
+    },
+    "DeleteReportsLayout": {
+      "Back": "Back to reports list",
+      "BtnLabel": "Delete all reports",
+      "Headline": "Are you sure you want to delete ALL reports?",
+      "HeadlineDeleting": "Deleting ALL reports",
+      "WinTitle": "Delete all reports"
+    },
+    "DeleteTextsLayout": {
+      "Back": "Back to texts list",
+      "BtnLabel": "Delete all texts",
+      "Headline": "Are you sure you want to delete ALL texts?",
+      "HeadlineDeleting": "Deleting ALL texts",
+      "WinTitle": "Delete all texts"
+    },
+    "EditClassesLayout": {
+      "WinTitle": "Edit class '%CLASS_NAME%'"
+    },
+    "EditPupilLayout": {
+      "WinTitle": "Edit pupil '%PUPIL_NAME%'"
+    },
+    "EditReportsLayout": {
+      "WinTitle": "Edit report '%REPORT_NAME%'"
+    },
+    "EditTextLayout": {
+      "WinTitle": "Edit text '%TEXT%'"
+    },
+    "EditPanelHeader": {
+      "AddCategory": "Add new category",
+      "AddClass": "Add new class",
+      "AddPupil": "Add new pupil",
+      "AddReport": "Add new report",
+      "AddText": "Add new text",
+      "BuildReport": "Build '%REPORT_NAME%'",
+      "DeleteCategories": "Delete categories",
+      "DeleteClasses": "Delete classes",
+      "DeletePupils": "Delete pupils",
+      "DeleteReports": "Delete reports",
+      "DeleteTexts": "Delete texts",
+      "EditCategory": "Edit '%CATEGORY_NAME%'",
+      "EditClass": "Edit '%CLASS_NAME%'",
+      "EditPupil": "Edit '%PUPIL_NAME%'",
+      "EditReport": "Edit '%REPORT_NAME%'",
+      "EditText": "Edit '%TEXT%'",
+      "ReportBuilder": "Report text for '%PUPIL_NAME%'",
+      "Settings": "Settings"
+    },
+    "Gender": {
+      "Female": "Girl",
+      "Male": "Boy"
+    },
+    "HomeLayout": {
+      "Categories": "Categories",
+      "CategoriesDescription": "Create/Edit text categories",
+      "Classes": "Classes",
+      "ClassesDescription": "Create/Edit classes and pupils",
+      "Reports": "Reports",
+      "ReportsDescription": "Create/Edit school reports",
+      "Settings": "Settings",
+      "SettingsDescription": "Manage school report settings",
+      "Texts": "Texts",
+      "TextsDescription": "Create/Edit the texts for your reports"
+    },
+    "InfoMessage": {
+      "Builder": "Create/export your reports",
+      "BuilderMsg": "You will not be able to edit classes or pupils here",
+      "Categories": "Manage categories to organise and group your report texts",
+      "CategoriesMsg": "",
+      "Classes": "Manage classes and pupils for use in your reports",
+      "ClassesMsg": "Select a class to view/edit its pupils",
+      "Pupils": "Manage pupils in %CLASS_NAME%",
+      "PupilsMsg": "",
+      "Reports": "Manage your reports",
+      "ReportsMsg": "",
+      "Texts": "Manage your report texts",
+      "TextsMsg": ""
+    },
+    "ItemList": {
+      "NoItems": "No items matched your search",
+      "None": "No %NAME% exist"
+    },
+    "ItemSelection": {
+      "Clear": "Clear search",
+      "Placeholder": "Search..."
+    },
+    "NewCategoryLayout": {
+      "WinTitle": "Add new category"
+    },
+    "NewClassLayout": {
+      "WinTitle": "Add new class"
+    },
+    "NewPupilLayout": {
+      "WinTitle": "Add new pupil"
+    },
+    "NewReportLayout": {
+      "WinTitle": "Add new report"
+    },
+    "NewTextLayout": {
+      "WinTitle": "Add new text"
+    },
+    "NoData": {
+      "BusyTxt": "Saving Data",
+      "ClassMessage": "Doesn't look like you have any reports yet, why not create your first class?",
+      "ClassMessageInfo": "You can add more classes later.",
+      "DataPersisted": "Initial data created",
+      "ErrorTxt": "Error Saving Data",
+      "PersistenceError": "Unable to save initial data",
+      "PupilMessage": "A class is no good without pupils, so add one now:",
+      "PupilMessageInfo": "You can add more pupils later.",
+      "TextBtnLabel": "Create Text",
+      "TextMessage": "And you also need to create at least one text for your reports to use:"
+    },
+    "NotFound": {
+      "Back": "Back to School Report",
+      "Message": "Page or resource not found"
+    },
+    "Pupils": {
+      "BackToPupils": "Cancel",
+      "Breadcrumb": "Pupils in '%CLASS_NAME%'",
+      "CreatePupilBtnLabel": "Create Pupil",
+      "DescriptionPlaceholder": "Optional description...",
+      "FirstnamePlaceholder": "First name...",
+      "LastnamePlaceholder": "Last name...",
+      "PersistenceDeleteByClassError": "Unable to delete pupils from '%CLASS_NAME%'",
+      "PersistenceDeletedByClass": "Pupils deleted from '%CLASS_NAME%'",
+      "PersistenceEdit": "Pupil updated",
+      "PersistenceNew": "New pupil created",
+      "PersistenceNewError": "Unable to create new pupil",
+      "UpdatePupilBtnLabel": "Update Pupil",
+      "WinTitle": "Pupils in '%CLASS_NAME%'"
+    },
+    "PupilForm": {
+      "AddBtnLabel": "Add Pupil",
+      "FirstnamePlaceholder": "First name...",
+      "DescriptionPlaceholder": "Optional description...",
+      "LastnamePlaceholder": "Last name..."
+    },
+    "ReportPanel": {
+      "NoneSelected": "Click the + button to add a text"
+    },
+    "ReportsTextList": {
+      "None": "No texts available."
+    },
+    "Reports": {
+      "BackToReports": "Cancel",
+      "Breadcrumb": "Reports",
+      "CreateReportBtnLabel": "Create Report",
+      "LabelPlaceholder": "Name of report...",
+      "PersistenceDeleted": "All reports deleted",
+      "PersistenceDeleteError": "Unable to delete reports",
+      "PersistenceNew": "New report saved",
+      "ReportClasses": "Select classes to include (%SELECTED%/%TOTAL%):",
+      "PersistenceNewError": "Unable to save new report",
+      "PersistenceEdit": "Report updated",
+      "PersistenceEditError": "Unable to save changes to report",
+      "UpdateReportsBtnLabel": "Update Report",
+      "WinTitle": "Reports"
+    },
+    "Settings": {
+      "Breadcrumb": "Settings",
+      "Cancel": "Cancel",
+      "LabelLanguage": "Language",
+      "LanguageChanged": "Language:",
+      "PersistenceEdit": "Settings updated",
+      "UpdateSettingsBtnLabel": "Update Settings",
+      "WinTitle": "Settings"
+    },
+    "SidebarNoItems": {
+      "Categories": "There are no categories, click the + button to add a new category.",
+      "Classes": "There are no classes, click the + button to add a new class.",
+      "Pupils": "There are no pupils, click the + button to add a new pupil.",
+      "Reports": "There are no reports, click the + button to add a new report.",
+      "Texts": "There are no texts, click the + button to add a new text."
+    },
+    "SidebarItem": {
+      "Delete": "Delete"
+    },
+    "SidebarHeader": {
+      "Header-build": "Report Classes / Pupils",
+      "Header-category": "Categories",
+      "Header-class": "Classes",
+      "Header-pupil": "Pupils",
+      "Header-report": "Reports",
+      "Header-text": "Texts"
+    },
+    "Symbols": {
+      "Add": "+",
+      "Delete": "-"
+    },
+    "Texts": {
+      "BackToTexts": "Cancel",
+      "BodytextPlaceholder": "Enter a text to be used in the report...",
+      "Breadcrumb": "Texts",
+      "CreateTextBtnLabel": "Create Text",
+      "PersistenceDeleted": "All texts deleted",
+      "PersistenceDeleteError": "Unable to delete texts",
+      "PersistenceEdit": "Text updated",
+      "PersistenceEditError": "Unable to save changes to text",
+      "PersistenceNew": "New text created",
+      "PersistenceNewError": "Unable to create new text",
+      "ReportCategories": "Text categories (%SELECTED%/%TOTAL%):",
+      "UpdateTextBtnLabel": "Update Text",
+      "WinTitle": "Texts"
+    },
+    "Toastr": {
+      "PersistenceError": "Error Saving"
+    },
+    "Validation": {
+      "CategoryLabel": "A category name is required",
+      "ClassLabel": "A class name is required",
+      "PupilFirstname": "A first name is required",
+      "PupilLastname": "A last name is required",
+      "ReportLabel": "A report name is required",
+      "ReportClasses": "Select at least 1 class",
+      "TextBodytext": "A text is required"
+    }
+  }
+}

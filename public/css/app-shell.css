@@ -1,0 +1,21 @@
+/* App Shell CSS */
+/* ------------- */
+
+  /* Fonts */
+@import "./fonts/fonts.css";
+
+  /* Vendor */
+@import "./vendor/react-select.css";
+@import "./vendor/react-redux-toastr.css";
+
+  /* Base */
+@import "./base/normalize.css";
+@import "./base/vars.css";
+@import "./base/keyframes.css";
+@import "./base/tags.css";
+@import "./base/apploader.css";
+@import "./base/toastr.css";
+
+  /* UI */
+@import "./ui/forms.css";
+@import "./ui/select.css";

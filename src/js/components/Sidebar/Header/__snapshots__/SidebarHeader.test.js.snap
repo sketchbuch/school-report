@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SidebarHeader /> Props render correctly 1`] = `
+<header
+  className="SidebarHeader"
+>
+  <h1
+    className="SidebarHeader__headline"
+  >
+    Test title
+  </h1>
+</header>
+`;

@@ -1,0 +1,38 @@
+/* Not Found */
+/* --------- */
+
+.NotFound {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.NotFound__msg {
+  text-align: center;
+  font-size: var(--font-size-large);
+  line-height: var(--lh-reduced);
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--font-size-large);
+  color: var(--col-darken-5);
+}
+
+.NotFound__submsg a {
+  color: var(--col-primary);
+  text-decoration: none;
+}
+
+.NotFound__submsg a:hover {
+  color: var(--col-primary-light);
+  text-decoration: underline;
+}
+
+.NotFound__submsg a:active {
+  color: var(--col-primary-dark);
+  text-decoration: none;
+}

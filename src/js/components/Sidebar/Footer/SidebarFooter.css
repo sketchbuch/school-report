@@ -1,0 +1,62 @@
+/* Sidebar Footer */
+/* -------------- */
+
+.SidebarFooter {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  margin: 0px;
+  padding: 2px;
+  width: 100%;
+  height: var(--sidebar-footer-height);
+  border-top: 1px solid var(--col-darken-1);
+  background: var(--col-lighten-5);
+}
+
+.SidebarFooter__actionsBox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0px;
+  padding: 10px 20px;
+}
+
+.SidebarFooter__actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+}
+
+.SidebarFooter__actions--left {
+  padding-right: 10px;
+}
+
+.SidebarFooter__actions--right {
+  justify-content: flex-end;
+  padding-left: 10px;
+}
+
+.SidebarFooter__action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+@media screen and (min-width: 1024px) {
+    .SidebarFooter {
+      border-right: 1px solid var(--col-sidebar-border);
+    }
+}

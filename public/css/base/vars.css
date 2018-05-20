@@ -1,0 +1,117 @@
+/* Vars */
+/* ---- */
+
+:root {
+  /* Colours */
+  --col-bg: #fcf5f5;
+  --col-white: #fff;
+  --col-offwhite: #f4f4f4;
+  --col-black: #000;
+  --col-blue: #5ab6dd;
+  --col-blue-light: #53c6ef;
+  --col-orange: #e84918;
+  --col-orange-light: #ef5728;
+  --col-green: #85d341;
+  --col-green-light: #92db53;
+  --col-text: #333;
+  --col-grey: #777;
+  --col-grey-light: #aaa;
+  --col-grey-dark: #444;
+
+  --col-lighten-1: rgba(255, 255, 255, 0.1);
+  --col-lighten-2: rgba(255, 255, 255, 0.2);
+  --col-lighten-3: rgba(255, 255, 255, 0.3);
+  --col-lighten-4: rgba(255, 255, 255, 0.4);
+  --col-lighten-5: rgba(255, 255, 255, 0.5);
+  --col-lighten-6: rgba(255, 255, 255, 0.6);
+  --col-lighten-7: rgba(255, 255, 255, 0.7);
+  --col-lighten-8: rgba(255, 255, 255, 0.8);
+  --col-lighten-9: rgba(255, 255, 255, 0.9);
+  --col-lighten-10: rgba(255, 255, 255, 1.0);
+
+  --col-darken-1: rgba(0, 0, 0, 0.1);
+  --col-darken-2: rgba(0, 0, 0, 0.2);
+  --col-darken-3: rgba(0, 0, 0, 0.3);
+  --col-darken-4: rgba(0, 0, 0, 0.4);
+  --col-darken-5: rgba(0, 0, 0, 0.5);
+  --col-darken-6: rgba(0, 0, 0, 0.6);
+  --col-darken-7: rgba(0, 0, 0, 0.7);
+  --col-darken-8: rgba(0, 0, 0, 0.8);
+  --col-darken-9: rgba(0, 0, 0, 0.9);
+  --col-darken-10: rgba(0, 0, 0, 1.0);
+
+  --col-sidebar-bg: rgba(0, 0, 0, 0.05);
+  --col-sidebar-border: var(--col-darken-2);
+  --col-placeholder: var(--col-darken-4);
+  --col-field-bg: rgba(0, 0, 0, 0.05);
+
+  --col-brand: #31a2ac;
+  --col-brand-transparent: rgba(49, 162, 172, 0.5);
+  --col-brand-dark: #307684;
+  --col-brand-dark-transparent: rgba(48, 118, 132, 0.5);
+
+  --col-primary: #5ab6dd;
+  --col-primary-light: #53c6ef;
+  --col-primary-dark: #46a7ce;
+  --col-secondary: #666;
+  --col-secondary-light: #777;
+  --col-secondary-dark: #555;
+  --col-tertiary: #aaa;
+  --col-tertiary-light: #bbb;
+  --col-tertiary-dark: #999;
+
+  --col-pos: #85d341;
+  --col-pos-light: #92db53;
+  --col-pos-dark: #79c438;
+  --col-neg: #e84918;
+  --col-neg-light: #f25626;
+  --col-neg-dark: #db4011;
+
+
+    /* Fileds / Forms */
+  --focus: 0px 0px 1px 4px rgba(90, 182, 221, 0.2);
+  --focus-error: 0px 0px 1px 4px rgba(232, 73, 24, 0.2);
+  --but-highlight: inset 0px 7px 9px -7px var(--col-lighten-4);
+  --border-radius: 4px;
+  --form-ele-height: 4.0rem;
+  --popup-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.15);
+
+
+  /* Typography */
+  --font-sans: 'PT Sans', sans-serif;
+  --font-serif: 'PT Serif', serif;
+  --font-size-base: 10px;
+  --font-size-small: 1.5rem;
+  --font-size: 2.0rem;
+  --font-size-medium: 2.5rem;
+  --font-size-large: 3.0rem;
+  --font-size-vlarge: 3.5rem;
+  --font-size-huge: 4.0rem;
+  --lh-std: 1.6;
+  --lh-reduced: 1.3;
+  --ls-std: 2px;
+  --mar-bottom-std: 1.6rem;
+
+
+  /* Misc. */
+  --apploader-ms: 2000;
+  --apploader-duration: 2000ms;
+  --sidebaritem-ms: 250;
+  --sidebaritem-duration: 250ms;
+
+
+  /* Sizes */
+  --header-height: 7.0rem;
+  --sidebar-max-width: 480px;
+  --sidebar-header-height: 5.0rem;
+  --sidebar-footer-height: 7.0rem;
+  --sidebar-item-height: 5.0rem;
+  --toastr-max-width: 440px;
+
+
+  /* Z Indexes */
+  --z-apploader: 10000;
+  --z-header: 20;
+  --z-menu: 10;
+  --z-puller: 2;
+}

@@ -1,0 +1,86 @@
+/* Button */
+/* ------ */
+
+.Button {
+  position: relative;
+  text-align: center;
+  border: 1px solid var(--col-darken-3);
+  box-shadow: var(--but-highlight);
+  border-radius: var(--border-radius);
+  outline: 0px;
+  cursor: pointer;
+  padding: 0px 1.0rem;
+  font-size: var(--font-size);
+  line-height: var(--lh-reduced);
+  width: 100%;
+  margin: 0px auto;
+  font-weight: bold;
+  background: var(--col-primary);
+  color: var(--col-white);
+  height: var(--form-ele-height);
+  transition: all 250ms ease;
+}
+
+.Button:focus {
+  box-shadow: var(--focus), var(--but-highlight);
+}
+
+.Button:hover {
+  background: var(--col-primary-light);
+}
+
+.Button:active {
+  background: var(--col-primary);
+}
+
+.Button__busy .Icon {
+  position: absolute;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  color: var(--col-black);
+  margin-left: -15px;
+  margin-top: -13px;
+  animation: spinner 1s linear infinite;
+}
+
+
+/* Disabled */
+.Button[disabled],
+.Button[disabled]:focus,
+.Button[disabled]:hover,
+.Button[disabled]:active {
+  opacity: 0.33;
+  cursor: not-allowed;
+  box-shadow: none;
+  background: var(--col-primary);
+  user-select: none;
+}
+
+
+/* Warning */
+.Button[data-buttontype="warning"] {
+  background: var(--col-neg);
+}
+
+.Button[data-buttontype="warning"]:focus {
+  box-shadow: var(--focus-error), var(--but-highlight);
+}
+
+.Button[data-buttontype="warning"]:hover {
+  background: var(--col-neg-light);
+}
+
+.Button[data-buttontype="warning"]:active {
+  background: var(--col-neg);
+}
+
+.Button[disabled][data-buttontype="warning"],
+.Button[disabled][data-buttontype="warning"]:focus,
+.Button[disabled][data-buttontype="warning"]:hover,
+.Button[disabled][data-buttontype="warning"]:active {
+  background: var(--col-neg);
+}

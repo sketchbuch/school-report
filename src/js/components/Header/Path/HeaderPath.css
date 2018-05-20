@@ -1,0 +1,31 @@
+/* Header Path */
+/* ----------- */
+
+.HeaderPath {
+  display: none;
+  color: var(--col-lighten-7);
+  font-weight: normal;
+}
+
+.HeaderPath__sub:not(:empty):before {
+  content: " ";
+  position: relative;
+  display: inline-block;
+  width: 10px;
+}
+
+.HeaderPath__sub:not(:empty) + .HeaderPath__sub:not(:empty):before {
+  content: "/";
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  text-align: center;
+  color: var(--col-lighten-5);
+}
+
+
+@media screen and (min-width: 1024px) {
+    .HeaderPath{
+      display: inline-block;
+    }
+}

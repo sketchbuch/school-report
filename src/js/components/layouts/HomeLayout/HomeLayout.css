@@ -1,0 +1,110 @@
+/* Home Layout */
+/* ----------- */
+
+.HomeLayout {
+  width: 100%;
+  height: 100%;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  max-width: 500px;
+}
+
+.HomeLayout__item {
+  display: block;
+  width: 100%;
+}
+
+.HomeLayout__link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: var(--col-text);
+  position: relative;
+  padding: 15px 20px 15px 70px;
+}
+
+.HomeLayout__link:focus {
+  outline: none;
+
+  /* http://colorzilla.com/gradient-editor/#ffffff+1,ffffff+50,ffffff+100&0+0,0.33+51,0+100 */
+  background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.01) 1%, rgba(255,255,255,0.32) 50%, rgba(255,255,255,0.33) 51%, rgba(255,255,255,0) 100%);
+  background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.01) 1%,rgba(255,255,255,0.32) 50%,rgba(255,255,255,0.33) 51%,rgba(255,255,255,0) 100%);
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.01) 1%,rgba(255,255,255,0.32) 50%,rgba(255,255,255,0.33) 51%,rgba(255,255,255,0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 );
+}
+
+.HomeLayout__link:hover {
+  /* http://colorzilla.com/gradient-editor/#ffffff+1,ffffff+50,ffffff+100&0+0,0.66+50,0+100 */
+  background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,0.01) 1%, rgba(255,255,255,0.66) 50%, rgba(255,255,255,0) 100%);
+  background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%,rgba(255,255,255,0.01) 1%,rgba(255,255,255,0.66) 50%,rgba(255,255,255,0) 100%);
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%,rgba(255,255,255,0.01) 1%,rgba(255,255,255,0.66) 50%,rgba(255,255,255,0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#00ffffff',GradientType=1 );
+}
+
+.HomeLayout__link:active .ButtonCircular {
+  background: var(--col-primary-light);
+}
+
+.HomeLayout__item + .HomeLayout__item .HomeLayout__link:before {
+  content: " ";
+  display: block;
+  position: absolute;
+  width:100%;
+  height: 1px;
+  top: 0px;
+  left: 0px;
+  opacity: 0.25;
+
+  /* http://colorzilla.com/gradient-editor/#000000+0,000000+50,000000+100&0+0,0.66+50,0+100 */
+  background: -moz-linear-gradient(left, rgba(0,0,0,0) 0%, rgba(0,0,0,0.66) 50%, rgba(0,0,0,0) 100%);
+  background: -webkit-linear-gradient(left, rgba(0,0,0,0) 0%,rgba(0,0,0,0.66) 50%,rgba(0,0,0,0) 100%);
+  background: linear-gradient(to right, rgba(0,0,0,0) 0%,rgba(0,0,0,0.66) 50%,rgba(0,0,0,0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000000',GradientType=1 );
+}
+
+.HomeLayout__title {
+  display: block;
+  line-height: var(--lh-reduced);
+  font-size: var(--font-size);
+}
+
+.HomeLayout__link:active .HomeLayout__title {
+  color: var(--col-primary-dark);
+}
+
+.HomeLayout__description {
+  display: block;
+  color: var(--col-darken-5);
+  line-height: var(--lh-reduced);
+  font-size: var(--font-size-small);
+}
+
+.HomeLayout__icon2 {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background: var(--col-primary);
+  width: 50px;
+  height: 50px;
+}
+
+.HomeLayout__icon {
+  position: absolute;
+  left: 10px;
+  width: 50px;
+  height: 50px;
+}
+
+.HomeLayout .icofont {
+  pointer-events: none;
+  font-size: 2.75rem;
+  color: var(--col-white);
+}

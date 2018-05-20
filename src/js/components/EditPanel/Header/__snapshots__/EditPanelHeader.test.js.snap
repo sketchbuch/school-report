@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EditPanelHeader /> Props render correctly 1`] = `
+<header
+  className="EditPanelHeader"
+>
+  <h1
+    className="EditPanelHeader_headline"
+  >
+    Test title
+  </h1>
+</header>
+`;

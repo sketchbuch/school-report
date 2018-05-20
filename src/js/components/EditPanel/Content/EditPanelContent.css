@@ -1,0 +1,22 @@
+/* Edit Panel Content */
+/* ------------------ */
+
+.EditPanelContent {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.EditPanelContent--noPadding {
+  padding: 0px;
+}
+
+.EditPanelHeader + .EditPanelContent {
+  padding-top: calc(20px + var(--sidebar-header-height));
+}
+
+.EditPanelHeader + .EditPanelContent--noPadding {
+  padding-top: var(--sidebar-header-height);
+}

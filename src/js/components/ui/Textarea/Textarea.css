@@ -1,0 +1,55 @@
+/* Textareas */
+/* --------- */
+
+.Textarea {
+  background: var(--col-white);
+  color: var(--col-text);
+  border: 1px solid var(--col-darken-3);
+  border-radius: var(--border-radius);
+  outline: 0px;
+  text-align: left;
+  padding: 1.0rem;
+  font-size: var(--font-size);
+  line-height: var(--lh-reduced);
+  width: 100%;
+  margin: 0px auto;
+  height: 10.0rem;
+  transition: all 250ms ease;
+}
+
+.Textarea:focus {
+  box-shadow: var(--focus);
+}
+
+.Textarea:hover {
+  border-color: var(--col-primary-light);
+}
+
+.Textarea:active {
+  border-color: var(--col-primary);
+}
+
+.Textarea + .invalid-feedback {
+  margin-top: -1.0rem;
+}
+
+
+/* Error */
+.Textarea.has--error,
+.Textarea.has--error:focus,
+.Textarea.has--error:active {
+  border-color: var(--col-neg);
+}
+
+
+/* Disabled */
+.Textarea[disabled],
+.Textarea[disabled]:focus,
+.Textarea[disabled]:hover,
+.Textarea[disabled]:active {
+  opacity: 0.33;
+  cursor: not-allowed;
+  box-shadow: none;
+  border-color: var(--col-darken-3);
+  user-select: none;
+}

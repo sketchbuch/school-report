@@ -1,0 +1,42 @@
+/* Gender Switch */
+/* ------------- */
+
+.GenderSwitch {
+  position: relative;
+  text-align: center;
+}
+
+.GenderSwitch input {
+  pointer-events: none;
+  opacity: 0.0;
+  position: absolute;
+}
+
+.GenderSwitch label {
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: var(--form-ele-height);
+  height: var(--form-ele-height);
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  color: var(--col-grey-light);
+}
+
+.GenderSwitch--large label {
+  width: 50px;
+  height: 50px;
+}
+
+.GenderSwitch input:focus + .icofont,
+.GenderSwitch input:checked + .icofont {
+  color: var(--col-text);
+}
+
+.GenderSwitch--large label .icofont {
+  font-size: var(--form-ele-height);
+}

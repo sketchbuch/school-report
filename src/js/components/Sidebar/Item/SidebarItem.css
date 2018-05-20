@@ -1,0 +1,57 @@
+/* Sidebar Item */
+/* ------------ */
+
+.SidebarItem {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  opacity: 1.0;
+}
+
+.SidebarItem--new {
+  opacity: 0.0;
+  width: 0%;
+  background: var(--col-pos);
+
+  -webkit-animation-duration: var(--sidebaritem-duration);
+  -webkit-animation-name: sidebaritem-new;
+  -webkit-animation-fill-mode: forwards;
+
+  animation-duration: var(--sidebaritem-duration);
+  animation-name: sidebaritem-new;
+  animation-fill-mode: forwards;
+}
+
+.SidebarItem--delete .SidebarInner {
+  background: var(--col-neg);
+}
+
+.SidebarItem--delete .SidebarInner:focus {
+  background: var(--col-neg-dark);
+}
+
+.SidebarItem--delete .SidebarInner:active,
+.SidebarItem--delete .SidebarInner:hover {
+  background: var(--col-neg);
+}
+
+.SidebarItem--delete .SidebarItemButton {
+  display: flex;
+}
+
+.SidebarItem--deleting {
+  background: var(--col-neg);
+  transform: translateX(0%);
+
+  -webkit-animation-duration: var(--sidebaritem-duration);
+  -webkit-animation-name: sidebaritem-deleting;
+  -webkit-animation-fill-mode: forwards;
+
+  animation-duration: var(--sidebaritem-duration);
+  animation-name: sidebaritem-deleting;
+  animation-fill-mode: forwards;
+}
+
+.SidebarItem__icon {
+  font-size: var(--font-size-medium);
+}

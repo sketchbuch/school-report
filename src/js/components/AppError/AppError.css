@@ -1,0 +1,30 @@
+/* App Error */
+/* --------- */
+
+.AppError {
+  height: 100%;
+  width: 100%;
+  padding-top: var(--header-height);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  color: var(--col-neg);
+}
+
+.AppError__text {
+  font-size: var(--font-size-medium);
+  margin: 0px;
+  text-align: center;
+  letter-spacing: var(--ls-std);
+  animation: fadein 1s 1 ease-in-out both;
+}
+
+.AppError__icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 6.0rem;
+  font-size: 6.0rem;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>School Report</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <link rel="stylesheet" href="%PUBLIC_URL%/css/app-shell.css">
+
+    <script id="reportr-object">
+      window.reportr = {
+        appName: "School Report",
+        appError: "Error Loading",
+        publicPath: '/',
+        translations: {
+        },
+        languages: [
+          {
+            key: "DE",
+            label: "Deutsch",
+          },
+          {
+            key: "EN",
+            label: "English",
+          },
+        ],
+        curLang: "EN",
+        defLang: "EN",
+      };
+
+      if (typeof process !== 'undefined' && process.env.NODE_ENV === 'development') {
+        const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
+        const host = process.env.HOST || '0.0.0.0';
+        const port = parseInt(process.env.PORT, 10) || 3000;
+        window.reportr.publicPath = protocol + '://' + host + ':' + port + '/';
+      }
+    </script>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run School Report.
+    </noscript>
+
+    <main id="root" class="App"></main>
+
+    <div id="apploader" class="apploader">
+      <div class="apploader__circles">
+        <div class="apploader__circle" data-circle="1"></div>
+        <div class="apploader__circle" data-circle="2"></div>
+        <div class="apploader__circle" data-circle="3"></div>
+      </div>
+      <p class="apploader__text">School Report</p>
+    </div>
+  </body>
+</html>

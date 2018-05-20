@@ -1,0 +1,81 @@
+/* Loading Spinner  */
+/* ---------------- */
+
+.apploader {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  z-index: var(--z-apploader);
+  background: var(--col-brand);
+  pointer-events: none;
+  transition: opacity 150ms ease;
+  will-change: opacity;
+}
+
+.apploader *,
+.apploader *:before,
+.apploader *:after {
+  pointer-events: inherit;
+}
+
+html.app-initialised .apploader {
+  -webkit-animation-duration: var(--apploader-duration);
+  -webkit-animation-name: fadeout;
+  -webkit-animation-fill-mode: forwards;
+
+  animation-duration: var(--apploader-duration);
+  animation-name: fadeout;
+  animation-fill-mode: forwards;
+}
+
+.apploader__text {
+  font-size: var(--font-size-medium);
+  position: absolute;
+  margin: 0px;
+  text-align: center;
+  letter-spacing: var(--ls-std);
+  animation: fadein 1s 1 ease-in-out both;
+  color: var(--col-white);
+}
+
+.apploader__circles {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin: 0px auto;
+  height: 250px;
+  text-align: center;
+  position: relative;
+}
+
+.apploader__circle {
+  opacity: 1.0;
+  background-clip: padding-box;
+  border-radius: 50%;
+  transform: scale(0.0);
+  position: absolute;
+  display: inline-block;
+  width: 125px;
+  height: 125px;
+  border: 1px solid var(--col-darken-1);
+  background: var(--col-lighten-1);
+  animation: loader-expand 3s infinite ease-in-out both;
+}
+
+.apploader__circle[data-circle="1"] {
+  animation-delay: -2s;
+}
+
+.apploader__circle[data-circle="2"] {
+  animation-delay: -1s;
+}

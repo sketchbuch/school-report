@@ -1,0 +1,84 @@
+/* Sidebar Buildepr Item */
+/* -------------------- */
+
+.SidebarBuilderItem--active > .SidebarInner {
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+.SidebarBuilderItem--open > .SidebarInner {
+  border-bottom: 1px solid var(--col-darken-2);
+}
+
+.SidebarBuilderItem--open > .SidebarInner::after {
+  opacity: 0.1;
+  content: " ";
+  position: absolute;
+  bottom: -11px;
+  left: 0px;
+  width: 100%;
+  height: 10px;
+  display: block;
+
+      /* http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+100 */
+  background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+  background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
+}
+
+.SidebarBuilderItem__sub {
+  display: block;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  background: var(--col-darken-1);
+}
+
+.SidebarBuilderItem__sub  .SidebarItem {
+  border-left: 1px solid var(--col-darken-1);
+}
+
+.SidebarBuilderItem__sub  .SidebarItem:first-child .SidebarInner {
+    border-top: none;
+}
+
+
+/* Inactive - no pupils */
+/* -------------------- */
+
+.SidebarBuilderItem--inactive {
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.SidebarBuilderItem--inactive > .SidebarInner {
+  pointer-events: none;
+}
+
+.SidebarBuilderItem--inactive > .SidebarInner:focus,
+.SidebarBuilderItem--inactive > .SidebarInner:hover,
+.SidebarBuilderItem--inactive > .SidebarInner:active {
+  color: var(--col-text);
+  background: var(--col-darken-1);
+}
+
+
+/* Expander Controls */
+/* ----------------- */
+
+.SidebarItem_expander,
+.SidebarItem_contractor {
+  display: none;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
+}
+
+.SidebarBuilderItem--open .SidebarItem_contractor,
+.SidebarBuilderItem--active:not(.SidebarBuilderItem--open) .SidebarItem_expander {
+  display: flex;
+}

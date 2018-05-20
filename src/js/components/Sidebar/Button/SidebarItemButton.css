@@ -1,0 +1,23 @@
+/* Sidebar Icon */
+/* ------------ */
+
+.SidebarItemButton {
+  display: none;
+}
+
+
+.SidebarItemButton:focus,
+.SidebarItemButton:hover,
+.SidebarItemButton:active {
+  color: var(--col-white);
+}
+
+.SidebarItemButton + .SidebarItemButton {
+  margin-left: 10px;
+}
+
+.SidebarInner:focus .SidebarItemButton,
+.SidebarInner:hover .SidebarItemButton,
+.SidebarInner:active .SidebarItemButton {
+  display: flex;
+}

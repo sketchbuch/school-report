@@ -1,0 +1,48 @@
+/* Header Breadcrumb */
+/* ----------------- */
+
+.HeaderBreadcrumb:not(:first-child) {
+  display: none;
+}
+
+
+@media screen and (min-width: 1024px) {
+    .HeaderBreadcrumb:not(:first-child) {
+      display: inline;
+    }
+
+    .HeaderBreadcrumb:not(:last-child) {
+      color: var(--col-lighten-5);
+    }
+
+    .HeaderBreadcrumb:last-child {
+      color: var(--col-lighten-10);
+    }
+
+    .HeaderBreadcrumb:last-child:not(:first-child) {
+      color: var(--col-lighten-10);
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .HeaderBreadcrumb + .HeaderBreadcrumb:before {
+      content: "/";
+      position: relative;
+      display: inline-block;
+      width: 30px;
+      text-align: center;
+      color: var(--col-darken-1);
+    }
+
+    .HeaderBreadcrumb:not(:first-child):blur {
+      color: var(--col-lighten-7);
+    }
+
+    .HeaderBreadcrumb:not(:first-child):hover {
+      color: var(--col-lighten-7);
+    }
+
+    .HeaderBreadcrumb:not(:first-child):active {
+      color: var(--col-lighten-10);
+    }
+}

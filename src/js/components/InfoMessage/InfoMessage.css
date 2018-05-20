@@ -1,0 +1,42 @@
+/* Info Message */
+/* ------------ */
+
+.InfoMessage {
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  padding: 40px 20px;
+}
+
+.InfoMessage__subtext,
+.InfoMessage__headine {
+  text-align: center;
+  font-size: var(--font-size-large);
+  line-height: var(--lh-reduced);
+  width: 80%;
+  margin: 0px auto 10px auto;
+  color: var(--col-darken-5);
+  font-weight: normal;
+}
+
+.InfoMessage__headine:empty {
+  display: none;
+}
+
+.InfoMessage__subtext {
+  font-size: var(--font-size);
+}
+
+.InfoMessage__subtext:empty {
+  display: none;
+}
+
+@media screen and (min-width: 1024px) {
+  .InfoMessage {
+    display: flex;
+  }
+}

@@ -1,0 +1,39 @@
+/* Report Panel Text List */
+/* ---------------------- */
+
+.ReportsTextList {
+  display: block;
+  position: relative;
+  padding: 0px;
+  margin: 0px;
+  border-top: 1px solid var(--col-darken-1);
+}
+
+.ReportsTextList_list {
+  display: block;
+  position: relative;
+  list-style: none;
+  padding: 20px;
+  margin: 0px;
+}
+
+.ReportsTextList__item {
+  display: -webkit-box;
+  padding: 5px 10px;
+  margin: 0px;
+  border: 1px solid var(--col-darken-1);
+  background: var(--col-white);
+  user-select: none;
+  cursor: move;
+  -webkit-user-drag: element;
+}
+
+.ReportsTextList__item + .ReportsTextList__item {
+  margin-top: 20px;
+}
+
+.ReportsTextList_nolist {
+  line-height: var(--lh-reduced);
+  color: var(--col-darken-5);
+  padding: 10px 20px;
+}

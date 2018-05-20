@@ -1,0 +1,41 @@
+/* Edit Panel */
+/* ---------- */
+
+.EditPanel {
+  height: calc(100% - 3.5rem);
+  width: 100%;
+  position: absolute;
+	display: block;
+  bottom: -100%;
+  left: 0px;
+  opacity: 0.0;
+  transition: transform 750ms ease-in-out, opacity 1s ease-in-out;
+  transform: translateX(0px) scale(1.4);
+}
+
+.EditPanel[data-state="slidein"] {
+  opacity: 1.0;
+  transform: translateY(-100%) scale(1.0);
+}
+
+.EditPanel__container {
+  background: var(--col-offwhite);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: calc(100% - 3.5rem);
+}
+
+@media screen and (min-width: 1024px) {
+    .EditPanel {
+      height: 100%;
+      transition: none;
+      position: relative;
+    }
+
+    .EditPanel__container {
+      height: 100%;
+    }
+}

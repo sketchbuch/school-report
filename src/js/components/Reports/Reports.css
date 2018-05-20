@@ -1,0 +1,40 @@
+/* Report Panel */
+/* ------------ */
+
+.Reports {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.Reports__left {
+  position: relative;
+  width: 100%;
+}
+
+.Reports__right {
+  position: relative;
+  width: 100%;
+  border-left: 1px solid var(--col-darken-1);
+}
+
+@media screen and (min-width: 1024px) {
+    .Reports {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: stretch;
+    }
+
+    .Reports__left {
+      width: 60%;
+    }
+
+    .Reports__right {
+      width: 40%;
+    }
+}

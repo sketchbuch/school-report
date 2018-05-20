@@ -1,0 +1,17 @@
+[ignore]
+<PROJECT_ROOT>/build/.*
+<PROJECT_ROOT>/dist/.*
+<PROJECT_ROOT>/flow-typed/.*
+
+[include]
+
+[libs]
+flow-typed
+jest
+classnames
+
+[lints]
+
+[options]
+
+[strict]

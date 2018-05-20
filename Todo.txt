@@ -1,0 +1,58 @@
+NoData:
+======
+
+- Write tests
+- Use an H tag for headline
+- Add form class
+- Add language choice before everything else
+
+
+Builder:
+=======
+
+- Add expand/contract all buttons to sidebar header
+
+
+SidebarList:
+===========
+
+- Highlight updated as new.
+- Delete should show toastr
+- items - add correct flow type for items
+- SidebarLink reclass and change css source
+- Add back arrow to header
+
+
+Fields/Forms:
+============
+
+- Get trim validation working: strict(false) BROKEN IN FORMIK
+- Extract form parts to new components
+
+
+Tests:
+=====
+
+- Tests needed for utils/redux
+- utils/redux move get array element to new function and also use in reducers
+- Create tests for actions
+- Tests for layouts
+
+
+Breadcrumb:
+==========
+
+- Add edit/delete/new crumb
+
+
+Misc.:
+=====
+
+- All form submit handlers - use appropriate type rather than Object
+
+
+Layouts:
+-------
+
+- Remove unnecessary connect() in sub layouts
+- Merge forms like for reports

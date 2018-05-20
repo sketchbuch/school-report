@@ -1,0 +1,39 @@
+/* Menu Panel */
+/* ---------- */
+
+.MenuPanel {
+  position: absolute;
+  top: var(--header-height);
+  left: 0px;
+  height: calc(100vh - var(--header-height));
+  width: 330px;
+  background: var(--col-brand-dark);
+  border-right: 1px solid var(--col-darken-1);
+  z-index: var(--z-menu);
+  transform: translateX(-102%);
+  transition: transform 250ms ease;
+  padding: 10px 20px;
+  color: var(--col-white);
+}
+
+.MenuPanel--open {
+  animation: slideinMenu 500ms ease;
+  transform: translateX(0%);
+}
+
+.MenuPanel::after {
+  opacity: 0.1;
+  content: " ";
+  position: absolute;
+  right: -10px;
+  top: 0px;
+  width: 10px;
+  height: 100%;
+  display: block;
+
+    /* http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+100 */
+  background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=1 ); /* IE6-9 */
+}

@@ -1,0 +1,8 @@
+/* No Items */
+/* -------- */
+
+.NoItems {
+  line-height: var(--lh-reduced);
+  color: var(--col-darken-5);
+  padding: 10px 20px;
+}

@@ -1,0 +1,30 @@
+/* Alert */
+/* ----- */
+
+.Alert {
+  position: relative;
+  width: 100%;
+  padding: 6px 10px;
+  margin: 0px;
+  margin-bottom: var(--mar-bottom-std);
+  border-radius: var(--border-radius);
+  background: green;
+  color: var(--col-white);
+  border: 1px solid var(--col-darken-1);
+}
+
+.Alert__headline,
+.Alert__body {
+  margin: 0px;
+  font-size: var(--font-size);
+  line-height: var(Icon--lh-reduced);
+  padding-left: 40px;
+}
+
+.Alert .Icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  margin-top: -15px;
+  font-size: 30px;
+}

@@ -1,0 +1,55 @@
+/* Sidebar Inner */
+/* ------------- */
+
+.SidebarInner {
+  padding: 10px 20px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+  color: var(--col-text);
+  font-size: var(--font-size);
+  border-top: 1px solid var(--col-darken-1);
+  border-bottom: 1px solid var(--col-darken-1);
+  background: var(--col-darken-1);
+  outline: none;
+  text-decoration: none;
+  height: var(--sidebar-item-height);
+  width: 100%;
+  position: relative;
+}
+
+.SidebarInner:focus {
+  background: var(--col-primary);
+}
+
+.SidebarInner:hover {
+  color: var(--col-white);
+  background: var(--col-blue);
+}
+
+.SidebarInner:active {
+  color: var(--col-white);
+  background: var(--col-blue-light);
+}
+
+.SidebarInner__text {
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 10px;
+}
+
+.SidebarInner:focus .SidebarInner__text,
+.SidebarInner:hover .SidebarInner__text,
+.SidebarInner:active .SidebarInner__text {
+  padding-right: 10px;
+}
+
+.SidebarInner__description {
+  padding-left: 1.0rem;
+  opacity: 0.5;
+}

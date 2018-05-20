@@ -1,0 +1,18 @@
+/* Header Title */
+/* ------------ */
+
+.HeaderTitle {
+  display: inline-block;
+}
+
+.HeaderTitle .Icon {
+  display: inline;
+  color: var(--col-white);
+  font-size: var(--font-size-huge);
+  position: relative;
+  top: 5px;
+  margin-right: 15px;
+}
+
+@media screen and (min-width: 1024px) {
+}

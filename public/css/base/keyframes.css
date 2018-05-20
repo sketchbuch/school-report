@@ -1,0 +1,102 @@
+/* Key Frames */
+/* ---------- */
+
+@keyframes fadein {
+  0% {
+    opacity: 0.0;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+
+@keyframes fadeout {
+  0% {
+    opacity: 1.0;
+  }
+  100% {
+    opacity: 0.0;
+  }
+}
+
+@keyframes slidein {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideout {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slideinMenu {
+  0% {
+    transform: translateX(-102%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideoutMenu {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-102%);
+  }
+}
+
+@keyframes slidedown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes loader-expand {
+  0% {
+    opacity: 1.0;
+    transform: scale(0.0);
+  }
+  100% {
+    opacity: 0.0;
+    transform: scale(2.0);
+  }
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
+}
+
+@keyframes sidebaritem-new {
+  0% {
+    opacity: 0.0;
+    width: 0%;
+  }
+  100% {
+    opacity: 1.0;
+    width: 100%;
+  }
+}
+
+@keyframes sidebaritem-deleting {
+  0% {
+    opacity: 1.0;
+    transform: translateX(0%);
+  }
+  100% {
+    opacity: 0.0;
+    transform: translateX(100%);
+  }
+}
