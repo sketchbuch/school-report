@@ -8,7 +8,6 @@ import EditPanelContent from '../../../EditPanel/Content/EditPanelContent';
 import { text }  from '../../../Translation/Translation';
 import { getItemById } from '../../../../utils/arrays';
 import type { ReportType } from '../../../../types/report';
-import type { TextType } from '../../../../types/text';
 import type { SidebarBuilderItemType } from '../../../../types/sidebarBuilderItem';
 
 type Props = {
@@ -17,7 +16,6 @@ type Props = {
   items: Array<SidebarBuilderItemType>,
   location: Object,
   match: Object,
-  texts: Array<TextType>,
 };
 
 
@@ -28,6 +26,7 @@ type Props = {
 export class EditBuilderLayout extends Component<Props> {
   static defaultProps = {
     activeReport: {},
+    categories: [],
     items: [],
     texts: [],
   };
@@ -42,7 +41,7 @@ export class EditBuilderLayout extends Component<Props> {
       <EditPanel>
         <EditPanelHeader title={text('ReportBuilder', 'EditPanelHeader', { 'PUPIL_NAME': activePupil.getLabel(), 'CLASS_NAME': activeItem.classRec.getLabel() })} />
         <EditPanelContent noPadding={true}>
-          <Reports texts={this.props.texts} />
+          <Reports activePupil={activePupil} activeReport={this.props.activeReport} />
         </EditPanelContent>
       </EditPanel>
     )

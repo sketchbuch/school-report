@@ -24,7 +24,7 @@ export class HeaderTitle extends Component<Props> {
   props: Props;
   appName: string;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.appName = text('Name', 'App');

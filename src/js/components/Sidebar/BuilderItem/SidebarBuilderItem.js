@@ -31,7 +31,7 @@ class SidebarBuilderItem extends Component<Props, State> {
   props: Props;
   handleExpandClick: Function;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {

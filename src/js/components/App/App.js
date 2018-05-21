@@ -33,7 +33,7 @@ export class App extends Component<Props> {
   languageLoaded: Function;
   settingsLoaded: Function;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.dataCreated = this.dataCreated.bind(this);

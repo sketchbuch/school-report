@@ -20,7 +20,7 @@ export class HomeLayout extends Component<Props> {
   props: Props;
   menuItems: Array<MenuItemType>;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.menuItems = [];

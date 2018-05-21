@@ -45,7 +45,7 @@ export class NoData extends Component<Props, State> {
   handleClick: Function;
   dataSaved: Function;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {

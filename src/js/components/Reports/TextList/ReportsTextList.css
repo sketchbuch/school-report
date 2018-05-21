@@ -6,6 +6,7 @@
   position: relative;
   padding: 0px;
   margin: 0px;
+  height: 100%;
   border-top: 1px solid var(--col-darken-1);
 }
 
@@ -18,6 +19,7 @@
 }
 
 .ReportsTextList__item {
+  position: relative;
   display: -webkit-box;
   padding: 5px 10px;
   margin: 0px;
@@ -32,8 +34,30 @@
   margin-top: 20px;
 }
 
+.ReportsTextList__item--selected {
+  background: var(--col-brand-transparent);
+}
+
 .ReportsTextList_nolist {
   line-height: var(--lh-reduced);
   color: var(--col-darken-5);
   padding: 10px 20px;
+}
+
+.ReportsTextList__itemselected {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  top: 50%;
+  margin-top: -15px;
+  right: -15px;
+  background: var(--col-brand);
+  color: var(--col-white);
+  border: 1px solid var(--col-darken-1);
+  font-size: var(--font-size-small);
 }

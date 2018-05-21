@@ -54,7 +54,7 @@ class SidebarList extends Component<Props, State> {
   onDelete: Function;
   updateExistingItems: Function;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {

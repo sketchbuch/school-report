@@ -47,7 +47,7 @@ export class EditTextLayout extends Component<Props, State> {
   handleSubmit: Function;
   initialValues: Object;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -123,7 +123,7 @@ export class EditTextLayout extends Component<Props, State> {
             validationSchema={textSchema}
             onSubmit={this.handleSubmit}
             render={(formikProps) => (
-              <EditTextForm {...formikProps} saving={this.state.saving} />
+              <EditTextForm {...formikProps} saving={this.state.saving} categories={this.props.categories} />
             )}
           />
         </EditPanelContent>

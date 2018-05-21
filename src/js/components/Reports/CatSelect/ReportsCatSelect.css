@@ -1,0 +1,16 @@
+/* Report Category Selector */
+/* ------------------------ */
+
+.ReportsCatSelect {
+  padding: 20px;
+  background: var(--col-darken-1);
+  border-bottom: 1px solid var(--col-darken-1);
+}
+
+.ReportsCatSelect select:focus {
+  box-shadow: none;
+}
+
+.ReportsCatSelect_sep {
+  opacity: 0.5;
+}

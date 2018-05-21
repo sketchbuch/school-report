@@ -24,7 +24,7 @@ class Menu extends PureComponent<Props, State> {
   handleButtonClick: Function;
   handleItemClick: Function;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {

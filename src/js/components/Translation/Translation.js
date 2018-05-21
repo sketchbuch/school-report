@@ -56,7 +56,7 @@ export default class Translation extends Component<Props> {
     if (window.reportr.translations.length > 0) this.prevLang = window.reportr.curLang;
   }
 
-  shouldComponentUpdate(nextProps: Object) {
+  shouldComponentUpdate(nextProps: Props) {
     if (this.prevLang !== window.reportr.curLang) return true;
     if (this.props.name !== nextProps.name) return true;
     if (this.props.ns !== nextProps.ns) return true;

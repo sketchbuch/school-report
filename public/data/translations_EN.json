@@ -1,5 +1,8 @@
 {
   "EN": {
+    "##": {
+      "Temp": "test"
+    },
     "Actions": {
       "CategoryAdd": "Add category",
       "CategoryDelete": "Delete all categories",
@@ -220,6 +223,11 @@
     },
     "ReportsTextList": {
       "None": "No texts available."
+    },
+    "ReportsCatSelect": {
+      "CatsAll": "All",
+      "CatsUncategorised": "Uncategorised",
+      "Tooltip": "Select a category"
     },
     "Reports": {
       "BackToReports": "Cancel",

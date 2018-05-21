@@ -35,7 +35,7 @@ class AddButton extends React.Component<Props> {
   props: Props;
   onClick: Function;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
     this.onClick = this.onClick.bind(this);
   }

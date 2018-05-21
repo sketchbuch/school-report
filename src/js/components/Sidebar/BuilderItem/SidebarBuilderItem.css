@@ -35,8 +35,8 @@
   background: var(--col-darken-1);
 }
 
-.SidebarBuilderItem__sub  .SidebarItem {
-  border-left: 1px solid var(--col-darken-1);
+.SidebarBuilderItem__sub  .SidebarItem .SidebarInner {
+  padding-left: 45px;
 }
 
 .SidebarBuilderItem__sub  .SidebarItem:first-child .SidebarInner {

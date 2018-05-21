@@ -44,7 +44,7 @@ export class EditClassLayout extends Component<Props, State> {
   dataSaved: Function;
   handleSubmit: Function;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {

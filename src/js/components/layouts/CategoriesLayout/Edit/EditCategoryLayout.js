@@ -44,7 +44,7 @@ export class EditCategoryLayout extends Component<Props, State> {
   handleSubmit: Function;
   initialValues: Object;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {

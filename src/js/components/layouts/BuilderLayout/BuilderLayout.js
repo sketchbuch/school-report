@@ -16,7 +16,6 @@ import { pupilSort } from '../../../types/pupil';
 import type { ClassType } from '../../../types/class';
 import type { PupilType } from '../../../types/pupil';
 import type { ReportType } from '../../../types/report';
-import type { TextType } from '../../../types/text';
 import {
   ROUTE_BUILDER,
   ROUTE_EDIT_BUILDER,
@@ -32,7 +31,6 @@ type Props = {
   location: Object,
   match: Object,
   pupils: Array<PupilType>,
-  texts: Array<TextType>,
 };
 
 
@@ -44,7 +42,6 @@ export class BuilderLayout extends Component<Props> {
     activeReport: {},
     classes: [],
     pupils: [],
-    texts: [],
   };
 
   props: Props;
@@ -101,7 +98,7 @@ export class BuilderLayout extends Component<Props> {
           />
         </Sidebar>
         <Switch>
-          <Route path={ROUTE_EDIT_BUILDER} render={routerProps => <EditBuilderLayout {...routerProps} activeReport={this.props.activeReport} items={items} texts={this.props.texts} />} />
+          <Route path={ROUTE_EDIT_BUILDER} render={routerProps => <EditBuilderLayout {...routerProps} activeReport={this.props.activeReport} items={items} />} />
           <Route path={ROUTE_BUILDER} render={routerProps => <InfoMessage {...routerProps} headine={text('Builder', 'InfoMessage')} subtext={text('BuilderMsg', 'InfoMessage')} />} />
         </Switch>
       </div>
@@ -114,7 +111,6 @@ const mapStateToProps = (state: Object, props: Props) => {
     activeReport: getActiveReport(state.reports, props.match.params.reportId),
     classes: state.classes,
     pupils: state.pupils,
-    texts: state.texts,
   }
 };
 

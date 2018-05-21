@@ -53,7 +53,7 @@ class SidebarItem extends Component<Props, State> {
   handleClick: Function;
   newTimer: number | null;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {

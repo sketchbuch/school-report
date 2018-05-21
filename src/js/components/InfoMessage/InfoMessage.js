@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import './InfoMessage.css';
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 /**
 * An info message only visible on desktops that displays on the right of the sidebar.
 */
-export class InfoMessage extends Component<Props> {
+export class InfoMessage extends PureComponent<Props> {
   props: Props;
 
   static defaultProps = {

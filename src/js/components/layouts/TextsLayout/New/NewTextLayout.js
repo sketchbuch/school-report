@@ -46,7 +46,7 @@ export class NewTextLayout extends Component<Props, State> {
   dataSaved: Function;
   handleSubmit: Function;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -114,7 +114,7 @@ export class NewTextLayout extends Component<Props, State> {
             validationSchema={textSchema}
             onSubmit={this.handleSubmit}
             render={(formikProps) => (
-              <EditTextForm {...formikProps} saving={this.state.saving} isNew={true} />
+              <EditTextForm {...formikProps} saving={this.state.saving} isNew={true} categories={this.props.categories} />
             )}
           />
         </EditPanelContent>

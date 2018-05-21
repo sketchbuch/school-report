@@ -25,7 +25,7 @@ class SidebarItemButton extends Component<Props> {
   props: Props;
   handleClick: Function;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);

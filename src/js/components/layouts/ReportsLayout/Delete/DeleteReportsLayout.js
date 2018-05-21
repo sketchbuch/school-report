@@ -33,7 +33,7 @@ export class DeleteReportsLayout extends Component<Props, State> {
   props: Props;
   handleClick: Function;
 
-  constructor(props: Object) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
