@@ -71,6 +71,8 @@ export class Reports extends Component<Props, State> {
       <section className="Reports">
         <div className="Reports__left">
           <ReportsTexts
+            activePupil={this.props.activePupil}
+            handleTextToggle={this.handleTextToggle}
             selectedTexts={selectedTexts}
             texts={this.props.texts}
           />
@@ -79,8 +81,8 @@ export class Reports extends Component<Props, State> {
           <ReportsTextList
             activePupil={this.props.activePupil}
             categories={this.props.categories}
-            selectedTexts={selectedTexts}
             handleTextToggle={this.handleTextToggle}
+            selectedTexts={selectedTexts}
             texts={this.props.texts}
           />
         </div>
