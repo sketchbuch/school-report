@@ -19,7 +19,7 @@ export class EditPanel extends React.Component<Props, State> {
   props: Props;
   state: State;
   slidein: Function;
-  slideinTimer: number | null;
+  slideinTimer: TimeoutID;
 
   constructor(props: Props){
     super(props);

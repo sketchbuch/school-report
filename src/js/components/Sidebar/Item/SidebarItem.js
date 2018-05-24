@@ -48,10 +48,10 @@ class SidebarItem extends Component<Props, State> {
   };
 
   props: Props;
-  deleteTimer: number | null;
-  deletingTimer: number | null;
+  deleteTimer: TimeoutID;
+  deletingTimer: TimeoutID;
   handleClick: Function;
-  newTimer: number | null;
+  newTimer: TimeoutID;
 
   constructor(props: Props) {
     super(props);
@@ -63,9 +63,6 @@ class SidebarItem extends Component<Props, State> {
     };
 
     this.handleClick = this.handleClick.bind(this);
-    this.deleteTimer = null;
-    this.deletingTimer = null;
-    this.newTimer = null;
   }
 
   componentDidMount() {

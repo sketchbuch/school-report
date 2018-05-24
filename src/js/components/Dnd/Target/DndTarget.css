@@ -1,0 +1,20 @@
+/* Dnd Target */
+/* ---------- */
+
+.DndTarget {
+  border-radius: var(--border-radius);
+  border: 4px dashed var(--col-darken-1);
+  padding: 2px 20px;
+  color: var(--col-darken-1);
+  cursor: pointer;
+}
+
+.DndTarget:hover {
+  border-color: var(--col-darken-2);
+  color: var(--col-darken-2);
+}
+
+.DndTarget:active {
+  border-color: var(--col-primary);
+  color: var(--col-primary);
+}
