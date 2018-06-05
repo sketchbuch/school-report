@@ -2,7 +2,7 @@
 
 
 /**
-* Returns a custom prop from the html element.
+* Returns a custom prop (CSS var) from the html element.
 *
 * @param string prop The name of the prop to get.
 * @return string The prop value or null.

@@ -1,10 +1,11 @@
 // @flow
 
+import { generateId } from '../ids';
+
+
 /**
 * ID Tests
 */
-
-import { generateId } from '../ids';
 
 describe('Util: IDs', () => {
   const ts = Date.now();

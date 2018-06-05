@@ -1,10 +1,11 @@
 // @flow
 
+import { sortObjectsAz, sortObjectsZa } from '../sort';
+
+
 /**
 * Sort Tests
 */
-
-import { sortObjectsAz, sortObjectsZa } from '../sort';
 
 describe('Util: sort', () => {
   const testArr = [

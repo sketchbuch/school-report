@@ -1,10 +1,11 @@
 // @flow
 
+import { cropStr, ucFirst } from '../strings';
+
+
 /**
 * String Tests
 */
-
-import { cropStr, ucFirst } from '../strings';
 
 describe('Util: strings', () => {
   test('ucFirst() should capitalise the first letter of a string', () => {
