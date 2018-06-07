@@ -18,6 +18,7 @@ import {
   ROUTE_SETTINGS,
   ROUTE_TEXTS,
 } from '../constants/routes';
+import { getItemById } from './arrays';
 
 type BcStateType = CategoryType | ClassType | PupilType | ReportType | TextType;
 
@@ -115,8 +116,7 @@ function getBreadcrumb(stateSlice: Array<BcStateType>, objId: string): ClassType
 * @return object Either the class or an empty object.
 */
 export function getActiveClass(classes: Array<ClassType>, classId: string): ClassType | Object {
-  if (classId !== '') return classes.filter(c => c.id === classId).shift();
-  return {};
+  return getItemById(classes, classId);
 }
 
 /**
@@ -127,8 +127,7 @@ export function getActiveClass(classes: Array<ClassType>, classId: string): Clas
 * @return object Either the pupil or an empty object.
 */
 export function getActivePupil(pupils: Array<PupilType>, pupilId: string): PupilType | Object {
-  if (pupilId !== '') return pupils.filter(p => p.id === pupilId).shift();
-  return {};
+  return getItemById(pupils, pupilId);
 }
 
 /**
@@ -139,8 +138,7 @@ export function getActivePupil(pupils: Array<PupilType>, pupilId: string): Pupil
 * @return object Either the text or an empty object.
 */
 export function getActiveText(texts: Array<TextType>, textId: string): TextType | Object {
-  if (textId !== '') return texts.filter(t => t.id === textId).shift();
-  return {};
+  return getItemById(texts, textId);
 }
 
 /**
@@ -151,8 +149,7 @@ export function getActiveText(texts: Array<TextType>, textId: string): TextType 
 * @return object Either the text or an empty object.
 */
 export function getActiveReport(reports: Array<ReportType>, reportId: string): ReportType | Object {
-  if (reportId !== '') return reports.filter(r => r.id === reportId).shift();
-  return {};
+  return getItemById(reports, reportId);
 }
 
 /**
@@ -163,8 +160,7 @@ export function getActiveReport(reports: Array<ReportType>, reportId: string): R
 * @return object Either the category or an empty object.
 */
 export function getActiveCategory(categories: Array<CategoryType>, categoryId: string): CategoryType | Object {
-  if (categoryId !== '') return categories.filter(r => r.id === categoryId).shift();
-  return {};
+  return getItemById(categories, categoryId);
 }
 
 /**

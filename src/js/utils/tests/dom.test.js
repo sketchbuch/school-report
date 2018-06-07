@@ -8,10 +8,10 @@ import { getCustomNumProp } from '../dom';
 */
 
 describe('Util: DOM', () => {
-  test('getCustomNumProp() returns the same MD5 hash given the same arguments', () => {
-    const htmlEle = getComputedStyle(document.getElementsByTagName('html')[0]);
+  test('getCustomNumProp() should return an integer', () => {
+    const prop = '--header-height';
+    const styleObj = { [prop]: '70' };
 
-    console.log(htmlEle);
-    console.log('"' + htmlEle.getPropertyValue('scrollBlocksOn') + '"');
+    expect(getCustomNumProp(prop, styleObj)).toBe(70);
   });
 });
