@@ -13,6 +13,7 @@ import {
 } from '../constants/actionTypes';
 import reduce from '../utils/reducers';
 import { hydratePupil } from '../types/pupil';
+import type { PupilType } from '../types/pupil';
 
 /**
 * Pupils Reducer.
@@ -48,7 +49,7 @@ export default function reducer(state: Array<Object> = [], action: Object) {
 
     case DELETE_ALL_CLASS_PUPILS:
     case DELETE_CLASS: // Must delete all pupils for this class (action.payload.id === the class ID).
-      return state.filter(item => item.classId !== action.payload.id);
+      return state.filter((item: PupilType) => item.classId !== action.payload.id);
 
     default:
       return state;
