@@ -16,18 +16,29 @@ describe('Util: sort', () => {
   ];
 
   test('sortObjectsAz() should return the array sorted a-z', () => {
-    const sortedArr = sortObjectsAz(testArr, ['label']);
+    const expectedArr = [
+      { label: 'a', },
+      { label: 'b', },
+      { label: 'c', },
+      { label: 'd', },
+    ];
 
-    expect(sortedArr[0].label).toEqual('a');
-    expect(sortedArr[sortedArr.length - 1].label).toEqual('d');
-    expect(sortedArr).toHaveLength(4);
+    expect(sortObjectsAz(testArr, ['label'])).toEqual(expectedArr);
+  });
+
+  test('sortObjectsAz() handles empty arrays correctly', () => {
+    expect(sortObjectsAz(testArr, [])).toEqual(testArr);
+    expect(sortObjectsAz([], ['label'])).toEqual([]);
   });
 
   test('sortObjectsZa() should return the array sorted z-a', () => {
-    const sortedArr = sortObjectsZa(testArr, ['label']);
+    const expectedArr = [
+      { label: 'd', },
+      { label: 'c', },
+      { label: 'b', },
+      { label: 'a', },
+    ];
 
-    expect(sortedArr[0].label).toEqual('d');
-    expect(sortedArr[sortedArr.length - 1].label).toEqual('a');
-    expect(sortedArr).toHaveLength(4);
+    expect(sortObjectsZa(testArr, ['label'])).toEqual(expectedArr);
   });
 });

@@ -51,7 +51,7 @@
     "redux-mock-store": "^1.5.1",
     "wait-on": "^2.1.0"
   },
-  "jest": {
+  "jest2": {
     "collectCoverageFrom": [
       "src/js/utils/**/*.{js,jsx}"
     ]
