@@ -70,6 +70,7 @@ export function hydrateCategory(categoryObj: CategoryType): CategoryType {
     ...categoryObj,
     contains: function (term?: string) {
       if (term) {
+        term = term.toLowerCase();
         const searchStr = this.label;
         if (term && searchStr.toLowerCase().indexOf(term) !== -1) return true;
       }
@@ -89,13 +90,15 @@ export function hydrateCategory(categoryObj: CategoryType): CategoryType {
       return this.getLabel();
     },
     getUrl: function (linkType: string) {
+      let theUrl = ROUTE_CATEGORIES;
+      
       if (linkType === 'delete') {
-        return ROUTE_DEL_CATEGORY.replace(':categoryId', this.id);
+        theUrl = ROUTE_DEL_CATEGORY;
       } else if (linkType === 'edit') {
-        return ROUTE_EDIT_CATEGORY.replace(':categoryId', this.id);
+        theUrl = ROUTE_EDIT_CATEGORY;
       }
 
-      return ROUTE_CATEGORIES.replace(':categoryId', this.id);
+      return theUrl.replace(':categoryId', this.id);
     },
   };
 }

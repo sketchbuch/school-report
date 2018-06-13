@@ -71,6 +71,7 @@ export function hydrateReport(reportObj: ReportType): ReportType {
     ...reportObj,
     contains: function (term?: string) {
       if (term) {
+        term = term.toLowerCase();
         const searchStr = this.label;
         if (term && searchStr.toLowerCase().indexOf(term) !== -1) return true;
       }

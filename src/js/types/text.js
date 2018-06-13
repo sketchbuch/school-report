@@ -76,6 +76,7 @@ export function hydrateText(textObj: TextType): TextType {
     ...textObj,
     contains: function (term?: string) {
       if (term) {
+        term = term.toLowerCase();
         const searchStr = this.bodytext;
         if (term && searchStr.toLowerCase().indexOf(term) !== -1) return true;
       }

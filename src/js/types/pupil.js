@@ -80,6 +80,7 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
     ...pupilObj,
     contains: function (term?: string) {
       if (term) {
+        term = term.toLowerCase();
         const searchStr = this.firstname + this.lastname + this.description;
         if (term && searchStr.toLowerCase().indexOf(term) !== -1) return true;
       }
@@ -99,17 +100,20 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
     getTooltip: function () {
       let tooltip = this.getLabel();
       let description = this.getDescription();
-      if (description !== '') tooltip = `${tooltip} - ${description}`;
+      if (description !== '') return `${tooltip} - ${description}`;
 
       return tooltip;
     },
     getUrl: function (linkType: string, reportId: string = '') {
+      let theUrl = ROUTE_EDIT_PUPIL;
+
       if (linkType === 'delete') {
-        return ROUTE_DEL_PUPIL.replace(':pupilId', this.id).replace(':classId', this.classId);
+        theUrl = ROUTE_DEL_PUPIL;
       } else if (linkType === 'builder') {
-        return ROUTE_EDIT_BUILDER.replace(':pupilId', this.id).replace(':classId', this.classId).replace(':reportId', reportId);
+        theUrl = ROUTE_EDIT_BUILDER;
       }
-      return ROUTE_EDIT_PUPIL.replace(':pupilId', this.id).replace(':classId', this.classId);
+
+      return theUrl.replace(':pupilId', this.id).replace(':classId', this.classId).replace(':reportId', reportId);
     },
   };
 }
