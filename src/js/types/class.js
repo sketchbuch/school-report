@@ -94,7 +94,7 @@ export function hydrateClass(classObj: ClassType): ClassType {
     },
     getUrl: function (linkType: string) {
       let theUrl = ROUTE_PUPILS;
-
+      
       if (linkType === 'delete') {
         theUrl = ROUTE_DEL_CLASS;
       } else if (linkType === 'edit') {

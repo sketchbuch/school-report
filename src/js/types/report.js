@@ -92,15 +92,15 @@ export function hydrateReport(reportObj: ReportType): ReportType {
       return this.getLabel();
     },
     getUrl: function (linkType: string) {
+      let theUrl = ROUTE_BUILDER;
+      
       if (linkType === 'delete') {
-        return ROUTE_DEL_REPORT.replace(':reportId', this.id);
-      } else if (linkType === 'edit') {
-        return ROUTE_EDIT_REPORT.replace(':reportId', this.id);
-      } else if (this.classes.length < 1) {
-        return ROUTE_EDIT_REPORT.replace(':reportId', this.id);
+        theUrl = ROUTE_DEL_REPORT;
+      } else if (linkType === 'edit' || this.classes.length < 1) {
+        theUrl = ROUTE_EDIT_REPORT;
       }
 
-      return ROUTE_BUILDER.replace(':reportId', this.id);
+      return theUrl.replace(':reportId', this.id);
     },
   };
 }

@@ -13,6 +13,18 @@ window.reportr = {
         "Male": "Male",
         "Female": "Female"
       },
+      "HomeLayout": {
+        "Categories": "Categories",
+        "CategoriesDescription": "Create/Edit text categories",
+        "Classes": "Classes",
+        "ClassesDescription": "Create/Edit classes and pupils",
+        "Reports": "Reports",
+        "ReportsDescription": "Create/Edit school reports",
+        "Settings": "Settings",
+        "SettingsDescription": "Manage school report settings",
+        "Texts": "Texts",
+        "TextsDescription": "Create/Edit the texts for your reports"
+      },
       "NoData": {
         "ClassMessage": "Doesn't look like you have any reports yet, why not create your first class?",
         "ClassPlaceholder": "Name of class...",

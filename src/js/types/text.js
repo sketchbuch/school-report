@@ -96,8 +96,11 @@ export function hydrateText(textObj: TextType): TextType {
       return this.getLabel();
     },
     getUrl: function (linkType: string) {
-      if (linkType === 'delete') return ROUTE_DEL_TEXT.replace(':textId', this.id);
-      return ROUTE_EDIT_TEXT.replace(':textId', this.id);
+      let theUrl = ROUTE_EDIT_TEXT;
+      
+      if (linkType === 'delete') theUrl = ROUTE_DEL_TEXT;
+
+      return theUrl.replace(':textId', this.id);
     },
   };
 }
