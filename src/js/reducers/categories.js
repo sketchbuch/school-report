@@ -10,6 +10,8 @@ import {
   UPDATE_CATEGORY,
 } from '../constants/actionTypes';
 import reduce from '../utils/reducers';
+import type { ActionObj } from '../types/action';
+import type { CategoryType } from '../types/category';
 import { hydrateCategory } from '../types/category';
 
 
@@ -17,7 +19,7 @@ import { hydrateCategory } from '../types/category';
 * Categories Reducer.
 */
 
-export default function reducer(state: Array<Object> = [], action: Object) {
+export default function reducer(state: Array<CategoryType> = [], action: ActionObj) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_CATEGORIES:

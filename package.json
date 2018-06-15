@@ -53,7 +53,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/js/types/**/*.{js,jsx}"
+      "src/js/reducers/**/*.{js,jsx}"
     ]
   },
   "build": {
