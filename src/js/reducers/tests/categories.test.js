@@ -67,8 +67,7 @@ describe('Reducer: Categories', () => {
   });
 
   test('ADD_CATEGORY should not add the category if the ID already exists', () => {
-    const NEW_CAT = {...categoryDefault, label: 'Category 2', id: 'c1' };
-    const EXPECTED_RESULT = [{...INITIAL_STATE[0]}, {...NEW_CAT}];
+    const NEW_CAT = {...categoryDefault, label: 'Category 1', id: 'c1' };
     const reducerResult = reducer(INITIAL_STATE, { type: ADD_CATEGORY, payload: NEW_CAT });
     expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(INITIAL_STATE));
   });
