@@ -13,6 +13,7 @@ import {
   UPDATE_PUPIL,
 } from '../../constants/actionTypes';
 import pupilDefault from '../../types/pupil';
+import reduce from '../../utils/reducers';
 
 /**
 * Pupils Reducer Tests
@@ -22,12 +23,6 @@ describe('Reducer: Pupils', () => {
   const INITIAL_STATE = [
     {...pupilDefault, firstname: 'Arnold', gender: 'm', id: 'p1', lastname: 'Rimmer' }
   ];
-  const TEST_PUPILS = {
-    pupils: [
-      {...pupilDefault, classId: 'c1', firstname: 'Dave', gender: 'm', id: 'p2', lastname: 'Lister' },
-      {...pupilDefault, classId: 'c1', firstname: 'Holly', gender: 'f', id: 'p3', lastname: '(Computer)' },
-    ]
-  };
 
   test('Should return the initial state if no type matches', () => {
     expect(reducer(INITIAL_STATE, { type: 'IGNORE' })).toEqual(INITIAL_STATE);
@@ -49,6 +44,12 @@ describe('Reducer: Pupils', () => {
   });
 
   test('REPLACE_PUPILS should return payload replacing existing pupils.', () => {
+    const TEST_PUPILS = {
+      pupils: [
+        {...pupilDefault, classId: 'c1', firstname: 'Dave', gender: 'm', id: 'p2', lastname: 'Lister' },
+        {...pupilDefault, classId: 'c1', firstname: 'Holly', gender: 'f', id: 'p3', lastname: '(Computer)' },
+      ]
+    };
     const reducerResult = reducer(INITIAL_STATE, { type: REPLACE_PUPILS, payload: TEST_PUPILS });
     expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(TEST_PUPILS.pupils));
   });
@@ -62,8 +63,8 @@ describe('Reducer: Pupils', () => {
 
   test('ADD_PUPIL should add the payload to existing pupils.', () => {
     const NEW_PUPIL = { ...pupilDefault, classId: 'c2', firstname: 'The', gender: 'm',  id: 'p4', lastname: 'Cat' };
-    const EXPECTED_RESULT = [...TEST_PUPILS.pupils].concat(NEW_PUPIL);
-    const reducerResult = reducer(TEST_PUPILS.pupils, { type: ADD_PUPIL, payload: NEW_PUPIL });
+    const EXPECTED_RESULT = [{...INITIAL_STATE[0]}, {...NEW_PUPIL}];
+    const reducerResult = reducer(INITIAL_STATE, { type: ADD_PUPIL, payload: NEW_PUPIL });
     expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
   });
 
@@ -79,10 +80,7 @@ describe('Reducer: Pupils', () => {
       {...pupilDefault, classId: 'c1', firstname: 'Dave', gender: 'm', id: 'p2', lastname: 'Lister' },
       {...pupilDefault, classId: 'c1', firstname: 'The', gender: 'm', id: 'p3', lastname: 'Cat' },
     ];
-    const EXPECTED_STATE_DEL = [
-      {...pupilDefault, classId: 'c1', firstname: 'Arnold', gender: 'm', id: 'p1', lastname: 'Rimmer' },
-      {...pupilDefault, classId: 'c1', firstname: 'The', gender: 'm', id: 'p3', lastname: 'Cat' },
-    ];
+    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[1]);
     const reducerResult = reducer(INITIAL_STATE_DEL, { type: DELETE_PUPIL, payload: INITIAL_STATE_DEL[1] });
     expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
   });

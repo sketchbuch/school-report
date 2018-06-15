@@ -11,14 +11,15 @@ import {
 } from '../constants/actionTypes';
 import reduce from '../utils/reducers';
 import { hydrateClass } from '../types/class';
-// import type { ActionObj } from '../types/action';
+import type { ClassType } from '../types/class';
+import type { ActionObj } from '../types/action';
 
 
 /**
 * Classes Reducer.
 */
 
-export default function reducer(state: Array<Object> = [], action: Object) {
+export default function reducer(state: Array<ClassType> = [], action: ActionObj) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_CLASSES:

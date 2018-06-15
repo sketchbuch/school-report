@@ -11,6 +11,7 @@ import {
   UPDATE_CATEGORY,
 } from '../../constants/actionTypes';
 import categoryDefault from '../../types/category';
+import reduce from '../../utils/reducers';
 
 
 /**
@@ -21,12 +22,6 @@ describe('Reducer: Categories', () => {
   const INITIAL_STATE = [
     {...categoryDefault, label: 'Category 1', id: 'c1' }
   ];
-  const TEST_CATEGORIES = {
-    categories: [
-      {...categoryDefault, label: 'Category 2', id: 'c2' },
-      {...categoryDefault, label: 'Category 3', id: 'c3' }
-    ]
-  };
 
   test('Should return the initial state if no type matches', () => {
     expect(reducer(INITIAL_STATE, { type: 'IGNORE' })).toEqual(INITIAL_STATE);
@@ -48,6 +43,13 @@ describe('Reducer: Categories', () => {
   });
 
   test('REPLACE_CATEGORIES should return payload replacing existing categories', () => {
+    const TEST_CATEGORIES = {
+      categories: [
+        {...categoryDefault, label: 'Category 2', id: 'c2' },
+        {...categoryDefault, label: 'Category 3', id: 'c3' }
+      ]
+    };
+    
     const reducerResult = reducer(INITIAL_STATE, { type: REPLACE_CATEGORIES, payload: TEST_CATEGORIES });
     expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(TEST_CATEGORIES.categories));
   });
@@ -78,10 +80,8 @@ describe('Reducer: Categories', () => {
       {...categoryDefault, label: 'Category 2', id: 'c2' },
       {...categoryDefault, label: 'Category 3', id: 'c3' },
     ];
-    const EXPECTED_STATE_DEL = [
-      {...categoryDefault, label: 'Category 1', id: 'c1' },
-      {...categoryDefault, label: 'Category 3', id: 'c3' },
-    ];
+    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[1]);
+
     const reducerResult = reducer(INITIAL_STATE_DEL, { type: DELETE_CATEGORY, payload: INITIAL_STATE_DEL[1] });
     expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
   });
