@@ -26,18 +26,17 @@ const defaultState = {
 export default function reducer(state: initialState = defaultState, action: Object) {
   switch (action.type) {
     case CHANGE_LANGUAGE:
-      if (action.payload.lang) {
-        const langFound = state.available.find((lang) => lang.key === action.payload.lang);
-        if (langFound !== undefined) return {...state, available: [...state.available], current: action.payload.lang};
-      }
-    break;
-
     case SETTINGS_LOADED:
-      const { settings } = action.payload;
-      if (settings && settings.language) {
-        const langFound = state.available.find((lang) => lang.key === settings.language);
-        if (langFound !== undefined) return {...state, available: [...state.available], current: settings.language};
+      let reqLang = '';
+
+      if (action.payload.settings && action.payload.settings.language) {
+        reqLang = action.payload.settings.language.current;
+      } else if (action.payload.lang) {
+        reqLang = action.payload.lang;
       }
+
+      const langFound = state.available.find((lang) => lang.key === reqLang);
+      if (langFound !== undefined) return {...state, available: [...state.available], current: langFound.key };
     break;
 
     default:
