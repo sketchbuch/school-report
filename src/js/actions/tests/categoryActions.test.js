@@ -1,8 +1,13 @@
 // @flow
 
+import thunk from 'redux-thunk';
+import configureMockStore from 'redux-mock-store';
 import * as categoryActions from '../categoryActions';
 import { REPLACE_CATEGORIES } from '../../constants/actionTypes';
 import catgeoryDefault from '../../types/category';
+
+const middlewares = [thunk]
+const mockStore = configureMockStore(middlewares);
 
 
 /**

@@ -97,11 +97,9 @@ describe('Reducer: Pupils', () => {
       {...pupilDefault, classId: 'c3', firstname: 'The', gender: 'm', id: 'p3', lastname: 'Cat' },
       {...pupilDefault, classId: 'c2', firstname: 'Holly', gender: 'f', id: 'p4', lastname: '(Computer)' },
     ];
-    const EXPECTED_STATE_DEL = [
-      {...pupilDefault, classId: 'c3', firstname: 'The', gender: 'm', id: 'p3', lastname: 'Cat' },
-      {...pupilDefault, classId: 'c2', firstname: 'Holly', gender: 'f', id: 'p4', lastname: '(Computer)' },
-    ];
-    const reducerResult = reducer(INITIAL_STATE_DEL, { type: DELETE_ALL_CLASS_PUPILS, payload: { id: 'c1' } });
+    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[2]);
+    const reducerResult = reducer(INITIAL_STATE_DEL, { type: DELETE_ALL_CLASS_PUPILS, payload: { id: 'c3' } });
+
     expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
   });
 
@@ -112,11 +110,14 @@ describe('Reducer: Pupils', () => {
       {...pupilDefault, classId: 'c3', firstname: 'The', gender: 'm', id: 'p3', lastname: 'Cat' },
       {...pupilDefault, classId: 'c2', firstname: 'Holly', gender: 'f', id: 'p4', lastname: '(Computer)' },
     ];
-    const EXPECTED_STATE_DEL = [
-      {...pupilDefault, classId: 'c3', firstname: 'The', gender: 'm', id: 'p3', lastname: 'Cat' },
-      {...pupilDefault, classId: 'c2', firstname: 'Holly', gender: 'f', id: 'p4', lastname: '(Computer)' },
-    ];
-    const reducerResult = reducer(INITIAL_STATE_DEL, { type: DELETE_CLASS, payload: { id: 'c1' } });
+    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[2]);
+    const reducerResult = reducer(INITIAL_STATE_DEL, { type: DELETE_CLASS, payload: { id: 'c3' } });
+    
     expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
+  });
+
+  test('DELETE_CLASS handles undefined ID', () => {
+    const reducerResult = reducer(INITIAL_STATE, { type: DELETE_CLASS, payload: {} });
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(INITIAL_STATE));
   });
 });

@@ -53,7 +53,7 @@ export default function reducer(state: Array<PupilType> = [], action: ActionObj)
       return state.filter((item: PupilType) => {
         const { payload }: Object = action;
         if (payload.id !== undefined) return item.classId !== payload.id; 
-        return false;
+        return true;
       });
 
     default:
