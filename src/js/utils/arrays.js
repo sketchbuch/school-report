@@ -9,6 +9,10 @@
 * @return object Either the matching object or an empty object.
 */
 export function getItemById(itemArr: Array<Object>, itemId: string, idProp?: string = 'id'): Object {
-  if (itemId !== '') return itemArr.filter(item => item[idProp] === itemId).shift();
+  if (itemId !== '' && itemArr.length > 0) {
+    const match = itemArr.filter(item => item[idProp] === itemId).shift();
+    if (match) return match;
+  }
+
   return {};
 }

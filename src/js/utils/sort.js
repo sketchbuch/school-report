@@ -8,7 +8,7 @@
 * @return array A copy of arr sorted by prop.
 */
 export function sortObjectsAz(arr: Array<Object>, props: Array<string>): Array<Object> {
-  if (!Array.isArray(arr) || !Array.isArray(props) || props.length < 1) return arr;
+  if (arr.length < 1 || props.length < 1) return arr;
 
   return [].concat(arr).sort((a, b) => {
     var labelA = getSortProp(a, props);

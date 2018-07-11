@@ -23,7 +23,7 @@ export type ClassType = {
   getUrl: Function,
   id: string,
   label: string,
-  pupilCount?: number, // Required so that the pupil count can be calculated and set - but the actual count is never persisted - 0 will always be saved.
+  pupilCount: number, // Required so that the pupil count can be calculated and set - but the actual count is never persisted - 0 will always be saved.
   updated: number,
 };
 
@@ -73,6 +73,7 @@ export function hydrateClass(classObj: ClassType): ClassType {
     ...classObj,
     contains: function (term?: string) {
       if (term) {
+        term = term.toLowerCase();
         const searchStr = this.label + this.pupilCount;
         if (term && searchStr.toLowerCase().indexOf(term) !== -1) return true;
       }
@@ -92,13 +93,15 @@ export function hydrateClass(classObj: ClassType): ClassType {
       return`${this.getLabel()} - ${this.getDescription()}`;
     },
     getUrl: function (linkType: string) {
+      let theUrl = ROUTE_PUPILS;
+      
       if (linkType === 'delete') {
-        return ROUTE_DEL_CLASS.replace(':classId', this.id);
+        theUrl = ROUTE_DEL_CLASS;
       } else if (linkType === 'edit') {
-        return ROUTE_EDIT_CLASS.replace(':classId', this.id);
+        theUrl = ROUTE_EDIT_CLASS;
       }
 
-      return ROUTE_PUPILS.replace(':classId', this.id);
+      return theUrl.replace(':classId', this.id);
     },
   };
 }

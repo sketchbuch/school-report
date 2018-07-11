@@ -1,6 +1,10 @@
 // @flow
 
-import { SETTINGS_LOADED, REPLACE_DATA, UPDATE_SETTINGS } from '../constants/actionTypes';
+import {
+  REPLACE_DATA,
+  SETTINGS_LOADED,
+  UPDATE_SETTINGS,
+} from '../constants/actionTypes';
 
 
 /**
