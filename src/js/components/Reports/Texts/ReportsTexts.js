@@ -1,13 +1,13 @@
 // @flow
 
 import React, { Component, Fragment } from 'react';
+import { DragSource } from 'react-dnd';
 import Icon from '../../Icon/Icon';
 import DndTarget from '../../Dnd/Target/DndTarget';
 import { getPupilTextHtml } from '../../../utils/html';
 import { ICON_ADD } from '../../../constants/icons';
 import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
-import { getPupilTextHtml } from '../../../utils/html';
 import './ReportsTexts.css';
 
 type Props = {
@@ -15,6 +15,10 @@ type Props = {
   handleTextToggle: Function,
   selectedTexts: Array<string>,
   texts: Array<TextType>,
+};
+
+const dndTypes = {
+  TEXT: 'text'
 };
 
 // DnD:

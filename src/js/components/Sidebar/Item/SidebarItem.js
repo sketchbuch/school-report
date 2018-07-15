@@ -9,6 +9,7 @@ import type { ClassType } from '../../../types/class';
 import type { PupilType } from '../../../types/pupil';
 import type { ReportType } from '../../../types/report';
 import type { TextType } from '../../../types/text';
+import type { TimeoutID } from '../../../types/fixes';
 import {
   ICON_DELETE,
   ICON_EDIT,
