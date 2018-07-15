@@ -2,6 +2,8 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 import ReportsTextList from './TextList/ReportsTextList'
 import ReportsTexts from './Texts/ReportsTexts'
 import type { CategoryType } from '../../types/category';
@@ -98,6 +100,8 @@ const mapStateToProps = (state: Object, props: Props) => {
     texts: state.texts,
   }
 };
+
+Reports = DragDropContext(HTML5Backend)(Reports);
 
 
 export default connect(mapStateToProps)(Reports);

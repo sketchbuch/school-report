@@ -7,6 +7,7 @@ import { getPupilTextHtml } from '../../../utils/html';
 import { ICON_ADD } from '../../../constants/icons';
 import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
+import { getPupilTextHtml } from '../../../utils/html';
 import './ReportsTexts.css';
 
 type Props = {
@@ -15,6 +16,33 @@ type Props = {
   selectedTexts: Array<string>,
   texts: Array<TextType>,
 };
+
+// DnD:
+const boxSource = {
+	beginDrag(props: Object, monitor: Object | Function, component: Object | Function) {
+    console.log('beginDrag', arguments);
+    return { id: props.id };
+	},
+
+	endDrag(props: Object, monitor: Object | Function, component: Object | Function) {
+		console.log('endDrag');
+	},
+}
+
+let ReportTxt = (props: Object) => {
+  const { isDragging, connectDragSource, text } = props;
+  
+  return connectDragSource(
+    <li className="ReportsTexts__item" onClick={props.onClick(props.txt.id)} style={{ opacity: isDragging ? 0.5 : 1 }}>
+      <span dangerouslySetInnerHTML={getPupilTextHtml(props.txt.getLabel(0), props.activePupil)} />
+    </li>
+  )
+}
+
+ReportTxt = DragSource(dndTypes.TEXT, boxSource, (connect, monitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging()
+}))(ReportTxt);
 
 
 /**

@@ -32,3 +32,34 @@
 .ReportsText__item + .ReportsText__item {
   margin-top: 10px;
 }
+
+.ReportsTexts_list {
+  display: block;
+  position: relative;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.ReportsTexts__item {
+  position: relative;
+  display: block;
+  padding: 5px 10px;
+  margin: 0px;
+  border: 1px solid var(--col-darken-1);
+  background: var(--col-white);
+  user-select: none;
+  cursor: move;
+  -webkit-user-drag: element;
+}
+
+.ReportsTexts__item + .ReportsTexts__item {
+  margin-top: 10px;
+}
+
+
+.ReportsTexts__adder {
+  text-align: center;
+  border: none;
+  background: none;
+}

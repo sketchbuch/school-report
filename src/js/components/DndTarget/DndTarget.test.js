@@ -1,17 +1,15 @@
 // @flow
 
 import React from 'react';
-import { Provider } from 'react-redux';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import store from '../../store';
-import Reports from './Reports';
+import DndTarget from './DndTarget';
 
 configure({ adapter: new Adapter() });
 
-describe('<Reports />', () => {
+describe('<DndTarget />', () => {
   test('Renders without crashing', () => {
-    const wrapper = shallow(<Provider store={store}><Reports /></Provider>);
+    const wrapper = shallow(<DndTarget />);
     expect(wrapper).toHaveLength(1);
   });
 });

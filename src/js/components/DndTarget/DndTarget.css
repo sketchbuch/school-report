@@ -1,0 +1,33 @@
+/* Dnd Target */
+/* ---------- */
+
+.DndTarget {
+  border: 4px dashed var(--col-darken-1);
+  color: var(--col-darken-1);
+  background: transparent;
+  border-radius: 5px;
+  position: relative;
+  display: inline-block;
+  padding: 4px 20px;
+  margin: 0px auto;
+  cursor: pointer;
+}
+
+.DndTarget:hover {
+  color: var(--col-primary-light);
+}
+
+.DndTarget:active {
+  color: var(--col-primary);
+}
+
+
+/* Disabled */
+.DndTarget[disabled],
+.DndTarget[disabled]:c,
+.DndTarget[disabled]:hover,
+.DndTarget[disabled]:active {
+  cursor: not-allowed;
+  user-select: none;
+  box-shadow: none;
+}
