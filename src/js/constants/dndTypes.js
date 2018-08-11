@@ -2,4 +2,6 @@
 * Drag and Drop types
 */
 
-export default { TEXT: 'text' };
+export const dndTypes = {
+    TEXT: 'text',
+};

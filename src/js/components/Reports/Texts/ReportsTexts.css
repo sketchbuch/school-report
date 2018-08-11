@@ -53,6 +53,11 @@
   -webkit-user-drag: element;
 }
 
+.ReportsTexts__item--dragging {
+  background: var(--col-brand-transparent);
+  opacity: 0.5;
+}
+
 .ReportsTexts__item + .ReportsTexts__item {
   margin-top: 10px;
 }

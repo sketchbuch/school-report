@@ -6,6 +6,7 @@ import Icon from '../../Icon/Icon';
 import DndTarget from '../../Dnd/Target/DndTarget';
 import { getPupilTextHtml } from '../../../utils/html';
 import { ICON_ADD } from '../../../constants/icons';
+import { dndTypes } from '../../../constants/dndTypes';
 import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
 import './ReportsTexts.css';
@@ -15,10 +16,6 @@ type Props = {
   handleTextToggle: Function,
   selectedTexts: Array<string>,
   texts: Array<TextType>,
-};
-
-const dndTypes = {
-  TEXT: 'text'
 };
 
 // DnD:
@@ -35,9 +32,11 @@ const boxSource = {
 
 let ReportTxt = (props: Object) => {
   const { isDragging, connectDragSource, text } = props;
+  let classes = 'ReportsTexts__item';
+  if (isDragging) classes += ' ReportsTexts__item--dragging';
   
   return connectDragSource(
-    <li className="ReportsTexts__item" onClick={props.onClick(props.txt.id)} style={{ opacity: isDragging ? 0.5 : 1 }}>
+    <li className={classes} onClick={props.onClick(props.txt.id)}>
       <span dangerouslySetInnerHTML={getPupilTextHtml(props.txt.getLabel(0), props.activePupil)} />
     </li>
   )
@@ -84,9 +83,7 @@ export class ReportsTexts extends Component<Props> {
 
         {selectedTexts.map(text => (
           <Fragment key={text.id}>
-            <li className="ReportsText__item ReportsText__item--txt" onClick={this.props.handleTextToggle(text.id)}>
-              <span dangerouslySetInnerHTML={getPupilTextHtml(text.getLabel(0), this.props.activePupil)} />
-            </li>
+            <ReportTxt txt={text} activePupil={this.props.activePupil} onClick={this.props.handleTextToggle} />
             <li className="ReportsText__item ReportsText__item--dnd">
               <DndTarget><Icon type={ ICON_ADD } /></DndTarget>
             </li>
