@@ -26,7 +26,7 @@ type State = {
 
 
 /**
-* Selected texts for a pupil in a report.
+* A list of available texts.
 */
 export class ReportsTextList extends Component<Props, State> {
   static defaultProps = {

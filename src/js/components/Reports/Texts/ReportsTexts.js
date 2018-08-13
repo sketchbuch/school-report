@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component, Fragment } from 'react';
-import { DragSource } from 'react-dnd';
+import ReportsTextItem from '../TextItem/ReportsTextItem';
 import Icon from '../../Icon/Icon';
 import DndTarget from '../../Dnd/Target/DndTarget';
 import { getPupilTextHtml } from '../../../utils/html';
@@ -18,38 +18,9 @@ type Props = {
   texts: Array<TextType>,
 };
 
-// DnD:
-const boxSource = {
-	beginDrag(props: Object, monitor: Object | Function, component: Object | Function) {
-    console.log('beginDrag', arguments);
-    return { id: props.id };
-	},
-
-	endDrag(props: Object, monitor: Object | Function, component: Object | Function) {
-		console.log('endDrag');
-	},
-}
-
-let ReportTxt = (props: Object) => {
-  const { isDragging, connectDragSource, text } = props;
-  let classes = 'ReportsTexts__item';
-  if (isDragging) classes += ' ReportsTexts__item--dragging';
-  
-  return connectDragSource(
-    <li className={classes} onClick={props.onClick(props.txt.id)}>
-      <span dangerouslySetInnerHTML={getPupilTextHtml(props.txt.getLabel(0), props.activePupil)} />
-    </li>
-  )
-}
-
-ReportTxt = DragSource(dndTypes.TEXT, boxSource, (connect, monitor) => ({
-  connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
-}))(ReportTxt);
-
 
 /**
-* A list of available texts.
+* Selected texts for a pupil in a report.
 */
 export class ReportsTexts extends Component<Props> {
   static defaultProps = {
@@ -83,7 +54,7 @@ export class ReportsTexts extends Component<Props> {
 
         {selectedTexts.map(text => (
           <Fragment key={text.id}>
-            <ReportTxt txt={text} activePupil={this.props.activePupil} onClick={this.props.handleTextToggle} />
+            <ReportsTextItem txt={text} activePupil={this.props.activePupil} onClick={this.props.handleTextToggle} />
             <li className="ReportsText__item ReportsText__item--dnd">
               <DndTarget><Icon type={ ICON_ADD } /></DndTarget>
             </li>
