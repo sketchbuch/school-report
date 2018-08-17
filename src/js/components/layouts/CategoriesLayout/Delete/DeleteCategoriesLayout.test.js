@@ -7,7 +7,7 @@ import DeleteCategoriesLayout from './DeleteCategoriesLayout';
 
 configure({ adapter: new Adapter() });
 
-describe.skip('<DeleteCategoriesLayout />:', () => {
+describe.skip('<DeleteCategoriesLayout />', () => {
   const props = {
     dispatch: jest.fn(),
     history: {},

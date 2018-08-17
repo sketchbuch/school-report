@@ -11,7 +11,6 @@ import type { DomainType } from '../../../types/domain';
 import './ItemSelection.css';
 
 type Props = {
-  children?: React.Node,
   items: Array<DomainType>, // Already sorted for display.
   name: string, // Name of property in Formik's values object.
   searchMin: number, // Minimum number of items before the search shows.

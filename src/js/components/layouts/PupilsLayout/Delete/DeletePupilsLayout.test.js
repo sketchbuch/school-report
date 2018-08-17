@@ -8,7 +8,7 @@ import classDefault from '../../../../types/class';
 
 configure({ adapter: new Adapter() });
 
-describe.skip('<DeletePupilsLayout />:', () => {
+describe.skip('<DeletePupilsLayout />', () => {
   const props = {
     activeClass: {...classDefault, id: 'c1', label: 'Test Class' },
     dispatch: jest.fn(),

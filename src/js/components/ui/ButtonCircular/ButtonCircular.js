@@ -2,16 +2,17 @@
 
 import * as React from 'react';
 import type { ButtonType } from '../../../types/button';
+import type { EventHandlerType } from '../../../types/functions';
 import './ButtonCircular.css';
 
 type Props = {
   action: string,
-  buttontype: ButtonType,
+  buttontype?: ButtonType,
   children?: React.Node,
   className?: string,
   disabled?: boolean,
   name?: string,
-  onClick: Function,
+  onClick?: EventHandlerType | null,
   title?: string,
   type?: string,
   visual?: boolean,
@@ -29,28 +30,13 @@ class ButtonCircular extends React.Component<Props> {
     className: '',
     disabled: false,
     name: '',
-    onClick: ()=>{},
+    onClick: null,
     title: '',
     type: 'button',
     visual: false,
   };
 
   props: Props;
-  onClick: Function;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.onClick = this.onClick.bind(this);
-  }
-
-  onClick(event: SyntheticInputEvent<HTMLInputElement>) {
-    if (this.props.disabled) {
-      event.preventDefault();
-    } else {
-      this.props.onClick(event);
-    }
-  }
 
   render() {
     const {
@@ -60,6 +46,7 @@ class ButtonCircular extends React.Component<Props> {
       className,
       disabled,
       name,
+      onClick,
       title,
       type,
       visual,
@@ -75,7 +62,7 @@ class ButtonCircular extends React.Component<Props> {
       "data-buttontype": buttontype,
       disabled: disabled,
       name: name,
-      onClick: this.onClick,
+      onClick: onClick,
       title: title,
       type: type,
     }, children);

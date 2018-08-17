@@ -8,7 +8,7 @@ import DeleteClassesLayout from './DeleteClassesLayout';
 
 configure({ adapter: new Adapter() });
 
-describe('<DeleteClassesLayout />:', () => {
+describe('<DeleteClassesLayout />', () => {
   const props = {
     dispatch: jest.fn(),
     history: {},

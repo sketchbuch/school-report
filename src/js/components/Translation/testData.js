@@ -4,7 +4,8 @@ window.reportr = {
   translations: {
     EN: {
       "App": {
-        "Name": "School Report"
+        "Name": "School Report",
+        "Placeholder": "This is the placeholder: %PH%"
       },
       "AppError": {
         "ErrorTxt": "Error Loading"
@@ -41,7 +42,8 @@ window.reportr = {
     },
     DE: {
       "App": {
-        "Name": "DE School Report"
+        "Name": "DE School Report",
+        "Placeholder": "DE This is the placeholder: %PH%"
       },
       "AppError": {
         "ErrorTxt": "DE Error Loading"

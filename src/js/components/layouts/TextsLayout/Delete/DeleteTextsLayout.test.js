@@ -7,7 +7,7 @@ import DeleteTextsLayout from './DeleteTextsLayout';
 
 configure({ adapter: new Adapter() });
 
-describe.skip('<DeleteTextsLayout />:', () => {
+describe.skip('<DeleteTextsLayout />', () => {
   const props = {
     dispatch: jest.fn(),
     history: {},

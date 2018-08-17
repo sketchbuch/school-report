@@ -6,7 +6,7 @@ import Alert from './Alert';
 
 configure({ adapter: new Adapter() });
 
-describe('<Alert />:', () => {
+describe('<Alert />', () => {
   const props = {
     body: 'The body',
     icon: true,

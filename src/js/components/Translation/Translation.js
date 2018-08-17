@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import { Component } from 'react';
 
 type Props = {
   name: string,
@@ -53,7 +53,7 @@ export default class Translation extends Component<Props> {
   prevLang: string = '';
 
   componentWillMount() {
-    if (window.reportr.translations.length > 0) this.prevLang = window.reportr.curLang;
+    if (window.reportr && window.reportr.curLang) this.prevLang = window.reportr.curLang;
   }
 
   shouldComponentUpdate(nextProps: Props) {
@@ -65,22 +65,11 @@ export default class Translation extends Component<Props> {
   }
 
   componentWillUpdate() {
-    if (window.reportr.translations.length > 0) this.prevLang = window.reportr.curLang;
+    if (window.reportr && window.reportr.curLang) this.prevLang = window.reportr.curLang;
   }
 
 
   render() {
     return text(this.props.name, this.props.ns, this.props.placeholders);
   }
-}
-
-/**
-* Translation function that returns a react element to allow "inline" use of a component (like in attributes).
-*
-* @param string name The name/key of the translation.
-* @param string ns The namespace that the name belongs to.
-* @param mixed placeholders An optional object of replacement texts: {search: replace}
-*/
-export function t(name: string, ns: string, placeholders: ?Object = null) {
-  return React.createElement(Translation, { name, ns, placeholders });
 }

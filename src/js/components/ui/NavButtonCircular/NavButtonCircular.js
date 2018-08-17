@@ -32,16 +32,6 @@ class NavButtonCircular extends React.Component<Props> {
   };
 
   props: Props;
-  onClick: Function;
-
-  constructor(props: Props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
-  }
-
-  onClick(event: SyntheticInputEvent<HTMLInputElement>) {
-    if (this.props.disabled) event.preventDefault();
-  }
 
   render() {
     const {
@@ -60,7 +50,6 @@ class NavButtonCircular extends React.Component<Props> {
 
     return (
         <Link
-          onClick={this.onClick}
           className={classes}
           data-action={action}
           data-buttontype={buttontype}

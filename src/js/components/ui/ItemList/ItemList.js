@@ -16,7 +16,7 @@ type DomainTypes = ClassType | PupilType | ReportType | TextType;
 type Props = {
   form: Object,
   insert: Function,
-  items: Array<DomainTypes>,
+  items: Array<DomainTypes>, // Items, could be filtered so length != totalCount.
   move: Function,
   name: string,
   pop: Function,
@@ -24,7 +24,7 @@ type Props = {
   remove: Function,
   selected: Array<string>,
   swap: Function,
-  totalCount: number,
+  totalCount: number, // Total number of items
   unshift: Function,
 };
 
@@ -34,9 +34,9 @@ type Props = {
 */
 class ItemList extends Component<Props> {
   static defaultProps = {
-    items: [],
+    items: [], // Already sorted for display.
     name: '',
-    selected: [],
+    selected: [], // IDs from the domain objects.
     totalCount: 0,
   };
 

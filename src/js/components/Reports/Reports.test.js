@@ -6,7 +6,6 @@ import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import store from '../../store';
 import Reports from './Reports';
-import store from '../../store';
 
 configure({ adapter: new Adapter() });
 

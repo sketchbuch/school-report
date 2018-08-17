@@ -3,6 +3,7 @@
 import * as React from 'react';
 import Icon from '../../Icon/Icon';
 import { ICON_BUSY } from '../../../constants/icons';
+import type { EventHandlerType } from '../../../types/functions';
 import './Button.css';
 
 type Props = {
@@ -12,7 +13,7 @@ type Props = {
   className?: string,
   disabled?: boolean,
   name?: string,
-  onClick: Function,
+  onClick?: EventHandlerType | null,
   title?: string,
   type?: string,
 };
@@ -25,41 +26,40 @@ class Button extends React.Component<Props> {
     busy: false,
     buttontype: 'default',
     children: null,
-    className: '',
     disabled: false,
-    name: '',
-    onClick: ()=>{},
-    title: '',
+    onClick: null,
     type: 'button',
   };
 
   props: Props;
-  onClick: Function;
-
-  constructor(props: Props) {
-    super(props);
-    this.onClick = this.onClick.bind(this);
-  }
-
-  onClick(event: SyntheticInputEvent<HTMLInputElement>) {
-    if (this.props.disabled) {
-      event.preventDefault();
-    } else {
-      this.props.onClick(event);
-    }
-  }
 
   render() {
+    const {
+      buttontype,
+      className,
+      children,
+      disabled,
+      busy,
+      name,
+      onClick,
+      title,
+      type,
+    } = this.props;
+
+    let classes = 'Button';
+    if (className && className !== '') classes += ` ${className}`;
+
     return (
       <button
-        className="Button"
-        disabled={this.props.disabled}
-        data-buttontype={this.props.buttontype}
-        onClick={this.onClick}
-        title={this.props.title}
-        type={this.props.type}
+        className={classes}
+        data-buttontype={buttontype}
+        disabled={disabled}
+        name={name}
+        onClick={onClick}
+        title={title}
+        type={type}
       >
-        {this.props.children}{this.props.busy && <span className="Button__busy"><Icon type={ ICON_BUSY } /></span>}
+        {children}{busy && <span className="Button__busy"><Icon type={ ICON_BUSY } /></span>}
       </button>
     )
   }

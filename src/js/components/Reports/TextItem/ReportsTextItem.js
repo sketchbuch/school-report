@@ -1,11 +1,8 @@
 // @flow
 
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { DragSource, DropTarget } from 'react-dnd';
-import { XYCoord } from 'dnd-core';
-import Icon from '../../Icon/Icon';
 import { getPupilTextHtml } from '../../../utils/html';
-import { ICON_ADD } from '../../../constants/icons';
 import { dndTypes } from '../../../constants/dndTypes';
 import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
