@@ -51,6 +51,12 @@ Misc.:
 - All form submit handlers - use appropriate type rather than Object
 
 
+Reports:
+-------
+
+- Add unselected to category selector
+
+
 Layouts:
 -------
 

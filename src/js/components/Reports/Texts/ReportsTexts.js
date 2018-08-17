@@ -1,16 +1,18 @@
 // @flow
 
 import React, { Component, Fragment } from 'react';
+import ReportsTextItem from '../TextItem/ReportsTextItem';
 import Icon from '../../Icon/Icon';
-import DndTarget from '../../Dnd/Target/DndTarget';
 import { getPupilTextHtml } from '../../../utils/html';
 import { ICON_ADD } from '../../../constants/icons';
+import { dndTypes } from '../../../constants/dndTypes';
 import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
 import './ReportsTexts.css';
 
 type Props = {
   activePupil: PupilType | Object,
+  handleTextMove: Function,
   handleTextToggle: Function,
   selectedTexts: Array<string>,
   texts: Array<TextType>,
@@ -18,11 +20,12 @@ type Props = {
 
 
 /**
-* A list of available texts.
+* Selected texts for a pupil in a report.
 */
 export class ReportsTexts extends Component<Props> {
   static defaultProps = {
     activePupil: {},
+    handleTextMove: ()=>{},
     handleTextToggle: ()=>{},
     selectedTexts: [],
     texts: [],
@@ -30,6 +33,10 @@ export class ReportsTexts extends Component<Props> {
 
   props: Props;
 
+  /**
+   * Returns the selected texts in the order that they are selected.
+   * this.props.selectedTexts is just an array of IDs.
+   */
   getSelectedTexts() {
     const visibleTexts = [];
 
@@ -46,19 +53,14 @@ export class ReportsTexts extends Component<Props> {
 
     return (
       <ul className="ReportsTexts">
-        <li className="ReportsText__item ReportsText__item--dnd">
-          <DndTarget><Icon type={ ICON_ADD } /></DndTarget>
-        </li>
-
         {selectedTexts.map(text => (
-          <Fragment key={text.id}>
-            <li className="ReportsText__item ReportsText__item--txt" onClick={this.props.handleTextToggle(text.id)}>
-              <span dangerouslySetInnerHTML={getPupilTextHtml(text.getLabel(0), this.props.activePupil)} />
-            </li>
-            <li className="ReportsText__item ReportsText__item--dnd">
-              <DndTarget><Icon type={ ICON_ADD } /></DndTarget>
-            </li>
-          </Fragment>
+            <ReportsTextItem 
+              activePupil={this.props.activePupil} 
+              key={text.id}
+              onClick={this.props.handleTextToggle}
+              onMove={this.props.handleTextMove} 
+              txt={text} 
+            />
         ))}
       </ul>
     )

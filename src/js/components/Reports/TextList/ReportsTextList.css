@@ -20,7 +20,7 @@
 
 .ReportsTextList__item {
   position: relative;
-  display: -webkit-box;
+  display: block;
   padding: 5px 10px;
   margin: 0px;
   border: 1px solid var(--col-darken-1);

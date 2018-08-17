@@ -6,9 +6,9 @@
 [include]
 
 [libs]
+classnames
 flow-typed
 jest
-classnames
 
 [lints]
 

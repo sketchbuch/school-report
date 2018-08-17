@@ -125,7 +125,7 @@
       "EditPupil": "Edit '%PUPIL_NAME%'",
       "EditReport": "Edit '%REPORT_NAME%'",
       "EditText": "Edit '%TEXT%'",
-      "ReportBuilder": "Report text for '%PUPIL_NAME%'",
+      "ReportBuilder": "Report for '%PUPIL_NAME%'",
       "Settings": "Settings"
     },
     "Gender": {

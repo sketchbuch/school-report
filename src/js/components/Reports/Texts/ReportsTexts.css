@@ -7,28 +7,13 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 10px 20px;
+  padding: 20px 20px;
   list-style: none;
   margin: 0px;
 }
 
-.ReportsText__item {
-  padding: 0px;
-  margin: 0px;
-}
-
-.ReportsText__item--txt {
-    position: relative;
-    display: -webkit-box;
-    padding: 5px 10px;
-    margin: 0px;
-    border: 1px solid var(--col-darken-1);
-    background: var(--col-white);
-    user-select: none;
-    cursor: move;
-    -webkit-user-drag: element;
-}
-
-.ReportsText__item + .ReportsText__item {
-  margin-top: 10px;
+.ReportsTexts__adder {
+  text-align: center;
+  border: none;
+  background: none;
 }

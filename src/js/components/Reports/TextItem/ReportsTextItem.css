@@ -1,0 +1,22 @@
+/* Report Text Item */
+/* ---------------- */
+
+.ReportsTextItem {
+  position: relative;
+  display: block;
+  padding: 5px 10px;
+  margin: 0px;
+  border: 1px solid var(--col-darken-1);
+  background: var(--col-white);
+  user-select: none;
+  cursor: move;
+  -webkit-user-drag: element;
+}
+
+.ReportsTextItem + .ReportsTextItem {
+  margin-top: 20px;
+}
+
+.ReportsTextItem--dragging {
+  visibility: hidden;
+}

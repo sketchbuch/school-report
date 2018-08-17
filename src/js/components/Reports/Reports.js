@@ -2,13 +2,15 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 import ReportsTextList from './TextList/ReportsTextList'
 import ReportsTexts from './Texts/ReportsTexts'
 import type { CategoryType } from '../../types/category';
 import type { ReportType } from '../../types/report';
 import type { PupilType } from '../../types/pupil';
 import type { TextType } from '../../types/text';
-import { removeItem }  from '../../utils/reducers/array';
+import { moveItem, removeItem }  from '../../utils/reducers/array';
 import './Reports.css';
 
 type Props = {
@@ -36,6 +38,7 @@ export class Reports extends Component<Props, State> {
 
   props: Props;
   state: State;
+  handleTextMove: ()=>{};
   handleTextToggle: Function;
 
   constructor(props: Props) {
@@ -45,9 +48,32 @@ export class Reports extends Component<Props, State> {
       selected: {},
     };
 
+    this.handleTextMove = this.handleTextMove.bind(this);
     this.handleTextToggle = this.handleTextToggle.bind(this);
   }
 
+  /**
+   * Method called by drag and drop when a drag source is hovering over a drop target.
+   */
+  handleTextMove(sourceId: string, targetId: string, before: boolean = false) {
+    const newSelected = JSON.parse(JSON.stringify(this.state.selected)); // Clone
+    const activePupilId = this.props.activePupil.id;
+
+    if (newSelected[activePupilId] === undefined) return;
+
+    let sourceIndex = newSelected[activePupilId].indexOf(sourceId);
+    let targetIndex = newSelected[activePupilId].indexOf(targetId);
+
+    if (sourceIndex < 0 || targetIndex < 0) return;
+    if (before && targetIndex > 0) targetIndex -= 1;
+    
+    newSelected[activePupilId] = moveItem(newSelected[activePupilId], sourceId, sourceIndex, targetIndex);
+    this.setState({ selected: newSelected });
+  }
+
+  /**
+   * Toggles the selected state of a text. Uyed in both the list of selected texts and the list of available texts.
+   */
   handleTextToggle = (pupilId: string) => (event: SyntheticEvent<>) => {
     const newSelected = JSON.parse(JSON.stringify(this.state.selected));
     const activePupilId = this.props.activePupil.id;
@@ -72,6 +98,7 @@ export class Reports extends Component<Props, State> {
         <div className="Reports__left">
           <ReportsTexts
             activePupil={this.props.activePupil}
+            handleTextMove={this.handleTextMove}
             handleTextToggle={this.handleTextToggle}
             selectedTexts={selectedTexts}
             texts={this.props.texts}
@@ -98,6 +125,8 @@ const mapStateToProps = (state: Object, props: Props) => {
     texts: state.texts,
   }
 };
+
+Reports = DragDropContext(HTML5Backend)(Reports);
 
 
 export default connect(mapStateToProps)(Reports);
