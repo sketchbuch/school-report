@@ -59,6 +59,10 @@ export class ReportsTextList extends Component<Props, State> {
     if (this.state.option !== 'category-all') {
       if (this.state.option === 'category-nocat') {
         return this.props.texts.filter(text => text.categories.length === 0);
+      } else if (this.state.option === 'category-selected') {
+        return this.props.texts.filter(text => this.props.selectedTexts.indexOf(text.id) > -1);
+      } else if (this.state.option === 'category-unselected') {
+        return this.props.texts.filter(text => this.props.selectedTexts.indexOf(text.id) < 0);
       } else {
         return this.props.texts.filter(text => text.categories.includes(this.state.option));
       }
@@ -72,7 +76,13 @@ export class ReportsTextList extends Component<Props, State> {
 
     return (
       <div className="ReportsTextList">
-        <ReportsCatSelect categories={this.props.categories} onChange={this.onFilterChanage} option={this.state.option} texts={this.props.texts} />
+        <ReportsCatSelect 
+          categories={this.props.categories} 
+          onChange={this.onFilterChanage} 
+          option={this.state.option} 
+          selectedCount={this.props.selectedTexts.length} 
+          texts={this.props.texts} 
+        />
 
         {visibleTexts.length > 0 ? (
           <ul className="ReportsTextList_list">

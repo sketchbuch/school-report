@@ -10,6 +10,7 @@
   background: var(--col-white);
   user-select: none;
   cursor: move;
+  width: 100%;
   -webkit-user-drag: element;
 }
 

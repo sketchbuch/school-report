@@ -227,6 +227,8 @@
     "ReportsCatSelect": {
       "CatsAll": "All",
       "CatsUncategorised": "Uncategorised",
+      "CatsSelected": "Selected",
+      "CatsUnselected": "Unselected",
       "Tooltip": "Select a category"
     },
     "Reports": {

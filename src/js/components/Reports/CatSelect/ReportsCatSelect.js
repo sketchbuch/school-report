@@ -12,6 +12,7 @@ type Props = {
   categories: Array<CategoryType>,
   onChange: Function,
   option: string,
+  selectedCount: number,
   texts: Array<TextType>,
 };
 
@@ -24,6 +25,7 @@ export class ReportsCatSelect extends React.Component<Props> {
     categories: [],
     onChange: ()=>{},
     option: '',
+    selectedCount: 0,
     texts: [],
   };
 
@@ -34,16 +36,20 @@ export class ReportsCatSelect extends React.Component<Props> {
       categories,
       onChange,
       option,
+      selectedCount,
       texts,
     } = this.props;
     const uncategorisedTexts = texts.filter(text => text.categories.length < 1).length;
     const sortedCategories = sortObjectsAz(categories, categorySort);
+    const unselectedCount = texts.length - selectedCount;
     if (categories.length < 1) return null;
 
     return (
       <div className="ReportsCatSelect">
         <select value={option} onChange={onChange} title={text('Tooltip', 'ReportsCatSelect')}>
           <option key="category-all" value="category-all">{text('CatsAll', 'ReportsCatSelect')} ({texts.length})</option>
+          {selectedCount > 0 && <option key="category-selected" value="category-selected">{text('CatsSelected', 'ReportsCatSelect')} ({selectedCount})</option> }
+          {unselectedCount > 0 && <option key="category-unselected" value="category-unselected">{text('CatsUnselected', 'ReportsCatSelect')} ({unselectedCount})</option> }
           {uncategorisedTexts > 0 && <option key="category-nocat" value="category-nocat">{text('CatsUncategorised', 'ReportsCatSelect')} ({uncategorisedTexts})</option> }
           <option key="category-disabled" disabled className="ReportsCatSelect_sep">---</option>
 

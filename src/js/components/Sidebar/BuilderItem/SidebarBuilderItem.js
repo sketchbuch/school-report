@@ -41,7 +41,12 @@ class SidebarBuilderItem extends Component<Props, State> {
     this.handleExpandClick = this.handleExpandClick.bind(this);
   }
 
+  componentDidUpdate() {
+    console.log('### componentDidUpdate', this.state.open);
+  }
+
   handleExpandClick(event: SyntheticInputEvent<HTMLInputElement>) {
+    console.log('### handleExpandClick');
     event.preventDefault();
     if (this.props.item.pupils.length > 0) this.setState({ open: !this.state.open });
   }

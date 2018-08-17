@@ -21,16 +21,7 @@ class SidebarHeader extends PureComponent<Props> {
    };
 
   props: Props;
-
-  getActions() {
-    let actions = [];
-
-    //if (this.props.search) actions.push(<span className="SidebarHeader__action" data-action="search">S1</span>);
-    //if (this.props.sort) actions.push(<span className="SidebarHeader__action" data-action="sort">S2</span>);
-
-    return actions;
-  }
-
+  
   render() {
     return (
       <header className="SidebarHeader">
