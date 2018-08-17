@@ -10,7 +10,7 @@ import type { CategoryType } from '../../types/category';
 import type { ReportType } from '../../types/report';
 import type { PupilType } from '../../types/pupil';
 import type { TextType } from '../../types/text';
-import { insertItem, removeItem }  from '../../utils/reducers/array';
+import { moveItem, removeItem }  from '../../utils/reducers/array';
 import './Reports.css';
 
 type Props = {
@@ -53,9 +53,9 @@ export class Reports extends Component<Props, State> {
   }
 
   /**
-   * Method called by drag and drop when a drag source is dropped on drop target.
+   * Method called by drag and drop when a drag source is hovering over a drop target.
    */
-  handleTextMove(sourceId: string, targetId: string) {
+  handleTextMove(sourceId: string, targetId: string, before: boolean = false) {
     const newSelected = JSON.parse(JSON.stringify(this.state.selected)); // Clone
     const activePupilId = this.props.activePupil.id;
 
@@ -65,13 +65,15 @@ export class Reports extends Component<Props, State> {
     let targetIndex = newSelected[activePupilId].indexOf(targetId);
 
     if (sourceIndex < 0 || targetIndex < 0) return;
+    if (before && targetIndex > 0) targetIndex -= 1;
     
-    newSelected[activePupilId] = removeItem(newSelected[activePupilId], sourceIndex);
-    newSelected[activePupilId] = insertItem(newSelected[activePupilId], sourceId, targetIndex);
-
+    newSelected[activePupilId] = moveItem(newSelected[activePupilId], sourceId, sourceIndex, targetIndex);
     this.setState({ selected: newSelected });
   }
 
+  /**
+   * Toggles the selected state of a text. Uyed in both the list of selected texts and the list of available texts.
+   */
   handleTextToggle = (pupilId: string) => (event: SyntheticEvent<>) => {
     const newSelected = JSON.parse(JSON.stringify(this.state.selected));
     const activePupilId = this.props.activePupil.id;

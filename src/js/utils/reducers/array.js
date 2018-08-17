@@ -13,11 +13,33 @@ export function addItem(state: Array<any>, newEle: any): Array<any> {
 }
 
 /**
+* Returns a copy of state with the element moved.
+*
+* @param array state The array containing the items.
+* @param mixed theEle The element to move.
+* @param integer fromIndex The index of theEle.
+* @param integer toIndex The index to move theEle to.
+* @return array An updated copy of state.
+*/
+export function moveItem(state: Array<any>, newEle: any, fromIndex: number, toIndex: number): Array<any> {
+  const newState = [
+      ...state.slice(0, fromIndex),
+      ...state.slice(fromIndex + 1)
+  ];
+
+  return [
+    ...newState.slice(0, toIndex),
+    newEle,
+    ...newState.slice(toIndex),
+  ];
+}
+
+/**
 * Returns a copy of state with a new element inserted.
 *
 * @param array state The array to add to.
 * @param mixed newEle The element to add.
-* @param integer arrIndex The index to add newEle at.
+* @param integer arrIndex The index to insert newEle at.
 * @return array An updated copy of state.
 */
 export function insertItem(state: Array<any>, newEle: any, arrIndex: number): Array<any> {
