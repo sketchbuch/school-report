@@ -10,7 +10,7 @@ import type { CategoryType } from '../../types/category';
 import type { ReportType } from '../../types/report';
 import type { PupilType } from '../../types/pupil';
 import type { TextType } from '../../types/text';
-import { removeItem }  from '../../utils/reducers/array';
+import { insertItem, removeItem }  from '../../utils/reducers/array';
 import './Reports.css';
 
 type Props = {
@@ -38,6 +38,7 @@ export class Reports extends Component<Props, State> {
 
   props: Props;
   state: State;
+  handleTextMove: ()=>{};
   handleTextToggle: Function;
 
   constructor(props: Props) {
@@ -47,7 +48,28 @@ export class Reports extends Component<Props, State> {
       selected: {},
     };
 
+    this.handleTextMove = this.handleTextMove.bind(this);
     this.handleTextToggle = this.handleTextToggle.bind(this);
+  }
+
+  /**
+   * Method called by drag and drop when a drag source is dropped on drop target.
+   */
+  handleTextMove(sourceId: string, targetId: string) {
+    const newSelected = JSON.parse(JSON.stringify(this.state.selected)); // Clone
+    const activePupilId = this.props.activePupil.id;
+
+    if (newSelected[activePupilId] === undefined) return;
+
+    let sourceIndex = newSelected[activePupilId].indexOf(sourceId);
+    let targetIndex = newSelected[activePupilId].indexOf(targetId);
+
+    if (sourceIndex < 0 || targetIndex < 0) return;
+    
+    newSelected[activePupilId] = removeItem(newSelected[activePupilId], sourceIndex);
+    newSelected[activePupilId] = insertItem(newSelected[activePupilId], sourceId, targetIndex);
+
+    this.setState({ selected: newSelected });
   }
 
   handleTextToggle = (pupilId: string) => (event: SyntheticEvent<>) => {
@@ -74,6 +96,7 @@ export class Reports extends Component<Props, State> {
         <div className="Reports__left">
           <ReportsTexts
             activePupil={this.props.activePupil}
+            handleTextMove={this.handleTextMove}
             handleTextToggle={this.handleTextToggle}
             selectedTexts={selectedTexts}
             texts={this.props.texts}

@@ -14,10 +14,9 @@
 }
 
 .ReportsTextItem + .ReportsTextItem {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .ReportsTextItem--dragging {
-  background: var(--col-brand-transparent);
-  opacity: 0.5;
+  visibility: hidden;
 }

@@ -13,10 +13,26 @@ export function addItem(state: Array<any>, newEle: any): Array<any> {
 }
 
 /**
+* Returns a copy of state with a new element inserted.
+*
+* @param array state The array to add to.
+* @param mixed newEle The element to add.
+* @param integer arrIndex The index to add newEle at.
+* @return array An updated copy of state.
+*/
+export function insertItem(state: Array<any>, newEle: any, arrIndex: number): Array<any> {
+  return [
+    ...state.slice(0, arrIndex),
+    newEle,
+    ...state.slice(arrIndex),
+  ];
+}
+
+/**
 * Returns a copy of state with the element at arrIndex removed.
 *
 * @param array state The array that contains the element to delete.
-* @param integer delIndex The index to be removed.
+* @param integer arrIndex The index to be removed.
 * @return array An updated copy of state.
 */
 export function removeItem(state: Array<any>, arrIndex: number): Array<any> {
