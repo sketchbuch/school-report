@@ -16,4 +16,9 @@ describe('<NoItems />', () => {
     const wrapper = shallow(<NoItems {...props} />);
     expect(wrapper).toHaveLength(1);
   });
+
+  test('Renders children if no message', () => {
+    const wrapper = shallow(<NoItems>Test</NoItems>);
+    expect(wrapper.find('p')).toHaveLength(1);
+  });
 });

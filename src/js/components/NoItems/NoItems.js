@@ -5,7 +5,7 @@ import './NoItems.css';
 
 type Props = {
   children?: React.Node,
-  message: string,
+  message?: string,
 };
 
 

@@ -1,19 +1,57 @@
 // @flow
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { mount, shallow, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { MemoryRouter } from 'react-router-dom';
 import SidebarItemButton from './SidebarItemButton';
 
+configure({ adapter: new Adapter() });
+
 describe('<SidebarItemButton />', () => {
   const props = {
-    history: Object,
+    history: { push: jest.fn() },
     link: "/",
     type: "ui-edit",
   };
 
   test('Renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<MemoryRouter><SidebarItemButton {...props} /></MemoryRouter>, div);
+    const wrapper = shallow(<MemoryRouter><SidebarItemButton {...props} /></MemoryRouter>);
+    expect(wrapper).toHaveLength(1);
+  });
+
+  test('history.push is called (when using component handleClick())', () => {
+    const wrapper = mount(<SidebarItemButton.WrappedComponent {...props} />);
+    const component = wrapper.find('.SidebarItemButton').first();
+    component.simulate('click');
+
+    expect(component).toHaveLength(1);
+    expect(props.history.push).toHaveBeenCalledWith(props.link);
+  });
+
+  test('handleClick prop gets called', () => {
+    const handleClickMock = jest.fn();
+    const handlePropClickMock = jest.fn();
+    SidebarItemButton.WrappedComponent.prototype.handleClick = handleClickMock;
+
+    const wrapper = mount(<SidebarItemButton.WrappedComponent {...props} handleClick={handlePropClickMock} />);
+    const component = wrapper.find('.SidebarItemButton').first();
+    component.simulate('click');
+
+    expect(component).toHaveLength(1);
+    expect(handlePropClickMock).toHaveBeenCalled();
+    expect(handleClickMock).not.toHaveBeenCalled();
+  });
+
+  test('handleClick gets called', () => {
+    const handleClickMock = jest.fn();
+    SidebarItemButton.WrappedComponent.prototype.handleClick = handleClickMock;
+
+    const wrapper = mount(<SidebarItemButton.WrappedComponent {...props} />);
+    const component = wrapper.find('.SidebarItemButton').first();
+    component.simulate('click');
+
+    expect(component).toHaveLength(1);
+    expect(handleClickMock).toHaveBeenCalled();
   });
 });

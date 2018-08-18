@@ -39,10 +39,11 @@ export class ReportsCatSelect extends React.Component<Props> {
       selectedCount,
       texts,
     } = this.props;
-    const uncategorisedTexts = texts.filter(text => text.categories.length < 1).length;
+    if (categories.length < 1) return null;
+    
+    const uncategorisedCount = texts.filter(text => text.categories.length < 1).length;
     const sortedCategories = sortObjectsAz(categories, categorySort);
     const unselectedCount = texts.length - selectedCount;
-    if (categories.length < 1) return null;
 
     return (
       <div className="ReportsCatSelect">
@@ -50,7 +51,7 @@ export class ReportsCatSelect extends React.Component<Props> {
           <option key="category-all" value="category-all">{text('CatsAll', 'ReportsCatSelect')} ({texts.length})</option>
           {selectedCount > 0 && <option key="category-selected" value="category-selected">{text('CatsSelected', 'ReportsCatSelect')} ({selectedCount})</option> }
           {unselectedCount > 0 && <option key="category-unselected" value="category-unselected">{text('CatsUnselected', 'ReportsCatSelect')} ({unselectedCount})</option> }
-          {uncategorisedTexts > 0 && <option key="category-nocat" value="category-nocat">{text('CatsUncategorised', 'ReportsCatSelect')} ({uncategorisedTexts})</option> }
+          {uncategorisedCount > 0 && <option key="category-nocat" value="category-nocat">{text('CatsUncategorised', 'ReportsCatSelect')} ({uncategorisedCount})</option> }
           <option key="category-disabled" disabled className="ReportsCatSelect_sep">---</option>
 
           {categories.length > 0 && (

@@ -38,7 +38,7 @@ export class Panels extends Component<Props> {
   props: Props;
 
   componentDidMount() {
-    if (this.props.match.path === '/') this.props.history.push(ROUTE_HOME);
+    if (this.props.match.path === ROUTE_HOME) this.props.history.push(ROUTE_HOME);
   }
 
   render() {
