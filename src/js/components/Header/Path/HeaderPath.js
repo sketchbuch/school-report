@@ -4,14 +4,11 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import HeaderBreadcrumb from '../Breadcrumb/HeaderBreadcrumb';
 import { getBreadcrumbs } from '../../../utils/redux';
+import type { Breadcrumb } from '../../../types/breadcrumb';
 import './HeaderPath.css';
 
 type Props = {
-  breadcrumbs: Array<{
-    id: string,
-    link: string,
-    text: string,
-  }>,
+  breadcrumbs: Array<Breadcrumb>,
   dispatch: Function,
   location: Object,
   match: Object,

@@ -1,6 +1,6 @@
 // @flow
 
-import configureMockStore from 'redux-mock-store'
+import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as pupilActions from '../pupilActions';
 import {

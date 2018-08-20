@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import NoData from './NoData';
-import store from '../../store';
+import store from '../../store/redux';
 import '../Translation/testData';
 
 describe('<NoData />', () => {

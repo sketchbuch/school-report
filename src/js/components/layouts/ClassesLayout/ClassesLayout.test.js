@@ -4,7 +4,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import store from '../../../store';
+import store from '../../../store/redux';
 import ClassesLayout from './ClassesLayout';
 
 configure({ adapter: new Adapter() });

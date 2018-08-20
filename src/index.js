@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReduxToastr from 'react-redux-toastr';
 import { Provider } from 'react-redux';
-import store from './js/store';
+import store from './js/store/redux';
 import App from './js/components/App/App';
 import './index.css';
 

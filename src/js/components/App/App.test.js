@@ -6,7 +6,7 @@ import { mount, shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { App } from './App';
 import appDefault from '../../types/app';
-import store from '../../store';
+import store from '../../store/redux';
 import '../Translation/testData';
 
 configure({ adapter: new Adapter() });

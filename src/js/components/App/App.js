@@ -12,6 +12,7 @@ import * as appActions from '../../actions/appActions';
 import * as dataActions from '../../actions/dataActions';
 import * as settingsActions from '../../actions/settingsActions';
 import * as languageActions from '../../actions/languageActions';
+import { getCustomNumProp } from '../../utils/dom';
 import type { AppType } from '../../types/app';
 import './App.css';
 
@@ -22,6 +23,19 @@ type Props = {
   dispatch: Function,
   settings: Object,
 };
+
+function hideLoader() {
+  const alDuration = getCustomNumProp('--apploader-ms');
+  document.getElementsByTagName('html')[0].classList.add('app-initialised');
+
+  setTimeout(
+    () => {
+      let appLoaderEle = document && document.getElementById('apploader');
+      if (appLoaderEle && appLoaderEle.parentNode) appLoaderEle.parentNode.removeChild(appLoaderEle);
+    },
+    alDuration,
+  );
+}
 
 /**
 * App.
@@ -56,7 +70,7 @@ export class App extends Component<Props> {
       } = this.props.app;
 
       if (dataLoaded || (!dataLoaded && languageLoaded && dataCreated)) {
-        this.props.dispatch(appActions.loaded());
+        this.props.dispatch(appActions.loaded(hideLoader));
       } else if (languageLoaded && !dataCreated) {
         this.props.dispatch(dataActions.load(this.dataLoaded));
       } else if (settingsLoaded || dataCreated) {
@@ -116,7 +130,7 @@ export class App extends Component<Props> {
     if (ioResult.success === true) {
       this.props.dispatch(dataActions.created());
     } else {
-      this.props.dispatch(appActions.errored());
+      this.props.dispatch(appActions.errored(hideLoader));
     }
   }
 
@@ -124,7 +138,7 @@ export class App extends Component<Props> {
   * Update UI to show an error occured.
   */
   appError(type: string) {
-    this.props.dispatch(appActions.errored());
+    this.props.dispatch(appActions.errored(hideLoader));
   }
 
   /**
