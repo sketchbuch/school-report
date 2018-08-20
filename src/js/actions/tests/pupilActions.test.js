@@ -3,7 +3,13 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk';
 import * as pupilActions from '../pupilActions';
-import { REPLACE_PUPILS, ADD_PUPIL, DELETE_ALL_CLASS_PUPILS } from '../../constants/actionTypes';
+import {
+  ADD_PUPIL,
+  DELETE_ALL_CLASS_PUPILS,
+  REPLACE_PUPILS,
+  DELETE_PUPIL,
+  UPDATE_PUPIL,
+} from '../../constants/actionTypes';
 import pupilDefault from '../../types/pupil';
 
 const middlewares = [thunk];
@@ -29,8 +35,21 @@ describe('Actions: pupilActions:', () => {
       { type: REPLACE_PUPILS, payload: [testPupil] },
     ];
 
+    expect.assertions(1);
     store.dispatch(pupilActions.replace([testPupil], callback));
     expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
+    store.clearActions();
+  });
+
+  test('update() dispatches the correct action', () => {
+    const EXPECTED_ACTIONS = [
+      { type: UPDATE_PUPIL, payload: testPupil },
+    ];
+
+    expect.assertions(1);
+    store.dispatch(pupilActions.update(testPupil, callback));
+    expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
+    store.clearActions();
   });
 
   test('add() dispatches the correct action', () => {
@@ -38,19 +57,31 @@ describe('Actions: pupilActions:', () => {
       { type: ADD_PUPIL, payload: testPupil },
     ];
 
+    expect.assertions(1);
     store.dispatch(pupilActions.add(testPupil, callback));
     expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
+    store.clearActions();
   });
 
-  test('deleteClass() dispatches the correct action', () => {
+  test('deleteOne dispatches the correct action', () => {
     const EXPECTED_ACTIONS = [
-      {
-        type: DELETE_ALL_CLASS_PUPILS,
-        payload: { id: 'c1' },
-      },
+      { type: DELETE_PUPIL, payload: { id: 'p1' } },
     ];
 
+    expect.assertions(1);
+    store.dispatch(pupilActions.deleteOne('p1', callback));
+    expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
+    store.clearActions();
+  });
+
+  test('deletePupils dispatches the correct action', () => {
+    const EXPECTED_ACTIONS = [
+      { type: DELETE_ALL_CLASS_PUPILS, payload: { id: 'c1' } },
+    ];
+
+    expect.assertions(1);
     store.dispatch(pupilActions.deletePupils('c1', callback));
     expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
+    store.clearActions();
   });
 });

@@ -47,7 +47,7 @@ export function add(newText: TextType, callback: Function): ActionCreator {
   };
 }
 
-export function deleteOne(id: string, callback: Function = ()=>{}): ActionCreator {
+export function deleteOne(id: string, callback: Function): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: DELETE_TEXT,

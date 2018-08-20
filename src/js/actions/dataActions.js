@@ -72,7 +72,7 @@ export function load(callback: Function): ActionCreator {
   };
 }
 
-export function loaded(loadedData?: Object = {}): ActionCreator {
+export function loaded(loadedData?: Object): ActionCreator {
     return {
       type: DATA_LOADED,
       payload: loadedData,

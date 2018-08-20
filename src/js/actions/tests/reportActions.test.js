@@ -2,87 +2,86 @@
 
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk';
-import * as textActions from '../textActions';
+import * as reportActions from '../reportActions';
 import {
-  ADD_TEXT,
-  DELETE_ALL_TEXTS,
-  DELETE_TEXT,
-  REPLACE_TEXTS,
-  UPDATE_TEXT,
+  ADD_REPORT,
+  DELETE_ALL_REPORTS,
+  DELETE_REPORT,
+  REPLACE_REPORTS,
+  UPDATE_REPORT,
 } from '../../constants/actionTypes';
-import textDefault from '../../types/text';
+import reportDefault from '../../types/report';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 
 /**
-* Report Text Actions Tests
+* Class Actions Tests
 */
 
-describe('Actions: textActions:', () => {
-  let testClass = {...textDefault, id: 't1', bodytext: 'A test text'};
+describe('Actions: reportActions:', () => {
+  let testReport = {...reportDefault, id: 'c1', label: 'Class'};
   let callback = ()=>{};
   let store = ()=>{};
 
   beforeEach(() => {
     callback = jest.fn();
-    store = mockStore({ texts: [] });
+    store = mockStore({ reports: [] });
   });
 
   test('replace() dispatches the correct action', () => {
     const EXPECTED_ACTIONS = [
-      { type: REPLACE_TEXTS, payload: [testClass] },
+      { type: REPLACE_REPORTS, payload: [testReport] },
     ];
 
     expect.assertions(1);
-    store.dispatch(textActions.replace([testClass], callback));
+    store.dispatch(reportActions.replace([testReport], callback));
     expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
     store.clearActions();
   });
 
   test('update() dispatches the correct action', () => {
     const EXPECTED_ACTIONS = [
-      { type: UPDATE_TEXT, payload: testClass },
+      { type: UPDATE_REPORT, payload: testReport },
     ];
 
     expect.assertions(1);
-    store.dispatch(textActions.update(testClass, callback));
+    store.dispatch(reportActions.update(testReport, callback));
     expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
     store.clearActions();
   });
 
   test('add() dispatches the correct action', () => {
     const EXPECTED_ACTIONS = [
-      { type: ADD_TEXT, payload: testClass },
+      { type: ADD_REPORT, payload: testReport },
     ];
 
     expect.assertions(1);
-    store.dispatch(textActions.add(testClass, callback));
+    store.dispatch(reportActions.add(testReport, callback));
     expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
     store.clearActions();
   });
 
   test('deleteOne dispatches the correct action', () => {
     const EXPECTED_ACTIONS = [
-      { type: DELETE_TEXT, payload: { id: 'c1' } },
+      { type: DELETE_REPORT, payload: { id: 'c1' } },
     ];
 
     expect.assertions(1);
-    store.dispatch(textActions.deleteOne('c1', callback));
+    store.dispatch(reportActions.deleteOne('c1', callback));
     expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
     store.clearActions();
   });
 
   test('deleteAll dispatches the correct action', () => {
     const EXPECTED_ACTIONS = [
-      { type: DELETE_ALL_TEXTS },
+      { type: DELETE_ALL_REPORTS },
     ];
 
     expect.assertions(1);
-    store.dispatch(textActions.deleteAll(callback));
+    store.dispatch(reportActions.deleteAll(callback));
     expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
     store.clearActions();
   });
 });
-

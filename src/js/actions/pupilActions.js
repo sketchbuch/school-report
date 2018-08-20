@@ -47,7 +47,7 @@ export function add(newPupil: PupilType, callback: Function): ActionCreator {
   };
 }
 
-export function deleteOne(id: string, callback: Function = ()=>{}): ActionCreator {
+export function deleteOne(id: string, callback: Function): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: DELETE_PUPIL,

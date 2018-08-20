@@ -62,3 +62,9 @@ Layouts:
 
 - Remove unnecessary connect() in sub layouts
 - Merge forms like for reports
+
+
+Actions:
+-------
+
+- Replace function for callbacks with correct definition

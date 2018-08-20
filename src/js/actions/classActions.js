@@ -47,7 +47,7 @@ export function add(classToAdd: ClassType, callback: Function): ActionCreator {
   };
 }
 
-export function deleteOne(id: string, callback: Function = ()=>{}): ActionCreator {
+export function deleteOne(id: string, callback: Function): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: DELETE_CLASS,
