@@ -26,7 +26,6 @@ export class HeaderPath extends Component<Props> {
       return (
         <Fragment>
           {this.props.breadcrumbs.map(ele => {
-            // console.log('ele: ' + ele.id, ele);
             return (
               <HeaderBreadcrumb {...ele} key={ele.id} />
             )
