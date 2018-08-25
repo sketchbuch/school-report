@@ -53,6 +53,7 @@ class SidebarItem extends Component<Props, State> {
   deletingTimer: TimeoutID;
   handleClick: Function;
   newTimer: TimeoutID;
+  timeoutDuration: number;
 
   constructor(props: Props) {
     super(props);
@@ -64,6 +65,7 @@ class SidebarItem extends Component<Props, State> {
     };
 
     this.handleClick = this.handleClick.bind(this);
+    this.timeoutDuration = 3000;
   }
 
   componentDidMount() {
@@ -90,7 +92,7 @@ class SidebarItem extends Component<Props, State> {
     switch (event.target.dataset.action) {
       case 'item-delete':
         this.setState({ delete: true });
-        this.deleteTimer = setTimeout(() => this.setState({ delete: false }), 3000);
+        this.deleteTimer = setTimeout(() => this.setState({ delete: false }), this.timeoutDuration);
       break;
 
       case 'item-delete-no':

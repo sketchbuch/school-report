@@ -87,11 +87,11 @@ describe('<Translation />', () => {
   });
 
   test('componentWillUpdate()', () => {
-    const wrapper = shallow(<Translation name="Name" ns="App" />);
+    const wrapper = mount(<Translation name="Name" ns="App" />);
     const wrapperInstance = wrapper.instance();
     expect(wrapperInstance.prevLang).toBe('EN');
     window.reportr.curLang = 'DE';
-    wrapperInstance.componentWillUpdate();
+    wrapper.setProps({ name: 'Placeholder' });
     expect(wrapperInstance.prevLang).toBe('DE');
     window.reportr.curLang = 'EN';
   });
