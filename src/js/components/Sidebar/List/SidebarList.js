@@ -66,7 +66,7 @@ class SidebarList extends Component<Props, State> {
     });
 
     this.itemDuration = getCustomNumProp('--sidebaritem-ms');
-    this.onDelete = (id: string, callback?: Function) => this.props.dispatch(actions[this.props.listType].deleteOne(id, callback));
+    this.onDelete = (id: string, callback?: Function = ()=>{}) => this.props.dispatch(actions[this.props.listType].deleteOne(id, callback));
     this.onDelete = this.onDelete.bind(this);
     this.updateExistingItems = this.updateExistingItems.bind(this);
   }

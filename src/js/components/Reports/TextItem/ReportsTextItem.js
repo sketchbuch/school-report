@@ -51,10 +51,6 @@ const textTarget = {
 };
 
 export class ReportsTextItem extends Component<Props> {
-  static defaultProps = {
-      title: '',
-   };
-
   props: Props;
   ele: ?HTMLElement;
 
