@@ -112,4 +112,41 @@ describe('<SidebarItem />', () => {
       expect(wrapper2.state().delete).toBe(false);
     });
   });
+
+  describe('componentDidMount()', () => {
+    test('updateExistingItems() not called if the item !isNew', () => {
+      const mockUpdateExistingItems = jest.fn();
+      const wrapper = shallow(<SidebarItem {...props} updateExistingItems={mockUpdateExistingItems} isNew={false} />);
+      jest.runAllTimers();
+      expect(mockUpdateExistingItems).not.toHaveBeenCalled();
+    });
+
+    test('updateExistingItems() called if the item isNew', () => {
+      const mockUpdateExistingItems = jest.fn();
+      const wrapper = shallow(<SidebarItem {...props} updateExistingItems={mockUpdateExistingItems} isNew={true} />);
+      jest.runAllTimers();
+      expect(mockUpdateExistingItems).toHaveBeenCalled();
+    });
+  });
+
+  describe('componentDidUpdate()', () => {
+    const mockOnDelete = jest.fn();
+    const wrapper = mount(<SidebarItem {...props} onDelete={mockOnDelete} />);
+
+    test('if state.deleting, sets state.confirmed to true', () => {
+      wrapper.instance().handleClick({
+        preventDefault: jest.fn(),
+        target: { dataset: { action: 'item-delete-yes' }},
+      });
+
+      expect(wrapper.state().deleting).toBe(true);
+      expect(wrapper.state().confirmed).toBe(false);
+      jest.runAllTimers();
+      expect(wrapper.state().confirmed).toBe(true);
+    });
+    test('if state.confirmed is true, should call onDelete()', () => {
+      expect(wrapper.state().confirmed).toBe(true);
+      expect(mockOnDelete).toHaveBeenCalledWith(props.item.id);
+    });
+  });
 });

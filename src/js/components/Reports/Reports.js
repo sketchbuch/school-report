@@ -17,6 +17,7 @@ type Props = {
   activePupil: PupilType | Object,
   activeReport: ReportType | Object,
   categories: Array<CategoryType>,
+  initialSelected: Object,
   texts: Array<TextType>,
 };
 
@@ -33,6 +34,7 @@ export class Reports extends Component<Props, State> {
     activePupil: {},
     activeReport: {},
     categories: [],
+    initialSelected: {},
     texts: [],
   };
 
@@ -45,7 +47,7 @@ export class Reports extends Component<Props, State> {
     super(props);
 
     this.state = {
-      selected: {},
+      selected: props.initialSelected,
     };
 
     this.handleTextMove = this.handleTextMove.bind(this);
