@@ -2,15 +2,15 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Textarea from '../../../ui/Textarea/Textarea';
-import ItemSelection from '../../../ui/ItemSelection/ItemSelection';
-import Button from '../../../ui/Button/Button';
-import Translation, { text } from '../../../Translation/Translation';
-import validate from '../../../../validation/validation';
-import type { CategoryType } from '../../../../types/category';
-import { categorySort } from '../../../../types/category';
-import { ROUTE_TEXTS } from '../../../../constants/routes';
-import { sortObjectsAz } from '../../../../utils/sort';
+import Textarea from '../../../components/ui/Textarea/Textarea';
+import ItemSelection from '../../../components/ui/ItemSelection/ItemSelection';
+import Button from '../../../components/ui/Button/Button';
+import Translation, { text } from '../../../components/Translation/Translation';
+import validate from '../../../validation/validation';
+import type { CategoryType } from '../../../types/category';
+import { categorySort } from '../../../types/category';
+import { ROUTE_TEXTS } from '../../../constants/routes';
+import { sortObjectsAz } from '../../../utils/sort';
 
 type Props = {
   categories: Array<CategoryType>,

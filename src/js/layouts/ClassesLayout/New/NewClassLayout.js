@@ -3,17 +3,17 @@
 import React, { Component } from 'react';
 import { toastr } from 'react-redux-toastr'
 import { Formik } from 'formik';
-import EditPanel from '../../../EditPanel/EditPanel';
-import EditPanelHeader from '../../../EditPanel/Header/EditPanelHeader';
-import EditPanelContent from '../../../EditPanel/Content/EditPanelContent';
+import EditPanel from '../../../components/EditPanel/EditPanel';
+import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
+import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import NewClassForm from './Form/NewClassForm';
-import { text }  from '../../../Translation/Translation';
-import { classSchema } from '../../../../validation/schemas';
-import * as classActions from '../../../../actions/classActions';
-import classDefault, { ClassFactory } from '../../../../types/class';
-import type { ClassType } from '../../../../types/class';
-import { ROUTE_CLASSES } from '../../../../constants/routes';
-import setTitle from '../../../../utils/title';
+import { text }  from '../../../components/Translation/Translation';
+import { classSchema } from '../../../validation/schemas';
+import * as classActions from '../../../actions/classActions';
+import classDefault, { ClassFactory } from '../../../types/class';
+import type { ClassType } from '../../../types/class';
+import { ROUTE_CLASSES } from '../../../constants/routes';
+import setTitle from '../../../utils/title';
 
 type Props = {
   dispatch: Function,

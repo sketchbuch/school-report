@@ -2,14 +2,14 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import TextInput from '../../../ui/TextInput/TextInput';
-import ItemSelection from '../../../ui/ItemSelection/ItemSelection';
-import Button from '../../../ui/Button/Button';
-import Translation, { text } from '../../../Translation/Translation';
-import validate from '../../../../validation/validation';
-import type { ClassType } from '../../../../types/class';
-import { ROUTE_REPORTS } from '../../../../constants/routes';
-import { sortObjectsAz } from '../../../../utils/sort';
+import TextInput from '../../../components/ui/TextInput/TextInput';
+import ItemSelection from '../../../components/ui/ItemSelection/ItemSelection';
+import Button from '../../../components/ui/Button/Button';
+import Translation, { text } from '../../../components/Translation/Translation';
+import validate from '../../../validation/validation';
+import type { ClassType } from '../../../types/class';
+import { ROUTE_REPORTS } from '../../../constants/routes';
+import { sortObjectsAz } from '../../../utils/sort';
 
 type Props = {
   classes: Array<ClassType>,

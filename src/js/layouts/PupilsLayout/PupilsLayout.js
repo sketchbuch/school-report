@@ -3,28 +3,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import InfoMessage from '../../InfoMessage/InfoMessage';
-import Icon from '../../Icon/Icon';
-import Sidebar from '../../Sidebar/Sidebar';
-import SidebarList from '../../Sidebar/List/SidebarList';
-import SidebarFooter from '../../Sidebar/Footer/SidebarFooter';
-import SidebarHeader from '../../Sidebar/Header/SidebarHeader';
-import NavButtonCircular from '../../ui/NavButtonCircular/NavButtonCircular';
+import InfoMessage from '../../components/InfoMessage/InfoMessage';
+import Icon from '../../components/Icon/Icon';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import SidebarList from '../../components/Sidebar/List/SidebarList';
+import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
+import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
+import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCircular';
 import EditPupilLayout from './Edit/EditPupilLayout';
 import DeletePupilsLayout from './Delete/DeletePupilsLayout';
 import NewPupilLayout from './New/NewPupilLayout';
-import { text }  from '../../Translation/Translation';
-import { pupilSort } from '../../../types/pupil';
-import type { ClassType } from '../../../types/class';
-import type { PupilType } from '../../../types/pupil';
+import { text }  from '../../components/Translation/Translation';
+import { pupilSort } from '../../types/pupil';
+import type { ClassType } from '../../types/class';
+import type { PupilType } from '../../types/pupil';
 import {
   ROUTE_DEL_PUPILS,
   ROUTE_EDIT_PUPIL,
   ROUTE_NEW_PUPIL,
   ROUTE_PUPILS,
-} from '../../../constants/routes';
-import { getActiveClass, getClassPupils } from '../../../utils/redux';
-import setTitle from '../../../utils/title';
+} from '../../constants/routes';
+import { getActiveClass, getClassPupils } from '../../utils/redux';
+import setTitle from '../../utils/title';
 
 type Props = {
   activeClass: ClassType | Object,

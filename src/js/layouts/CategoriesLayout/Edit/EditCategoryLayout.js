@@ -3,18 +3,18 @@
 import React, { Component } from 'react';
 import { toastr } from 'react-redux-toastr'
 import { Formik } from 'formik';
-import EditPanel from '../../../EditPanel/EditPanel';
-import EditPanelHeader from '../../../EditPanel/Header/EditPanelHeader';
-import EditPanelContent from '../../../EditPanel/Content/EditPanelContent';
+import EditPanel from '../../../components/EditPanel/EditPanel';
+import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
+import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import EditCategoryForm from '../Form/EditCategoryForm';
-import { text }  from '../../../Translation/Translation';
-import categorySchema from '../../../../validation/schemas/categories';
-import * as categoryActions from '../../../../actions/categoryActions';
-import type { CategoryType } from '../../../../types/category';
-import categoryDefault from '../../../../types/category';
-import { ROUTE_CATEGORIES } from '../../../../constants/routes';
-import { getActiveCategory } from '../../../../utils/redux';
-import setTitle from '../../../../utils/title';
+import { text }  from '../../../components/Translation/Translation';
+import categorySchema from '../../../validation/schemas/categories';
+import * as categoryActions from '../../../actions/categoryActions';
+import type { CategoryType } from '../../../types/category';
+import categoryDefault from '../../../types/category';
+import { ROUTE_CATEGORIES } from '../../../constants/routes';
+import { getActiveCategory } from '../../../utils/redux';
+import setTitle from '../../../utils/title';
 
 type Props = {
   categories: Array<CategoryType>,

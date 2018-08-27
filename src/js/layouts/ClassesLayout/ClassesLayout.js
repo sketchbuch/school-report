@@ -3,27 +3,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import InfoMessage from '../../InfoMessage/InfoMessage';
-import Icon from '../../Icon/Icon';
-import Sidebar from '../../Sidebar/Sidebar';
-import SidebarHeader from '../../Sidebar/Header/SidebarHeader';
-import SidebarList from '../../Sidebar/List/SidebarList';
-import SidebarFooter from '../../Sidebar/Footer/SidebarFooter';
-import NavButtonCircular from '../../ui/NavButtonCircular/NavButtonCircular';
+import InfoMessage from '../../components/InfoMessage/InfoMessage';
+import Icon from '../../components/Icon/Icon';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
+import SidebarList from '../../components/Sidebar/List/SidebarList';
+import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
+import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCircular';
 import EditClassLayout from './Edit/EditClassLayout';
 import DeleteClassesLayout from './Delete/DeleteClassesLayout';
 import NewClassLayout from './New/NewClassLayout';
-import { text }  from '../../Translation/Translation';
-import { classSort } from '../../../types/class';
-import type { ClassType } from '../../../types/class';
-import type { PupilType } from '../../../types/pupil';
+import { text }  from '../../components/Translation/Translation';
+import { classSort } from '../../types/class';
+import type { ClassType } from '../../types/class';
+import type { PupilType } from '../../types/pupil';
 import {
   ROUTE_CLASSES,
   ROUTE_DEL_CLASSES,
   ROUTE_EDIT_CLASS,
   ROUTE_NEW_CLASS,
-} from '../../../constants/routes';
-import setTitle from '../../../utils/title';
+} from '../../constants/routes';
+import setTitle from '../../utils/title';
 
 type Props = {
   classes: Array<ClassType>,

@@ -4,24 +4,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import EditBuilderLayout from './Edit/EditBuilderLayout';
-import InfoMessage from '../../InfoMessage/InfoMessage';
-import Sidebar from '../../Sidebar/Sidebar';
-import SidebarHeader from '../../Sidebar/Header/SidebarHeader';
-import SidebarList from '../../Sidebar/List/SidebarList';
-import { text }  from '../../Translation/Translation';
-import { sortObjectsAz } from '../../../utils/sort';
-import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
-import { classSort } from '../../../types/class';
-import { pupilSort } from '../../../types/pupil';
-import type { ClassType } from '../../../types/class';
-import type { PupilType } from '../../../types/pupil';
-import type { ReportType } from '../../../types/report';
+import InfoMessage from '../../components/InfoMessage/InfoMessage';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
+import SidebarList from '../../components/Sidebar/List/SidebarList';
+import { text }  from '../../components/Translation/Translation';
+import { sortObjectsAz } from '../../utils/sort';
+import type { SidebarBuilderItemType } from '../../types/sidebarBuilderItem';
+import { classSort } from '../../types/class';
+import { pupilSort } from '../../types/pupil';
+import type { ClassType } from '../../types/class';
+import type { PupilType } from '../../types/pupil';
+import type { ReportType } from '../../types/report';
 import {
   ROUTE_BUILDER,
   ROUTE_EDIT_BUILDER,
-} from '../../../constants/routes';
-import { getActiveReport } from '../../../utils/redux';
-import setTitle from '../../../utils/title';
+} from '../../constants/routes';
+import { getActiveReport } from '../../utils/redux';
+import setTitle from '../../utils/title';
 
 type Props = {
   activeReport: ReportType | Object,

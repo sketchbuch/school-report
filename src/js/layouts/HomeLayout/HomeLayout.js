@@ -2,11 +2,11 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Icon from '../../Icon/Icon';
-import ButtonCircular from '../../ui/ButtonCircular/ButtonCircular';
-import type { MenuItemType } from '../../../types/menuitem';
-import menuItemDefault, { MenuItemFactory } from '../../../types/menuitem';
-import setTitle from '../../../utils/title';
+import Icon from '../../components/Icon/Icon';
+import ButtonCircular from '../../components/ui/ButtonCircular/ButtonCircular';
+import type { MenuItemType } from '../../types/menuitem';
+import menuItemDefault, { MenuItemFactory } from '../../types/menuitem';
+import setTitle from '../../utils/title';
 import './HomeLayout.css';
 
 type Props = {

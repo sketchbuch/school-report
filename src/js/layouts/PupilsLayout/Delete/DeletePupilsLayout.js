@@ -4,16 +4,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr'
 import { Link } from 'react-router-dom';
-import EditPanel from '../../../EditPanel/EditPanel';
-import EditPanelHeader from '../../../EditPanel/Header/EditPanelHeader';
-import EditPanelContent from '../../../EditPanel/Content/EditPanelContent';
-import Button from '../../../ui/Button/Button';
-import Translation, { text }  from '../../../Translation/Translation';
-import * as pupilActions from '../../../../actions/pupilActions';
-import type { ClassType } from '../../../../types/class';
-import type { PupilType } from '../../../../types/pupil';
-import { ROUTE_PUPILS } from '../../../../constants/routes';
-import setTitle from '../../../../utils/title';
+import EditPanel from '../../../components/EditPanel/EditPanel';
+import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
+import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
+import Button from '../../../components/ui/Button/Button';
+import Translation, { text }  from '../../../components/Translation/Translation';
+import * as pupilActions from '../../../actions/pupilActions';
+import type { ClassType } from '../../../types/class';
+import type { PupilType } from '../../../types/pupil';
+import { ROUTE_PUPILS } from '../../../constants/routes';
+import setTitle from '../../../utils/title';
 
 type Props = {
   activeClass: ClassType,

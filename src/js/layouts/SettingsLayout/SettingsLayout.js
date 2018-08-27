@@ -5,15 +5,15 @@ import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr'
 import { Formik } from 'formik';
 import SettingsForm from './Form/SettingsForm';
-import { text }  from '../../Translation/Translation';
-import type { LangType } from '../../../types/lang';
-import settingsSchema from '../../../validation/schemas/settings';
-import settingsDefault from '../../../types/settings';
-import type { SettingsType } from '../../../types/settings';
-import * as settingsActions from '../../../actions/settingsActions';
-import * as languageActions from '../../../actions/languageActions';
-import { ROUTE_HOME, ROUTE_SETTINGS } from '../../../constants/routes';
-import setTitle from '../../../utils/title';
+import { text }  from '../../components/Translation/Translation';
+import type { LangType } from '../../types/lang';
+import settingsSchema from '../../validation/schemas/settings';
+import settingsDefault from '../../types/settings';
+import type { SettingsType } from '../../types/settings';
+import * as settingsActions from '../../actions/settingsActions';
+import * as languageActions from '../../actions/languageActions';
+import { ROUTE_HOME, ROUTE_SETTINGS } from '../../constants/routes';
+import setTitle from '../../utils/title';
 import './SettingsLayout.css';
 
 type Props = {

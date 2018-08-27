@@ -3,27 +3,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import InfoMessage from '../../InfoMessage/InfoMessage';
-import Icon from '../../Icon/Icon';
-import Sidebar from '../../Sidebar/Sidebar';
-import SidebarHeader from '../../Sidebar/Header/SidebarHeader';
-import SidebarList from '../../Sidebar/List/SidebarList';
-import SidebarFooter from '../../Sidebar/Footer/SidebarFooter';
-import NavButtonCircular from '../../ui/NavButtonCircular/NavButtonCircular';
+import InfoMessage from '../../components/InfoMessage/InfoMessage';
+import Icon from '../../components/Icon/Icon';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
+import SidebarList from '../../components/Sidebar/List/SidebarList';
+import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
+import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCircular';
 import EditTextLayout from './Edit/EditTextLayout';
 import DeleteTextsLayout from './Delete/DeleteTextsLayout';
 import NewTextLayout from './New/NewTextLayout';
-import { text }  from '../../Translation/Translation';
-import { textSort } from '../../../types/text';
-import type { CategoryType } from '../../../types/category';
-import type { TextType } from '../../../types/text';
+import { text }  from '../../components/Translation/Translation';
+import { textSort } from '../../types/text';
+import type { CategoryType } from '../../types/category';
+import type { TextType } from '../../types/text';
 import {
   ROUTE_DEL_TEXTS,
   ROUTE_EDIT_TEXT,
   ROUTE_NEW_TEXT,
   ROUTE_TEXTS,
-} from '../../../constants/routes';
-import setTitle from '../../../utils/title';
+} from '../../constants/routes';
+import setTitle from '../../utils/title';
 
 type Props = {
   categories: Array<CategoryType>,

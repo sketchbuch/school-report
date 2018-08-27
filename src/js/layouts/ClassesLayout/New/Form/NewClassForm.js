@@ -2,12 +2,12 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import TextInput from '../../../../ui/TextInput/TextInput';
-import Button from '../../../../ui/Button/Button';
-import Translation, { text } from '../../../../Translation/Translation';
-import validate from '../../../../../validation/validation';
-import { CLASS_LABEL_MAX } from '../../../../../validation/schemas';
-import { ROUTE_CLASSES } from '../../../../../constants/routes';
+import TextInput from '../../../../components/ui/TextInput/TextInput';
+import Button from '../../../../components/ui/Button/Button';
+import Translation, { text } from '../../../../components/Translation/Translation';
+import validate from '../../../../validation/validation';
+import { CLASS_LABEL_MAX } from '../../../../validation/schemas';
+import { ROUTE_CLASSES } from '../../../../constants/routes';
 
 type Props = {
   errors: Object,

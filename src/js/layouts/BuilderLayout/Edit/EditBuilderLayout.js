@@ -1,14 +1,14 @@
 // @flow
 
 import React, { Component } from 'react';
-import EditPanel from '../../../EditPanel/EditPanel';
-import Reports from '../../../Reports/Reports';
-import EditPanelHeader from '../../../EditPanel/Header/EditPanelHeader';
-import EditPanelContent from '../../../EditPanel/Content/EditPanelContent';
-import { text }  from '../../../Translation/Translation';
-import { getItemById } from '../../../../utils/arrays';
-import type { ReportType } from '../../../../types/report';
-import type { SidebarBuilderItemType } from '../../../../types/sidebarBuilderItem';
+import EditPanel from '../../../components/EditPanel/EditPanel';
+import Reports from '../../../components/Reports/Reports';
+import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
+import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
+import { text }  from '../../../components/Translation/Translation';
+import { getItemById } from '../../../utils/arrays';
+import type { ReportType } from '../../../types/report';
+import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
 
 type Props = {
   activeReport: ReportType | Object,

@@ -2,10 +2,10 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../../../ui/Button/Button';
-import Translation from '../../../Translation/Translation';
-import type { LangType } from '../../../../types/lang';
-import { ROUTE_HOME } from '../../../../constants/routes';
+import Button from '../../../components/ui/Button/Button';
+import Translation from '../../../components/Translation/Translation';
+import type { LangType } from '../../../types/lang';
+import { ROUTE_HOME } from '../../../constants/routes';
 
 type Props = {
   dirty: boolean,

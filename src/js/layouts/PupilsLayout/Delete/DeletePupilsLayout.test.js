@@ -4,7 +4,7 @@ import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import DeletePupilsLayout from './DeletePupilsLayout';
-import classDefault from '../../../../types/class';
+import classDefault from '../../../types/class';
 
 configure({ adapter: new Adapter() });
 
