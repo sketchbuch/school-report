@@ -1,7 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
-import { DragSource, DropTarget } from 'react-dnd';
+import {
+  DragSource,
+  DropTarget,
+	DragSourceConnector,
+	DragSourceMonitor,
+} from 'react-dnd';
 import { getPupilTextHtml } from '../../../utils/html';
 import { dndTypes } from '../../../constants/dndTypes';
 import type { PupilType } from '../../../types/pupil';
@@ -12,6 +17,7 @@ type Props = {
   activePupil: PupilType | Object,
   onClick: (id: string)=>{},
   onMove: ()=>{},
+  onEndDrag: ()=>{},
   txt: TextType,
   canDrop: boolean,
   connectDragSource: Function,
@@ -22,14 +28,18 @@ type Props = {
 
 // DnD Source and Target:
 const textSource = {
-	beginDrag(props: Object, monitor: Object | Function, component: Object | Function) {
+	beginDrag(props: Props, monitor: DragSourceMonitor | Function, component: Object | Function) {
     return { id: props.txt.id };
+	},
+	endDrag(props: Props, monitor: DragSourceMonitor | Function, component: Object | Function) {
+		const item = monitor.getItem();
+    props.onEndDrag();
 	},
 };
 
 const textTarget = {
-	hover(props: Object, monitor: Object | Function, component: Object | Function) {
-    if (!component) return null;
+	hover(props: Props, monitor: DragSourceMonitor | Function, component: Object | Function) {
+   if (!component) return null;
     
 		const dragIndex = monitor.getItem().id;
     const hoverIndex = props.txt.id;
@@ -76,13 +86,13 @@ export class ReportsTextItem extends Component<Props> {
 }
 
 // DnD Source and Target connection:
-ReportsTextItem = DragSource(dndTypes.TEXT, textSource, (connect, monitor) => ({
+ReportsTextItem = DragSource(dndTypes.TEXT, textSource, (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging()
 }))(ReportsTextItem);
 
 
-ReportsTextItem = DropTarget(dndTypes.TEXT, textTarget, (connect, monitor) => ({
+ReportsTextItem = DropTarget(dndTypes.TEXT, textTarget, (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   isOverCurrent: monitor.isOver({ shallow: true }),

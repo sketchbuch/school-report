@@ -6,6 +6,9 @@
 export const APP_ERRORED = 'APP_ERRORED';
 export const APP_LOADED = 'APP_LOADED';
 
+// Builder
+export const SAVE_BUILDER = 'SAVE_BUILDER';
+
 // Categories
 export const ADD_CATEGORY = 'ADD_CATEGORY';
 export const DELETE_ALL_CATEGORIES = 'DELETE_ALL_CATEGORIES';

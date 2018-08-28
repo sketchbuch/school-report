@@ -10,6 +10,8 @@ import type { CategoryType } from '../../types/category';
 import type { ReportType } from '../../types/report';
 import type { PupilType } from '../../types/pupil';
 import type { TextType } from '../../types/text';
+import type { DispatchType } from '../../types/functions';
+import * as builderActions from '../../actions/builderActions';
 import { moveItem, removeItem }  from '../../utils/reducers/array';
 import './Reports.css';
 
@@ -18,6 +20,7 @@ type Props = {
   activeReport: ReportType | Object,
   categories: Array<CategoryType>,
   initialSelected: Object,
+  saveReorts: ()=>{},
   texts: Array<TextType>,
 };
 
@@ -35,11 +38,13 @@ export class Reports extends Component<Props, State> {
     activeReport: {},
     categories: [],
     initialSelected: {},
+    saveReorts: ()=>{},
     texts: [],
   };
 
   props: Props;
   state: State;
+  handleEndDrag: ()=>{};
   handleTextMove: ()=>{};
   handleTextToggle: Function;
 
@@ -50,8 +55,13 @@ export class Reports extends Component<Props, State> {
       selected: props.initialSelected,
     };
 
+    this.handleEndDrag = this.handleEndDrag.bind(this);
     this.handleTextMove = this.handleTextMove.bind(this);
     this.handleTextToggle = this.handleTextToggle.bind(this);
+  }
+
+  handleEndDrag() {
+    this.props.saveReorts(this.state.selected);
   }
 
   /**
@@ -100,6 +110,7 @@ export class Reports extends Component<Props, State> {
         <div className="Reports__left">
           <ReportsTexts
             activePupil={this.props.activePupil}
+            handleEndDrag={this.handleEndDrag}
             handleTextMove={this.handleTextMove}
             handleTextToggle={this.handleTextToggle}
             selectedTexts={selectedTexts}
@@ -128,7 +139,15 @@ const mapStateToProps = (state: Object, props: Props) => {
   }
 };
 
+const mapDispatchToProps = (dispatch: DispatchType) => {
+  return {
+    saveReorts: (selected: Object) => {
+      dispatch(builderActions.save(selected));
+    }
+  }
+}
+
 Reports = DragDropContext(HTML5Backend)(Reports);
 
 
-export default connect(mapStateToProps)(Reports);
+export default connect(mapStateToProps, mapDispatchToProps)(Reports);

@@ -55,6 +55,7 @@ export class ReportsTexts extends Component<Props> {
               key={text.id}
               onClick={this.props.handleTextToggle}
               onMove={this.props.handleTextMove} 
+              onEndDrag={this.props.handleEndDrag} 
               txt={text} 
             />
         ))}

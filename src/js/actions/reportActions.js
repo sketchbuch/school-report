@@ -14,7 +14,7 @@ import type { ReportType } from '../types/report';
 
 
 /**
-* Report Actions
+* Report Actions (the list items)
 */
 
 export function replace(updatedData: Array<ReportType>, callback: Function): ActionCreator {
