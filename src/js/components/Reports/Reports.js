@@ -7,6 +7,7 @@ import { DragDropContext } from 'react-dnd';
 import ReportsTextList from './TextList/ReportsTextList'
 import ReportsTexts from './Texts/ReportsTexts'
 import type { CategoryType } from '../../types/category';
+import type { ClassType } from '../../types/class';
 import type { ReportType } from '../../types/report';
 import type { PupilType } from '../../types/pupil';
 import type { TextType } from '../../types/text';
@@ -16,34 +17,33 @@ import { moveItem, removeItem }  from '../../utils/reducers/array';
 import './Reports.css';
 
 type Props = {
+  activeClass: ClassType | Object,
   activePupil: PupilType | Object,
   activeReport: ReportType | Object,
+  builder: Object,
   categories: Array<CategoryType>,
-  initialSelected: Object,
-  saveReorts: (reportId: string, selected: Object, callback?: ()=>{})=>{},
+  dragReports: (reportId: string, classId: string, pupilId: string, selected: Array<string>, callback?: ()=>{})=>{},
+  saveReports: (reportId: string, classId: string, pupilId: string, selected: Array<string>, callback?: ()=>{})=>{},
   texts: Array<TextType>,
-};
-
-type State = {
-  selected: Object,
 };
 
 
 /**
 * The interface to build a report.
 */
-export class Reports extends Component<Props, State> {
+export class Reports extends Component<Props> {
   static defaultProps = {
+    activeClass: {},
     activePupil: {},
     activeReport: {},
+    builder: {},
     categories: [],
-    initialSelected: {},
-    saveReorts: ()=>{},
+    dragReports: ()=>{},
+    saveReports: ()=>{},
     texts: [],
   };
 
   props: Props;
-  state: State;
   handleEndDrag: ()=>{};
   handleTextMove: ()=>{};
   handleTextToggle: ()=>{};
@@ -51,21 +51,21 @@ export class Reports extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    this.state = {
-      selected: props.initialSelected,
-    };
-
     this.handleEndDrag = this.handleEndDrag.bind(this);
     this.handleTextMove = this.handleTextMove.bind(this);
     this.handleTextToggle = this.handleTextToggle.bind(this);
   }
 
   handleEndDrag() {
-    console.log(this.props.activeReport.id,);
-    this.props.saveReorts(
-      this.props.activeReport.id,
-      this.state.selected,
-      //()=> {console.log('saved!!!!')},
+    const reportId = this.props.activeReport.id;
+    const classId = this.props.activeClass.id;
+    const pupilId = this.props.activePupil.id;
+
+    this.props.saveReports(
+      reportId,
+      classId,
+      pupilId,
+      [...this.props.builder[reportId][classId][pupilId]], // Must exist or wouldn't be able to drag
     );
   }
 
@@ -73,43 +73,77 @@ export class Reports extends Component<Props, State> {
    * Method called by drag and drop when a drag source is hovering over a drop target.
    */
   handleTextMove(sourceId: string, targetId: string, before: boolean = false) {
-    const newSelected = JSON.parse(JSON.stringify(this.state.selected)); // Clone
-    const activePupilId = this.props.activePupil.id;
+    const { builder } = this.props;
+    const reportId = this.props.activeReport.id;
+    const classId = this.props.activeClass.id;
+    const pupilId = this.props.activePupil.id;
+    let selected = [...builder[reportId][classId][pupilId]];
 
-    if (newSelected[activePupilId] === undefined) return;
-
-    let sourceIndex = newSelected[activePupilId].indexOf(sourceId);
-    let targetIndex = newSelected[activePupilId].indexOf(targetId);
+    let sourceIndex = selected.indexOf(sourceId);
+    let targetIndex = selected.indexOf(targetId);
 
     if (sourceIndex < 0 || targetIndex < 0) return;
     if (before && targetIndex > 0) targetIndex -= 1;
     
-    newSelected[activePupilId] = moveItem(newSelected[activePupilId], sourceId, sourceIndex, targetIndex);
-    this.setState({ selected: newSelected });
+    selected = moveItem(selected, sourceId, sourceIndex, targetIndex); 
+    
+    this.props.dragReports(
+      reportId,
+      classId,
+      pupilId,
+      selected,
+    );
   }
 
   /**
-   * Toggles the selected state of a text. Uyed in both the list of selected texts and the list of available texts.
+   * Toggles the selected state of a text.
    */
-  handleTextToggle = (pupilId: string) => (event: SyntheticEvent<>) => {
-    const newSelected = JSON.parse(JSON.stringify(this.state.selected));
-    const activePupilId = this.props.activePupil.id;
+  handleTextToggle = (textId: string) => (event: SyntheticEvent<>) => {
+    const { builder } = this.props;
+    const reportId = this.props.activeReport.id;
+    const classId = this.props.activeClass.id;
+    const pupilId = this.props.activePupil.id;
+    let selected = [];
 
-    if (newSelected[activePupilId] === undefined) newSelected[activePupilId] = [];
-    let pupilIndex = newSelected[activePupilId].indexOf(pupilId);
-
-    if (pupilIndex > -1) {
-      newSelected[activePupilId] = removeItem(newSelected[activePupilId], pupilIndex);
+    if (builder[reportId] === undefined) {
+      selected.push(textId);
+    } else if (builder[reportId][classId] === undefined) {
+      selected.push(textId);
+    } else if (builder[reportId][classId][pupilId] === undefined) {
+      selected.push(textId);
     } else {
-      newSelected[activePupilId].push(pupilId);
-    }
+      const textIndex = builder[reportId][classId][pupilId].indexOf(textId);
+      selected = [...builder[reportId][classId][pupilId]];
 
-    this.setState({ selected: newSelected });
-    this.handleEndDrag();
+      if (textIndex > -1) {
+        selected = removeItem(selected, textIndex);
+      } else {
+        selected.push(textId);
+      }
+    }
+    
+    this.props.saveReports(
+      reportId,
+      classId,
+      pupilId,
+      selected,
+    );
   }
 
   render() {
-    const selectedTexts = (this.state.selected[this.props.activePupil.id] !== undefined) ? [...this.state.selected[this.props.activePupil.id]] : [];
+    const { builder } = this.props;
+    const reportId = this.props.activeReport.id;
+    const classId = this.props.activeClass.id;
+    const pupilId = this.props.activePupil.id;
+
+    let selected = [];
+    if (builder[reportId] !== undefined) {
+      if (builder[reportId][classId] !== undefined) {
+        if (builder[reportId][classId][pupilId] !== undefined) {
+          selected = builder[reportId][classId][pupilId];
+        }
+      }
+    }
 
     return (
       <section className="Reports">
@@ -119,7 +153,7 @@ export class Reports extends Component<Props, State> {
             handleEndDrag={this.handleEndDrag}
             handleTextMove={this.handleTextMove}
             handleTextToggle={this.handleTextToggle}
-            selectedTexts={selectedTexts}
+            selectedTexts={selected}
             texts={this.props.texts}
           />
         </div>
@@ -128,7 +162,7 @@ export class Reports extends Component<Props, State> {
             activePupil={this.props.activePupil}
             categories={this.props.categories}
             handleTextToggle={this.handleTextToggle}
-            selectedTexts={selectedTexts}
+            selectedTexts={selected}
             texts={this.props.texts}
           />
         </div>
@@ -140,6 +174,7 @@ export class Reports extends Component<Props, State> {
 
 const mapStateToProps = (state: Object, props: Props) => {
   return {
+    builder: state.builder,
     categories: state.categories,
     texts: state.texts,
   }
@@ -147,9 +182,12 @@ const mapStateToProps = (state: Object, props: Props) => {
 
 const mapDispatchToProps = (dispatch: DispatchType) => {
   return {
-    saveReorts: (reportId: string, selected: Object, callback?: Function = ()=>{}) => {
-      dispatch(builderActions.save(reportId, selected, callback));
-    }
+    saveReports: (reportId: string, classId: string, pupilId: string, selected: Array<string>, callback?: Function = ()=>{}) => {
+      dispatch(builderActions.save(reportId, classId, pupilId, selected, callback));
+    },
+    dragReports: (reportId: string, classId: string, pupilId: string, selected: Array<string>, callback?: Function = ()=>{}) => {
+      dispatch(builderActions.drag(reportId, classId, pupilId, selected, callback));
+    },
   }
 }
 

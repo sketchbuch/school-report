@@ -94,26 +94,6 @@ export function createDataFolder(fileName: string) {
   }
 }
 
-/**
-* Creates the builder storage folder and all intermediate folders.
-*
-* @param string fileName The name of the file to create.
-*/
-export function createBuilderFolder(fileName: string) {
-  const filePath = getDataPath(fileName);
-
-  if (!fs.existsSync(filePath)) {
-    let folders = filePath.replace(DATA_PATH, '').split('/').filter(f => f !== '');
-    if (folders[folders.length - 1].indexOf('.') > -1) folders.pop();
-    let finalPath = DATA_PATH + '/' + ((folders.length > 1) ? folders.join('/') : folders[0]);
-
-    try {
-      fs.mkdirSync(finalPath);
-    } catch (err) {
-    }
-  }
-}
-
 
 /**
 * Loads multiple app data files async. from the filesystem. callback receives a results object: {
@@ -218,48 +198,4 @@ export function writeAppData(content: Object, callback: Function) {
         });
       }
     );
-}
-
-/**
-* Writes builder data. callback receives a results object: {
-*   success: boolean ,
-*   errorObj: object | null,
-* }
-*
-* @param string reportId The ID of the report that this builder is for.
-* @param object content An object with string content, keyed by file name: { Classes: "{"classes":[]}" }
-* @param function callback The function to call with the results of the save attempt.
-*/
-export function writeBuilderData(reportId: string, content: Object, callback: Function) {
-/*   let files = Object.keys(content).map(function(fileName, index) {
-    return new Promise((resolve, reject) => {
-      const FILE_PATH = getDataPath(fileName);
-
-      fs.writeFile(FILE_PATH, JSON.stringify(content[fileName]), 'UTF-8', (err?: any) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(FILE_PATH);
-        }
-      });
-    });
-  }); */
-
-/*   Promise.all(files)
-    .then(
-      responses => {
-        callback({
-          success: true,
-          errorObj: null,
-        });
-      }
-    )
-    .catch(
-      err => {
-        callback({
-          success: false,
-          errorObj: err,
-        });
-      }
-    ); */
 }

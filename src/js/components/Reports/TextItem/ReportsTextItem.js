@@ -16,7 +16,7 @@ import './ReportsTextItem.css';
 type Props = {
   activePupil: PupilType | Object,
   onClick: (id: string)=>{},
-  onMove: ()=>{},
+  onMove: (sourceId: string, targetId: string, before?: boolean)=>{},
   onEndDrag: ()=>{},
   txt: TextType,
   canDrop: boolean,

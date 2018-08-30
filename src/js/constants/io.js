@@ -4,8 +4,8 @@
 
 export const FILE_TYPE = 'json';
 export const DATA_FOLDER = '/Storage/';
-export const BUILDER_FOLDER = 'Builder/';
 
+export const FILE_BUILDER = 'Builder';
 export const FILE_CATEGORIES = 'Categories';
 export const FILE_CLASSES = 'Classes';
 export const FILE_PUPILS = 'Pupils';

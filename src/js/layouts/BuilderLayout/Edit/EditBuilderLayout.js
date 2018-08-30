@@ -41,7 +41,7 @@ export class EditBuilderLayout extends Component<Props> {
       <EditPanel>
         <EditPanelHeader title={text('ReportBuilder', 'EditPanelHeader', { 'PUPIL_NAME': activePupil.getLabel(), 'CLASS_NAME': activeItem.classRec.getLabel() })} />
         <EditPanelContent noPadding={true}>
-          <Reports activePupil={activePupil} activeReport={this.props.activeReport} />
+          <Reports activeClass={activeItem.classRec}  activePupil={activePupil} activeReport={this.props.activeReport} />
         </EditPanelContent>
       </EditPanel>
     )
