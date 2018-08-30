@@ -20,7 +20,7 @@ type Props = {
   activeReport: ReportType | Object,
   categories: Array<CategoryType>,
   initialSelected: Object,
-  saveReorts: ()=>{},
+  saveReorts: (reportId: string, selected: Object, callback?: ()=>{})=>{},
   texts: Array<TextType>,
 };
 
@@ -46,7 +46,7 @@ export class Reports extends Component<Props, State> {
   state: State;
   handleEndDrag: ()=>{};
   handleTextMove: ()=>{};
-  handleTextToggle: Function;
+  handleTextToggle: ()=>{};
 
   constructor(props: Props) {
     super(props);
@@ -61,7 +61,12 @@ export class Reports extends Component<Props, State> {
   }
 
   handleEndDrag() {
-    this.props.saveReorts(this.state.selected);
+    console.log(this.props.activeReport.id,);
+    this.props.saveReorts(
+      this.props.activeReport.id,
+      this.state.selected,
+      //()=> {console.log('saved!!!!')},
+    );
   }
 
   /**
@@ -100,6 +105,7 @@ export class Reports extends Component<Props, State> {
     }
 
     this.setState({ selected: newSelected });
+    this.handleEndDrag();
   }
 
   render() {
@@ -141,8 +147,8 @@ const mapStateToProps = (state: Object, props: Props) => {
 
 const mapDispatchToProps = (dispatch: DispatchType) => {
   return {
-    saveReorts: (selected: Object) => {
-      dispatch(builderActions.save(selected));
+    saveReorts: (reportId: string, selected: Object, callback?: Function = ()=>{}) => {
+      dispatch(builderActions.save(reportId, selected, callback));
     }
   }
 }
