@@ -21,19 +21,18 @@ SidebarList:
 - items - add correct flow type for items
 - SidebarLink reclass and change css source
 - Add back arrow to header
+- Use icon constants in sidebar footer
 
 
 Fields/Forms:
 ============
 
-- Get trim validation working: strict(false) BROKEN IN FORMIK
 - Extract form parts to new components
 
 
 Tests:
 =====
 
-- Tests needed for utils/redux
 - utils/redux move get array element to new function and also use in reducers
 - Create tests for actions
 - Tests for layouts
@@ -51,20 +50,8 @@ Misc.:
 - All form submit handlers - use appropriate type rather than Object
 
 
-Reports:
--------
-
-- Add unselected to category selector
-
-
 Layouts:
 -------
 
 - Remove unnecessary connect() in sub layouts
 - Merge forms like for reports
-
-
-Actions:
--------
-
-- Replace function for callbacks with correct definition

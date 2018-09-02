@@ -28,7 +28,7 @@ export function save(reportId: string, classId: string, pupilId: string, selecte
   };
 }
 
-export function drag(reportId: string, classId: string, pupilId: string, selected: Array<string>, callback: Function): ActionCreator {
+export function drag(reportId: string, classId: string, pupilId: string, selected: Array<string>): ActionCreator {
   return {
     type: DRAG_BUILDER,
     payload: { selected },

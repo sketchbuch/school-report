@@ -20,14 +20,16 @@ export default function reducer(state: {} = {}, action: ActionObj) {
     case DATA_LOADED:
     case REPLACE_BUILDER:
     case REPLACE_DATA:
-      if (action.payload && action.payload.builder !== undefined) return action.payload.builder;
+      if (action.payload && action.payload.builder !== undefined && typeof action.payload.builder === 'object') {
+        return action.payload.builder;
+      }
 
       break;
 
     case DRAG_BUILDER:
     case SAVE_BUILDER:
       if (action.payload !== undefined && action.meta !== undefined) {
-        if (action.payload.selected !== undefined && action.payload.selected.length > 0) {
+        if (action.payload.selected !== undefined && Array.isArray(action.payload.selected) && action.payload.selected.length > 0) {
           const {
             reportId,
             classId,

@@ -22,8 +22,8 @@ type Props = {
   activeReport: ReportType | Object,
   builder: Object,
   categories: Array<CategoryType>,
-  dragReports: (reportId: string, classId: string, pupilId: string, selected: Array<string>, callback?: ()=>{})=>{},
-  saveReports: (reportId: string, classId: string, pupilId: string, selected: Array<string>, callback?: ()=>{})=>{},
+  dragReports: Function,
+  saveReports: Function,
   texts: Array<TextType>,
 };
 
@@ -182,11 +182,11 @@ const mapStateToProps = (state: Object, props: Props) => {
 
 const mapDispatchToProps = (dispatch: DispatchType) => {
   return {
+    dragReports: (reportId: string, classId: string, pupilId: string, selected: Array<string>) => {
+      dispatch(builderActions.drag(reportId, classId, pupilId, selected));
+    },
     saveReports: (reportId: string, classId: string, pupilId: string, selected: Array<string>, callback?: Function = ()=>{}) => {
       dispatch(builderActions.save(reportId, classId, pupilId, selected, callback));
-    },
-    dragReports: (reportId: string, classId: string, pupilId: string, selected: Array<string>, callback?: Function = ()=>{}) => {
-      dispatch(builderActions.drag(reportId, classId, pupilId, selected, callback));
     },
   }
 }

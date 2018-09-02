@@ -15,6 +15,7 @@ import {
   ROUTE_EDIT_PUPIL,
   ROUTE_EDIT_REPORT,
   ROUTE_EDIT_TEXT,
+  ROUTE_EXPORT_BUILDER,
   ROUTE_HOME,
   ROUTE_PUPILS,
   ROUTE_REPORTS,
@@ -38,6 +39,7 @@ export class Header extends Component<Props> {
         <p className="Header__sitetitle">
           <HeaderBreadcrumb link={ROUTE_HOME}><HeaderTitle /></HeaderBreadcrumb>
           <Switch>
+            <Route path={ROUTE_EXPORT_BUILDER} render={(routerProps) => <HeaderPath {...routerProps} path="reports-builder-export" />} />
             <Route path={ROUTE_EDIT_BUILDER} render={(routerProps) => <HeaderPath {...routerProps} path="reports-builder-pupil" />} />
             <Route path={ROUTE_BUILDER} render={(routerProps) => <HeaderPath {...routerProps} path="reports-builder" />} />
             <Route path={ROUTE_EDIT_CATEGORY} render={(routerProps) => <HeaderPath {...routerProps} path="categories-category" />} />

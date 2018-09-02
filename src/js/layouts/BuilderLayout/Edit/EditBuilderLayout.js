@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import EditPanel from '../../../components/EditPanel/EditPanel';
-import Reports from '../../../components/Reports/Reports';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
+import Reports from '../../../components/Reports/Reports';
 import { text }  from '../../../components/Translation/Translation';
 import { getItemById } from '../../../utils/arrays';
 import type { ReportType } from '../../../types/report';
@@ -21,7 +21,7 @@ type Props = {
 
 
 /**
-* Layout for editing an existing class.
+* Layout for creating a report.
 */
 export class EditBuilderLayout extends Component<Props> {
   static defaultProps = {
