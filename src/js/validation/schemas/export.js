@@ -9,7 +9,7 @@ import { text } from '../../components/Translation/Translation';
 
 * @return object
 */
-export default function reportSchema(): Object {
+export default function exportSchema(): Object {
   return Yup.object().shape({
     name: Yup.string().trim().required(text('ReportExportName', 'Validation')),
   });

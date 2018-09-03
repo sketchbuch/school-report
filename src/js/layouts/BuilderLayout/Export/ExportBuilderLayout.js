@@ -6,8 +6,12 @@ import ExportBuilderForm from '../Form/ExportBuilderForm';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
+import exportSchema from '../../../validation/schemas/export';
 import { text }  from '../../../components/Translation/Translation';
+import exportDefault from '../../../types/export';
+import { exportWord } from '../../../fs/export';
 import type { ReportType } from '../../../types/report';
+import type { ExportType } from '../../../types/export';
 import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
 
 type Props = {
@@ -18,7 +22,7 @@ type Props = {
 };
 
 type State = {
-  export: Object,
+  export: ExportType,
   error: boolean,
   saving: boolean,
 }
@@ -40,7 +44,7 @@ export class ExportBuilderLayout extends Component<Props, State> {
     super(props);
 
     this.state = {
-      export: {},
+      export: {...exportDefault},
       error: false,
       saving: false,
     };
@@ -48,8 +52,8 @@ export class ExportBuilderLayout extends Component<Props, State> {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(values: Object) {
-    
+  handleSubmit(values: ExportType) {
+    exportWord(values);
   }
 
   render() {
@@ -60,10 +64,10 @@ export class ExportBuilderLayout extends Component<Props, State> {
         <EditPanelHeader title={text('ReportExport', 'EditPanelHeader', { 'REPORT_NAME': reportName })} />
         <EditPanelContent>
           <Formik
-            initialValues={{}}
+            initialValues={{ name: '' }}
             enableReinitialize={true}
-            validationSchema={{}}
-            onSubmit={()=>{}}
+            validationSchema={exportSchema}
+            onSubmit={this.handleSubmit}
             render={(formikProps) => (
               <ExportBuilderForm {...formikProps} saving={this.state.saving} reportName={reportName} />
             )}

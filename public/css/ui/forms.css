@@ -35,6 +35,12 @@
   color: var(--col-neg);
 }
 
+.form {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .form__headline {
   text-align: center;
   font-size: var(--font-size-large);

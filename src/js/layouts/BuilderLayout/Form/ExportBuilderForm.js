@@ -56,7 +56,7 @@ export class ExportBuilderForm extends Component<Props> {
 
     return (
       <form className="form" onSubmit={handleSubmit}>
-      <p className="NoData__msg"><Translation name="Headline" ns="ExportBuilderForm" placeholders={{ REPORT_NAME: this.props.reportName }}/></p>
+      <p className="form__headline"><Translation name="Headline" ns="ExportBuilderForm" placeholders={{ REPORT_NAME: this.props.reportName }}/></p>
       <div className="fieldwrap">
         <TextInput
           autoFocus
