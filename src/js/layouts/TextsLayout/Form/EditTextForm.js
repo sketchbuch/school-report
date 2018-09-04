@@ -67,7 +67,6 @@ export class EditTextForm extends Component<Props> {
       <form className="form" onSubmit={handleSubmit}>
         <div className="fieldwrap">
           <Textarea
-            autoFocus
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.bodytext}

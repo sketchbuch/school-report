@@ -44,7 +44,6 @@ export class TextForm extends Component<Props> {
         <p className="NoData__msg"><Translation name="TextMessage" ns="NoData" /></p>
         <div className="fieldwrap">
           <Textarea
-            autoFocus
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.text.bodytext}

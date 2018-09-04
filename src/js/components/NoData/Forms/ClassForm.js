@@ -42,7 +42,6 @@ export class ClassForm extends Component<Props> {
         <p className="NoData__msg"><Translation name="ClassMessage" ns="NoData" /></p>
         <div className="fieldwrap">
           <TextInput
-            autoFocus
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.class.label}
