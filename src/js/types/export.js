@@ -8,17 +8,36 @@ import {
   ROUTE_PUPILS,
 } from '../constants/routes';
 
+type PupilEle = {
+  pupil_name: string,
+};
+
+type ClassEle = {
+  class_name: string,
+  pupils: Array<PupilEle>,
+};
+
 
 /**
 * Export type def.
 */
 
 export type ExportType = {
+  classCount: number,
+  classes: Array<ClassEle>,
+  exported: string,
   name: string,
+  pupilCount: number,
+  reportName: string,
 };
 
 const exportDefault: ExportType = {
+  classCount: -1,
+  classes: [],
+  exported: '',
   name: '',
+  pupilCount: -1,
+  reportName: '',
 };
 
 

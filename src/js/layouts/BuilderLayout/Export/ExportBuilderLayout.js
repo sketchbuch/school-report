@@ -9,14 +9,22 @@ import EditPanelContent from '../../../components/EditPanel/Content/EditPanelCon
 import exportSchema from '../../../validation/schemas/export';
 import { text }  from '../../../components/Translation/Translation';
 import exportDefault from '../../../types/export';
-import { exportWord } from '../../../fs/export';
+import { getItemById } from '../../../utils/arrays';
 import type { ReportType } from '../../../types/report';
 import type { ExportType } from '../../../types/export';
 import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
+import {
+  exportWord,
+  getClassCount,
+  getClassList,
+  getDateFromTs,
+  getPupilCount,
+} from '../../../fs/export';
 
 type Props = {
   activeReport: ReportType | Object,
   history: Object,
+  items: Array<SidebarBuilderItemType>,
   location: Object,
   match: Object,
 };
@@ -34,6 +42,7 @@ type State = {
 export class ExportBuilderLayout extends Component<Props, State> {
   static defaultProps = {
     activeReport: {},
+    items: [],
   };
 
   props: Props;
@@ -53,7 +62,15 @@ export class ExportBuilderLayout extends Component<Props, State> {
   }
 
   handleSubmit(values: ExportType) {
-    exportWord(values);
+    const exportValues = {...values};
+
+    exportValues.reportName = this.props.activeReport.getLabel();
+    exportValues.classCount = getClassCount(this.props.items);
+    exportValues.classes = getClassList(this.props.items);
+    exportValues.exported = getDateFromTs(Date.now());
+    exportValues.pupilCount = getPupilCount(this.props.items);
+
+    exportWord(exportValues);
   }
 
   render() {
