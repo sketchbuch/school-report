@@ -62,14 +62,15 @@ export class ExportBuilderLayout extends Component<Props, State> {
   }
 
   handleSubmit(values: ExportType) {
+    const { items } = this.props;
     const exportValues = {...values};
 
     exportValues.reportName = this.props.activeReport.getLabel();
-    exportValues.classCount = getClassCount(this.props.items);
-    exportValues.classes = getClassList(this.props.items);
+    exportValues.classCount = getClassCount(items);
+    exportValues.classes = getClassList(items);
     exportValues.exported = getDateFromTs(Date.now());
-    exportValues.pupilCount = getPupilCount(this.props.items);
-
+    exportValues.pupilCount = getPupilCount(items);
+    
     exportWord(exportValues);
   }
 

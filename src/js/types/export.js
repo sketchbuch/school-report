@@ -14,6 +14,7 @@ type PupilEle = {
 
 type ClassEle = {
   class_name: string,
+  class_name_count: string,
   pupils: Array<PupilEle>,
 };
 
