@@ -6,7 +6,7 @@ import { Formik } from 'formik';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
-import EditClassForm from './Form/EditClassForm';
+import EditClassForm from '../Form/EditClassForm';
 import { text }  from '../../../components/Translation/Translation';
 import { classSchema } from '../../../validation/schemas';
 import * as classActions from '../../../actions/classActions';

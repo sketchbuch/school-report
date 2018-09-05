@@ -6,7 +6,7 @@ import { Formik } from 'formik';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
-import NewClassForm from './Form/NewClassForm';
+import EditClassForm from '../Form/EditClassForm';
 import { text }  from '../../../components/Translation/Translation';
 import { classSchema } from '../../../validation/schemas';
 import * as classActions from '../../../actions/classActions';
@@ -104,7 +104,7 @@ export class NewClassLayout extends Component<Props, State> {
             validationSchema={classSchema}
             onSubmit={this.handleSubmit}
             render={(formikProps) => (
-              <NewClassForm {...formikProps} saving={this.state.saving} />
+              <EditClassForm {...formikProps} saving={this.state.saving} />
             )}
           />
         </EditPanelContent>

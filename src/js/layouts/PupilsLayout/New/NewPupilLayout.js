@@ -7,7 +7,7 @@ import { Formik } from 'formik';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
-import NewPupilForm from './Form/NewPupilForm';
+import EditPupilForm from '../Form/EditPupilForm';
 import { text }  from '../../../components/Translation/Translation';
 import { pupilSchema } from '../../../validation/schemas';
 import * as pupilActions from '../../../actions/pupilActions';
@@ -114,7 +114,7 @@ export class NewPupilLayout extends Component<Props, State> {
             validationSchema={pupilSchema}
             onSubmit={this.handleSubmit}
             render={(formikProps) => (
-              <NewPupilForm {...formikProps} saving={this.state.saving} classId={this.props.activeClass.id} />
+              <EditPupilForm {...formikProps} saving={this.state.saving} classId={this.props.activeClass.id} />
             )}
           />
         </EditPanelContent>

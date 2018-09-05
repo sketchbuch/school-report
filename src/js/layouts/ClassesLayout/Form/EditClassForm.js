@@ -2,14 +2,14 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import TextInput from '../../../../components/ui/TextInput/TextInput';
-import Button from '../../../../components/ui/Button/Button';
-import Translation, { text } from '../../../../components/Translation/Translation';
-import validate from '../../../../validation/validation';
-import { CLASS_LABEL_MAX } from '../../../../validation/schemas';
-import { ROUTE_CLASSES } from '../../../../constants/routes';
+import TextInput from '../../../components/ui/TextInput/TextInput';
+import Button from '../../../components/ui/Button/Button';
+import Translation, { text } from '../../../components/Translation/Translation';
+import validate from '../../../validation/validation';
+import { ROUTE_CLASSES } from '../../../constants/routes';
 
 type Props = {
+  dirty: boolean,
   errors: Object,
   handleBlur: Function,
   handleChange: Function,
@@ -24,11 +24,12 @@ type Props = {
 /**
 * Class form for the edit panel.
 */
-export class NewClassForm extends Component<Props> {
+export class EditClassForm extends Component<Props> {
   props: Props;
 
   render() {
     const {
+      dirty,
       errors,
       handleBlur,
       handleChange,
@@ -39,7 +40,7 @@ export class NewClassForm extends Component<Props> {
     } = this.props;
 
     const clValid = validate('label', errors, touched);
-    const btnIsDisabled = (!clValid || values.label === '' || saving) ? true : false;
+    const btnIsDisabled = (!clValid || values.label === '' || saving || !dirty) ? true : false;
 
     return (
       <form className="form" onSubmit={handleSubmit}>
@@ -49,7 +50,6 @@ export class NewClassForm extends Component<Props> {
             onBlur={handleBlur}
             value={values.label}
             name="label"
-            maxLength={CLASS_LABEL_MAX}
             placeholder={text('LabelPlaceholder', 'Classes')}
             isValid={clValid}
           />
@@ -57,7 +57,7 @@ export class NewClassForm extends Component<Props> {
         </div>
         <div className="fieldwrap">
           <Button type="submit" disabled={btnIsDisabled} busy={saving}>
-            <Translation name="CreateClassBtnLabel" ns="Classes" />
+            <Translation name="UpdateClassBtnLabel" ns="Classes" />
           </Button>
         </div>
 
@@ -72,4 +72,4 @@ export class NewClassForm extends Component<Props> {
 }
 
 
-export default NewClassForm;
+export default EditClassForm;

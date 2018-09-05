@@ -2,12 +2,12 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import TextInput from '../../../../components/ui/TextInput/TextInput';
-import Button from '../../../../components/ui/Button/Button';
-import GenderSwitch from '../../../../components/ui/GenderSwitch/GenderSwitch';
-import Translation, { text } from '../../../../components/Translation/Translation';
-import validate from '../../../../validation/validation';
-import { ROUTE_PUPILS } from '../../../../constants/routes';
+import TextInput from '../../../components/ui/TextInput/TextInput';
+import Button from '../../../components/ui/Button/Button';
+import GenderSwitch from '../../../components/ui/GenderSwitch/GenderSwitch';
+import Translation, { text } from '../../../components/Translation/Translation';
+import validate from '../../../validation/validation';
+import { ROUTE_PUPILS } from '../../../constants/routes';
 
 type Props = {
   classId: string,
@@ -50,6 +50,8 @@ export class EditPupilForm extends Component<Props> {
       !fnValid ||
       !lnValid ||
       !dValid ||
+      values.firstname === '' ||
+      values.lastname === '' ||
       !dirty
     ) ? true : false;
 
@@ -73,7 +75,7 @@ export class EditPupilForm extends Component<Props> {
             value={values.lastname}
             name="lastname"
             placeholder={text('LastnamePlaceholder', 'Pupils')}
-            isValid={lnValid}class
+            isValid={lnValid}
           />
           {!lnValid && <p className="invalid-feedback">{errors.lastname}</p>}
         </div>

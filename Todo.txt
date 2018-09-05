@@ -22,6 +22,7 @@ SidebarList:
 - SidebarLink reclass and change css source
 - Add back arrow to header
 - Use icon constants in sidebar footer
+- Add search
 
 
 Fields/Forms:
@@ -55,3 +56,15 @@ Layouts:
 
 - Remove unnecessary connect() in sub layouts
 - Merge forms like for reports
+
+
+Texts Layout:
+------------
+
+- Display placeholders
+
+
+Builder Layout:
+------------
+
+- Edit - add search
