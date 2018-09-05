@@ -10,11 +10,13 @@ import {
 
 type PupilEle = {
   pupil_name: string,
+  texts: Array<string>,
 };
 
 type ClassEle = {
   class_name: string,
   class_name_count: string,
+  pupil_count: number,
   pupils: Array<PupilEle>,
 };
 
@@ -25,7 +27,7 @@ type ClassEle = {
 
 export type ExportType = {
   classCount: number,
-  classes: Array<ClassEle>,
+  content: Array<ClassEle>,
   exported: string,
   name: string,
   pupilCount: number,
@@ -34,7 +36,7 @@ export type ExportType = {
 
 const exportDefault: ExportType = {
   classCount: -1,
-  classes: [],
+  content: [],
   exported: '',
   name: '',
   pupilCount: -1,

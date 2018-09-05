@@ -26,9 +26,7 @@ type Props = {
 export class EditBuilderLayout extends Component<Props> {
   static defaultProps = {
     activeReport: {},
-    categories: [],
     items: [],
-    texts: [],
   };
 
   props: Props;

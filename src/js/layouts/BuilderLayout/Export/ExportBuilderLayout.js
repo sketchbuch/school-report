@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import ExportBuilderForm from '../Form/ExportBuilderForm';
 import EditPanel from '../../../components/EditPanel/EditPanel';
@@ -10,23 +11,24 @@ import exportSchema from '../../../validation/schemas/export';
 import { text }  from '../../../components/Translation/Translation';
 import exportDefault from '../../../types/export';
 import { getItemById } from '../../../utils/arrays';
-import type { ReportType } from '../../../types/report';
 import type { ExportType } from '../../../types/export';
+import type { ReportType } from '../../../types/report';
+import type { TextType } from '../../../types/text';
 import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
 import {
   exportWord,
-  getClassCount,
-  getClassList,
+  getContent,
   getDateFromTs,
-  getPupilCount,
 } from '../../../fs/export';
 
 type Props = {
   activeReport: ReportType | Object,
+  builder: Object,
   history: Object,
   items: Array<SidebarBuilderItemType>,
   location: Object,
   match: Object,
+  texts: Array<TextType>,
 };
 
 type State = {
@@ -42,7 +44,9 @@ type State = {
 export class ExportBuilderLayout extends Component<Props, State> {
   static defaultProps = {
     activeReport: {},
+    builder: {},
     items: [],
+    texts: [],
   };
 
   props: Props;
@@ -62,15 +66,17 @@ export class ExportBuilderLayout extends Component<Props, State> {
   }
 
   handleSubmit(values: ExportType) {
-    const { items } = this.props;
+    const { activeReport, builder, items, texts } = this.props;
     const exportValues = {...values};
+    const content = getContent(items, builder[activeReport.id], texts);
 
-    exportValues.reportName = this.props.activeReport.getLabel();
-    exportValues.classCount = getClassCount(items);
-    exportValues.classes = getClassList(items);
+    exportValues.classCount = content.classCount;
     exportValues.exported = getDateFromTs(Date.now());
-    exportValues.pupilCount = getPupilCount(items);
+    exportValues.pupilCount = content.pupilCount;
+    exportValues.reportName = this.props.activeReport.getLabel();
+    exportValues.content = content.content;
     
+    // Todo... only export if there is content
     exportWord(exportValues);
   }
 
@@ -97,4 +103,12 @@ export class ExportBuilderLayout extends Component<Props, State> {
 }
 
 
-export default ExportBuilderLayout;
+const mapStateToProps = (state: Object, props: Props) => {
+  return {
+    builder: state.builder,
+    texts: state.texts,
+  }
+};
+
+
+export default connect(mapStateToProps)(ExportBuilderLayout);
