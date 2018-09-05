@@ -17,8 +17,11 @@ export default function persist(dispatch: Function, getState: Function, callback
   let contentTosave = {};
   content.forEach(filePath => {
     const STATE_KEY = filePath.toLowerCase();
-    contentTosave[filePath] = {[STATE_KEY]: getState()[STATE_KEY]};
-    persistFiles.push(STATE_KEY);
+    
+    if (getState()[STATE_KEY] !== undefined) {
+      contentTosave[filePath] = {[STATE_KEY]: getState()[STATE_KEY]};
+      persistFiles.push(STATE_KEY);
+    }
   });
   const PERSIST_KEY = persistFiles.join(', ');
 

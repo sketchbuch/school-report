@@ -6,7 +6,6 @@ import type { EventHandlerType } from '../../../types/functions';
 import './TextInput.css';
 
 type Props = {
-  autoFocus: boolean,
   className?: string,
   defaultValue?: string,
   disabled?: boolean,
@@ -28,7 +27,6 @@ type Props = {
 */
 class TextInput extends React.Component<Props> {
   static defaultProps = {
-    autoFocus: false,
     disabled: false,
     isValid: true,
     onBlur: null,
@@ -41,7 +39,6 @@ class TextInput extends React.Component<Props> {
 
   render() {
     const {
-      autoFocus,
       className,
       defaultValue,
       disabled,
@@ -63,7 +60,6 @@ class TextInput extends React.Component<Props> {
 
     return (
         <input
-          autoFocus={autoFocus}
           className={classes}
           defaultValue={defaultValue}
           disabled={disabled}

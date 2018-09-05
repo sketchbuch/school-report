@@ -44,7 +44,6 @@ export class PupilForm extends Component<Props> {
         <p className="NoData__msg"><Translation name="PupilMessage" ns="NoData" /></p>
         <div className="fieldwrap">
           <TextInput
-            autoFocus
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.pupil.firstname}

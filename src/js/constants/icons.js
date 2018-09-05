@@ -12,6 +12,7 @@ export const ICON_CONTRACT = 'rounded-up';
 export const ICON_DELETE = 'trash';
 export const ICON_EDIT = 'ui-edit';
 export const ICON_ERROR = 'error';
+export const ICON_EXPORT = 'download-alt';
 export const ICON_EXPAND = 'rounded-down';
 export const ICON_PUPILS_FEMALE = 'student';
 export const ICON_PUPILS_MALE = 'student-alt';

@@ -60,7 +60,6 @@ export class EditCategoryForm extends Component<Props> {
       <form className="form" onSubmit={handleSubmit}>
         <div className="fieldwrap">
           <TextInput
-            autoFocus
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.label}

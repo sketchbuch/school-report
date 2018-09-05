@@ -4,10 +4,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import EditBuilderLayout from './Edit/EditBuilderLayout';
+import ExportBuilderLayout from './Export/ExportBuilderLayout';
 import InfoMessage from '../../components/InfoMessage/InfoMessage';
+import Icon from '../../components/Icon/Icon';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
+import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
+import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCircular';
 import { text }  from '../../components/Translation/Translation';
 import { sortObjectsAz } from '../../utils/sort';
 import type { SidebarBuilderItemType } from '../../types/sidebarBuilderItem';
@@ -16,9 +20,11 @@ import { pupilSort } from '../../types/pupil';
 import type { ClassType } from '../../types/class';
 import type { PupilType } from '../../types/pupil';
 import type { ReportType } from '../../types/report';
+import { ICON_EXPORT } from '../../constants/icons';
 import {
   ROUTE_BUILDER,
   ROUTE_EDIT_BUILDER,
+  ROUTE_EXPORT_BUILDER,
 } from '../../constants/routes';
 import { getActiveReport } from '../../utils/redux';
 import setTitle from '../../utils/title';
@@ -84,6 +90,19 @@ export class BuilderLayout extends Component<Props> {
 
   render() {
     const items = this.getItems();
+    
+    const leftActions = (
+      <NavButtonCircular
+        to={ROUTE_EXPORT_BUILDER.replace(':reportId', this.props.activeReport.id,)}
+        className="SidebarFooter__action"
+        buttontype="pos-rollover"
+        action="add-category"
+        title={text('ReportExport', 'Actions')}
+      >
+        <Icon type={ICON_EXPORT} />
+      </NavButtonCircular>
+    );
+
     return (
       <div className="Panel">
         <Sidebar footer={false}>
@@ -96,8 +115,10 @@ export class BuilderLayout extends Component<Props> {
             noItemsTxt={text('Classes', 'SidebarNoItems')}
             sortOrder={[]}
           />
+          <SidebarFooter leftActions={leftActions} />
         </Sidebar>
         <Switch>
+          <Route path={ROUTE_EXPORT_BUILDER} render={routerProps => <ExportBuilderLayout {...routerProps} activeReport={this.props.activeReport} items={items} />} />
           <Route path={ROUTE_EDIT_BUILDER} render={routerProps => <EditBuilderLayout {...routerProps} activeReport={this.props.activeReport} items={items} />} />
           <Route path={ROUTE_BUILDER} render={routerProps => <InfoMessage {...routerProps} headine={text('Builder', 'InfoMessage')} subtext={text('BuilderMsg', 'InfoMessage')} />} />
         </Switch>

@@ -6,6 +6,7 @@
 import { combineReducers } from 'redux';
 import {reducer as toastrReducer} from 'react-redux-toastr'
 import app from './app';
+import builder from './builder';
 import categories from './categories';
 import classes from './classes';
 import languages from './languages';
@@ -17,6 +18,7 @@ import texts from './texts';
 
 export default combineReducers({
   app,
+  builder,
   categories,
   classes,
   languages,

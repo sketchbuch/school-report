@@ -8,6 +8,7 @@ import './ReportsTexts.css';
 
 type Props = {
   activePupil: PupilType | Object,
+  handleEndDrag: Function,
   handleTextMove: Function,
   handleTextToggle: Function,
   selectedTexts: Array<string>,
@@ -21,6 +22,7 @@ type Props = {
 export class ReportsTexts extends Component<Props> {
   static defaultProps = {
     activePupil: {},
+    handleEndDrag: ()=>{},
     handleTextMove: ()=>{},
     handleTextToggle: ()=>{},
     selectedTexts: [],
@@ -55,6 +57,7 @@ export class ReportsTexts extends Component<Props> {
               key={text.id}
               onClick={this.props.handleTextToggle}
               onMove={this.props.handleTextMove} 
+              onEndDrag={this.props.handleEndDrag} 
               txt={text} 
             />
         ))}

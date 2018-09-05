@@ -10,6 +10,7 @@ import {
   REPLACE_DATA,
 } from '../constants/actionTypes';
 import {
+  FILE_BUILDER,
   FILE_CATEGORIES,
   FILE_CLASSES,
   FILE_PUPILS,
@@ -32,13 +33,14 @@ export function replace(updatedData?: Object, callback: Function): ActionCreator
       type: REPLACE_DATA,
       payload: updatedData,
     });
-    persist(dispatch, getState, callback, [FILE_CATEGORIES, FILE_CLASSES, FILE_PUPILS, FILE_TEXTS, FILE_REPORTS]);
+    persist(dispatch, getState, callback, [FILE_BUILDER, FILE_CATEGORIES, FILE_CLASSES, FILE_PUPILS, FILE_TEXTS, FILE_REPORTS]);
   };
 }
 
 export function create(callback: Function): ActionCreator {
   return (dispatch, getState) => {
     const content = {
+      [FILE_BUILDER]: {builder: {}},
       [FILE_CATEGORIES]: {categories: []},
       [FILE_CLASSES]: {classes: []},
       [FILE_PUPILS]: {pupils: []},
@@ -60,6 +62,7 @@ export function load(callback: Function): ActionCreator {
     dispatch({ type: LOAD_DATA });
     readAppData(
       [
+        FILE_BUILDER,
         FILE_CATEGORIES,
         FILE_CLASSES,
         FILE_PUPILS,

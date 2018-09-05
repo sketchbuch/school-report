@@ -42,14 +42,4 @@ describe('<TextInput />', () => {
     expect(iv1Wrapper.find('.TextInput').hasClass(UI_ERROR_CLASS)).toEqual(false);
     expect(iv2Wrapper.find('.TextInput').hasClass(UI_ERROR_CLASS)).toEqual(true);
   });
-
-  test('Handles autoFocus property', () => {
-    const af1Props = { autoFocus: true };
-    const af1Wrapper = shallow(<TextInput {...af1Props} />);
-    const af2Props = { autoFocus: false };
-    const af2Wrapper = shallow(<TextInput {...af2Props} />);
-
-    expect(af1Wrapper.find('.TextInput').prop('autoFocus')).toEqual(true);
-    expect(af2Wrapper.find('.TextInput').prop('autoFocus')).toEqual(false);
-  });
 });

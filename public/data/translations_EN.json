@@ -13,6 +13,7 @@
       "PupilDelete": "Delete all pupils",
       "ReportAdd": "Add report",
       "ReportDelete": "Delete all reports",
+      "ReportExport": "Save report as Word File",
       "SidebarItemDelete": "Delete",
       "SidebarItemEdit": "Edit",
       "TextAdd": "Add text",
@@ -29,6 +30,8 @@
     "Builder": {
       "TextTitle": "Text:",
       "Breadcrumb": "Build Report",
+      "ExportPlaceholder": "Enter a filename",
+      "ExportReportBtn": "Save as .docx",
       "WinTitle": "Build Report"
     },
     "BuildReportLayout": {
@@ -96,6 +99,9 @@
       "HeadlineDeleting": "Deleting ALL texts",
       "WinTitle": "Delete all texts"
     },
+    "ExportBuilderForm": {
+      "Headline": "Save your report as a Word file."
+    },
     "EditClassesLayout": {
       "WinTitle": "Edit class '%CLASS_NAME%'"
     },
@@ -126,6 +132,7 @@
       "EditReport": "Edit '%REPORT_NAME%'",
       "EditText": "Edit '%TEXT%'",
       "ReportBuilder": "Report for '%PUPIL_NAME%'",
+      "ReportExport": "Export '%REPORT_NAME%'",
       "Settings": "Settings"
     },
     "Gender": {
@@ -234,6 +241,7 @@
     "Reports": {
       "BackToReports": "Cancel",
       "Breadcrumb": "Reports",
+      "BreadcrumbExport": "Export",
       "CreateReportBtnLabel": "Create Report",
       "LabelPlaceholder": "Name of report...",
       "PersistenceDeleted": "All reports deleted",
@@ -300,8 +308,9 @@
       "ClassLabel": "A class name is required",
       "PupilFirstname": "A first name is required",
       "PupilLastname": "A last name is required",
-      "ReportLabel": "A report name is required",
       "ReportClasses": "Select at least 1 class",
+      "ReportExportName": "A name for the export is required",
+      "ReportLabel": "A report name is required",
       "TextBodytext": "A text is required"
     }
   }

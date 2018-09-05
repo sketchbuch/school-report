@@ -13,6 +13,7 @@ import {
   ROUTE_EDIT_CATEGORY,
   ROUTE_EDIT_REPORT,
   ROUTE_EDIT_TEXT,
+  ROUTE_EXPORT_BUILDER,
   ROUTE_PUPILS,
   ROUTE_REPORTS,
   ROUTE_SETTINGS,
@@ -24,6 +25,7 @@ type BcStateType = CategoryType | ClassType | PupilType | ReportType | TextType;
 
 const bcMap = {
   builder: { param: 'reportId', route: ROUTE_BUILDER, stateKey: 'reports' },
+  export: { param: '', route: ROUTE_EXPORT_BUILDER, stateKey: '', trans: "BreadcrumbExport:Reports" },
   classlist: { param: 'classId', route: ROUTE_PUPILS, stateKey: 'classes' },
   category: { param: 'categoryId', route: ROUTE_EDIT_CATEGORY, stateKey: 'categories' },
   class: { param: 'classId', route: ROUTE_CLASSES, stateKey: 'classes' },
@@ -56,7 +58,7 @@ export function getBreadcrumbs(state: Object, props: Object) {
         const transParts = trans.split(':');
 
         activeElements.push({
-          id: text,
+          id: trans.replace(':', '-').toLowerCase(),
           link: getBreadcrumbLink(route, props.match.params),
           text: text(transParts[0], transParts[1]),
         });

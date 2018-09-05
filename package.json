@@ -20,9 +20,12 @@
     "testv": "react-scripts test --env=jsdom --verbose"
   },
   "dependencies": {
+    "docxtemplater": "^3.8.4",
     "electron-is-dev": "^0.3.0",
     "electron-storage": "^1.0.7",
     "formik": "^0.11.11",
+    "jszip": "^2.6.1",
+    "jszip-utils": "0.0.2",
     "md5": "^2.2.1",
     "react": "^16.4.2",
     "react-dnd": "^5.0.0",
