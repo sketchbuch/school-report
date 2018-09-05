@@ -10,7 +10,6 @@ import EditPanelContent from '../../../components/EditPanel/Content/EditPanelCon
 import exportSchema from '../../../validation/schemas/export';
 import { text }  from '../../../components/Translation/Translation';
 import exportDefault from '../../../types/export';
-import { getItemById } from '../../../utils/arrays';
 import type { ExportType } from '../../../types/export';
 import type { ReportType } from '../../../types/report';
 import type { TextType } from '../../../types/text';

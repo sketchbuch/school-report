@@ -32,7 +32,6 @@ const textSource = {
     return { id: props.txt.id };
 	},
 	endDrag(props: Props, monitor: DragSourceMonitor | Function, component: Object | Function) {
-		const item = monitor.getItem();
     props.onEndDrag();
 	},
 };

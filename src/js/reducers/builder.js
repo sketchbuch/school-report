@@ -7,7 +7,6 @@ import {
   REPLACE_DATA,
   SAVE_BUILDER,
 } from '../constants/actionTypes';
-import reduce from '../utils/reducers';
 import type { ActionObj } from '../types/action';
 
 
@@ -37,7 +36,7 @@ export default function reducer(state: {} = {}, action: ActionObj) {
           } = action.meta;
           const selected = action.payload.selected;
 
-          if (reportId, classId, pupilId) {
+          if (reportId && classId && pupilId) {
             const newState = {...state};
 
             if (newState[reportId] === undefined) {

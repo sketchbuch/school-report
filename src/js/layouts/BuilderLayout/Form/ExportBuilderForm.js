@@ -13,7 +13,6 @@ type Props = {
   handleBlur: Function,
   handleChange: Function,
   handleSubmit: Function,
-  isNew: boolean,
   isSubmitting: boolean,
   reportName: string,
   saving: boolean,
@@ -29,7 +28,6 @@ export class ExportBuilderForm extends Component<Props> {
   static defaultProps = {
     export: {},
     dirty: false,
-    isNew: false,
   };
 
   props: Props;
@@ -41,7 +39,6 @@ export class ExportBuilderForm extends Component<Props> {
       handleBlur,
       handleChange,
       handleSubmit,
-      isNew,
       saving,
       touched,
       values,

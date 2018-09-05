@@ -6,7 +6,6 @@ import { getPupilTextHtml } from '../utils/html';
 import type { ExportType } from '../types/export';
 import type { SidebarBuilderItemType } from '../types/sidebarBuilderItem';
 import type { TextType } from '../types/text';
-import * as io from '../constants/io';
 
 let electron = null;
 let fs = require('fs');
@@ -19,7 +18,6 @@ if (window !== undefined && window.require) {
 }
 
 const APP_PATH = (electron !== null) ? electron.remote.app.getAppPath() : '';
-const DATA_PATH = (electron !== null) ? electron.remote.app.getPath('userData') : '';
 const HOME_PATH = (electron !== null) ? electron.remote.app.getPath('home') : '';
 const FOLDER = (window.location.hostname === 'localhost') ? 'public' : 'build';
 
@@ -46,9 +44,7 @@ export function exportWord(exportConfig: ExportType) {
 
   try {
       doc.render();
-  }
-  catch (error) {
-      console.log(error);
+  } catch (error) {
       throw error;
   }
 

@@ -1,7 +1,6 @@
 // @flow
 
 import { writeAppData } from '../fs/fs';
-import { BUILDER_FOLDER } from '../constants/io';
 import { persistenceSuccess, persistenceError } from '../actions/dataActions';
 
 
