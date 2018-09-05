@@ -1,7 +1,9 @@
 {
   "EN": {
     "##": {
-      "Temp": "test"
+      "N": "Full name",
+      "F": "First name",
+      "L": "Last name"
     },
     "Actions": {
       "CategoryAdd": "Add category",

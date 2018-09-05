@@ -29,13 +29,13 @@ Fields/Forms:
 ============
 
 - Extract form parts to new components
+- use fieldwrap component
 
 
 Tests:
 =====
 
 - utils/redux move get array element to new function and also use in reducers
-- Create tests for actions
 - Tests for layouts
 
 
@@ -55,13 +55,6 @@ Layouts:
 -------
 
 - Remove unnecessary connect() in sub layouts
-- Merge forms like for reports
-
-
-Texts Layout:
-------------
-
-- Display placeholders
 
 
 Builder Layout:

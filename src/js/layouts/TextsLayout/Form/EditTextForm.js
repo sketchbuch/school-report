@@ -10,6 +10,7 @@ import validate from '../../../validation/validation';
 import type { CategoryType } from '../../../types/category';
 import { categorySort } from '../../../types/category';
 import { ROUTE_TEXTS } from '../../../constants/routes';
+import { placeholderMap } from '../../../utils/html';
 import { sortObjectsAz } from '../../../utils/sort';
 
 type Props = {
@@ -75,6 +76,9 @@ export class EditTextForm extends Component<Props> {
             isValid={btValid}
           />
           {!btValid && <p className="invalid-feedback">{errors.bodytext}</p>}
+          <div className="fiedwrap__placeholders">
+            {placeholderMap.map(ph => <span key={ph.symbol} className="fiedwrap__placeholder" title={text(ph.symbol, '##')} >#{ph.symbol}#</span>)}
+          </div>
         </div>
         <div className="fieldwrap">
           <p>

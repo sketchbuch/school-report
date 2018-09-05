@@ -6,6 +6,21 @@
   margin-bottom: 2.0rem;
 }
 
+.fiedwrap__placeholders {
+  position: relative;
+  margin: 0px -10px;
+}
+
+.fiedwrap__placeholder {
+  position: relative;
+  display: inline-block;
+  border-radius: var(--border-radius);
+  background: var(--col-darken-1);
+  border: 1px solid var(--col-darken-1);
+  padding: 2px 5px;
+  margin: 10px;
+}
+
 .fieldwrap--labeled {
   position: relative;
 }

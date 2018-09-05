@@ -3,6 +3,12 @@
 import type { PupilType } from '../types/pupil';
 
 
+export const placeholderMap = [
+  { symbol: 'N', function: 'getLabel' },
+  { symbol: 'F', property: 'firstname' },
+  { symbol: 'L', property: 'lastname' },
+];
+
 /**
 * Returns the text with the placeholders replaced
 *
@@ -15,11 +21,17 @@ export function getPupilTextHtml(text: string, pupil: PupilType | Object, highli
   let newText = text;
 
   // Replace pupil specific placeholders:
-  newText = newText.replace(new RegExp('#N#', 'g'), highlightStart + pupil.getLabel() + highlightEnd);
-  newText = newText.replace(new RegExp('#F#', 'g'), highlightStart + pupil.firstname + highlightEnd);
-  newText = newText.replace(new RegExp('#L#', 'g'), highlightStart + pupil.lastname + highlightEnd);
+  placeholderMap.forEach(ph =>{
+    let phVal = '';
 
-  // Replace language specific placeholders:
+    if (ph.function !== undefined) {
+      phVal = pupil[ph.function]();
+    } else if (ph.property !== undefined) {
+      phVal = pupil[ph.property];
+    }
+
+    newText = newText.replace(new RegExp(`#${ph.symbol}#`, 'g'), highlightStart + phVal + highlightEnd);
+  });
 
   return { __html: newText };
 }
