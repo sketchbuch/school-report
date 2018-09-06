@@ -10,7 +10,6 @@ import type { CategoryType } from '../../../types/category';
 import { ROUTE_CATEGORIES } from '../../../constants/routes';
 
 type Props = {
-  categories: Array<CategoryType>,
   dirty: boolean,
   errors: Object,
   handleBlur: Function,
@@ -29,7 +28,6 @@ type Props = {
 */
 export class EditCategoryForm extends Component<Props> {
   static defaultProps = {
-    categories: [],
     dirty: false,
     isNew: false,
   };

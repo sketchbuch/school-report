@@ -104,7 +104,7 @@ export class NewClassLayout extends Component<Props, State> {
             validationSchema={classSchema}
             onSubmit={this.handleSubmit}
             render={(formikProps) => (
-              <EditClassForm {...formikProps} saving={this.state.saving} />
+              <EditClassForm {...formikProps} saving={this.state.saving} isNew={true} />
             )}
           />
         </EditPanelContent>

@@ -16,6 +16,7 @@ type Props = {
   handleBlur: Function,
   handleChange: Function,
   handleSubmit: Function,
+  isNew: boolean,
   isSubmitting: boolean,
   saving: boolean,
   touched: Object,
@@ -27,6 +28,11 @@ type Props = {
 * Pupil form for the edit panel.
 */
 export class EditPupilForm extends Component<Props> {
+  static defaultProps = {
+    dirty: false,
+    isNew: false,
+  };
+
   props: Props;
 
   render() {
@@ -37,6 +43,7 @@ export class EditPupilForm extends Component<Props> {
       handleBlur,
       handleChange,
       handleSubmit,
+      isNew,
       saving,
       touched,
       values,
@@ -103,7 +110,11 @@ export class EditPupilForm extends Component<Props> {
         </div>
         <div className="fieldwrap">
           <Button type="submit" disabled={btnIsDisabled} busy={saving}>
-            <Translation name="UpdatePupilBtnLabel" ns="Pupils" />
+            {isNew ? (
+              <Translation name="CreatePupilBtnLabel" ns="Pupils" />
+            ) : (
+              <Translation name="UpdatePupilBtnLabel" ns="Pupils" />
+            )}
           </Button>
         </div>
 

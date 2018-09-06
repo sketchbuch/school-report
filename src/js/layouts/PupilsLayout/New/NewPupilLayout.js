@@ -114,7 +114,7 @@ export class NewPupilLayout extends Component<Props, State> {
             validationSchema={pupilSchema}
             onSubmit={this.handleSubmit}
             render={(formikProps) => (
-              <EditPupilForm {...formikProps} saving={this.state.saving} classId={this.props.activeClass.id} />
+              <EditPupilForm {...formikProps} saving={this.state.saving} classId={this.props.activeClass.id} isNew={true} />
             )}
           />
         </EditPanelContent>
