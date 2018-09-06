@@ -1,0 +1,8 @@
+/* Ico Font Changes */
+/* ---------------- */
+
+.icofont-ui-text-chat:before {
+	top: 3px;
+	position: relative;
+	left: 1px;
+}

@@ -61,7 +61,7 @@ export function exportWord(exportConfig: ExportType) {
 * @param {string} The Formated date.
 */
 export function getDateFromTs(ts: number): string {
-  const exportDate = new Date();
+  const exportDate = new Date(ts);
   const exportDateYyyy = exportDate.getFullYear();
   let exportDateDd = exportDate.getDate();
   let exportDateMm = exportDate.getMonth() + 1;

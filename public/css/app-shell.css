@@ -5,8 +5,9 @@
 @import "./fonts/fonts.css";
 
   /* Vendor */
-@import "./vendor/react-select.css";
+@import "./vendor/icofont.css";
 @import "./vendor/react-redux-toastr.css";
+@import "./vendor/react-select.css";
 
   /* Base */
 @import "./base/normalize.css";

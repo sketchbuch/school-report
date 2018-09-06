@@ -1,7 +1,7 @@
-file type
-abstract
-text editor
-web app
-education
-mobile ui
-search
+Abstract
+Education
+File Type
+Moile UI
+Search
+Text Editor
+Web Application

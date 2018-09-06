@@ -20,8 +20,6 @@ type Props = {
 export function text(name: string, ns: string, placeholders: ?Object = null) {
   const { translations, curLang } = window.reportr;
 
-  console.log(name, ns);
-
   if (translations !== undefined) {
     if (translations[curLang] !== undefined) {
       if (translations[curLang][ns] !== undefined) {
