@@ -17,6 +17,7 @@ import { text }  from '../../components/Translation/Translation';
 import { textSort } from '../../types/text';
 import type { CategoryType } from '../../types/category';
 import type { TextType } from '../../types/text';
+import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
 import {
   ROUTE_DEL_TEXTS,
   ROUTE_EDIT_TEXT,
@@ -65,7 +66,7 @@ export class TextsLayout extends Component<Props> {
         action="add-text"
         title={text('TextAdd', 'Actions')}
       >
-        <Icon type="ui-add" />
+        <Icon type={ICON_ADD} />
       </NavButtonCircular>
     );
     const rightActions = (
@@ -77,7 +78,7 @@ export class TextsLayout extends Component<Props> {
         action="delete-texts"
         title={text('TextDelete', 'Actions')}
       >
-        <Icon type="trash" />
+        <Icon type={ICON_DELETE} />
       </NavButtonCircular>
     );
 

@@ -21,7 +21,6 @@ SidebarList:
 - items - add correct flow type for items
 - SidebarLink reclass and change css source
 - Add back arrow to header
-- Use icon constants in sidebar footer
 - Add search
 
 
@@ -48,12 +47,6 @@ Misc.:
 =====
 
 - All form submit handlers - use appropriate type rather than Object
-
-
-Layouts:
--------
-
-- Remove unnecessary connect() in sub layouts
 
 
 Builder Layout:

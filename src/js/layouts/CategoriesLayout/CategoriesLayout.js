@@ -16,6 +16,7 @@ import NewCategoryLayout from './New/NewCategoryLayout';
 import { text }  from '../../components/Translation/Translation';
 import { categorySort } from '../../types/category';
 import type { CategoryType } from '../../types/category';
+import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
 import {
   ROUTE_DEL_CATEGORIES,
   ROUTE_EDIT_CATEGORY,
@@ -61,7 +62,7 @@ export class CategoriesLayout extends Component<Props> {
         action="add-category"
         title={text('CategoryAdd', 'Actions')}
       >
-        <Icon type="ui-add" />
+        <Icon type={ICON_ADD} />
       </NavButtonCircular>
     );
     const rightActions = (
@@ -73,7 +74,7 @@ export class CategoriesLayout extends Component<Props> {
         action="delete-categories"
         title={text('CategoryDelete', 'Actions')}
       >
-        <Icon type="trash" />
+        <Icon type={ICON_DELETE} />
       </NavButtonCircular>
     );
 

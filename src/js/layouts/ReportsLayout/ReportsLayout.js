@@ -17,6 +17,7 @@ import { text }  from '../../components/Translation/Translation';
 import { reportSort } from '../../types/report';
 import type { ReportType } from '../../types/report';
 import type { ClassType } from '../../types/class';
+import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
 import {
   ROUTE_DEL_REPORTS,
   ROUTE_EDIT_REPORT,
@@ -64,7 +65,7 @@ export class ReportsLayout extends Component<Props> {
         action="add-report"
         title={text('ReportAdd', 'Actions')}
       >
-        <Icon type="ui-add" />
+        <Icon type={ICON_ADD} />
       </NavButtonCircular>
     );
 
@@ -77,7 +78,7 @@ export class ReportsLayout extends Component<Props> {
         action="delete-reports"
         title={text('ReportDelete', 'Actions')}
       >
-        <Icon type="trash" />
+        <Icon type={ICON_DELETE} />
       </NavButtonCircular>
     );
 

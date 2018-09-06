@@ -17,6 +17,7 @@ import { text }  from '../../components/Translation/Translation';
 import { pupilSort } from '../../types/pupil';
 import type { ClassType } from '../../types/class';
 import type { PupilType } from '../../types/pupil';
+import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
 import {
   ROUTE_DEL_PUPILS,
   ROUTE_EDIT_PUPIL,
@@ -73,7 +74,7 @@ export class PupilsLayout extends Component<Props> {
         action="add-pupil"
         title={text('PupilAdd', 'Actions')}
       >
-        <Icon type="ui-add" />
+        <Icon type={ICON_ADD} />
       </NavButtonCircular>
     );
     const rightActions = (
@@ -85,7 +86,7 @@ export class PupilsLayout extends Component<Props> {
         action="delete-pupils"
         title={text('PupilDelete', 'Actions')}
       >
-        <Icon type="trash" />
+        <Icon type={ICON_DELETE} />
       </NavButtonCircular>
     );
 

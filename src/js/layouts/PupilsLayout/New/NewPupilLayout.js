@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr'
 import { Formik } from 'formik';
 import EditPanel from '../../../components/EditPanel/EditPanel';
@@ -124,4 +123,4 @@ export class NewPupilLayout extends Component<Props, State> {
 }
 
 
-export default connect()(NewPupilLayout);
+export default NewPupilLayout;

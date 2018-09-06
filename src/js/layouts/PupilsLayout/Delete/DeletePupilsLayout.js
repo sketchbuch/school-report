@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr'
 import { Link } from 'react-router-dom';
 import EditPanel from '../../../components/EditPanel/EditPanel';
@@ -138,4 +137,4 @@ export class DeletePupilsLayout extends Component<Props, State> {
 }
 
 
-export default connect()(DeletePupilsLayout);
+export default DeletePupilsLayout;
