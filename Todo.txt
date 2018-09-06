@@ -28,7 +28,6 @@ SidebarList:
 Fields/Forms:
 ============
 
-- Extract form parts to new components
 - use fieldwrap component
 
 

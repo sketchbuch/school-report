@@ -1,5 +1,7 @@
 // @flow
 
+import type { DomainBaseType } from './domain';
+import domainBaseDefault from './domain';
 import { generateId } from '../utils/ids';
 import { ICON_REPORTS } from '../constants/icons';
 import {
@@ -14,31 +16,15 @@ import {
 */
 
 export type ReportType = {
-  contains: Function,
-  created: number,
-  getDescription: Function,
-  getIcon: Function,
-  getLabel: Function,
-  getTooltip: Function,
-  getUrl: Function,
-  id: string,
+  ...$Exact<DomainBaseType>,
   classes: Array<string>,
   label: string,
-  updated: number,
 };
 
 const reportDefault: ReportType = {
-  contains: ()=>{},
-  created: -1,
-  getDescription: ()=>{},
-  getIcon: ()=>{},
-  getLabel: ()=>{},
-  getTooltip: ()=>{},
-  getUrl: ()=>{},
-  id: '',
+  ...domainBaseDefault,
   classes: [],
   label: '',
-  updated: -1,
 };
 
 export const reportSort = ['label', 'updated'];

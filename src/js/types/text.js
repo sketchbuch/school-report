@@ -1,5 +1,7 @@
 // @flow
 
+import type { DomainBaseType } from './domain';
+import domainBaseDefault from './domain';
 import { generateId } from '../utils/ids';
 import { ICON_TEXTS } from '../constants/icons';
 import { TEXT_CROP_LEN } from '../constants/misc';
@@ -15,33 +17,17 @@ import {
 */
 
 export type TextType = {
+  ...$Exact<DomainBaseType>,
   bodytext: string,
   categories: Array<string>,
-  contains: Function,
-  created: number,
-  getDescription: Function,
-  getIcon: Function,
-  getLabel: Function,
-  getTooltip: Function,
-  getUrl: Function,
-  id: string,
   lang: string,
-  updated: number,
 };
 
 const textDefault: TextType = {
+  ...domainBaseDefault,
   bodytext: '',
   categories: [],
-  contains: ()=>{},
-  created: -1,
-  getDescription: ()=>{},
-  getIcon: ()=>{},
-  getLabel: ()=>{},
-  getTooltip: ()=>{},
-  getUrl: ()=>{},
-  id: '',
   lang: '',
-  updated: -1,
 };
 
 export const textSort = ['bodytext', 'updated'];

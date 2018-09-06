@@ -1,5 +1,7 @@
 // @flow
 
+import type { DomainBaseType } from './domain';
+import domainBaseDefault from './domain';
 import { generateId } from '../utils/ids';
 import { ICON_CATEGORIES } from '../constants/icons';
 import {
@@ -13,29 +15,13 @@ import {
 */
 
 export type CategoryType = {
-  contains: Function,
-  created: number,
-  getDescription: Function,
-  getIcon: Function,
-  getLabel: Function,
-  getTooltip: Function,
-  getUrl: Function,
-  id: string,
+  ...$Exact<DomainBaseType>,
   label: string,
-  updated: number,
 };
 
 const categoryDefault: CategoryType = {
-  contains: ()=>{},
-  created: -1,
-  getDescription: ()=>{},
-  getLabel: ()=>{},
-  getIcon: ()=>{},
-  getTooltip: ()=>{},
-  getUrl: ()=>{},
-  id: '',
+  ...domainBaseDefault,
   label: '',
-  updated: -1,
 };
 
 export const categorySort = ['label', 'updated'];

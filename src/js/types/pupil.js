@@ -1,5 +1,7 @@
 // @flow
 
+import type { DomainBaseType } from './domain';
+import domainBaseDefault from './domain';
 import { generateId } from '../utils/ids';
 import { ICON_PUPILS_FEMALE, ICON_PUPILS_MALE } from '../constants/icons';
 import {
@@ -14,37 +16,21 @@ import {
 */
 
 export type PupilType = {
+  ...$Exact<DomainBaseType>,
   classId: string,
-  contains: Function,
-  created: number,
   description: string,
   firstname: string,
   gender: string,
-  getDescription: Function,
-  getIcon: Function,
-  getLabel: Function,
-  getTooltip: Function,
-  getUrl: Function,
-  id: string,
   lastname: string,
-  updated: number,
 };
 
 const pupilDefault: PupilType = {
+  ...domainBaseDefault,
   classId: '',
-  contains: ()=>{},
-  created: -1,
   description: '',
   firstname: '',
   gender: 'm',
-  getDescription: ()=>{},
-  getIcon: ()=>{},
-  getLabel: ()=>{},
-  getTooltip: ()=>{},
-  getUrl: ()=>{},
-  id: '',
   lastname: '',
-  updated: -1,
 };
 
 export const pupilSort = ['firstname', 'lastname', 'updated'];

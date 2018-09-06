@@ -1,5 +1,7 @@
 // @flow
 
+import type { DomainBaseType } from './domain';
+import domainBaseDefault from './domain';
 import { generateId } from '../utils/ids';
 import { ICON_CLASSES } from '../constants/icons';
 import {
@@ -14,31 +16,15 @@ import {
 */
 
 export type ClassType = {
-  contains: Function,
-  created: number,
-  getDescription: Function,
-  getIcon: Function,
-  getLabel: Function,
-  getTooltip: Function,
-  getUrl: Function,
-  id: string,
+  ...$Exact<DomainBaseType>,
   label: string,
   pupilCount: number, // Required so that the pupil count can be calculated and set - but the actual count is never persisted - 0 will always be saved.
-  updated: number,
 };
 
 const classDefault: ClassType = {
-  contains: ()=>{},
-  created: -1,
-  getDescription: ()=>{},
-  getIcon: ()=>{},
-  getLabel: ()=>{},
-  getTooltip: ()=>{},
-  getUrl: ()=>{},
-  id: '',
+  ...domainBaseDefault,
   label: '',
   pupilCount: 0,
-  updated: -1,
 };
 
 export const classSort = ['label', 'updated'];
