@@ -1,7 +1,9 @@
 # school-report
 A School Report writer created with Create-React-App (with Jest, Flowtype), React Router, Redux, and Electron.
 
-This app is not ready for use yet.
+![alt text](https://github.com/sketchbuch/school-report/blob/master/docs/images/github.com_sketchbuch_school-report.gif "School Report")
+
+This app is NEARLY ready for use.
 
 Developer Instructions:
 
