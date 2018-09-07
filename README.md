@@ -1,5 +1,5 @@
-# school-report
-A School Report writer created with Create-React-App (with Jest, Flowtype), React Router, Redux, and Electron.
+# School Report (school-report)
+A School Report writer created with React, Jest, Flowtype, React Router, Redux, and Electron.
 
 ![alt text](https://github.com/sketchbuch/school-report/blob/master/docs/images/github.com_sketchbuch_school-report.gif "School Report")
 
