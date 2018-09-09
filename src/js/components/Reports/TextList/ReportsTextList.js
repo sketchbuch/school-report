@@ -17,6 +17,7 @@ type Props = {
   categories: Array<CategoryType>,
   handleTextToggle: Function,
   selectedTexts: Array<string>,
+  term: string,
   texts: Array<TextType>,
 };
 
@@ -34,6 +35,7 @@ export class ReportsTextList extends Component<Props, State> {
     categories: [],
     handleTextToggle: ()=>{},
     selectedTexts: [],
+    term: '',
     texts: [],
   };
 
@@ -56,6 +58,8 @@ export class ReportsTextList extends Component<Props, State> {
   }
 
   getVisibleTexts() {
+    let visibleTexts = [];
+
     if (this.state.option !== 'category-all') {
       if (this.state.option === 'category-nocat') {
         return this.props.texts.filter(text => text.categories.length === 0);
@@ -66,9 +70,13 @@ export class ReportsTextList extends Component<Props, State> {
       } else {
         return this.props.texts.filter(text => text.categories.includes(this.state.option));
       }
+    } else {
+      visibleTexts = [...this.props.texts];
     }
 
-    return this.props.texts;
+    if (this.props.term !== '') visibleTexts = visibleTexts.filter(text => text.contains(this.props.term));
+
+    return visibleTexts;
   }
 
   render() {
@@ -99,7 +107,11 @@ export class ReportsTextList extends Component<Props, State> {
             })}
           </ul>
         ) : (
-          <NoItems><Translation name="None" ns="ReportsTextList" /></NoItems>
+          this.props.term !== '' ? (
+            <NoItems><Translation name="NoneSearched" ns="ReportsTextList" /></NoItems>
+          ) : (
+            <NoItems><Translation name="None" ns="ReportsTextList" /></NoItems>
+          )
         )}
       </div>
     )

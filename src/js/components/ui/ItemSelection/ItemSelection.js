@@ -55,7 +55,8 @@ export class ItemSelection extends React.Component<Props, State> {
   }
 
   handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
-    this.setState({ term: event.currentTarget.value });
+    const term = event.currentTarget.value;
+    this.setState({ term });
   }
 
   render() {

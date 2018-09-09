@@ -24,6 +24,7 @@ type Props = {
   categories: Array<CategoryType>,
   dragReports: Function,
   saveReports: Function,
+  term: string,
   texts: Array<TextType>,
 };
 
@@ -40,6 +41,7 @@ export class Reports extends Component<Props> {
     categories: [],
     dragReports: ()=>{},
     saveReports: ()=>{},
+    term: '',
     texts: [],
   };
 
@@ -164,6 +166,7 @@ export class Reports extends Component<Props> {
             handleTextToggle={this.handleTextToggle}
             selectedTexts={selected}
             texts={this.props.texts}
+            term={this.props.term}
           />
         </div>
       </section>

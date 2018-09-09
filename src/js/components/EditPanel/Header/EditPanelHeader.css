@@ -4,9 +4,10 @@
 .EditPanelHeader {
   position: absolute;
 	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+	justify-content: flex-start;
+	align-items: center;
   top: 0px;
   left: 0px;
   margin: 0px;
@@ -37,7 +38,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
 }
 
-.EditPanelHeader_headline {
+.EditPanelHeader__headline {
   margin: 0px;
   font-size: var(--font-size);
   font-weight: normal;
@@ -47,4 +48,40 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
   color: var(--col-white);
+}
+
+.EditPanelHeader__controls {
+  padding-left: 20px;
+  position: relative;
+}
+
+.EditPanelHeader__search {
+  background: var(--col-darken-1);
+  border: 1px solid var(--col-darken-2);
+  height: 32px;
+  color: var(--col-white);
+  padding-right: 40px;
+}
+
+.EditPanelHeader__search::-webkit-input-placeholder {
+  color: var(--col-lighten-5);
+}
+
+.EditPanelHeader__searchclear {
+  width: 32px;
+  height: 32px;
+  display: none;
+  position: absolute;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  right: 0px;
+  top: 0px;
+  font-size: var(--font-size-medium);
+  cursor: pointer;
+  color: var(--col-white);
+}
+
+.EditPanelHeader__search:not(:placeholder-shown) + .EditPanelHeader__searchclear {
+  display: flex;
 }

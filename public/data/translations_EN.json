@@ -135,7 +135,8 @@
       "EditText": "Edit '%TEXT%'",
       "ReportBuilder": "Report for '%PUPIL_NAME%'",
       "ReportExport": "Export '%REPORT_NAME%'",
-      "Settings": "Settings"
+      "Settings": "Settings",
+      "SearchPlaceholder": "Search texts..."
     },
     "Gender": {
       "Female": "Girl",
@@ -231,7 +232,8 @@
       "NoneSelected": "Click the + button to add a text"
     },
     "ReportsTextList": {
-      "None": "No texts available."
+      "None": "No texts available.",
+      "NoneSearched": "No texts match your search"
     },
     "ReportsCatSelect": {
       "CatsAll": "All",

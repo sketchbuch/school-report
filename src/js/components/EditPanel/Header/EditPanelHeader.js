@@ -1,9 +1,10 @@
 // @flow
 
-import React, { PureComponent } from 'react';
+import * as React from 'react';
 import './EditPanelHeader.css';
 
 type Props = {
+  children?: React.Node,
   title: string,
 };
 
@@ -11,17 +12,25 @@ type Props = {
 /**
 * Edit Panel header.
 */
-export class EditPanelHeader extends PureComponent<Props> {
+export class EditPanelHeader extends React.Component<Props> {
   static defaultProps = {
-      title: '',
-   };
+    children: null,
+    title: '',
+  };
 
   props: Props;
 
   render() {
     return (
       <header className="EditPanelHeader">
-        <h1 className="EditPanelHeader_headline">{this.props.title}</h1>
+        <h1 className="EditPanelHeader__headline">{this.props.title}</h1>
+        {
+          this.props.children && (
+            <div className="EditPanelHeader__controls">
+              {this.props.children}
+            </div>
+          )
+        }
       </header>
     )
   }
