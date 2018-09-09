@@ -66,17 +66,18 @@ export class ExportBuilderLayout extends Component<Props, State> {
 
   handleSubmit(values: ExportType) {
     const { activeReport, builder, items, texts } = this.props;
-    const exportValues = {...values};
-    const content = getContent(items, builder[activeReport.id], texts);
-
-    exportValues.classCount = content.classCount;
-    exportValues.exported = getDateFromTs(Date.now());
-    exportValues.pupilCount = content.pupilCount;
-    exportValues.reportName = this.props.activeReport.getLabel();
-    exportValues.content = content.content;
+    const content = getContent(items, builder[activeReport.id] || {}, texts);
+    const exportValues = {
+      ...values,
+      classCount: content.classCount,
+      content: content.content,
+      exported: getDateFromTs(Date.now()),
+      pupilCount: content.pupilCount,
+      reportName: this.props.activeReport.getLabel(),
+    };
     
     // Todo... only export if there is content
-    exportWord(exportValues);
+    //exportWord(exportValues);
   }
 
   render() {
@@ -87,7 +88,7 @@ export class ExportBuilderLayout extends Component<Props, State> {
         <EditPanelHeader title={text('ReportExport', 'EditPanelHeader', { 'REPORT_NAME': reportName })} />
         <EditPanelContent>
           <Formik
-            initialValues={{ name: '' }}
+            initialValues={{ name: reportName }}
             enableReinitialize={true}
             validationSchema={exportSchema}
             onSubmit={this.handleSubmit}

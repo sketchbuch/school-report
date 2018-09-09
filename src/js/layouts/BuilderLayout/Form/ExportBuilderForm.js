@@ -44,12 +44,8 @@ export class ExportBuilderForm extends Component<Props> {
       values,
     } = this.props;
 
-    const lValid = validate('label', errors, touched);
-    const btnIsDisabled = (
-      !lValid ||
-      saving ||
-      !dirty
-    ) ? true : false;
+    const lValid = validate('name', errors, touched);
+    const btnIsDisabled = !lValid || saving || values.name === '';
 
     return (
       <form className="form" onSubmit={handleSubmit}>

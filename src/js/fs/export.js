@@ -43,15 +43,15 @@ export function exportWord(exportConfig: ExportType) {
   });
 
   try {
-      doc.render();
-  } catch (error) {
-      throw error;
-  }
+    doc.render();
 
-  fs.writeFileSync(
-    path.resolve(HOME_PATH, exportConfig.name.trim() + '.docx'),
-    doc.getZip().generate({ type: 'nodebuffer' })
-  );
+    fs.writeFileSync(
+      path.resolve(HOME_PATH, exportConfig.name.trim() + '.docx'),
+      doc.getZip().generate({ type: 'nodebuffer' })
+    );
+  } catch (error) {
+    throw error;
+  }
 }
 
 /**
@@ -87,43 +87,41 @@ export function getContent(items: Array<SidebarBuilderItemType>, builderData: Ob
     pupilCount: 0,
   };
 
-  if (builderData !== undefined) {
-    items.forEach(function(item) {
-      if (item.pupils.length > 0) {
-        const newClass = {
-          class_name: item.classRec.getLabel(),
-          class_name_count: `${item.classRec.getLabel()} (${item.pupils.length})`,
-          pupil_count: item.pupils.length,
-          pupils: [],
-        };
+  items.forEach(function(item) {
+    if (item.pupils.length > 0) {
+      const newClass = {
+        class_name: item.classRec.getLabel(),
+        class_name_count: `${item.classRec.getLabel()} (${item.pupils.length})`,
+        pupil_count: item.pupils.length,
+        pupils: [],
+      };
 
-        item.pupils.forEach(function(pupil){
-          if (builderData[item.id] !== undefined && builderData[item.id][pupil.id] !== undefined) {
-            const newContentItem = {
-              pupil_name: `${pupil.getLabel()}`,
-              texts: [],
-            };
-            
-            builderData[item.id][pupil.id].forEach(function(textId: string) {
-              var textEle = texts.find((text: TextType) => text.id === textId);
-              if (textEle !== undefined) {
-                const textHtml = getPupilTextHtml(textEle.getLabel(0), pupil, false);
-                newContentItem.texts.push(textHtml.__html);
-              }
-            });
-    
-            newClass.pupils.push(newContentItem);
-            content.pupilCount += 1;
-          }
-        });
-
-        if (newClass.pupils.length > 0) {
-          content.content.push(newClass);
-          content.classCount += 1;
+      item.pupils.forEach(function(pupil){
+        if (builderData[item.id] !== undefined && builderData[item.id][pupil.id] !== undefined) {
+          const newContentItem = {
+            pupil_name: `${pupil.getLabel()}`,
+            texts: [],
+          };
+          
+          builderData[item.id][pupil.id].forEach(function(textId: string) {
+            var textEle = texts.find((text: TextType) => text.id === textId);
+            if (textEle !== undefined) {
+              const textHtml = getPupilTextHtml(textEle.getLabel(0), pupil, false);
+              newContentItem.texts.push(textHtml.__html);
+            }
+          });
+  
+          newClass.pupils.push(newContentItem);
+          content.pupilCount += 1;
         }
+      });
+
+      if (newClass.pupils.length > 0) {
+        content.content.push(newClass);
+        content.classCount += 1;
       }
-    });
-  }
+    }
+  });
 
   return content;
 }
