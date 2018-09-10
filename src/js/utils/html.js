@@ -7,6 +7,9 @@ export const placeholderMap = [
   { symbol: 'N', function: 'getLabel' },
   { symbol: 'F', property: 'firstname' },
   { symbol: 'L', property: 'lastname' },
+  { symbol: 'PS', function: 'getPronoun' },
+  { symbol: 'PO', function: 'getPronoun' },
+  { symbol: 'PP', function: 'getPronoun' },
 ];
 
 /**

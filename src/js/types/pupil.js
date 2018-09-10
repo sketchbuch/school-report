@@ -21,6 +21,7 @@ export type PupilType = {
   description: string,
   firstname: string,
   gender: string,
+  getPronoun: Function,
   lastname: string,
 };
 
@@ -30,6 +31,7 @@ const pupilDefault: PupilType = {
   description: '',
   firstname: '',
   gender: 'm',
+  getPronoun: ()=>{},
   lastname: '',
 };
 
@@ -100,6 +102,9 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
       }
 
       return theUrl.replace(':pupilId', this.id).replace(':classId', this.classId).replace(':reportId', reportId);
+    },
+    getPronoun() {
+      return this.gender;
     },
   };
 }

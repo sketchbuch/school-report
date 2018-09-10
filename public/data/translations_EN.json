@@ -3,7 +3,10 @@
     "##": {
       "N": "Full name",
       "F": "First name",
-      "L": "Last name"
+      "L": "Last name",
+      "PS": "He/She",
+      "PO": "Him/her",
+      "PP": "His/her"
     },
     "Actions": {
       "CategoryAdd": "Add category",
