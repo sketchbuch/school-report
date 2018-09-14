@@ -20,32 +20,34 @@ type Props = {
   activeClass: ClassType | Object,
   activePupil: PupilType | Object,
   activeReport: ReportType | Object,
-  builder: Object,
   categories: Array<CategoryType>,
-  dragReports: Function,
   saveReports: Function,
+  selected: Array<string>,
   term: string,
   texts: Array<TextType>,
+};
+
+type State = {
+  dragSelected: Array<string>,
 };
 
 
 /**
 * The interface to build a report.
 */
-export class Reports extends Component<Props> {
+export class Reports extends Component<Props, State> {
   static defaultProps = {
     activeClass: {},
     activePupil: {},
     activeReport: {},
-    builder: {},
     categories: [],
-    dragReports: ()=>{},
     saveReports: ()=>{},
     term: '',
     texts: [],
   };
 
   props: Props;
+  state: State;
   handleEndDrag: ()=>{};
   handleTextMove: ()=>{};
   handleTextToggle: ()=>{};
@@ -53,99 +55,64 @@ export class Reports extends Component<Props> {
   constructor(props: Props) {
     super(props);
 
+    this.state = {
+      dragSelected: [],
+    };
+
     this.handleEndDrag = this.handleEndDrag.bind(this);
     this.handleTextMove = this.handleTextMove.bind(this);
     this.handleTextToggle = this.handleTextToggle.bind(this);
   }
 
   handleEndDrag() {
-    const reportId = this.props.activeReport.id;
-    const classId = this.props.activeClass.id;
-    const pupilId = this.props.activePupil.id;
-
     this.props.saveReports(
-      reportId,
-      classId,
-      pupilId,
-      [...this.props.builder[reportId][classId][pupilId]], // Must exist or wouldn't be able to drag
+      this.props.activeReport.id,
+      this.props.activeClass.id,
+      this.props.activePupil.id,
+      [...this.state.dragSelected],
     );
+
+    this.setState({ dragSelected: [] });
   }
 
   /**
    * Method called by drag and drop when a drag source is hovering over a drop target.
    */
   handleTextMove(sourceId: string, targetId: string, before: boolean = false) {
-    const { builder } = this.props;
-    const reportId = this.props.activeReport.id;
-    const classId = this.props.activeClass.id;
-    const pupilId = this.props.activePupil.id;
-    let selected = [...builder[reportId][classId][pupilId]];
-
-    let sourceIndex = selected.indexOf(sourceId);
-    let targetIndex = selected.indexOf(targetId);
+    let dragSelected = [...this.props.selected];
+    const sourceIndex = dragSelected.indexOf(sourceId);
+    let targetIndex = dragSelected.indexOf(targetId);
 
     if (sourceIndex < 0 || targetIndex < 0) return;
     if (before && targetIndex > 0) targetIndex -= 1;
     
-    selected = moveItem(selected, sourceId, sourceIndex, targetIndex); 
-    
-    this.props.dragReports(
-      reportId,
-      classId,
-      pupilId,
-      selected,
-    );
+    dragSelected = moveItem(dragSelected, sourceId, sourceIndex, targetIndex);
+    this.setState({ dragSelected });
   }
 
   /**
    * Toggles the selected state of a text.
    */
   handleTextToggle = (textId: string) => (event: SyntheticEvent<>) => {
-    const { builder } = this.props;
-    const reportId = this.props.activeReport.id;
-    const classId = this.props.activeClass.id;
-    const pupilId = this.props.activePupil.id;
-    let selected = [];
+    let selected = [...this.props.selected];
+    const textIndex = selected.indexOf(textId);
 
-    if (builder[reportId] === undefined) {
-      selected.push(textId);
-    } else if (builder[reportId][classId] === undefined) {
-      selected.push(textId);
-    } else if (builder[reportId][classId][pupilId] === undefined) {
-      selected.push(textId);
+    if (textIndex > -1) {
+      selected = removeItem(selected, textIndex);
     } else {
-      const textIndex = builder[reportId][classId][pupilId].indexOf(textId);
-      selected = [...builder[reportId][classId][pupilId]];
-
-      if (textIndex > -1) {
-        selected = removeItem(selected, textIndex);
-      } else {
-        selected.push(textId);
-      }
+      selected.push(textId);
     }
     
     this.props.saveReports(
-      reportId,
-      classId,
-      pupilId,
+      this.props.activeReport.id,
+      this.props.activeClass.id,
+      this.props.activePupil.id,
       selected,
     );
   }
 
   render() {
-    const { builder } = this.props;
-    const reportId = this.props.activeReport.id;
-    const classId = this.props.activeClass.id;
-    const pupilId = this.props.activePupil.id;
-
-    let selected = [];
-    if (builder[reportId] !== undefined) {
-      if (builder[reportId][classId] !== undefined) {
-        if (builder[reportId][classId][pupilId] !== undefined) {
-          selected = builder[reportId][classId][pupilId];
-        }
-      }
-    }
+    const selectedTexts = (this.state.dragSelected.length > 0) ? this.state.dragSelected : this.props.selected;
 
     return (
       <section className="Reports">
@@ -155,7 +122,7 @@ export class Reports extends Component<Props> {
             handleEndDrag={this.handleEndDrag}
             handleTextMove={this.handleTextMove}
             handleTextToggle={this.handleTextToggle}
-            selectedTexts={selected}
+            selectedTexts={selectedTexts}
             texts={this.props.texts}
           />
         </div>
@@ -164,7 +131,7 @@ export class Reports extends Component<Props> {
             activePupil={this.props.activePupil}
             categories={this.props.categories}
             handleTextToggle={this.handleTextToggle}
-            selectedTexts={selected}
+            selectedTexts={selectedTexts}
             texts={this.props.texts}
             term={this.props.term}
           />
@@ -174,10 +141,22 @@ export class Reports extends Component<Props> {
   }
 }
 
+const getSelectedTexts = (builderData, activeReportId, activeClassId, activePupilId) => {
+  let selected = [];
+  if (builderData[activeReportId] !== undefined) {
+    if (builderData[activeReportId][activeClassId] !== undefined) {
+      if (builderData[activeReportId][activeClassId][activePupilId] !== undefined) {
+        selected = builderData[activeReportId][activeClassId][activePupilId];
+      }
+    }
+  }
+
+  return selected;
+}
 
 const mapStateToProps = (state: Object, props: Props) => {
   return {
-    builder: state.builder,
+    selected: getSelectedTexts(state.builder, props.activeReport.id, props.activeClass.id, props.activePupil.id),
     categories: state.categories,
     texts: state.texts,
   }
@@ -185,9 +164,6 @@ const mapStateToProps = (state: Object, props: Props) => {
 
 const mapDispatchToProps = (dispatch: DispatchType) => {
   return {
-    dragReports: (reportId: string, classId: string, pupilId: string, selected: Array<string>) => {
-      dispatch(builderActions.drag(reportId, classId, pupilId, selected));
-    },
     saveReports: (reportId: string, classId: string, pupilId: string, selected: Array<string>, callback?: Function = ()=>{}) => {
       dispatch(builderActions.save(reportId, classId, pupilId, selected, callback));
     },

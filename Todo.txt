@@ -7,12 +7,6 @@ NoData:
 - Add language choice before everything else
 
 
-Builder:
-=======
-
-- Add expand/contract all buttons to sidebar header
-
-
 SidebarList:
 ===========
 
@@ -42,6 +36,13 @@ Breadcrumb:
 ==========
 
 - Add edit/delete/new crumb
+- Add prefix to elemnts like "Edit:" and "Build:"
+
+
+Domain:
+======
+
+- 
 
 
 Misc.:
@@ -51,6 +52,9 @@ Misc.:
 
 
 Builder Layout:
-------------
+--------------
 
 - Edit - add search
+- Add message if no selected texts exist for the left panel
+- Make search none message more visible/graphical??
+- Add expand/contract all buttons to sidebar header

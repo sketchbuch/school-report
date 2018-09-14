@@ -56,6 +56,8 @@ const textTarget = {
     } else {
       props.onMove(dragIndex, hoverIndex);
     }
+    
+		monitor.getItem().index = hoverIndex
 	},
 };
 
