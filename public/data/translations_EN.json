@@ -5,8 +5,14 @@
       "F": "First name",
       "L": "Last name",
       "PS": "He/She",
-      "PO": "Him/her",
-      "PP": "His/her"
+      "PO": "Him/Her",
+      "PP": "His/Her",
+      "PS-m": "he",
+      "PO-m": "him",
+      "PP-m": "his",
+      "PS-f": "she",
+      "PO-f": "her",
+      "PP-f": "her"
     },
     "Actions": {
       "CategoryAdd": "Add category",

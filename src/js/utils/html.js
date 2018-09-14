@@ -1,5 +1,6 @@
 // @flow
 
+import { ucFirst } from './strings';
 import type { PupilType } from '../types/pupil';
 
 
@@ -23,17 +24,24 @@ export function getPupilTextHtml(text: string, pupil: PupilType | Object, highli
   const highlightEnd = (highlight) ? '</strong>' : '';
   let newText = text;
 
-  // Replace pupil specific placeholders:
-  placeholderMap.forEach(ph =>{
-    let phVal = '';
+  placeholderMap.forEach(ph => {
+    const phSymbol = `#${ph.symbol}#`;
+    let phVal = phSymbol;
+    let isPronoun = false;
 
     if (ph.function !== undefined) {
-      phVal = pupil[ph.function]();
+      if (ph.function === 'getPronoun') {
+        isPronoun = true;
+        phVal = pupil[ph.function](ph.symbol);
+      } else {
+        phVal = pupil[ph.function]();
+      }
     } else if (ph.property !== undefined) {
       phVal = pupil[ph.property];
     }
 
-    newText = newText.replace(new RegExp(`#${ph.symbol}#`, 'g'), highlightStart + phVal + highlightEnd);
+    if (isPronoun) newText = newText.replace(new RegExp(`\\. ${phSymbol}`, 'g'), '. ' + highlightStart + ucFirst(phVal) + highlightEnd);
+    newText = newText.replace(new RegExp(phSymbol, 'g'), highlightStart + phVal + highlightEnd);
   });
 
   return { __html: newText };

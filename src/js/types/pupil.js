@@ -9,6 +9,7 @@ import {
   ROUTE_DEL_PUPIL,
   ROUTE_EDIT_PUPIL,
 } from '../constants/routes';
+import { text } from '../components/Translation/Translation';
 
 
 /**
@@ -103,8 +104,19 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
 
       return theUrl.replace(':pupilId', this.id).replace(':classId', this.classId).replace(':reportId', reportId);
     },
-    getPronoun() {
-      return this.gender;
+    getPronoun(ph: string) {
+      switch (ph) {
+        case 'PS':
+        case 'PO':
+        case 'PP':
+        case 'PSC':
+        case 'POC':
+        case 'PPC':
+          return text(`${ph}-${this.gender}`, '##');
+        
+        default:
+          return ph;
+      }
     },
   };
 }
