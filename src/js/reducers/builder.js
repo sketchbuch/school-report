@@ -26,7 +26,6 @@ export default function reducer(state: {} = {}, action: ActionObj) {
 
     case SAVE_BUILDER:
       if (action.payload !== undefined && action.meta !== undefined) {
-        console.log(action);
         if (action.payload.selected !== undefined && Array.isArray(action.payload.selected) && action.payload.selected.length >= 0) {
           const {
             reportId,
