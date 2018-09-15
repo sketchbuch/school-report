@@ -5,7 +5,6 @@ import configureMockStore from 'redux-mock-store';
 import * as builderActions from '../builderActions';
 import persist from '../../fs/persist';
 import {
-  DRAG_BUILDER,
   SAVE_BUILDER,
 } from '../../constants/actionTypes';
 
@@ -33,20 +32,6 @@ describe('Actions: builderActions:', () => {
   beforeEach(() => {
     mockCallback = jest.fn();
     store = mockStore({ builder: {} });
-  });
-
-  test('drag() dispatches the correct action', () => {
-    const EXPECTED_ACTION = {
-      type: DRAG_BUILDER,
-      payload: { selected },
-      meta: {
-        reportId: REPORT_ID,
-        classId: CLASS_ID,
-        pupilId: PUPIL_ID,
-      },
-    };
-
-    expect(builderActions.drag(REPORT_ID, CLASS_ID, PUPIL_ID, selected)).toEqual(EXPECTED_ACTION);
   });
 
   test('save() dispatches the correct action', () => {

@@ -1,7 +1,6 @@
 // @flow
 
 import {
-  DRAG_BUILDER,
   SAVE_BUILDER,
 } from '../constants/actionTypes';
 import persist from '../fs/persist';
@@ -25,17 +24,5 @@ export function save(reportId: string, classId: string, pupilId: string, selecte
       },
     });
     persist(dispatch, getState, callback, [FILE_BUILDER]);
-  };
-}
-
-export function drag(reportId: string, classId: string, pupilId: string, selected: Array<string>): ActionCreator {
-  return {
-    type: DRAG_BUILDER,
-    payload: { selected },
-    meta: {
-      reportId,
-      classId,
-      pupilId,
-    },
   };
 }

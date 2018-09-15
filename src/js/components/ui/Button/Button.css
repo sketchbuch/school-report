@@ -54,10 +54,10 @@
 .Button[disabled]:hover,
 .Button[disabled]:active {
   opacity: 0.33;
-  cursor: not-allowed;
   box-shadow: none;
   background: var(--col-primary);
   user-select: none;
+  pointer-events: none;
 }
 
 

@@ -77,7 +77,7 @@ export class EditTextForm extends Component<Props> {
           />
           {!btValid && <p className="invalid-feedback">{errors.bodytext}</p>}
           <div className="fiedwrap__placeholders">
-            {placeholderMap.map(ph => <span key={ph.symbol} className="fiedwrap__placeholder" title={text(ph.symbol, '##')} >#{ph.symbol}#</span>)}
+            {placeholderMap.map(ph => <span key={ph.symbol} className="fiedwrap__placeholder" title={text('Title' + ph.symbol, '##')} >#{ph.symbol}#</span>)}
           </div>
         </div>
         <div className="fieldwrap">

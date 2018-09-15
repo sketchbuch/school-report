@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
+import { toastr } from 'react-redux-toastr'
 import ExportBuilderForm from '../Form/ExportBuilderForm';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
@@ -19,6 +20,8 @@ import {
   getContent,
   getDateFromTs,
 } from '../../../fs/export';
+import setTitle from '../../../utils/title';
+import { TOASTR_DURATION_LONG } from '../../../constants/misc';
 
 type Props = {
   activeReport: ReportType | Object,
@@ -50,7 +53,9 @@ export class ExportBuilderLayout extends Component<Props, State> {
 
   props: Props;
   state: State;
-  handleSubmit: Function;
+  exportResult: (ioResult: Object)=>{};
+  handleSubmit: (values: ExportType)=>{};
+  saveName: string;
 
   constructor(props: Props) {
     super(props);
@@ -61,7 +66,13 @@ export class ExportBuilderLayout extends Component<Props, State> {
       saving: false,
     };
 
+    this.exportResult = this.exportResult.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.saveName = '';
+  }
+
+  componentDidMount() {
+    setTitle(text('WinTitle', 'ExportBuilderLayout'));
   }
 
   handleSubmit(values: ExportType) {
@@ -75,9 +86,24 @@ export class ExportBuilderLayout extends Component<Props, State> {
       pupilCount: content.pupilCount,
       reportName: this.props.activeReport.getLabel(),
     };
+    this.saveName = `${values.name}.docx`;
     
-    // Todo... only export if there is content
-    //exportWord(exportValues);
+    exportWord(exportValues, this.exportResult);
+  }
+
+  exportResult(ioResult: Object) {
+    if (ioResult.success === true) {
+      toastr.success(
+        text('PersistenceSuccess', 'ExportBuilderLayout'),
+        this.saveName,
+      );
+    } else {
+      toastr.error(
+        text('PersistenceError', 'ExportBuilderLayout'),
+        text('PersistenceErrorMsg', 'ExportBuilderLayout', { ERROR: ioResult.errorObj.message }),
+        { timeOut: TOASTR_DURATION_LONG }
+      );
+    }
   }
 
   render() {

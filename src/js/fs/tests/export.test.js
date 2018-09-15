@@ -11,6 +11,8 @@ import classDefault, { ClassFactory } from '../../types/class';
 import pupilDefault, { PupilFactory } from '../../types/pupil';
 import textDefault, { TextFactory } from '../../types/text';
 import type { PupilType } from '../../types/pupil';
+import { text } from '../../components/Translation/Translation';
+import '../../components/Translation/testData';
 
 jest.mock('jszip', () => jest.fn(()=>{}));
 
@@ -93,8 +95,13 @@ describe('FS: Export:', () => {
   test('getDateFromTs() should return a formatted date string', () => {
     const ts = Date.now();
     const result = getDateFromTs(ts);
+    const EXPECTED_FORMAT = text('DateFormat', 'Lang', {
+      D: '04',
+      M: '09',
+      Y: '2018',
+    });
     expect(getDateFromTs(ts)).toBe(result); // Test that both calls return the same
-    expect(getDateFromTs(1536092102000)).toBe('04/09/2018'); // Fixed test
+    expect(getDateFromTs(1536092102000)).toBe(EXPECTED_FORMAT); // Fixed test
   });
   
   describe('getContent():', () => {
@@ -124,7 +131,7 @@ describe('FS: Export:', () => {
         exported: getDateFromTs(Date.now()),
         pupilCount: content.pupilCount,
         reportName: 'Report 1',
-      })).toThrow();
+      }, jest.fn())).toThrow();
     });
   });
 });

@@ -76,7 +76,7 @@
 .ButtonCircular[disabled]:active {
   background: var(--col-darken-1);
   color: var(--col-darken-1);
-  cursor: not-allowed;
+  pointer-events: none;
   user-select: none;
   box-shadow: none;
 }

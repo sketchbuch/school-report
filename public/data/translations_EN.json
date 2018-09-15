@@ -1,18 +1,18 @@
 {
   "EN": {
     "##": {
-      "N": "Full name",
-      "F": "First name",
-      "L": "Last name",
-      "PS": "He/She",
-      "PO": "Him/Her",
-      "PP": "His/Her",
-      "PS-m": "he",
+      "PO-f": "her",
       "PO-m": "him",
+      "PP-f": "her",
       "PP-m": "his",
       "PS-f": "she",
-      "PO-f": "her",
-      "PP-f": "her"
+      "PS-m": "he",
+      "TitleF": "First name",
+      "TitleL": "Last name",
+      "TitleN": "Full name",
+      "TitlePO": "Him/Her",
+      "TitlePP": "His/Her",
+      "TitlePS": "He/She"
     },
     "Actions": {
       "CategoryAdd": "Add category",
@@ -147,6 +147,12 @@
       "Settings": "Settings",
       "SearchPlaceholder": "Search texts..."
     },
+    "ExportBuilderLayout": {
+      "PersistenceError": "Report not exported",
+      "PersistenceErrorMsg": "Error whilst saving: '%ERROR%'",
+      "PersistenceSuccess": "Report saved as",
+      "WinTitle": "Export Report"
+    },
     "Gender": {
       "Female": "Girl",
       "Male": "Boy"
@@ -184,6 +190,9 @@
     "ItemSelection": {
       "Clear": "Clear search",
       "Placeholder": "Search..."
+    },
+    "Lang": {
+      "DateFormat": "%D%/%M%/%Y%"
     },
     "NewCategoryLayout": {
       "WinTitle": "Add new category"

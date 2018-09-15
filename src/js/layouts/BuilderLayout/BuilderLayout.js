@@ -14,12 +14,12 @@ import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
 import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCircular';
 import { text }  from '../../components/Translation/Translation';
 import { sortObjectsAz } from '../../utils/sort';
-import type { SidebarBuilderItemType } from '../../types/sidebarBuilderItem';
 import { classSort } from '../../types/class';
 import { pupilSort } from '../../types/pupil';
 import type { ClassType } from '../../types/class';
 import type { PupilType } from '../../types/pupil';
 import type { ReportType } from '../../types/report';
+import type { SidebarBuilderItemType } from '../../types/sidebarBuilderItem';
 import { ICON_EXPORT } from '../../constants/icons';
 import {
   ROUTE_BUILDER,
@@ -31,6 +31,7 @@ import setTitle from '../../utils/title';
 
 type Props = {
   activeReport: ReportType | Object,
+  builder: Object,
   classes: Array<ClassType>,
   dispatch: Function,
   history: Object,
@@ -46,6 +47,7 @@ type Props = {
 export class BuilderLayout extends Component<Props> {
   static defaultProps = {
     activeReport: {},
+    builder: {},
     classes: [],
     pupils: [],
   };
@@ -88,16 +90,37 @@ export class BuilderLayout extends Component<Props> {
     return items;
   }
 
+  canExport(items: Array<SidebarBuilderItemType>): boolean {
+    const { activeReport, builder } = this.props;
+    const reportData = builder[activeReport.id];
+    let canExport = false;
+    
+    if (reportData !== undefined) {
+      items.forEach((item)=>{
+        if (reportData[item.id] !== undefined) {
+          item.pupils.forEach((pupil)=>{
+            if (reportData[item.id][pupil.id] !== undefined && reportData[item.id][pupil.id].length > 0) {
+              canExport = true;
+            }
+          });
+        }
+      });
+    }
+
+    return canExport;
+  }
+
   render() {
     const items = this.getItems();
-    
+    const CAN_EXPORT = this.canExport(items);
     const leftActions = (
       <NavButtonCircular
-        to={ROUTE_EXPORT_BUILDER.replace(':reportId', this.props.activeReport.id,)}
-        className="SidebarFooter__action"
-        buttontype="pos-rollover"
         action="add-category"
+        buttontype="pos-rollover"
+        className="SidebarFooter__action"
+        disabled={!CAN_EXPORT}
         title={text('ReportExport', 'Actions')}
+        to={ROUTE_EXPORT_BUILDER.replace(':reportId', this.props.activeReport.id,)}
       >
         <Icon type={ICON_EXPORT} />
       </NavButtonCircular>
@@ -129,6 +152,7 @@ export class BuilderLayout extends Component<Props> {
 
 const mapStateToProps = (state: Object, props: Props) => {
   return {
+    builder: state.builder,
     activeReport: getActiveReport(state.reports, props.match.params.reportId),
     classes: state.classes,
     pupils: state.pupils,

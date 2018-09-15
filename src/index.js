@@ -4,9 +4,8 @@ import ReduxToastr from 'react-redux-toastr';
 import { Provider } from 'react-redux';
 import store from './js/store/redux';
 import App from './js/components/App/App';
+import { TOASTR_DURATION } from './js/constants/misc';
 import './index.css';
-
-const TOASTR_DURATION = 2500;
 
 
 ReactDOM.render(

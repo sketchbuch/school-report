@@ -3,7 +3,6 @@
 import reducer from '../builder';
 import {
   DATA_LOADED,
-  DRAG_BUILDER,
   REPLACE_BUILDER,
   REPLACE_DATA,
   SAVE_BUILDER,
@@ -39,16 +38,6 @@ describe('Reducer: Categories', () => {
     },
   };
 
-  const DRAG_ACTION = {
-    type: DRAG_BUILDER,
-    payload: { selected: ['t3', 't6', 't7',  't9', 't12'] },
-    meta: {
-      reportId: 'r2',
-      classId: 'c3',
-      pupilId: 'p6',
-    },
-  };
-
   test('Should return the initial state if no type matches', () => {
     expect(reducer(INITIAL_STATE, { type: 'IGNORE' })).toEqual(INITIAL_STATE);
   });
@@ -71,61 +60,5 @@ describe('Reducer: Categories', () => {
   test('REPLACE_BUILDER should return payload replacing existing builder object', () => {
     const reducerResult = reducer(INITIAL_STATE, { type: REPLACE_BUILDER, payload: TEST_BUILDER });
     expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(TEST_BUILDER.builder));
-  });
-
-  describe('DRAG_BUILDER:', () => {
-    let dragAction = { type: 'NOT_SET', payload: {}, meta: {} };
-
-    beforeEach(() => {
-      dragAction = {...DRAG_ACTION};
-    });
-
-    test('Should return the initial state if there is no meta object', () => {
-      delete dragAction.meta;
-      const reducerResult = reducer(INITIAL_STATE, dragAction);
-      expect(reducerResult).toEqual(INITIAL_STATE);
-    });
-    
-    test('Should return the initial state if there is no payload object', () => {
-      delete dragAction.payload;
-      const reducerResult = reducer(INITIAL_STATE, dragAction);
-      expect(reducerResult).toEqual(INITIAL_STATE);
-    });
-
-    test('Should return the initial state if there is no payload selected', () => {
-      delete dragAction.payload.selected;
-      const reducerResult = reducer(INITIAL_STATE, dragAction);
-      expect(reducerResult).toEqual(INITIAL_STATE);
-    });
-
-    test('Should return the initial state if payload selected is not an array', () => {
-      dragAction.payload.selected = {};
-      const reducerResult = reducer(INITIAL_STATE, dragAction);
-      expect(reducerResult).toEqual(INITIAL_STATE);
-    });
-
-    test('Should return the initial state if payload selected is an empty array', () => {
-      dragAction.payload.selected = [];
-      const reducerResult = reducer(INITIAL_STATE, dragAction);
-      expect(reducerResult).toEqual(INITIAL_STATE);
-    });
-
-    test('Should return the initial state if meta has no reportId', () => {
-      delete dragAction.meta.reportId;
-      const reducerResult = reducer(INITIAL_STATE, dragAction);
-      expect(reducerResult).toEqual(INITIAL_STATE);
-    });
-
-    test('Should return the initial state if meta has no classId', () => {
-      delete dragAction.meta.classId;
-      const reducerResult = reducer(INITIAL_STATE, dragAction);
-      expect(reducerResult).toEqual(INITIAL_STATE);
-    });
-
-    test('Should return the initial state if meta has no pupilId', () => {
-      delete dragAction.meta.pupilId;
-      const reducerResult = reducer(INITIAL_STATE, dragAction);
-      expect(reducerResult).toEqual(INITIAL_STATE);
-    });
   });
 });

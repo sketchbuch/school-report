@@ -2,7 +2,6 @@
 
 import {
   DATA_LOADED,
-  DRAG_BUILDER,
   REPLACE_BUILDER,
   REPLACE_DATA,
   SAVE_BUILDER,
@@ -25,10 +24,10 @@ export default function reducer(state: {} = {}, action: ActionObj) {
 
       break;
 
-    case DRAG_BUILDER:
     case SAVE_BUILDER:
       if (action.payload !== undefined && action.meta !== undefined) {
-        if (action.payload.selected !== undefined && Array.isArray(action.payload.selected) && action.payload.selected.length > 0) {
+        console.log(action);
+        if (action.payload.selected !== undefined && Array.isArray(action.payload.selected) && action.payload.selected.length >= 0) {
           const {
             reportId,
             classId,

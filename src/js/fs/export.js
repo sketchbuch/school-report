@@ -6,6 +6,7 @@ import { getPupilTextHtml } from '../utils/html';
 import type { ExportType } from '../types/export';
 import type { SidebarBuilderItemType } from '../types/sidebarBuilderItem';
 import type { TextType } from '../types/text';
+import { text } from '../components/Translation/Translation';
 
 let electron = null;
 let fs = require('fs');
@@ -25,7 +26,7 @@ const FOLDER = (window.location.hostname === 'localhost') ? 'public' : 'build';
 /**
 * Saves a report as a word file.
 */
-export function exportWord(exportConfig: ExportType) {
+export function exportWord(exportConfig: ExportType, callback: Function) {
   const filePath = `${APP_PATH}/${FOLDER}/data/template.docx`;
   const content = fs.readFileSync(filePath, 'binary');
   const zip = new JSZip(content);
@@ -45,12 +46,20 @@ export function exportWord(exportConfig: ExportType) {
   try {
     doc.render();
 
-    fs.writeFileSync(
+    fs.writeFile(
       path.resolve(HOME_PATH, exportConfig.name.trim() + '.docx'),
-      doc.getZip().generate({ type: 'nodebuffer' })
+      doc.getZip().generate({ type: 'nodebuffer' }),
+      'UTF-8',
+      callback({
+        success: true,
+        errorObj: null,
+      })
     );
   } catch (error) {
-    throw error;
+    callback({
+      success: false,
+      errorObj: error,
+    });
   }
 }
 
@@ -69,7 +78,11 @@ export function getDateFromTs(ts: number): string {
   if(exportDateDd < 10) exportDateDd = '0' + exportDateDd;
   if(exportDateMm < 10) exportDateMm = '0' + exportDateMm;
 
-  return `${exportDateDd}/${exportDateMm}/${exportDateYyyy}`;
+  return text('DateFormat', 'Lang', {
+    D: exportDateDd,
+    M: exportDateMm,
+    Y: exportDateYyyy,
+  });
 }
 
 /**
