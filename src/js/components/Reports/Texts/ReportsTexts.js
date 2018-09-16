@@ -2,6 +2,8 @@
 
 import React, { Component } from 'react';
 import ReportsTextItem from '../TextItem/ReportsTextItem';
+import InfoMsg from '../../InfoMsg/InfoMsg';
+import { text } from '../../Translation/Translation';
 import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
 import './ReportsTexts.css';
@@ -50,18 +52,25 @@ export class ReportsTexts extends Component<Props> {
     const selectedTexts = this.getSelectedTexts();
 
     return (
-      <ul className="ReportsTexts">
-        {selectedTexts.map(text => (
-            <ReportsTextItem 
-              activePupil={this.props.activePupil} 
-              key={text.id}
-              onClick={this.props.handleTextToggle}
-              onMove={this.props.handleTextMove} 
-              onEndDrag={this.props.handleEndDrag} 
-              txt={text} 
-            />
-        ))}
-      </ul>
+      selectedTexts.length > 0 ? (
+        <ul className="ReportsTexts">
+          {selectedTexts.map(text => (
+              <ReportsTextItem 
+                activePupil={this.props.activePupil} 
+                key={text.id}
+                onClick={this.props.handleTextToggle}
+                onMove={this.props.handleTextMove} 
+                onEndDrag={this.props.handleEndDrag} 
+                txt={text} 
+              />
+          ))}
+        </ul>
+      ) : (
+        <InfoMsg
+          headine={text('ReportsNoneSel', 'InfoMsg')}
+          subtext={text('ReportsNoneSelMsg', 'InfoMsg')}
+        />
+      )
     )
   }
 }

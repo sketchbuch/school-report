@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import EditBuilderLayout from './Edit/EditBuilderLayout';
 import ExportBuilderLayout from './Export/ExportBuilderLayout';
-import InfoMessage from '../../components/InfoMessage/InfoMessage';
+import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import Icon from '../../components/Icon/Icon';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
@@ -38,6 +38,7 @@ type Props = {
   location: Object,
   match: Object,
   pupils: Array<PupilType>,
+  textCount: number,
 };
 
 
@@ -50,6 +51,7 @@ export class BuilderLayout extends Component<Props> {
     builder: {},
     classes: [],
     pupils: [],
+    textCount: 0,
   };
 
   props: Props;
@@ -142,8 +144,8 @@ export class BuilderLayout extends Component<Props> {
         </Sidebar>
         <Switch>
           <Route path={ROUTE_EXPORT_BUILDER} render={routerProps => <ExportBuilderLayout {...routerProps} activeReport={this.props.activeReport} items={items} />} />
-          <Route path={ROUTE_EDIT_BUILDER} render={routerProps => <EditBuilderLayout {...routerProps} activeReport={this.props.activeReport} items={items} />} />
-          <Route path={ROUTE_BUILDER} render={routerProps => <InfoMessage {...routerProps} headine={text('Builder', 'InfoMessage')} subtext={text('BuilderMsg', 'InfoMessage')} />} />
+          <Route path={ROUTE_EDIT_BUILDER} render={routerProps => <EditBuilderLayout {...routerProps} activeReport={this.props.activeReport} items={items} textCount={this.props.textCount} />} />
+          <Route path={ROUTE_BUILDER} render={routerProps => <InfoMsg {...routerProps} headine={text('Builder', 'InfoMsg')} subtext={text('BuilderMsg', 'InfoMsg')} />} />
         </Switch>
       </div>
     )
@@ -156,6 +158,7 @@ const mapStateToProps = (state: Object, props: Props) => {
     activeReport: getActiveReport(state.reports, props.match.params.reportId),
     classes: state.classes,
     pupils: state.pupils,
+    textCount: state.texts.length,
   }
 };
 

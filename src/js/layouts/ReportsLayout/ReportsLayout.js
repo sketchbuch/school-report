@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import InfoMessage from '../../components/InfoMessage/InfoMessage';
+import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import Icon from '../../components/Icon/Icon';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
@@ -93,7 +93,7 @@ export class ReportsLayout extends Component<Props> {
           <Route path={ROUTE_EDIT_REPORT} render={routerProps => <EditReportLayout {...routerProps} dispatch={this.props.dispatch} reports={this.props.reports} classes={this.props.classes} />} />
           <Route path={ROUTE_DEL_REPORTS} render={routerProps => <DeleteReportsLayout {...routerProps} dispatch={this.props.dispatch} />} />
           <Route path={ROUTE_NEW_REPORT} render={routerProps => <NewReportLayout {...routerProps} dispatch={this.props.dispatch} classes={this.props.classes} />} />
-          <Route path={ROUTE_REPORTS} render={routerProps => <InfoMessage {...routerProps} headine={text('Reports', 'InfoMessage')} subtext={text('ReportsMsg', 'InfoMessage')} />} />
+          <Route path={ROUTE_REPORTS} render={routerProps => <InfoMsg {...routerProps} headine={text('Reports', 'InfoMsg')} subtext={text('ReportsMsg', 'InfoMsg')} />} />
         </Switch>
       </div>
     )

@@ -169,9 +169,11 @@
       "Texts": "Texts",
       "TextsDescription": "Create/Edit the texts for your reports"
     },
-    "InfoMessage": {
+    "InfoMsg": {
       "Builder": "Create/export your reports",
       "BuilderMsg": "You will not be able to edit classes or pupils here",
+      "BuilderNoTexts": "You haven't created any texts",
+      "BuilderNoTextsMsg": "Before you can create a report you will first need to create at least one text",
       "Categories": "Manage categories to organise and group your report texts",
       "CategoriesMsg": "",
       "Classes": "Manage classes and pupils for use in your reports",
@@ -180,6 +182,8 @@
       "PupilsMsg": "",
       "Reports": "Manage your reports",
       "ReportsMsg": "",
+      "ReportsNoneSel": "No texts selected",
+      "ReportsNoneSelMsg": "Texts will appear after you select them from the list of available texts",
       "Texts": "Manage your report texts",
       "TextsMsg": ""
     },

@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import InfoMessage from '../../components/InfoMessage/InfoMessage';
+import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import Icon from '../../components/Icon/Icon';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
@@ -101,7 +101,7 @@ export class PupilsLayout extends Component<Props> {
           <Route path={ROUTE_EDIT_PUPIL} render={routerProps => <EditPupilLayout {...routerProps} dispatch={this.props.dispatch} pupils={this.props.pupils} activeClass={this.props.activeClass} />} />
           <Route path={ROUTE_DEL_PUPILS} render={routerProps => <DeletePupilsLayout {...routerProps} dispatch={this.props.dispatch} pupils={this.props.pupils} activeClass={this.props.activeClass} />} />
           <Route path={ROUTE_NEW_PUPIL} render={routerProps => <NewPupilLayout {...routerProps} dispatch={this.props.dispatch} pupils={this.props.pupils} activeClass={this.props.activeClass} />} />
-          <Route path={ROUTE_PUPILS} render={routerProps => <InfoMessage {...routerProps} headine={text('Pupils', 'InfoMessage', { CLASS_NAME: this.getClassLabel() })} subtext={text('PupilsMsg', 'InfoMessage', { CLASS_NAME: this.getClassLabel() })} />} />
+          <Route path={ROUTE_PUPILS} render={routerProps => <InfoMsg {...routerProps} headine={text('Pupils', 'InfoMsg', { CLASS_NAME: this.getClassLabel() })} subtext={text('PupilsMsg', 'InfoMsg', { CLASS_NAME: this.getClassLabel() })} />} />
         </Switch>
       </div>
     )

@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import InfoMessage from '../../components/InfoMessage/InfoMessage';
+import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import Icon from '../../components/Icon/Icon';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
@@ -89,7 +89,7 @@ export class CategoriesLayout extends Component<Props> {
           <Route path={ROUTE_EDIT_CATEGORY} render={ routerProps => <EditCategoryLayout {...routerProps} categories={this.props.categories} dispatch={this.props.dispatch} />} />
           <Route path={ROUTE_DEL_CATEGORIES} render={ routerProps => <DeleteCategoriesLayout {...routerProps} dispatch={this.props.dispatch} />} />
           <Route path={ROUTE_NEW_CATEGORY} render={ routerProps => <NewCategoryLayout {...routerProps} categories={this.props.categories} dispatch={this.props.dispatch} />} />
-          <Route path={ROUTE_CATEGORIES} render={routerProps => <InfoMessage {...routerProps} headine={text('Categories', 'InfoMessage')} subtext={text('CategoriesMsg', 'InfoMessage')} /> } />
+          <Route path={ROUTE_CATEGORIES} render={routerProps => <InfoMsg {...routerProps} headine={text('Categories', 'InfoMsg')} subtext={text('CategoriesMsg', 'InfoMsg')} /> } />
         </Switch>
       </div>
     )

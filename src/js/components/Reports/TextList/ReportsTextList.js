@@ -62,13 +62,13 @@ export class ReportsTextList extends Component<Props, State> {
 
     if (this.state.option !== 'category-all') {
       if (this.state.option === 'category-nocat') {
-        return this.props.texts.filter(text => text.categories.length === 0);
+        visibleTexts = this.props.texts.filter(text => text.categories.length === 0);
       } else if (this.state.option === 'category-selected') {
-        return this.props.texts.filter(text => this.props.selectedTexts.indexOf(text.id) > -1);
+        visibleTexts = this.props.texts.filter(text => this.props.selectedTexts.indexOf(text.id) > -1);
       } else if (this.state.option === 'category-unselected') {
-        return this.props.texts.filter(text => this.props.selectedTexts.indexOf(text.id) < 0);
+        visibleTexts = this.props.texts.filter(text => this.props.selectedTexts.indexOf(text.id) < 0);
       } else {
-        return this.props.texts.filter(text => text.categories.includes(this.state.option));
+        visibleTexts = this.props.texts.filter(text => text.categories.includes(this.state.option));
       }
     } else {
       visibleTexts = [...this.props.texts];

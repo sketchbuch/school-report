@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import InfoMessage from '../../components/InfoMessage/InfoMessage';
+import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import Icon from '../../components/Icon/Icon';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
@@ -104,7 +104,7 @@ export class ClassesLayout extends Component<Props> {
           <Route path={ROUTE_EDIT_CLASS} render={ routerProps => <EditClassLayout {...routerProps} dispatch={this.props.dispatch} classes={this.props.classes} />} />
           <Route path={ROUTE_DEL_CLASSES} render={ routerProps => <DeleteClassesLayout {...routerProps} dispatch={this.props.dispatch} />} />
           <Route path={ROUTE_NEW_CLASS} render={ routerProps => <NewClassLayout {...routerProps} dispatch={this.props.dispatch} />} />
-          <Route path={ROUTE_CLASSES} render={routerProps => <InfoMessage {...routerProps} headine={text('Classes', 'InfoMessage')} subtext={text('ClassesMsg', 'InfoMessage')} />} />
+          <Route path={ROUTE_CLASSES} render={routerProps => <InfoMsg {...routerProps} headine={text('Classes', 'InfoMsg')} subtext={text('ClassesMsg', 'InfoMsg')} />} />
         </Switch>
       </div>
     )

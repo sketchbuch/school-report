@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import InfoMessage from '../../components/InfoMessage/InfoMessage';
+import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import Icon from '../../components/Icon/Icon';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
@@ -93,7 +93,7 @@ export class TextsLayout extends Component<Props> {
           <Route path={ROUTE_EDIT_TEXT} render={ routerProps => <EditTextLayout {...routerProps} dispatch={this.props.dispatch} categories={this.props.categories} texts={this.props.texts} />} />
           <Route path={ROUTE_DEL_TEXTS} render={ routerProps => <DeleteTextsLayout {...routerProps} dispatch={this.props.dispatch} />} />
           <Route path={ROUTE_NEW_TEXT} render={ routerProps => <NewTextLayout {...routerProps} curLang={this.props.curLang} categories={this.props.categories} dispatch={this.props.dispatch} />} />
-          <Route path={ROUTE_TEXTS} render={routerProps => <InfoMessage {...routerProps} headine={text('Texts', 'InfoMessage')} subtext={text('TextsMsg', 'InfoMessage')} />} />
+          <Route path={ROUTE_TEXTS} render={routerProps => <InfoMsg {...routerProps} headine={text('Texts', 'InfoMsg')} subtext={text('TextsMsg', 'InfoMsg')} />} />
         </Switch>
       </div>
     )

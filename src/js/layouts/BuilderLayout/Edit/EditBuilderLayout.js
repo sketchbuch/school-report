@@ -1,11 +1,12 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import TextInput from '../../../components/ui/TextInput/TextInput';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import Reports from '../../../components/Reports/Reports';
+import InfoMsg from '../../../components/InfoMsg/InfoMsg';
 import Icon from '../../../components/Icon/Icon';
 import { text }  from '../../../components/Translation/Translation';
 import { getItemById } from '../../../utils/arrays';
@@ -19,6 +20,7 @@ type Props = {
   items: Array<SidebarBuilderItemType>,
   location: Object,
   match: Object,
+  textCount: number,
 };
 
 type State = {
@@ -33,6 +35,7 @@ export class EditBuilderLayout extends Component<Props, State> {
   static defaultProps = {
     activeReport: {},
     items: [],
+    textCount: 0,
   };
 
   props: Props;
@@ -63,25 +66,45 @@ export class EditBuilderLayout extends Component<Props, State> {
   render() {
     const activeItem = getItemById(this.props.items, this.props.match.params.classId);
     const activePupil = getItemById(activeItem.pupils, this.props.match.params.pupilId);
+    let searchBox = null;
+
+    if (this.props.textCount > 0) {
+      searchBox = (
+        <Fragment>
+          <TextInput 
+              className="EditPanelHeader__search"
+              onChange={this.handleSearch} 
+              placeholder={text('SearchPlaceholder', 'EditPanelHeader')}
+              value={this.state.term}
+          />
+          <span 
+            className="EditPanelHeader__searchclear" 
+            onClick={this.handleClear} 
+            title={text('Clear', 'ItemSelection')}
+          >
+            <Icon type={ ICON_CLOSE } />
+          </span>
+        </Fragment>
+      );
+    }
 
     return (
       <EditPanel>
-        <EditPanelHeader title={text('ReportBuilder', 'EditPanelHeader', { 'PUPIL_NAME': activePupil.getLabel(), 'CLASS_NAME': activeItem.classRec.getLabel() })}>
-          <TextInput 
-            className="EditPanelHeader__search"
-            onChange={this.handleSearch} 
-            placeholder={text('SearchPlaceholder', 'EditPanelHeader')}
-            value={this.state.term}
-          />
-          <span className="EditPanelHeader__searchclear" onClick={this.handleClear} title={text('Clear', 'ItemSelection')}><Icon type={ ICON_CLOSE } /></span>
-        </EditPanelHeader>
+        <EditPanelHeader title={text('ReportBuilder', 'EditPanelHeader', { 'PUPIL_NAME': activePupil.getLabel(), 'CLASS_NAME': activeItem.classRec.getLabel() })}>{searchBox}</EditPanelHeader>
         <EditPanelContent noPadding={true}>
-          <Reports 
-            activeClass={activeItem.classRec}  
-            activePupil={activePupil} 
-            activeReport={this.props.activeReport}
-            term={this.state.term}
-          />
+          {this.props.textCount > 0 ? (
+            <Reports 
+              activeClass={activeItem.classRec}  
+              activePupil={activePupil} 
+              activeReport={this.props.activeReport}
+              term={this.state.term}
+            />
+          ) : (
+            <InfoMsg 
+              headine={text('BuilderNoTexts', 'InfoMsg')} 
+              subtext={text('BuilderNoTextsMsg', 'InfoMsg')} 
+            />
+          )}
         </EditPanelContent>
       </EditPanel>
     )
