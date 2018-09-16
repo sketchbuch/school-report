@@ -6,6 +6,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import ReportsTextList from './TextList/ReportsTextList'
 import ReportsTexts from './Texts/ReportsTexts'
+import { getSelectedTexts } from '../../utils/redux';
 import type { CategoryType } from '../../types/category';
 import type { ClassType } from '../../types/class';
 import type { ReportType } from '../../types/report';
@@ -139,19 +140,6 @@ export class Reports extends Component<Props, State> {
       </section>
     )
   }
-}
-
-const getSelectedTexts = (builderData, activeReportId, activeClassId, activePupilId) => {
-  let selected = [];
-  if (builderData[activeReportId] !== undefined) {
-    if (builderData[activeReportId][activeClassId] !== undefined) {
-      if (builderData[activeReportId][activeClassId][activePupilId] !== undefined) {
-        selected = builderData[activeReportId][activeClassId][activePupilId];
-      }
-    }
-  }
-
-  return selected;
 }
 
 const mapStateToProps = (state: Object, props: Props) => {

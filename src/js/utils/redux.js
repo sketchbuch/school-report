@@ -176,3 +176,25 @@ export function getClassPupils(pupils: Array<PupilType>, classId: string): Array
   if (classId !== '') return pupils.filter(p => p.classId === classId);
   return [];
 }
+
+/**
+* Returns an array of text IDs that have been selected by a pupil.
+*
+* @param object builderData The builder data object.
+* @param string activeReportId The id of the report in the builder data.
+* @param string activeClassId The id of the class in the builder data.
+* @param string activePupilId The id of the pupil in the builder data.
+* @return array An array with any selected texts for a pupil.
+*/
+export const getSelectedTexts = (builderData: Object, activeReportId: string, activeClassId: string, activePupilId: string): Array<string> => {
+  let selected = [];
+  if (builderData[activeReportId] !== undefined) {
+    if (builderData[activeReportId][activeClassId] !== undefined) {
+      if (builderData[activeReportId][activeClassId][activePupilId] !== undefined) {
+        selected = builderData[activeReportId][activeClassId][activePupilId];
+      }
+    }
+  }
+
+  return selected;
+}
