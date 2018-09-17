@@ -49,6 +49,7 @@ export class Reports extends Component<Props, State> {
 
   props: Props;
   state: State;
+  pupilId: string;
   handleEndDrag: ()=>{};
   handleTextMove: ()=>{};
   handleTextToggle: ()=>{};
@@ -60,12 +61,18 @@ export class Reports extends Component<Props, State> {
       dragSelected: [],
     };
 
+    this.pupilId = props.activePupil.id;
     this.handleEndDrag = this.handleEndDrag.bind(this);
     this.handleTextMove = this.handleTextMove.bind(this);
     this.handleTextToggle = this.handleTextToggle.bind(this);
   }
 
+  /**
+   * Method called by drag and drop when a draging ends.
+   */
   handleEndDrag() {
+    if (this.state.dragSelected.length < 1) return;
+
     this.props.saveReports(
       this.props.activeReport.id,
       this.props.activeClass.id,
