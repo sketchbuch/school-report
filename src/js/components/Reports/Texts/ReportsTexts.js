@@ -53,7 +53,7 @@ export class ReportsTexts extends Component<Props> {
 
     return (
       selectedTexts.length > 0 ? (
-        <ul className="ReportsTexts">
+        <div className="ReportsTexts">
           {selectedTexts.map(text => (
               <ReportsTextItem 
                 activePupil={this.props.activePupil} 
@@ -64,7 +64,7 @@ export class ReportsTexts extends Component<Props> {
                 txt={text} 
               />
           ))}
-        </ul>
+        </div>
       ) : (
         <InfoMsg
           headine={text('ReportsNoneSel', 'InfoMsg')}

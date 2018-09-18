@@ -20,6 +20,7 @@ export type TextType = {
   ...$Exact<DomainBaseType>,
   bodytext: string,
   categories: Array<string>,
+  charCount: number,
   lang: string,
 };
 
@@ -27,6 +28,7 @@ const textDefault: TextType = {
   ...domainBaseDefault,
   bodytext: '',
   categories: [],
+  charCount: 0,
   lang: '',
 };
 
@@ -46,6 +48,7 @@ export function TextFactory(textObj: TextType, ts: number, lang: string): TextTy
     created: ts,
     updated: ts,
     lang: lang,
+    charCount: textObj.bodytext.length,
     id: generateId(getTextIdStr(textObj), ts),
   });
 }

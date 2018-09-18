@@ -77,6 +77,7 @@ export class EditTextLayout extends Component<Props, State> {
   handleSubmit(values: Object) {
     const updatedText = {...values};
     updatedText.updated = Date.now();
+    updatedText.charCount = updatedText.bodytext.length;
 
     this.setState({
       text: updatedText,

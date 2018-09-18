@@ -79,9 +79,9 @@ export class ReportsTextItem extends Component<Props> {
     if (isDragging) classes += ' ReportsTextItem--dragging';
     
     return connectDragSource(connectDropTarget(
-      <li className={classes} onClick={onClick(txt.id)} ref={ ele => (this.ele = ele) }>
+      <div className={classes} onClick={onClick(txt.id)} ref={ ele => (this.ele = ele) }>
         <span dangerouslySetInnerHTML={getPupilTextHtml(txt.getLabel(0), activePupil)} />
-      </li>
+      </div>
     ));
   }
 }
