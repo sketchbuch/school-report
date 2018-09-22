@@ -7,7 +7,7 @@ import './InfoMsg.css';
 type Props = {
   children?: React.Node,
   headine: string,
-  icon?: string,
+  icon: string,
   subtext?: string,
 };
 
