@@ -7,6 +7,7 @@ import categoryDefault from '../../../types/category';
 import pupilDefault, { PupilFactory } from '../../../types/pupil';
 import textDefault, { TextFactory } from '../../../types/text';
 import ReportsTextList from './ReportsTextList';
+import '../../../components/Translation/testData';
 
 configure({ adapter: new Adapter() });
 

@@ -4,6 +4,7 @@ import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ReportsTexts from './ReportsTexts';
+import InfoMsg from '../../InfoMsg/InfoMsg';
 import textDefault from '../../../types/text';
 import '../../Translation/testData';
 
@@ -33,7 +34,8 @@ describe('<ReportsTexts />', () => {
     const wrapper1 = shallow(<ReportsTexts {...props} texts={texts1} />);
     const wrapper2 = shallow(<ReportsTexts {...props} texts={texts2} />);
 
-    expect(wrapper1.find('.ReportsTexts').prop('children')).toHaveLength(0);
+    expect(wrapper1.find('.ReportsTexts')).toHaveLength(0);
+    expect(wrapper1.find(InfoMsg)).toHaveLength(1);
     expect(wrapper2.find('.ReportsTexts').prop('children')).toHaveLength(2);
   });
 

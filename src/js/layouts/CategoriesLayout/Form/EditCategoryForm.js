@@ -47,11 +47,7 @@ export class EditCategoryForm extends Component<Props> {
     } = this.props;
 
     const lValid = validate('label', errors, touched);
-    const btnIsDisabled = (
-      !lValid ||
-      saving ||
-      !dirty
-    ) ? true : false;
+    const btnIsDisabled = !lValid || saving || !dirty;
 
     return (
       <form className="form" onSubmit={handleSubmit}>
