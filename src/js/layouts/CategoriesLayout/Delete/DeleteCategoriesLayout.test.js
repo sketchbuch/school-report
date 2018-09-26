@@ -62,13 +62,23 @@ describe('<DeleteCategoriesLayout />', () => {
   });
 
   describe('componentDidUpdate():', () => {
-    test('this.state.error() pushes a route to history', () => {
+    test('state.error pushes a route to history', () => {
       const wrapper = shallow(<DeleteCategoriesLayout {...props} />);
       const instance = wrapper.instance();
 
       wrapper.setState({ error: true });
       instance.componentDidUpdate({}, {});
       expect(props.history.push).toHaveBeenCalledWith(ROUTE_CATEGORIES);
+    });
+
+    test('state.deleting calls props.dispatch', () => {
+      const mockDispatch =  jest.fn();
+      const wrapper = shallow(<DeleteCategoriesLayout {...props} dispatch={mockDispatch} />);
+      const instance = wrapper.instance();
+
+      wrapper.setState({ deleting: true });
+      instance.componentDidUpdate({}, {});
+      expect(mockDispatch).toHaveBeenCalled();
     });
   });
 });
