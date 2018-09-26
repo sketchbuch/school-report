@@ -47,8 +47,11 @@ export class EditCategoryLayout extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
+    const activeId = props.match.params !== undefined ? props.match.params.categoryId : '';
+    const activeCat = getActiveCategory(props.categories, activeId);
+
     this.state = {
-      category: {...categoryDefault, ...this.getActiveCategory()},
+      category: {...categoryDefault, ...activeCat},
       error: false,
       saving: false,
     };
@@ -82,15 +85,6 @@ export class EditCategoryLayout extends Component<Props, State> {
   }
 
   /**
-  * Returns the matching class or an empty object
-  *
-  * @return ClassType | object
-  */
-  getActiveCategory() {
-    return getActiveCategory(this.props.categories, this.props.match.params.categoryId);
-  }
-
-  /**
   * Callback used by writeAppData.
   *
   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
@@ -108,11 +102,13 @@ export class EditCategoryLayout extends Component<Props, State> {
   }
 
   render() {
-    const activeCategory = this.getActiveCategory();
+    const activeId = this.props.match.params !== undefined ? this.props.match.params.categoryId : '';
+    const activeCategory = getActiveCategory(this.props.categories, activeId);
+    const activeLabel = activeCategory.getLabel !== undefined ? activeCategory.getLabel() : '';
 
     return (
       <EditPanel>
-        <EditPanelHeader title={text('EditCategory', 'EditPanelHeader', { CATEGORY_NAME: activeCategory.getLabel() })} />
+        <EditPanelHeader title={text('EditCategory', 'EditPanelHeader', { CATEGORY_NAME: activeLabel })} />
         <EditPanelContent>
           <Formik
             initialValues={{...categoryDefault, ...activeCategory}}
