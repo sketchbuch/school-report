@@ -23,6 +23,7 @@ type Props = {
   history: Object,
   location: Object,
   match: Object,
+  maxChars: number,
   reports: Array<ReportType>,
 };
 

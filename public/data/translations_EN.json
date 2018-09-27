@@ -270,13 +270,16 @@
       "BreadcrumbExport": "Export",
       "CreateReportBtnLabel": "Create Report",
       "LabelPlaceholder": "Name of report...",
-      "PersistenceDeleted": "All reports deleted",
+      "MaxCharsPlaceholder": "Max characters...",
       "PersistenceDeleteError": "Unable to delete reports",
-      "PersistenceNew": "New report saved",
-      "ReportClasses": "Select classes to include (%SELECTED%/%TOTAL%):",
-      "PersistenceNewError": "Unable to save new report",
+      "PersistenceDeleted": "All reports deleted",
       "PersistenceEdit": "Report updated",
       "PersistenceEditError": "Unable to save changes to report",
+      "PersistenceNew": "New report saved",
+      "PersistenceNewError": "Unable to save new report",
+      "ReportClasses": "Select classes to include (%SELECTED%/%TOTAL%):",
+      "ReportMaxChars": "Max characters per pupil:",
+      "ReportMaxCharsInfo": "Use 0 for no limit",
       "UpdateReportsBtnLabel": "Update Report",
       "WinTitle": "Reports"
     },
@@ -337,6 +340,7 @@
       "ReportClasses": "Select at least 1 class",
       "ReportExportName": "A name for the export is required",
       "ReportLabel": "A report name is required",
+      "ReportMaxChars": "Must be a whole number",
       "TextBodytext": "A text is required"
     }
   }

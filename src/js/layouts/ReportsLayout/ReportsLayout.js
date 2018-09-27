@@ -32,6 +32,7 @@ type Props = {
   history: Object,
   location: Object,
   match: Object,
+  maxChars: number,
   reports: Array<ReportType>,
 };
 
@@ -90,9 +91,9 @@ export class ReportsLayout extends Component<Props> {
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>
         <Switch>u
-          <Route path={ROUTE_EDIT_REPORT} render={routerProps => <EditReportLayout {...routerProps} dispatch={this.props.dispatch} reports={this.props.reports} classes={this.props.classes} />} />
+          <Route path={ROUTE_EDIT_REPORT} render={routerProps => <EditReportLayout {...routerProps} dispatch={this.props.dispatch} reports={this.props.reports} classes={this.props.classes} maxChars={this.props.maxChars} />} />
           <Route path={ROUTE_DEL_REPORTS} render={routerProps => <DeleteReportsLayout {...routerProps} dispatch={this.props.dispatch} />} />
-          <Route path={ROUTE_NEW_REPORT} render={routerProps => <NewReportLayout {...routerProps} dispatch={this.props.dispatch} classes={this.props.classes} />} />
+          <Route path={ROUTE_NEW_REPORT} render={routerProps => <NewReportLayout {...routerProps} dispatch={this.props.dispatch} classes={this.props.classes} maxChars={this.props.maxChars}  />} />
           <Route path={ROUTE_REPORTS} render={routerProps => <InfoMsg {...routerProps} headine={text('Reports', 'InfoMsg')} subtext={text('ReportsMsg', 'InfoMsg')} />} />
         </Switch>
       </div>
@@ -103,6 +104,7 @@ export class ReportsLayout extends Component<Props> {
 const mapStateToProps = (state: Object) => (
   {
     classes: state.classes,
+    maxChars: state.settings.maxChars,
     reports: state.reports,
   }
 );

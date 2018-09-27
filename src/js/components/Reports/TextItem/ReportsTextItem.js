@@ -7,6 +7,7 @@ import {
 	DragSourceConnector,
 	DragSourceMonitor,
 } from 'react-dnd';
+import LetterCount from '../../LetterCount/LetterCount';
 import { getPupilTextHtml } from '../../../utils/html';
 import { dndTypes } from '../../../constants/dndTypes';
 import type { PupilType } from '../../../types/pupil';
@@ -77,10 +78,13 @@ export class ReportsTextItem extends Component<Props> {
 
     let classes = 'ReportsTextItem';
     if (isDragging) classes += ' ReportsTextItem--dragging';
+
+    const pupilText = getPupilTextHtml(txt.getLabel(0), activePupil);
     
     return connectDragSource(connectDropTarget(
       <div className={classes} onClick={onClick(txt.id)} ref={ ele => (this.ele = ele) }>
-        <span dangerouslySetInnerHTML={getPupilTextHtml(txt.getLabel(0), activePupil)} />
+        <span dangerouslySetInnerHTML={pupilText} />
+        <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length} />
       </div>
     ));
   }

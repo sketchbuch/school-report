@@ -19,12 +19,14 @@ export type ReportType = {
   ...$Exact<DomainBaseType>,
   classes: Array<string>,
   label: string,
+  maxChars: number,
 };
 
 const reportDefault: ReportType = {
   ...domainBaseDefault,
   classes: [],
   label: '',
+  maxChars: 0,
 };
 
 export const reportSort = ['label', 'updated'];

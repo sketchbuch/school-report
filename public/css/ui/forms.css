@@ -42,6 +42,40 @@
   align-items: center;
 }
 
+.fieldwrap__columns {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.fieldwrap__column {
+  width: 50%;
+}
+
+.fieldwrap__column:first-child {
+  padding-right: 10px;
+}
+
+.fieldwrap__column:last-child {
+  padding-left: 10px;
+}
+
+.fieldwrap__info {
+  line-height: var(--lh-reduced);
+  color: var(--col-darken-5);
+  font-size: var(--font-size-small);
+}
+
+.fieldwrap__columns {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .invalid-feedback {
   position: relative;
   padding-top: 1.0rem;
@@ -70,7 +104,7 @@
 
 .form__footnote {
   text-align: center;
-  font-size: 1.4rem;
+  font-size: var(--font-size-small);
   line-height: var(--lh-reduced);
   width: 80%;
   margin-left: auto;

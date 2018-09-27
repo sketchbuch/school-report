@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import TextInput from '../../../components/ui/TextInput/TextInput';
 import Button from '../../../components/ui/Button/Button';
 import Translation from '../../../components/Translation/Translation';
 import type { LangType } from '../../../types/lang';
@@ -30,12 +31,10 @@ export class SettingsFrom extends Component<Props> {
   render() {
     const {
       dirty,
-      //errors,
-      //handleBlur,
+      handleBlur,
       handleChange,
       handleSubmit,
       saving,
-      //touched,
       values,
     } = this.props;
 
@@ -53,6 +52,30 @@ export class SettingsFrom extends Component<Props> {
                   return <option value={lang.key} key={lang.key}>{lang.label}</option>
                 })}
             </select>
+          </div>
+        </div>
+        <div className="fieldwrap fieldwrap--labeled">
+          <div className="fieldwrap__left">
+            <Translation name="ReportMaxChars" ns="Reports" />
+          </div>
+          <div className="fieldwrap__right">
+            <div className="fieldwrap__columns">
+              <div className="fieldwrap__column">
+                <TextInput
+                  isValid={true}
+                  name="maxChars"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  type="number"
+                  value={values.maxChars}
+                />
+              </div>
+              <div className="fieldwrap__column">
+                <span className="fieldwrap__info">
+                  <Translation name="ReportMaxCharsInfo" ns="Reports" />
+                </span>
+              </div>
+            </div>
           </div>
         </div>
         <div className="fieldwrap">

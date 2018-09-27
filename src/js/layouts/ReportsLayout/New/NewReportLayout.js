@@ -22,6 +22,7 @@ type Props = {
   history: Object,
   location: Object,
   match: Object,
+  maxChars: number,
 };
 
 type State = {
@@ -105,7 +106,7 @@ export class NewReportLayout extends Component<Props, State> {
         <EditPanelHeader title={text('AddReport', 'EditPanelHeader')} />
         <EditPanelContent>
           <Formik
-            initialValues={{...reportDefault}}
+            initialValues={{...reportDefault, maxChars: this.props.maxChars}}
             enableReinitialize={true}
             validationSchema={reportSchema}
             onSubmit={this.handleSubmit}

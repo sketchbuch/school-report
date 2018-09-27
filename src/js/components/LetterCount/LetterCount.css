@@ -1,0 +1,8 @@
+/* Letter Count */
+/* ------------ */
+
+.LetterCount {
+  display: inline-block;
+  color: var(--col-darken-3);
+  padding-left: 10px;
+}

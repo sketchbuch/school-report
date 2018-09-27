@@ -60,12 +60,12 @@ export class EditReportForm extends Component<Props> {
       <form className="form" onSubmit={handleSubmit}>
         <div className="fieldwrap">
           <TextInput
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.label}
-            name="label"
-            placeholder={text('LabelPlaceholder', 'Reports')}
             isValid={rlValid}
+            name="label"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            placeholder={text('LabelPlaceholder', 'Reports')}
+            value={values.label}
           />
           {!rlValid && <p className="invalid-feedback">{errors.label}</p>}
         </div>
@@ -80,6 +80,28 @@ export class EditReportForm extends Component<Props> {
           </p>
           <ItemSelection items={sortedClasses} name="classes" selected={values.classes} />
           {!rcValid && <p className="invalid-feedback">{errors.classes}</p>}
+        </div>
+        <div className="fieldwrap">
+          <p>
+            <Translation name="ReportMaxChars" ns="Reports" />
+          </p>
+          <div className="fieldwrap__columns">
+            <div className="fieldwrap__column">
+              <TextInput
+                isValid={true}
+                name="maxChars"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                type="number"
+                value={values.maxChars}
+              />
+            </div>
+            <div className="fieldwrap__column">
+              <span className="fieldwrap__info">
+                <Translation name="ReportMaxCharsInfo" ns="Reports" />
+              </span>
+            </div>
+          </div>
         </div>
         <div className="fieldwrap">
           <Button type="submit" disabled={btnIsDisabled} busy={saving}>

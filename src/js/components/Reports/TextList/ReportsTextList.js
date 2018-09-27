@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import Icon from '../../Icon/Icon';
 import NoItems from '../../NoItems/NoItems';
+import LetterCount from '../../LetterCount/LetterCount';
 import ReportsCatSelect from '../CatSelect/ReportsCatSelect';
 import Translation from '../../Translation/Translation';
 import type { CategoryType } from '../../../types/category';
@@ -98,9 +99,12 @@ export class ReportsTextList extends Component<Props, State> {
               const isSelected = (this.props.selectedTexts.indexOf(text.id) > -1) ? true : false;
               const classes = (isSelected) ? 'ReportsTextList__item ReportsTextList__item--selected' : 'ReportsTextList__item';
 
+              const pupilText = getPupilTextHtml(text.getLabel(0), this.props.activePupil);
+
               return (
                 <li key={text.id} className={classes} onClick={this.props.handleTextToggle(text.id)}>
-                  <span dangerouslySetInnerHTML={getPupilTextHtml(text.getLabel(0), this.props.activePupil)} />
+                  <span dangerouslySetInnerHTML={pupilText} />
+                  <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length} />
                   {isSelected && <span className="ReportsTextList__itemselected"><Icon type={ ICON_SUCCESS } /></span>}
                 </li>
               )
