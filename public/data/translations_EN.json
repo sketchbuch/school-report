@@ -143,6 +143,7 @@
       "EditReport": "Edit '%REPORT_NAME%'",
       "EditText": "Edit '%TEXT%'",
       "ReportBuilder": "Report for '%PUPIL_NAME%'",
+      "ReportBuilderCount": "%TEXT_COUNT%/%MAX_CHARS%",
       "ReportExport": "Export '%REPORT_NAME%'",
       "Settings": "Settings",
       "SearchPlaceholder": "Search texts..."

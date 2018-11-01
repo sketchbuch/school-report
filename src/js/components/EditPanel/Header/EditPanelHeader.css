@@ -50,6 +50,17 @@
   color: var(--col-white);
 }
 
+.EditPanelHeader__headline span {
+  display: inline-block;
+  color: var(--col-lighten-5);
+  padding-left: 10px;
+}
+
+.EditPanelHeader__headline span:empty {
+  display: none;
+  padding-left: 0px;
+}
+
 .EditPanelHeader__controls {
   padding-left: 20px;
   position: relative;

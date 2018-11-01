@@ -12,11 +12,7 @@ type Props = {
 * Letter count indicator component.
 */
 const LetterCount = (props: Props) => {
-  return (
-    <i className="LetterCount">
-      ({props.count})
-    </i>
-  )
+  return <i className="LetterCount">{props.count}</i>
 }
 
 

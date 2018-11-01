@@ -19,6 +19,7 @@ import { pupilSort } from '../../types/pupil';
 import type { ClassType } from '../../types/class';
 import type { PupilType } from '../../types/pupil';
 import type { ReportType } from '../../types/report';
+import type { TextType } from '../../types/text';
 import type { SidebarBuilderItemType } from '../../types/sidebarBuilderItem';
 import { ICON_EXPORT } from '../../constants/icons';
 import {
@@ -39,6 +40,7 @@ type Props = {
   match: Object,
   pupils: Array<PupilType>,
   textCount: number,
+  texts: Array<TextType>,
 };
 
 
@@ -52,6 +54,7 @@ export class BuilderLayout extends Component<Props> {
     classes: [],
     pupils: [],
     textCount: 0,
+    texts: [],
   };
 
   props: Props;
@@ -143,8 +146,8 @@ export class BuilderLayout extends Component<Props> {
           <SidebarFooter leftActions={leftActions} />
         </Sidebar>
         <Switch>
-          <Route path={ROUTE_EXPORT_BUILDER} render={routerProps => <ExportBuilderLayout {...routerProps} activeReport={this.props.activeReport} items={items} />} />
-          <Route path={ROUTE_EDIT_BUILDER} render={routerProps => <EditBuilderLayout {...routerProps} activeReport={this.props.activeReport} items={items} textCount={this.props.textCount} />} />
+          <Route path={ROUTE_EXPORT_BUILDER} render={routerProps => <ExportBuilderLayout {...routerProps} activeReport={this.props.activeReport} />} />
+          <Route path={ROUTE_EDIT_BUILDER} render={routerProps => <EditBuilderLayout {...routerProps} activeReport={this.props.activeReport} builder={this.props.builder} items={items} textCount={this.props.textCount} texts={this.props.texts} />} />
           <Route path={ROUTE_BUILDER} render={routerProps => <InfoMsg {...routerProps} headine={text('Builder', 'InfoMsg')} subtext={text('BuilderMsg', 'InfoMsg')} />} />
         </Switch>
       </div>
@@ -154,11 +157,12 @@ export class BuilderLayout extends Component<Props> {
 
 const mapStateToProps = (state: Object, props: Props) => {
   return {
-    builder: state.builder,
     activeReport: getActiveReport(state.reports, props.match.params.reportId),
+    builder: state.builder,
     classes: state.classes,
     pupils: state.pupils,
     textCount: state.texts.length,
+    texts: state.texts,
   }
 };
 

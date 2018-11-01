@@ -8,19 +8,24 @@ import EditPanelContent from '../../../components/EditPanel/Content/EditPanelCon
 import Reports from '../../../components/Reports/Reports';
 import InfoMsg from '../../../components/InfoMsg/InfoMsg';
 import Icon from '../../../components/Icon/Icon';
+import { getSelectedTexts } from '../../../utils/redux';
+import { getPupilTextHtml } from '../../../utils/html';
 import { text }  from '../../../components/Translation/Translation';
 import { getItemById } from '../../../utils/arrays';
 import type { ReportType } from '../../../types/report';
 import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
+import type { TextType } from '../../../types/text';
 import { ICON_CLOSE } from '../../../constants/icons';
 
 type Props = {
   activeReport: ReportType | Object,
+  builder: Object,
   history: Object,
   items: Array<SidebarBuilderItemType>,
   location: Object,
   match: Object,
   textCount: number,
+  texts: Array<TextType>,
 };
 
 type State = {
@@ -34,8 +39,10 @@ type State = {
 export class EditBuilderLayout extends Component<Props, State> {
   static defaultProps = {
     activeReport: {},
+    builder: {},
     items: [],
     textCount: 0,
+    texts: [],
   };
 
   props: Props;
@@ -88,9 +95,33 @@ export class EditBuilderLayout extends Component<Props, State> {
       );
     }
 
+    const selectedTexts = getSelectedTexts(this.props.builder, this.props.activeReport.id, activeItem.classRec.id, activePupil.id);
+    let textCount = 0;
+
+    selectedTexts.forEach(selTxtId => {
+      const txt = this.props.texts.find(txt => txt.id === selTxtId);
+      if (txt !== undefined) {
+        const pupilText = getPupilTextHtml(txt.getLabel(0), activePupil);
+        textCount += pupilText.__html.replace(/<(.|\n)*?>/g, '').length;
+      }
+    });
+
     return (
       <EditPanel>
-        <EditPanelHeader title={text('ReportBuilder', 'EditPanelHeader', { 'PUPIL_NAME': activePupil.getLabel(), 'CLASS_NAME': activeItem.classRec.getLabel() })}>{searchBox}</EditPanelHeader>
+        <EditPanelHeader 
+          title={text(
+            'ReportBuilder', 
+            'EditPanelHeader', 
+            { 'PUPIL_NAME': activePupil.getLabel(), 'CLASS_NAME': activeItem.classRec.getLabel() }
+          )}
+          subtitle={text(
+            'ReportBuilderCount', 
+            'EditPanelHeader', 
+            { 'TEXT_COUNT': textCount, 'MAX_CHARS': this.props.activeReport.maxChars }
+          )}
+        >
+          {searchBox}
+        </EditPanelHeader>
         <EditPanelContent noPadding={true}>
           {this.props.textCount > 0 ? (
             <Reports 
