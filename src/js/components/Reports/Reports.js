@@ -22,6 +22,7 @@ type Props = {
   activePupil: PupilType | Object,
   activeReport: ReportType | Object,
   categories: Array<CategoryType>,
+  disableTexts: boolean,
   saveReports: Function,
   selected: Array<string>,
   term: string,
@@ -42,6 +43,7 @@ export class Reports extends Component<Props, State> {
     activePupil: {},
     activeReport: {},
     categories: [],
+    disableTexts: false,
     saveReports: ()=>{},
     term: '',
     texts: [],
@@ -138,10 +140,11 @@ export class Reports extends Component<Props, State> {
           <ReportsTextList
             activePupil={this.props.activePupil}
             categories={this.props.categories}
+            disableTexts={this.props.disableTexts}
             handleTextToggle={this.handleTextToggle}
             selectedTexts={selectedTexts}
-            texts={this.props.texts}
             term={this.props.term}
+            texts={this.props.texts}
           />
         </div>
       </section>

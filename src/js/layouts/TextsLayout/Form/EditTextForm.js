@@ -63,6 +63,7 @@ export class EditTextForm extends Component<Props> {
       !dirty
     ) ? true : false;
     const sortedCategories = sortObjectsAz(categories, categorySort);
+    const selCount = categories.filter(c => values.categories.includes(c.id)).length;
 
     return (
       <form className="form" onSubmit={handleSubmit}>
@@ -84,11 +85,12 @@ export class EditTextForm extends Component<Props> {
           <p>
             <Translation name="ReportCategories" ns="Texts"
               placeholders={{
-                SELECTED: values.categories.length,
+                SELECTED: selCount,
                 TOTAL: categories.length,
               }}
             />
           </p>
+
           <ItemSelection items={sortedCategories} name="categories" selected={values.categories} />
           {!cValid && <p className="invalid-feedback">{errors.categories}</p>}
         </div>

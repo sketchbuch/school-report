@@ -73,6 +73,7 @@ export class EditBuilderLayout extends Component<Props, State> {
   render() {
     const activeItem = getItemById(this.props.items, this.props.match.params.classId);
     const activePupil = getItemById(activeItem.pupils, this.props.match.params.pupilId);
+    const maxChars = this.props.activeReport.maxChars;
     let searchBox = null;
 
     if (this.props.textCount > 0) {
@@ -109,6 +110,7 @@ export class EditBuilderLayout extends Component<Props, State> {
     return (
       <EditPanel>
         <EditPanelHeader 
+          alert={ textCount >= maxChars ? true : false }
           title={text(
             'ReportBuilder', 
             'EditPanelHeader', 
@@ -117,7 +119,7 @@ export class EditBuilderLayout extends Component<Props, State> {
           subtitle={text(
             'ReportBuilderCount', 
             'EditPanelHeader', 
-            { 'TEXT_COUNT': textCount, 'MAX_CHARS': this.props.activeReport.maxChars }
+            { 'TEXT_COUNT': textCount, 'MAX_CHARS': maxChars }
           )}
         >
           {searchBox}
@@ -128,6 +130,7 @@ export class EditBuilderLayout extends Component<Props, State> {
               activeClass={activeItem.classRec}  
               activePupil={activePupil} 
               activeReport={this.props.activeReport}
+              disableTexts={ textCount >= maxChars ? true : false }
               term={this.state.term}
             />
           ) : (

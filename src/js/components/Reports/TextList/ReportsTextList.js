@@ -16,6 +16,7 @@ import './ReportsTextList.css';
 type Props = {
   activePupil: PupilType | Object,
   categories: Array<CategoryType>,
+  disableTexts: boolean,
   handleTextToggle: Function,
   selectedTexts: Array<string>,
   term: string,
@@ -96,13 +97,14 @@ export class ReportsTextList extends Component<Props, State> {
         {visibleTexts.length > 0 ? (
           <ul className="ReportsTextList_list">
             {visibleTexts.map(text => {
-              const isSelected = (this.props.selectedTexts.indexOf(text.id) > -1) ? true : false;
-              const classes = (isSelected) ? 'ReportsTextList__item ReportsTextList__item--selected' : 'ReportsTextList__item';
-
               const pupilText = getPupilTextHtml(text.getLabel(0), this.props.activePupil);
+              const isSelected = (this.props.selectedTexts.indexOf(text.id) > -1) ? true : false;
+              const isActive = !isSelected && this.props.disableTexts;
+              let classes = (isSelected) ? 'ReportsTextList__item ReportsTextList__item--selected' : 'ReportsTextList__item';
+              if (isActive) classes += ' ReportsTextList__item--disabled';
 
               return (
-                <li key={text.id} className={classes} onClick={this.props.handleTextToggle(text.id)}>
+                <li key={text.id} className={classes} onClick={isActive ? null : this.props.handleTextToggle(text.id)}>
                   <span dangerouslySetInnerHTML={pupilText} />
                   <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length} />
                   {isSelected && <span className="ReportsTextList__itemselected"><Icon type={ ICON_SUCCESS } /></span>}

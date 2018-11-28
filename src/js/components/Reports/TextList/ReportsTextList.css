@@ -26,7 +26,6 @@
   border: 1px solid var(--col-darken-1);
   background: var(--col-white);
   user-select: none;
-  cursor: move;
   -webkit-user-drag: element;
 }
 
@@ -36,6 +35,11 @@
 
 .ReportsTextList__item--selected {
   background: var(--col-brand-transparent);
+}
+
+.ReportsTextList__item--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 .ReportsTextList_nolist {

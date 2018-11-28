@@ -55,6 +55,7 @@ export class EditReportForm extends Component<Props> {
     const rcValid = validate('classes', errors, touched);
     const btnIsDisabled = (!rcValid || !rlValid || values.label === '' || values.classes.length < 1 || saving || !dirty) ? true : false;
     const sortedClasses = sortObjectsAz(classes, ['label', 'updated']);
+    const selCount = classes.filter(c => values.classes.includes(c.id)).length;
 
     return (
       <form className="form" onSubmit={handleSubmit}>
@@ -73,7 +74,7 @@ export class EditReportForm extends Component<Props> {
           <p>
             <Translation name="ReportClasses" ns="Reports"
               placeholders={{
-                SELECTED: values.classes.length,
+                SELECTED: selCount,
                 TOTAL: classes.length,
               }}
             />

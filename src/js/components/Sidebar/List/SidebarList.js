@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import NoItems from '../../NoItems/NoItems';
+import Translation from '../../Translation/Translation';
 import SidebarItem from '../Item/SidebarItem';
 import SidebarBuilderItem from '../BuilderItem/SidebarBuilderItem';
 import type { SidebarListTypes } from '../../../types/sidebarList';
@@ -21,6 +22,7 @@ type Props = {
   listType: SidebarListTypes,
   noItemsTxt: string,
   sortOrder: Array<string>,
+  term: string,
 };
 
 type State = {
@@ -45,6 +47,7 @@ class SidebarList extends Component<Props, State> {
     items: [],
     listType: 'class',
     sortOrder: ['updated'],
+    term: '',
   };
 
   props: Props;
@@ -85,9 +88,10 @@ class SidebarList extends Component<Props, State> {
   }
 
   renderContent() {
-    if (this.props.items.length > 0) {
-      const sortedItems = sortObjectsAz(this.props.items, this.props.sortOrder);
+    let sortedItems = sortObjectsAz(this.props.items, this.props.sortOrder);
+    if (this.props.term !== '') sortedItems = sortedItems.filter(item => item.contains(this.props.term));
 
+    if (sortedItems.length > 0) {
       return (
         <ul className="SidebarList" data-type={this.props.listType}>
           {sortedItems.map(item => {
@@ -107,6 +111,8 @@ class SidebarList extends Component<Props, State> {
           })}
         </ul>
       )
+    } else if (this.props.term !== '') {
+      return <NoItems><Translation name="NoneSearched" ns="SidebarList" /></NoItems>
     } else {
       return <NoItems message={this.props.noItemsTxt} />
     }

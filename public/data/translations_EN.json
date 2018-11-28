@@ -309,7 +309,11 @@
       "Header-class": "Classes",
       "Header-pupil": "Pupils",
       "Header-report": "Reports",
-      "Header-text": "Texts"
+      "Header-text": "Texts",
+      "SearchPlaceholder": "Search texts..."
+    },
+    "SidebarList": {
+      "NoneSearched": "No texts match your search"
     },
     "Symbols": {
       "Add": "+",

@@ -4,6 +4,7 @@ import * as React from 'react';
 import './EditPanelHeader.css';
 
 type Props = {
+  alert: boolean,
   children?: React.Node,
   subtitle: string,
   title: string,
@@ -15,6 +16,7 @@ type Props = {
 */
 export class EditPanelHeader extends React.Component<Props> {
   static defaultProps = {
+    alert: false,
     children: null,
     subtitle: '',
     title: '',
@@ -25,7 +27,7 @@ export class EditPanelHeader extends React.Component<Props> {
   render() {
     return (
       <header className="EditPanelHeader">
-        <h1 className="EditPanelHeader__headline">{this.props.title}<span>{this.props.subtitle}</span></h1>
+        <h1 className="EditPanelHeader__headline">{this.props.title}<span data-alert={this.props.alert}>{this.props.subtitle}</span></h1>
         {
           this.props.children && (
             <div className="EditPanelHeader__controls">

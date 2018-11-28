@@ -1,23 +1,21 @@
 // @flow
 
-import React, { PureComponent } from 'react';
+import * as React from 'react';
 import './SidebarHeader.css';
 
 type Props = {
+  children?: React.Node,
   title: string,
-  search: boolean,
-  sort: boolean,
 };
 
 
 /**
 * Sidebar header.
 */
-class SidebarHeader extends PureComponent<Props> {
+class SidebarHeader extends React.PureComponent<Props> {
   static defaultProps = {
+      children: null,
       title: '',
-      search: true,
-      sort: true,
    };
 
   props: Props;
@@ -26,6 +24,13 @@ class SidebarHeader extends PureComponent<Props> {
     return (
       <header className="SidebarHeader">
         <h1 className="SidebarHeader__headline">{this.props.title}</h1>
+        {
+          this.props.children && (
+            <div className="SidebarHeader__controls">
+              {this.props.children}
+            </div>
+          )
+        }
       </header>
     )
   }

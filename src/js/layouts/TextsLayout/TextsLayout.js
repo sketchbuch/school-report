@@ -1,9 +1,10 @@
 // @flow
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
+import TextInput from '../../components/ui/TextInput/TextInput';
 import Icon from '../../components/Icon/Icon';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
@@ -17,7 +18,11 @@ import { text }  from '../../components/Translation/Translation';
 import { textSort } from '../../types/text';
 import type { CategoryType } from '../../types/category';
 import type { TextType } from '../../types/text';
-import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
+import {
+  ICON_ADD,
+  ICON_CLOSE,
+  ICON_DELETE,
+} from '../../constants/icons';
 import {
   ROUTE_DEL_TEXTS,
   ROUTE_EDIT_TEXT,
@@ -36,17 +41,35 @@ type Props = {
   texts: Array<TextType>,
 };
 
+type State = {
+  term: string,
+};
+
 
 /**
 * Layout for displaying classes.
 */
-export class TextsLayout extends Component<Props> {
+export class TextsLayout extends React.Component<Props, State> {
   static defaultProps = {
       categories: [],
       texts: [],
    };
 
   props: Props;
+  state: State;
+  handleClear: Function;
+  handleSearch: Function;
+
+  constructor(props: Props){
+    super(props);
+
+    this.state = {
+      term: '',
+    };
+
+    this.handleClear = this.handleClear.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+  }
 
   componentDidMount() {
     setTitle(text('WinTitle', 'Texts'));
@@ -54,6 +77,15 @@ export class TextsLayout extends Component<Props> {
 
   componentDidUpdate() {
     if (window.location.pathname === ROUTE_TEXTS) setTitle(text('WinTitle', 'Texts'));
+  }
+
+  handleClear(event: SyntheticInputEvent<HTMLInputElement>) {
+    this.setState({ term: '' });
+  }
+
+  handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
+    const term = event.currentTarget.value;
+    this.setState({ term });
   }
 
   render() {
@@ -81,12 +113,40 @@ export class TextsLayout extends Component<Props> {
         <Icon type={ICON_DELETE} />
       </NavButtonCircular>
     );
+    let searchBox = null;
+
+    if (HAS_TEXTS) {
+      searchBox = (
+        <React.Fragment>
+          <TextInput 
+              className="SidebarHeader__search"
+              onChange={this.handleSearch} 
+              placeholder={text('SearchPlaceholder', 'SidebarHeader')}
+              value={this.state.term}
+          />
+          <span 
+            className="SidebarHeader__searchclear" 
+            onClick={this.handleClear} 
+            title={text('Clear', 'ItemSelection')}
+          >
+            <Icon type={ ICON_CLOSE } />
+          </span>
+        </React.Fragment>
+      );
+    }
 
     return (
       <div className="Panel">
         <Sidebar>
-          <SidebarHeader title={text('Header-text', 'SidebarHeader')} />
-          <SidebarList dispatch={this.props.dispatch} listType="text" items={this.props.texts} noItemsTxt={text('Texts', 'SidebarNoItems')} sortOrder={textSort} />
+          <SidebarHeader title={text('Header-text', 'SidebarHeader')}>{searchBox}</SidebarHeader>
+          <SidebarList 
+            dispatch={this.props.dispatch}
+            items={this.props.texts}
+            listType="text"
+            noItemsTxt={text('Texts', 'SidebarNoItems')}
+            sortOrder={textSort}
+            term={this.state.term}
+          />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>
         <Switch>

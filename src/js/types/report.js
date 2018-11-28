@@ -67,8 +67,7 @@ export function hydrateReport(reportObj: ReportType): ReportType {
       return false;
     },
     getDescription: function () {
-      return '';
-      //return `(${this.classes.length})`;
+      return `(${this.classes.length})`;
     },
     getIcon: function () {
       return ICON_REPORTS;
@@ -77,7 +76,7 @@ export function hydrateReport(reportObj: ReportType): ReportType {
       return this.label;
     },
     getTooltip: function () {
-      return this.getLabel();
+      return`${this.getLabel()} - ${this.getDescription()}`;
     },
     getUrl: function (linkType: string) {
       let theUrl = ROUTE_BUILDER;

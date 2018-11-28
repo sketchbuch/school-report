@@ -52,13 +52,23 @@
 
 .EditPanelHeader__headline span {
   display: inline-block;
+  background: transparent;
   color: var(--col-lighten-5);
-  padding-left: 10px;
+  margin-left: 10px;
+  padding: 0px 6px;
+  border-radius: var(--border-radius);
+}
+
+.EditPanelHeader__headline span[data-alert="true"] {
+  background: var(--col-neg-dark);
+  color: var(--col-lighten-7);
+  border: 1px solid var(--col-darken-2);
 }
 
 .EditPanelHeader__headline span:empty {
   display: none;
-  padding-left: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 
 .EditPanelHeader__controls {
