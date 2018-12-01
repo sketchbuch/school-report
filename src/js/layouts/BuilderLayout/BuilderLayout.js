@@ -146,7 +146,7 @@ export class BuilderLayout extends Component<Props> {
           <SidebarFooter leftActions={leftActions} />
         </Sidebar>
         <Switch>
-          <Route path={ROUTE_EXPORT_BUILDER} render={routerProps => <ExportBuilderLayout {...routerProps} activeReport={this.props.activeReport} />} />
+          <Route path={ROUTE_EXPORT_BUILDER} render={routerProps => <ExportBuilderLayout {...routerProps} activeReport={this.props.activeReport} items={items} />} />
           <Route path={ROUTE_EDIT_BUILDER} render={routerProps => <EditBuilderLayout {...routerProps} activeReport={this.props.activeReport} builder={this.props.builder} items={items} textCount={this.props.textCount} texts={this.props.texts} />} />
           <Route path={ROUTE_BUILDER} render={routerProps => <InfoMsg {...routerProps} headine={text('Builder', 'InfoMsg')} subtext={text('BuilderMsg', 'InfoMsg')} />} />
         </Switch>
