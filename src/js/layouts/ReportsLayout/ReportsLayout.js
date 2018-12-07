@@ -86,7 +86,10 @@ export class ReportsLayout extends Component<Props> {
     return (
       <div className="Panel">
         <Sidebar>
-          <SidebarHeader title={text('Header-report', 'SidebarHeader')} />
+          <SidebarHeader 
+            title={text('Header-report', 'SidebarHeader')}
+            subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.reports.length })}
+          />
           <SidebarList dispatch={this.props.dispatch} listType="report" items={this.props.reports} noItemsTxt={text('Reports', 'SidebarNoItems')} sortOrder={reportSort} />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>

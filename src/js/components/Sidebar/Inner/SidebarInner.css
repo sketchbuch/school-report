@@ -20,6 +20,7 @@
   position: relative;
 }
 
+.SidebarInner--selected,
 .SidebarInner:focus {
   background: var(--col-primary);
 }
@@ -52,4 +53,12 @@
 .SidebarInner__description {
   padding-left: 1.0rem;
   opacity: 0.5;
+}
+
+.SidebarInner__icon {
+  font-size: var(--font-size-medium);
+}
+
+.SidebarInner__icon  .icofont-student {
+  color: #d838b5;
 }

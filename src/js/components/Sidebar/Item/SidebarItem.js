@@ -116,6 +116,9 @@ class SidebarItem extends Component<Props, State> {
     if (this.state.delete) classes += ' SidebarItem--delete';
     if (this.state.deleting) classes += ' SidebarItem--deleting';
 
+    const editUrl = this.props.item.getUrl('edit');
+    const canDelete = window.location.pathname !== editUrl
+
     return (
       <li className={classes} title={this.props.item.getTooltip()}>
         {this.state.delete ? (
@@ -124,9 +127,15 @@ class SidebarItem extends Component<Props, State> {
             <SidebarItemButton handleClick={this.handleClick} title={text('Yes', 'Actions')} action="item-delete-yes" type="pos" icon={ ICON_SUCCESS } />
           </SidebarInner>
         ) : (
-          <SidebarInner link={this.props.item.getUrl('link')} description={this.props.item.getDescription()} label={this.props.item.getLabel()} icon={this.props.item.getIcon()}>
-            <SidebarItemButton handleClick={this.handleClick} title={text('SidebarItemDelete', 'Actions')} action="item-delete" type="neg-rollover" icon={ ICON_DELETE } />
-            <SidebarItemButton title={text('SidebarItemEdit', 'Actions')} action="item-edit" type="default" icon={ ICON_EDIT } link={this.props.item.getUrl('edit')} />
+          <SidebarInner
+            description={this.props.item.getDescription()}
+            icon={this.props.item.getIcon()}
+            label={this.props.item.getLabel()}
+            link={this.props.item.getUrl('link')}
+            linkEdit={editUrl}
+          >
+            {canDelete && <SidebarItemButton handleClick={this.handleClick} title={text('SidebarItemDelete', 'Actions')} action="item-delete" type="neg-rollover" icon={ ICON_DELETE } />}
+            <SidebarItemButton title={text('SidebarItemEdit', 'Actions')} action="item-edit" type="default" icon={ ICON_EDIT } link={editUrl} />
           </SidebarInner>
         )}
       </li>

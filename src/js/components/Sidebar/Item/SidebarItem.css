@@ -51,7 +51,3 @@
   animation-name: sidebaritem-deleting;
   animation-fill-mode: forwards;
 }
-
-.SidebarItem__icon {
-  font-size: var(--font-size-medium);
-}

@@ -50,7 +50,15 @@
   color: var(--col-white);
 }
 
-.EditPanelHeader__headline span {
+.EditPanelHeader__headline span[data-count] {
+  display: inline-block;
+  background: transparent;
+  color: var(--col-lighten-5);
+  margin-left: 10px;
+  padding: 0px 6px;
+}
+
+.EditPanelHeader__headline span[data-alert] {
   display: inline-block;
   background: transparent;
   color: var(--col-lighten-5);

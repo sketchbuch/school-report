@@ -11,13 +11,16 @@ type Props = {
   icon: string,
   label: string,
   link: string,
+  linkEdit: string,
   onClick: Function | null,
 };
 
 const ItemContent = (props: Props) => {
   return (
     <React.Fragment>
-      <Icon type={props.icon} />
+      <span className="SidebarInner__icon">
+        <Icon type={props.icon} />
+      </span>
       <span className="SidebarInner__text">
         <span className="SidebarInner__label">{props.label}</span>
         <span className="SidebarInner__description">{props.description}</span>
@@ -37,14 +40,27 @@ class SidebarInner extends React.Component<Props> {
     icon: '',
     label: '',
     link: '',
+    linkEdit: '',
     onClick: null,
   };
 
   props: Props;
 
   render() {
+    let isSelected = false;
+    if (this.props.link === window.location.pathname) {
+      isSelected = true;
+    } else if (this.props.linkEdit === window.location.pathname) {
+      isSelected = true;
+    }
+    
     if (this.props.link) {
-      return <Link className="SidebarInner" to={this.props.link}><ItemContent {...this.props} /></Link>
+      return (
+        <Link
+          className={isSelected ? 'SidebarInner SidebarInner--selected' : 'SidebarInner'}
+          to={this.props.link}
+        ><ItemContent {...this.props} /></Link>
+      )
     } else {
       return <div onClick={this.props.onClick} className="SidebarInner"><ItemContent {...this.props} /></div>
     }

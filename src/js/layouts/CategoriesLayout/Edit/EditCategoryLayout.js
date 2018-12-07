@@ -62,6 +62,9 @@ export class EditCategoryLayout extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
+    const activeCategory = this.getActiveCategory();
+    setTitle(text('WinTitle', 'EditTextLayout', { TEXT: activeCategory.getLabel() }));
+
     if (this.state.error) {
       toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Texts'));
       this.props.history.push(ROUTE_CATEGORIES);

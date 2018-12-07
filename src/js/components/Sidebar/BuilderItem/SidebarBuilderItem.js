@@ -11,6 +11,7 @@ import '../Item/SidebarItem.css';
 import './SidebarBuilderItem.css';
 
 type Props = {
+  description: ?(pupilId: string, classId: string) => string  | null,
   item: SidebarBuilderItemType,
   itemType: SidebarListTypes,
 };
@@ -25,6 +26,7 @@ type State = {
 */
 class SidebarBuilderItem extends Component<Props, State> {
   static defaultProps = {
+    description: null,
     itemType: 'class',
   };
 
@@ -47,6 +49,7 @@ class SidebarBuilderItem extends Component<Props, State> {
   }
 
   render() {
+    const { description } = this.props;
     const { classRec, pupils } = this.props.item;
 
     let classes = 'SidebarItem SidebarBuilderItem';
@@ -68,7 +71,12 @@ class SidebarBuilderItem extends Component<Props, State> {
             {pupils.map(pupil => {
               return (
                 <li className="SidebarItem" key={pupil.id} title={pupil.getTooltip()}>
-                  <SidebarInner description={pupil.getDescription()} label={pupil.getLabel()} icon={pupil.getIcon()} link={pupil.getUrl('builder', this.props.item.reportId)} />
+                  <SidebarInner 
+                    description={this.props.description ? String(this.props.description(pupil.id, pupil.classId)) : pupil.getDescription()} 
+                    label={pupil.getLabel()} 
+                    icon={pupil.getIcon()}
+                    link={pupil.getUrl('builder', this.props.item.reportId)}
+                  />
                 </li>
               )
             })}

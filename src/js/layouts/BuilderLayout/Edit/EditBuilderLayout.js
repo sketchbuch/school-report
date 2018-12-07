@@ -15,6 +15,7 @@ import { getItemById } from '../../../utils/arrays';
 import type { ReportType } from '../../../types/report';
 import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
 import type { TextType } from '../../../types/text';
+import setTitle from '../../../utils/title';
 import { ICON_CLOSE } from '../../../constants/icons';
 
 type Props = {
@@ -59,6 +60,10 @@ export class EditBuilderLayout extends Component<Props, State> {
 
     this.handleClear = this.handleClear.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+  }
+
+  componentDidMount() {
+    setTitle(text('WinTitle', 'EditBuilderLayout'));
   }
 
   handleClear(event: SyntheticInputEvent<HTMLInputElement>) {
@@ -110,14 +115,15 @@ export class EditBuilderLayout extends Component<Props, State> {
     return (
       <EditPanel>
         <EditPanelHeader 
-          alert={ textCount >= maxChars ? true : false }
+          alert={ maxChars > 0 && textCount >= maxChars ? true : false }
+          count={selectedTexts.length > 0 ? selectedTexts.length : -1}
           title={text(
             'ReportBuilder', 
             'EditPanelHeader', 
             { 'PUPIL_NAME': activePupil.getLabel(), 'CLASS_NAME': activeItem.classRec.getLabel() }
           )}
           subtitle={text(
-            'ReportBuilderCount', 
+            maxChars > 0 ? 'ReportBuilderCount' : 'ReportBuilderCountNoLimit', 
             'EditPanelHeader', 
             { 'TEXT_COUNT': textCount, 'MAX_CHARS': maxChars }
           )}
@@ -130,7 +136,7 @@ export class EditBuilderLayout extends Component<Props, State> {
               activeClass={activeItem.classRec}  
               activePupil={activePupil} 
               activeReport={this.props.activeReport}
-              disableTexts={ textCount >= maxChars ? true : false }
+              disableTexts={ maxChars > 0 && textCount >= maxChars ? true : false }
               term={this.state.term}
             />
           ) : (

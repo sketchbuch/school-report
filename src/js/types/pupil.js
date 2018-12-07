@@ -67,11 +67,16 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
   return {
     ...pupilDefault,
     ...pupilObj,
-    contains: function (term?: string) {
+    contains: function (term?: string, anywhere?: boolean = false) {
       if (term) {
         term = term.toLowerCase();
         const searchStr = this.firstname + this.lastname + this.description;
-        if (term && searchStr.toLowerCase().indexOf(term) !== -1) return true;
+
+        if (!anywhere && searchStr.toLowerCase().indexOf(term) === 0) {
+          return true;
+        } else if (searchStr.toLowerCase().indexOf(term) !== -1) {
+          return true;
+        }
       }
 
       return false;

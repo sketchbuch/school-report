@@ -96,7 +96,10 @@ export class ClassesLayout extends Component<Props> {
     return (
       <div className="Panel">
         <Sidebar>
-          <SidebarHeader title={text('Header-class', 'SidebarHeader')} />
+          <SidebarHeader 
+            title={text('Header-class', 'SidebarHeader')}
+            subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.classes.length })}
+          />
           <SidebarList dispatch={this.props.dispatch} listType="class" items={this.getItems()} noItemsTxt={text('Classes', 'SidebarNoItems')} sortOrder={classSort} />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>

@@ -62,6 +62,9 @@ export class EditClassLayout extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
+    const activeClass = this.getActiveClass();
+    setTitle(text('WinTitle', 'EditClassesLayout', {'CLASS_NAME': activeClass.getLabel()}));
+
     if (this.state.error) {
       toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceEditError', 'Classes'));
       this.props.history.push(ROUTE_CLASSES);

@@ -65,6 +65,9 @@ export class EditTextLayout extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
+    const activeText = this.getActiveText();
+    setTitle(text('WinTitle', 'EditTextLayout', { TEXT: activeText.getLabel() }));
+    
     if (this.state.error) {
       toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Texts'));
       this.props.history.push(ROUTE_TEXTS);

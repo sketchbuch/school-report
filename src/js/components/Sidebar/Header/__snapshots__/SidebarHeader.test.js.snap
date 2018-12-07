@@ -8,6 +8,7 @@ exports[`<SidebarHeader /> Props render correctly 1`] = `
     className="SidebarHeader__headline"
   >
     Test title
+    
   </h1>
 </header>
 `;

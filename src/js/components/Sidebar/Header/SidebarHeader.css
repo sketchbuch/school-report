@@ -46,6 +46,11 @@
   color: var(--col-white);
 }
 
+.SidebarHeader__subheadline {
+  margin-left: 10px;
+  color: var(--col-lighten-5);
+}
+
 .SidebarHeader__controls {
   padding-left: 20px;
   position: relative;

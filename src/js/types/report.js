@@ -57,11 +57,16 @@ export function hydrateReport(reportObj: ReportType): ReportType {
   return {
     ...reportDefault,
     ...reportObj,
-    contains: function (term?: string) {
+    contains: function (term?: string, anywhere?: boolean = false) {
       if (term) {
         term = term.toLowerCase();
         const searchStr = this.label;
-        if (term && searchStr.toLowerCase().indexOf(term) !== -1) return true;
+
+        if (!anywhere && searchStr.toLowerCase().indexOf(term) === 0) {
+          return true;
+        } else if (searchStr.toLowerCase().indexOf(term) !== -1) {
+          return true;
+        }
       }
 
       return false;

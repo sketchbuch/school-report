@@ -57,11 +57,16 @@ export function hydrateClass(classObj: ClassType): ClassType {
   return {
     ...classDefault,
     ...classObj,
-    contains: function (term?: string) {
+    contains: function (term?: string, anywhere?: boolean = false) {
       if (term) {
         term = term.toLowerCase();
-        const searchStr = this.label + this.pupilCount;
-        if (term && searchStr.toLowerCase().indexOf(term) !== -1) return true;
+        const searchStr = this.label + this.pupilCount;;
+
+        if (!anywhere && searchStr.toLowerCase().indexOf(term) === 0) {
+          return true;
+        } else if (searchStr.toLowerCase().indexOf(term) !== -1) {
+          return true;
+        }
       }
 
       return false;

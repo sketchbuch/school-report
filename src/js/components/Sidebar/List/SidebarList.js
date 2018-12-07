@@ -17,6 +17,7 @@ import './SidebarList.css';
 
 type Props = {
   builder: boolean,
+  description: ?(pupilId: string, classId: string) => string  | null,
   dispatch: Function,
   items: Array<Object>;
   listType: SidebarListTypes,
@@ -43,6 +44,7 @@ const actions = {
 */
 class SidebarList extends Component<Props, State> {
   static defaultProps = {
+    description: null,
     builder: false,
     items: [],
     listType: 'class',
@@ -96,7 +98,7 @@ class SidebarList extends Component<Props, State> {
         <ul className="SidebarList" data-type={this.props.listType}>
           {sortedItems.map(item => {
             if (this.props.builder) {
-              return <SidebarBuilderItem item={item} itemType={this.props.listType} key={item.id} />;
+              return <SidebarBuilderItem description={this.props.description} item={item} itemType={this.props.listType} key={item.id} />;
             } else {
               return <SidebarItem
                 isNew={!this.state.existingItems.includes(item.id)}

@@ -64,6 +64,9 @@ export class EditPupilLayout extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
+    const activePupil = this.getActivePupil();
+    setTitle(text('WinTitle', 'EditPupilLayout', {'PUPIL_NAME': activePupil.getLabel()}));
+
     if (this.state.error) {
       toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Pupils'));
       this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));

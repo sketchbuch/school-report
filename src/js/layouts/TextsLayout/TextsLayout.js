@@ -138,7 +138,12 @@ export class TextsLayout extends React.Component<Props, State> {
     return (
       <div className="Panel">
         <Sidebar>
-          <SidebarHeader title={text('Header-text', 'SidebarHeader')}>{searchBox}</SidebarHeader>
+          <SidebarHeader 
+            title={text('Header-text', 'SidebarHeader')}
+            subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.texts.length })}
+          >
+            {searchBox}
+          </SidebarHeader>
           <SidebarList 
             dispatch={this.props.dispatch}
             items={this.props.texts}

@@ -81,7 +81,10 @@ export class CategoriesLayout extends Component<Props> {
     return (
       <div className="Panel">
         <Sidebar>
-          <SidebarHeader title={text('Header-category', 'SidebarHeader')} />
+          <SidebarHeader 
+            title={text('Header-category', 'SidebarHeader')}
+            subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.categories.length })}
+          />
           <SidebarList dispatch={this.props.dispatch} listType="category" items={this.props.categories} noItemsTxt={text('Categories', 'SidebarNoItems')} sortOrder={categorySort} />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>

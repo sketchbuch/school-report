@@ -21,6 +21,7 @@ import type { PupilType } from '../../types/pupil';
 import type { ReportType } from '../../types/report';
 import type { TextType } from '../../types/text';
 import type { SidebarBuilderItemType } from '../../types/sidebarBuilderItem';
+import { getSelectedTexts } from '../../utils/redux';
 import { ICON_EXPORT } from '../../constants/icons';
 import {
   ROUTE_BUILDER,
@@ -116,7 +117,10 @@ export class BuilderLayout extends Component<Props> {
   }
 
   render() {
+    const { activeReport, builder } = this.props;
     const items = this.getItems();
+    const classCount = items.length;
+    const pupilCount = items.reduce((curCount, curClass) => curCount + curClass.classRec.pupilCount, 0);
     const CAN_EXPORT = this.canExport(items);
     const leftActions = (
       <NavButtonCircular
@@ -125,18 +129,27 @@ export class BuilderLayout extends Component<Props> {
         className="SidebarFooter__action"
         disabled={!CAN_EXPORT}
         title={text('ReportExport', 'Actions')}
-        to={ROUTE_EXPORT_BUILDER.replace(':reportId', this.props.activeReport.id,)}
+        to={ROUTE_EXPORT_BUILDER.replace(':reportId', activeReport.id,)}
       >
         <Icon type={ICON_EXPORT} />
       </NavButtonCircular>
     );
 
+    const pupilBuilderSelectedCount = (pupilId: string, classId: string): string => {
+      const selectedTexts = getSelectedTexts(builder, activeReport.id, classId, pupilId);
+      return selectedTexts.length > 0 ? `(${selectedTexts.length})` : '';
+    }
+
     return (
       <div className="Panel">
-        <Sidebar footer={false}>
-          <SidebarHeader title={text('Header-build', 'SidebarHeader')} />
+        <Sidebar>
+          <SidebarHeader 
+            title={text('Header-build', 'SidebarHeader')}
+            subtitle={text('Subheader-countmulti', 'SidebarHeader', { COUNT1: classCount, COUNT2: pupilCount })}
+          />
           <SidebarList
             builder={true}
+            description={pupilBuilderSelectedCount}
             dispatch={this.props.dispatch}
             items={items}
             listType="class"

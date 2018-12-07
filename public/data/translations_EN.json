@@ -144,9 +144,13 @@
       "EditText": "Edit '%TEXT%'",
       "ReportBuilder": "Report for '%PUPIL_NAME%'",
       "ReportBuilderCount": "%TEXT_COUNT%/%MAX_CHARS%",
+      "ReportBuilderCountNoLimit": "%TEXT_COUNT%",
       "ReportExport": "Export '%REPORT_NAME%'",
       "Settings": "Settings",
       "SearchPlaceholder": "Search texts..."
+    },
+    "EditBuilderLayout": {
+      "WinTitle": "Build Report"
     },
     "ExportBuilderLayout": {
       "PersistenceError": "Report not exported",
@@ -310,7 +314,9 @@
       "Header-pupil": "Pupils",
       "Header-report": "Reports",
       "Header-text": "Texts",
-      "SearchPlaceholder": "Search texts..."
+      "SearchPlaceholder": "Search texts...",
+      "Subheader-count": "(%COUNT%)",
+      "Subheader-countmulti": "(%COUNT1% / %COUNT2%)"
     },
     "SidebarList": {
       "NoneSearched": "No texts match your search"

@@ -14,6 +14,7 @@ describe('<SidebarInner />', () => {
       icon: '',
       label: '',
       link: '',
+      linkEdit: '',
       onClick: null,
     };
 

@@ -5,9 +5,14 @@ exports[`<EditPanelHeader /> Props render correctly 1`] = `
   className="EditPanelHeader"
 >
   <h1
-    className="EditPanelHeader_headline"
+    className="EditPanelHeader__headline"
   >
     Test title
+    <span
+      data-alert={false}
+    >
+      
+    </span>
   </h1>
 </header>
 `;

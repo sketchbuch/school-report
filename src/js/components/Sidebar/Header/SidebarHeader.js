@@ -5,6 +5,7 @@ import './SidebarHeader.css';
 
 type Props = {
   children?: React.Node,
+  subtitle: string,
   title: string,
 };
 
@@ -15,6 +16,7 @@ type Props = {
 class SidebarHeader extends React.PureComponent<Props> {
   static defaultProps = {
       children: null,
+      subtitle: '',
       title: '',
    };
 
@@ -23,7 +25,10 @@ class SidebarHeader extends React.PureComponent<Props> {
   render() {
     return (
       <header className="SidebarHeader">
-        <h1 className="SidebarHeader__headline">{this.props.title}</h1>
+        <h1 className="SidebarHeader__headline">
+          {this.props.title}
+          {this.props.subtitle && <span className="SidebarHeader__subheadline">{this.props.subtitle}</span>}
+        </h1>
         {
           this.props.children && (
             <div className="SidebarHeader__controls">
