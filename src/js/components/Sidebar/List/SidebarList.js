@@ -1,8 +1,9 @@
 // @flow
 
-import React, { Component, Fragment } from 'react';
+import * as React from 'react';
 import NoItems from '../../NoItems/NoItems';
 import Translation from '../../Translation/Translation';
+import SidebarSubheader from '../Subheader/SidebarSubheader';
 import SidebarItem from '../Item/SidebarItem';
 import SidebarPageBrowser from '../PageBrowser/SidebarPageBrowser';
 import SidebarBuilderItem from '../BuilderItem/SidebarBuilderItem';
@@ -19,8 +20,10 @@ import './SidebarList.css';
 
 type Props = {
   builder: boolean,
+  children?: React.Node,
   description: ?(pupilId: string, classId: string) => string  | null,
   dispatch: Function,
+  filter: string,
   items: Array<Object>;
   listType: SidebarListTypes,
   noItemsTxt: string,
@@ -48,10 +51,11 @@ const actions = {
 /**
 * Sidebar list of items
 */
-class SidebarList extends Component<Props, State> {
+class SidebarList extends React.Component<Props, State> {
   static defaultProps = {
     builder: false,
     description: null,
+    filter: '',
     items: [],
     listType: 'class',
     pagesToShow: 3,
@@ -105,9 +109,26 @@ class SidebarList extends Component<Props, State> {
     this.setState({ curPage });
   }
 
-  renderContent() {
+  getSortedItems() {
     let sortedItems = sortObjectsAz(this.props.items, this.props.sortOrder);
+
+    if (this.props.filter) {
+      if (this.props.filter !== 'category-all') {
+        if (this.props.filter === 'category-nocat') {
+          sortedItems = sortedItems.filter(item => item.categories.length === 0);
+        } else {
+          sortedItems = sortedItems.filter(item => item.categories.includes(this.props.filter));
+        }
+      }
+    }
+
     if (this.props.term !== '') sortedItems = sortedItems.filter(item => item.contains(this.props.term));
+
+    return sortedItems;
+  }
+
+  renderContent() {
+    let sortedItems = this.getSortedItems();
     const itemForPaging = sortedItems.length;
 
     if (this.props.usePb) {
@@ -125,9 +146,11 @@ class SidebarList extends Component<Props, State> {
       };
       let classes = 'SidebarList';
       if (showPb) classes += ' SidebarList--pb';
+      if (this.props.children) classes += ' SidebarList--sh';
 
       return (
-        <Fragment>
+        <React.Fragment>
+          {this.props.children && <SidebarSubheader>{this.props.children}</SidebarSubheader>}
           <ul className={classes} data-type={this.props.listType}>
             {sortedItems.map(item => {
               if (this.props.builder) {
@@ -146,7 +169,7 @@ class SidebarList extends Component<Props, State> {
             })}
           </ul>
           {showPb && <SidebarPageBrowser {...pbProps} onChange={this.handlePbChange} />}
-        </Fragment>
+        </React.Fragment>
       )
     } else if (this.props.term !== '') {
       return <NoItems><Translation name="NoneSearched" ns="SidebarList" /></NoItems>
