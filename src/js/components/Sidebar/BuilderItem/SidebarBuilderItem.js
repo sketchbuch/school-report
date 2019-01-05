@@ -49,7 +49,6 @@ class SidebarBuilderItem extends Component<Props, State> {
   }
 
   render() {
-    const { description } = this.props;
     const { classRec, pupils } = this.props.item;
 
     let classes = 'SidebarItem SidebarBuilderItem';

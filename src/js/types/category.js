@@ -7,7 +7,6 @@ import { ICON_CATEGORIES } from '../constants/icons';
 import {
   ROUTE_DEL_CATEGORY,
   ROUTE_EDIT_CATEGORY,
-  ROUTE_CATEGORIES,
 } from '../constants/routes';
 
 /**
