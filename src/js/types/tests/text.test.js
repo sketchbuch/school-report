@@ -13,6 +13,7 @@ describe('Types: Text', () => {
   const textObj = {
     ...textDefault,
     bodytext: 'A text',
+    charCount: 6,
     created: -1,
     updated: -2,
   };
@@ -22,6 +23,7 @@ describe('Types: Text', () => {
   const testText = {
     ...textDefault,
     bodytext: 'A text',
+    charCount: 6,
     created: ts,
     id: id,
     lang: langCode,
