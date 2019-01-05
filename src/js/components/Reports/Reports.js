@@ -80,6 +80,8 @@ export class Reports extends Component<Props, State> {
       this.props.activeClass.id,
       this.props.activePupil.id,
       [...this.state.dragSelected],
+      ()=>{},
+      true,
     );
 
     this.setState({ dragSelected: [] });
@@ -118,6 +120,8 @@ export class Reports extends Component<Props, State> {
       this.props.activeClass.id,
       this.props.activePupil.id,
       selected,
+      ()=>{},
+      false,
     );
   }
 
@@ -162,8 +166,15 @@ const mapStateToProps = (state: Object, props: Props) => {
 
 const mapDispatchToProps = (dispatch: DispatchType) => {
   return {
-    saveReports: (reportId: string, classId: string, pupilId: string, selected: Array<string>, callback?: Function = ()=>{}) => {
-      dispatch(builderActions.save(reportId, classId, pupilId, selected, callback));
+    saveReports: (
+      reportId: string,
+      classId: string,
+      pupilId: string,
+      selected: Array<string>,
+      callback?: Function = ()=>{},
+      immediate: boolean,
+    ) => {
+      dispatch(builderActions.save(reportId, classId, pupilId, selected, callback, immediate));
     },
   }
 }

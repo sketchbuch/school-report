@@ -12,7 +12,14 @@ import type { ActionCreator } from '../types/action';
 * Builder Actions
 */
 
-export function save(reportId: string, classId: string, pupilId: string, selected: Array<string>, callback: Function): ActionCreator {
+export function save(
+  reportId: string, 
+  classId: string, 
+  pupilId: string, 
+  selected: Array<string>, 
+  callback: Function,
+  immediate: boolean,
+): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: SAVE_BUILDER,
@@ -23,6 +30,6 @@ export function save(reportId: string, classId: string, pupilId: string, selecte
         pupilId,
       },
     });
-    persist(dispatch, getState, callback, [FILE_BUILDER]);
+    persist(dispatch, getState, callback, [FILE_BUILDER], immediate);
   };
 }
