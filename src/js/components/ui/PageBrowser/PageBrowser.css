@@ -33,6 +33,15 @@
   text-align: center;
 }
 
+
+/* Disabled */
+.PageBrowser__btn[disabled],
+.PageBrowser__btn[disabled]:focus,
+.PageBrowser__btn[disabled]:hover,
+.PageBrowser__btn[disabled]:active {
+  background: transparent;
+}
+
 .PageBrowser__btn--page {
   transition: none;
 }

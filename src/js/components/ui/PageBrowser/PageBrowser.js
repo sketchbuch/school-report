@@ -69,10 +69,6 @@ class PageBrowser extends Component<Props> {
       const btn = event.currentTarget;
       const { action } = btn.dataset;
       
-      if (action === 'first') {
-        this.props.onChange(1);
-      }
-      
       switch(action) {
         case 'first':
           this.props.onChange(1);
@@ -155,11 +151,14 @@ class PageBrowser extends Component<Props> {
       pages.push(<PbBut key={'page-' + p} label={p} title={p} type={p} selected={sel} page onClick={this.handleClick} />);
     }
 
+    const showLeftMore = (curPage > middle) && (totalPages > pagesToShow);
+    const showRightMore = (curPage < totalPages - Math.floor(pagesToShow / 2)) && (totalPages > pagesToShow);
+
     return (
       <div className="PageBrowser__centre">
-        {curPage > middle ? <PbMore /> : <PbMore hidden />}
+        {showLeftMore ? <PbMore /> : <PbMore hidden />}
         {pages}
-        {(curPage < totalPages - Math.floor(pagesToShow / 2)) ? <PbMore /> : <PbMore hidden />}
+        {showRightMore ? <PbMore /> : <PbMore hidden />}
       </div>
     )
   }

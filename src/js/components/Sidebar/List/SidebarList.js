@@ -111,7 +111,7 @@ class SidebarList extends Component<Props, State> {
     const itemForPaging = sortedItems.length;
 
     if (this.props.usePb) {
-      const itemstart = this.state.curPage - 1;
+      const itemstart = 0 + (this.props.perPage * (this.state.curPage - 1));
       sortedItems = sortedItems.slice(itemstart, itemstart + this.props.perPage);
     }
 
