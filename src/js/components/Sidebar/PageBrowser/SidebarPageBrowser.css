@@ -1,0 +1,22 @@
+.SidebarPageBrowser {
+  position: absolute;
+  bottom: var(--sidebar-footer-height);
+  left: 0px;
+  margin: 0px;
+  padding: 10px 20px;
+  width: 100%;
+  height: var(--sidebar-footer-height);
+  border-top: 1px solid var(--col-darken-2);
+  background: var(--col-lighten-1);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 1024px) {
+    .SidebarPageBrowser {
+      border-right: 1px solid var(--col-sidebar-border);
+    }
+}

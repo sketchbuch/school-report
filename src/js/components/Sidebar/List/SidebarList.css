@@ -11,6 +11,10 @@
   overflow-x: hidden;
 }
 
+.SidebarList--pb {
+  height: calc(100% - 7.0rem);
+}
+
 @media screen and (min-width: 1024px) {
     .SidebarList {
       border-right: 1px solid var(--col-sidebar-border);
