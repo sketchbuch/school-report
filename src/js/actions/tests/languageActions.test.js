@@ -8,7 +8,6 @@ import {
   LOAD_LANGUAGE,
   CHANGE_LANGUAGE,
 } from '../../constants/actionTypes';
-import testData from '../../components/Translation/testData';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

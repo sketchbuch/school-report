@@ -1,14 +1,10 @@
 // @flow
 
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import ReportsCatSelect from './ReportsCatSelect';
 import categoryDefault from '../../../types/category';
 import textDefault from '../../../types/text';
-import '../../Translation/testData';
-
-configure({ adapter: new Adapter() });
 
 describe('<ReportsCatSelect />', () => {
   const props = {

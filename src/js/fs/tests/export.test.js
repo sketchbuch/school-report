@@ -1,7 +1,5 @@
 // @flow
 
-import JSZip from 'jszip';
-import Docxtemplater from 'docxtemplater';
 import {
   exportWord,
   getContent,
@@ -10,9 +8,7 @@ import {
 import classDefault, { ClassFactory } from '../../types/class';
 import pupilDefault, { PupilFactory } from '../../types/pupil';
 import textDefault, { TextFactory } from '../../types/text';
-import type { PupilType } from '../../types/pupil';
 import { text } from '../../components/Translation/Translation';
-import '../../components/Translation/testData';
 
 jest.mock('jszip', () => jest.fn(()=>{}));
 

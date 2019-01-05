@@ -1,12 +1,7 @@
 import React from 'react';
-import { mount, shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { MemoryRouter } from 'react-router-dom';
+import { mount, shallow } from 'enzyme';
 import classDefault, { ClassFactory } from '../../../types/class';
 import ItemSelection from './ItemSelection';
-import '../../Translation/testData';
-
-configure({ adapter: new Adapter() });
 
 describe('<ItemSelection />', () => {
     const defaultProps = {

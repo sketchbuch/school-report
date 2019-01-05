@@ -1,22 +1,18 @@
 // @flow
 
 import React from 'react';
-import { mount, shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount, shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import textDefault, { TextFactory } from '../../../types/text';
 import SidebarList from './SidebarList';
-import SidebarInner from '../Inner/SidebarInner';
-import persist from '../../../fs/persist';
 import { DELETE_TEXT } from '../../../constants/actionTypes';
-import '../../Translation/testData';
 
 jest.mock('../Inner/SidebarInner', () => ()=> <div className="SidebarInner" />);
 jest.mock('../../../fs/persist', () => (dispatch: Function, getState: Function, callback: Function, content: Array<string>)=> {
   callback();
 });
-configure({ adapter: new Adapter() });
+
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

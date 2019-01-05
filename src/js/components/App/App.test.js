@@ -2,14 +2,10 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { mount, shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount, shallow } from 'enzyme';
 import { App } from './App';
 import appDefault from '../../types/app';
 import store from '../../store/redux';
-import '../Translation/testData';
-
-configure({ adapter: new Adapter() });
 
 describe('<App />', () => {
   const props = {

@@ -2,12 +2,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount, shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount, shallow } from 'enzyme';
 import Translation from './Translation';
-import './testData';
-
-configure({ adapter: new Adapter() });
 
 const windowApp = {...window.reportr};
 

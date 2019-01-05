@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow, mount } from 'enzyme';
 import Textarea from './Textarea';
-
-configure({ adapter: new Adapter() });
 
 describe('<Textarea />', () => {
   test('Renders without crashing', () => {

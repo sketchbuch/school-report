@@ -3,7 +3,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SidebarFooter from './SidebarFooter';
-import '../../Translation/testData';
 
 
 describe('<SidebarFooter />', () => {

@@ -116,6 +116,9 @@
     "EditClassesLayout": {
       "WinTitle": "Edit class '%CLASS_NAME%'"
     },
+    "EditCategoryLayout": {
+      "WinTitle": "Edit category '%CAT%'"
+    },
     "EditPupilLayout": {
       "WinTitle": "Edit pupil '%PUPIL_NAME%'"
     },

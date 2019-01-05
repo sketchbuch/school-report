@@ -1,8 +1,12 @@
-// @flow
+import 'jest-localstorage-mock';
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+
+configure({ adapter: new Adapter() });
 
 window.reportr = {
-  translations: {
-    EN: {
+  "translations": {
+    "EN": {
       "App": {
         "Name": "School Report",
         "Placeholder": "This is the placeholder: %PH%"
@@ -43,7 +47,7 @@ window.reportr = {
         "ErrorTxt": "Error Saving Data"
       }
     },
-    DE: {
+    "DE": {
       "App": {
         "Name": "DE - School Report",
         "Placeholder": "DE - This is the placeholder: %PH%"
@@ -83,9 +87,9 @@ window.reportr = {
         "BusyTxt": "DE - Saving Data",
         "ErrorTxt": "DE - Error Saving Data"
       }
-    }
+    },
   },
-  languages: ['EN', 'DE'],
-  curLang: 'EN',
-  defLang: 'EN'
+  "languages": ['EN'],
+  "curLang": 'EN',
+  "defLang": 'EN'
 };

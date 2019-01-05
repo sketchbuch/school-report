@@ -1,14 +1,10 @@
 // @flow
 
 import React from 'react';
-import { mount, shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount, shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import EditCategoryForm from './EditCategoryForm';
 import { text } from '../../../components/Translation/Translation';
-import '../../../components/Translation/testData';
-
-configure({ adapter: new Adapter() });
 
 describe('<EditCategoryForm />', () => {
   const props = {

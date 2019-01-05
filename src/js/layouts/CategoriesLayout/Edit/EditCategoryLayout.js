@@ -61,12 +61,13 @@ export class EditCategoryLayout extends Component<Props, State> {
   }
 
   componentDidMount() {
-    setTitle(text('WinTitle', 'EditTextLayout', { TEXT: this.state.category.getLabel() }));
+    setTitle(text('WinTitle', 'EditCategoryLayout', { CAT: this.state.category.getLabel() }));
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    const activeCategory = this.getActiveCategory();
-    setTitle(text('WinTitle', 'EditTextLayout', { TEXT: activeCategory.getLabel() }));
+    const activeId = this.props.match.params !== undefined ? this.props.match.params.categoryId : '';
+    const activeCategory = getActiveCategory(this.props.categories, activeId);
+    setTitle(text('WinTitle', 'EditCategoryLayout', { CAT: activeCategory.getLabel() }));
 
     if (this.state.error) {
       toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Texts'));

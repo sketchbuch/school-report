@@ -1,8 +1,6 @@
 // @flow
 
 import setTitle, { titleSep } from '../title';
-import '../../components/Translation/testData';
-
 
 /**
 * ID Tests

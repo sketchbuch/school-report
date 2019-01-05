@@ -1,15 +1,11 @@
 // @flow
 
 import React from 'react';
-import { mount, shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount, shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import SidebarBuilderItem from './SidebarBuilderItem';
 import  classDefault, { ClassFactory } from '../../../types/class';
 import  pupilDefault, { PupilFactory } from '../../../types/pupil';
-import '../../Translation/testData';
-
-configure({ adapter: new Adapter() });
 
 describe('<SidebarBuilderItem />', () => {
   const classRec = ClassFactory({...classDefault, label: 'Starbug' }, Date.now());

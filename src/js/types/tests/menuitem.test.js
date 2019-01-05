@@ -2,7 +2,6 @@
 
 import menuItemDefault, { MenuItemFactory, getMenuItemIdStr } from '../menuitem';
 import { generateId } from '../../utils/ids';
-import '../../components/Translation/testData';
 
 describe('Types: Menuitem', () => {
   const langCode = 'EN';

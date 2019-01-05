@@ -1,9 +1,6 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import NotFound from './NotFound';
-
-configure({ adapter: new Adapter() });
 
 it('<NotFound /> - Renders without crashing', () => {
   const wrapper = shallow(<NotFound />);
