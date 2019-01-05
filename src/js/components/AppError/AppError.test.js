@@ -3,7 +3,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppError from './AppError';
-import '../Translation/testData';
 
 describe('<AppError />', () => {
   const props = {

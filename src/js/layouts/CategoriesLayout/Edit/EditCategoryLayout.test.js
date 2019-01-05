@@ -1,24 +1,25 @@
 // @flow
 
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import EditCategoryLayout from './EditCategoryLayout';
 import { ROUTE_CATEGORIES } from '../../../constants/routes';
-import '../../../components/Translation/testData';
-
-configure({ adapter: new Adapter() });
-
+import categoryDefault, { CategoryFactory } from '../../../types/category';
 
 describe('<EditCategoryLayout />', () => {
+  const cat = CategoryFactory({...categoryDefault, label: 'Test'}, Date.now());
   const props = {
-    categories: [],
+    categories: [cat],
     dispatch: jest.fn(),
     history: {
       push: jest.fn(),
     },
     location: {},
-    match: {},
+    match: {
+      params: {
+        categoryId: cat.id,
+      },
+    },
   }
 
   test('Renders without crashing', () => {

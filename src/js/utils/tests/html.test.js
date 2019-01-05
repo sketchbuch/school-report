@@ -2,8 +2,6 @@
 
 import { getPupilTextHtml } from '../html';
 import pupilDefault, { PupilFactory } from '../../types/pupil';
-import '../../components/Translation/testData';
-
 
 /**
 * ID Tests

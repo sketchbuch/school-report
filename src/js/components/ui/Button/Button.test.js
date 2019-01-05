@@ -2,12 +2,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow, mount } from 'enzyme';
 import Button from './Button';
-import { UI_ERROR_CLASS } from '../../../constants/ui';
-
-configure({ adapter: new Adapter() });
 
 describe('<Button />', () => {
   test('Renders without crashing', () => {

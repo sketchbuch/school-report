@@ -34,7 +34,6 @@ export class ExportBuilderForm extends Component<Props> {
 
   render() {
     const {
-      dirty,
       errors,
       handleBlur,
       handleChange,

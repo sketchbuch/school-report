@@ -2,19 +2,15 @@
 
 import React from 'react';
 import { Provider } from 'react-redux';
-import { mount, shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import store from '../../store/redux';
-import ConnectedReports, { Reports } from './Reports';
+import ConnectedReports from './Reports';
 import categoryDefault, { CategoryFactory } from '../../types/category';
 import classDefault, { ClassFactory } from '../../types/class';
 import pupilDefault, { PupilFactory } from '../../types/pupil';
 import reportDefault, { ReportFactory } from '../../types/report';
 import textDefault, { TextFactory } from '../../types/text';
-import '../Translation/testData';
 import { CLIENT_RENEG_LIMIT } from 'tls';
-
-configure({ adapter: new Adapter() });
 
 describe('<Reports />', () => {
   const ACTIVE_REPORT = ReportFactory({...reportDefault, label: 'Test Report'}, Date.now());

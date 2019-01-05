@@ -1,11 +1,7 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { MemoryRouter } from 'react-router-dom';
+import { shallow } from 'enzyme';
 import classDefault from '../../../types/class';
 import ItemList from './ItemList';
-
-configure({ adapter: new Adapter() });
 
 describe('<ItemList />', () => {
     const defaultProps = {

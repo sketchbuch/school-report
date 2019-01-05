@@ -1,5 +1,12 @@
 // @flow
 
+import React from 'react';
+import { Provider } from 'react-redux';
+import { mount, shallow } from 'enzyme';
+import { MemoryRouter } from 'react-router-dom';
+import Header from './Header';
+import store from '../../store/redux';
+
 jest.doMock('./Path/HeaderPath', () => {
   const HeaderPath = (props) => {
     console.log('path', props.path);
@@ -7,33 +14,6 @@ jest.doMock('./Path/HeaderPath', () => {
   };
   return HeaderPath;
 });
-
-import React from 'react';
-import { Provider } from 'react-redux';
-import { mount, shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { MemoryRouter } from 'react-router-dom';
-import Header from './Header';
-import {
-  ROUTE_BUILDER,
-  ROUTE_CATEGORIES,
-  ROUTE_CLASSES,
-  ROUTE_EDIT_BUILDER,
-  ROUTE_EDIT_CATEGORY,
-  ROUTE_EDIT_CLASS,
-  ROUTE_EDIT_PUPIL,
-  ROUTE_EDIT_REPORT,
-  ROUTE_EDIT_TEXT,
-  ROUTE_HOME,
-  ROUTE_PUPILS,
-  ROUTE_REPORTS,
-  ROUTE_SETTINGS,
-  ROUTE_TEXTS,
-} from '../../constants/routes';
-import store from '../../store/redux';
-import '../Translation/testData';
-
-configure({ adapter: new Adapter() });
 
 describe('<Header />', () => {
   const props = {

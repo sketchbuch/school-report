@@ -2,11 +2,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow, mount } from 'enzyme';
 import ButtonCircular from './ButtonCircular';
-
-configure({ adapter: new Adapter() });
 
 describe('<ButtonCircular />', () => {
   test('Renders without crashing', () => {

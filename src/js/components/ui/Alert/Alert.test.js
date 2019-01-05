@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 import Alert from './Alert';
-
-configure({ adapter: new Adapter() });
 
 describe('<Alert />', () => {
   const props = {

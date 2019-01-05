@@ -60,7 +60,9 @@ export default class Translation extends Component<Props> {
     if (this.prevLang !== window.reportr.curLang) return true;
     if (this.props.name !== nextProps.name) return true;
     if (this.props.ns !== nextProps.ns) return true;
-    if (JSON.stringify(this.props.placeholders) !== JSON.stringify(nextProps.placeholders)) return true;
+    if (this.props.placeholders && nextProps.placeholders) {
+      if (JSON.stringify(this.props.placeholders) !== JSON.stringify(nextProps.placeholders)) return true;
+    }
 
     return false;
   }

@@ -16,10 +16,8 @@ export default function reducer(state: Object = {}, action: Object) {
     case REPLACE_DATA:
     case UPDATE_SETTINGS:
     case SETTINGS_LOADED:
-      if (action.payload && action.payload.settings !== undefined) return {...action.payload.settings};
-
+      if (action.payload && action.payload.settings !== undefined) return {...state, ...action.payload.settings};
       break;
-
     default:
       return state;
   }

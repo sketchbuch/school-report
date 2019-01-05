@@ -1,11 +1,8 @@
 // @flow
 
 import React from 'react';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import Sidebar from './Sidebar';
-
-configure({ adapter: new Adapter() });
 
 describe('<Sidebar />', () => {
   test('Renders without crashing', () => {

@@ -1,13 +1,9 @@
 // @flow
 
 import React from 'react';
-import { mount, shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import renderer from 'react-test-renderer';
+import { mount, shallow } from 'enzyme';
 import SidebarItem from './SidebarItem';
-import SidebarInner from '../Inner/SidebarInner';
 import ClassDefault, { ClassFactory } from '../../../types/class';
-import '../../Translation/testData';
 
 jest.mock('../Inner/SidebarInner', () => (props: Object)=> {
   if (props.link) {
@@ -17,7 +13,7 @@ jest.mock('../Inner/SidebarInner', () => (props: Object)=> {
   }
 });
 jest.useFakeTimers();
-configure({ adapter: new Adapter() });
+
 
 describe('<SidebarItem />', () => {
   const props = {

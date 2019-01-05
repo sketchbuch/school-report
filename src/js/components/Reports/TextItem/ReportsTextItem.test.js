@@ -1,14 +1,10 @@
 // @flow
 
 import React from 'react';
-import TestUtils from 'react-dom/test-utils';
-import { shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { shallow } from 'enzyme';
 import ReportsTextItem from './ReportsTextItem';
 import pupilDefault, { PupilFactory } from '../../../types/pupil';
 import textDefault, { TextFactory } from '../../../types/text';
-
-configure({ adapter: new Adapter() });
 
 describe('<ReportsTextItem />', () => {
   const props = {

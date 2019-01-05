@@ -1,15 +1,10 @@
 // @flow
 import React from 'react';
-import { mount, shallow, configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount, shallow } from 'enzyme';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import store from '../../../store/redux';
-import { getBreadcrumbs } from '../../../utils/redux';
 import HeaderPath from './HeaderPath';
-import '../../Translation/testData';
-
-configure({ adapter: new Adapter() });
 
 jest.mock('../../../utils/redux', () => {
   return {

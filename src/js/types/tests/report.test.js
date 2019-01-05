@@ -44,7 +44,7 @@ describe('Types: Report', () => {
     const newReportObj = ReportFactory(reportObj, ts);
 
     test('getDescription() correctly returns the description', () => {
-      expect(newReportObj.getDescription()).toEqual('');
+      expect(newReportObj.getDescription()).toEqual(`(${reportObj.classes.length})`);
     });
 
     test('getIcon() correctly returns the icon', () => {
@@ -56,7 +56,7 @@ describe('Types: Report', () => {
     });
 
     test('getTooltip() correctly returns the tooltip', () => {
-      expect(newReportObj.getTooltip()).toEqual(newReportObj.label);
+      expect(newReportObj.getTooltip()).toEqual(`${newReportObj.label} - (${reportObj.classes.length})`);
     });
 
     describe('contains()', () => {

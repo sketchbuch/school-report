@@ -9,7 +9,6 @@ import {
   SETTINGS_LOADED,
 } from '../../constants/actionTypes';
 import settingsDefault from '../../types/settings';
-import testData from '../../components/Translation/testData';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
