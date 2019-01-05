@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
+import ReportsCatSelect from '../../components/Reports/CatSelect/ReportsCatSelect';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import TextInput from '../../components/ui/TextInput/TextInput';
 import Icon from '../../components/Icon/Icon';
@@ -42,6 +43,7 @@ type Props = {
 };
 
 type State = {
+  option: string,
   term: string,
 };
 
@@ -59,16 +61,19 @@ export class TextsLayout extends React.Component<Props, State> {
   state: State;
   handleClear: (event: SyntheticInputEvent<HTMLInputElement>) => void;
   handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
+  handleFilterChanage: (event: SyntheticInputEvent<HTMLInputElement>) => void;
 
   constructor(props: Props){
     super(props);
 
     this.state = {
+      option: 'category-all',
       term: '',
     };
 
     this.handleClear = this.handleClear.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleFilterChanage = this.handleFilterChanage.bind(this);
   }
 
   componentDidMount() {
@@ -86,6 +91,10 @@ export class TextsLayout extends React.Component<Props, State> {
   handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
     const term = event.currentTarget.value;
     this.setState({ term });
+  }
+
+  handleFilterChanage(event: SyntheticInputEvent<HTMLInputElement>) {
+    this.setState({option: event.target.value});
   }
 
   render() {
@@ -151,8 +160,18 @@ export class TextsLayout extends React.Component<Props, State> {
             noItemsTxt={text('Texts', 'SidebarNoItems')}
             sortOrder={textSort}
             term={this.state.term}
+            filter={this.state.option}
             usePb
-          />
+          >
+            <ReportsCatSelect 
+              categories={this.props.categories} 
+              onChange={this.handleFilterChanage} 
+              option={this.state.option} 
+              selectedCount={0} 
+              texts={this.props.texts}
+              useSelected={false}
+            />
+          </SidebarList>
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>
         <Switch>

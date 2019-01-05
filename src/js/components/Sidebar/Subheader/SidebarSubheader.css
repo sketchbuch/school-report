@@ -1,0 +1,24 @@
+/* Sidebar Subheader */
+/* ----------------- */
+
+.SidebarSubheader {
+  position: absolute;
+  top: var(--sidebar-header-height);
+  left: 0px;
+  margin: 0px;
+  padding: 10px 20px;
+  width: 100%;
+  height: var(--sidebar-footer-height);
+  border-bottom: 1px solid var(--col-darken-2);
+  background: var(--col-darken-1);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.SidebarSubheader .ReportsCatSelect {
+  background: transparent;
+  padding: 0px;
+}
