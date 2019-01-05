@@ -21,6 +21,7 @@
     "test:w": "react-scripts test --env=jsdom --watch"
   },
   "dependencies": {
+    "debounce": "^1.2.0",
     "docxtemplater": "^3.8.4",
     "electron-is-dev": "^0.3.0",
     "electron-storage": "^1.0.7",
@@ -42,7 +43,6 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1",
-    "throttle-debounce": "^2.0.1",
     "yup": "^0.24.1"
   },
   "devDependencies": {

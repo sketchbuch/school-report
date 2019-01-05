@@ -1,0 +1,81 @@
+.PageBrowser {
+  position: relative;
+	display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+	justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.PageBrowser__more {
+  position: relative;
+	display: inline-flex;
+  flex-direction: column;
+	justify-content: center;
+  align-items: center;
+  color: var(--col-darken-5);
+  height: 40px;
+  min-height: 40px;
+  margin-right: 5px;
+  margin-left: 5px;
+  text-align: center;
+  top: -0.5rem;
+}
+
+.PageBrowser__more--hidden {
+  visibility: hidden;
+}
+
+.PageBrowser__btn {
+	display: inline-flex;
+  background: var(--col-darken-2);
+  text-align: center;
+}
+
+
+/* Disabled */
+.PageBrowser__btn[disabled],
+.PageBrowser__btn[disabled]:focus,
+.PageBrowser__btn[disabled]:hover,
+.PageBrowser__btn[disabled]:active {
+  background: transparent;
+}
+
+.PageBrowser__btn--page {
+  transition: none;
+}
+
+.PageBrowser__btn--selected {
+  background: var(--col-text);
+  user-select: none;
+  pointer-events: none;
+  font-weight: bold;
+}
+
+.PageBrowser__left {
+  position: relative;
+}
+
+.PageBrowser__right {
+  position: relative;
+}
+
+.PageBrowser__centre {
+  position: relative;
+}
+
+.PageBrowser__left .PageBrowser__btn {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.PageBrowser__right .PageBrowser__btn {
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.PageBrowser__centre .PageBrowser__btn {
+  margin-right: 5px;
+  margin-left: 5px;
+}

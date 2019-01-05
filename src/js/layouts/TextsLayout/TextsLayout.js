@@ -57,8 +57,8 @@ export class TextsLayout extends React.Component<Props, State> {
 
   props: Props;
   state: State;
-  handleClear: Function;
-  handleSearch: Function;
+  handleClear: (event: SyntheticInputEvent<HTMLInputElement>) => void;
+  handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
 
   constructor(props: Props){
     super(props);
@@ -151,6 +151,7 @@ export class TextsLayout extends React.Component<Props, State> {
             noItemsTxt={text('Texts', 'SidebarNoItems')}
             sortOrder={textSort}
             term={this.state.term}
+            usePb
           />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>

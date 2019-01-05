@@ -90,7 +90,14 @@ export class ReportsLayout extends Component<Props> {
             title={text('Header-report', 'SidebarHeader')}
             subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.reports.length })}
           />
-          <SidebarList dispatch={this.props.dispatch} listType="report" items={this.props.reports} noItemsTxt={text('Reports', 'SidebarNoItems')} sortOrder={reportSort} />
+          <SidebarList
+            dispatch={this.props.dispatch}
+            listType="report"
+            items={this.props.reports}
+            noItemsTxt={text('Reports', 'SidebarNoItems')}
+            sortOrder={reportSort}
+            usePb
+          />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>
         <Switch>u

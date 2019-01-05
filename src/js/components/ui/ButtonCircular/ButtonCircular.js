@@ -24,14 +24,11 @@ type Props = {
 */
 class ButtonCircular extends React.Component<Props> {
   static defaultProps = {
-    action: '',
     buttontype: 'default',
     children: null,
     className: '',
     disabled: false,
-    name: '',
     onClick: null,
-    title: '',
     type: 'button',
     visual: false,
   };

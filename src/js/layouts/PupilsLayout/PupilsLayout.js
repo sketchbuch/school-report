@@ -97,7 +97,14 @@ export class PupilsLayout extends Component<Props> {
             title={text('Header-pupil', 'SidebarHeader')}
             subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.pupils.length })}
           />
-          <SidebarList dispatch={this.props.dispatch} listType="pupil" items={this.props.pupils} noItemsTxt={text('Pupils', 'SidebarNoItems')} sortOrder={pupilSort} />
+          <SidebarList
+            dispatch={this.props.dispatch}
+            items={this.props.pupils}
+            listType="pupil"
+            noItemsTxt={text('Pupils', 'SidebarNoItems')}
+            sortOrder={pupilSort}
+            usePb
+          />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>
         <Switch>

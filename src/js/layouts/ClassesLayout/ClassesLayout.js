@@ -100,7 +100,14 @@ export class ClassesLayout extends Component<Props> {
             title={text('Header-class', 'SidebarHeader')}
             subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.classes.length })}
           />
-          <SidebarList dispatch={this.props.dispatch} listType="class" items={this.getItems()} noItemsTxt={text('Classes', 'SidebarNoItems')} sortOrder={classSort} />
+          <SidebarList
+            dispatch={this.props.dispatch}
+            items={this.getItems()}
+            listType="class"
+            noItemsTxt={text('Classes', 'SidebarNoItems')}
+            sortOrder={classSort}
+            usePb
+          />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>
         <Switch>

@@ -55,6 +55,10 @@
   padding: 0px;
 }
 
+.SidebarPageBrowser + .SidebarFooter {
+  border-top-color: var(--col-darken-2);
+}
+
 @media screen and (min-width: 1024px) {
     .SidebarFooter {
       border-right: 1px solid var(--col-sidebar-border);
