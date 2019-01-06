@@ -3,10 +3,7 @@
 import textDefault, { TextFactory, getTextIdStr } from '../text';
 import { ICON_TEXTS } from '../../constants/icons';
 import { generateId } from '../../utils/ids';
-import {
-  ROUTE_DEL_TEXT,
-  ROUTE_EDIT_TEXT,
-} from '../../constants/routes';
+import { ROUTE_DEL_TEXT, ROUTE_EDIT_TEXT } from '../../constants/routes';
 
 describe('Types: Text', () => {
   const langCode = 'EN';
@@ -57,7 +54,9 @@ describe('Types: Text', () => {
     });
 
     test('getLabel() correctly crops the label', () => {
-      expect(newTextObj.getLabel(3)).toEqual(newTextObj.bodytext.substr(0, 3) + '…');
+      expect(newTextObj.getLabel(3)).toEqual(
+        newTextObj.bodytext.substr(0, 3) + '…'
+      );
     });
 
     test('getTooltip() correctly returns the tooltip', () => {
@@ -70,13 +69,13 @@ describe('Types: Text', () => {
         expect(result).toBe(false);
       });
 
-      test('Returns false if the text object does not contain the search term.' , () => {
+      test('Returns false if the text object does not contain the search term.', () => {
         const term = 'Once upon';
         const result = newTextObj.contains(term);
         expect(result).toBe(false);
       });
 
-      test('Returns true if the text object contains the search term.' , () => {
+      test('Returns true if the text object contains the search term.', () => {
         const term = 'A t';
         const result = newTextObj.contains(term);
         expect(result).toBe(true);
@@ -85,7 +84,9 @@ describe('Types: Text', () => {
 
     describe('getUrl()', () => {
       test('Returns ROUTE_DEL_TEXT if linkType is delete', () => {
-        expect(newTextObj.getUrl('delete')).toBe(ROUTE_DEL_TEXT.replace(':textId', newTextObj.id));
+        expect(newTextObj.getUrl('delete')).toBe(
+          ROUTE_DEL_TEXT.replace(':textId', newTextObj.id)
+        );
       });
 
       test('Returns ROUTE_EDIT_TEXT for any other linkType', () => {

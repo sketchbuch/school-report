@@ -13,20 +13,19 @@ import settingsDefault from '../../types/settings';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-
 /**
-* Settings Actions Tests
-*/
+ * Settings Actions Tests
+ */
 
 describe('Actions: settingsActions:', () => {
   const testSettings = { language: 'DE' };
-  let testClass = {...settingsDefault};
-  let callback = ()=>{};
-  let store = ()=>{};
+  let testClass = { ...settingsDefault };
+  let callback = () => {};
+  let store = () => {};
 
   beforeEach(() => {
     callback = jest.fn();
-    store = mockStore({ settings: {}});
+    store = mockStore({ settings: {} });
     window.reportr.curLang = 'EN';
   });
 
@@ -42,9 +41,7 @@ describe('Actions: settingsActions:', () => {
   });
 
   test('load() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: LOAD_SETTINGS },
-    ];
+    const EXPECTED_ACTIONS = [{ type: LOAD_SETTINGS }];
 
     expect.assertions(1);
     store.dispatch(settingsActions.load(callback));
@@ -59,7 +56,7 @@ describe('Actions: settingsActions:', () => {
 
     expect.assertions(3);
     expect(window.reportr.curLang).toBe('EN');
-    store.dispatch(settingsActions.loaded({ settings: testSettings}));
+    store.dispatch(settingsActions.loaded({ settings: testSettings }));
     expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
     expect(window.reportr.curLang).toBe(testSettings.language);
     store.clearActions();
@@ -72,7 +69,7 @@ describe('Actions: settingsActions:', () => {
 
     expect.assertions(3);
     expect(window.reportr.curLang).toBe('EN');
-    store.dispatch(settingsActions.loaded({ settings: {}}));
+    store.dispatch(settingsActions.loaded({ settings: {} }));
     expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
     expect(window.reportr.curLang).toBe('EN');
     store.clearActions();

@@ -7,10 +7,15 @@ import type { CategoryType } from './category';
 import type { TextType } from './text';
 
 /**
-* Domain object type def.
-*/
+ * Domain object type def.
+ */
 
-export type DomainType = ClassType | PupilType | ReportType | TextType | CategoryType;
+export type DomainType =
+  | ClassType
+  | PupilType
+  | ReportType
+  | TextType
+  | CategoryType;
 
 export type DomainBaseType = {
   contains: Function,
@@ -25,13 +30,13 @@ export type DomainBaseType = {
 };
 
 const domainBaseDefault: DomainBaseType = {
-  contains: ()=>{},
+  contains: () => {},
   created: -1,
-  getDescription: ()=>{},
-  getIcon: ()=>{},
-  getLabel: ()=>{},
-  getTooltip: ()=>{},
-  getUrl: ()=>{},
+  getDescription: () => {},
+  getIcon: () => {},
+  getLabel: () => {},
+  getTooltip: () => {},
+  getUrl: () => {},
   id: '',
   updated: -1,
 };

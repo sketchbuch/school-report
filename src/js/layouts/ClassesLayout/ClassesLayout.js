@@ -14,15 +14,11 @@ import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCi
 import EditClassLayout from './Edit/EditClassLayout';
 import DeleteClassesLayout from './Delete/DeleteClassesLayout';
 import NewClassLayout from './New/NewClassLayout';
-import { text }  from '../../components/Translation/Translation';
+import { text } from '../../components/Translation/Translation';
 import { classSort } from '../../types/class';
 import type { ClassType } from '../../types/class';
 import type { PupilType } from '../../types/pupil';
-import {
-  ICON_ADD,
-  ICON_CLOSE,
-  ICON_DELETE,
-} from '../../constants/icons';
+import { ICON_ADD, ICON_CLOSE, ICON_DELETE } from '../../constants/icons';
 import {
   ROUTE_CLASSES,
   ROUTE_DEL_CLASSES,
@@ -45,10 +41,9 @@ type State = {
   term: string,
 };
 
-
 /**
-* Layout for displaying classes.
-*/
+ * Layout for displaying classes.
+ */
 export class ClassesLayout extends Component<Props, State> {
   static defaultProps = {
     classes: [],
@@ -61,7 +56,7 @@ export class ClassesLayout extends Component<Props, State> {
   handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
   handlePbChange: (curPage: number) => void;
 
-  constructor(props: Props){
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -79,7 +74,8 @@ export class ClassesLayout extends Component<Props, State> {
   }
 
   componentDidUpdate() {
-    if (window.location.pathname === ROUTE_CLASSES) setTitle(text('WinTitle', 'Classes'));
+    if (window.location.pathname === ROUTE_CLASSES)
+      setTitle(text('WinTitle', 'Classes'));
   }
 
   handleClear(event: SyntheticInputEvent<HTMLInputElement>) {
@@ -96,19 +92,24 @@ export class ClassesLayout extends Component<Props, State> {
   }
 
   /**
-  * Returns the correct prop to be used as the items in the sidebar list.
-  *
-  * @return array The items to be rendered.
-  */
+   * Returns the correct prop to be used as the items in the sidebar list.
+   *
+   * @return array The items to be rendered.
+   */
   getItems() {
     let items = [...this.props.classes];
-    items.forEach((item) => item.pupilCount = this.props.pupils.filter(pupil => pupil.classId === item.id).length);
+    items.forEach(
+      item =>
+        (item.pupilCount = this.props.pupils.filter(
+          pupil => pupil.classId === item.id
+        ).length)
+    );
 
     return items;
   }
 
   render() {
-    const HAS_CLASSES = (this.props.classes.length > 0) ? true : false;
+    const HAS_CLASSES = this.props.classes.length > 0 ? true : false;
     const leftActions = (
       <NavButtonCircular
         to={ROUTE_NEW_CLASS}
@@ -137,18 +138,18 @@ export class ClassesLayout extends Component<Props, State> {
     if (HAS_CLASSES) {
       searchBox = (
         <React.Fragment>
-          <TextInput 
-              className="SidebarHeader__search"
-              onChange={this.handleSearch} 
-              placeholder={text('SearchPlaceholder', 'SidebarHeader')}
-              value={this.state.term}
+          <TextInput
+            className="SidebarHeader__search"
+            onChange={this.handleSearch}
+            placeholder={text('SearchPlaceholder', 'SidebarHeader')}
+            value={this.state.term}
           />
-          <span 
-            className="SidebarHeader__searchclear" 
-            onClick={this.handleClear} 
+          <span
+            className="SidebarHeader__searchclear"
+            onClick={this.handleClear}
             title={text('Clear', 'ItemSelection')}
           >
-            <Icon type={ ICON_CLOSE } />
+            <Icon type={ICON_CLOSE} />
           </span>
         </React.Fragment>
       );
@@ -157,9 +158,11 @@ export class ClassesLayout extends Component<Props, State> {
     return (
       <div className="Panel">
         <Sidebar>
-          <SidebarHeader 
+          <SidebarHeader
             title={text('Header-class', 'SidebarHeader')}
-            subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.classes.length })}
+            subtitle={text('Subheader-count', 'SidebarHeader', {
+              COUNT: this.props.classes.length,
+            })}
           >
             {searchBox}
           </SidebarHeader>
@@ -173,16 +176,50 @@ export class ClassesLayout extends Component<Props, State> {
             term={this.state.term}
             usePb
           />
-          <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
+          <SidebarFooter
+            leftActions={leftActions}
+            rightActions={rightActions}
+          />
         </Sidebar>
         <Switch>
-          <Route path={ROUTE_EDIT_CLASS} render={ routerProps => <EditClassLayout {...routerProps} dispatch={this.props.dispatch} classes={this.props.classes} />} />
-          <Route path={ROUTE_DEL_CLASSES} render={ routerProps => <DeleteClassesLayout {...routerProps} dispatch={this.props.dispatch} />} />
-          <Route path={ROUTE_NEW_CLASS} render={ routerProps => <NewClassLayout {...routerProps} dispatch={this.props.dispatch} />} />
-          <Route path={ROUTE_CLASSES} render={routerProps => <InfoMsg {...routerProps} headine={text('Classes', 'InfoMsg')} subtext={text('ClassesMsg', 'InfoMsg')} />} />
+          <Route
+            path={ROUTE_EDIT_CLASS}
+            render={routerProps => (
+              <EditClassLayout
+                {...routerProps}
+                dispatch={this.props.dispatch}
+                classes={this.props.classes}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_DEL_CLASSES}
+            render={routerProps => (
+              <DeleteClassesLayout
+                {...routerProps}
+                dispatch={this.props.dispatch}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_NEW_CLASS}
+            render={routerProps => (
+              <NewClassLayout {...routerProps} dispatch={this.props.dispatch} />
+            )}
+          />
+          <Route
+            path={ROUTE_CLASSES}
+            render={routerProps => (
+              <InfoMsg
+                {...routerProps}
+                headine={text('Classes', 'InfoMsg')}
+                subtext={text('ClassesMsg', 'InfoMsg')}
+              />
+            )}
+          />
         </Switch>
       </div>
-    )
+    );
   }
 }
 
@@ -190,8 +227,7 @@ const mapStateToProps = (state: Object, props: Props) => {
   return {
     classes: state.classes,
     pupils: state.pupils,
-  }
+  };
 };
-
 
 export default connect(mapStateToProps)(ClassesLayout);

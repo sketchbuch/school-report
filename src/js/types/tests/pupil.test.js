@@ -54,17 +54,25 @@ describe('Types: Pupil', () => {
     });
 
     test('getIcon() correctly returns the icon', () => {
-      const femalePupilObj = PupilFactory({...pupilObj, gender: 'f' }, ts, classId);
+      const femalePupilObj = PupilFactory(
+        { ...pupilObj, gender: 'f' },
+        ts,
+        classId
+      );
       expect(newPupilObj.getIcon()).toEqual(ICON_PUPILS_MALE);
       expect(femalePupilObj.getIcon()).toEqual(ICON_PUPILS_FEMALE);
     });
 
     test('getLabel() correctly returns the label', () => {
-      expect(newPupilObj.getLabel()).toEqual(newPupilObj.firstname + ' ' + newPupilObj.lastname);
+      expect(newPupilObj.getLabel()).toEqual(
+        newPupilObj.firstname + ' ' + newPupilObj.lastname
+      );
     });
 
     test('getTooltip() correctly returns the tooltip', () => {
-      expect(newPupilObj.getTooltip()).toEqual(newPupilObj.getLabel() + ' - ' + newPupilObj.getDescription());
+      expect(newPupilObj.getTooltip()).toEqual(
+        newPupilObj.getLabel() + ' - ' + newPupilObj.getDescription()
+      );
       newPupilObj.description = '';
       expect(newPupilObj.getTooltip()).toEqual(newPupilObj.getLabel());
     });
@@ -75,13 +83,13 @@ describe('Types: Pupil', () => {
         expect(result).toBe(false);
       });
 
-      test('Returns false if the pupil object does not contain the search term.' , () => {
+      test('Returns false if the pupil object does not contain the search term.', () => {
         const term = 'Lister';
         const result = newPupilObj.contains(term);
         expect(result).toBe(false);
       });
 
-      test('Returns true if the pupil object contains the search term.' , () => {
+      test('Returns true if the pupil object contains the search term.', () => {
         const term = 'Arn';
         const result = newPupilObj.contains(term);
         expect(result).toBe(true);
@@ -90,15 +98,27 @@ describe('Types: Pupil', () => {
 
     describe('getUrl()', () => {
       test('Returns ROUTE_EDIT_BUILDER if linkType is builder', () => {
-        expect(newPupilObj.getUrl('builder', 'r1')).toBe(ROUTE_EDIT_BUILDER.replace(':pupilId', newPupilObj.id).replace(':classId', newPupilObj.classId).replace(':reportId', 'r1'));
+        expect(newPupilObj.getUrl('builder', 'r1')).toBe(
+          ROUTE_EDIT_BUILDER.replace(':pupilId', newPupilObj.id)
+            .replace(':classId', newPupilObj.classId)
+            .replace(':reportId', 'r1')
+        );
       });
 
       test('Returns ROUTE_DEL_PUPIL if linkType is delete', () => {
-        expect(newPupilObj.getUrl('delete')).toBe(ROUTE_DEL_PUPIL.replace(':pupilId', newPupilObj.id).replace(':classId', newPupilObj.classId));
+        expect(newPupilObj.getUrl('delete')).toBe(
+          ROUTE_DEL_PUPIL.replace(':pupilId', newPupilObj.id).replace(
+            ':classId',
+            newPupilObj.classId
+          )
+        );
       });
 
       test('Returns ROUTE_EDIT_PUPIL for any other linkType', () => {
-        const expects = ROUTE_EDIT_PUPIL.replace(':pupilId', newPupilObj.id).replace(':classId', newPupilObj.classId);
+        const expects = ROUTE_EDIT_PUPIL.replace(
+          ':pupilId',
+          newPupilObj.id
+        ).replace(':classId', newPupilObj.classId);
         expect(newPupilObj.getUrl()).toBe(expects);
         expect(newPupilObj.getUrl('something')).toBe(expects);
       });

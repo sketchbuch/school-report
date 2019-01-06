@@ -8,10 +8,18 @@ import textDefault, { TextFactory } from '../../../types/text';
 
 describe('<ReportsTextItem />', () => {
   const props = {
-    activePupil: PupilFactory({...pupilDefault, firstname: 'Dr', lastname: 'Who'}, Date.now(), 'cl1'),
+    activePupil: PupilFactory(
+      { ...pupilDefault, firstname: 'Dr', lastname: 'Who' },
+      Date.now(),
+      'cl1'
+    ),
     onClick: jest.fn(),
     onMove: jest.fn(),
-    txt: TextFactory({...textDefault, bodytext: 'Red Dwarf', categories: [ 'c1' ] }, Date.now(), 'EN'),
+    txt: TextFactory(
+      { ...textDefault, bodytext: 'Red Dwarf', categories: ['c1'] },
+      Date.now(),
+      'EN'
+    ),
     canDrop: false,
     connectDragSource: jest.fn(),
     connectDropTarget: jest.fn(),
@@ -26,7 +34,9 @@ describe('<ReportsTextItem />', () => {
   });
 
   test.skip('isDragging sets the correct class', () => {
-    const wrapper = shallow(<ReportsTextItem.DecoratedComponent {...props} isDragging={true} />);
+    const wrapper = shallow(
+      <ReportsTextItem.DecoratedComponent {...props} isDragging={true} />
+    );
     //expect(wrapper.find('li')).toHaveLength(1);
   });
 });

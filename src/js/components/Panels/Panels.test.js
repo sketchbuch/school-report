@@ -19,7 +19,11 @@ describe('<Panels />', () => {
   });
 
   test('Renders without crashing', () => {
-    const wrapper = shallow(<Provider store={store}><Panels {...props} /></Provider>);
+    const wrapper = shallow(
+      <Provider store={store}>
+        <Panels {...props} />
+      </Provider>
+    );
     expect(wrapper).toHaveLength(1);
   });
 
@@ -32,7 +36,9 @@ describe('<Panels />', () => {
         path: ROUTE_HOME,
       },
     };
-    const wrapper = shallow(<Panels.WrappedComponent {...props} {...routerProps} />);
+    const wrapper = shallow(
+      <Panels.WrappedComponent {...props} {...routerProps} />
+    );
     expect(routerProps.history.push).toHaveBeenCalledWith(ROUTE_HOME);
   });
 });

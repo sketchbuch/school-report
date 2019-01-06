@@ -21,7 +21,7 @@ describe.skip('<DeleteTextsLayout />', () => {
     let wrapper = shallow(<DeleteTextsLayout {...props} />);
     wrapper.instance().saveData = jest.fn();
     expect(wrapper.find('.DeleteClassesLayout__submsg')).toHaveLength(1);
-    wrapper.setState({ deleting: true, });
+    wrapper.setState({ deleting: true });
     expect(wrapper.find('.DeleteClassesLayout__submsg')).toHaveLength(0);
   });
 });

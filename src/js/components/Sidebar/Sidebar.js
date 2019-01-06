@@ -9,15 +9,14 @@ type Props = {
   header: boolean,
 };
 
-
 /**
-* Sidebar containing the class and pupil lists
-*/
+ * Sidebar containing the class and pupil lists
+ */
 class Sidebar extends React.Component<Props> {
   static defaultProps = {
     footer: true,
     header: true,
-   };
+  };
 
   props: Props;
 
@@ -26,13 +25,8 @@ class Sidebar extends React.Component<Props> {
     if (this.props.footer) classes += ' Sidebar--footer';
     if (this.props.header) classes += ' Sidebar--header';
 
-    return (
-      <section className={classes}>
-        {this.props.children}
-      </section>
-    )
+    return <section className={classes}>{this.props.children}</section>;
   }
 }
-
 
 export default Sidebar;

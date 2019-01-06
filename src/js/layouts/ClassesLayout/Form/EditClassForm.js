@@ -21,10 +21,9 @@ type Props = {
   values: Object,
 };
 
-
 /**
-* Class form for the edit panel.
-*/
+ * Class form for the edit panel.
+ */
 export class EditClassForm extends Component<Props> {
   static defaultProps = {
     dirty: false,
@@ -47,7 +46,8 @@ export class EditClassForm extends Component<Props> {
     } = this.props;
 
     const clValid = validate('label', errors, touched);
-    const btnIsDisabled = (!clValid || values.label === '' || saving || !dirty) ? true : false;
+    const btnIsDisabled =
+      !clValid || values.label === '' || saving || !dirty ? true : false;
 
     return (
       <form className="form" onSubmit={handleSubmit}>
@@ -72,15 +72,16 @@ export class EditClassForm extends Component<Props> {
           </Button>
         </div>
 
-        {!saving &&
+        {!saving && (
           <p className="form__submsg">
-            <Link to={ROUTE_CLASSES}><Translation name="BackToClasses" ns="Classes" /></Link>
+            <Link to={ROUTE_CLASSES}>
+              <Translation name="BackToClasses" ns="Classes" />
+            </Link>
           </p>
-        }
+        )}
       </form>
     );
   }
 }
-
 
 export default EditClassForm;

@@ -17,14 +17,13 @@ type Props = {
   useSelected: boolean,
 };
 
-
 /**
-* A category selector for texts.
-*/
+ * A category selector for texts.
+ */
 export class ReportsCatSelect extends React.Component<Props> {
   static defaultProps = {
     categories: [],
-    onChange: ()=>{},
+    onChange: () => {},
     option: '',
     selectedCount: 0,
     texts: [],
@@ -42,32 +41,63 @@ export class ReportsCatSelect extends React.Component<Props> {
       texts,
       useSelected,
     } = this.props;
-    
+
     if (categories.length < 1) return null;
-    
-    const uncategorisedCount = texts.filter(text => text.categories.length < 1).length;
+
+    const uncategorisedCount = texts.filter(text => text.categories.length < 1)
+      .length;
     const sortedCategories = sortObjectsAz(categories, categorySort);
     const unselectedCount = texts.length - selectedCount;
 
     return (
       <div className="ReportsCatSelect">
-        <select value={option} onChange={onChange} title={text('Tooltip', 'ReportsCatSelect')}>
-          <option key="category-all" value="category-all">{text('CatsAll', 'ReportsCatSelect')} ({texts.length})</option>
-          {(useSelected && selectedCount > 0) && <option key="category-selected" value="category-selected">{text('CatsSelected', 'ReportsCatSelect')} ({selectedCount})</option> }
-          {(useSelected && unselectedCount > 0) && <option key="category-unselected" value="category-unselected">{text('CatsUnselected', 'ReportsCatSelect')} ({unselectedCount})</option> }
-          {uncategorisedCount > 0 && <option key="category-nocat" value="category-nocat">{text('CatsUncategorised', 'ReportsCatSelect')} ({uncategorisedCount})</option> }
-          <option key="category-disabled" disabled className="ReportsCatSelect_sep">---</option>
+        <select
+          value={option}
+          onChange={onChange}
+          title={text('Tooltip', 'ReportsCatSelect')}
+        >
+          <option key="category-all" value="category-all">
+            {text('CatsAll', 'ReportsCatSelect')} ({texts.length})
+          </option>
+          {useSelected && selectedCount > 0 && (
+            <option key="category-selected" value="category-selected">
+              {text('CatsSelected', 'ReportsCatSelect')} ({selectedCount})
+            </option>
+          )}
+          {useSelected && unselectedCount > 0 && (
+            <option key="category-unselected" value="category-unselected">
+              {text('CatsUnselected', 'ReportsCatSelect')} ({unselectedCount})
+            </option>
+          )}
+          {uncategorisedCount > 0 && (
+            <option key="category-nocat" value="category-nocat">
+              {text('CatsUncategorised', 'ReportsCatSelect')} (
+              {uncategorisedCount})
+            </option>
+          )}
+          <option
+            key="category-disabled"
+            disabled
+            className="ReportsCatSelect_sep"
+          >
+            ---
+          </option>
 
           {sortedCategories.map(cat => {
-            const textCount = texts.filter(text => text.categories.includes(cat.id)).length;
+            const textCount = texts.filter(text =>
+              text.categories.includes(cat.id)
+            ).length;
             if (textCount < 1) return null;
-            return <option key={cat.id} value={cat.id}>{cat.getLabel()} ({textCount})</option>
+            return (
+              <option key={cat.id} value={cat.id}>
+                {cat.getLabel()} ({textCount})
+              </option>
+            );
           })}
         </select>
       </div>
-    )
+    );
   }
 }
-
 
 export default ReportsCatSelect;

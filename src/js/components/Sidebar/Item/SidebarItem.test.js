@@ -5,24 +5,23 @@ import { mount, shallow } from 'enzyme';
 import SidebarItem from './SidebarItem';
 import ClassDefault, { ClassFactory } from '../../../types/class';
 
-jest.mock('../Inner/SidebarInner', () => (props: Object)=> {
+jest.mock('../Inner/SidebarInner', () => (props: Object) => {
   if (props.link) {
-    return <a href="#"className="SidebarInner" />
+    return <a href="#" className="SidebarInner" />;
   } else {
-    return <div className="SidebarInner" />
+    return <div className="SidebarInner" />;
   }
 });
 jest.useFakeTimers();
 
-
 describe('<SidebarItem />', () => {
   const props = {
     isNew: false,
-    item: ClassFactory({...ClassDefault}, Date.now()),
+    item: ClassFactory({ ...ClassDefault }, Date.now()),
     itemDuration: 1000,
     itemType: 'class',
-    onDelete: ()=>{},
-    updateExistingItems: ()=>{},
+    onDelete: () => {},
+    updateExistingItems: () => {},
   };
 
   test('Renders without crashing', () => {
@@ -59,12 +58,12 @@ describe('<SidebarItem />', () => {
 
   describe('handleClick()', () => {
     const wrapper = mount(<SidebarItem {...props} />);
-    const initialState = {...wrapper.state()};
+    const initialState = { ...wrapper.state() };
 
     test('Leaves state as is if no case matches', () => {
       wrapper.instance().handleClick({
         preventDefault: jest.fn(),
-        target: { dataset: { action: '' }},
+        target: { dataset: { action: '' } },
       });
 
       expect(wrapper.state()).toEqual(initialState);
@@ -75,7 +74,7 @@ describe('<SidebarItem />', () => {
 
       wrapper.instance().handleClick({
         preventDefault: jest.fn(),
-        target: { dataset: { action: 'item-delete-yes' }},
+        target: { dataset: { action: 'item-delete-yes' } },
       });
 
       expect(wrapper.state().deleting).toBe(true);
@@ -86,7 +85,7 @@ describe('<SidebarItem />', () => {
 
       wrapper.instance().handleClick({
         preventDefault: jest.fn(),
-        target: { dataset: { action: 'item-delete' }},
+        target: { dataset: { action: 'item-delete' } },
       });
 
       expect(wrapper.state().delete).toBe(true);
@@ -100,10 +99,10 @@ describe('<SidebarItem />', () => {
 
       wrapper2.setState({ delete: true });
       expect(wrapper2.state().delete).toBe(true);
-      
+
       wrapper2.instance().handleClick({
         preventDefault: jest.fn(),
-        target: { dataset: { action: 'item-delete-no' }},
+        target: { dataset: { action: 'item-delete-no' } },
       });
       expect(wrapper2.state().delete).toBe(false);
     });
@@ -112,14 +111,26 @@ describe('<SidebarItem />', () => {
   describe('componentDidMount()', () => {
     test('updateExistingItems() not called if the item !isNew', () => {
       const mockUpdateExistingItems = jest.fn();
-      const wrapper = shallow(<SidebarItem {...props} updateExistingItems={mockUpdateExistingItems} isNew={false} />);
+      const wrapper = shallow(
+        <SidebarItem
+          {...props}
+          updateExistingItems={mockUpdateExistingItems}
+          isNew={false}
+        />
+      );
       jest.runAllTimers();
       expect(mockUpdateExistingItems).not.toHaveBeenCalled();
     });
 
     test('updateExistingItems() called if the item isNew', () => {
       const mockUpdateExistingItems = jest.fn();
-      const wrapper = shallow(<SidebarItem {...props} updateExistingItems={mockUpdateExistingItems} isNew={true} />);
+      const wrapper = shallow(
+        <SidebarItem
+          {...props}
+          updateExistingItems={mockUpdateExistingItems}
+          isNew={true}
+        />
+      );
       jest.runAllTimers();
       expect(mockUpdateExistingItems).toHaveBeenCalled();
     });
@@ -132,7 +143,7 @@ describe('<SidebarItem />', () => {
     test('if state.deleting, sets state.confirmed to true', () => {
       wrapper.instance().handleClick({
         preventDefault: jest.fn(),
-        target: { dataset: { action: 'item-delete-yes' }},
+        target: { dataset: { action: 'item-delete-yes' } },
       });
 
       expect(wrapper.state().deleting).toBe(true);

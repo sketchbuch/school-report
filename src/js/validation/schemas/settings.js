@@ -2,7 +2,6 @@
 
 import Yup from 'yup';
 
-
 /**
 * Validation scheme for a class.
 

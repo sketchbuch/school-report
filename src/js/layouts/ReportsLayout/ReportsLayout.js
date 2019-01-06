@@ -14,15 +14,11 @@ import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCi
 import EditReportLayout from './Edit/EditReportLayout';
 import NewReportLayout from './New/NewReportLayout';
 import DeleteReportsLayout from './Delete/DeleteReportsLayout';
-import { text }  from '../../components/Translation/Translation';
+import { text } from '../../components/Translation/Translation';
 import { reportSort } from '../../types/report';
 import type { ReportType } from '../../types/report';
 import type { ClassType } from '../../types/class';
-import {
-  ICON_ADD,
-  ICON_CLOSE,
-  ICON_DELETE,
-} from '../../constants/icons';
+import { ICON_ADD, ICON_CLOSE, ICON_DELETE } from '../../constants/icons';
 import {
   ROUTE_DEL_REPORTS,
   ROUTE_EDIT_REPORT,
@@ -46,10 +42,9 @@ type State = {
   term: string,
 };
 
-
 /**
-* Layout for displaying reports.
-*/
+ * Layout for displaying reports.
+ */
 export class ReportsLayout extends Component<Props, State> {
   static defaultProps = {
     classes: [],
@@ -62,7 +57,7 @@ export class ReportsLayout extends Component<Props, State> {
   handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
   handlePbChange: (curPage: number) => void;
 
-  constructor(props: Props){
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -80,7 +75,8 @@ export class ReportsLayout extends Component<Props, State> {
   }
 
   componentDidUpdate() {
-    if (window.location.pathname === ROUTE_REPORTS) setTitle(text('WinTitle', 'Reports'));
+    if (window.location.pathname === ROUTE_REPORTS)
+      setTitle(text('WinTitle', 'Reports'));
   }
 
   handleClear(event: SyntheticInputEvent<HTMLInputElement>) {
@@ -97,7 +93,7 @@ export class ReportsLayout extends Component<Props, State> {
   }
 
   render() {
-    const HAS_REPORTS = (this.props.reports.length > 0) ? true : false;
+    const HAS_REPORTS = this.props.reports.length > 0 ? true : false;
     const leftActions = (
       <NavButtonCircular
         to={ROUTE_NEW_REPORT}
@@ -127,18 +123,18 @@ export class ReportsLayout extends Component<Props, State> {
     if (HAS_REPORTS) {
       searchBox = (
         <React.Fragment>
-          <TextInput 
-              className="SidebarHeader__search"
-              onChange={this.handleSearch} 
-              placeholder={text('SearchPlaceholder', 'SidebarHeader')}
-              value={this.state.term}
+          <TextInput
+            className="SidebarHeader__search"
+            onChange={this.handleSearch}
+            placeholder={text('SearchPlaceholder', 'SidebarHeader')}
+            value={this.state.term}
           />
-          <span 
-            className="SidebarHeader__searchclear" 
-            onClick={this.handleClear} 
+          <span
+            className="SidebarHeader__searchclear"
+            onClick={this.handleClear}
             title={text('Clear', 'ItemSelection')}
           >
-            <Icon type={ ICON_CLOSE } />
+            <Icon type={ICON_CLOSE} />
           </span>
         </React.Fragment>
       );
@@ -147,9 +143,11 @@ export class ReportsLayout extends Component<Props, State> {
     return (
       <div className="Panel">
         <Sidebar>
-          <SidebarHeader 
+          <SidebarHeader
             title={text('Header-report', 'SidebarHeader')}
-            subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.reports.length })}
+            subtitle={text('Subheader-count', 'SidebarHeader', {
+              COUNT: this.props.reports.length,
+            })}
           >
             {searchBox}
           </SidebarHeader>
@@ -163,26 +161,65 @@ export class ReportsLayout extends Component<Props, State> {
             term={this.state.term}
             usePb
           />
-          <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
+          <SidebarFooter
+            leftActions={leftActions}
+            rightActions={rightActions}
+          />
         </Sidebar>
-        <Switch>u
-          <Route path={ROUTE_EDIT_REPORT} render={routerProps => <EditReportLayout {...routerProps} dispatch={this.props.dispatch} reports={this.props.reports} classes={this.props.classes} maxChars={this.props.maxChars} />} />
-          <Route path={ROUTE_DEL_REPORTS} render={routerProps => <DeleteReportsLayout {...routerProps} dispatch={this.props.dispatch} />} />
-          <Route path={ROUTE_NEW_REPORT} render={routerProps => <NewReportLayout {...routerProps} dispatch={this.props.dispatch} classes={this.props.classes} maxChars={this.props.maxChars}  />} />
-          <Route path={ROUTE_REPORTS} render={routerProps => <InfoMsg {...routerProps} headine={text('Reports', 'InfoMsg')} subtext={text('ReportsMsg', 'InfoMsg')} />} />
+        <Switch>
+          u
+          <Route
+            path={ROUTE_EDIT_REPORT}
+            render={routerProps => (
+              <EditReportLayout
+                {...routerProps}
+                dispatch={this.props.dispatch}
+                reports={this.props.reports}
+                classes={this.props.classes}
+                maxChars={this.props.maxChars}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_DEL_REPORTS}
+            render={routerProps => (
+              <DeleteReportsLayout
+                {...routerProps}
+                dispatch={this.props.dispatch}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_NEW_REPORT}
+            render={routerProps => (
+              <NewReportLayout
+                {...routerProps}
+                dispatch={this.props.dispatch}
+                classes={this.props.classes}
+                maxChars={this.props.maxChars}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_REPORTS}
+            render={routerProps => (
+              <InfoMsg
+                {...routerProps}
+                headine={text('Reports', 'InfoMsg')}
+                subtext={text('ReportsMsg', 'InfoMsg')}
+              />
+            )}
+          />
         </Switch>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state: Object) => (
-  {
-    classes: state.classes,
-    maxChars: state.settings.maxChars,
-    reports: state.reports,
-  }
-);
-
+const mapStateToProps = (state: Object) => ({
+  classes: state.classes,
+  maxChars: state.settings.maxChars,
+  reports: state.reports,
+});
 
 export default connect(mapStateToProps)(ReportsLayout);

@@ -30,15 +30,15 @@ type Props = {
   match: Object,
 };
 
-
 /**
-* Panels containing the main app content.
-*/
+ * Panels containing the main app content.
+ */
 export class Panels extends Component<Props> {
   props: Props;
 
   componentDidMount() {
-    if (this.props.match.path === ROUTE_HOME) this.props.history.push(ROUTE_HOME);
+    if (this.props.match.path === ROUTE_HOME)
+      this.props.history.push(ROUTE_HOME);
   }
 
   render() {
@@ -56,9 +56,8 @@ export class Panels extends Component<Props> {
           <Route component={NotFound} />
         </Switch>
       </div>
-    )
+    );
   }
 }
-
 
 export default withRouter(Panels);

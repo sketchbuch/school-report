@@ -12,10 +12,9 @@ type ClassEle = {
   pupils: Array<PupilEle>,
 };
 
-
 /**
-* Export type def.
-*/
+ * Export type def.
+ */
 
 export type ExportType = {
   classCount: number,
@@ -34,6 +33,5 @@ const exportDefault: ExportType = {
   pupilCount: -1,
   reportName: '',
 };
-
 
 export default exportDefault;

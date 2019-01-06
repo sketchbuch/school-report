@@ -22,10 +22,10 @@ type Props = {
   builder: boolean,
   children?: React.Node,
   curPage: number,
-  description: ?(pupilId: string, classId: string) => string  | null,
+  description: ?(pupilId: string, classId: string) => string | null,
   dispatch: Function,
   filter: string,
-  items: Array<Object>;
+  items: Array<Object>,
   listType: SidebarListTypes,
   noItemsTxt: string,
   onChange: (curPage: number) => void,
@@ -38,20 +38,19 @@ type Props = {
 
 type State = {
   existingItems: Array<string>,
-}
-
-const actions = {
-  'category': categoryActions,
-  'class': classActions,
-  'pupil': pupilActions,
-  'report': reportActions,
-  'text': textActions,
 };
 
+const actions = {
+  category: categoryActions,
+  class: classActions,
+  pupil: pupilActions,
+  report: reportActions,
+  text: textActions,
+};
 
 /**
-* Sidebar list of items
-*/
+ * Sidebar list of items
+ */
 class SidebarList extends React.Component<Props, State> {
   static defaultProps = {
     builder: false,
@@ -83,26 +82,30 @@ class SidebarList extends React.Component<Props, State> {
     };
 
     this.props.items.forEach(item => {
-      if (!this.state.existingItems.includes(item.id)) this.state.existingItems.push(item.id);
+      if (!this.state.existingItems.includes(item.id))
+        this.state.existingItems.push(item.id);
     });
 
     this.itemDuration = getCustomNumProp('--sidebaritem-ms');
-    this.onDelete = (id: string, callback?: Function = ()=>{}) => this.props.dispatch(actions[this.props.listType].deleteOne(id, callback));
+    this.onDelete = (id: string, callback?: Function = () => {}) =>
+      this.props.dispatch(actions[this.props.listType].deleteOne(id, callback));
     this.onDelete = this.onDelete.bind(this);
     this.updateExistingItems = this.updateExistingItems.bind(this);
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (this.props.items.length < 1 && prevProps.items.length > 0) this.setState({ existingItems: [] });
+    if (this.props.items.length < 1 && prevProps.items.length > 0)
+      this.setState({ existingItems: [] });
   }
 
   /**
-  * Updates the local state of existing items. Called by an item after its new animation finishes.
-  *
-  * @param string itemId The ID of a new item for the existing items.
-  */
+   * Updates the local state of existing items. Called by an item after its new animation finishes.
+   *
+   * @param string itemId The ID of a new item for the existing items.
+   */
   updateExistingItems(itemId: string): void {
-    if (!this.state.existingItems.includes(itemId)) this.setState({ existingItems: [...this.state.existingItems, itemId] });
+    if (!this.state.existingItems.includes(itemId))
+      this.setState({ existingItems: [...this.state.existingItems, itemId] });
   }
 
   getSortedItems() {
@@ -111,14 +114,19 @@ class SidebarList extends React.Component<Props, State> {
     if (this.props.filter) {
       if (this.props.filter !== 'category-all') {
         if (this.props.filter === 'category-nocat') {
-          sortedItems = sortedItems.filter(item => item.categories.length === 0);
+          sortedItems = sortedItems.filter(
+            item => item.categories.length === 0
+          );
         } else {
-          sortedItems = sortedItems.filter(item => item.categories.includes(this.props.filter));
+          sortedItems = sortedItems.filter(item =>
+            item.categories.includes(this.props.filter)
+          );
         }
       }
     }
 
-    if (this.props.term !== '') sortedItems = sortedItems.filter(item => item.contains(this.props.term));
+    if (this.props.term !== '')
+      sortedItems = sortedItems.filter(item => item.contains(this.props.term));
 
     return sortedItems;
   }
@@ -128,8 +136,11 @@ class SidebarList extends React.Component<Props, State> {
     const itemForPaging = sortedItems.length;
 
     if (this.props.usePb) {
-      const itemstart = 0 + (this.props.perPage * (this.props.curPage - 1));
-      sortedItems = sortedItems.slice(itemstart, itemstart + this.props.perPage);
+      const itemstart = 0 + this.props.perPage * (this.props.curPage - 1);
+      sortedItems = sortedItems.slice(
+        itemstart,
+        itemstart + this.props.perPage
+      );
     }
 
     if (itemForPaging > 0) {
@@ -146,38 +157,57 @@ class SidebarList extends React.Component<Props, State> {
 
       return (
         <React.Fragment>
-          {this.props.children && <SidebarSubheader>{this.props.children}</SidebarSubheader>}
+          {this.props.children && (
+            <SidebarSubheader>{this.props.children}</SidebarSubheader>
+          )}
           <ul className={classes} data-type={this.props.listType}>
             {sortedItems.map(item => {
               if (this.props.builder) {
-                return <SidebarBuilderItem description={this.props.description} item={item} itemType={this.props.listType} key={item.id} />;
+                return (
+                  <SidebarBuilderItem
+                    description={this.props.description}
+                    item={item}
+                    itemType={this.props.listType}
+                    key={item.id}
+                  />
+                );
               } else {
-                return <SidebarItem
-                  isNew={!this.state.existingItems.includes(item.id)}
-                  item={item}
-                  itemDuration={this.itemDuration}
-                  itemType={this.props.listType}
-                  key={item.id}
-                  onDelete={this.onDelete}
-                  updateExistingItems={this.updateExistingItems}
-                />;
+                return (
+                  <SidebarItem
+                    isNew={!this.state.existingItems.includes(item.id)}
+                    item={item}
+                    itemDuration={this.itemDuration}
+                    itemType={this.props.listType}
+                    key={item.id}
+                    onDelete={this.onDelete}
+                    updateExistingItems={this.updateExistingItems}
+                  />
+                );
               }
             })}
           </ul>
-          {showPb && <SidebarPageBrowser {...pbProps} onChange={this.props.onChange} />}
+          {showPb && (
+            <SidebarPageBrowser {...pbProps} onChange={this.props.onChange} />
+          )}
         </React.Fragment>
-      )
+      );
     } else if (this.props.term !== '') {
-      return <NoItems><Translation name={'NoneSearched-' + this.props.listType} ns="SidebarList" /></NoItems>
+      return (
+        <NoItems>
+          <Translation
+            name={'NoneSearched-' + this.props.listType}
+            ns="SidebarList"
+          />
+        </NoItems>
+      );
     } else {
-      return <NoItems message={this.props.noItemsTxt} />
+      return <NoItems message={this.props.noItemsTxt} />;
     }
   }
 
   render() {
-    return this.renderContent()
+    return this.renderContent();
   }
 }
-
 
 export default SidebarList;

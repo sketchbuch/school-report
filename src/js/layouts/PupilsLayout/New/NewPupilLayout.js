@@ -1,13 +1,13 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr';
 import { Formik } from 'formik';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import EditPupilForm from '../Form/EditPupilForm';
-import { text }  from '../../../components/Translation/Translation';
+import { text } from '../../../components/Translation/Translation';
 import { pupilSchema } from '../../../validation/schemas';
 import * as pupilActions from '../../../actions/pupilActions';
 import pupilDefault, { PupilFactory } from '../../../types/pupil';
@@ -29,12 +29,11 @@ type State = {
   error: boolean,
   pupil: PupilType,
   saving: boolean,
-}
-
+};
 
 /**
-* Layout for adding a new pupil.
-*/
+ * Layout for adding a new pupil.
+ */
 export class NewPupilLayout extends Component<Props, State> {
   static defaultProps = {
     activeClass: {},
@@ -50,7 +49,7 @@ export class NewPupilLayout extends Component<Props, State> {
 
     this.state = {
       error: false,
-      pupil: {...pupilDefault},
+      pupil: { ...pupilDefault },
       saving: false,
     };
 
@@ -64,8 +63,13 @@ export class NewPupilLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Pupils'));
-      this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));
+      toastr.error(
+        text('PersistenceError', 'Toastr'),
+        text('PersistenceNewError', 'Pupils')
+      );
+      this.props.history.push(
+        ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)
+      );
     } else if (this.state.saving) {
       this.props.dispatch(pupilActions.add(this.state.pupil, this.dataSaved));
       this.setState({ saving: false });
@@ -76,24 +80,29 @@ export class NewPupilLayout extends Component<Props, State> {
     const newPupil = PupilFactory(
       values,
       Date.now(),
-      this.props.match.params.classId,
+      this.props.match.params.classId
     );
 
     this.setState({
       pupil: newPupil,
-      saving: true
+      saving: true,
     });
   }
 
   /**
-  * Callback used by writeAppData.
-  *
-  * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-  */
+   * Callback used by writeAppData.
+   *
+   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
+   */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
-      this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));
-      toastr.success(text('PersistenceNew', 'Pupils'), this.state.pupil.getLabel());
+      this.props.history.push(
+        ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)
+      );
+      toastr.success(
+        text('PersistenceNew', 'Pupils'),
+        this.state.pupil.getLabel()
+      );
     } else {
       this.setState({
         error: true,
@@ -108,19 +117,23 @@ export class NewPupilLayout extends Component<Props, State> {
         <EditPanelHeader title={text('AddPupil', 'EditPanelHeader')} />
         <EditPanelContent>
           <Formik
-            initialValues={{...pupilDefault}}
+            initialValues={{ ...pupilDefault }}
             enableReinitialize={true}
             validationSchema={pupilSchema}
             onSubmit={this.handleSubmit}
-            render={(formikProps) => (
-              <EditPupilForm {...formikProps} saving={this.state.saving} classId={this.props.activeClass.id} isNew={true} />
+            render={formikProps => (
+              <EditPupilForm
+                {...formikProps}
+                saving={this.state.saving}
+                classId={this.props.activeClass.id}
+                isNew={true}
+              />
             )}
           />
         </EditPanelContent>
       </EditPanel>
-    )
+    );
   }
 }
-
 
 export default NewPupilLayout;

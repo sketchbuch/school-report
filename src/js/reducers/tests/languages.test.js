@@ -3,25 +3,24 @@
 import reducer from '../languages';
 import { CHANGE_LANGUAGE, SETTINGS_LOADED } from '../../constants/actionTypes';
 
-
 /**
-* Languages Reducer Tests
-*/
+ * Languages Reducer Tests
+ */
 
 describe('Reducer: Languages', () => {
   const INITIAL_STATE = {
     available: [
       {
-        key: "EN",
-        label: "English",
+        key: 'EN',
+        label: 'English',
       },
       {
-        key: "DE",
-        label: "Deutsch",
+        key: 'DE',
+        label: 'Deutsch',
       },
     ],
     current: 'EN',
-    default: 'EN'
+    default: 'EN',
   };
   const NEW_LANG = 'DE';
   const TEST_STATE = {

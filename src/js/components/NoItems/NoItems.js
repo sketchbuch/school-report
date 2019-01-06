@@ -8,21 +8,20 @@ type Props = {
   message?: string,
 };
 
-
 /**
-* Displayed instead of a list when there are no items.
-*/
+ * Displayed instead of a list when there are no items.
+ */
 class NoItems extends React.PureComponent<Props> {
   static defaultProps = {
-      message: '',
-   };
+    message: '',
+  };
 
   props: Props;
 
   render() {
     return (
       <p className="NoItems">{this.props.message || this.props.children}</p>
-    )
+    );
   }
 }
 

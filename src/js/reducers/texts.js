@@ -14,24 +14,26 @@ import { hydrateText } from '../types/text';
 import type { TextType } from '../types/text';
 import type { ActionObj } from '../types/action';
 
-
 /**
-* Texts Reducer.
-*/
+ * Texts Reducer.
+ */
 
-export default function reducer(state: Array<TextType> = [], action: ActionObj) {
+export default function reducer(
+  state: Array<TextType> = [],
+  action: ActionObj
+) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_DATA:
     case REPLACE_TEXTS:
       if (action.payload && action.payload.texts !== undefined) {
-          if (Array.isArray(action.payload.texts)) {
-            const newState = [];
-            action.payload.texts.forEach(item => {
-              newState.push(hydrateText(item));
-            });
-            return newState;
-          }
+        if (Array.isArray(action.payload.texts)) {
+          const newState = [];
+          action.payload.texts.forEach(item => {
+            newState.push(hydrateText(item));
+          });
+          return newState;
+        }
       }
 
       break;

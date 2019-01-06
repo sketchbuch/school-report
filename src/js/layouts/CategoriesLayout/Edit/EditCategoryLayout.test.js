@@ -7,7 +7,10 @@ import { ROUTE_CATEGORIES } from '../../../constants/routes';
 import categoryDefault, { CategoryFactory } from '../../../types/category';
 
 describe('<EditCategoryLayout />', () => {
-  const cat = CategoryFactory({...categoryDefault, label: 'Test'}, Date.now());
+  const cat = CategoryFactory(
+    { ...categoryDefault, label: 'Test' },
+    Date.now()
+  );
   const props = {
     categories: [cat],
     dispatch: jest.fn(),
@@ -20,7 +23,7 @@ describe('<EditCategoryLayout />', () => {
         categoryId: cat.id,
       },
     },
-  }
+  };
 
   test('Renders without crashing', () => {
     const wrapper = shallow(<EditCategoryLayout {...props} />);
@@ -33,7 +36,7 @@ describe('<EditCategoryLayout />', () => {
 
     instance.componentDidUpdate = jest.fn();
     instance.handleSubmit({});
-    
+
     expect(wrapper.state().saving).toBe(true);
     expect(wrapper.instance().componentDidUpdate).toHaveBeenCalledTimes(1);
   });
@@ -60,8 +63,10 @@ describe('<EditCategoryLayout />', () => {
     });
 
     test('state.saving calls props.dispatch', () => {
-      const mockDispatch =  jest.fn();
-      const wrapper = shallow(<EditCategoryLayout {...props} dispatch={mockDispatch} />);
+      const mockDispatch = jest.fn();
+      const wrapper = shallow(
+        <EditCategoryLayout {...props} dispatch={mockDispatch} />
+      );
       const instance = wrapper.instance();
 
       wrapper.setState({ saving: true });

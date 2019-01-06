@@ -10,10 +10,9 @@ import {
   ROUTE_EDIT_REPORT,
 } from '../constants/routes';
 
-
 /**
-* Report type def.
-*/
+ * Report type def.
+ */
 
 export type ReportType = {
   ...$Exact<DomainBaseType>,
@@ -32,12 +31,12 @@ const reportDefault: ReportType = {
 export const reportSort = ['label', 'updated'];
 
 /**
-* Returns an object of ReportType based on reportObj but with additional props set.
-*
-* @param ReportType reportObj The initial report object.
-* @param number ts A timestamp used for the id, created, and updated.
-* @return ReportType The new report object.
-*/
+ * Returns an object of ReportType based on reportObj but with additional props set.
+ *
+ * @param ReportType reportObj The initial report object.
+ * @param number ts A timestamp used for the id, created, and updated.
+ * @return ReportType The new report object.
+ */
 export function ReportFactory(reportObj: ReportType, ts: number): ReportType {
   return hydrateReport({
     ...reportObj,
@@ -48,16 +47,16 @@ export function ReportFactory(reportObj: ReportType, ts: number): ReportType {
 }
 
 /**
-* Returns an updated reportObj with getters.
-*
-* @param ReportType reportObj The report object.
-* @return ReportType The hydrated report object.
-*/
+ * Returns an updated reportObj with getters.
+ *
+ * @param ReportType reportObj The report object.
+ * @return ReportType The hydrated report object.
+ */
 export function hydrateReport(reportObj: ReportType): ReportType {
   return {
     ...reportDefault,
     ...reportObj,
-    contains: function (term?: string, anywhere?: boolean = false) {
+    contains: function(term?: string, anywhere?: boolean = false) {
       if (term) {
         term = term.toLowerCase();
         const searchStr = this.label.toLowerCase();
@@ -75,21 +74,21 @@ export function hydrateReport(reportObj: ReportType): ReportType {
 
       return false;
     },
-    getDescription: function () {
+    getDescription: function() {
       return `(${this.classes.length})`;
     },
-    getIcon: function () {
+    getIcon: function() {
       return ICON_REPORTS;
     },
-    getLabel: function () {
+    getLabel: function() {
       return this.label;
     },
-    getTooltip: function () {
-      return`${this.getLabel()} - ${this.getDescription()}`;
+    getTooltip: function() {
+      return `${this.getLabel()} - ${this.getDescription()}`;
     },
-    getUrl: function (linkType: string) {
+    getUrl: function(linkType: string) {
       let theUrl = ROUTE_BUILDER;
-      
+
       if (linkType === 'delete') {
         theUrl = ROUTE_DEL_REPORT;
       } else if (linkType === 'edit' || this.classes.length < 1) {
@@ -102,14 +101,13 @@ export function hydrateReport(reportObj: ReportType): ReportType {
 }
 
 /**
-* Returns a string to be used when creating an ID for reports.
-*
-* @param ReportType reportObj The report record.
-* @return string The string to be used in creating the ID.
-*/
+ * Returns a string to be used when creating an ID for reports.
+ *
+ * @param ReportType reportObj The report record.
+ * @return string The string to be used in creating the ID.
+ */
 export function getReportIdStr(reportObj: ReportType): string {
   return 'report:' + reportObj.label;
 }
-
 
 export default reportDefault;

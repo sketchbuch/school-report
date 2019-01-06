@@ -1,8 +1,8 @@
 // @flow
 
 /**
-* Breadcrumb type def.
-*/
+ * Breadcrumb type def.
+ */
 
 export type Breadcrumb = {
   id: string,

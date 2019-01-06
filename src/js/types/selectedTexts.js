@@ -1,9 +1,8 @@
 // @flow
 
-
 /**
-* Selected Texts type def.
-*/
+ * Selected Texts type def.
+ */
 
 type SelectedTextsBase = {
   id: string,
@@ -11,5 +10,5 @@ type SelectedTextsBase = {
 
 export type SelectedTexts = {
   ...SelectedTextsBase,
-  sub: Array<SelectedTextsBase>
+  sub: Array<SelectedTextsBase>,
 };

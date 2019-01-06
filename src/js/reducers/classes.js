@@ -14,24 +14,26 @@ import { hydrateClass } from '../types/class';
 import type { ClassType } from '../types/class';
 import type { ActionObj } from '../types/action';
 
-
 /**
-* Classes Reducer.
-*/
+ * Classes Reducer.
+ */
 
-export default function reducer(state: Array<ClassType> = [], action: ActionObj) {
+export default function reducer(
+  state: Array<ClassType> = [],
+  action: ActionObj
+) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_CLASSES:
     case REPLACE_DATA:
       if (action.payload && action.payload.classes !== undefined) {
-          if (Array.isArray(action.payload.classes)) {
-            const newState = [];
-            action.payload.classes.forEach(item => {
-              newState.push(hydrateClass(item));
-            });
-            return newState;
-          }
+        if (Array.isArray(action.payload.classes)) {
+          const newState = [];
+          action.payload.classes.forEach(item => {
+            newState.push(hydrateClass(item));
+          });
+          return newState;
+        }
       }
 
       break;

@@ -12,12 +12,14 @@ import { FILE_TEXTS } from '../constants/io';
 import type { ActionCreator } from '../types/action';
 import type { TextType } from '../types/text';
 
-
 /**
-* Text Actions
-*/
+ * Text Actions
+ */
 
-export function replace(updatedData?: Array<TextType>, callback: Function): ActionCreator {
+export function replace(
+  updatedData?: Array<TextType>,
+  callback: Function
+): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: REPLACE_TEXTS,
@@ -27,7 +29,10 @@ export function replace(updatedData?: Array<TextType>, callback: Function): Acti
   };
 }
 
-export function update(textToUpdate: TextType, callback: Function): ActionCreator {
+export function update(
+  textToUpdate: TextType,
+  callback: Function
+): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_TEXT,

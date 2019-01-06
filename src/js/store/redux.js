@@ -1,6 +1,6 @@
 /**
-* Store
-*/
+ * Store
+ */
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
@@ -20,21 +20,21 @@ if (window !== undefined) {
 
 let reduxMiddleware = null;
 
-  // If there are dev tools (i.e. not in electron) and not running in Jest, include dev tools.
-if (window && window.__REDUX_DEVTOOLS_EXTENSION__ && !navigator.userAgent.includes("Node.js")) {
+// If there are dev tools (i.e. not in electron) and not running in Jest, include dev tools.
+if (
+  window &&
+  window.__REDUX_DEVTOOLS_EXTENSION__ &&
+  !navigator.userAgent.includes('Node.js')
+) {
   reduxMiddleware = compose(
     applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  );
 } else {
   reduxMiddleware = applyMiddleware(thunk);
 }
 
-const store = createStore(
-  allReducers,
-  initialState,
-  reduxMiddleware
-);
+const store = createStore(allReducers, initialState, reduxMiddleware);
 
 window.store = store; // Just for testing!!! Delete!!!
 export default store;

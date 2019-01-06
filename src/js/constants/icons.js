@@ -1,6 +1,6 @@
 /**
-* Icon Constants (for icofont)
-*/
+ * Icon Constants (for icofont)
+ */
 
 export const ICON_ADD = 'plus';
 export const ICON_BRAND = 'hat';

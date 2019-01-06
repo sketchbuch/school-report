@@ -1,13 +1,13 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr';
 import { Formik } from 'formik';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import EditClassForm from '../Form/EditClassForm';
-import { text }  from '../../../components/Translation/Translation';
+import { text } from '../../../components/Translation/Translation';
 import { classSchema } from '../../../validation/schemas';
 import * as classActions from '../../../actions/classActions';
 import classDefault from '../../../types/class';
@@ -28,13 +28,11 @@ type State = {
   error: boolean,
   class: ClassType,
   saving: boolean,
-}
-
-
+};
 
 /**
-* Layout for editing an existing class.
-*/
+ * Layout for editing an existing class.
+ */
 export class EditClassLayout extends Component<Props, State> {
   static defaultProps = {
     classes: [],
@@ -49,7 +47,7 @@ export class EditClassLayout extends Component<Props, State> {
 
     this.state = {
       error: false,
-      class: {...classDefault, ...this.getActiveClass()},
+      class: { ...classDefault, ...this.getActiveClass() },
       saving: false,
     };
 
@@ -58,49 +56,65 @@ export class EditClassLayout extends Component<Props, State> {
   }
 
   componentDidMount() {
-    setTitle(text('WinTitle', 'EditClassesLayout', {'CLASS_NAME': this.state.class.getLabel()}));
+    setTitle(
+      text('WinTitle', 'EditClassesLayout', {
+        CLASS_NAME: this.state.class.getLabel(),
+      })
+    );
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     const activeClass = this.getActiveClass();
-    setTitle(text('WinTitle', 'EditClassesLayout', {'CLASS_NAME': activeClass.getLabel()}));
+    setTitle(
+      text('WinTitle', 'EditClassesLayout', {
+        CLASS_NAME: activeClass.getLabel(),
+      })
+    );
 
     if (this.state.error) {
-      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceEditError', 'Classes'));
+      toastr.error(
+        text('PersistenceError', 'Toastr'),
+        text('PersistenceEditError', 'Classes')
+      );
       this.props.history.push(ROUTE_CLASSES);
     } else if (this.state.saving) {
-      this.props.dispatch(classActions.update(this.state.class, this.dataSaved));
+      this.props.dispatch(
+        classActions.update(this.state.class, this.dataSaved)
+      );
       this.setState({ saving: false });
     }
   }
 
   handleSubmit(values: ClassType) {
-    const updatedClass = {...values};
+    const updatedClass = { ...values };
     updatedClass.updated = Date.now();
 
     this.setState({
       class: updatedClass,
-      saving: true
+      saving: true,
     });
   }
 
   /**
-  * Returns the matching class or an empty object
-  *
-  * @return ClassType | object
-  */
+   * Returns the matching class or an empty object
+   *
+   * @return ClassType | object
+   */
   getActiveClass() {
     return getActiveClass(this.props.classes, this.props.match.params.classId);
   }
 
   /**
-  * Callback used by electron fs functions.
-  *
-  * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-  */
+   * Callback used by electron fs functions.
+   *
+   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
+   */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
-      toastr.success(text('PersistenceEdit', 'Classes'), this.state.class.getLabel());
+      toastr.success(
+        text('PersistenceEdit', 'Classes'),
+        this.state.class.getLabel()
+      );
       this.props.history.push(ROUTE_CLASSES);
     } else {
       this.setState({
@@ -115,22 +129,25 @@ export class EditClassLayout extends Component<Props, State> {
 
     return (
       <EditPanel>
-        <EditPanelHeader title={text('EditClass', 'EditPanelHeader', {'CLASS_NAME': activeClass.getLabel()})} />
+        <EditPanelHeader
+          title={text('EditClass', 'EditPanelHeader', {
+            CLASS_NAME: activeClass.getLabel(),
+          })}
+        />
         <EditPanelContent>
           <Formik
-            initialValues={{...classDefault, ...activeClass}}
+            initialValues={{ ...classDefault, ...activeClass }}
             enableReinitialize={true}
             validationSchema={classSchema}
             onSubmit={this.handleSubmit}
-            render={(formikProps) => (
+            render={formikProps => (
               <EditClassForm {...formikProps} saving={this.state.saving} />
             )}
           />
         </EditPanelContent>
       </EditPanel>
-    )
+    );
   }
 }
-
 
 export default EditClassLayout;

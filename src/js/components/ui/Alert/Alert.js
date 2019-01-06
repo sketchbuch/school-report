@@ -18,10 +18,9 @@ const alertIcons = {
   success: 'thumbs-up',
 };
 
-
 /**
-* A message to display to the user.
-*/
+ * A message to display to the user.
+ */
 class Alert extends PureComponent<Props> {
   static defaultProps = {
     body: 'A body text is required',
@@ -37,14 +36,9 @@ class Alert extends PureComponent<Props> {
   }
 
   render() {
-    const {
-      body,
-      icon,
-      title,
-      type,
-    } = this.props;
+    const { body, icon, title, type } = this.props;
 
-    const tooltip = (title) ? `${title} - ${body}` : body;
+    const tooltip = title ? `${title} - ${body}` : body;
 
     return (
       <section className={'Alert Alert--' + type} title={tooltip}>
@@ -52,9 +46,8 @@ class Alert extends PureComponent<Props> {
         {title && <h1 className="Alert__headline">{title}</h1>}
         <p className="Alert__body">{body}</p>
       </section>
-    )
+    );
   }
 }
-
 
 export default Alert;

@@ -8,10 +8,9 @@ type Props = {
   rightActions?: React.Node,
 };
 
-
 /**
-* Sidebar footer controls.
-*/
+ * Sidebar footer controls.
+ */
 class SidebarFooter extends React.Component<Props> {
   props: Props;
 
@@ -27,7 +26,7 @@ class SidebarFooter extends React.Component<Props> {
           </div>
         </div>
       </footer>
-    )
+    );
   }
 }
 

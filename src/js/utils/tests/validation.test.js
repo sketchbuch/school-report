@@ -2,10 +2,9 @@
 
 import validate from '../validation';
 
-
 /**
-* Validation Tests
-*/
+ * Validation Tests
+ */
 
 describe('Util: validation', () => {
   const field = 'label';
@@ -15,6 +14,8 @@ describe('Util: validation', () => {
   });
 
   test('validate() should return false upon errors', () => {
-    expect(validate(field, { label: 'something' }, { label: true })).toBe(false);
+    expect(validate(field, { label: 'something' }, { label: true })).toBe(
+      false
+    );
   });
 });

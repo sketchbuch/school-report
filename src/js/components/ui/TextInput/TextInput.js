@@ -21,10 +21,9 @@ type Props = {
   value?: string,
 };
 
-
 /**
-* Generic input tag.
-*/
+ * Generic input tag.
+ */
 class TextInput extends React.Component<Props> {
   static defaultProps = {
     disabled: false,
@@ -59,23 +58,22 @@ class TextInput extends React.Component<Props> {
     if (isValid === false) classes += ` ${UI_ERROR_CLASS}`;
 
     return (
-        <input
-          className={classes}
-          defaultValue={defaultValue}
-          disabled={disabled}
-          name={name}
-          maxLength={maxLength}
-          onBlur={disabled ? null : onBlur}
-          onKeyUp={disabled ? null : onKeyUp}
-          onChange={disabled ? null : onChange}
-          placeholder={placeholder}
-          title={title}
-          type={type}
-          value={value}
-        />
-    )
+      <input
+        className={classes}
+        defaultValue={defaultValue}
+        disabled={disabled}
+        name={name}
+        maxLength={maxLength}
+        onBlur={disabled ? null : onBlur}
+        onKeyUp={disabled ? null : onKeyUp}
+        onChange={disabled ? null : onChange}
+        placeholder={placeholder}
+        title={title}
+        type={type}
+        value={value}
+      />
+    );
   }
 }
-
 
 export default TextInput;

@@ -1,6 +1,5 @@
 // @flow
 
-
 import {
   LANGUAGE_LOADED,
   LOAD_LANGUAGE,
@@ -9,10 +8,9 @@ import {
 import { readLangFile } from '../fs/fs';
 import type { ActionCreator } from '../types/action';
 
-
 /**
-* Language Actions
-*/
+ * Language Actions
+ */
 
 export function change(langKey: string, callback?: Function): ActionCreator {
   return (dispatch, getState) => {
@@ -28,10 +26,12 @@ export function change(langKey: string, callback?: Function): ActionCreator {
     }
 
     if (window.reportr.translations[langKey] === undefined) {
-      dispatch(load(langKey, function(ioResult: Object){
-        Object.assign(window.reportr.translations, ioResult.data);
-        langReady();
-      }));
+      dispatch(
+        load(langKey, function(ioResult: Object) {
+          Object.assign(window.reportr.translations, ioResult.data);
+          langReady();
+        })
+      );
     } else {
       langReady();
     }

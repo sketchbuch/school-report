@@ -1,6 +1,6 @@
 /**
-* Route Constants
-*/
+ * Route Constants
+ */
 
 export const ROUTE_HOME = '/';
 
@@ -35,7 +35,8 @@ export const ROUTE_NEW_REPORT = '/reports/new';
 
 // Report Builder
 export const ROUTE_BUILDER = '/builder/:reportId';
-export const ROUTE_EDIT_BUILDER = '/builder/:reportId/class/:classId/edit/:pupilId';
+export const ROUTE_EDIT_BUILDER =
+  '/builder/:reportId/class/:classId/edit/:pupilId';
 export const ROUTE_EXPORT_BUILDER = '/builder/:reportId/export';
 
 // Settings

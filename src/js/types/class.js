@@ -10,10 +10,9 @@ import {
   ROUTE_PUPILS,
 } from '../constants/routes';
 
-
 /**
-* Class type def.
-*/
+ * Class type def.
+ */
 
 export type ClassType = {
   ...$Exact<DomainBaseType>,
@@ -30,12 +29,12 @@ const classDefault: ClassType = {
 export const classSort = ['label', 'updated'];
 
 /**
-* Returns an object of ClassType based on classObj but with additional props set.
-*
-* @param ClassType classObj The initial class object.
-* @param number ts A timestamp used for the id, created, and updated.
-* @return ClassType The new class object.
-*/
+ * Returns an object of ClassType based on classObj but with additional props set.
+ *
+ * @param ClassType classObj The initial class object.
+ * @param number ts A timestamp used for the id, created, and updated.
+ * @return ClassType The new class object.
+ */
 export function ClassFactory(classObj: ClassType, ts: number): ClassType {
   const newObj = hydrateClass({
     ...classObj,
@@ -48,16 +47,16 @@ export function ClassFactory(classObj: ClassType, ts: number): ClassType {
 }
 
 /**
-* Returns an updated classObj with getters.
-*
-* @param ClassType classObj The class object.
-* @return ClassType The hydrated class object.
-*/
+ * Returns an updated classObj with getters.
+ *
+ * @param ClassType classObj The class object.
+ * @return ClassType The hydrated class object.
+ */
 export function hydrateClass(classObj: ClassType): ClassType {
   return {
     ...classDefault,
     ...classObj,
-    contains: function (term?: string, anywhere?: boolean = false) {
+    contains: function(term?: string, anywhere?: boolean = false) {
       if (term) {
         term = term.toLowerCase();
         const searchStr = (this.label + this.pupilCount).toLowerCase();
@@ -75,21 +74,21 @@ export function hydrateClass(classObj: ClassType): ClassType {
 
       return false;
     },
-    getDescription: function () {
+    getDescription: function() {
       return `(${this.pupilCount})`;
     },
-    getIcon: function () {
+    getIcon: function() {
       return ICON_CLASSES;
     },
-    getLabel: function () {
+    getLabel: function() {
       return this.label;
     },
-    getTooltip: function () {
-      return`${this.getLabel()} - ${this.getDescription()}`;
+    getTooltip: function() {
+      return `${this.getLabel()} - ${this.getDescription()}`;
     },
-    getUrl: function (linkType: string) {
+    getUrl: function(linkType: string) {
       let theUrl = ROUTE_PUPILS;
-      
+
       if (linkType === 'delete') {
         theUrl = ROUTE_DEL_CLASS;
       } else if (linkType === 'edit') {
@@ -102,11 +101,11 @@ export function hydrateClass(classObj: ClassType): ClassType {
 }
 
 /**
-* Returns a string to be used when creating an ID for classes.
-*
-* @param ClassType classObj The class record.
-* @return string The string to be used in creating the ID.
-*/
+ * Returns a string to be used when creating an ID for classes.
+ *
+ * @param ClassType classObj The class record.
+ * @return string The string to be used in creating the ID.
+ */
 export function getClassIdStr(classObj: ClassType): string {
   return 'class:' + classObj.label;
 }

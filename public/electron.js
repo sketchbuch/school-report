@@ -8,11 +8,15 @@ let mainWindow;
 
 function createWindow() {
   if (isDev) {
-    const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
+    const {
+      default: installExtension,
+      REACT_DEVELOPER_TOOLS,
+      REDUX_DEVTOOLS,
+    } = require('electron-devtools-installer');
     [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].forEach(extension => {
       installExtension(extension)
-          .then((name) => console.log(`Added Extension: ${name}`))
-          .catch((err) => console.log('An error occurred: ', err));
+        .then(name => console.log(`Added Extension: ${name}`))
+        .catch(err => console.log('An error occurred: ', err));
     });
   }
   mainWindow = new BrowserWindow({
@@ -23,8 +27,12 @@ function createWindow() {
     width: 900,
   });
 
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
-  mainWindow.on('closed', () => mainWindow = null);
+  mainWindow.loadURL(
+    isDev
+      ? 'http://localhost:3000'
+      : `file://${path.join(__dirname, '../build/index.html')}`
+  );
+  mainWindow.on('closed', () => (mainWindow = null));
   if (isDev) mainWindow.openDevTools();
 }
 
@@ -32,8 +40,10 @@ app
   .on('ready', createWindow)
   .on('browser-window-created', (e, window) => {
     window.setMenu(null);
-  }).on('window-all-closed', () => {
+  })
+  .on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
-  }).on('activate', () => {
+  })
+  .on('activate', () => {
     if (mainWindow === null) createWindow();
   });

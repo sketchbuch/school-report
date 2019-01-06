@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
-import ReportsTextList from './TextList/ReportsTextList'
-import ReportsTexts from './Texts/ReportsTexts'
+import ReportsTextList from './TextList/ReportsTextList';
+import ReportsTexts from './Texts/ReportsTexts';
 import { getSelectedTexts } from '../../utils/redux';
 import type { CategoryType } from '../../types/category';
 import type { ClassType } from '../../types/class';
@@ -14,7 +14,7 @@ import type { PupilType } from '../../types/pupil';
 import type { TextType } from '../../types/text';
 import type { DispatchType } from '../../types/functions';
 import * as builderActions from '../../actions/builderActions';
-import { moveItem, removeItem }  from '../../utils/reducers/array';
+import { moveItem, removeItem } from '../../utils/reducers/array';
 import './Reports.css';
 
 type Props = {
@@ -33,10 +33,9 @@ type State = {
   dragSelected: Array<string>,
 };
 
-
 /**
-* The interface to build a report.
-*/
+ * The interface to build a report.
+ */
 export class Reports extends Component<Props, State> {
   static defaultProps = {
     activeClass: {},
@@ -44,7 +43,7 @@ export class Reports extends Component<Props, State> {
     activeReport: {},
     categories: [],
     disableTexts: false,
-    saveReports: ()=>{},
+    saveReports: () => {},
     term: '',
     texts: [],
   };
@@ -52,9 +51,9 @@ export class Reports extends Component<Props, State> {
   props: Props;
   state: State;
   pupilId: string;
-  handleEndDrag: ()=>{};
-  handleTextMove: ()=>{};
-  handleTextToggle: ()=>{};
+  handleEndDrag: () => {};
+  handleTextMove: () => {};
+  handleTextToggle: () => {};
 
   constructor(props: Props) {
     super(props);
@@ -80,8 +79,8 @@ export class Reports extends Component<Props, State> {
       this.props.activeClass.id,
       this.props.activePupil.id,
       [...this.state.dragSelected],
-      ()=>{},
-      true,
+      () => {},
+      true
     );
 
     this.setState({ dragSelected: [] });
@@ -97,7 +96,7 @@ export class Reports extends Component<Props, State> {
 
     if (sourceIndex < 0 || targetIndex < 0) return;
     if (before && targetIndex > 0) targetIndex -= 1;
-    
+
     dragSelected = moveItem(dragSelected, sourceId, sourceIndex, targetIndex);
     this.setState({ dragSelected });
   }
@@ -114,19 +113,22 @@ export class Reports extends Component<Props, State> {
     } else {
       selected.push(textId);
     }
-    
+
     this.props.saveReports(
       this.props.activeReport.id,
       this.props.activeClass.id,
       this.props.activePupil.id,
       selected,
-      ()=>{},
-      false,
+      () => {},
+      false
     );
-  }
+  };
 
   render() {
-    const selectedTexts = (this.state.dragSelected.length > 0) ? this.state.dragSelected : this.props.selected;
+    const selectedTexts =
+      this.state.dragSelected.length > 0
+        ? this.state.dragSelected
+        : this.props.selected;
 
     return (
       <section className="Reports">
@@ -152,16 +154,21 @@ export class Reports extends Component<Props, State> {
           />
         </div>
       </section>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state: Object, props: Props) => {
   return {
-    selected: getSelectedTexts(state.builder, props.activeReport.id, props.activeClass.id, props.activePupil.id),
+    selected: getSelectedTexts(
+      state.builder,
+      props.activeReport.id,
+      props.activeClass.id,
+      props.activePupil.id
+    ),
     categories: state.categories,
     texts: state.texts,
-  }
+  };
 };
 
 const mapDispatchToProps = (dispatch: DispatchType) => {
@@ -171,15 +178,26 @@ const mapDispatchToProps = (dispatch: DispatchType) => {
       classId: string,
       pupilId: string,
       selected: Array<string>,
-      callback?: Function = ()=>{},
-      immediate: boolean,
+      callback?: Function = () => {},
+      immediate: boolean
     ) => {
-      dispatch(builderActions.save(reportId, classId, pupilId, selected, callback, immediate));
+      dispatch(
+        builderActions.save(
+          reportId,
+          classId,
+          pupilId,
+          selected,
+          callback,
+          immediate
+        )
+      );
     },
-  }
-}
+  };
+};
 
 Reports = DragDropContext(HTML5Backend)(Reports);
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Reports);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Reports);

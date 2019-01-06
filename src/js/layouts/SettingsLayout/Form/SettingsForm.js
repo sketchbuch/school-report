@@ -21,10 +21,9 @@ type Props = {
   values: Object,
 };
 
-
 /**
-* Settings form.
-*/
+ * Settings form.
+ */
 export class SettingsFrom extends Component<Props> {
   props: Props;
 
@@ -38,7 +37,7 @@ export class SettingsFrom extends Component<Props> {
       values,
     } = this.props;
 
-    const btnIsDisabled = (saving || !dirty) ? true : false;
+    const btnIsDisabled = saving || !dirty ? true : false;
 
     return (
       <form className="form" onSubmit={handleSubmit}>
@@ -47,10 +46,18 @@ export class SettingsFrom extends Component<Props> {
             <Translation name="LabelLanguage" ns="Settings" />
           </div>
           <div className="fieldwrap__right">
-            <select name="language" value={values.language} onChange={handleChange}>
-                {this.props.languages.map(lang => {
-                  return <option value={lang.key} key={lang.key}>{lang.label}</option>
-                })}
+            <select
+              name="language"
+              value={values.language}
+              onChange={handleChange}
+            >
+              {this.props.languages.map(lang => {
+                return (
+                  <option value={lang.key} key={lang.key}>
+                    {lang.label}
+                  </option>
+                );
+              })}
             </select>
           </div>
         </div>
@@ -84,15 +91,16 @@ export class SettingsFrom extends Component<Props> {
           </Button>
         </div>
 
-        {!saving &&
+        {!saving && (
           <p className="form__submsg">
-            <Link to={ROUTE_HOME}><Translation name="Cancel" ns="Settings" /></Link>
+            <Link to={ROUTE_HOME}>
+              <Translation name="Cancel" ns="Settings" />
+            </Link>
           </p>
-        }
+        )}
       </form>
     );
   }
 }
-
 
 export default SettingsFrom;

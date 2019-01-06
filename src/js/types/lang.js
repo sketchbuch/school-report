@@ -1,9 +1,8 @@
 // @flow
 
-
 /**
-* Language type def.
-*/
+ * Language type def.
+ */
 
 export type LangType = {
   key: string,

@@ -12,20 +12,19 @@ let electron = null;
 let fs = require('fs');
 var path = require('path');
 
-  // If in electron environment:
+// If in electron environment:
 if (window !== undefined && window.require) {
   electron = window.require('electron');
   fs = electron.remote.require('fs');
 }
 
-const APP_PATH = (electron !== null) ? electron.remote.app.getAppPath() : '';
-const HOME_PATH = (electron !== null) ? electron.remote.app.getPath('home') : '';
-const FOLDER = (window.location.hostname === 'localhost') ? 'public' : 'build';
-
+const APP_PATH = electron !== null ? electron.remote.app.getAppPath() : '';
+const HOME_PATH = electron !== null ? electron.remote.app.getPath('home') : '';
+const FOLDER = window.location.hostname === 'localhost' ? 'public' : 'build';
 
 /**
-* Saves a report as a word file.
-*/
+ * Saves a report as a word file.
+ */
 export function exportWord(exportConfig: ExportType, callback: Function) {
   const filePath = `${APP_PATH}/${FOLDER}/data/template.docx`;
   const content = fs.readFileSync(filePath, 'binary');
@@ -64,19 +63,19 @@ export function exportWord(exportConfig: ExportType, callback: Function) {
 }
 
 /**
-* Returns the export date.
-* 
-* @param {integer} ts The timestamp to get the formated date for.
-* @param {string} The Formated date.
-*/
+ * Returns the export date.
+ *
+ * @param {integer} ts The timestamp to get the formated date for.
+ * @param {string} The Formated date.
+ */
 export function getDateFromTs(ts: number): string {
   const exportDate = new Date(ts);
   const exportDateYyyy = exportDate.getFullYear();
   let exportDateDd = exportDate.getDate();
   let exportDateMm = exportDate.getMonth() + 1;
 
-  if(exportDateDd < 10) exportDateDd = '0' + exportDateDd;
-  if(exportDateMm < 10) exportDateMm = '0' + exportDateMm;
+  if (exportDateDd < 10) exportDateDd = '0' + exportDateDd;
+  if (exportDateMm < 10) exportDateMm = '0' + exportDateMm;
 
   return text('DateFormat', 'Lang', {
     D: exportDateDd,
@@ -86,14 +85,18 @@ export function getDateFromTs(ts: number): string {
 }
 
 /**
-* Returns the content - a list of pupils and associated texts.
-* 
-* @param {array} items The array of classes, as create for the edit builder layout sidebar.
-* @param {object} builderData The builder data.
-* @param {array} ittextsems The texts.
-* @param {object} content an object containing content data including an array of pupils and their selected texts.
-*/
-export function getContent(items: Array<SidebarBuilderItemType>, builderData: Object, texts: Array<TextType>) {
+ * Returns the content - a list of pupils and associated texts.
+ *
+ * @param {array} items The array of classes, as create for the edit builder layout sidebar.
+ * @param {object} builderData The builder data.
+ * @param {array} ittextsems The texts.
+ * @param {object} content an object containing content data including an array of pupils and their selected texts.
+ */
+export function getContent(
+  items: Array<SidebarBuilderItemType>,
+  builderData: Object,
+  texts: Array<TextType>
+) {
   const content = {
     classCount: 0,
     content: [],
@@ -109,21 +112,28 @@ export function getContent(items: Array<SidebarBuilderItemType>, builderData: Ob
         pupils: [],
       };
 
-      item.pupils.forEach(function(pupil){
-        if (builderData[item.id] !== undefined && builderData[item.id][pupil.id] !== undefined) {
+      item.pupils.forEach(function(pupil) {
+        if (
+          builderData[item.id] !== undefined &&
+          builderData[item.id][pupil.id] !== undefined
+        ) {
           const newContentItem = {
             pupil_name: `${pupil.getLabel()}`,
             texts: [],
           };
-          
+
           builderData[item.id][pupil.id].forEach(function(textId: string) {
             var textEle = texts.find((text: TextType) => text.id === textId);
             if (textEle !== undefined) {
-              const textHtml = getPupilTextHtml(textEle.getLabel(0), pupil, false);
+              const textHtml = getPupilTextHtml(
+                textEle.getLabel(0),
+                pupil,
+                false
+              );
               newContentItem.texts.push(textHtml.__html);
             }
           });
-  
+
           newClass.pupils.push(newContentItem);
           content.pupilCount += 1;
         }

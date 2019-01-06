@@ -15,15 +15,14 @@ import pupilDefault from '../../types/pupil';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-
 /**
-* Pupil Actions Tests
-*/
+ * Pupil Actions Tests
+ */
 
 describe('Actions: pupilActions:', () => {
-  let testPupil = {...pupilDefault, id: 'p1', label: 'Pupil', classId: 'c1'};
-  let callback = ()=>{};
-  let store = ()=>{};
+  let testPupil = { ...pupilDefault, id: 'p1', label: 'Pupil', classId: 'c1' };
+  let callback = () => {};
+  let store = () => {};
 
   beforeEach(() => {
     callback = jest.fn();
@@ -31,9 +30,7 @@ describe('Actions: pupilActions:', () => {
   });
 
   test('replace() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: REPLACE_PUPILS, payload: [testPupil] },
-    ];
+    const EXPECTED_ACTIONS = [{ type: REPLACE_PUPILS, payload: [testPupil] }];
 
     expect.assertions(1);
     store.dispatch(pupilActions.replace([testPupil], callback));
@@ -42,9 +39,7 @@ describe('Actions: pupilActions:', () => {
   });
 
   test('update() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: UPDATE_PUPIL, payload: testPupil },
-    ];
+    const EXPECTED_ACTIONS = [{ type: UPDATE_PUPIL, payload: testPupil }];
 
     expect.assertions(1);
     store.dispatch(pupilActions.update(testPupil, callback));
@@ -53,9 +48,7 @@ describe('Actions: pupilActions:', () => {
   });
 
   test('add() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: ADD_PUPIL, payload: testPupil },
-    ];
+    const EXPECTED_ACTIONS = [{ type: ADD_PUPIL, payload: testPupil }];
 
     expect.assertions(1);
     store.dispatch(pupilActions.add(testPupil, callback));
@@ -64,9 +57,7 @@ describe('Actions: pupilActions:', () => {
   });
 
   test('deleteOne dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: DELETE_PUPIL, payload: { id: 'p1' } },
-    ];
+    const EXPECTED_ACTIONS = [{ type: DELETE_PUPIL, payload: { id: 'p1' } }];
 
     expect.assertions(1);
     store.dispatch(pupilActions.deleteOne('p1', callback));

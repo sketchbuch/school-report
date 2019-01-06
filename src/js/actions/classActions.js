@@ -12,12 +12,14 @@ import { FILE_CLASSES, FILE_PUPILS } from '../constants/io';
 import type { ActionCreator } from '../types/action';
 import type { ClassType } from '../types/class';
 
-
 /**
-* Class Actions
-*/
+ * Class Actions
+ */
 
-export function replace(updatedData: Array<ClassType>, callback: Function): ActionCreator {
+export function replace(
+  updatedData: Array<ClassType>,
+  callback: Function
+): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: REPLACE_CLASSES,
@@ -27,7 +29,10 @@ export function replace(updatedData: Array<ClassType>, callback: Function): Acti
   };
 }
 
-export function update(classToUpdate: ClassType, callback: Function): ActionCreator {
+export function update(
+  classToUpdate: ClassType,
+  callback: Function
+): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_CLASS,

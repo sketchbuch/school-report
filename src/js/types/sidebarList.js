@@ -1,7 +1,12 @@
 // @flow
 
 /**
-* Types of Sidebar list.
-*/
+ * Types of Sidebar list.
+ */
 
-export type SidebarListTypes = 'category' | 'pupil' | 'class' | 'text' | 'report';
+export type SidebarListTypes =
+  | 'category'
+  | 'pupil'
+  | 'class'
+  | 'text'
+  | 'report';

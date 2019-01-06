@@ -11,12 +11,14 @@ import { FILE_SETTINGS } from '../constants/io';
 import type { ActionCreator } from '../types/action';
 import type { SettingsType } from '../types/settings';
 
-
 /**
-* Class Actions
-*/
+ * Class Actions
+ */
 
-export function update(settings: SettingsType, callback: Function): ActionCreator {
+export function update(
+  settings: SettingsType,
+  callback: Function
+): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_SETTINGS,
@@ -35,7 +37,11 @@ export function load(callback: Function): ActionCreator {
 }
 
 export function loaded(settings: Object): ActionCreator {
-  if (settings.settings !== undefined && settings.settings.language !== undefined) window.reportr.curLang = settings.settings.language;
+  if (
+    settings.settings !== undefined &&
+    settings.settings.language !== undefined
+  )
+    window.reportr.curLang = settings.settings.language;
 
   return {
     type: SETTINGS_LOADED,

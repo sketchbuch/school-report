@@ -7,7 +7,6 @@ import App from './js/components/App/App';
 import { TOASTR_DURATION } from './js/constants/misc';
 import './index.css';
 
-
 ReactDOM.render(
   <Provider store={store}>
     <div className="App__frame">
@@ -22,5 +21,5 @@ ReactDOM.render(
       />
     </div>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

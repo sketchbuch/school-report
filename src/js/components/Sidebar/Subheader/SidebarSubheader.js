@@ -7,23 +7,18 @@ type Props = {
   children?: React.Node,
 };
 
-
 /**
-* Sidebar subheader.
-*/
+ * Sidebar subheader.
+ */
 class SidebarSubheader extends React.Component<Props> {
   static defaultProps = {
-      children: null,
-   };
+    children: null,
+  };
 
   props: Props;
-  
+
   render() {
-    return (
-      <div className="SidebarSubheader">
-        {this.props.children}
-      </div>
-    )
+    return <div className="SidebarSubheader">{this.props.children}</div>;
   }
 }
 

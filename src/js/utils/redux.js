@@ -1,6 +1,6 @@
 // @flow
 
-import { text }  from '../components/Translation/Translation';
+import { text } from '../components/Translation/Translation';
 import type { CategoryType } from '../types/category';
 import type { ClassType } from '../types/class';
 import type { PupilType } from '../types/pupil';
@@ -25,32 +25,65 @@ type BcStateType = CategoryType | ClassType | PupilType | ReportType | TextType;
 
 const bcMap = {
   builder: { param: 'reportId', route: ROUTE_BUILDER, stateKey: 'reports' },
-  export: { param: '', route: ROUTE_EXPORT_BUILDER, stateKey: '', trans: "BreadcrumbExport:Reports" },
+  export: {
+    param: '',
+    route: ROUTE_EXPORT_BUILDER,
+    stateKey: '',
+    trans: 'BreadcrumbExport:Reports',
+  },
   classlist: { param: 'classId', route: ROUTE_PUPILS, stateKey: 'classes' },
-  category: { param: 'categoryId', route: ROUTE_EDIT_CATEGORY, stateKey: 'categories' },
+  category: {
+    param: 'categoryId',
+    route: ROUTE_EDIT_CATEGORY,
+    stateKey: 'categories',
+  },
   class: { param: 'classId', route: ROUTE_CLASSES, stateKey: 'classes' },
   pupil: { param: 'pupilId', route: ROUTE_PUPILS, stateKey: 'pupils' },
   report: { param: 'reportId', route: ROUTE_EDIT_REPORT, stateKey: 'reports' },
   text: { param: 'textId', route: ROUTE_EDIT_TEXT, stateKey: 'texts' },
-  categories: { param: '', route: ROUTE_CATEGORIES, stateKey: '', trans: "Breadcrumb:Categories" },
-  reports: { param: '', route: ROUTE_REPORTS, stateKey: '', trans: "Breadcrumb:Reports" },
-  settings: { param: '', route: ROUTE_SETTINGS, stateKey: '', trans: "Breadcrumb:Settings" },
-  classes: { param: '', route: ROUTE_CLASSES, stateKey: '', trans: "Breadcrumb:Classes" },
-  texts: { param: '', route: ROUTE_TEXTS, stateKey: '', trans: "Breadcrumb:Texts" },
-}
-
+  categories: {
+    param: '',
+    route: ROUTE_CATEGORIES,
+    stateKey: '',
+    trans: 'Breadcrumb:Categories',
+  },
+  reports: {
+    param: '',
+    route: ROUTE_REPORTS,
+    stateKey: '',
+    trans: 'Breadcrumb:Reports',
+  },
+  settings: {
+    param: '',
+    route: ROUTE_SETTINGS,
+    stateKey: '',
+    trans: 'Breadcrumb:Settings',
+  },
+  classes: {
+    param: '',
+    route: ROUTE_CLASSES,
+    stateKey: '',
+    trans: 'Breadcrumb:Classes',
+  },
+  texts: {
+    param: '',
+    route: ROUTE_TEXTS,
+    stateKey: '',
+    trans: 'Breadcrumb:Texts',
+  },
+};
 
 /**
-* Returns an array of objects with text and a link for use in a breadcrumb trail.
-*
-* @param object state The redux state.
-* @param object props The props of the component calling this method.
-* @return array an array of matching breadcrumb parts.
-*/
+ * Returns an array of objects with text and a link for use in a breadcrumb trail.
+ *
+ * @param object state The redux state.
+ * @param object props The props of the component calling this method.
+ * @return array an array of matching breadcrumb parts.
+ */
 export function getBreadcrumbs(state: Object, props: Object) {
   let activeElements = [];
 
-  props.path.split('-').forEach((ele) => {
+  props.path.split('-').forEach(ele => {
     if (bcMap[ele] !== undefined) {
       const { param, route, stateKey, trans } = bcMap[ele];
 
@@ -80,14 +113,14 @@ export function getBreadcrumbs(state: Object, props: Object) {
 }
 
 /**
-* Returns the link for the breadcrumb element with path params replaced.
-*
-* @param string path The route that represents the link.
-* @param array matchParams Any matching route params.
-* @return string The link URL.
-*/
+ * Returns the link for the breadcrumb element with path params replaced.
+ *
+ * @param string path The route that represents the link.
+ * @param array matchParams Any matching route params.
+ * @return string The link URL.
+ */
 function getBreadcrumbLink(path: string, matchParams: Object) {
-  Object.keys(matchParams).forEach((param) => {
+  Object.keys(matchParams).forEach(param => {
     path = path.replace(`:${param}`, matchParams[param]);
   });
 
@@ -95,106 +128,134 @@ function getBreadcrumbLink(path: string, matchParams: Object) {
 }
 
 /**
-* Returns the active class from state.classes that matches the classId or an empty object.
-*
-* @param object stateSlice The slice of the state that contains the object needed.
-* @param string objId The id of the obect needed.
-* @return object|null Either a copy of the object needed or null.
-*/
-function getBreadcrumb(stateSlice: Array<BcStateType>, objId: string): ClassType | null {
+ * Returns the active class from state.classes that matches the classId or an empty object.
+ *
+ * @param object stateSlice The slice of the state that contains the object needed.
+ * @param string objId The id of the obect needed.
+ * @return object|null Either a copy of the object needed or null.
+ */
+function getBreadcrumb(
+  stateSlice: Array<BcStateType>,
+  objId: string
+): ClassType | null {
   if (objId) {
     const neededObj = stateSlice.find(obj => obj.id === objId);
-    if (neededObj !== undefined) return {...neededObj};
+    if (neededObj !== undefined) return { ...neededObj };
   }
 
   return null;
 }
 
 /**
-* Returns the active class from state.classes that matches the classId or an empty object.
-*
-* @param array classes The classes from redux state.
-* @param string classId The id of the class looked for.
-* @return object Either the class or an empty object.
-*/
-export function getActiveClass(classes: Array<ClassType>, classId: string): ClassType | Object {
+ * Returns the active class from state.classes that matches the classId or an empty object.
+ *
+ * @param array classes The classes from redux state.
+ * @param string classId The id of the class looked for.
+ * @return object Either the class or an empty object.
+ */
+export function getActiveClass(
+  classes: Array<ClassType>,
+  classId: string
+): ClassType | Object {
   return getItemById(classes, classId);
 }
 
 /**
-* Returns the active pupil from state.pupils that matches the pupilId or an empty object.
-*
-* @param array pupils The pupils from redux state.
-* @param string pupilId The id of the pupil looked for.
-* @return object Either the pupil or an empty object.
-*/
-export function getActivePupil(pupils: Array<PupilType>, pupilId: string): PupilType | Object {
+ * Returns the active pupil from state.pupils that matches the pupilId or an empty object.
+ *
+ * @param array pupils The pupils from redux state.
+ * @param string pupilId The id of the pupil looked for.
+ * @return object Either the pupil or an empty object.
+ */
+export function getActivePupil(
+  pupils: Array<PupilType>,
+  pupilId: string
+): PupilType | Object {
   return getItemById(pupils, pupilId);
 }
 
 /**
-* Returns the active text from state.texts that matches the textId or an empty object.
-*
-* @param array texts The texts from redux state.
-* @param string textId The id of the text looked for.
-* @return object Either the text or an empty object.
-*/
-export function getActiveText(texts: Array<TextType>, textId: string): TextType | Object {
+ * Returns the active text from state.texts that matches the textId or an empty object.
+ *
+ * @param array texts The texts from redux state.
+ * @param string textId The id of the text looked for.
+ * @return object Either the text or an empty object.
+ */
+export function getActiveText(
+  texts: Array<TextType>,
+  textId: string
+): TextType | Object {
   return getItemById(texts, textId);
 }
 
 /**
-* Returns the active report from state.reports that matches the reportId or an empty object.
-*
-* @param array reports The reports from redux state.
-* @param string reportId The id of the report looked for.
-* @return object Either the text or an empty object.
-*/
-export function getActiveReport(reports: Array<ReportType>, reportId: string): ReportType | Object {
+ * Returns the active report from state.reports that matches the reportId or an empty object.
+ *
+ * @param array reports The reports from redux state.
+ * @param string reportId The id of the report looked for.
+ * @return object Either the text or an empty object.
+ */
+export function getActiveReport(
+  reports: Array<ReportType>,
+  reportId: string
+): ReportType | Object {
   return getItemById(reports, reportId);
 }
 
 /**
-* Returns the active category from state.categories that matches the categoryId or an empty object.
-*
-* @param array categories The categories from redux state.
-* @param string categoryId The id of the category looked for.
-* @return object Either the category or an empty object.
-*/
-export function getActiveCategory(categories: Array<CategoryType>, categoryId: string): CategoryType | Object {
+ * Returns the active category from state.categories that matches the categoryId or an empty object.
+ *
+ * @param array categories The categories from redux state.
+ * @param string categoryId The id of the category looked for.
+ * @return object Either the category or an empty object.
+ */
+export function getActiveCategory(
+  categories: Array<CategoryType>,
+  categoryId: string
+): CategoryType | Object {
   return getItemById(categories, categoryId);
 }
 
 /**
-* Returns an array of pupils from state.pupils that matches the classId or an empty array.
-*
-* @param array pupils The pupils from redux state.
-* @param string classId The id of the class looked for.
-* @return array Either the matching pupils or an empty array.
-*/
-export function getClassPupils(pupils: Array<PupilType>, classId: string): Array<PupilType> {
+ * Returns an array of pupils from state.pupils that matches the classId or an empty array.
+ *
+ * @param array pupils The pupils from redux state.
+ * @param string classId The id of the class looked for.
+ * @return array Either the matching pupils or an empty array.
+ */
+export function getClassPupils(
+  pupils: Array<PupilType>,
+  classId: string
+): Array<PupilType> {
   if (classId !== '') return pupils.filter(p => p.classId === classId);
   return [];
 }
 
 /**
-* Returns an array of text IDs that have been selected by a pupil.
-*
-* @param object builderData The builder data object.
-* @param string activeReportId The id of the report in the builder data.
-* @param string activeClassId The id of the class in the builder data.
-* @param string activePupilId The id of the pupil in the builder data.
-* @return array An array with any selected texts for a pupil.
-*/
-export const getSelectedTexts = (builderData: Object, activeReportId: string, activeClassId: string, activePupilId: string): Array<string> => {
+ * Returns an array of text IDs that have been selected by a pupil.
+ *
+ * @param object builderData The builder data object.
+ * @param string activeReportId The id of the report in the builder data.
+ * @param string activeClassId The id of the class in the builder data.
+ * @param string activePupilId The id of the pupil in the builder data.
+ * @return array An array with any selected texts for a pupil.
+ */
+export const getSelectedTexts = (
+  builderData: Object,
+  activeReportId: string,
+  activeClassId: string,
+  activePupilId: string
+): Array<string> => {
   let selected = [];
   if (builderData[activeReportId] !== undefined) {
     if (builderData[activeReportId][activeClassId] !== undefined) {
-      if (builderData[activeReportId][activeClassId][activePupilId] !== undefined) {
+      if (
+        builderData[activeReportId][activeClassId][activePupilId] !== undefined
+      ) {
         selected = builderData[activeReportId][activeClassId][activePupilId];
       }
     }
   }
 
   return selected;
-}
+};

@@ -12,17 +12,16 @@ type State = {
   display: 'mounting' | 'slidein' | 'slideout' | 'unmounting',
 };
 
-
 /**
-* The Edit Panel.
-*/
+ * The Edit Panel.
+ */
 export class EditPanel extends React.Component<Props, State> {
   props: Props;
   state: State;
   slidein: Function;
   slideinTimer: TimeoutID;
 
-  constructor(props: Props){
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -41,7 +40,7 @@ export class EditPanel extends React.Component<Props, State> {
   }
 
   slidein() {
-    this.setState({display: 'slidein'});
+    this.setState({ display: 'slidein' });
   }
 
   render() {
@@ -51,9 +50,8 @@ export class EditPanel extends React.Component<Props, State> {
           {this.props.children}
         </section>
       </div>
-    )
+    );
   }
 }
-
 
 export default EditPanel;

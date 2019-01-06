@@ -15,15 +15,11 @@ import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCi
 import EditTextLayout from './Edit/EditTextLayout';
 import DeleteTextsLayout from './Delete/DeleteTextsLayout';
 import NewTextLayout from './New/NewTextLayout';
-import { text }  from '../../components/Translation/Translation';
+import { text } from '../../components/Translation/Translation';
 import { textSort } from '../../types/text';
 import type { CategoryType } from '../../types/category';
 import type { TextType } from '../../types/text';
-import {
-  ICON_ADD,
-  ICON_CLOSE,
-  ICON_DELETE,
-} from '../../constants/icons';
+import { ICON_ADD, ICON_CLOSE, ICON_DELETE } from '../../constants/icons';
 import {
   ROUTE_DEL_TEXTS,
   ROUTE_EDIT_TEXT,
@@ -48,15 +44,14 @@ type State = {
   term: string,
 };
 
-
 /**
-* Layout for displaying classes.
-*/
+ * Layout for displaying classes.
+ */
 export class TextsLayout extends React.Component<Props, State> {
   static defaultProps = {
-      categories: [],
-      texts: [],
-   };
+    categories: [],
+    texts: [],
+  };
 
   props: Props;
   state: State;
@@ -65,7 +60,7 @@ export class TextsLayout extends React.Component<Props, State> {
   handleFilterChanage: (event: SyntheticInputEvent<HTMLInputElement>) => void;
   handlePbChange: (curPage: number) => void;
 
-  constructor(props: Props){
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -85,7 +80,8 @@ export class TextsLayout extends React.Component<Props, State> {
   }
 
   componentDidUpdate() {
-    if (window.location.pathname === ROUTE_TEXTS) setTitle(text('WinTitle', 'Texts'));
+    if (window.location.pathname === ROUTE_TEXTS)
+      setTitle(text('WinTitle', 'Texts'));
   }
 
   handleClear(event: SyntheticInputEvent<HTMLInputElement>) {
@@ -112,7 +108,7 @@ export class TextsLayout extends React.Component<Props, State> {
   }
 
   render() {
-    const HAS_TEXTS = (this.props.texts.length > 0) ? true : false;
+    const HAS_TEXTS = this.props.texts.length > 0 ? true : false;
     const leftActions = (
       <NavButtonCircular
         to={ROUTE_NEW_TEXT}
@@ -141,18 +137,18 @@ export class TextsLayout extends React.Component<Props, State> {
     if (HAS_TEXTS) {
       searchBox = (
         <React.Fragment>
-          <TextInput 
-              className="SidebarHeader__search"
-              onChange={this.handleSearch} 
-              placeholder={text('SearchPlaceholder', 'SidebarHeader')}
-              value={this.state.term}
+          <TextInput
+            className="SidebarHeader__search"
+            onChange={this.handleSearch}
+            placeholder={text('SearchPlaceholder', 'SidebarHeader')}
+            value={this.state.term}
           />
-          <span 
-            className="SidebarHeader__searchclear" 
-            onClick={this.handleClear} 
+          <span
+            className="SidebarHeader__searchclear"
+            onClick={this.handleClear}
             title={text('Clear', 'ItemSelection')}
           >
-            <Icon type={ ICON_CLOSE } />
+            <Icon type={ICON_CLOSE} />
           </span>
         </React.Fragment>
       );
@@ -161,13 +157,15 @@ export class TextsLayout extends React.Component<Props, State> {
     return (
       <div className="Panel">
         <Sidebar>
-          <SidebarHeader 
+          <SidebarHeader
             title={text('Header-text', 'SidebarHeader')}
-            subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.texts.length })}
+            subtitle={text('Subheader-count', 'SidebarHeader', {
+              COUNT: this.props.texts.length,
+            })}
           >
             {searchBox}
           </SidebarHeader>
-          <SidebarList 
+          <SidebarList
             curPage={this.state.curPage}
             dispatch={this.props.dispatch}
             filter={this.state.option}
@@ -179,35 +177,72 @@ export class TextsLayout extends React.Component<Props, State> {
             term={this.state.term}
             usePb
           >
-            <ReportsCatSelect 
-              categories={this.props.categories} 
-              onChange={this.handleFilterChanage} 
-              option={this.state.option} 
-              selectedCount={0} 
+            <ReportsCatSelect
+              categories={this.props.categories}
+              onChange={this.handleFilterChanage}
+              option={this.state.option}
+              selectedCount={0}
               texts={this.props.texts}
               useSelected={false}
             />
           </SidebarList>
-          <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
+          <SidebarFooter
+            leftActions={leftActions}
+            rightActions={rightActions}
+          />
         </Sidebar>
         <Switch>
-          <Route path={ROUTE_EDIT_TEXT} render={ routerProps => <EditTextLayout {...routerProps} dispatch={this.props.dispatch} categories={this.props.categories} texts={this.props.texts} />} />
-          <Route path={ROUTE_DEL_TEXTS} render={ routerProps => <DeleteTextsLayout {...routerProps} dispatch={this.props.dispatch} />} />
-          <Route path={ROUTE_NEW_TEXT} render={ routerProps => <NewTextLayout {...routerProps} curLang={this.props.curLang} categories={this.props.categories} dispatch={this.props.dispatch} />} />
-          <Route path={ROUTE_TEXTS} render={routerProps => <InfoMsg {...routerProps} headine={text('Texts', 'InfoMsg')} subtext={text('TextsMsg', 'InfoMsg')} />} />
+          <Route
+            path={ROUTE_EDIT_TEXT}
+            render={routerProps => (
+              <EditTextLayout
+                {...routerProps}
+                dispatch={this.props.dispatch}
+                categories={this.props.categories}
+                texts={this.props.texts}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_DEL_TEXTS}
+            render={routerProps => (
+              <DeleteTextsLayout
+                {...routerProps}
+                dispatch={this.props.dispatch}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_NEW_TEXT}
+            render={routerProps => (
+              <NewTextLayout
+                {...routerProps}
+                curLang={this.props.curLang}
+                categories={this.props.categories}
+                dispatch={this.props.dispatch}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_TEXTS}
+            render={routerProps => (
+              <InfoMsg
+                {...routerProps}
+                headine={text('Texts', 'InfoMsg')}
+                subtext={text('TextsMsg', 'InfoMsg')}
+              />
+            )}
+          />
         </Switch>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state: Object) => (
-  {
-    categories: state.categories,
-    curLang: state.languages.current,
-    texts: state.texts,
-  }
-);
-
+const mapStateToProps = (state: Object) => ({
+  categories: state.categories,
+  curLang: state.languages.current,
+  texts: state.texts,
+});
 
 export default connect(mapStateToProps)(TextsLayout);

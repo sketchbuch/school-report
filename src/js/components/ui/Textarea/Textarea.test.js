@@ -15,7 +15,7 @@ describe('<Textarea />', () => {
       disabled: true,
     };
     const wrapper = mount(<Textarea {...props} />);
-    wrapper.simulate('change')
+    wrapper.simulate('change');
     expect(props.onChange.mock.calls.length).toBe(0);
   });
 
@@ -33,7 +33,7 @@ describe('<Textarea />', () => {
     const props1 = { to: '/classes', isValid: true };
     const wrapper1 = shallow(<Textarea {...props1} />);
     const props2 = { to: '/classes', isValid: false };
-    const wrapper2= shallow(<Textarea {...props2} />);
+    const wrapper2 = shallow(<Textarea {...props2} />);
 
     expect(wrapper1.find('textarea').hasClass('has--error')).toEqual(false);
     expect(wrapper2.find('textarea').hasClass('has--error')).toEqual(true);

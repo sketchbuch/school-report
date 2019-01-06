@@ -20,10 +20,9 @@ type Props = {
   values: Object,
 };
 
-
 /**
-* Export form for the edit panel.
-*/
+ * Export form for the edit panel.
+ */
 export class ExportBuilderForm extends Component<Props> {
   static defaultProps = {
     export: {},
@@ -48,18 +47,24 @@ export class ExportBuilderForm extends Component<Props> {
 
     return (
       <form className="form" onSubmit={handleSubmit}>
-      <p className="form__headline"><Translation name="Headline" ns="ExportBuilderForm" placeholders={{ REPORT_NAME: this.props.reportName }}/></p>
-      <div className="fieldwrap">
-        <TextInput
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.name}
-          name="name"
-          placeholder={text('ExportPlaceholder', 'Builder')}
-          isValid={lValid}
-        />
-        {!lValid && <p className="invalid-feedback">{errors.name}</p>}
-      </div>
+        <p className="form__headline">
+          <Translation
+            name="Headline"
+            ns="ExportBuilderForm"
+            placeholders={{ REPORT_NAME: this.props.reportName }}
+          />
+        </p>
+        <div className="fieldwrap">
+          <TextInput
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.name}
+            name="name"
+            placeholder={text('ExportPlaceholder', 'Builder')}
+            isValid={lValid}
+          />
+          {!lValid && <p className="invalid-feedback">{errors.name}</p>}
+        </div>
         <div className="fieldwrap">
           <Button type="submit" disabled={btnIsDisabled} busy={saving}>
             <Translation name="ExportReportBtn" ns="Builder" />
@@ -69,6 +74,5 @@ export class ExportBuilderForm extends Component<Props> {
     );
   }
 }
-
 
 export default ExportBuilderForm;

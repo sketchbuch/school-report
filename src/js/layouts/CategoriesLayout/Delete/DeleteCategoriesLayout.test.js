@@ -68,8 +68,10 @@ describe('<DeleteCategoriesLayout />', () => {
     });
 
     test('state.deleting calls props.dispatch', () => {
-      const mockDispatch =  jest.fn();
-      const wrapper = shallow(<DeleteCategoriesLayout {...props} dispatch={mockDispatch} />);
+      const mockDispatch = jest.fn();
+      const wrapper = shallow(
+        <DeleteCategoriesLayout {...props} dispatch={mockDispatch} />
+      );
       const instance = wrapper.instance();
 
       wrapper.setState({ deleting: true });

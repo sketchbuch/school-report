@@ -8,8 +8,8 @@ type Props = {
 };
 
 /**
-* A wrapping component for UI elements.
-*/
+ * A wrapping component for UI elements.
+ */
 class FieldWrap extends React.Component<Props> {
   static defaultProps = {
     children: null,
@@ -18,13 +18,8 @@ class FieldWrap extends React.Component<Props> {
   props: Props;
 
   render() {
-    return (
-      <div className="FieldWrap">
-        {this.props.children}
-      </div>
-    )
+    return <div className="FieldWrap">{this.props.children}</div>;
   }
 }
-
 
 export default FieldWrap;

@@ -17,16 +17,15 @@ type Props = {
   texts: Array<TextType>,
 };
 
-
 /**
-* Selected texts for a pupil in a report.
-*/
+ * Selected texts for a pupil in a report.
+ */
 export class ReportsTexts extends Component<Props> {
   static defaultProps = {
     activePupil: {},
-    handleEndDrag: ()=>{},
-    handleTextMove: ()=>{},
-    handleTextToggle: ()=>{},
+    handleEndDrag: () => {},
+    handleTextMove: () => {},
+    handleTextToggle: () => {},
     selectedTexts: [],
     texts: [],
   };
@@ -42,7 +41,7 @@ export class ReportsTexts extends Component<Props> {
 
     this.props.selectedTexts.forEach(selTxtId => {
       const txt = this.props.texts.find(txt => txt.id === selTxtId);
-      if (txt !== undefined) visibleTexts.push({...txt});
+      if (txt !== undefined) visibleTexts.push({ ...txt });
     });
 
     return visibleTexts;
@@ -51,29 +50,26 @@ export class ReportsTexts extends Component<Props> {
   render() {
     const selectedTexts = this.getSelectedTexts();
 
-    return (
-      selectedTexts.length > 0 ? (
-        <div className="ReportsTexts">
-          {selectedTexts.map(text => (
-              <ReportsTextItem 
-                activePupil={this.props.activePupil} 
-                key={text.id}
-                onClick={this.props.handleTextToggle}
-                onMove={this.props.handleTextMove} 
-                onEndDrag={this.props.handleEndDrag} 
-                txt={text} 
-              />
-          ))}
-        </div>
-      ) : (
-        <InfoMsg
-          headine={text('ReportsNoneSel', 'InfoMsg')}
-          subtext={text('ReportsNoneSelMsg', 'InfoMsg')}
-        />
-      )
-    )
+    return selectedTexts.length > 0 ? (
+      <div className="ReportsTexts">
+        {selectedTexts.map(text => (
+          <ReportsTextItem
+            activePupil={this.props.activePupil}
+            key={text.id}
+            onClick={this.props.handleTextToggle}
+            onMove={this.props.handleTextMove}
+            onEndDrag={this.props.handleEndDrag}
+            txt={text}
+          />
+        ))}
+      </div>
+    ) : (
+      <InfoMsg
+        headine={text('ReportsNoneSel', 'InfoMsg')}
+        subtext={text('ReportsNoneSelMsg', 'InfoMsg')}
+      />
+    );
   }
 }
-
 
 export default ReportsTexts;

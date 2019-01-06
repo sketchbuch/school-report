@@ -16,15 +16,14 @@ import {
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-
 /**
-* Data Actions Tests
-*/
+ * Data Actions Tests
+ */
 
 describe('Actions: classActions:', () => {
   let testDataType = 'class';
-  let callback = ()=>{};
-  let store = ()=>{};
+  let callback = () => {};
+  let store = () => {};
 
   beforeEach(() => {
     callback = jest.fn();
@@ -34,13 +33,11 @@ describe('Actions: classActions:', () => {
   test('replace() should return expected action', () => {
     const TEST_DATA = {
       classes: [
-        {label: 'Class 1 Edited', id: '1' },
-        {label: 'Class 2 Edited', id: '2' },
+        { label: 'Class 1 Edited', id: '1' },
+        { label: 'Class 2 Edited', id: '2' },
       ],
     };
-    const EXPECTED_ACTIONS = [
-      { type: REPLACE_DATA, payload: TEST_DATA }
-    ];
+    const EXPECTED_ACTIONS = [{ type: REPLACE_DATA, payload: TEST_DATA }];
 
     expect.assertions(1);
     store.dispatch(dataActions.replace(TEST_DATA, callback));
@@ -49,9 +46,7 @@ describe('Actions: classActions:', () => {
   });
 
   test('create() should return expected action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: CREATE_DATA }
-    ];
+    const EXPECTED_ACTIONS = [{ type: CREATE_DATA }];
 
     expect.assertions(1);
     store.dispatch(dataActions.create(callback));
@@ -65,9 +60,7 @@ describe('Actions: classActions:', () => {
   });
 
   test('load() should return expected action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: LOAD_DATA }
-    ];
+    const EXPECTED_ACTIONS = [{ type: LOAD_DATA }];
 
     expect.assertions(1);
     store.dispatch(dataActions.load(callback));
@@ -82,12 +75,22 @@ describe('Actions: classActions:', () => {
   });
 
   test('persistenceSuccess() should return the expected action', () => {
-    const EXPECTED_ACTIONS = { type: PERSISTING_SUCCESS, payload: { dataType: testDataType } };
-    expect(dataActions.persistenceSuccess(testDataType)).toEqual(EXPECTED_ACTIONS);
+    const EXPECTED_ACTIONS = {
+      type: PERSISTING_SUCCESS,
+      payload: { dataType: testDataType },
+    };
+    expect(dataActions.persistenceSuccess(testDataType)).toEqual(
+      EXPECTED_ACTIONS
+    );
   });
 
   test('persistenceError() should return the expected action', () => {
-    const EXPECTED_ACTIONS = { type: PERSISTING_ERROR, payload: { dataType: testDataType } };
-    expect(dataActions.persistenceError(testDataType)).toEqual(EXPECTED_ACTIONS);
+    const EXPECTED_ACTIONS = {
+      type: PERSISTING_ERROR,
+      payload: { dataType: testDataType },
+    };
+    expect(dataActions.persistenceError(testDataType)).toEqual(
+      EXPECTED_ACTIONS
+    );
   });
 });

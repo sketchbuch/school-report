@@ -1,13 +1,13 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr';
 import { Formik } from 'formik';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import EditCategoryForm from '../Form/EditCategoryForm';
-import { text }  from '../../../components/Translation/Translation';
+import { text } from '../../../components/Translation/Translation';
 import categorySchema from '../../../validation/schemas/categories';
 import * as categoryActions from '../../../actions/categoryActions';
 import type { CategoryType } from '../../../types/category';
@@ -28,12 +28,11 @@ type State = {
   error: boolean,
   category: CategoryType,
   saving: boolean,
-}
-
+};
 
 /**
-* Layout for adding a new category.
-*/
+ * Layout for adding a new category.
+ */
 export class NewCategoryLayout extends Component<Props, State> {
   static defaultProps = {
     categories: [],
@@ -48,7 +47,7 @@ export class NewCategoryLayout extends Component<Props, State> {
 
     this.state = {
       error: false,
-      category: {...categoryDefault},
+      category: { ...categoryDefault },
       saving: false,
     };
 
@@ -62,35 +61,40 @@ export class NewCategoryLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Categories'));
+      toastr.error(
+        text('PersistenceError', 'Toastr'),
+        text('PersistenceNewError', 'Categories')
+      );
       this.props.history.push(ROUTE_CATEGORIES);
     } else if (this.state.saving) {
-      this.props.dispatch(categoryActions.add(this.state.category, this.dataSaved));
+      this.props.dispatch(
+        categoryActions.add(this.state.category, this.dataSaved)
+      );
       this.setState({ saving: false });
     }
   }
 
   handleSubmit(values: Object) {
-    const newCategory = CategoryFactory(
-      values,
-      Date.now()
-    );
+    const newCategory = CategoryFactory(values, Date.now());
 
     this.setState({
       category: newCategory,
-      saving: true
+      saving: true,
     });
   }
 
   /**
-  * Callback used by writeAppData.
-  *
-  * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-  */
+   * Callback used by writeAppData.
+   *
+   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
+   */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
       this.props.history.push(ROUTE_CATEGORIES);
-      toastr.success(text('PersistenceNew', 'Categories'), this.state.category.getLabel());
+      toastr.success(
+        text('PersistenceNew', 'Categories'),
+        this.state.category.getLabel()
+      );
     } else {
       this.setState({
         error: true,
@@ -105,19 +109,22 @@ export class NewCategoryLayout extends Component<Props, State> {
         <EditPanelHeader title={text('AddCategory', 'EditPanelHeader')} />
         <EditPanelContent>
           <Formik
-            initialValues={{...categoryDefault}}
+            initialValues={{ ...categoryDefault }}
             enableReinitialize={true}
             validationSchema={categorySchema}
             onSubmit={this.handleSubmit}
-            render={(formikProps) => (
-              <EditCategoryForm {...formikProps} saving={this.state.saving} isNew={true} />
+            render={formikProps => (
+              <EditCategoryForm
+                {...formikProps}
+                saving={this.state.saving}
+                isNew={true}
+              />
             )}
           />
         </EditPanelContent>
       </EditPanel>
-    )
+    );
   }
 }
-
 
 export default NewCategoryLayout;

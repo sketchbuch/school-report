@@ -22,10 +22,9 @@ type State = {
   term: string,
 };
 
-
 /**
-* Item select with search and new item controls.
-*/
+ * Item select with search and new item controls.
+ */
 export class ItemSelection extends React.Component<Props, State> {
   static defaultProps = {
     items: [],
@@ -38,7 +37,7 @@ export class ItemSelection extends React.Component<Props, State> {
   handleClear: Function;
   handleSearch: Function;
 
-  constructor(props: Props){
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -60,27 +59,44 @@ export class ItemSelection extends React.Component<Props, State> {
   }
 
   render() {
-    const {
-      items,
-      name,
-      searchMin,
-      selected,
-    } = this.props;
-    const visibleItems = (this.state.term === '') ? items : items.filter(item => item.contains(this.state.term));
+    const { items, name, searchMin, selected } = this.props;
+    const visibleItems =
+      this.state.term === ''
+        ? items
+        : items.filter(item => item.contains(this.state.term));
 
     return (
       <div className="ItemSelection">
         {items.length > 0 && items.length > searchMin && (
           <div className="ItemSelection__search">
-            <TextInput onChange={this.handleSearch} placeholder={text('Placeholder', 'ItemSelection')} value={this.state.term} />
-            <span className="ItemSelection__searchclear" onClick={this.handleClear} title={text('Clear', 'ItemSelection')}><Icon type={ ICON_CLOSE } /></span>
+            <TextInput
+              onChange={this.handleSearch}
+              placeholder={text('Placeholder', 'ItemSelection')}
+              value={this.state.term}
+            />
+            <span
+              className="ItemSelection__searchclear"
+              onClick={this.handleClear}
+              title={text('Clear', 'ItemSelection')}
+            >
+              <Icon type={ICON_CLOSE} />
+            </span>
           </div>
         )}
-        <FieldArray name={name} render={arrayHelpers => <ItemList {...arrayHelpers} totalCount={items.length} items={visibleItems} selected={selected} />} />
+        <FieldArray
+          name={name}
+          render={arrayHelpers => (
+            <ItemList
+              {...arrayHelpers}
+              totalCount={items.length}
+              items={visibleItems}
+              selected={selected}
+            />
+          )}
+        />
       </div>
-    )
+    );
   }
 }
-
 
 export default ItemSelection;

@@ -16,8 +16,8 @@ type Props = {
 };
 
 /**
-* App Header path showing breadcrumb on desktop.
-*/
+ * App Header path showing breadcrumb on desktop.
+ */
 export class HeaderPath extends Component<Props> {
   props: Props;
 
@@ -26,12 +26,10 @@ export class HeaderPath extends Component<Props> {
       return (
         <Fragment>
           {this.props.breadcrumbs.map(ele => {
-            return (
-              <HeaderBreadcrumb {...ele} key={ele.id} />
-            )
+            return <HeaderBreadcrumb {...ele} key={ele.id} />;
           })}
         </Fragment>
-      )
+      );
     }
 
     return null;
@@ -43,6 +41,5 @@ const mapStateToProps = (state: Object, props: Props) => {
     breadcrumbs: getBreadcrumbs(state, props),
   };
 };
-
 
 export default connect(mapStateToProps)(HeaderPath);

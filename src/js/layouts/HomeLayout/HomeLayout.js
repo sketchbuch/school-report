@@ -9,13 +9,11 @@ import menuItemDefault, { MenuItemFactory } from '../../types/menuitem';
 import setTitle from '../../utils/title';
 import './HomeLayout.css';
 
-type Props = {
-};
-
+type Props = {};
 
 /**
-* Home Layout.
-*/
+ * Home Layout.
+ */
 export class HomeLayout extends Component<Props> {
   props: Props;
   menuItems: Array<MenuItemType>;
@@ -24,15 +22,13 @@ export class HomeLayout extends Component<Props> {
     super(props);
 
     this.menuItems = [];
-    [
-      'classes',
-      'texts',
-      'categories',
-      'reports',
-      'settings',
-    ].forEach((item, index) => {
-      this.menuItems.push(MenuItemFactory({...menuItemDefault, key: item }, Date.now()));
-    });
+    ['classes', 'texts', 'categories', 'reports', 'settings'].forEach(
+      (item, index) => {
+        this.menuItems.push(
+          MenuItemFactory({ ...menuItemDefault, key: item }, Date.now())
+        );
+      }
+    );
   }
 
   componentDidMount() {
@@ -43,24 +39,25 @@ export class HomeLayout extends Component<Props> {
     return (
       <div className="Panel">
         <div className="HomeLayout">
-            {this.menuItems.map(item => {
-              return (
-                <div key={item.id} className="HomeLayout__item">
-                  <Link to={item.route} className="HomeLayout__link">
-                    <ButtonCircular className="HomeLayout__icon" visual={true}>
-                      <Icon type={item.icon} />
-                    </ButtonCircular>
-                    <span className="HomeLayout__title">{item.label}</span>
-                    <span className="HomeLayout__description">{item.description}</span>
-                  </Link>
-                </div>
-              )
-            })}
+          {this.menuItems.map(item => {
+            return (
+              <div key={item.id} className="HomeLayout__item">
+                <Link to={item.route} className="HomeLayout__link">
+                  <ButtonCircular className="HomeLayout__icon" visual={true}>
+                    <Icon type={item.icon} />
+                  </ButtonCircular>
+                  <span className="HomeLayout__title">{item.label}</span>
+                  <span className="HomeLayout__description">
+                    {item.description}
+                  </span>
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </div>
-    )
+    );
   }
 }
-
 
 export default HomeLayout;

@@ -1,8 +1,8 @@
 // @flow
 
 /**
-* Action Creator return type def.
-*/
+ * Action Creator return type def.
+ */
 
 export type ActionObj = {
   error?: boolean,

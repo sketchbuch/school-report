@@ -7,6 +7,10 @@ import store from '../../store/redux';
 import PupilsLayout from './PupilsLayout';
 
 test('<PupilsLayout />: Renders without crashing', () => {
-  const wrapper = shallow(<Provider store={store}><PupilsLayout /></Provider>);
+  const wrapper = shallow(
+    <Provider store={store}>
+      <PupilsLayout />
+    </Provider>
+  );
   expect(wrapper).toHaveLength(1);
 });

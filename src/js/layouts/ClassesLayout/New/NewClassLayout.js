@@ -1,13 +1,13 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr';
 import { Formik } from 'formik';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import EditClassForm from '../Form/EditClassForm';
-import { text }  from '../../../components/Translation/Translation';
+import { text } from '../../../components/Translation/Translation';
 import { classSchema } from '../../../validation/schemas';
 import * as classActions from '../../../actions/classActions';
 import classDefault, { ClassFactory } from '../../../types/class';
@@ -26,12 +26,11 @@ type State = {
   error: boolean,
   class: ClassType,
   saving: boolean,
-}
-
+};
 
 /**
-* Layout for adding a new class.
-*/
+ * Layout for adding a new class.
+ */
 export class NewClassLayout extends Component<Props, State> {
   props: Props;
   dataSaved: Function;
@@ -42,7 +41,7 @@ export class NewClassLayout extends Component<Props, State> {
 
     this.state = {
       error: false,
-      class: {...classDefault},
+      class: { ...classDefault },
       saving: false,
     };
 
@@ -56,7 +55,10 @@ export class NewClassLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Classes'));
+      toastr.error(
+        text('PersistenceError', 'Toastr'),
+        text('PersistenceNewError', 'Classes')
+      );
       this.props.history.push(ROUTE_CLASSES);
     } else if (this.state.saving) {
       this.props.dispatch(classActions.add(this.state.class, this.dataSaved));
@@ -65,25 +67,25 @@ export class NewClassLayout extends Component<Props, State> {
   }
 
   handleSubmit(values: Object) {
-    const newClass = ClassFactory(
-      values,
-      Date.now(),
-    );
+    const newClass = ClassFactory(values, Date.now());
 
     this.setState({
       class: newClass,
-      saving: true
+      saving: true,
     });
   }
 
   /**
-  * Callback used by electron fs functions.
-  *
-  * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-  */
+   * Callback used by electron fs functions.
+   *
+   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
+   */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
-      toastr.success(text('PersistenceNew', 'Classes'), this.state.class.getLabel());
+      toastr.success(
+        text('PersistenceNew', 'Classes'),
+        this.state.class.getLabel()
+      );
       this.props.history.push(ROUTE_CLASSES);
     } else {
       this.setState({
@@ -99,19 +101,22 @@ export class NewClassLayout extends Component<Props, State> {
         <EditPanelHeader title={text('AddClass', 'EditPanelHeader')} />
         <EditPanelContent>
           <Formik
-            initialValues={{...classDefault}}
+            initialValues={{ ...classDefault }}
             enableReinitialize={true}
             validationSchema={classSchema}
             onSubmit={this.handleSubmit}
-            render={(formikProps) => (
-              <EditClassForm {...formikProps} saving={this.state.saving} isNew={true} />
+            render={formikProps => (
+              <EditClassForm
+                {...formikProps}
+                saving={this.state.saving}
+                isNew={true}
+              />
             )}
           />
         </EditPanelContent>
       </EditPanel>
-    )
+    );
   }
 }
-
 
 export default NewClassLayout;

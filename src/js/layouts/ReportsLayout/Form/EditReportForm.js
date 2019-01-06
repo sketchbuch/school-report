@@ -25,10 +25,9 @@ type Props = {
   values: Object,
 };
 
-
 /**
-* Report form for the edit panel.
-*/
+ * Report form for the edit panel.
+ */
 export class EditReportForm extends Component<Props> {
   static defaultProps = {
     dirty: false,
@@ -53,7 +52,15 @@ export class EditReportForm extends Component<Props> {
 
     const rlValid = validate('label', errors, touched);
     const rcValid = validate('classes', errors, touched);
-    const btnIsDisabled = (!rcValid || !rlValid || values.label === '' || values.classes.length < 1 || saving || !dirty) ? true : false;
+    const btnIsDisabled =
+      !rcValid ||
+      !rlValid ||
+      values.label === '' ||
+      values.classes.length < 1 ||
+      saving ||
+      !dirty
+        ? true
+        : false;
     const sortedClasses = sortObjectsAz(classes, ['label', 'updated']);
     const selCount = classes.filter(c => values.classes.includes(c.id)).length;
 
@@ -72,14 +79,20 @@ export class EditReportForm extends Component<Props> {
         </div>
         <div className="fieldwrap">
           <p>
-            <Translation name="ReportClasses" ns="Reports"
+            <Translation
+              name="ReportClasses"
+              ns="Reports"
               placeholders={{
                 SELECTED: selCount,
                 TOTAL: classes.length,
               }}
             />
           </p>
-          <ItemSelection items={sortedClasses} name="classes" selected={values.classes} />
+          <ItemSelection
+            items={sortedClasses}
+            name="classes"
+            selected={values.classes}
+          />
           {!rcValid && <p className="invalid-feedback">{errors.classes}</p>}
         </div>
         <div className="fieldwrap">
@@ -114,15 +127,16 @@ export class EditReportForm extends Component<Props> {
           </Button>
         </div>
 
-        {!saving &&
+        {!saving && (
           <p className="form__submsg">
-            <Link to={ROUTE_REPORTS}><Translation name="BackToReports" ns="Reports" /></Link>
+            <Link to={ROUTE_REPORTS}>
+              <Translation name="BackToReports" ns="Reports" />
+            </Link>
           </p>
-        }
+        )}
       </form>
     );
   }
 }
-
 
 export default EditReportForm;

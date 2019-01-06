@@ -7,6 +7,10 @@ import store from '../../store/redux';
 import HomeLayout from './HomeLayout';
 
 test('<HomeLayout />: Renders without crashing', () => {
-  const wrapper = shallow(<Provider store={store}><HomeLayout /></Provider>);
+  const wrapper = shallow(
+    <Provider store={store}>
+      <HomeLayout />
+    </Provider>
+  );
   expect(wrapper).toHaveLength(1);
 });

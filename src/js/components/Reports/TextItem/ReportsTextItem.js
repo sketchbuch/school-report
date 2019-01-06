@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import {
   DragSource,
   DropTarget,
-	DragSourceConnector,
-	DragSourceMonitor,
+  DragSourceConnector,
+  DragSourceMonitor,
 } from 'react-dnd';
 import LetterCount from '../../LetterCount/LetterCount';
 import { getPupilTextHtml } from '../../../utils/html';
@@ -16,9 +16,9 @@ import './ReportsTextItem.css';
 
 type Props = {
   activePupil: PupilType | Object,
-  onClick: (id: string)=>{},
-  onMove: (sourceId: string, targetId: string, before?: boolean)=>{},
-  onEndDrag: ()=>{},
+  onClick: (id: string) => {},
+  onMove: (sourceId: string, targetId: string, before?: boolean) => {},
+  onEndDrag: () => {},
   txt: TextType,
   canDrop: boolean,
   connectDragSource: Function,
@@ -29,37 +29,49 @@ type Props = {
 
 // DnD Source and Target:
 const textSource = {
-	beginDrag(props: Props, monitor: DragSourceMonitor | Function, component: Object | Function) {
+  beginDrag(
+    props: Props,
+    monitor: DragSourceMonitor | Function,
+    component: Object | Function
+  ) {
     return { id: props.txt.id };
-	},
-	endDrag(props: Props, monitor: DragSourceMonitor | Function, component: Object | Function) {
+  },
+  endDrag(
+    props: Props,
+    monitor: DragSourceMonitor | Function,
+    component: Object | Function
+  ) {
     props.onEndDrag();
-	},
+  },
 };
 
 const textTarget = {
-	hover(props: Props, monitor: DragSourceMonitor | Function, component: Object | Function) {
-   if (!component) return null;
-    
-		const dragIndex = monitor.getItem().id;
+  hover(
+    props: Props,
+    monitor: DragSourceMonitor | Function,
+    component: Object | Function
+  ) {
+    if (!component) return null;
+
+    const dragIndex = monitor.getItem().id;
     const hoverIndex = props.txt.id;
     if (dragIndex === hoverIndex) return;
 
     const undecoratedComponent = component.getDecoratedComponentInstance();
     if (!undecoratedComponent) return;
 
-		const hoverBoundingRect = undecoratedComponent.ele.getBoundingClientRect();
-		const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+    const hoverBoundingRect = undecoratedComponent.ele.getBoundingClientRect();
+    const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
     const hoverClientY = monitor.getClientOffset().y - hoverBoundingRect.top;
-    
-		if (hoverClientY < hoverMiddleY) {
+
+    if (hoverClientY < hoverMiddleY) {
       props.onMove(dragIndex, hoverIndex, true);
     } else {
       props.onMove(dragIndex, hoverIndex);
     }
-    
-		monitor.getItem().index = hoverIndex
-	},
+
+    monitor.getItem().index = hoverIndex;
+  },
 };
 
 export class ReportsTextItem extends Component<Props> {
@@ -67,7 +79,7 @@ export class ReportsTextItem extends Component<Props> {
   ele: ?HTMLElement;
 
   render() {
-    const { 
+    const {
       activePupil,
       connectDragSource,
       connectDropTarget,
@@ -80,30 +92,44 @@ export class ReportsTextItem extends Component<Props> {
     if (isDragging) classes += ' ReportsTextItem--dragging';
 
     const pupilText = getPupilTextHtml(txt.getLabel(0), activePupil);
-    
-    return connectDragSource(connectDropTarget(
-      <div className={classes} onClick={onClick(txt.id)} ref={ ele => (this.ele = ele) }>
-        <span dangerouslySetInnerHTML={pupilText} />
-        <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length} />
-      </div>
-    ));
+
+    return connectDragSource(
+      connectDropTarget(
+        <div
+          className={classes}
+          onClick={onClick(txt.id)}
+          ref={ele => (this.ele = ele)}
+        >
+          <span dangerouslySetInnerHTML={pupilText} />
+          <LetterCount
+            count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length}
+          />
+        </div>
+      )
+    );
   }
 }
 
 // DnD Source and Target connection:
-ReportsTextItem = DragSource(dndTypes.TEXT, textSource, (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
-  connectDragSource: connect.dragSource(),
-  isDragging: monitor.isDragging()
-}))(ReportsTextItem);
+ReportsTextItem = DragSource(
+  dndTypes.TEXT,
+  textSource,
+  (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging(),
+  })
+)(ReportsTextItem);
 
-
-ReportsTextItem = DropTarget(dndTypes.TEXT, textTarget, (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
-  connectDropTarget: connect.dropTarget(),
-  isOver: monitor.isOver(),
-  isOverCurrent: monitor.isOver({ shallow: true }),
-  canDrop: monitor.canDrop(),
-  itemType: monitor.getItemType()
-}))(ReportsTextItem);
-
+ReportsTextItem = DropTarget(
+  dndTypes.TEXT,
+  textTarget,
+  (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    isOverCurrent: monitor.isOver({ shallow: true }),
+    canDrop: monitor.canDrop(),
+    itemType: monitor.getItemType(),
+  })
+)(ReportsTextItem);
 
 export default ReportsTextItem;

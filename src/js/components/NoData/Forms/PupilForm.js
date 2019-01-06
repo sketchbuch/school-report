@@ -18,10 +18,9 @@ type Props = {
   values: Object,
 };
 
-
 /**
-* Pupil form for NoData component.
-*/
+ * Pupil form for NoData component.
+ */
 export class PupilForm extends Component<Props> {
   props: Props;
 
@@ -37,11 +36,19 @@ export class PupilForm extends Component<Props> {
 
     const fnValid = validate('firstname', errors.pupil, touched.pupil);
     const lnValid = validate('lastname', errors.pupil, touched.pupil);
-    const btnIsDisabled = (!fnValid || !lnValid || values.pupil.firstname === '' || values.pupil.lastname === '') ? true : false;
+    const btnIsDisabled =
+      !fnValid ||
+      !lnValid ||
+      values.pupil.firstname === '' ||
+      values.pupil.lastname === ''
+        ? true
+        : false;
 
     return (
       <form className="NoData__step--pupil" onSubmit={handleSubmit}>
-        <p className="NoData__msg"><Translation name="PupilMessage" ns="NoData" /></p>
+        <p className="NoData__msg">
+          <Translation name="PupilMessage" ns="NoData" />
+        </p>
         <div className="fieldwrap">
           <TextInput
             onChange={handleChange}
@@ -51,7 +58,9 @@ export class PupilForm extends Component<Props> {
             placeholder={text('FirstnamePlaceholder', 'Pupils')}
             isValid={fnValid}
           />
-          {!fnValid && <p className="invalid-feedback">{errors.pupil.firstname}</p>}
+          {!fnValid && (
+            <p className="invalid-feedback">{errors.pupil.firstname}</p>
+          )}
         </div>
         <div className="fieldwrap">
           <TextInput
@@ -62,7 +71,9 @@ export class PupilForm extends Component<Props> {
             placeholder={text('FirstnamePlaceholder', 'Pupils')}
             isValid={lnValid}
           />
-          {!lnValid && <p className="invalid-feedback">{errors.pupil.lastname}</p>}
+          {!lnValid && (
+            <p className="invalid-feedback">{errors.pupil.lastname}</p>
+          )}
         </div>
         <div className="fieldwrap">
           <GenderSwitch
@@ -76,15 +87,20 @@ export class PupilForm extends Component<Props> {
           />
         </div>
         <div className="fieldwrap">
-          <Button type="button" disabled={btnIsDisabled} onClick={() => this.props.handleClick(values)}>
+          <Button
+            type="button"
+            disabled={btnIsDisabled}
+            onClick={() => this.props.handleClick(values)}
+          >
             <Translation name="CreatePupilBtnLabel" ns="Pupils" />
           </Button>
         </div>
-        <p className="NoData__msginfo"><Translation name="PupilMessageInfo" ns="NoData" /></p>
+        <p className="NoData__msginfo">
+          <Translation name="PupilMessageInfo" ns="NoData" />
+        </p>
       </form>
     );
   }
 }
-
 
 export default PupilForm;

@@ -17,10 +17,9 @@ type Props = {
   values: Object,
 };
 
-
 /**
-* Class form for NoData component.
-*/
+ * Class form for NoData component.
+ */
 export class ClassForm extends Component<Props> {
   props: Props;
 
@@ -35,11 +34,13 @@ export class ClassForm extends Component<Props> {
     } = this.props;
 
     const clValid = validate('label', errors.class, touched.class);
-    const btnIsDisabled = (!clValid || values.class.label === '') ? true : false;
+    const btnIsDisabled = !clValid || values.class.label === '' ? true : false;
 
     return (
       <form className="NoData__step--class" onSubmit={handleSubmit}>
-        <p className="NoData__msg"><Translation name="ClassMessage" ns="NoData" /></p>
+        <p className="NoData__msg">
+          <Translation name="ClassMessage" ns="NoData" />
+        </p>
         <div className="fieldwrap">
           <TextInput
             onChange={handleChange}
@@ -52,15 +53,20 @@ export class ClassForm extends Component<Props> {
           {!clValid && <p className="invalid-feedback">{errors.class.label}</p>}
         </div>
         <div className="fieldwrap">
-          <Button type="button" disabled={btnIsDisabled} onClick={() => this.props.handleClick(values)}>
+          <Button
+            type="button"
+            disabled={btnIsDisabled}
+            onClick={() => this.props.handleClick(values)}
+          >
             <Translation name="CreateClassBtnLabel" ns="Classes" />
           </Button>
         </div>
-        <p className="NoData__msginfo"><Translation name="ClassMessageInfo" ns="NoData" /></p>
+        <p className="NoData__msginfo">
+          <Translation name="ClassMessageInfo" ns="NoData" />
+        </p>
       </form>
     );
   }
 }
-
 
 export default ClassForm;

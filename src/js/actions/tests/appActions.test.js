@@ -3,13 +3,12 @@
 import * as appActions from '../appActions';
 import { APP_LOADED, APP_ERRORED } from '../../constants/actionTypes';
 
-
 /**
-* App Actions Tests
-*/
+ * App Actions Tests
+ */
 
 describe('Actions: AppActions:', () => {
-  let hideLoader = ()=>{};
+  let hideLoader = () => {};
 
   beforeEach(() => {
     hideLoader = jest.fn();

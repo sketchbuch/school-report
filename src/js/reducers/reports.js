@@ -14,24 +14,26 @@ import { hydrateReport } from '../types/report';
 import type { ReportType } from '../types/report';
 import type { ActionObj } from '../types/action';
 
-
 /**
-* Reports Reducer.
-*/
+ * Reports Reducer.
+ */
 
-export default function reducer(state: Array<ReportType> = [], action: ActionObj) {
+export default function reducer(
+  state: Array<ReportType> = [],
+  action: ActionObj
+) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_REPORTS:
     case REPLACE_DATA:
       if (action.payload && action.payload.reports !== undefined) {
-          if (Array.isArray(action.payload.reports)) {
-            const newState = [];
-            action.payload.reports.forEach(item => {
-              newState.push(hydrateReport(item));
-            });
-            return newState;
-          }
+        if (Array.isArray(action.payload.reports)) {
+          const newState = [];
+          action.payload.reports.forEach(item => {
+            newState.push(hydrateReport(item));
+          });
+          return newState;
+        }
       }
 
       break;

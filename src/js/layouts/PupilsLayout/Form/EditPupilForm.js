@@ -23,10 +23,9 @@ type Props = {
   values: Object,
 };
 
-
 /**
-* Pupil form for the edit panel.
-*/
+ * Pupil form for the edit panel.
+ */
 export class EditPupilForm extends Component<Props> {
   static defaultProps = {
     dirty: false,
@@ -52,7 +51,7 @@ export class EditPupilForm extends Component<Props> {
     const fnValid = validate('firstname', errors, touched);
     const lnValid = validate('lastname', errors, touched);
     const dValid = validate('description', errors, touched);
-    const btnIsDisabled = (
+    const btnIsDisabled =
       saving ||
       !fnValid ||
       !lnValid ||
@@ -60,7 +59,8 @@ export class EditPupilForm extends Component<Props> {
       values.firstname === '' ||
       values.lastname === '' ||
       !dirty
-    ) ? true : false;
+        ? true
+        : false;
 
     return (
       <form className="form" onSubmit={handleSubmit}>
@@ -118,15 +118,16 @@ export class EditPupilForm extends Component<Props> {
           </Button>
         </div>
 
-        {!saving &&
+        {!saving && (
           <p className="form__submsg">
-            <Link to={ROUTE_PUPILS.replace(':classId', classId)}><Translation name="BackToPupils" ns="Pupils" /></Link>
+            <Link to={ROUTE_PUPILS.replace(':classId', classId)}>
+              <Translation name="BackToPupils" ns="Pupils" />
+            </Link>
           </p>
-        }
+        )}
       </form>
     );
   }
 }
-
 
 export default EditPupilForm;

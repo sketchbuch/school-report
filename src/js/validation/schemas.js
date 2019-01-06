@@ -5,7 +5,6 @@ import { text } from '../components/Translation/Translation';
 
 export const CLASS_LABEL_MAX = 20;
 
-
 /**
 * Validation scheme for a class.
 
@@ -13,7 +12,9 @@ export const CLASS_LABEL_MAX = 20;
 */
 export function classSchema(): Object {
   return Yup.object().shape({
-    label: Yup.string().trim().required(text('ClassLabel', 'Validation')),
+    label: Yup.string()
+      .trim()
+      .required(text('ClassLabel', 'Validation')),
   });
 }
 
@@ -25,8 +26,12 @@ export function classSchema(): Object {
 export function pupilSchema(): Object {
   return Yup.object().shape({
     description: Yup.string().trim(),
-    firstname: Yup.string().trim().required(text('PupilFirstname', 'Validation')),
-    lastname: Yup.string().trim().required(text('PupilLastname', 'Validation')),
+    firstname: Yup.string()
+      .trim()
+      .required(text('PupilFirstname', 'Validation')),
+    lastname: Yup.string()
+      .trim()
+      .required(text('PupilLastname', 'Validation')),
   });
 }
 
@@ -37,7 +42,9 @@ export function pupilSchema(): Object {
 */
 export function textSchema(): Object {
   return Yup.object().shape({
-    bodytext: Yup.string().trim().required(text('TextBodytext', 'Validation')),
+    bodytext: Yup.string()
+      .trim()
+      .required(text('TextBodytext', 'Validation')),
     categories: Yup.array().of(Yup.string()),
   });
 }

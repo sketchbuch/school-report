@@ -27,13 +27,12 @@ const ItemContent = (props: Props) => {
       </span>
       {props.children}
     </React.Fragment>
-  )
-}
-
+  );
+};
 
 /**
-* A sidebar item inner element.
-*/
+ * A sidebar item inner element.
+ */
 class SidebarInner extends React.Component<Props> {
   static defaultProps = {
     description: '',
@@ -53,16 +52,24 @@ class SidebarInner extends React.Component<Props> {
     } else if (this.props.linkEdit === window.location.pathname) {
       isSelected = true;
     }
-    
+
     if (this.props.link) {
       return (
         <Link
-          className={isSelected ? 'SidebarInner SidebarInner--selected' : 'SidebarInner'}
+          className={
+            isSelected ? 'SidebarInner SidebarInner--selected' : 'SidebarInner'
+          }
           to={this.props.link}
-        ><ItemContent {...this.props} /></Link>
-      )
+        >
+          <ItemContent {...this.props} />
+        </Link>
+      );
     } else {
-      return <div onClick={this.props.onClick} className="SidebarInner"><ItemContent {...this.props} /></div>
+      return (
+        <div onClick={this.props.onClick} className="SidebarInner">
+          <ItemContent {...this.props} />
+        </div>
+      );
     }
   }
 }

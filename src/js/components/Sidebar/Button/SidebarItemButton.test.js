@@ -8,12 +8,16 @@ import SidebarItemButton from './SidebarItemButton';
 describe('<SidebarItemButton />', () => {
   const props = {
     history: { push: jest.fn() },
-    link: "/",
-    type: "ui-edit",
+    link: '/',
+    type: 'ui-edit',
   };
 
   test('Renders without crashing', () => {
-    const wrapper = shallow(<MemoryRouter><SidebarItemButton {...props} /></MemoryRouter>);
+    const wrapper = shallow(
+      <MemoryRouter>
+        <SidebarItemButton {...props} />
+      </MemoryRouter>
+    );
     expect(wrapper).toHaveLength(1);
   });
 
@@ -31,7 +35,12 @@ describe('<SidebarItemButton />', () => {
     const handlePropClickMock = jest.fn();
     SidebarItemButton.WrappedComponent.prototype.handleClick = handleClickMock;
 
-    const wrapper = mount(<SidebarItemButton.WrappedComponent {...props} handleClick={handlePropClickMock} />);
+    const wrapper = mount(
+      <SidebarItemButton.WrappedComponent
+        {...props}
+        handleClick={handlePropClickMock}
+      />
+    );
     const component = wrapper.find('.SidebarItemButton').first();
     component.simulate('click');
 

@@ -14,14 +14,10 @@ import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCi
 import DeleteCategoriesLayout from './Delete/DeleteCategoriesLayout';
 import EditCategoryLayout from './Edit/EditCategoryLayout';
 import NewCategoryLayout from './New/NewCategoryLayout';
-import { text }  from '../../components/Translation/Translation';
+import { text } from '../../components/Translation/Translation';
 import { categorySort } from '../../types/category';
 import type { CategoryType } from '../../types/category';
-import {
-  ICON_ADD,
-  ICON_CLOSE,
-  ICON_DELETE,
-} from '../../constants/icons';
+import { ICON_ADD, ICON_CLOSE, ICON_DELETE } from '../../constants/icons';
 import {
   ROUTE_DEL_CATEGORIES,
   ROUTE_EDIT_CATEGORY,
@@ -43,14 +39,13 @@ type State = {
   term: string,
 };
 
-
 /**
-* Layout for displaying catgeories.
-*/
+ * Layout for displaying catgeories.
+ */
 export class CategoriesLayout extends Component<Props, State> {
   static defaultProps = {
-      categories: [],
-   };
+    categories: [],
+  };
 
   props: Props;
   state: State;
@@ -58,7 +53,7 @@ export class CategoriesLayout extends Component<Props, State> {
   handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
   handlePbChange: (curPage: number) => void;
 
-  constructor(props: Props){
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -76,7 +71,8 @@ export class CategoriesLayout extends Component<Props, State> {
   }
 
   componentDidUpdate() {
-    if (window.location.pathname === ROUTE_CATEGORIES) setTitle(text('WinTitle', 'Categories'));
+    if (window.location.pathname === ROUTE_CATEGORIES)
+      setTitle(text('WinTitle', 'Categories'));
   }
 
   handleClear(event: SyntheticInputEvent<HTMLInputElement>) {
@@ -93,7 +89,7 @@ export class CategoriesLayout extends Component<Props, State> {
   }
 
   render() {
-    const HAS_CATGEORIES = (this.props.categories.length > 0) ? true : false;
+    const HAS_CATGEORIES = this.props.categories.length > 0 ? true : false;
     const leftActions = (
       <NavButtonCircular
         to={ROUTE_NEW_CATEGORY}
@@ -122,18 +118,18 @@ export class CategoriesLayout extends Component<Props, State> {
     if (HAS_CATGEORIES) {
       searchBox = (
         <React.Fragment>
-          <TextInput 
-              className="SidebarHeader__search"
-              onChange={this.handleSearch} 
-              placeholder={text('SearchPlaceholder', 'SidebarHeader')}
-              value={this.state.term}
+          <TextInput
+            className="SidebarHeader__search"
+            onChange={this.handleSearch}
+            placeholder={text('SearchPlaceholder', 'SidebarHeader')}
+            value={this.state.term}
           />
-          <span 
-            className="SidebarHeader__searchclear" 
-            onClick={this.handleClear} 
+          <span
+            className="SidebarHeader__searchclear"
+            onClick={this.handleClear}
             title={text('Clear', 'ItemSelection')}
           >
-            <Icon type={ ICON_CLOSE } />
+            <Icon type={ICON_CLOSE} />
           </span>
         </React.Fragment>
       );
@@ -142,9 +138,11 @@ export class CategoriesLayout extends Component<Props, State> {
     return (
       <div className="Panel">
         <Sidebar>
-          <SidebarHeader 
+          <SidebarHeader
             title={text('Header-category', 'SidebarHeader')}
-            subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.categories.length })}
+            subtitle={text('Subheader-count', 'SidebarHeader', {
+              COUNT: this.props.categories.length,
+            })}
           >
             {searchBox}
           </SidebarHeader>
@@ -158,24 +156,59 @@ export class CategoriesLayout extends Component<Props, State> {
             term={this.state.term}
             usePb
           />
-          <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
+          <SidebarFooter
+            leftActions={leftActions}
+            rightActions={rightActions}
+          />
         </Sidebar>
         <Switch>
-          <Route path={ROUTE_EDIT_CATEGORY} render={ routerProps => <EditCategoryLayout {...routerProps} categories={this.props.categories} dispatch={this.props.dispatch} />} />
-          <Route path={ROUTE_DEL_CATEGORIES} render={ routerProps => <DeleteCategoriesLayout {...routerProps} dispatch={this.props.dispatch} />} />
-          <Route path={ROUTE_NEW_CATEGORY} render={ routerProps => <NewCategoryLayout {...routerProps} categories={this.props.categories} dispatch={this.props.dispatch} />} />
-          <Route path={ROUTE_CATEGORIES} render={routerProps => <InfoMsg {...routerProps} headine={text('Categories', 'InfoMsg')} subtext={text('CategoriesMsg', 'InfoMsg')} /> } />
+          <Route
+            path={ROUTE_EDIT_CATEGORY}
+            render={routerProps => (
+              <EditCategoryLayout
+                {...routerProps}
+                categories={this.props.categories}
+                dispatch={this.props.dispatch}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_DEL_CATEGORIES}
+            render={routerProps => (
+              <DeleteCategoriesLayout
+                {...routerProps}
+                dispatch={this.props.dispatch}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_NEW_CATEGORY}
+            render={routerProps => (
+              <NewCategoryLayout
+                {...routerProps}
+                categories={this.props.categories}
+                dispatch={this.props.dispatch}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_CATEGORIES}
+            render={routerProps => (
+              <InfoMsg
+                {...routerProps}
+                headine={text('Categories', 'InfoMsg')}
+                subtext={text('CategoriesMsg', 'InfoMsg')}
+              />
+            )}
+          />
         </Switch>
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state: Object) => (
-  {
-    categories: state.categories
-  }
-);
-
+const mapStateToProps = (state: Object) => ({
+  categories: state.categories,
+});
 
 export default connect(mapStateToProps)(CategoriesLayout);

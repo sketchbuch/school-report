@@ -12,29 +12,28 @@ import {
 import type { AppType } from '../types/app';
 import appDefault from '../types/app';
 
-
 /**
-* App Reducer.
-*/
+ * App Reducer.
+ */
 export default function reducer(state: AppType = appDefault, action: Object) {
   switch (action.type) {
     case APP_ERRORED:
-      return {...state, error: true};
+      return { ...state, error: true };
 
     case APP_LOADED:
-      return {...state, loaded: true};
+      return { ...state, loaded: true };
 
     case LANGUAGE_LOADED:
-      return {...state, languageLoaded: true};
+      return { ...state, languageLoaded: true };
 
     case SETTINGS_LOADED:
-      return {...state, settingsLoaded: true};
+      return { ...state, settingsLoaded: true };
 
     case DATA_LOADED:
-      return {...state, dataLoaded: true};
+      return { ...state, dataLoaded: true };
 
     case DATA_CREATED:
-      return {...state, dataCreated: true};
+      return { ...state, dataCreated: true };
 
     default:
       return state;

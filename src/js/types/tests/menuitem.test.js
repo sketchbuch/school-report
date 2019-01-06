@@ -1,6 +1,9 @@
 // @flow
 
-import menuItemDefault, { MenuItemFactory, getMenuItemIdStr } from '../menuitem';
+import menuItemDefault, {
+  MenuItemFactory,
+  getMenuItemIdStr,
+} from '../menuitem';
 import { generateId } from '../../utils/ids';
 
 describe('Types: Menuitem', () => {

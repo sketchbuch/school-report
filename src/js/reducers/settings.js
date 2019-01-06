@@ -6,17 +6,17 @@ import {
   UPDATE_SETTINGS,
 } from '../constants/actionTypes';
 
-
 /**
-* Settings Reducer.
-*/
+ * Settings Reducer.
+ */
 
 export default function reducer(state: Object = {}, action: Object) {
   switch (action.type) {
     case REPLACE_DATA:
     case UPDATE_SETTINGS:
     case SETTINGS_LOADED:
-      if (action.payload && action.payload.settings !== undefined) return {...state, ...action.payload.settings};
+      if (action.payload && action.payload.settings !== undefined)
+        return { ...state, ...action.payload.settings };
       break;
     default:
       return state;

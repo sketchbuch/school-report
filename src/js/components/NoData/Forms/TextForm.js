@@ -17,10 +17,9 @@ type Props = {
   values: Object,
 };
 
-
 /**
-* Text form for NoData component.
-*/
+ * Text form for NoData component.
+ */
 export class TextForm extends Component<Props> {
   props: Props;
 
@@ -37,11 +36,14 @@ export class TextForm extends Component<Props> {
     } = this.props;
 
     const btValid = validate('bodytext', errors.text, touched.text);
-    const btnIsDisabled = (!btValid || values.text.bodytext === '') ? true : false;
+    const btnIsDisabled =
+      !btValid || values.text.bodytext === '' ? true : false;
 
     return (
       <form className="NoData__step--text" onSubmit={handleSubmit}>
-        <p className="NoData__msg"><Translation name="TextMessage" ns="NoData" /></p>
+        <p className="NoData__msg">
+          <Translation name="TextMessage" ns="NoData" />
+        </p>
         <div className="fieldwrap">
           <Textarea
             onChange={handleChange}
@@ -51,10 +53,16 @@ export class TextForm extends Component<Props> {
             placeholder={text('BodytextPlaceholder', 'Texts')}
             isValid={btValid}
           />
-          {!btValid && <p className="invalid-feedback">{errors.text.bodytext}</p>}
+          {!btValid && (
+            <p className="invalid-feedback">{errors.text.bodytext}</p>
+          )}
         </div>
         <div className="fieldwrap">
-          <Button type="submit" disabled={busy || btnIsDisabled || isSubmitting} busy={busy}>
+          <Button
+            type="submit"
+            disabled={busy || btnIsDisabled || isSubmitting}
+            busy={busy}
+          >
             <Translation name="TextBtnLabel" ns="NoData" />
           </Button>
         </div>
@@ -62,6 +70,5 @@ export class TextForm extends Component<Props> {
     );
   }
 }
-
 
 export default TextForm;

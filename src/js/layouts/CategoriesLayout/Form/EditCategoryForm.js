@@ -21,10 +21,9 @@ type Props = {
   values: Object,
 };
 
-
 /**
-* Category form for the edit panel.
-*/
+ * Category form for the edit panel.
+ */
 export class EditCategoryForm extends Component<Props> {
   static defaultProps = {
     dirty: false,
@@ -72,15 +71,16 @@ export class EditCategoryForm extends Component<Props> {
           </Button>
         </div>
 
-        {!saving &&
+        {!saving && (
           <p className="form__submsg">
-            <Link to={ROUTE_CATEGORIES}><Translation name="BackToCategories" ns="Categories" /></Link>
+            <Link to={ROUTE_CATEGORIES}>
+              <Translation name="BackToCategories" ns="Categories" />
+            </Link>
           </p>
-        }
+        )}
       </form>
     );
   }
 }
-
 
 export default EditCategoryForm;

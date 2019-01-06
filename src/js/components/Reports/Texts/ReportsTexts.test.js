@@ -13,12 +13,12 @@ describe('<ReportsTexts />', () => {
     texts: [],
   };
   const texts1 = [
-    {...textDefault, id: 't3', bodytext: 'Starbug', categories: [ 'c1', 'c2' ] },
+    { ...textDefault, id: 't3', bodytext: 'Starbug', categories: ['c1', 'c2'] },
   ];
   const texts2 = [
-    {...textDefault, id: 't1', bodytext: 'Red Dwarf', categories: [ 'c1' ] },
-    {...textDefault, id: 't2', bodytext: 'Blue Midget', categories: [ 'c1' ] },
-    {...textDefault, id: 't3', bodytext: 'Starbug', categories: [ 'c1', 'c2' ] },
+    { ...textDefault, id: 't1', bodytext: 'Red Dwarf', categories: ['c1'] },
+    { ...textDefault, id: 't2', bodytext: 'Blue Midget', categories: ['c1'] },
+    { ...textDefault, id: 't3', bodytext: 'Starbug', categories: ['c1', 'c2'] },
   ];
 
   test('Renders without crashing', () => {

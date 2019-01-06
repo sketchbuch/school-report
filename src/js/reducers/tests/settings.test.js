@@ -8,13 +8,12 @@ import {
 } from '../../constants/actionTypes';
 import settingsDefault from '../../types/settings';
 
-
 /**
-* Settings Reducer Tests
-*/
+ * Settings Reducer Tests
+ */
 
 describe('Reducer: Settings', () => {
-  const INITIAL_STATE = {...settingsDefault};
+  const INITIAL_STATE = { ...settingsDefault };
   const NEW_LANG = 'DE';
   const TEST_STATE = {
     ...INITIAL_STATE,
@@ -26,8 +25,15 @@ describe('Reducer: Settings', () => {
   });
 
   test('REPLACE_DATA should return the initial state if payload has no settings object', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(INITIAL_STATE);
-    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {settingswrong: ''} })).toEqual(INITIAL_STATE);
+    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(
+      INITIAL_STATE
+    );
+    expect(
+      reducer(INITIAL_STATE, {
+        type: REPLACE_DATA,
+        payload: { settingswrong: '' },
+      })
+    ).toEqual(INITIAL_STATE);
   });
 
   test('REPLACE_DATA return the new settings', () => {
@@ -36,7 +42,7 @@ describe('Reducer: Settings', () => {
       payload: {
         settings: {
           language: NEW_LANG,
-        }
+        },
       },
     };
     expect(reducer(INITIAL_STATE, ACTION)).toEqual(TEST_STATE);
@@ -48,7 +54,7 @@ describe('Reducer: Settings', () => {
       payload: {
         settings: {
           language: NEW_LANG,
-        }
+        },
       },
     };
     expect(reducer(INITIAL_STATE, ACTION)).toEqual(TEST_STATE);
@@ -60,7 +66,7 @@ describe('Reducer: Settings', () => {
       payload: {
         settings: {
           language: NEW_LANG,
-        }
+        },
       },
     };
     expect(reducer(INITIAL_STATE, ACTION)).toEqual(TEST_STATE);

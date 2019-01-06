@@ -14,7 +14,7 @@ describe('<NewCategoryLayout />', () => {
     },
     location: {},
     match: {},
-  }
+  };
 
   test('Renders without crashing', () => {
     const wrapper = shallow(<NewCategoryLayout {...props} />);
@@ -27,7 +27,7 @@ describe('<NewCategoryLayout />', () => {
 
     instance.componentDidUpdate = jest.fn();
     instance.handleSubmit({});
-    
+
     expect(wrapper.state().saving).toBe(true);
     expect(wrapper.instance().componentDidUpdate).toHaveBeenCalledTimes(1);
   });
@@ -54,8 +54,10 @@ describe('<NewCategoryLayout />', () => {
     });
 
     test('state.saving calls props.dispatch', () => {
-      const mockDispatch =  jest.fn();
-      const wrapper = shallow(<NewCategoryLayout {...props} dispatch={mockDispatch} />);
+      const mockDispatch = jest.fn();
+      const wrapper = shallow(
+        <NewCategoryLayout {...props} dispatch={mockDispatch} />
+      );
       const instance = wrapper.instance();
 
       wrapper.setState({ saving: true });

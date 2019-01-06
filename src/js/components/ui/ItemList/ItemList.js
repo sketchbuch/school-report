@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import Icon from '../../Icon/Icon';
 import NoItems from '../../NoItems/NoItems';
-import Translation  from '../../Translation/Translation';
+import Translation from '../../Translation/Translation';
 import type { ClassType } from '../../../types/class';
 import type { PupilType } from '../../../types/pupil';
 import type { ReportType } from '../../../types/report';
@@ -28,10 +28,9 @@ type Props = {
   unshift: Function,
 };
 
-
 /**
-* A list of items for selection.
-*/
+ * A list of items for selection.
+ */
 class ItemList extends Component<Props> {
   static defaultProps = {
     items: [], // Already sorted for display.
@@ -43,22 +42,19 @@ class ItemList extends Component<Props> {
   props: Props;
 
   render() {
-    const {
-      items,
-      name,
-      push,
-      remove,
-      selected,
-      totalCount,
-    } = this.props;
-    const labelName = (totalCount === 0) ? 'None' : 'NoItems';
+    const { items, name, push, remove, selected, totalCount } = this.props;
+    const labelName = totalCount === 0 ? 'None' : 'NoItems';
 
     return (
       <div className="ItemList">
         {totalCount > 0 && items.length > 0 ? (
           items.map(item => {
             return (
-              <label className="ItemList__item" key={item.id} title={item.getTooltip()}>
+              <label
+                className="ItemList__item"
+                key={item.id}
+                title={item.getTooltip()}
+              >
                 <input
                   type="checkbox"
                   value={item.id}
@@ -72,21 +68,36 @@ class ItemList extends Component<Props> {
                     }
                   }}
                 />
-                <div className="ItemList__inner" key={item.id} title={item.getTooltip()}>
-                  {selected.includes(item.id) ? (<Icon type={ ICON_SUCCESS } />) : (<Icon type={item.getIcon()} />)}
+                <div
+                  className="ItemList__inner"
+                  key={item.id}
+                  title={item.getTooltip()}
+                >
+                  {selected.includes(item.id) ? (
+                    <Icon type={ICON_SUCCESS} />
+                  ) : (
+                    <Icon type={item.getIcon()} />
+                  )}
                   <span className="ItemList__label">{item.getLabel()}</span>
-                  <span className="ItemList__description">{item.getDescription()}</span>
+                  <span className="ItemList__description">
+                    {item.getDescription()}
+                  </span>
                 </div>
               </label>
-            )
+            );
           })
         ) : (
-          <NoItems><Translation name={ labelName } ns="ItemList" placeholders={{ NAME: name }} /></NoItems>
+          <NoItems>
+            <Translation
+              name={labelName}
+              ns="ItemList"
+              placeholders={{ NAME: name }}
+            />
+          </NoItems>
         )}
       </div>
-    )
+    );
   }
 }
-
 
 export default ItemList;

@@ -12,18 +12,17 @@ import {
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-
 /**
-* Language Actions Tests
-*/
+ * Language Actions Tests
+ */
 
 describe('Actions: languageActions:', () => {
-  let callback = ()=>{};
-  let store = ()=>{};
+  let callback = () => {};
+  let store = () => {};
 
   beforeEach(() => {
     callback = jest.fn();
-    store = mockStore({ settings: {}});
+    store = mockStore({ settings: {} });
     window.reportr.curLang = 'EN';
   });
 
@@ -31,7 +30,7 @@ describe('Actions: languageActions:', () => {
     test('Dispatches the correct action', () => {
       const LANG_KEY = 'EN';
       const EXPECTED_ACTIONS = [
-        { type: CHANGE_LANGUAGE, payload: { lang: LANG_KEY }},
+        { type: CHANGE_LANGUAGE, payload: { lang: LANG_KEY } },
       ];
 
       expect.assertions(1);
@@ -43,7 +42,7 @@ describe('Actions: languageActions:', () => {
     test('Dispatches the correct actions if the language is not loaded', () => {
       const LANG_KEY = 'FR';
       const EXPECTED_ACTIONS = [
-        { type: LOAD_LANGUAGE, meta: { lang: LANG_KEY }},
+        { type: LOAD_LANGUAGE, meta: { lang: LANG_KEY } },
       ];
 
       expect.assertions(1);
@@ -56,7 +55,7 @@ describe('Actions: languageActions:', () => {
   test('load() dispatches the correct action', () => {
     const LANG_KEY = 'FR';
     const EXPECTED_ACTIONS = [
-      { type: LOAD_LANGUAGE, meta: { lang: LANG_KEY }},
+      { type: LOAD_LANGUAGE, meta: { lang: LANG_KEY } },
     ];
 
     expect.assertions(1);
@@ -66,9 +65,7 @@ describe('Actions: languageActions:', () => {
   });
 
   test('loaded() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: LANGUAGE_LOADED },
-    ];
+    const EXPECTED_ACTIONS = [{ type: LANGUAGE_LOADED }];
 
     expect.assertions(1);
     store.dispatch(languageActions.loaded());

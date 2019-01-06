@@ -28,18 +28,16 @@ function hideLoader() {
   const alDuration = getCustomNumProp('--apploader-ms');
   document.getElementsByTagName('html')[0].classList.add('app-initialised');
 
-  setTimeout(
-    () => {
-      let appLoaderEle = document && document.getElementById('apploader');
-      if (appLoaderEle && appLoaderEle.parentNode) appLoaderEle.parentNode.removeChild(appLoaderEle);
-    },
-    alDuration,
-  );
+  setTimeout(() => {
+    let appLoaderEle = document && document.getElementById('apploader');
+    if (appLoaderEle && appLoaderEle.parentNode)
+      appLoaderEle.parentNode.removeChild(appLoaderEle);
+  }, alDuration);
 }
 
 /**
-* App.
-*/
+ * App.
+ */
 export class App extends Component<Props> {
   props: Props;
   dataCreated: Function;
@@ -74,20 +72,23 @@ export class App extends Component<Props> {
       } else if (languageLoaded && !dataCreated) {
         this.props.dispatch(dataActions.load(this.dataLoaded));
       } else if (settingsLoaded || dataCreated) {
-        this.props.dispatch(languageActions.load(this.props.currentLang, this.languageLoaded));
+        this.props.dispatch(
+          languageActions.load(this.props.currentLang, this.languageLoaded)
+        );
       }
     }
   }
 
   /**
-  * Callback used when the settings have loaded.
-  *
-  * @param object ioResult An object: {success: boolean, errorObj?: object, data?: string}
-  */
+   * Callback used when the settings have loaded.
+   *
+   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: string}
+   */
   settingsLoaded(ioResult: Object) {
     if (ioResult.success === true) {
       this.props.dispatch(settingsActions.loaded(ioResult.data));
-    } else if (ioResult.errorObj.code === 'ENOENT') { // File doesn't exist.
+    } else if (ioResult.errorObj.code === 'ENOENT') {
+      // File doesn't exist.
       this.props.dispatch(dataActions.create(this.dataCreated));
     } else {
       this.appError('settingsLoaded');
@@ -95,10 +96,10 @@ export class App extends Component<Props> {
   }
 
   /**
-  * Callback used when the language has loaded.
-  *
-  * @param object ioResult An object: {success: boolean, errorObj?: object, data?: object}
-  */
+   * Callback used when the language has loaded.
+   *
+   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: object}
+   */
   languageLoaded(ioResult: Object) {
     if (ioResult.success === true) {
       Object.assign(window.reportr.translations, ioResult.data);
@@ -109,10 +110,10 @@ export class App extends Component<Props> {
   }
 
   /**
-  * Callback used by readAppData.
-  *
-  * @param object ioResult An object: {success: boolean, errorObj?: object, data?: string}
-  */
+   * Callback used by readAppData.
+   *
+   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: string}
+   */
   dataLoaded(ioResult: Object) {
     if (ioResult.success === true) {
       this.props.dispatch(dataActions.loaded(JSON.parse(ioResult.data)));
@@ -122,10 +123,10 @@ export class App extends Component<Props> {
   }
 
   /**
-  * Callback used when initial data is created.
-  *
-  * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-  */
+   * Callback used when initial data is created.
+   *
+   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
+   */
   dataCreated(ioResult: Object) {
     if (ioResult.success === true) {
       this.props.dispatch(dataActions.created());
@@ -135,15 +136,15 @@ export class App extends Component<Props> {
   }
 
   /**
-  * Update UI to show an error occured.
-  */
+   * Update UI to show an error occured.
+   */
   appError(type: string) {
     this.props.dispatch(appActions.errored(hideLoader));
   }
 
   /**
-  * Returns the correct panel content.
-  */
+   * Returns the correct panel content.
+   */
   renderContent() {
     if (this.props.app.error === false && this.props.app.loaded === true) {
       if (!this.props.app.dataCreated || this.props.classes.length > 0) {
@@ -156,7 +157,7 @@ export class App extends Component<Props> {
     let appError = text('ErrorTxt', 'AppError');
     if (appError.substr(0, 1) === '?') appError = window.reportr.appError;
 
-    return <AppError errorTxt={appError}/>;
+    return <AppError errorTxt={appError} />;
   }
 
   render() {
@@ -171,14 +172,11 @@ export class App extends Component<Props> {
   }
 }
 
-const mapStateToProps = (state: Object) => (
-  {
-    app: state.app,
-    classes: state.classes,
-    currentLang: state.languages.current,
-    settings: state.settings,
-  }
-);
-
+const mapStateToProps = (state: Object) => ({
+  app: state.app,
+  classes: state.classes,
+  currentLang: state.languages.current,
+  settings: state.settings,
+});
 
 export default connect(mapStateToProps)(App);

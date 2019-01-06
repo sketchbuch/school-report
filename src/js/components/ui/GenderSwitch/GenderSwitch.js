@@ -16,8 +16,8 @@ type Props = {
 };
 
 /**
-* A gender switch using icons.
-*/
+ * A gender switch using icons.
+ */
 class GenderSwitch extends React.Component<Props> {
   static defaultProps = {
     value: '',
@@ -48,17 +48,30 @@ class GenderSwitch extends React.Component<Props> {
     return (
       <div className={classes}>
         <label title={titleMale}>
-          <input onChange={onChange} onBlur={onBlur} name={name} checked={(value === 'm') ? true : false} type="radio" value="m" />
+          <input
+            onChange={onChange}
+            onBlur={onBlur}
+            name={name}
+            checked={value === 'm' ? true : false}
+            type="radio"
+            value="m"
+          />
           <Icon type={ICON_PUPILS_MALE} />
         </label>
         <label title={titleFemale}>
-          <input onChange={onChange} onBlur={onBlur} name={name} checked={(value === 'f') ? true : false} type="radio" value="f" />
+          <input
+            onChange={onChange}
+            onBlur={onBlur}
+            name={name}
+            checked={value === 'f' ? true : false}
+            type="radio"
+            value="f"
+          />
           <Icon type={ICON_PUPILS_FEMALE} />
         </label>
       </div>
-    )
+    );
   }
 }
-
 
 export default GenderSwitch;

@@ -3,10 +3,9 @@
 import { APP_ERRORED, APP_LOADED } from '../constants/actionTypes';
 import type { ActionCreator } from '../types/action';
 
-
 /**
-* App Actions
-*/
+ * App Actions
+ */
 
 export function loaded(hideLoader: Function): ActionCreator {
   hideLoader();

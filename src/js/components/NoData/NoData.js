@@ -2,13 +2,17 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { toastr } from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr';
 import { Formik } from 'formik';
 import ClassForm from './Forms/ClassForm';
 import PupilForm from './Forms/PupilForm';
 import TextForm from './Forms/TextForm';
 import { text } from '../Translation/Translation';
-import { prefixedClassSchema, prefixedPupilSchema, prefixedTextSchema } from '../../validation/schemas';
+import {
+  prefixedClassSchema,
+  prefixedPupilSchema,
+  prefixedTextSchema,
+} from '../../validation/schemas';
 import * as dataActions from '../../actions/dataActions';
 import type { ClassType } from '../../types/class';
 import type { PupilType } from '../../types/pupil';
@@ -33,10 +37,9 @@ type State = {
   text: TextType,
 };
 
-
 /**
-* NoClasses
-*/
+ * NoClasses
+ */
 export class NoData extends Component<Props, State> {
   state: State;
   props: Props;
@@ -49,18 +52,18 @@ export class NoData extends Component<Props, State> {
     super(props);
 
     this.state = {
-      class: {...classDefault},
+      class: { ...classDefault },
       error: false,
-      pupil: {...pupilDefault},
+      pupil: { ...pupilDefault },
       saving: false,
       step: 'class',
-      text: {...textDefault},
+      text: { ...textDefault },
     };
 
     this.initialValues = {
-      class: {...classDefault},
-      pupil: {...pupilDefault},
-      text: {...textDefault},
+      class: { ...classDefault },
+      pupil: { ...pupilDefault },
+      text: { ...textDefault },
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -70,18 +73,23 @@ export class NoData extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceError', 'NoData'));
+      toastr.error(
+        text('PersistenceError', 'Toastr'),
+        text('PersistenceError', 'NoData')
+      );
     } else if (this.state.saving) {
-      this.props.dispatch(dataActions.replace(
-        {
-          categories: [],
-          classes: [{...this.state.class}],
-          pupils: [{...this.state.pupil}],
-          reports: [],
-          texts: [{...this.state.text}],
-        },
-        this.dataSaved,
-      ));
+      this.props.dispatch(
+        dataActions.replace(
+          {
+            categories: [],
+            classes: [{ ...this.state.class }],
+            pupils: [{ ...this.state.pupil }],
+            reports: [],
+            texts: [{ ...this.state.text }],
+          },
+          this.dataSaved
+        )
+      );
       this.setState({ saving: false });
     }
   }
@@ -89,11 +97,7 @@ export class NoData extends Component<Props, State> {
   handleSubmit(values: Object) {
     values.text.lang = this.props.curLang;
 
-    const newText = TextFactory(
-      values.text,
-      Date.now(),
-      this.props.curLang,
-    );
+    const newText = TextFactory(values.text, Date.now(), this.props.curLang);
 
     this.setState({
       saving: true,
@@ -107,18 +111,16 @@ export class NoData extends Component<Props, State> {
       const newPupil = PupilFactory(
         values.pupil,
         Date.now(),
-        this.state.class.id,
+        this.state.class.id
       );
 
       this.setState({
         step: 'text',
         pupil: newPupil,
       });
-    } else { // Class
-      const newClass = ClassFactory(
-        values.class,
-        Date.now(),
-      );
+    } else {
+      // Class
+      const newClass = ClassFactory(values.class, Date.now());
 
       this.setState({
         step: 'pupil',
@@ -128,16 +130,16 @@ export class NoData extends Component<Props, State> {
   }
 
   /**
-  * Callback used by writeAppData.
-  *
-  * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-  */
+   * Callback used by writeAppData.
+   *
+   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
+   */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
       toastr.success(text('DataPersisted', 'NoData'));
       //this.props.history.push(ROUTE_CLASSES);
     } else {
-      this.setState({error: true});
+      this.setState({ error: true });
     }
   }
 
@@ -145,7 +147,7 @@ export class NoData extends Component<Props, State> {
     switch (this.state.step) {
       case 'save':
       case 'text':
-        const busy = (this.state.step === 'save') ? true : false;
+        const busy = this.state.step === 'save' ? true : false;
 
         return (
           <Formik
@@ -153,8 +155,12 @@ export class NoData extends Component<Props, State> {
             enableReinitialize={false}
             validationSchema={prefixedTextSchema}
             onSubmit={this.handleSubmit}
-            render={(formikProps) => (
-              <TextForm {...formikProps} handleClick={this.handleClick} busy={busy} />
+            render={formikProps => (
+              <TextForm
+                {...formikProps}
+                handleClick={this.handleClick}
+                busy={busy}
+              />
             )}
           />
         );
@@ -166,7 +172,7 @@ export class NoData extends Component<Props, State> {
             enableReinitialize={false}
             validationSchema={prefixedPupilSchema}
             onSubmit={this.handleSubmit}
-            render={(formikProps) => (
+            render={formikProps => (
               <PupilForm {...formikProps} handleClick={this.handleClick} />
             )}
           />
@@ -180,7 +186,7 @@ export class NoData extends Component<Props, State> {
             enableReinitialize={false}
             validationSchema={prefixedClassSchema}
             onSubmit={this.handleSubmit}
-            render={(formikProps) => (
+            render={formikProps => (
               <ClassForm {...formikProps} handleClick={this.handleClick} />
             )}
           />
@@ -189,19 +195,12 @@ export class NoData extends Component<Props, State> {
   }
 
   render() {
-    return (
-      <div className="NoData">
-        {this.renderStep()}
-      </div>
-    );
+    return <div className="NoData">{this.renderStep()}</div>;
   }
 }
 
-const mapStateToProps = (state: Object) => (
-  {
-    curLang: state.languages.current,
-  }
-);
-
+const mapStateToProps = (state: Object) => ({
+  curLang: state.languages.current,
+});
 
 export default connect(mapStateToProps)(NoData);

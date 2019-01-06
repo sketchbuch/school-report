@@ -7,6 +7,10 @@ import store from '../../store/redux';
 import CategoriesLayout from './CategoriesLayout';
 
 test('<CategoriesLayout />: Renders without crashing', () => {
-  const wrapper = shallow(<Provider store={store}><CategoriesLayout /></Provider>);
+  const wrapper = shallow(
+    <Provider store={store}>
+      <CategoriesLayout />
+    </Provider>
+  );
   expect(wrapper).toHaveLength(1);
 });

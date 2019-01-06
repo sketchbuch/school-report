@@ -8,14 +8,16 @@ import HeaderPath from './HeaderPath';
 
 jest.mock('../../../utils/redux', () => {
   return {
-    getBreadcrumbs: jest.fn(()=>{
-      return [{
-        id: 'b1222',
-        link: '/',
-        text: 'Link',
-      }];
-    })
-  }
+    getBreadcrumbs: jest.fn(() => {
+      return [
+        {
+          id: 'b1222',
+          link: '/',
+          text: 'Link',
+        },
+      ];
+    }),
+  };
 });
 
 describe('<HeaderPath />', () => {
@@ -27,17 +29,29 @@ describe('<HeaderPath />', () => {
   };
 
   test('<Renders without crashing', () => {
-    const wrapper = shallow(<Provider store={store}><HeaderPath breadcrumbs={[]} /></Provider>);
+    const wrapper = shallow(
+      <Provider store={store}>
+        <HeaderPath breadcrumbs={[]} />
+      </Provider>
+    );
     expect(wrapper).toHaveLength(1);
   });
 
   test('Breadcrumbs render', () => {
-    const wrapper = mount(<Provider store={store}><MemoryRouter><HeaderPath/></MemoryRouter></Provider>);
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <HeaderPath />
+        </MemoryRouter>
+      </Provider>
+    );
     expect(wrapper.find('HeaderBreadcrumb')).toHaveLength(1);
   });
 
   test('<Returns null if no breadcrumbs', () => {
-    const wrapper = shallow(<HeaderPath.WrappedComponent store={store} breadcrumbs={[]} />);
+    const wrapper = shallow(
+      <HeaderPath.WrappedComponent store={store} breadcrumbs={[]} />
+    );
     expect(wrapper.get(0)).toBeNull();
   });
-}); 
+});

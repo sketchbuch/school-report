@@ -3,7 +3,6 @@
 import { ucFirst } from './strings';
 import type { PupilType } from '../types/pupil';
 
-
 export const placeholderMap = [
   { symbol: 'N', function: 'getLabel' },
   { symbol: 'F', property: 'firstname' },
@@ -14,14 +13,18 @@ export const placeholderMap = [
 ];
 
 /**
-* Returns the text with the placeholders replaced
-*
-* @param {string} text The text to change.
-* @return {object}
-*/
-export function getPupilTextHtml(text: string, pupil: PupilType | Object, highlight: boolean = true): Object {
-  const highlightStart = (highlight) ? '<strong>' : '';
-  const highlightEnd = (highlight) ? '</strong>' : '';
+ * Returns the text with the placeholders replaced
+ *
+ * @param {string} text The text to change.
+ * @return {object}
+ */
+export function getPupilTextHtml(
+  text: string,
+  pupil: PupilType | Object,
+  highlight: boolean = true
+): Object {
+  const highlightStart = highlight ? '<strong>' : '';
+  const highlightEnd = highlight ? '</strong>' : '';
   let newText = text;
 
   placeholderMap.forEach(ph => {
@@ -40,8 +43,15 @@ export function getPupilTextHtml(text: string, pupil: PupilType | Object, highli
       phVal = pupil[ph.property];
     }
 
-    if (isPronoun) newText = newText.replace(new RegExp(`\\. ${phSymbol}`, 'g'), '. ' + highlightStart + ucFirst(phVal) + highlightEnd);
-    newText = newText.replace(new RegExp(phSymbol, 'g'), highlightStart + phVal + highlightEnd);
+    if (isPronoun)
+      newText = newText.replace(
+        new RegExp(`\\. ${phSymbol}`, 'g'),
+        '. ' + highlightStart + ucFirst(phVal) + highlightEnd
+      );
+    newText = newText.replace(
+      new RegExp(phSymbol, 'g'),
+      highlightStart + phVal + highlightEnd
+    );
   });
 
   return { __html: newText };

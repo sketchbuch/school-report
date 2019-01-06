@@ -27,10 +27,9 @@ type Props = {
   values: Object,
 };
 
-
 /**
-* Text form for the edit panel.W
-*/
+ * Text form for the edit panel.W
+ */
 export class EditTextForm extends Component<Props> {
   static defaultProps = {
     categories: [],
@@ -56,14 +55,11 @@ export class EditTextForm extends Component<Props> {
 
     const cValid = validate('categories', errors, touched);
     const btValid = validate('bodytext', errors, touched);
-    const btnIsDisabled = (
-      !cValid ||
-      !btValid ||
-      saving ||
-      !dirty
-    ) ? true : false;
+    const btnIsDisabled =
+      !cValid || !btValid || saving || !dirty ? true : false;
     const sortedCategories = sortObjectsAz(categories, categorySort);
-    const selCount = categories.filter(c => values.categories.includes(c.id)).length;
+    const selCount = categories.filter(c => values.categories.includes(c.id))
+      .length;
 
     return (
       <form className="form" onSubmit={handleSubmit}>
@@ -78,12 +74,22 @@ export class EditTextForm extends Component<Props> {
           />
           {!btValid && <p className="invalid-feedback">{errors.bodytext}</p>}
           <div className="fiedwrap__placeholders">
-            {placeholderMap.map(ph => <span key={ph.symbol} className="fiedwrap__placeholder" title={text('Title' + ph.symbol, '##')} >#{ph.symbol}#</span>)}
+            {placeholderMap.map(ph => (
+              <span
+                key={ph.symbol}
+                className="fiedwrap__placeholder"
+                title={text('Title' + ph.symbol, '##')}
+              >
+                #{ph.symbol}#
+              </span>
+            ))}
           </div>
         </div>
         <div className="fieldwrap">
           <p>
-            <Translation name="ReportCategories" ns="Texts"
+            <Translation
+              name="ReportCategories"
+              ns="Texts"
               placeholders={{
                 SELECTED: selCount,
                 TOTAL: categories.length,
@@ -91,7 +97,11 @@ export class EditTextForm extends Component<Props> {
             />
           </p>
 
-          <ItemSelection items={sortedCategories} name="categories" selected={values.categories} />
+          <ItemSelection
+            items={sortedCategories}
+            name="categories"
+            selected={values.categories}
+          />
           {!cValid && <p className="invalid-feedback">{errors.categories}</p>}
         </div>
         <div className="fieldwrap">
@@ -104,15 +114,16 @@ export class EditTextForm extends Component<Props> {
           </Button>
         </div>
 
-        {!saving &&
+        {!saving && (
           <p className="form__submsg">
-            <Link to={ROUTE_TEXTS}><Translation name="BackToTexts" ns="Texts" /></Link>
+            <Link to={ROUTE_TEXTS}>
+              <Translation name="BackToTexts" ns="Texts" />
+            </Link>
           </p>
-        }
+        )}
       </form>
     );
   }
 }
-
 
 export default EditTextForm;

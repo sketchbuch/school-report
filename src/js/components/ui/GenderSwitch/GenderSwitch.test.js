@@ -14,8 +14,12 @@ describe('<GenderSwitch />', () => {
     const props2 = {};
     const wrapper2 = shallow(<GenderSwitch {...props2} />);
 
-    expect(wrapper1.find('.GenderSwitch').hasClass('GenderSwitch--large')).toEqual(true);
-    expect(wrapper2.find('.GenderSwitch').hasClass('GenderSwitch--large')).toEqual(false);
+    expect(
+      wrapper1.find('.GenderSwitch').hasClass('GenderSwitch--large')
+    ).toEqual(true);
+    expect(
+      wrapper2.find('.GenderSwitch').hasClass('GenderSwitch--large')
+    ).toEqual(false);
   });
 
   test('Checks the correct input', () => {

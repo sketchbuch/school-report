@@ -17,21 +17,24 @@ import type { PupilType } from '../types/pupil';
 import type { ActionObj } from '../types/action';
 
 /**
-* Pupils Reducer.
-*/
-export default function reducer(state: Array<PupilType> = [], action: ActionObj) {
+ * Pupils Reducer.
+ */
+export default function reducer(
+  state: Array<PupilType> = [],
+  action: ActionObj
+) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_DATA:
     case REPLACE_PUPILS:
       if (action.payload && action.payload.pupils !== undefined) {
-          if (Array.isArray(action.payload.pupils)) {
-            const newState = [];
-            action.payload.pupils.forEach(item => {
-              newState.push(hydratePupil(item));
-            });
-            return newState;
-          }
+        if (Array.isArray(action.payload.pupils)) {
+          const newState = [];
+          action.payload.pupils.forEach(item => {
+            newState.push(hydratePupil(item));
+          });
+          return newState;
+        }
       }
 
       break;
@@ -52,7 +55,7 @@ export default function reducer(state: Array<PupilType> = [], action: ActionObj)
     case DELETE_CLASS: // Must delete all pupils for this class (action.payload.id === the class ID).
       return state.filter((item: PupilType) => {
         const { payload }: Object = action;
-        if (payload.id !== undefined) return item.classId !== payload.id; 
+        if (payload.id !== undefined) return item.classId !== payload.id;
         return true;
       });
 

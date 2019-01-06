@@ -2,10 +2,9 @@
 
 import { generateId } from '../ids';
 
-
 /**
-* ID Tests
-*/
+ * ID Tests
+ */
 
 describe('Util: IDs', () => {
   const ts = Date.now();

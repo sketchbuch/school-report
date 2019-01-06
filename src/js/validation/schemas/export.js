@@ -3,7 +3,6 @@
 import Yup from 'yup';
 import { text } from '../../components/Translation/Translation';
 
-
 /**
 * Validation scheme for an export.
 
@@ -11,6 +10,8 @@ import { text } from '../../components/Translation/Translation';
 */
 export default function exportSchema(): Object {
   return Yup.object().shape({
-    name: Yup.string().trim().required(text('ReportExportName', 'Validation')),
+    name: Yup.string()
+      .trim()
+      .required(text('ReportExportName', 'Validation')),
   });
 }

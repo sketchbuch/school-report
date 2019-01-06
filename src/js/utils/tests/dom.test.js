@@ -2,10 +2,9 @@
 
 import { getCustomNumProp } from '../dom';
 
-
 /**
-* ID Tests
-*/
+ * ID Tests
+ */
 
 describe('Util: DOM', () => {
   test('getCustomNumProp() should return an integer', () => {

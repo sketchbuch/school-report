@@ -3,23 +3,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Formik } from 'formik';
-import { toastr } from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr';
 import ExportBuilderForm from '../Form/ExportBuilderForm';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import exportSchema from '../../../validation/schemas/export';
-import { text }  from '../../../components/Translation/Translation';
+import { text } from '../../../components/Translation/Translation';
 import exportDefault from '../../../types/export';
 import type { ExportType } from '../../../types/export';
 import type { ReportType } from '../../../types/report';
 import type { TextType } from '../../../types/text';
 import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
-import {
-  exportWord,
-  getContent,
-  getDateFromTs,
-} from '../../../fs/export';
+import { exportWord, getContent, getDateFromTs } from '../../../fs/export';
 import setTitle from '../../../utils/title';
 import { TOASTR_DURATION_LONG } from '../../../constants/misc';
 
@@ -37,12 +33,11 @@ type State = {
   export: ExportType,
   error: boolean,
   saving: boolean,
-}
-
+};
 
 /**
-* Layout for exporting a report
-*/
+ * Layout for exporting a report
+ */
 export class ExportBuilderLayout extends Component<Props, State> {
   static defaultProps = {
     activeReport: {},
@@ -53,15 +48,15 @@ export class ExportBuilderLayout extends Component<Props, State> {
 
   props: Props;
   state: State;
-  exportResult: (ioResult: Object)=>{};
-  handleSubmit: (values: ExportType)=>{};
+  exportResult: (ioResult: Object) => {};
+  handleSubmit: (values: ExportType) => {};
   saveName: string;
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      export: {...exportDefault},
+      export: { ...exportDefault },
       error: false,
       saving: false,
     };
@@ -87,7 +82,7 @@ export class ExportBuilderLayout extends Component<Props, State> {
       reportName: this.props.activeReport.getLabel(),
     };
     this.saveName = `${values.name}.docx`;
-    
+
     exportWord(exportValues, this.exportResult);
   }
 
@@ -95,12 +90,14 @@ export class ExportBuilderLayout extends Component<Props, State> {
     if (ioResult.success === true) {
       toastr.success(
         text('PersistenceSuccess', 'ExportBuilderLayout'),
-        this.saveName,
+        this.saveName
       );
     } else {
       toastr.error(
         text('PersistenceError', 'ExportBuilderLayout'),
-        text('PersistenceErrorMsg', 'ExportBuilderLayout', { ERROR: ioResult.errorObj.message }),
+        text('PersistenceErrorMsg', 'ExportBuilderLayout', {
+          ERROR: ioResult.errorObj.message,
+        }),
         { timeOut: TOASTR_DURATION_LONG }
       );
     }
@@ -111,30 +108,36 @@ export class ExportBuilderLayout extends Component<Props, State> {
 
     return (
       <EditPanel>
-        <EditPanelHeader title={text('ReportExport', 'EditPanelHeader', { 'REPORT_NAME': reportName })} />
+        <EditPanelHeader
+          title={text('ReportExport', 'EditPanelHeader', {
+            REPORT_NAME: reportName,
+          })}
+        />
         <EditPanelContent>
           <Formik
             initialValues={{ name: reportName }}
             enableReinitialize={true}
             validationSchema={exportSchema}
             onSubmit={this.handleSubmit}
-            render={(formikProps) => (
-              <ExportBuilderForm {...formikProps} saving={this.state.saving} reportName={reportName} />
+            render={formikProps => (
+              <ExportBuilderForm
+                {...formikProps}
+                saving={this.state.saving}
+                reportName={reportName}
+              />
             )}
           />
         </EditPanelContent>
       </EditPanel>
-    )
+    );
   }
 }
-
 
 const mapStateToProps = (state: Object, props: Props) => {
   return {
     builder: state.builder,
     texts: state.texts,
-  }
+  };
 };
-
 
 export default connect(mapStateToProps)(ExportBuilderLayout);

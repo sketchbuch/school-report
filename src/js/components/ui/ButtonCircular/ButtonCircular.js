@@ -18,10 +18,9 @@ type Props = {
   visual?: boolean,
 };
 
-
 /**
-* A round action button.
-*/
+ * A round action button.
+ */
 class ButtonCircular extends React.Component<Props> {
   static defaultProps = {
     buttontype: 'default',
@@ -51,20 +50,23 @@ class ButtonCircular extends React.Component<Props> {
 
     let classes = 'ButtonCircular';
     if (className && className !== '') classes += ' ' + className;
-    const tagName = (visual) ? 'span' : 'button';
+    const tagName = visual ? 'span' : 'button';
 
-    return React.createElement(tagName, {
-      className: classes,
-      "data-action": action,
-      "data-buttontype": buttontype,
-      disabled: disabled,
-      name: name,
-      onClick: onClick,
-      title: title,
-      type: type,
-    }, children);
+    return React.createElement(
+      tagName,
+      {
+        className: classes,
+        'data-action': action,
+        'data-buttontype': buttontype,
+        disabled: disabled,
+        name: name,
+        onClick: onClick,
+        title: title,
+        type: type,
+      },
+      children
+    );
   }
 }
-
 
 export default ButtonCircular;

@@ -1,6 +1,6 @@
 // @flow
 
-import * as arr from "./array";
+import * as arr from './array';
 
 export default {
   arr,

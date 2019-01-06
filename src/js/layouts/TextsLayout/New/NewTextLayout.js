@@ -1,13 +1,13 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr';
 import { Formik } from 'formik';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import EditTextForm from '../Form/EditTextForm';
-import { text }  from '../../../components/Translation/Translation';
+import { text } from '../../../components/Translation/Translation';
 import { textSchema } from '../../../validation/schemas';
 import * as textActions from '../../../actions/textActions';
 import type { TextType } from '../../../types/text';
@@ -31,12 +31,11 @@ type State = {
   error: boolean,
   text: TextType,
   saving: boolean,
-}
-
+};
 
 /**
-* Layout for adding a new text.
-*/
+ * Layout for adding a new text.
+ */
 export class NewTextLayout extends Component<Props, State> {
   static defaultProps = {
     categories: [],
@@ -51,7 +50,7 @@ export class NewTextLayout extends Component<Props, State> {
 
     this.state = {
       error: false,
-      text: {...textDefault},
+      text: { ...textDefault },
       saving: false,
     };
 
@@ -65,7 +64,10 @@ export class NewTextLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Texts'));
+      toastr.error(
+        text('PersistenceError', 'Toastr'),
+        text('PersistenceNewError', 'Texts')
+      );
       this.props.history.push(ROUTE_TEXTS);
     } else if (this.state.saving) {
       this.props.dispatch(textActions.add(this.state.text, this.dataSaved));
@@ -74,27 +76,26 @@ export class NewTextLayout extends Component<Props, State> {
   }
 
   handleSubmit(values: Object) {
-    const newText = TextFactory(
-      values,
-      Date.now(),
-      this.props.curLang
-    );
+    const newText = TextFactory(values, Date.now(), this.props.curLang);
 
     this.setState({
       text: newText,
-      saving: true
+      saving: true,
     });
   }
 
   /**
-  * Callback used by writeAppData.
-  *
-  * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-  */
+   * Callback used by writeAppData.
+   *
+   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
+   */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
       this.props.history.push(ROUTE_TEXTS);
-      toastr.success(text('PersistenceNew', 'Texts'), cropStr(this.state.text.getLabel(), TEXT_CROP_LEN));
+      toastr.success(
+        text('PersistenceNew', 'Texts'),
+        cropStr(this.state.text.getLabel(), TEXT_CROP_LEN)
+      );
     } else {
       this.setState({
         error: true,
@@ -109,19 +110,23 @@ export class NewTextLayout extends Component<Props, State> {
         <EditPanelHeader title={text('AddText', 'EditPanelHeader')} />
         <EditPanelContent>
           <Formik
-            initialValues={{...textDefault}}
+            initialValues={{ ...textDefault }}
             enableReinitialize={true}
             validationSchema={textSchema}
             onSubmit={this.handleSubmit}
-            render={(formikProps) => (
-              <EditTextForm {...formikProps} saving={this.state.saving} isNew={true} categories={this.props.categories} />
+            render={formikProps => (
+              <EditTextForm
+                {...formikProps}
+                saving={this.state.saving}
+                isNew={true}
+                categories={this.props.categories}
+              />
             )}
           />
         </EditPanelContent>
       </EditPanel>
-    )
+    );
   }
 }
-
 
 export default NewTextLayout;

@@ -12,12 +12,14 @@ import { FILE_PUPILS } from '../constants/io';
 import type { ActionCreator } from '../types/action';
 import type { PupilType } from '../types/pupil';
 
-
 /**
-* Pupil Actions
-*/
+ * Pupil Actions
+ */
 
-export function replace(updatedData: Array<PupilType>, callback: Function): ActionCreator {
+export function replace(
+  updatedData: Array<PupilType>,
+  callback: Function
+): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: REPLACE_PUPILS,
@@ -27,7 +29,10 @@ export function replace(updatedData: Array<PupilType>, callback: Function): Acti
   };
 }
 
-export function update(pupilToUpdate: PupilType, callback: Function): ActionCreator {
+export function update(
+  pupilToUpdate: PupilType,
+  callback: Function
+): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_PUPIL,

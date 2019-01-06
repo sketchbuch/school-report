@@ -12,12 +12,14 @@ import { FILE_CATEGORIES } from '../constants/io';
 import type { ActionCreator } from '../types/action';
 import type { CategoryType } from '../types/category';
 
-
 /**
-* Category Actions
-*/
+ * Category Actions
+ */
 
-export function replace(updatedData?: Array<CategoryType>, callback: Function): ActionCreator {
+export function replace(
+  updatedData?: Array<CategoryType>,
+  callback: Function
+): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: REPLACE_CATEGORIES,
@@ -27,7 +29,10 @@ export function replace(updatedData?: Array<CategoryType>, callback: Function): 
   };
 }
 
-export function update(categoryToUpdate: CategoryType, callback: Function): ActionCreator {
+export function update(
+  categoryToUpdate: CategoryType,
+  callback: Function
+): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_CATEGORY,

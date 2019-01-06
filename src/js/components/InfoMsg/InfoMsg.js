@@ -11,10 +11,9 @@ type Props = {
   subtext?: string,
 };
 
-
 /**
-* An info message with optional icon, and subcontent.
-*/
+ * An info message with optional icon, and subcontent.
+ */
 export class InfoMsg extends React.PureComponent<Props> {
   props: Props;
 
@@ -28,16 +27,19 @@ export class InfoMsg extends React.PureComponent<Props> {
   render() {
     return (
       <section className="InfoMsg">
-        { this.props.icon !== '' && <Icon type={this.props.icon} /> }
-        
+        {this.props.icon !== '' && <Icon type={this.props.icon} />}
+
         <h1 className="InfoMsg__headine">{this.props.headine}</h1>
 
-        { this.props.subtext !== '' && <p className="InfoMsg__subtext">{this.props.subtext}</p> }
-        { this.props.children && <div className="InfoMsg__sub">{this.props.children}</div> }
+        {this.props.subtext !== '' && (
+          <p className="InfoMsg__subtext">{this.props.subtext}</p>
+        )}
+        {this.props.children && (
+          <div className="InfoMsg__sub">{this.props.children}</div>
+        )}
       </section>
-    )
+    );
   }
 }
-
 
 export default InfoMsg;

@@ -1,10 +1,10 @@
 // @flow
 
 /**
-* Reducers
-*/
+ * Reducers
+ */
 import { combineReducers } from 'redux';
-import {reducer as toastrReducer} from 'react-redux-toastr';
+import { reducer as toastrReducer } from 'react-redux-toastr';
 import app from './app';
 import builder from './builder';
 import categories from './categories';
@@ -14,7 +14,6 @@ import pupils from './pupils';
 import reports from './reports';
 import settings from './settings';
 import texts from './texts';
-
 
 export default combineReducers({
   app,

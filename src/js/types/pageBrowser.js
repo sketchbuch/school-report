@@ -1,8 +1,8 @@
 // @flow
 
 /**
-* Page Browser props.
-*/
+ * Page Browser props.
+ */
 export type PageBrowserProps = {
   className?: string,
   curPage: number,
@@ -26,6 +26,6 @@ const pageBrowserPropsDefault = {
   pagesToShow: 3,
   perPage: 20,
   prev: true,
-}
+};
 
 export default pageBrowserPropsDefault;

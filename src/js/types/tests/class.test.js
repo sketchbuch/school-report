@@ -42,7 +42,9 @@ describe('Types: Class', () => {
     const newClassObj = ClassFactory(classObj, ts);
 
     test('getDescription() correctly returns the description', () => {
-      expect(newClassObj.getDescription()).toEqual('(' + newClassObj.pupilCount + ')');
+      expect(newClassObj.getDescription()).toEqual(
+        '(' + newClassObj.pupilCount + ')'
+      );
     });
 
     test('getIcon() correctly returns the icon', () => {
@@ -54,7 +56,9 @@ describe('Types: Class', () => {
     });
 
     test('getTooltip() correctly returns the tooltip', () => {
-      expect(newClassObj.getTooltip()).toEqual(newClassObj.getLabel() + ' - ' + newClassObj.getDescription());
+      expect(newClassObj.getTooltip()).toEqual(
+        newClassObj.getLabel() + ' - ' + newClassObj.getDescription()
+      );
     });
 
     describe('contains()', () => {
@@ -63,13 +67,13 @@ describe('Types: Class', () => {
         expect(result).toBe(false);
       });
 
-      test('Returns false if the class object does not contain the search term.' , () => {
+      test('Returns false if the class object does not contain the search term.', () => {
         const term = 'Pendley';
         const result = newClassObj.contains(term);
         expect(result).toBe(false);
       });
 
-      test('Returns true if the class object contains the search term.' , () => {
+      test('Returns true if the class object contains the search term.', () => {
         const term = 'Yr.';
         const result = newClassObj.contains(term);
         expect(result).toBe(true);
@@ -78,11 +82,15 @@ describe('Types: Class', () => {
 
     describe('getUrl()', () => {
       test('Returns ROUTE_EDIT_CLASS if linkType is edit', () => {
-        expect(newClassObj.getUrl('edit')).toBe(ROUTE_EDIT_CLASS.replace(':classId', newClassObj.id));
+        expect(newClassObj.getUrl('edit')).toBe(
+          ROUTE_EDIT_CLASS.replace(':classId', newClassObj.id)
+        );
       });
 
       test('Returns ROUTE_DEL_CLASS if linkType is delete', () => {
-        expect(newClassObj.getUrl('delete')).toBe(ROUTE_DEL_CLASS.replace(':classId', newClassObj.id));
+        expect(newClassObj.getUrl('delete')).toBe(
+          ROUTE_DEL_CLASS.replace(':classId', newClassObj.id)
+        );
       });
 
       test('Returns ROUTE_PUPILS for any other linkType', () => {

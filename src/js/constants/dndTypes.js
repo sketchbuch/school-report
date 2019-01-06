@@ -1,7 +1,7 @@
 /**
-* Drag and Drop types
-*/
+ * Drag and Drop types
+ */
 
 export const dndTypes = {
-    TEXT: 'text',
+  TEXT: 'text',
 };

@@ -14,15 +14,11 @@ import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCi
 import EditPupilLayout from './Edit/EditPupilLayout';
 import DeletePupilsLayout from './Delete/DeletePupilsLayout';
 import NewPupilLayout from './New/NewPupilLayout';
-import { text }  from '../../components/Translation/Translation';
+import { text } from '../../components/Translation/Translation';
 import { pupilSort } from '../../types/pupil';
 import type { ClassType } from '../../types/class';
 import type { PupilType } from '../../types/pupil';
-import {
-  ICON_ADD,
-  ICON_CLOSE,
-  ICON_DELETE,
-} from '../../constants/icons';
+import { ICON_ADD, ICON_CLOSE, ICON_DELETE } from '../../constants/icons';
 import {
   ROUTE_DEL_PUPILS,
   ROUTE_EDIT_PUPIL,
@@ -45,15 +41,14 @@ type State = {
   term: string,
 };
 
-
 /**
-* Layout for displaying pupils.
-*/
+ * Layout for displaying pupils.
+ */
 export class PupilsLayout extends Component<Props, State> {
   static defaultProps = {
-      activeClass: {},
-      pupils: [],
-   };
+    activeClass: {},
+    pupils: [],
+  };
 
   props: Props;
   state: State;
@@ -61,7 +56,7 @@ export class PupilsLayout extends Component<Props, State> {
   handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
   handlePbChange: (curPage: number) => void;
 
-  constructor(props: Props){
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -79,7 +74,13 @@ export class PupilsLayout extends Component<Props, State> {
   }
 
   componentDidUpdate() {
-    if (window.location.pathname === ROUTE_PUPILS.replace(':classId', this.props.match.params.classId)) setTitle(text('WinTitle', 'Pupils', { CLASS_NAME: this.getClassLabel() }));
+    if (
+      window.location.pathname ===
+      ROUTE_PUPILS.replace(':classId', this.props.match.params.classId)
+    )
+      setTitle(
+        text('WinTitle', 'Pupils', { CLASS_NAME: this.getClassLabel() })
+      );
   }
 
   handleClear(event: SyntheticInputEvent<HTMLInputElement>) {
@@ -96,19 +97,24 @@ export class PupilsLayout extends Component<Props, State> {
   }
 
   /**
-  * Returns the class name or id if not found.
-  *
-  * @return string
-  */
+   * Returns the class name or id if not found.
+   *
+   * @return string
+   */
   getClassLabel(): string {
-    return (this.props.activeClass.label !== undefined) ? this.props.activeClass.label : this.props.match.params.classId;
+    return this.props.activeClass.label !== undefined
+      ? this.props.activeClass.label
+      : this.props.match.params.classId;
   }
 
   render() {
-    const HAS_PUPILS = (this.props.pupils.length > 0) ? true : false;
+    const HAS_PUPILS = this.props.pupils.length > 0 ? true : false;
     const leftActions = (
       <NavButtonCircular
-        to={ROUTE_NEW_PUPIL.replace(':classId', this.props.match.params.classId)}
+        to={ROUTE_NEW_PUPIL.replace(
+          ':classId',
+          this.props.match.params.classId
+        )}
         className="SidebarFooter__action"
         buttontype="pos-rollover"
         action="add-pupil"
@@ -120,7 +126,10 @@ export class PupilsLayout extends Component<Props, State> {
     const rightActions = (
       <NavButtonCircular
         disabled={!HAS_PUPILS}
-        to={ROUTE_DEL_PUPILS.replace(':classId', this.props.match.params.classId)}
+        to={ROUTE_DEL_PUPILS.replace(
+          ':classId',
+          this.props.match.params.classId
+        )}
         className="SidebarFooter__action"
         buttontype="neg-rollover"
         action="delete-pupils"
@@ -134,18 +143,18 @@ export class PupilsLayout extends Component<Props, State> {
     if (HAS_PUPILS) {
       searchBox = (
         <React.Fragment>
-          <TextInput 
-              className="SidebarHeader__search"
-              onChange={this.handleSearch} 
-              placeholder={text('SearchPlaceholder', 'SidebarHeader')}
-              value={this.state.term}
+          <TextInput
+            className="SidebarHeader__search"
+            onChange={this.handleSearch}
+            placeholder={text('SearchPlaceholder', 'SidebarHeader')}
+            value={this.state.term}
           />
-          <span 
-            className="SidebarHeader__searchclear" 
-            onClick={this.handleClear} 
+          <span
+            className="SidebarHeader__searchclear"
+            onClick={this.handleClear}
             title={text('Clear', 'ItemSelection')}
           >
-            <Icon type={ ICON_CLOSE } />
+            <Icon type={ICON_CLOSE} />
           </span>
         </React.Fragment>
       );
@@ -154,9 +163,11 @@ export class PupilsLayout extends Component<Props, State> {
     return (
       <div className="Panel">
         <Sidebar>
-          <SidebarHeader 
+          <SidebarHeader
             title={text('Header-pupil', 'SidebarHeader')}
-            subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.pupils.length })}
+            subtitle={text('Subheader-count', 'SidebarHeader', {
+              COUNT: this.props.pupils.length,
+            })}
           >
             {searchBox}
           </SidebarHeader>
@@ -170,16 +181,62 @@ export class PupilsLayout extends Component<Props, State> {
             term={this.state.term}
             usePb
           />
-          <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
+          <SidebarFooter
+            leftActions={leftActions}
+            rightActions={rightActions}
+          />
         </Sidebar>
         <Switch>
-          <Route path={ROUTE_EDIT_PUPIL} render={routerProps => <EditPupilLayout {...routerProps} dispatch={this.props.dispatch} pupils={this.props.pupils} activeClass={this.props.activeClass} />} />
-          <Route path={ROUTE_DEL_PUPILS} render={routerProps => <DeletePupilsLayout {...routerProps} dispatch={this.props.dispatch} pupils={this.props.pupils} activeClass={this.props.activeClass} />} />
-          <Route path={ROUTE_NEW_PUPIL} render={routerProps => <NewPupilLayout {...routerProps} dispatch={this.props.dispatch} pupils={this.props.pupils} activeClass={this.props.activeClass} />} />
-          <Route path={ROUTE_PUPILS} render={routerProps => <InfoMsg {...routerProps} headine={text('Pupils', 'InfoMsg', { CLASS_NAME: this.getClassLabel() })} subtext={text('PupilsMsg', 'InfoMsg', { CLASS_NAME: this.getClassLabel() })} />} />
+          <Route
+            path={ROUTE_EDIT_PUPIL}
+            render={routerProps => (
+              <EditPupilLayout
+                {...routerProps}
+                dispatch={this.props.dispatch}
+                pupils={this.props.pupils}
+                activeClass={this.props.activeClass}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_DEL_PUPILS}
+            render={routerProps => (
+              <DeletePupilsLayout
+                {...routerProps}
+                dispatch={this.props.dispatch}
+                pupils={this.props.pupils}
+                activeClass={this.props.activeClass}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_NEW_PUPIL}
+            render={routerProps => (
+              <NewPupilLayout
+                {...routerProps}
+                dispatch={this.props.dispatch}
+                pupils={this.props.pupils}
+                activeClass={this.props.activeClass}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_PUPILS}
+            render={routerProps => (
+              <InfoMsg
+                {...routerProps}
+                headine={text('Pupils', 'InfoMsg', {
+                  CLASS_NAME: this.getClassLabel(),
+                })}
+                subtext={text('PupilsMsg', 'InfoMsg', {
+                  CLASS_NAME: this.getClassLabel(),
+                })}
+              />
+            )}
+          />
         </Switch>
       </div>
-    )
+    );
   }
 }
 
@@ -189,6 +246,5 @@ const mapStateToProps = (state: Object, props: Props) => {
     pupils: getClassPupils(state.pupils, props.match.params.classId),
   };
 };
-
 
 export default connect(mapStateToProps)(PupilsLayout);

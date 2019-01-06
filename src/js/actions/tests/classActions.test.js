@@ -15,15 +15,14 @@ import classDefault from '../../types/class';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-
 /**
-* Class Actions Tests
-*/
+ * Class Actions Tests
+ */
 
 describe('Actions: classActions:', () => {
-  let testClass = {...classDefault, id: 'c1', label: 'Class'};
-  let callback = ()=>{};
-  let store = ()=>{};
+  let testClass = { ...classDefault, id: 'c1', label: 'Class' };
+  let callback = () => {};
+  let store = () => {};
 
   beforeEach(() => {
     callback = jest.fn();
@@ -31,9 +30,7 @@ describe('Actions: classActions:', () => {
   });
 
   test('replace() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: REPLACE_CLASSES, payload: [testClass] },
-    ];
+    const EXPECTED_ACTIONS = [{ type: REPLACE_CLASSES, payload: [testClass] }];
 
     expect.assertions(1);
     store.dispatch(classActions.replace([testClass], callback));
@@ -42,9 +39,7 @@ describe('Actions: classActions:', () => {
   });
 
   test('update() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: UPDATE_CLASS, payload: testClass },
-    ];
+    const EXPECTED_ACTIONS = [{ type: UPDATE_CLASS, payload: testClass }];
 
     expect.assertions(1);
     store.dispatch(classActions.update(testClass, callback));
@@ -53,9 +48,7 @@ describe('Actions: classActions:', () => {
   });
 
   test('add() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: ADD_CLASS, payload: testClass },
-    ];
+    const EXPECTED_ACTIONS = [{ type: ADD_CLASS, payload: testClass }];
 
     expect.assertions(1);
     store.dispatch(classActions.add(testClass, callback));
@@ -64,9 +57,7 @@ describe('Actions: classActions:', () => {
   });
 
   test('deleteOne dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: DELETE_CLASS, payload: { id: 'c1' } },
-    ];
+    const EXPECTED_ACTIONS = [{ type: DELETE_CLASS, payload: { id: 'c1' } }];
 
     expect.assertions(1);
     store.dispatch(classActions.deleteOne('c1', callback));
@@ -75,9 +66,7 @@ describe('Actions: classActions:', () => {
   });
 
   test('deleteAll dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: DELETE_ALL_CLASSES },
-    ];
+    const EXPECTED_ACTIONS = [{ type: DELETE_ALL_CLASSES }];
 
     expect.assertions(1);
     store.dispatch(classActions.deleteAll(callback));

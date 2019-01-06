@@ -17,10 +17,9 @@ type Props = {
   type: ButtonType,
 };
 
-
 /**
-* A button in a sidebar item.
-*/
+ * A button in a sidebar item.
+ */
 class SidebarItemButton extends Component<Props> {
   props: Props;
   handleClick: Function;
@@ -47,7 +46,7 @@ class SidebarItemButton extends Component<Props> {
       >
         <Icon type={this.props.icon} />
       </ButtonCircular>
-    )
+    );
   }
 }
 

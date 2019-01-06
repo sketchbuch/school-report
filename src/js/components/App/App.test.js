@@ -17,15 +17,25 @@ describe('<App />', () => {
   };
   const propsLoaded = Object.assign({}, props);
   propsLoaded.app.loaded = true;
-  const propsLoadedWithClasses = Object.assign({}, propsLoaded, { classes: [{}] });
+  const propsLoadedWithClasses = Object.assign({}, propsLoaded, {
+    classes: [{}],
+  });
 
   test('Renders without crashing', () => {
-    const wrapper = shallow(<Provider store={store}><App {...props} /></Provider>);
+    const wrapper = shallow(
+      <Provider store={store}>
+        <App {...props} />
+      </Provider>
+    );
     expect(wrapper).toHaveLength(1);
   });
 
   test('Shows content if "loaded" is true & "error" is false and dataFolderCreated is false', () => {
-    const wrapperWithClasses = mount(<Provider store={store}><App {...propsLoadedWithClasses} /></Provider>);
+    const wrapperWithClasses = mount(
+      <Provider store={store}>
+        <App {...propsLoadedWithClasses} />
+      </Provider>
+    );
     expect(wrapperWithClasses.find('.Panels')).toHaveLength(1);
   });
 });

@@ -1,9 +1,8 @@
 // @flow
 
-
 /**
-* Settings type def.
-*/
+ * Settings type def.
+ */
 
 export type SettingsType = {
   language: string,

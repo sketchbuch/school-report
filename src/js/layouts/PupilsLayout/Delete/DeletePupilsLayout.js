@@ -1,13 +1,13 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr'
+import { toastr } from 'react-redux-toastr';
 import { Link } from 'react-router-dom';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import Button from '../../../components/ui/Button/Button';
-import Translation, { text }  from '../../../components/Translation/Translation';
+import Translation, { text } from '../../../components/Translation/Translation';
 import * as pupilActions from '../../../actions/pupilActions';
 import type { ClassType } from '../../../types/class';
 import type { PupilType } from '../../../types/pupil';
@@ -28,10 +28,9 @@ type State = {
   error: boolean,
 };
 
-
 /**
-* Layout for deleting all pupils from a class.
-*/
+ * Layout for deleting all pupils from a class.
+ */
 export class DeletePupilsLayout extends Component<Props, State> {
   static defaultProps = {
     activeClass: {},
@@ -55,15 +54,28 @@ export class DeletePupilsLayout extends Component<Props, State> {
   }
 
   componentDidMount() {
-    setTitle(text('WinTitle', 'DeletePupilsLayout', {'CLASS_NAME': this.getClassLabel()}));
+    setTitle(
+      text('WinTitle', 'DeletePupilsLayout', {
+        CLASS_NAME: this.getClassLabel(),
+      })
+    );
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceDeleteByClassError', 'Pupils', {'CLASS_NAME': this.getClassLabel()}));
-      this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));
+      toastr.error(
+        text('PersistenceError', 'Toastr'),
+        text('PersistenceDeleteByClassError', 'Pupils', {
+          CLASS_NAME: this.getClassLabel(),
+        })
+      );
+      this.props.history.push(
+        ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)
+      );
     } else if (this.state.deleting) {
-      this.props.dispatch(pupilActions.deletePupils(this.props.activeClass.id, this.dataSaved));
+      this.props.dispatch(
+        pupilActions.deletePupils(this.props.activeClass.id, this.dataSaved)
+      );
       this.setState({ deleting: false });
     }
   }
@@ -77,14 +89,20 @@ export class DeletePupilsLayout extends Component<Props, State> {
   }
 
   /**
-  * Callback used by writeAppData.
-  *
-  * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-  */
+   * Callback used by writeAppData.
+   *
+   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
+   */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
-      toastr.success(text('PersistenceDeletedByClass', 'Pupils', {'CLASS_NAME': this.getClassLabel()}));
-      this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));
+      toastr.success(
+        text('PersistenceDeletedByClass', 'Pupils', {
+          CLASS_NAME: this.getClassLabel(),
+        })
+      );
+      this.props.history.push(
+        ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)
+      );
     } else {
       this.setState({
         deleting: false,
@@ -94,10 +112,10 @@ export class DeletePupilsLayout extends Component<Props, State> {
   }
 
   /**
-  * Returns the class name or id if not found.
-  *
-  * @return string
-  */
+   * Returns the class name or id if not found.
+   *
+   * @return string
+   */
   getClassLabel() {
     if (this.props.activeClass.label) return this.props.activeClass.label;
     return this.props.match.params.classId;
@@ -112,29 +130,45 @@ export class DeletePupilsLayout extends Component<Props, State> {
             {this.state.deleting ? (
               <Translation name="HeadlineDeleting" ns="DeletePupilsLayout" />
             ) : (
-              <Translation name="Headline" ns="DeletePupilsLayout" placeholders={{
-                CLASS_NAME: this.getClassLabel(),
-              }} />
+              <Translation
+                name="Headline"
+                ns="DeletePupilsLayout"
+                placeholders={{
+                  CLASS_NAME: this.getClassLabel(),
+                }}
+              />
             )}
           </h2>
           <form className="form">
             <div className="fieldwrap">
-              <Button type="button" onClick={this.handleClick} buttontype="warning" disabled={this.state.deleting} busy={this.state.deleting}>
+              <Button
+                type="button"
+                onClick={this.handleClick}
+                buttontype="warning"
+                disabled={this.state.deleting}
+                busy={this.state.deleting}
+              >
                 <Translation name="BtnLabel" ns="DeletePupilsLayout" />
               </Button>
             </div>
 
-            {!this.state.deleting &&
+            {!this.state.deleting && (
               <p className="form__submsg">
-                <Link to={ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)}><Translation name="Back" ns="DeletePupilsLayout" /></Link>
+                <Link
+                  to={ROUTE_PUPILS.replace(
+                    ':classId',
+                    this.props.activeClass.id
+                  )}
+                >
+                  <Translation name="Back" ns="DeletePupilsLayout" />
+                </Link>
               </p>
-            }
+            )}
           </form>
         </EditPanelContent>
       </EditPanel>
-    )
+    );
   }
 }
-
 
 export default DeletePupilsLayout;

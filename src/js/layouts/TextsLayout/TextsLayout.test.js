@@ -7,6 +7,10 @@ import store from '../../store/redux';
 import TextsLayout from './TextsLayout';
 
 test('<TextsLayout />: Renders without crashing', () => {
-  const wrapper = shallow(<Provider store={store}><TextsLayout /></Provider>);
+  const wrapper = shallow(
+    <Provider store={store}>
+      <TextsLayout />
+    </Provider>
+  );
   expect(wrapper).toHaveLength(1);
 });

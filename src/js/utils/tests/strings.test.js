@@ -2,10 +2,9 @@
 
 import { cropStr, ucFirst } from '../strings';
 
-
 /**
-* String Tests
-*/
+ * String Tests
+ */
 
 describe('Util: strings', () => {
   test('ucFirst() should capitalise the first letter of a string', () => {

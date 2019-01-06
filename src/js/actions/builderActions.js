@@ -1,24 +1,21 @@
 // @flow
 
-import {
-  SAVE_BUILDER,
-} from '../constants/actionTypes';
+import { SAVE_BUILDER } from '../constants/actionTypes';
 import persist from '../fs/persist';
 import { FILE_BUILDER } from '../constants/io';
 import type { ActionCreator } from '../types/action';
 
-
 /**
-* Builder Actions
-*/
+ * Builder Actions
+ */
 
 export function save(
-  reportId: string, 
-  classId: string, 
-  pupilId: string, 
-  selected: Array<string>, 
+  reportId: string,
+  classId: string,
+  pupilId: string,
+  selected: Array<string>,
   callback: Function,
-  immediate: boolean,
+  immediate: boolean
 ): ActionCreator {
   return (dispatch, getState) => {
     dispatch({

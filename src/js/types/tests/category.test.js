@@ -1,6 +1,9 @@
 // @flow
 
-import categoryDefault, { CategoryFactory, getCategoryIdStr } from '../category';
+import categoryDefault, {
+  CategoryFactory,
+  getCategoryIdStr,
+} from '../category';
 import { ICON_CATEGORIES } from '../../constants/icons';
 import { generateId } from '../../utils/ids';
 import {
@@ -63,13 +66,13 @@ describe('Types: Class', () => {
         expect(result).toBe(false);
       });
 
-      test('Returns false if the category object does not contain the search term.' , () => {
+      test('Returns false if the category object does not contain the search term.', () => {
         const term = 'Chalfont';
         const result = newCategoryObj.contains(term);
         expect(result).toBe(false);
       });
 
-      test('Returns true if the category object contains the search term.' , () => {
+      test('Returns true if the category object contains the search term.', () => {
         const term = 'gory';
         const result = newCategoryObj.contains(term);
         expect(result).toBe(true);
@@ -78,11 +81,16 @@ describe('Types: Class', () => {
 
     describe('getUrl()', () => {
       test('Returns ROUTE_DEL_CATEGORY if linkType is delete', () => {
-        expect(newCategoryObj.getUrl('delete')).toBe(ROUTE_DEL_CATEGORY.replace(':categoryId', newCategoryObj.id));
+        expect(newCategoryObj.getUrl('delete')).toBe(
+          ROUTE_DEL_CATEGORY.replace(':categoryId', newCategoryObj.id)
+        );
       });
 
       test('Returns ROUTE_EDIT_CATEGORY for any other linkType', () => {
-        const expects = ROUTE_EDIT_CATEGORY.replace(':categoryId', newCategoryObj.id);
+        const expects = ROUTE_EDIT_CATEGORY.replace(
+          ':categoryId',
+          newCategoryObj.id
+        );
         expect(newCategoryObj.getUrl()).toBe(expects);
         expect(newCategoryObj.getUrl('something')).toBe(expects);
       });

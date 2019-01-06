@@ -10,19 +10,19 @@ type Props = {
   text?: string,
 };
 
-
 /**
-* Header breadcrumb component.
-*/
+ * Header breadcrumb component.
+ */
 export class HeaderBreadcrumb extends React.Component<Props> {
   props: Props;
 
   render() {
     return (
-      <Link className="HeaderBreadcrumb" to={this.props.link}>{this.props.children || this.props.text}</Link>
-    )
+      <Link className="HeaderBreadcrumb" to={this.props.link}>
+        {this.props.children || this.props.text}
+      </Link>
+    );
   }
 }
-
 
 export default HeaderBreadcrumb;

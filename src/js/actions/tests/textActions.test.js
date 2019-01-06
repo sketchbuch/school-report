@@ -15,15 +15,14 @@ import textDefault from '../../types/text';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-
 /**
-* Report Text Actions Tests
-*/
+ * Report Text Actions Tests
+ */
 
 describe('Actions: textActions:', () => {
-  let testClass = {...textDefault, id: 't1', bodytext: 'A test text'};
-  let callback = ()=>{};
-  let store = ()=>{};
+  let testClass = { ...textDefault, id: 't1', bodytext: 'A test text' };
+  let callback = () => {};
+  let store = () => {};
 
   beforeEach(() => {
     callback = jest.fn();
@@ -31,9 +30,7 @@ describe('Actions: textActions:', () => {
   });
 
   test('replace() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: REPLACE_TEXTS, payload: [testClass] },
-    ];
+    const EXPECTED_ACTIONS = [{ type: REPLACE_TEXTS, payload: [testClass] }];
 
     expect.assertions(1);
     store.dispatch(textActions.replace([testClass], callback));
@@ -42,9 +39,7 @@ describe('Actions: textActions:', () => {
   });
 
   test('update() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: UPDATE_TEXT, payload: testClass },
-    ];
+    const EXPECTED_ACTIONS = [{ type: UPDATE_TEXT, payload: testClass }];
 
     expect.assertions(1);
     store.dispatch(textActions.update(testClass, callback));
@@ -53,9 +48,7 @@ describe('Actions: textActions:', () => {
   });
 
   test('add() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: ADD_TEXT, payload: testClass },
-    ];
+    const EXPECTED_ACTIONS = [{ type: ADD_TEXT, payload: testClass }];
 
     expect.assertions(1);
     store.dispatch(textActions.add(testClass, callback));
@@ -64,9 +57,7 @@ describe('Actions: textActions:', () => {
   });
 
   test('deleteOne dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: DELETE_TEXT, payload: { id: 'c1' } },
-    ];
+    const EXPECTED_ACTIONS = [{ type: DELETE_TEXT, payload: { id: 'c1' } }];
 
     expect.assertions(1);
     store.dispatch(textActions.deleteOne('c1', callback));
@@ -75,9 +66,7 @@ describe('Actions: textActions:', () => {
   });
 
   test('deleteAll dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: DELETE_ALL_TEXTS },
-    ];
+    const EXPECTED_ACTIONS = [{ type: DELETE_ALL_TEXTS }];
 
     expect.assertions(1);
     store.dispatch(textActions.deleteAll(callback));
@@ -85,4 +74,3 @@ describe('Actions: textActions:', () => {
     store.clearActions();
   });
 });
-

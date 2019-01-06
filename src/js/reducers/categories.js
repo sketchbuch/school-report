@@ -14,24 +14,26 @@ import type { ActionObj } from '../types/action';
 import type { CategoryType } from '../types/category';
 import { hydrateCategory } from '../types/category';
 
-
 /**
-* Categories Reducer.
-*/
+ * Categories Reducer.
+ */
 
-export default function reducer(state: Array<CategoryType> = [], action: ActionObj) {
+export default function reducer(
+  state: Array<CategoryType> = [],
+  action: ActionObj
+) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_CATEGORIES:
     case REPLACE_DATA:
       if (action.payload && action.payload.categories !== undefined) {
-          if (Array.isArray(action.payload.categories)) {
-            const newState = [];
-            action.payload.categories.forEach(item => {
-              newState.push(hydrateCategory(item));
-            });
-            return newState;
-          }
+        if (Array.isArray(action.payload.categories)) {
+          const newState = [];
+          action.payload.categories.forEach(item => {
+            newState.push(hydrateCategory(item));
+          });
+          return newState;
+        }
       }
 
       break;

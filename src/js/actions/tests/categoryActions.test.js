@@ -12,18 +12,17 @@ import {
 } from '../../constants/actionTypes';
 import catgeoryDefault from '../../types/category';
 
-const middlewares = [thunk]
+const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-
 /**
-* Category Actions Tests
-*/
+ * Category Actions Tests
+ */
 
 describe('Actions: categoryActions:', () => {
-  let testCategory = {...catgeoryDefault, id: 'c1', label: 'Category'};
-  let callback = ()=>{};
-  let store = ()=>{};
+  let testCategory = { ...catgeoryDefault, id: 'c1', label: 'Category' };
+  let callback = () => {};
+  let store = () => {};
 
   beforeEach(() => {
     callback = jest.fn();
@@ -42,9 +41,7 @@ describe('Actions: categoryActions:', () => {
   });
 
   test('update() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: UPDATE_CATEGORY, payload: testCategory },
-    ];
+    const EXPECTED_ACTIONS = [{ type: UPDATE_CATEGORY, payload: testCategory }];
 
     expect.assertions(1);
     store.dispatch(categoryActions.update(testCategory, callback));
@@ -53,9 +50,7 @@ describe('Actions: categoryActions:', () => {
   });
 
   test('add() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: ADD_CATEGORY, payload: testCategory },
-    ];
+    const EXPECTED_ACTIONS = [{ type: ADD_CATEGORY, payload: testCategory }];
 
     expect.assertions(1);
     store.dispatch(categoryActions.add(testCategory, callback));
@@ -64,9 +59,7 @@ describe('Actions: categoryActions:', () => {
   });
 
   test('deleteOne dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: DELETE_CATEGORY, payload: { id: 'c1' } },
-    ];
+    const EXPECTED_ACTIONS = [{ type: DELETE_CATEGORY, payload: { id: 'c1' } }];
 
     expect.assertions(1);
     store.dispatch(categoryActions.deleteOne('c1', callback));
@@ -75,9 +68,7 @@ describe('Actions: categoryActions:', () => {
   });
 
   test('deleteAll dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: DELETE_ALL_CATEGORIES },
-    ];
+    const EXPECTED_ACTIONS = [{ type: DELETE_ALL_CATEGORIES }];
 
     expect.assertions(1);
     store.dispatch(categoryActions.deleteAll(callback));

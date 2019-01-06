@@ -12,7 +12,7 @@ import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
 import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCircular';
-import { text }  from '../../components/Translation/Translation';
+import { text } from '../../components/Translation/Translation';
 import { sortObjectsAz } from '../../utils/sort';
 import { classSort } from '../../types/class';
 import { pupilSort } from '../../types/pupil';
@@ -44,10 +44,9 @@ type Props = {
   texts: Array<TextType>,
 };
 
-
 /**
-* Layout for building reports.
-*/
+ * Layout for building reports.
+ */
 export class BuilderLayout extends Component<Props> {
   static defaultProps = {
     activeReport: {},
@@ -65,27 +64,32 @@ export class BuilderLayout extends Component<Props> {
   }
 
   componentDidUpdate() {
-    if (window.location.pathname === ROUTE_BUILDER) setTitle(text('WinTitle', 'Builder'));
+    if (window.location.pathname === ROUTE_BUILDER)
+      setTitle(text('WinTitle', 'Builder'));
   }
 
   /**
-  * Returns the correct prop to be used as the items in the sidebar list.
-  *
-  * @return array The items to be rendered.
-  */
+   * Returns the correct prop to be used as the items in the sidebar list.
+   *
+   * @return array The items to be rendered.
+   */
   getItems() {
     let items: Array<SidebarBuilderItemType> = [];
 
     if (this.props.activeReport.id !== undefined) {
-      const reportClasses = this.props.classes.filter(c => this.props.activeReport.classes.includes(c.id));
+      const reportClasses = this.props.classes.filter(c =>
+        this.props.activeReport.classes.includes(c.id)
+      );
       const sortedClasses = sortObjectsAz(reportClasses, classSort);
 
-      sortedClasses.forEach((item) => {
-        const newClassPupils = this.props.pupils.filter(p => p.classId === item.id);
+      sortedClasses.forEach(item => {
+        const newClassPupils = this.props.pupils.filter(
+          p => p.classId === item.id
+        );
         const sortedClassPupils = sortObjectsAz(newClassPupils, pupilSort);
 
         items.push({
-          classRec: {...item},
+          classRec: { ...item },
           id: item.id,
           pupils: sortedClassPupils,
           reportId: this.props.activeReport.id,
@@ -100,12 +104,15 @@ export class BuilderLayout extends Component<Props> {
     const { activeReport, builder } = this.props;
     const reportData = builder[activeReport.id];
     let canExport = false;
-    
+
     if (reportData !== undefined) {
-      items.forEach((item)=>{
+      items.forEach(item => {
         if (reportData[item.id] !== undefined) {
-          item.pupils.forEach((pupil)=>{
-            if (reportData[item.id][pupil.id] !== undefined && reportData[item.id][pupil.id].length > 0) {
+          item.pupils.forEach(pupil => {
+            if (
+              reportData[item.id][pupil.id] !== undefined &&
+              reportData[item.id][pupil.id].length > 0
+            ) {
               canExport = true;
             }
           });
@@ -120,7 +127,10 @@ export class BuilderLayout extends Component<Props> {
     const { activeReport, builder } = this.props;
     const items = this.getItems();
     const classCount = items.length;
-    const pupilCount = items.reduce((curCount, curClass) => curCount + curClass.classRec.pupilCount, 0);
+    const pupilCount = items.reduce(
+      (curCount, curClass) => curCount + curClass.classRec.pupilCount,
+      0
+    );
     const CAN_EXPORT = this.canExport(items);
     const leftActions = (
       <NavButtonCircular
@@ -129,23 +139,34 @@ export class BuilderLayout extends Component<Props> {
         className="SidebarFooter__action"
         disabled={!CAN_EXPORT}
         title={text('ReportExport', 'Actions')}
-        to={ROUTE_EXPORT_BUILDER.replace(':reportId', activeReport.id,)}
+        to={ROUTE_EXPORT_BUILDER.replace(':reportId', activeReport.id)}
       >
         <Icon type={ICON_EXPORT} />
       </NavButtonCircular>
     );
 
-    const pupilBuilderSelectedCount = (pupilId: string, classId: string): string => {
-      const selectedTexts = getSelectedTexts(builder, activeReport.id, classId, pupilId);
+    const pupilBuilderSelectedCount = (
+      pupilId: string,
+      classId: string
+    ): string => {
+      const selectedTexts = getSelectedTexts(
+        builder,
+        activeReport.id,
+        classId,
+        pupilId
+      );
       return selectedTexts.length > 0 ? `(${selectedTexts.length})` : '';
-    }
+    };
 
     return (
       <div className="Panel">
         <Sidebar>
-          <SidebarHeader 
+          <SidebarHeader
             title={text('Header-build', 'SidebarHeader')}
-            subtitle={text('Subheader-countmulti', 'SidebarHeader', { COUNT1: classCount, COUNT2: pupilCount })}
+            subtitle={text('Subheader-countmulti', 'SidebarHeader', {
+              COUNT1: classCount,
+              COUNT2: pupilCount,
+            })}
           />
           <SidebarList
             builder={true}
@@ -159,12 +180,42 @@ export class BuilderLayout extends Component<Props> {
           <SidebarFooter leftActions={leftActions} />
         </Sidebar>
         <Switch>
-          <Route path={ROUTE_EXPORT_BUILDER} render={routerProps => <ExportBuilderLayout {...routerProps} activeReport={this.props.activeReport} items={items} />} />
-          <Route path={ROUTE_EDIT_BUILDER} render={routerProps => <EditBuilderLayout {...routerProps} activeReport={this.props.activeReport} builder={this.props.builder} items={items} textCount={this.props.textCount} texts={this.props.texts} />} />
-          <Route path={ROUTE_BUILDER} render={routerProps => <InfoMsg {...routerProps} headine={text('Builder', 'InfoMsg')} subtext={text('BuilderMsg', 'InfoMsg')} />} />
+          <Route
+            path={ROUTE_EXPORT_BUILDER}
+            render={routerProps => (
+              <ExportBuilderLayout
+                {...routerProps}
+                activeReport={this.props.activeReport}
+                items={items}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_EDIT_BUILDER}
+            render={routerProps => (
+              <EditBuilderLayout
+                {...routerProps}
+                activeReport={this.props.activeReport}
+                builder={this.props.builder}
+                items={items}
+                textCount={this.props.textCount}
+                texts={this.props.texts}
+              />
+            )}
+          />
+          <Route
+            path={ROUTE_BUILDER}
+            render={routerProps => (
+              <InfoMsg
+                {...routerProps}
+                headine={text('Builder', 'InfoMsg')}
+                subtext={text('BuilderMsg', 'InfoMsg')}
+              />
+            )}
+          />
         </Switch>
       </div>
-    )
+    );
   }
 }
 
@@ -176,8 +227,7 @@ const mapStateToProps = (state: Object, props: Props) => {
     pupils: state.pupils,
     textCount: state.texts.length,
     texts: state.texts,
-  }
+  };
 };
-
 
 export default connect(mapStateToProps)(BuilderLayout);

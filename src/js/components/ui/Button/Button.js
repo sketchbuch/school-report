@@ -19,8 +19,8 @@ type Props = {
 };
 
 /**
-* A button.
-*/
+ * A button.
+ */
 class Button extends React.Component<Props> {
   static defaultProps = {
     busy: false,
@@ -59,11 +59,15 @@ class Button extends React.Component<Props> {
         title={title}
         type={type}
       >
-        {children}{busy && <span className="Button__busy"><Icon type={ ICON_BUSY } /></span>}
+        {children}
+        {busy && (
+          <span className="Button__busy">
+            <Icon type={ICON_BUSY} />
+          </span>
+        )}
       </button>
-    )
+    );
   }
 }
-
 
 export default Button;

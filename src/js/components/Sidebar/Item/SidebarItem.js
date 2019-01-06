@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { text }  from '../../Translation/Translation';
+import { text } from '../../Translation/Translation';
 import SidebarInner from '../Inner/SidebarInner';
 import SidebarItemButton from '../Button/SidebarItemButton';
 import type { SidebarListTypes } from '../../../types/sidebarList';
@@ -35,17 +35,16 @@ type State = {
   confirmed: boolean,
 };
 
-
 /**
-* An item in a sidebar list.
-*/
+ * An item in a sidebar list.
+ */
 class SidebarItem extends Component<Props, State> {
   static defaultProps = {
     isNew: false,
     itemDuration: 0,
     itemType: 'class',
-    onDelete: ()=>{},
-    updateExistingItems: ()=>{},
+    onDelete: () => {},
+    updateExistingItems: () => {},
   };
 
   props: Props;
@@ -69,14 +68,21 @@ class SidebarItem extends Component<Props, State> {
   }
 
   componentDidMount() {
-    if (this.props.isNew) this.newTimer = setTimeout(() => this.props.updateExistingItems(this.props.item.id), this.props.itemDuration);
+    if (this.props.isNew)
+      this.newTimer = setTimeout(
+        () => this.props.updateExistingItems(this.props.item.id),
+        this.props.itemDuration
+      );
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.confirmed) {
       this.props.onDelete(this.props.item.id);
     } else if (this.state.deleting) {
-      this.deletingTimer = setTimeout(() => this.setState({ confirmed: true }), this.props.itemDuration);
+      this.deletingTimer = setTimeout(
+        () => this.setState({ confirmed: true }),
+        this.props.itemDuration
+      );
     }
   }
 
@@ -92,21 +98,24 @@ class SidebarItem extends Component<Props, State> {
     switch (event.target.dataset.action) {
       case 'item-delete':
         this.setState({ delete: true });
-        this.deleteTimer = setTimeout(() => this.setState({ delete: false }), this.timeoutDuration);
-      break;
+        this.deleteTimer = setTimeout(
+          () => this.setState({ delete: false }),
+          this.timeoutDuration
+        );
+        break;
 
       case 'item-delete-no':
         clearTimeout(this.deleteTimer);
         this.setState({ delete: false });
-      break;
+        break;
 
       case 'item-delete-yes':
         clearTimeout(this.deleteTimer);
         this.setState({ deleting: true });
-      break;
+        break;
 
       default:
-      break;
+        break;
     }
   }
 
@@ -117,14 +126,30 @@ class SidebarItem extends Component<Props, State> {
     if (this.state.deleting) classes += ' SidebarItem--deleting';
 
     const editUrl = this.props.item.getUrl('edit');
-    const canDelete = window.location.pathname !== editUrl
+    const canDelete = window.location.pathname !== editUrl;
 
     return (
       <li className={classes} title={this.props.item.getTooltip()}>
         {this.state.delete ? (
-          <SidebarInner description={this.props.item.getLabel()} label={text('Delete', 'SidebarItem')} icon={ ICON_DELETE }>
-            <SidebarItemButton handleClick={this.handleClick} title={text('No', 'Actions')} action="item-delete-no" type="neg" icon={ ICON_ERROR } />
-            <SidebarItemButton handleClick={this.handleClick} title={text('Yes', 'Actions')} action="item-delete-yes" type="pos" icon={ ICON_SUCCESS } />
+          <SidebarInner
+            description={this.props.item.getLabel()}
+            label={text('Delete', 'SidebarItem')}
+            icon={ICON_DELETE}
+          >
+            <SidebarItemButton
+              handleClick={this.handleClick}
+              title={text('No', 'Actions')}
+              action="item-delete-no"
+              type="neg"
+              icon={ICON_ERROR}
+            />
+            <SidebarItemButton
+              handleClick={this.handleClick}
+              title={text('Yes', 'Actions')}
+              action="item-delete-yes"
+              type="pos"
+              icon={ICON_SUCCESS}
+            />
           </SidebarInner>
         ) : (
           <SidebarInner
@@ -134,12 +159,26 @@ class SidebarItem extends Component<Props, State> {
             link={this.props.item.getUrl('link')}
             linkEdit={editUrl}
           >
-            {canDelete && <SidebarItemButton handleClick={this.handleClick} title={text('SidebarItemDelete', 'Actions')} action="item-delete" type="neg-rollover" icon={ ICON_DELETE } />}
-            <SidebarItemButton title={text('SidebarItemEdit', 'Actions')} action="item-edit" type="default" icon={ ICON_EDIT } link={editUrl} />
+            {canDelete && (
+              <SidebarItemButton
+                handleClick={this.handleClick}
+                title={text('SidebarItemDelete', 'Actions')}
+                action="item-delete"
+                type="neg-rollover"
+                icon={ICON_DELETE}
+              />
+            )}
+            <SidebarItemButton
+              title={text('SidebarItemEdit', 'Actions')}
+              action="item-edit"
+              type="default"
+              icon={ICON_EDIT}
+              link={editUrl}
+            />
           </SidebarInner>
         )}
       </li>
-    )
+    );
   }
 }
 

@@ -15,10 +15,9 @@ type Props = {
   value?: string,
 };
 
-
 /**
-* Textarea tag.
-*/
+ * Textarea tag.
+ */
 class Textarea extends React.Component<Props> {
   static defaultProps = {
     className: '',
@@ -36,23 +35,23 @@ class Textarea extends React.Component<Props> {
 
   render() {
     let classes = 'Textarea';
-    if (this.props.className && this.props.className !== '') classes += ' ' + this.props.className;
+    if (this.props.className && this.props.className !== '')
+      classes += ' ' + this.props.className;
     if (this.props.isValid === false) classes += ' has--error';
 
     return (
-        <textarea
-          className={classes}
-          disabled={this.props.disabled}
-          onBlur={this.props.disabled ? null : this.props.onBlur}
-          onChange={this.props.disabled ? null : this.props.onChange}
-          name={this.props.name}
-          placeholder={this.props.placeholder}
-          title={this.props.title}
-          value={this.props.value}
-        />
-    )
+      <textarea
+        className={classes}
+        disabled={this.props.disabled}
+        onBlur={this.props.disabled ? null : this.props.onBlur}
+        onChange={this.props.disabled ? null : this.props.onChange}
+        name={this.props.name}
+        placeholder={this.props.placeholder}
+        title={this.props.title}
+        value={this.props.value}
+      />
+    );
   }
 }
-
 
 export default Textarea;

@@ -9,35 +9,34 @@ type Props = {
   title: string,
 };
 
-
 /**
-* Sidebar header.
-*/
+ * Sidebar header.
+ */
 class SidebarHeader extends React.PureComponent<Props> {
   static defaultProps = {
-      children: null,
-      subtitle: '',
-      title: '',
-   };
+    children: null,
+    subtitle: '',
+    title: '',
+  };
 
   props: Props;
-  
+
   render() {
     return (
       <header className="SidebarHeader">
         <h1 className="SidebarHeader__headline">
           {this.props.title}
-          {this.props.subtitle && <span className="SidebarHeader__subheadline">{this.props.subtitle}</span>}
+          {this.props.subtitle && (
+            <span className="SidebarHeader__subheadline">
+              {this.props.subtitle}
+            </span>
+          )}
         </h1>
-        {
-          this.props.children && (
-            <div className="SidebarHeader__controls">
-              {this.props.children}
-            </div>
-          )
-        }
+        {this.props.children && (
+          <div className="SidebarHeader__controls">{this.props.children}</div>
+        )}
       </header>
-    )
+    );
   }
 }
 

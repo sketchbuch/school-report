@@ -26,11 +26,19 @@ describe('<EditCategoryForm />', () => {
   });
 
   test('Handles isNew prop correctly', () => {
-    const wrapperNew = mount(<MemoryRouter><EditCategoryForm {...props} isNew={true} /></MemoryRouter>);
-    const wrapper = mount(<MemoryRouter><EditCategoryForm {...props} /></MemoryRouter>);
+    const wrapperNew = mount(
+      <MemoryRouter>
+        <EditCategoryForm {...props} isNew={true} />
+      </MemoryRouter>
+    );
+    const wrapper = mount(
+      <MemoryRouter>
+        <EditCategoryForm {...props} />
+      </MemoryRouter>
+    );
     const btnTxtNew = wrapperNew.find('button[type="submit"]').text();
     const btnTxt = wrapper.find('button[type="submit"]').text();
-    
+
     expect(btnTxtNew).toEqual(text('CreateCategoryBtnLabel', 'Categories'));
     expect(btnTxtNew).not.toEqual(text('UpdateCategoryBtnLabel', 'Categories'));
 

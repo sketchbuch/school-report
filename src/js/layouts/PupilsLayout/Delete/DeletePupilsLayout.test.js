@@ -7,7 +7,7 @@ import classDefault from '../../../types/class';
 
 describe.skip('<DeletePupilsLayout />', () => {
   const props = {
-    activeClass: {...classDefault, id: 'c1', label: 'Test Class' },
+    activeClass: { ...classDefault, id: 'c1', label: 'Test Class' },
     dispatch: jest.fn(),
     history: {},
     location: {},
@@ -24,7 +24,7 @@ describe.skip('<DeletePupilsLayout />', () => {
     let wrapper = shallow(<DeletePupilsLayout {...props} />);
     wrapper.instance().saveData = jest.fn();
     expect(wrapper.find('.DeleteClassesLayout__submsg')).toHaveLength(1);
-    wrapper.setState({ deleting: true, });
+    wrapper.setState({ deleting: true });
     expect(wrapper.find('.DeleteClassesLayout__submsg')).toHaveLength(0);
   });
 });
