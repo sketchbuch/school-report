@@ -22,3 +22,12 @@
   background: transparent;
   padding: 0px;
 }
+
+.SidebarSubheader + .NoItems {
+  width: 100%;
+}
+
+.SidebarSubheader + .NoItems,
+.SidebarSubheader + .SidebarList {
+  margin-top: var(--sidebar-footer-height);
+}

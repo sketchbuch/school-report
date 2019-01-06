@@ -44,8 +44,9 @@ export class ReportsCatSelect extends React.Component<Props> {
 
     if (categories.length < 1) return null;
 
-    const uncategorisedCount = texts.filter(text => text.categories.length < 1)
-      .length;
+    const uncategorisedCount = texts.filter(text => {
+      return text.categories.length < 1;
+    }).length;
     const sortedCategories = sortObjectsAz(categories, categorySort);
     const unselectedCount = texts.length - selectedCount;
 
@@ -69,7 +70,7 @@ export class ReportsCatSelect extends React.Component<Props> {
               {text('CatsUnselected', 'ReportsCatSelect')} ({unselectedCount})
             </option>
           )}
-          {uncategorisedCount > 0 && (
+          {(uncategorisedCount > 0 || option === 'category-nocat') && (
             <option key="category-nocat" value="category-nocat">
               {text('CatsUncategorised', 'ReportsCatSelect')} (
               {uncategorisedCount})
@@ -87,7 +88,9 @@ export class ReportsCatSelect extends React.Component<Props> {
             const textCount = texts.filter(text =>
               text.categories.includes(cat.id)
             ).length;
-            if (textCount < 1) return null;
+
+            if (textCount < 1 && option !== cat.id) return null;
+
             return (
               <option key={cat.id} value={cat.id}>
                 {cat.getLabel()} ({textCount})

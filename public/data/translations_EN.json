@@ -328,6 +328,7 @@
       "Subheader-countmulti": "(%COUNT1% / %COUNT2%)"
     },
     "SidebarList": {
+      "NoneCategory-text": "This category contains no texts.",
       "NoneSearched-category": "No categories begin with your search term.",
       "NoneSearched-class": "No classes begin with your search term.",
       "NoneSearched-pupil": "No pupils begin with your search term.",

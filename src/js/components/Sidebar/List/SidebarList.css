@@ -17,7 +17,6 @@
 
 .SidebarList--sh {
   height: calc(100% - var(--sidebar-footer-height));
-  margin-top: var(--sidebar-footer-height);
 }
 
 .SidebarList--pb.SidebarList--sh {
@@ -25,7 +24,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-    .SidebarList {
-      border-right: 1px solid var(--col-sidebar-border);
-    }
+  .SidebarList {
+    border-right: 1px solid var(--col-sidebar-border);
+  }
 }

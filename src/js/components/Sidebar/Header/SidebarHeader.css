@@ -3,10 +3,10 @@
 
 .SidebarHeader {
   position: absolute;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
   top: 0px;
   left: 0px;
   margin: 0px;
@@ -19,7 +19,7 @@
 
 .SidebarHeader::after {
   opacity: 0.1;
-  content: " ";
+  content: ' ';
   position: absolute;
   bottom: -11px;
   left: 0px;
@@ -27,10 +27,22 @@
   height: 10px;
   display: block;
 
-      /* http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+100 */
-  background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-  background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
-  background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
+  /* http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+100 */
+  background: -moz-linear-gradient(
+    top,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
 }
 
@@ -38,11 +50,11 @@
   margin: 0px;
   font-size: var(--font-size);
   font-weight: normal;
-	overflow: hidden;
+  overflow: hidden;
   display: block;
   width: 100%;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: var(--col-white);
 }
 
@@ -73,9 +85,9 @@
   height: 32px;
   display: none;
   position: absolute;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   right: 0px;
   top: 0px;
   font-size: var(--font-size-medium);
@@ -92,7 +104,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-    .SidebarHeader {
-      border-right: 1px solid var(--col-sidebar-border);
-    }
+  .SidebarHeader {
+    border-right: 1px solid var(--col-sidebar-border);
+  }
 }

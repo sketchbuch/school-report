@@ -191,14 +191,22 @@ class SidebarList extends React.Component<Props, State> {
           )}
         </React.Fragment>
       );
-    } else if (this.props.term !== '') {
+    } else if (this.props.term !== '' || this.props.filter !== '') {
+      let searchNone = 'NoneSearched-' + this.props.listType;
+
+      if (this.props.term === '' && this.props.filter !== '') {
+        searchNone = 'NoneCategory-' + this.props.listType;
+      }
+
       return (
-        <NoItems>
-          <Translation
-            name={'NoneSearched-' + this.props.listType}
-            ns="SidebarList"
-          />
-        </NoItems>
+        <React.Fragment>
+          {this.props.children && (
+            <SidebarSubheader>{this.props.children}</SidebarSubheader>
+          )}
+          <NoItems>
+            <Translation name={searchNone} ns="SidebarList" />
+          </NoItems>
+        </React.Fragment>
       );
     } else {
       return <NoItems message={this.props.noItemsTxt} />;
