@@ -269,7 +269,7 @@
     },
     "ReportsTextList": {
       "None": "No texts available.",
-      "NoneSearched": "No texts match your search"
+      "NoneSearched": "No texts begin with your search term."
     },
     "ReportsCatSelect": {
       "CatsAll": "All",
@@ -328,7 +328,11 @@
       "Subheader-countmulti": "(%COUNT1% / %COUNT2%)"
     },
     "SidebarList": {
-      "NoneSearched": "No texts match your search"
+      "NoneSearched-category": "No categories begin with your search term.",
+      "NoneSearched-class": "No classes begin with your search term.",
+      "NoneSearched-pupil": "No pupils begin with your search term.",
+      "NoneSearched-report": "No reports begin with your search term.",
+      "NoneSearched-text": "No texts begin with your search term."
     },
     "Symbols": {
       "Add": "+",

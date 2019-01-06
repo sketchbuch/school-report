@@ -21,12 +21,14 @@ import './SidebarList.css';
 type Props = {
   builder: boolean,
   children?: React.Node,
+  curPage: number,
   description: ?(pupilId: string, classId: string) => string  | null,
   dispatch: Function,
   filter: string,
   items: Array<Object>;
   listType: SidebarListTypes,
   noItemsTxt: string,
+  onChange: (curPage: number) => void,
   pagesToShow: number,
   perPage: number,
   sortOrder: Array<string>,
@@ -35,7 +37,6 @@ type Props = {
 };
 
 type State = {
-  curPage: number,
   existingItems: Array<string>,
 }
 
@@ -54,10 +55,12 @@ const actions = {
 class SidebarList extends React.Component<Props, State> {
   static defaultProps = {
     builder: false,
+    curPage: 1,
     description: null,
     filter: '',
     items: [],
     listType: 'class',
+    onChange: null,
     pagesToShow: 3,
     perPage: 20,
     sortOrder: ['updated'],
@@ -71,13 +74,11 @@ class SidebarList extends React.Component<Props, State> {
   itemDuration: number;
   onDelete: Function;
   updateExistingItems: (itemId: string) => void;
-  handlePbChange: (curPage: number) => void;
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      curPage: 1,
       existingItems: [],
     };
 
@@ -89,7 +90,6 @@ class SidebarList extends React.Component<Props, State> {
     this.onDelete = (id: string, callback?: Function = ()=>{}) => this.props.dispatch(actions[this.props.listType].deleteOne(id, callback));
     this.onDelete = this.onDelete.bind(this);
     this.updateExistingItems = this.updateExistingItems.bind(this);
-    this.handlePbChange = this.handlePbChange.bind(this);
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -103,10 +103,6 @@ class SidebarList extends React.Component<Props, State> {
   */
   updateExistingItems(itemId: string): void {
     if (!this.state.existingItems.includes(itemId)) this.setState({ existingItems: [...this.state.existingItems, itemId] });
-  }
-
-  handlePbChange(curPage: number) {
-    this.setState({ curPage });
   }
 
   getSortedItems() {
@@ -132,14 +128,14 @@ class SidebarList extends React.Component<Props, State> {
     const itemForPaging = sortedItems.length;
 
     if (this.props.usePb) {
-      const itemstart = 0 + (this.props.perPage * (this.state.curPage - 1));
+      const itemstart = 0 + (this.props.perPage * (this.props.curPage - 1));
       sortedItems = sortedItems.slice(itemstart, itemstart + this.props.perPage);
     }
 
     if (itemForPaging > 0) {
       const showPb = this.props.usePb && itemForPaging > this.props.perPage;
       const pbProps: PageBrowserProps = {
-        curPage: this.state.curPage,
+        curPage: this.props.curPage,
         itemCount: itemForPaging,
         pagesToShow: this.props.pagesToShow,
         perPage: this.props.perPage,
@@ -168,11 +164,11 @@ class SidebarList extends React.Component<Props, State> {
               }
             })}
           </ul>
-          {showPb && <SidebarPageBrowser {...pbProps} onChange={this.handlePbChange} />}
+          {showPb && <SidebarPageBrowser {...pbProps} onChange={this.props.onChange} />}
         </React.Fragment>
       )
     } else if (this.props.term !== '') {
-      return <NoItems><Translation name="NoneSearched" ns="SidebarList" /></NoItems>
+      return <NoItems><Translation name={'NoneSearched-' + this.props.listType} ns="SidebarList" /></NoItems>
     } else {
       return <NoItems message={this.props.noItemsTxt} />
     }

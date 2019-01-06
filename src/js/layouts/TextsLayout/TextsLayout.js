@@ -43,6 +43,7 @@ type Props = {
 };
 
 type State = {
+  curPage: number,
   option: string,
   term: string,
 };
@@ -62,11 +63,13 @@ export class TextsLayout extends React.Component<Props, State> {
   handleClear: (event: SyntheticInputEvent<HTMLInputElement>) => void;
   handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
   handleFilterChanage: (event: SyntheticInputEvent<HTMLInputElement>) => void;
+  handlePbChange: (curPage: number) => void;
 
   constructor(props: Props){
     super(props);
 
     this.state = {
+      curPage: 1,
       option: 'category-all',
       term: '',
     };
@@ -74,6 +77,7 @@ export class TextsLayout extends React.Component<Props, State> {
     this.handleClear = this.handleClear.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleFilterChanage = this.handleFilterChanage.bind(this);
+    this.handlePbChange = this.handlePbChange.bind(this);
   }
 
   componentDidMount() {
@@ -85,16 +89,26 @@ export class TextsLayout extends React.Component<Props, State> {
   }
 
   handleClear(event: SyntheticInputEvent<HTMLInputElement>) {
-    this.setState({ term: '' });
+    this.setState({ term: '', curPage: 1 });
   }
 
   handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
     const term = event.currentTarget.value;
-    this.setState({ term });
+    this.setState({ term, curPage: 1 });
   }
 
   handleFilterChanage(event: SyntheticInputEvent<HTMLInputElement>) {
-    this.setState({option: event.target.value});
+    const option = event.target.value;
+
+    if (this.state.option !== event.target.value) {
+      this.setState({ option, term: '', curPage: 1 });
+    } else {
+      this.setState({ option });
+    }
+  }
+
+  handlePbChange(curPage: number) {
+    this.setState({ curPage });
   }
 
   render() {
@@ -154,13 +168,15 @@ export class TextsLayout extends React.Component<Props, State> {
             {searchBox}
           </SidebarHeader>
           <SidebarList 
+            curPage={this.state.curPage}
             dispatch={this.props.dispatch}
+            filter={this.state.option}
             items={this.props.texts}
             listType="text"
             noItemsTxt={text('Texts', 'SidebarNoItems')}
+            onChange={this.handlePbChange}
             sortOrder={textSort}
             term={this.state.term}
-            filter={this.state.option}
             usePb
           >
             <ReportsCatSelect 

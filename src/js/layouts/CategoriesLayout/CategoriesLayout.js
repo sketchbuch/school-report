@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
+import TextInput from '../../components/ui/TextInput/TextInput';
 import Icon from '../../components/Icon/Icon';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
@@ -16,7 +17,11 @@ import NewCategoryLayout from './New/NewCategoryLayout';
 import { text }  from '../../components/Translation/Translation';
 import { categorySort } from '../../types/category';
 import type { CategoryType } from '../../types/category';
-import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
+import {
+  ICON_ADD,
+  ICON_CLOSE,
+  ICON_DELETE,
+} from '../../constants/icons';
 import {
   ROUTE_DEL_CATEGORIES,
   ROUTE_EDIT_CATEGORY,
@@ -33,16 +38,38 @@ type Props = {
   match: Object,
 };
 
+type State = {
+  curPage: number,
+  term: string,
+};
+
 
 /**
 * Layout for displaying catgeories.
 */
-export class CategoriesLayout extends Component<Props> {
+export class CategoriesLayout extends Component<Props, State> {
   static defaultProps = {
       categories: [],
    };
 
   props: Props;
+  state: State;
+  handleClear: (event: SyntheticInputEvent<HTMLInputElement>) => void;
+  handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
+  handlePbChange: (curPage: number) => void;
+
+  constructor(props: Props){
+    super(props);
+
+    this.state = {
+      curPage: 1,
+      term: '',
+    };
+
+    this.handleClear = this.handleClear.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handlePbChange = this.handlePbChange.bind(this);
+  }
 
   componentDidMount() {
     setTitle(text('WinTitle', 'Categories'));
@@ -50,6 +77,19 @@ export class CategoriesLayout extends Component<Props> {
 
   componentDidUpdate() {
     if (window.location.pathname === ROUTE_CATEGORIES) setTitle(text('WinTitle', 'Categories'));
+  }
+
+  handleClear(event: SyntheticInputEvent<HTMLInputElement>) {
+    this.setState({ term: '', curPage: 1 });
+  }
+
+  handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
+    const term = event.currentTarget.value;
+    this.setState({ term, curPage: 1 });
+  }
+
+  handlePbChange(curPage: number) {
+    this.setState({ curPage });
   }
 
   render() {
@@ -77,6 +117,27 @@ export class CategoriesLayout extends Component<Props> {
         <Icon type={ICON_DELETE} />
       </NavButtonCircular>
     );
+    let searchBox = null;
+
+    if (HAS_CATGEORIES) {
+      searchBox = (
+        <React.Fragment>
+          <TextInput 
+              className="SidebarHeader__search"
+              onChange={this.handleSearch} 
+              placeholder={text('SearchPlaceholder', 'SidebarHeader')}
+              value={this.state.term}
+          />
+          <span 
+            className="SidebarHeader__searchclear" 
+            onClick={this.handleClear} 
+            title={text('Clear', 'ItemSelection')}
+          >
+            <Icon type={ ICON_CLOSE } />
+          </span>
+        </React.Fragment>
+      );
+    }
 
     return (
       <div className="Panel">
@@ -84,13 +145,17 @@ export class CategoriesLayout extends Component<Props> {
           <SidebarHeader 
             title={text('Header-category', 'SidebarHeader')}
             subtitle={text('Subheader-count', 'SidebarHeader', { COUNT: this.props.categories.length })}
-          />
+          >
+            {searchBox}
+          </SidebarHeader>
           <SidebarList
+            curPage={this.state.curPage}
             dispatch={this.props.dispatch}
             items={this.props.categories}
             listType="category"
             noItemsTxt={text('Categories', 'SidebarNoItems')}
             sortOrder={categorySort}
+            term={this.state.term}
             usePb
           />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />

@@ -56,12 +56,16 @@ export function hydrateCategory(categoryObj: CategoryType): CategoryType {
     contains: function (term?: string, anywhere?: boolean = false) {
       if (term) {
         term = term.toLowerCase();
-        const searchStr = this.label;
+        const searchStr = this.label.toLowerCase();
 
-        if (!anywhere && searchStr.toLowerCase().indexOf(term) === 0) {
-          return true;
-        } else if (searchStr.toLowerCase().indexOf(term) !== -1) {
-          return true;
+        if (anywhere) {
+          if (searchStr.indexOf(term) !== -1) {
+            return true;
+          }
+        } else {
+          if (searchStr.indexOf(term) === 0) {
+            return true;
+          }
         }
       }
 
