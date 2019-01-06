@@ -172,6 +172,7 @@ export class ClassesLayout extends Component<Props, State> {
             items={this.getItems()}
             listType="class"
             noItemsTxt={text('Classes', 'SidebarNoItems')}
+            onChange={this.handlePbChange}
             sortOrder={classSort}
             term={this.state.term}
             usePb

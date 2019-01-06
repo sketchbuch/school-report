@@ -152,6 +152,7 @@ export class CategoriesLayout extends Component<Props, State> {
             items={this.props.categories}
             listType="category"
             noItemsTxt={text('Categories', 'SidebarNoItems')}
+            onChange={this.handlePbChange}
             sortOrder={categorySort}
             term={this.state.term}
             usePb

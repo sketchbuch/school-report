@@ -1,18 +1,17 @@
 .PageBrowser {
   position: relative;
-	display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-	justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
 }
 
 .PageBrowser__more {
   position: relative;
-	display: inline-flex;
+  display: inline-flex;
   flex-direction: column;
-	justify-content: center;
+  justify-content: center;
   align-items: center;
   color: var(--col-darken-5);
   height: 40px;
@@ -28,11 +27,10 @@
 }
 
 .PageBrowser__btn {
-	display: inline-flex;
+  display: inline-flex;
   background: var(--col-darken-2);
   text-align: center;
 }
-
 
 /* Disabled */
 .PageBrowser__btn[disabled],
@@ -78,4 +76,25 @@
 .PageBrowser__centre .PageBrowser__btn {
   margin-right: 5px;
   margin-left: 5px;
+}
+
+.PageBrowser__controls {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.PageBrowser__info {
+  width: 100%;
+  text-align: center;
+  margin: 0px;
+  margin-top: 6px;
+  margin-bottom: -7px;
+  position: relative;
+  color: var(--col-darken-5);
+  font-size: var(--font-size-small);
 }

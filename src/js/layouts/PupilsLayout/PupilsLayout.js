@@ -177,6 +177,7 @@ export class PupilsLayout extends Component<Props, State> {
             items={this.props.pupils}
             listType="pupil"
             noItemsTxt={text('Pupils', 'SidebarNoItems')}
+            onChange={this.handlePbChange}
             sortOrder={pupilSort}
             term={this.state.term}
             usePb

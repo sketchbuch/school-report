@@ -12,7 +12,7 @@
 }
 
 .SidebarList--pb {
-  height: calc(100% - var(--sidebar-footer-height));
+  height: calc(100% - var(--sidebar-pb-height));
 }
 
 .SidebarList--sh {
@@ -20,7 +20,7 @@
 }
 
 .SidebarList--pb.SidebarList--sh {
-  height: calc(100% - (2 * var(--sidebar-footer-height)));
+  height: calc(100% - var(--sidebar-footer-height-pb));
 }
 
 @media screen and (min-width: 1024px) {

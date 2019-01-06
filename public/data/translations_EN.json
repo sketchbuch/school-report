@@ -241,7 +241,8 @@
       "Btn-first": "First",
       "Btn-last": "Last",
       "Btn-next": "Next",
-      "Btn-prev": "Previous"
+      "Btn-prev": "Previous",
+      "InfoText": "Page %CUR% / %TOTAL%"
     },
     "Pupils": {
       "BackToPupils": "Cancel",

@@ -5,7 +5,7 @@
   margin: 0px;
   padding: 10px 20px;
   width: 100%;
-  height: var(--sidebar-footer-height);
+  height: var(--sidebar-pb-height);
   border-top: 1px solid var(--col-darken-2);
   background: var(--col-darken-1);
   display: flex;
@@ -16,7 +16,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-    .SidebarPageBrowser {
-      border-right: 1px solid var(--col-sidebar-border);
-    }
+  .SidebarPageBrowser {
+    border-right: 1px solid var(--col-sidebar-border);
+  }
 }

@@ -154,9 +154,10 @@ export class ReportsLayout extends Component<Props, State> {
           <SidebarList
             curPage={this.state.curPage}
             dispatch={this.props.dispatch}
-            listType="report"
             items={this.props.reports}
+            listType="report"
             noItemsTxt={text('Reports', 'SidebarNoItems')}
+            onChange={this.handlePbChange}
             sortOrder={reportSort}
             term={this.state.term}
             usePb

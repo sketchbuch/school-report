@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import ButtonCircular from '../ButtonCircular/ButtonCircular';
-import { text } from '../../Translation/Translation';
+import Translation, { text } from '../../Translation/Translation';
 import type { PageBrowserProps } from '../../../types/pageBrowser';
 import pageBrowserPropsDefault from '../../../types/pageBrowser';
 import './PageBrowser.css';
@@ -67,6 +67,10 @@ class PageBrowser extends Component<Props> {
     if (this.props.onChange) {
       const btn = event.currentTarget;
       const { action } = btn.dataset;
+      const totalPages = this.getTotalPages(
+        this.props.itemCount,
+        this.props.perPage
+      );
 
       switch (action) {
         case 'first':
@@ -79,23 +83,15 @@ class PageBrowser extends Component<Props> {
           break;
 
         case 'next':
-          const nextLast = this.getTotalPages(
-            this.props.itemCount,
-            this.props.perPage
-          );
           const next =
-            this.props.curPage + 1 < nextLast
+            this.props.curPage + 1 < totalPages
               ? this.props.curPage + 1
-              : nextLast;
+              : totalPages;
           this.props.onChange(next);
           break;
 
         case 'last':
-          const last = this.getTotalPages(
-            this.props.itemCount,
-            this.props.perPage
-          );
-          this.props.onChange(last);
+          this.props.onChange(totalPages);
           break;
 
         default:
@@ -144,11 +140,9 @@ class PageBrowser extends Component<Props> {
     next: boolean,
     last: boolean,
     curPage: number,
-    perPage: number,
-    itemCount: number
+    totalPages: number
   ): null | React.Node {
     if (next || last) {
-      const totalPages = this.getTotalPages(itemCount, perPage);
       return (
         <div className="PageBrowser__right">
           {next && (
@@ -177,10 +171,8 @@ class PageBrowser extends Component<Props> {
   renderCentre(
     curPage: number,
     pagesToShow: number,
-    perPage: number,
-    itemCount: number
+    totalPages: number
   ): React.Node {
-    const totalPages = this.getTotalPages(itemCount, perPage);
     const pages = [];
     const middle = Math.ceil(pagesToShow / 2);
 
@@ -238,6 +230,7 @@ class PageBrowser extends Component<Props> {
       prev,
     } = this.props;
 
+    const totalPages = this.getTotalPages(itemCount, perPage);
     let classes = 'PageBrowser';
     if (this.props.className && this.props.className !== '')
       classes += ' ' + this.props.className;
@@ -246,9 +239,18 @@ class PageBrowser extends Component<Props> {
     if (itemCount > 0) {
       pb = (
         <div className={classes}>
-          {this.renderLeft(first, prev, curPage)}
-          {this.renderCentre(curPage, pagesToShow, perPage, itemCount)}
-          {this.renderRight(next, last, curPage, perPage, itemCount)}
+          <div className="PageBrowser__controls">
+            {this.renderLeft(first, prev, curPage)}
+            {this.renderCentre(curPage, pagesToShow, totalPages)}
+            {this.renderRight(next, last, curPage, totalPages)}
+          </div>
+          <p className="PageBrowser__info">
+            <Translation
+              name="InfoText"
+              ns="PageBrowser"
+              placeholders={{ CUR: curPage, TOTAL: totalPages }}
+            />
+          </p>
         </div>
       );
     }
