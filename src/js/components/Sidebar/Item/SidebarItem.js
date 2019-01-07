@@ -135,15 +135,14 @@ class SidebarItem extends Component<Props, State> {
 
     const editUrl = this.props.item.getUrl('edit');
     const canDelete = window.location.pathname !== editUrl;
+    const displayProp =
+      this.props.itemType === 'pupil' ? this.props.sortOrder[0] : undefined;
 
     return (
-      <li
-        className={classes}
-        title={this.props.item.getTooltip(this.props.sortOrder[0])}
-      >
+      <li className={classes} title={this.props.item.getTooltip(displayProp)}>
         {this.state.delete ? (
           <SidebarInner
-            description={this.props.item.getLabel(this.props.sortOrder[0])}
+            description={this.props.item.getLabel(displayProp)}
             label={text('Delete', 'SidebarItem')}
             icon={ICON_DELETE}
           >
@@ -166,7 +165,7 @@ class SidebarItem extends Component<Props, State> {
           <SidebarInner
             description={this.props.item.getDescription()}
             icon={this.props.item.getIcon()}
-            label={this.props.item.getLabel(this.props.sortOrder[0])}
+            label={this.props.item.getLabel(displayProp)}
             link={this.props.item.getUrl('link')}
             linkEdit={editUrl}
           >
