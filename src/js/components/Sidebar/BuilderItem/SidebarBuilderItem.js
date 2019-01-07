@@ -14,6 +14,7 @@ type Props = {
   description: ?(pupilId: string, classId: string) => string | null,
   item: SidebarBuilderItemType,
   itemType: SidebarListTypes,
+  sortOrder: Array<string>,
 };
 
 type State = {
@@ -90,7 +91,7 @@ class SidebarBuilderItem extends Component<Props, State> {
                 <li
                   className="SidebarItem"
                   key={pupil.id}
-                  title={pupil.getTooltip()}
+                  title={pupil.getTooltip(this.props.sortOrder[0])}
                 >
                   <SidebarInner
                     description={
@@ -100,7 +101,7 @@ class SidebarBuilderItem extends Component<Props, State> {
                           )
                         : pupil.getDescription()
                     }
-                    label={pupil.getLabel()}
+                    label={pupil.getLabel(this.props.sortOrder[0])}
                     icon={pupil.getIcon()}
                     link={pupil.getUrl('builder', this.props.item.reportId)}
                   />

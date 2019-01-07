@@ -17,7 +17,7 @@ import NewPupilLayout from './New/NewPupilLayout';
 import { text } from '../../components/Translation/Translation';
 import { pupilSort } from '../../types/pupil';
 import type { ClassType } from '../../types/class';
-import type { PupilType } from '../../types/pupil';
+import type { PupilSortOptions, PupilType } from '../../types/pupil';
 import { ICON_ADD, ICON_CLOSE, ICON_DELETE } from '../../constants/icons';
 import {
   ROUTE_DEL_PUPILS,
@@ -33,6 +33,7 @@ type Props = {
   dispatch: Function,
   location: Object,
   match: Object,
+  pupilsSort: PupilSortOptions,
   pupils: Array<PupilType>,
 };
 
@@ -179,7 +180,7 @@ export class PupilsLayout extends Component<Props, State> {
             listType="pupil"
             noItemsTxt={text('Pupils', 'SidebarNoItems')}
             onChange={this.handlePbChange}
-            sortOrder={pupilSort}
+            sortOrder={pupilSort[this.props.pupilsSort]}
             term={this.state.term}
             usePb
           />
@@ -246,6 +247,7 @@ const mapStateToProps = (state: Object, props: Props) => {
   return {
     activeClass: getActiveClass(state.classes, props.match.params.classId),
     pupils: getClassPupils(state.pupils, props.match.params.classId),
+    pupilsSort: state.settings.pupilsSort,
   };
 };
 

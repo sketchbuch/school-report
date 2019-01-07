@@ -7,7 +7,6 @@ import menuItemDefault, {
 import { generateId } from '../../utils/ids';
 
 describe('Types: Menuitem', () => {
-  const langCode = 'EN';
   const miObj = {
     ...menuItemDefault,
     key: 'classes',

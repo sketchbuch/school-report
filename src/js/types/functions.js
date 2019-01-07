@@ -1,7 +1,5 @@
 // @flow
 
-import type { ActionCreator } from './action';
-
 /**
  * Function type defs.
  */

@@ -19,7 +19,6 @@ const mockStore = configureMockStore(middlewares);
 
 describe('Actions: settingsActions:', () => {
   const testSettings = { language: 'DE' };
-  let testClass = { ...settingsDefault };
   let callback = () => {};
   let store = () => {};
 
