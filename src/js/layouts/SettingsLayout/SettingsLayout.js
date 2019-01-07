@@ -61,8 +61,9 @@ export class SettingsLayout extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    if (window.location.pathname === ROUTE_SETTINGS)
+    if (window.location.pathname === ROUTE_SETTINGS) {
       setTitle(text('WinTitle', 'Settings'));
+    }
 
     if (this.state.error) {
       console.log('error');

@@ -4,5 +4,6 @@
   "editor.tabSize": 2,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "prettier.printWidth": 120,
-  "prettier.trailingComma": "es5"
+  "prettier.trailingComma": "es5",
+  "eslint.autoFixOnSave": true
 }
