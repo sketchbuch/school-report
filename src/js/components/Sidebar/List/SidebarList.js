@@ -129,7 +129,11 @@ class SidebarList extends React.Component<Props, State> {
     }
 
     if (this.props.term !== '') {
-      sortedItems = sortedItems.filter(item => item.contains(this.props.term));
+      const displayProp =
+        this.props.listType === 'pupil' ? this.props.sortOrder[0] : undefined;
+      sortedItems = sortedItems.filter(item =>
+        item.contains(this.props.term, false, displayProp)
+      );
     }
 
     return sortedItems;

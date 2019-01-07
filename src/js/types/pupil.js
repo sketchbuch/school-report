@@ -78,14 +78,26 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
   return {
     ...pupilDefault,
     ...pupilObj,
-    contains: function(term?: string, anywhere?: boolean = false) {
+    contains: function(
+      term?: string,
+      anywhere?: boolean = false,
+      sortOrder: PupilSortOptions = pupilSortDefault
+    ) {
       if (term) {
         term = term.toLowerCase();
-        const searchStr = (
+        let searchStr = (
           this.firstname +
           this.lastname +
           this.description
         ).toLowerCase();
+
+        if (sortOrder === pupilSortLast) {
+          searchStr = (
+            this.lastname +
+            this.firstname +
+            this.description
+          ).toLowerCase();
+        }
 
         if (anywhere) {
           if (searchStr.indexOf(term) !== -1) {
