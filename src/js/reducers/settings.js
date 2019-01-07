@@ -1,5 +1,6 @@
 // @flow
 
+import settingsDefault from '../types/settings';
 import {
   REPLACE_DATA,
   SETTINGS_LOADED,
@@ -10,7 +11,10 @@ import {
  * Settings Reducer.
  */
 
-export default function reducer(state: Object = {}, action: Object) {
+export default function reducer(
+  state: Object = settingsDefault,
+  action: Object
+) {
   switch (action.type) {
     case REPLACE_DATA:
     case UPDATE_SETTINGS:

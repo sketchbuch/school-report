@@ -7,11 +7,6 @@ import {
   getActiveReport,
   getActiveText,
 } from '../redux';
-import type CategoryType from '../../types/category';
-import type ClassType from '../../types/class';
-import type PupilType from '../../types/pupil';
-import type ReportType from '../../types/report';
-import type TextType from '../../types/text';
 import categoryDefault, { CategoryFactory } from '../../types/category';
 import classDefault, { ClassFactory } from '../../types/class';
 import pupilDefault, { PupilFactory } from '../../types/pupil';

@@ -302,8 +302,11 @@
       "Breadcrumb": "Settings",
       "Cancel": "Cancel",
       "LabelLanguage": "Language",
+      "LabelPupilsSort": "Sort pupils by",
       "LanguageChanged": "Language:",
       "PersistenceEdit": "Settings updated",
+      "PupilsSort-firstname": "First name",
+      "PupilsSort-lastname": "Last name",
       "UpdateSettingsBtnLabel": "Update Settings",
       "WinTitle": "Settings"
     },

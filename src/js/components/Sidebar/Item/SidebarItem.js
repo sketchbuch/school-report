@@ -26,6 +26,7 @@ type Props = {
   itemDuration: number,
   itemType: SidebarListTypes,
   onDelete: Function,
+  sortOrder: Array<string>,
   updateExistingItems: Function,
 };
 
@@ -136,10 +137,13 @@ class SidebarItem extends Component<Props, State> {
     const canDelete = window.location.pathname !== editUrl;
 
     return (
-      <li className={classes} title={this.props.item.getTooltip()}>
+      <li
+        className={classes}
+        title={this.props.item.getTooltip(this.props.sortOrder[0])}
+      >
         {this.state.delete ? (
           <SidebarInner
-            description={this.props.item.getLabel()}
+            description={this.props.item.getLabel(this.props.sortOrder[0])}
             label={text('Delete', 'SidebarItem')}
             icon={ICON_DELETE}
           >
@@ -162,7 +166,7 @@ class SidebarItem extends Component<Props, State> {
           <SidebarInner
             description={this.props.item.getDescription()}
             icon={this.props.item.getIcon()}
-            label={this.props.item.getLabel()}
+            label={this.props.item.getLabel(this.props.sortOrder[0])}
             link={this.props.item.getUrl('link')}
             linkEdit={editUrl}
           >

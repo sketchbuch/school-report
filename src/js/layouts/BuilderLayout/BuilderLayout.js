@@ -17,7 +17,7 @@ import { sortObjectsAz } from '../../utils/sort';
 import { classSort } from '../../types/class';
 import { pupilSort } from '../../types/pupil';
 import type { ClassType } from '../../types/class';
-import type { PupilType } from '../../types/pupil';
+import type { PupilSortOptions, PupilType } from '../../types/pupil';
 import type { ReportType } from '../../types/report';
 import type { TextType } from '../../types/text';
 import type { SidebarBuilderItemType } from '../../types/sidebarBuilderItem';
@@ -40,6 +40,7 @@ type Props = {
   location: Object,
   match: Object,
   pupils: Array<PupilType>,
+  pupilsSort: PupilSortOptions,
   textCount: number,
   texts: Array<TextType>,
 };
@@ -87,7 +88,10 @@ export class BuilderLayout extends Component<Props> {
         const newClassPupils = this.props.pupils.filter(
           p => p.classId === item.id
         );
-        const sortedClassPupils = sortObjectsAz(newClassPupils, pupilSort);
+        const sortedClassPupils = sortObjectsAz(
+          newClassPupils,
+          pupilSort[this.props.pupilsSort]
+        );
 
         items.push({
           classRec: { ...item },
@@ -176,7 +180,7 @@ export class BuilderLayout extends Component<Props> {
             items={items}
             listType="class"
             noItemsTxt={text('Classes', 'SidebarNoItems')}
-            sortOrder={[]}
+            sortOrder={pupilSort[this.props.pupilsSort]}
           />
           <SidebarFooter leftActions={leftActions} />
         </Sidebar>
@@ -226,6 +230,7 @@ const mapStateToProps = (state: Object, props: Props) => {
     builder: state.builder,
     classes: state.classes,
     pupils: state.pupils,
+    pupilsSort: state.settings.pupilsSort,
     textCount: state.texts.length,
     texts: state.texts,
   };

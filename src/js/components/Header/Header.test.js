@@ -10,7 +10,6 @@ import { ROUTE_CATEGORIES } from '../../constants/routes';
 
 jest.doMock('./Path/HeaderPath', () => {
   const HeaderPath = props => {
-    console.log('path', props.path);
     return <div className="MockHeaderPath">{props.path}</div>;
   };
   return HeaderPath;

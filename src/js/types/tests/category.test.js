@@ -9,7 +9,6 @@ import { generateId } from '../../utils/ids';
 import {
   ROUTE_DEL_CATEGORY,
   ROUTE_EDIT_CATEGORY,
-  ROUTE_CATEGORIES,
 } from '../../constants/routes';
 
 describe('Types: Class', () => {

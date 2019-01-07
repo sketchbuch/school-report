@@ -35,9 +35,15 @@ const pupilDefault: PupilType = {
   lastname: '',
 };
 
-export type PupilSortDefault = 'firstname';
-export type PupilSortOptions = PupilSortDefault | 'lastname';
-export const pupilSort = ['firstname', 'lastname', 'updated'];
+export const pupilSortFirst = 'firstname';
+export const pupilSortLast = 'lastname';
+export const pupilSortDefault = pupilSortFirst;
+export const pupilSortOptions = [pupilSortFirst, pupilSortLast];
+export type PupilSortOptions = $Values<pupilSortOptions>;
+export const pupilSort = {
+  [pupilSortFirst]: [...pupilSortOptions, 'updated'],
+  [pupilSortLast]: [pupilSortLast, pupilSortFirst, 'updated'],
+};
 
 /**
  * Returns an object of PupilType based on pupilObj but with additional props set.
@@ -103,11 +109,15 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
       }
       return ICON_PUPILS_MALE;
     },
-    getLabel: function() {
+    getLabel: function(sortOrder: PupilSortOptions = pupilSortDefault) {
+      if (sortOrder === pupilSortLast) {
+        return `${this.lastname}, ${this.firstname}`;
+      }
+
       return `${this.firstname} ${this.lastname}`;
     },
-    getTooltip: function() {
-      let tooltip = this.getLabel();
+    getTooltip: function(sortOrder: PupilSortOptions = pupilSortDefault) {
+      let tooltip = this.getLabel(sortOrder);
       let description = this.getDescription();
       if (description !== '') {
         return `${tooltip} - ${description}`;

@@ -28,6 +28,7 @@ export function change(langKey: string, callback?: Function): ActionCreator {
     }
 
     if (window.reportr.translations[langKey] === undefined) {
+      console.log('loading lang', langKey);
       dispatch(
         load(langKey, function(ioResult: Object) {
           Object.assign(window.reportr.translations, ioResult.data);
@@ -35,6 +36,7 @@ export function change(langKey: string, callback?: Function): ActionCreator {
         })
       );
     } else {
+      console.log('lang already loaded', langKey);
       langReady();
     }
   };

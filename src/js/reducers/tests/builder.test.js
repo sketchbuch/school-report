@@ -5,9 +5,7 @@ import {
   DATA_LOADED,
   REPLACE_BUILDER,
   REPLACE_DATA,
-  SAVE_BUILDER,
 } from '../../constants/actionTypes';
-import reduce from '../../utils/reducers';
 
 /**
  * Builder Reducer Tests

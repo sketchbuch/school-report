@@ -177,6 +177,7 @@ class SidebarList extends React.Component<Props, State> {
                     item={item}
                     itemType={this.props.listType}
                     key={item.id}
+                    sortOrder={this.props.sortOrder}
                   />
                 );
               } else {
@@ -188,6 +189,7 @@ class SidebarList extends React.Component<Props, State> {
                     itemType={this.props.listType}
                     key={item.id}
                     onDelete={this.onDelete}
+                    sortOrder={this.props.sortOrder}
                     updateExistingItems={this.updateExistingItems}
                   />
                 );

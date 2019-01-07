@@ -1,6 +1,7 @@
 // @flow
 
 import type { PupilSortOptions } from './pupil';
+import { pupilSortDefault } from './pupil';
 
 /**
  * Settings type def.
@@ -14,7 +15,7 @@ export type SettingsType = {
 
 const settingsDefault: SettingsType = {
   language: 'EN',
-  pupilsSort: 'firstname',
+  pupilsSort: pupilSortDefault,
   maxChars: 0,
 };
 

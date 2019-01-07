@@ -47,7 +47,7 @@ export class SettingsLayout extends Component<Props, State> {
     this.state = {
       error: false,
       saving: false,
-      settings: { ...settingsDefault },
+      settings: { ...settingsDefault, ...this.props.settings },
     };
 
     this.dataSaved = this.dataSaved.bind(this);
@@ -71,7 +71,7 @@ export class SettingsLayout extends Component<Props, State> {
       //this.props.history.push(ROUTE_CLASSES);
     } else if (this.state.saving) {
       this.props.dispatch(
-        settingsActions.update(this.state.settings, this.dataSaved)
+        settingsActions.update({ ...this.state.settings }, this.dataSaved)
       );
       this.setState({ saving: false });
     }
@@ -91,6 +91,7 @@ export class SettingsLayout extends Component<Props, State> {
    */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
+      toastr.success(text('PersistenceEdit', 'Settings'));
       this.props.dispatch(
         languageActions.change(
           this.state.settings.language,
@@ -109,16 +110,6 @@ export class SettingsLayout extends Component<Props, State> {
    * Callback used by languageActions.change.
    */
   languageChanged() {
-    const langObject = this.props.languages.find(
-      lang => lang.key === this.state.settings.language
-    );
-    const langText =
-      langObject !== undefined
-        ? `${text('LanguageChanged', 'Settings')} ${langObject.label} (${
-            langObject.key
-          })`
-        : '';
-    toastr.success(text('PersistenceEdit', 'Settings'), langText);
     this.props.history.push(ROUTE_HOME);
   }
 
@@ -128,7 +119,7 @@ export class SettingsLayout extends Component<Props, State> {
         <div className="SettingsLayout">
           <Formik
             initialValues={this.initialValues}
-            enableReinitialize={false}
+            enableReinitialize={true}
             validationSchema={settingsSchema}
             onSubmit={this.handleSubmit}
             render={formikProps => (
