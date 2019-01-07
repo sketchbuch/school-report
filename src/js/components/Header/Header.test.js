@@ -1,11 +1,12 @@
 // @flow
 
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
-import { MemoryRouter } from 'react-router-dom';
 import Header from './Header';
 import store from '../../store/redux';
+import { ROUTE_CATEGORIES } from '../../constants/routes';
 
 jest.doMock('./Path/HeaderPath', () => {
   const HeaderPath = props => {
