@@ -117,7 +117,9 @@ export class DeletePupilsLayout extends Component<Props, State> {
    * @return string
    */
   getClassLabel() {
-    if (this.props.activeClass.label) return this.props.activeClass.label;
+    if (this.props.activeClass.label) {
+      return this.props.activeClass.label;
+    }
     return this.props.match.params.classId;
   }
 

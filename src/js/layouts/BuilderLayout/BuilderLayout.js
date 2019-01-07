@@ -64,8 +64,9 @@ export class BuilderLayout extends Component<Props> {
   }
 
   componentDidUpdate() {
-    if (window.location.pathname === ROUTE_BUILDER)
+    if (window.location.pathname === ROUTE_BUILDER) {
       setTitle(text('WinTitle', 'Builder'));
+    }
   }
 
   /**

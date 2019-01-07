@@ -22,8 +22,12 @@ class Sidebar extends React.Component<Props> {
 
   render() {
     let classes = 'Sidebar';
-    if (this.props.footer) classes += ' Sidebar--footer';
-    if (this.props.header) classes += ' Sidebar--header';
+    if (this.props.footer) {
+      classes += ' Sidebar--footer';
+    }
+    if (this.props.header) {
+      classes += ' Sidebar--header';
+    }
 
     return <section className={classes}>{this.props.children}</section>;
   }

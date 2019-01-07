@@ -44,15 +44,18 @@ class SidebarBuilderItem extends Component<Props, State> {
 
   handleExpandClick(event: SyntheticInputEvent<HTMLInputElement>) {
     event.preventDefault();
-    if (this.props.item.pupils.length > 0)
+    if (this.props.item.pupils.length > 0) {
       this.setState({ open: !this.state.open });
+    }
   }
 
   render() {
     const { classRec, pupils } = this.props.item;
 
     let classes = 'SidebarItem SidebarBuilderItem';
-    if (this.state.open) classes += ' SidebarBuilderItem--open';
+    if (this.state.open) {
+      classes += ' SidebarBuilderItem--open';
+    }
     if (this.props.item.pupils.length > 0) {
       classes += ' SidebarBuilderItem--active';
     } else {

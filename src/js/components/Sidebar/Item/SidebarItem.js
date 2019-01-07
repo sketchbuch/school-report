@@ -68,11 +68,12 @@ class SidebarItem extends Component<Props, State> {
   }
 
   componentDidMount() {
-    if (this.props.isNew)
+    if (this.props.isNew) {
       this.newTimer = setTimeout(
         () => this.props.updateExistingItems(this.props.item.id),
         this.props.itemDuration
       );
+    }
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
@@ -121,9 +122,15 @@ class SidebarItem extends Component<Props, State> {
 
   render() {
     let classes = 'SidebarItem';
-    if (this.props.isNew) classes += ' SidebarItem--new';
-    if (this.state.delete) classes += ' SidebarItem--delete';
-    if (this.state.deleting) classes += ' SidebarItem--deleting';
+    if (this.props.isNew) {
+      classes += ' SidebarItem--new';
+    }
+    if (this.state.delete) {
+      classes += ' SidebarItem--delete';
+    }
+    if (this.state.deleting) {
+      classes += ' SidebarItem--deleting';
+    }
 
     const editUrl = this.props.item.getUrl('edit');
     const canDelete = window.location.pathname !== editUrl;

@@ -22,7 +22,9 @@ export function change(langKey: string, callback?: Function): ActionCreator {
         payload: { lang: langKey },
       });
 
-      if (callback) callback();
+      if (callback) {
+        callback();
+      }
     }
 
     if (window.reportr.translations[langKey] === undefined) {

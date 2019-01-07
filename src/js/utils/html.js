@@ -43,11 +43,12 @@ export function getPupilTextHtml(
       phVal = pupil[ph.property];
     }
 
-    if (isPronoun)
+    if (isPronoun) {
       newText = newText.replace(
         new RegExp(`\\. ${phSymbol}`, 'g'),
         '. ' + highlightStart + ucFirst(phVal) + highlightEnd
       );
+    }
     newText = newText.replace(
       new RegExp(phSymbol, 'g'),
       highlightStart + phVal + highlightEnd

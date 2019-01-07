@@ -43,7 +43,9 @@ class GenderSwitch extends React.Component<Props> {
     } = this.props;
 
     let classes = 'GenderSwitch';
-    if (large) classes += ' GenderSwitch--large';
+    if (large) {
+      classes += ' GenderSwitch--large';
+    }
 
     return (
       <div className={classes}>

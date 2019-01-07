@@ -74,8 +74,12 @@ export function getDateFromTs(ts: number): string {
   let exportDateDd = exportDate.getDate();
   let exportDateMm = exportDate.getMonth() + 1;
 
-  if (exportDateDd < 10) exportDateDd = '0' + exportDateDd;
-  if (exportDateMm < 10) exportDateMm = '0' + exportDateMm;
+  if (exportDateDd < 10) {
+    exportDateDd = '0' + exportDateDd;
+  }
+  if (exportDateMm < 10) {
+    exportDateMm = '0' + exportDateMm;
+  }
 
   return text('DateFormat', 'Lang', {
     D: exportDateDd,

@@ -54,8 +54,12 @@ class TextInput extends React.Component<Props> {
     } = this.props;
 
     let classes = 'TextInput';
-    if (className) classes += ` ${className}`;
-    if (isValid === false) classes += ` ${UI_ERROR_CLASS}`;
+    if (className) {
+      classes += ` ${className}`;
+    }
+    if (isValid === false) {
+      classes += ` ${UI_ERROR_CLASS}`;
+    }
 
     return (
       <input

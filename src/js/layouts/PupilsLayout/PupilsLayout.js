@@ -77,10 +77,11 @@ export class PupilsLayout extends Component<Props, State> {
     if (
       window.location.pathname ===
       ROUTE_PUPILS.replace(':classId', this.props.match.params.classId)
-    )
+    ) {
       setTitle(
         text('WinTitle', 'Pupils', { CLASS_NAME: this.getClassLabel() })
       );
+    }
   }
 
   handleClear(event: SyntheticInputEvent<HTMLInputElement>) {

@@ -35,9 +35,12 @@ class Textarea extends React.Component<Props> {
 
   render() {
     let classes = 'Textarea';
-    if (this.props.className && this.props.className !== '')
+    if (this.props.className && this.props.className !== '') {
       classes += ' ' + this.props.className;
-    if (this.props.isValid === false) classes += ' has--error';
+    }
+    if (this.props.isValid === false) {
+      classes += ' has--error';
+    }
 
     return (
       <textarea

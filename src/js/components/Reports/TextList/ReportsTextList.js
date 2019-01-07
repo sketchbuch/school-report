@@ -83,10 +83,11 @@ export class ReportsTextList extends Component<Props, State> {
       visibleTexts = [...this.props.texts];
     }
 
-    if (this.props.term !== '')
+    if (this.props.term !== '') {
       visibleTexts = visibleTexts.filter(text =>
         text.contains(this.props.term)
       );
+    }
 
     return visibleTexts;
   }
@@ -117,7 +118,9 @@ export class ReportsTextList extends Component<Props, State> {
               let classes = isSelected
                 ? 'ReportsTextList__item ReportsTextList__item--selected'
                 : 'ReportsTextList__item';
-              if (isActive) classes += ' ReportsTextList__item--disabled';
+              if (isActive) {
+                classes += ' ReportsTextList__item--disabled';
+              }
 
               return (
                 <li

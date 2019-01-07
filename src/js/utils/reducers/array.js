@@ -86,7 +86,9 @@ export function updateItem(
  */
 export function addObj(state: Array<Object>, newEle: any): Array<any> {
   let eleIndex = state.findIndex(ele => ele.id === newEle.id);
-  if (eleIndex < 0) return addItem(state, newEle);
+  if (eleIndex < 0) {
+    return addItem(state, newEle);
+  }
 
   return state;
 }
@@ -100,7 +102,9 @@ export function addObj(state: Array<Object>, newEle: any): Array<any> {
  */
 export function removeObj(state: Array<Object>, newEle: any): Array<any> {
   let eleIndex = state.findIndex(ele => ele.id === newEle.id);
-  if (eleIndex >= 0) return removeItem(state, eleIndex);
+  if (eleIndex >= 0) {
+    return removeItem(state, eleIndex);
+  }
 
   return state;
 }
@@ -114,7 +118,9 @@ export function removeObj(state: Array<Object>, newEle: any): Array<any> {
  */
 export function updateObj(state: Array<Object>, newEle: any): Array<any> {
   let eleIndex = state.findIndex(ele => ele.id === newEle.id);
-  if (eleIndex >= 0) return updateItem(state, eleIndex, newEle);
+  if (eleIndex >= 0) {
+    return updateItem(state, eleIndex, newEle);
+  }
 
   return state;
 }

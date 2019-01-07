@@ -15,7 +15,9 @@ export function getItemById(
 ): Object {
   if (itemId !== '' && itemArr.length > 0) {
     const match = itemArr.filter(item => item[idProp] === itemId).shift();
-    if (match) return match;
+    if (match) {
+      return match;
+    }
   }
 
   return {};

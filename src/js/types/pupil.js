@@ -35,6 +35,8 @@ const pupilDefault: PupilType = {
   lastname: '',
 };
 
+export type PupilSortDefault = 'firstname';
+export type PupilSortOptions = PupilSortDefault | 'lastname';
 export const pupilSort = ['firstname', 'lastname', 'updated'];
 
 /**
@@ -96,7 +98,9 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
       return this.description;
     },
     getIcon: function() {
-      if (this.gender === 'f') return ICON_PUPILS_FEMALE;
+      if (this.gender === 'f') {
+        return ICON_PUPILS_FEMALE;
+      }
       return ICON_PUPILS_MALE;
     },
     getLabel: function() {
@@ -105,7 +109,9 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
     getTooltip: function() {
       let tooltip = this.getLabel();
       let description = this.getDescription();
-      if (description !== '') return `${tooltip} - ${description}`;
+      if (description !== '') {
+        return `${tooltip} - ${description}`;
+      }
 
       return tooltip;
     },

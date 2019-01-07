@@ -75,8 +75,9 @@ export class ReportsLayout extends Component<Props, State> {
   }
 
   componentDidUpdate() {
-    if (window.location.pathname === ROUTE_REPORTS)
+    if (window.location.pathname === ROUTE_REPORTS) {
       setTitle(text('WinTitle', 'Reports'));
+    }
   }
 
   handleClear(event: SyntheticInputEvent<HTMLInputElement>) {

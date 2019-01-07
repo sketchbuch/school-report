@@ -41,12 +41,13 @@ export default function reducer(
       }
 
       const langFound = state.available.find(lang => lang.key === reqLang);
-      if (langFound !== undefined)
+      if (langFound !== undefined) {
         return {
           ...state,
           available: [...state.available],
           current: langFound.key,
         };
+      }
       break;
 
     default:

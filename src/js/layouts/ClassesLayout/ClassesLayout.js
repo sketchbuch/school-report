@@ -74,8 +74,9 @@ export class ClassesLayout extends Component<Props, State> {
   }
 
   componentDidUpdate() {
-    if (window.location.pathname === ROUTE_CLASSES)
+    if (window.location.pathname === ROUTE_CLASSES) {
       setTitle(text('WinTitle', 'Classes'));
+    }
   }
 
   handleClear(event: SyntheticInputEvent<HTMLInputElement>) {

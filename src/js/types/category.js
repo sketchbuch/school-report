@@ -86,7 +86,9 @@ export function hydrateCategory(categoryObj: CategoryType): CategoryType {
     getUrl: function(linkType: string) {
       let theUrl = ROUTE_EDIT_CATEGORY;
 
-      if (linkType === 'delete') theUrl = ROUTE_DEL_CATEGORY;
+      if (linkType === 'delete') {
+        theUrl = ROUTE_DEL_CATEGORY;
+      }
 
       return theUrl.replace(':categoryId', this.id);
     },

@@ -14,8 +14,9 @@ export default function validate(
   touchedObj: Object
 ): boolean {
   if (errObj && touchedObj) {
-    if (errObj[field] !== undefined && touchedObj[field] !== undefined)
+    if (errObj[field] !== undefined && touchedObj[field] !== undefined) {
       return false;
+    }
   }
 
   return true;

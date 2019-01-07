@@ -71,8 +71,9 @@ export class CategoriesLayout extends Component<Props, State> {
   }
 
   componentDidUpdate() {
-    if (window.location.pathname === ROUTE_CATEGORIES)
+    if (window.location.pathname === ROUTE_CATEGORIES) {
       setTitle(text('WinTitle', 'Categories'));
+    }
   }
 
   handleClear(event: SyntheticInputEvent<HTMLInputElement>) {

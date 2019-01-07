@@ -51,14 +51,20 @@ const textTarget = {
     monitor: DragSourceMonitor | Function,
     component: Object | Function
   ) {
-    if (!component) return null;
+    if (!component) {
+      return null;
+    }
 
     const dragIndex = monitor.getItem().id;
     const hoverIndex = props.txt.id;
-    if (dragIndex === hoverIndex) return;
+    if (dragIndex === hoverIndex) {
+      return;
+    }
 
     const undecoratedComponent = component.getDecoratedComponentInstance();
-    if (!undecoratedComponent) return;
+    if (!undecoratedComponent) {
+      return;
+    }
 
     const hoverBoundingRect = undecoratedComponent.ele.getBoundingClientRect();
     const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
@@ -89,7 +95,9 @@ export class ReportsTextItem extends Component<Props> {
     } = this.props;
 
     let classes = 'ReportsTextItem';
-    if (isDragging) classes += ' ReportsTextItem--dragging';
+    if (isDragging) {
+      classes += ' ReportsTextItem--dragging';
+    }
 
     const pupilText = getPupilTextHtml(txt.getLabel(0), activePupil);
 

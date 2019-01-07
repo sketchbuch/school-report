@@ -80,8 +80,9 @@ export class TextsLayout extends React.Component<Props, State> {
   }
 
   componentDidUpdate() {
-    if (window.location.pathname === ROUTE_TEXTS)
+    if (window.location.pathname === ROUTE_TEXTS) {
       setTitle(text('WinTitle', 'Texts'));
+    }
   }
 
   handleClear(event: SyntheticInputEvent<HTMLInputElement>) {

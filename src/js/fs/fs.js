@@ -87,7 +87,9 @@ export function createDataFolder(fileName: string) {
       .replace(DATA_PATH, '')
       .split('/')
       .filter(f => f !== '');
-    if (folders[folders.length - 1].indexOf('.') > -1) folders.pop();
+    if (folders[folders.length - 1].indexOf('.') > -1) {
+      folders.pop();
+    }
     let finalPath =
       DATA_PATH + '/' + (folders.length > 1 ? folders.join('/') : folders[0]);
 
@@ -137,7 +139,9 @@ export function readAppData(fileNames: Array<string>, callback: Function) {
           jsonResonse = JSON.parse(response.data);
         } catch (e) {}
 
-        if (jsonResonse !== null) data = { ...data, ...jsonResonse };
+        if (jsonResonse !== null) {
+          data = { ...data, ...jsonResonse };
+        }
       }
 
       callback({

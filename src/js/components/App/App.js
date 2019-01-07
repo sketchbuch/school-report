@@ -30,8 +30,9 @@ function hideLoader() {
 
   setTimeout(() => {
     let appLoaderEle = document && document.getElementById('apploader');
-    if (appLoaderEle && appLoaderEle.parentNode)
+    if (appLoaderEle && appLoaderEle.parentNode) {
       appLoaderEle.parentNode.removeChild(appLoaderEle);
+    }
   }, alDuration);
 }
 
@@ -155,7 +156,9 @@ export class App extends Component<Props> {
     }
 
     let appError = text('ErrorTxt', 'AppError');
-    if (appError.substr(0, 1) === '?') appError = window.reportr.appError;
+    if (appError.substr(0, 1) === '?') {
+      appError = window.reportr.appError;
+    }
 
     return <AppError errorTxt={appError} />;
   }

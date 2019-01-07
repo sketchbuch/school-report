@@ -27,6 +27,8 @@ export function cropStr(
   const cropLen = parseInt(len, 10);
   const ellipsis = ellipsize ? '…' : '';
 
-  if (cropLen < 1 || trimmedStr.length <= cropLen) return trimmedStr;
+  if (cropLen < 1 || trimmedStr.length <= cropLen) {
+    return trimmedStr;
+  }
   return `${trimmedStr.substr(0, cropLen)}${ellipsis}`;
 }

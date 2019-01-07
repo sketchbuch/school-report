@@ -72,7 +72,9 @@ export class Reports extends Component<Props, State> {
    * Method called by drag and drop when a draging ends.
    */
   handleEndDrag() {
-    if (this.state.dragSelected.length < 1) return;
+    if (this.state.dragSelected.length < 1) {
+      return;
+    }
 
     this.props.saveReports(
       this.props.activeReport.id,
@@ -94,8 +96,12 @@ export class Reports extends Component<Props, State> {
     const sourceIndex = dragSelected.indexOf(sourceId);
     let targetIndex = dragSelected.indexOf(targetId);
 
-    if (sourceIndex < 0 || targetIndex < 0) return;
-    if (before && targetIndex > 0) targetIndex -= 1;
+    if (sourceIndex < 0 || targetIndex < 0) {
+      return;
+    }
+    if (before && targetIndex > 0) {
+      targetIndex -= 1;
+    }
 
     dragSelected = moveItem(dragSelected, sourceId, sourceIndex, targetIndex);
     this.setState({ dragSelected });

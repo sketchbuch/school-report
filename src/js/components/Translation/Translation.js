@@ -52,28 +52,37 @@ export default class Translation extends Component<Props> {
   prevLang: string = '';
 
   componentWillMount() {
-    if (window.reportr && window.reportr.curLang)
+    if (window.reportr && window.reportr.curLang) {
       this.prevLang = window.reportr.curLang;
+    }
   }
 
   shouldComponentUpdate(nextProps: Props) {
-    if (this.prevLang !== window.reportr.curLang) return true;
-    if (this.props.name !== nextProps.name) return true;
-    if (this.props.ns !== nextProps.ns) return true;
+    if (this.prevLang !== window.reportr.curLang) {
+      return true;
+    }
+    if (this.props.name !== nextProps.name) {
+      return true;
+    }
+    if (this.props.ns !== nextProps.ns) {
+      return true;
+    }
     if (this.props.placeholders && nextProps.placeholders) {
       if (
         JSON.stringify(this.props.placeholders) !==
         JSON.stringify(nextProps.placeholders)
-      )
+      ) {
         return true;
+      }
     }
 
     return false;
   }
 
   componentWillUpdate() {
-    if (window.reportr && window.reportr.curLang)
+    if (window.reportr && window.reportr.curLang) {
       this.prevLang = window.reportr.curLang;
+    }
   }
 
   render() {

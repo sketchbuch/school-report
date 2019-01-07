@@ -41,7 +41,9 @@ export class ReportsTexts extends Component<Props> {
 
     this.props.selectedTexts.forEach(selTxtId => {
       const txt = this.props.texts.find(txt => txt.id === selTxtId);
-      if (txt !== undefined) visibleTexts.push({ ...txt });
+      if (txt !== undefined) {
+        visibleTexts.push({ ...txt });
+      }
     });
 
     return visibleTexts;

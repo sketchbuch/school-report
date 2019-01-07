@@ -33,7 +33,9 @@ function createWindow() {
       : `file://${path.join(__dirname, '../build/index.html')}`
   );
   mainWindow.on('closed', () => (mainWindow = null));
-  if (isDev) mainWindow.openDevTools();
+  if (isDev) {
+    mainWindow.openDevTools();
+  }
 }
 
 app
@@ -42,8 +44,12 @@ app
     window.setMenu(null);
   })
   .on('window-all-closed', () => {
-    if (process.platform !== 'darwin') app.quit();
+    if (process.platform !== 'darwin') {
+      app.quit();
+    }
   })
   .on('activate', () => {
-    if (mainWindow === null) createWindow();
+    if (mainWindow === null) {
+      createWindow();
+    }
   });

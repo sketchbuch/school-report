@@ -42,7 +42,9 @@ export class ReportsCatSelect extends React.Component<Props> {
       useSelected,
     } = this.props;
 
-    if (categories.length < 1) return null;
+    if (categories.length < 1) {
+      return null;
+    }
 
     const uncategorisedCount = texts.filter(text => {
       return text.categories.length < 1;
@@ -89,7 +91,9 @@ export class ReportsCatSelect extends React.Component<Props> {
               text.categories.includes(cat.id)
             ).length;
 
-            if (textCount < 1 && option !== cat.id) return null;
+            if (textCount < 1 && option !== cat.id) {
+              return null;
+            }
 
             return (
               <option key={cat.id} value={cat.id}>

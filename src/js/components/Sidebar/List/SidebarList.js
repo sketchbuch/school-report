@@ -82,8 +82,9 @@ class SidebarList extends React.Component<Props, State> {
     };
 
     this.props.items.forEach(item => {
-      if (!this.state.existingItems.includes(item.id))
+      if (!this.state.existingItems.includes(item.id)) {
         this.state.existingItems.push(item.id);
+      }
     });
 
     this.itemDuration = getCustomNumProp('--sidebaritem-ms');
@@ -94,8 +95,9 @@ class SidebarList extends React.Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props) {
-    if (this.props.items.length < 1 && prevProps.items.length > 0)
+    if (this.props.items.length < 1 && prevProps.items.length > 0) {
       this.setState({ existingItems: [] });
+    }
   }
 
   /**
@@ -104,8 +106,9 @@ class SidebarList extends React.Component<Props, State> {
    * @param string itemId The ID of a new item for the existing items.
    */
   updateExistingItems(itemId: string): void {
-    if (!this.state.existingItems.includes(itemId))
+    if (!this.state.existingItems.includes(itemId)) {
       this.setState({ existingItems: [...this.state.existingItems, itemId] });
+    }
   }
 
   getSortedItems() {
@@ -125,8 +128,9 @@ class SidebarList extends React.Component<Props, State> {
       }
     }
 
-    if (this.props.term !== '')
+    if (this.props.term !== '') {
       sortedItems = sortedItems.filter(item => item.contains(this.props.term));
+    }
 
     return sortedItems;
   }
@@ -152,8 +156,12 @@ class SidebarList extends React.Component<Props, State> {
         perPage: this.props.perPage,
       };
       let classes = 'SidebarList';
-      if (showPb) classes += ' SidebarList--pb';
-      if (this.props.children) classes += ' SidebarList--sh';
+      if (showPb) {
+        classes += ' SidebarList--pb';
+      }
+      if (this.props.children) {
+        classes += ' SidebarList--sh';
+      }
 
       return (
         <React.Fragment>

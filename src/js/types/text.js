@@ -99,7 +99,9 @@ export function hydrateText(textObj: TextType): TextType {
     getUrl: function(linkType: string) {
       let theUrl = ROUTE_EDIT_TEXT;
 
-      if (linkType === 'delete') theUrl = ROUTE_DEL_TEXT;
+      if (linkType === 'delete') {
+        theUrl = ROUTE_DEL_TEXT;
+      }
 
       return theUrl.replace(':textId', this.id);
     },

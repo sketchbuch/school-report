@@ -13,7 +13,9 @@ type PbMoreProps = {
 
 export const PbMore = (props: PbMoreProps) => {
   let classes = 'PageBrowser__more';
-  if (props.hidden) classes += ' PageBrowser__more--hidden';
+  if (props.hidden) {
+    classes += ' PageBrowser__more--hidden';
+  }
   return <span className={classes}>…</span>;
 };
 
@@ -30,8 +32,12 @@ type PbButProps = {
 export const PbBut = (props: PbButProps) => {
   const title = props.title || text('Btn-' + props.type, 'PageBrowser');
   let classes = `PageBrowser__btn PageBrowser__btn--${props.type}`;
-  if (props.page) classes += ' PageBrowser__btn--page';
-  if (props.selected) classes += ' PageBrowser__btn--selected';
+  if (props.page) {
+    classes += ' PageBrowser__btn--page';
+  }
+  if (props.selected) {
+    classes += ' PageBrowser__btn--selected';
+  }
 
   return (
     <ButtonCircular
@@ -183,13 +189,19 @@ class PageBrowser extends Component<Props> {
       start = Math.floor(curPage - middle / 2);
     }
 
-    if (start < 1) start = 1;
+    if (start < 1) {
+      start = 1;
+    }
 
     let finish = pagesToShow + start;
-    if (finish > totalPages) finish = totalPages;
+    if (finish > totalPages) {
+      finish = totalPages;
+    }
 
     for (let p = start; p <= finish; p++) {
-      if (p >= start + pagesToShow) break;
+      if (p >= start + pagesToShow) {
+        break;
+      }
       const sel = p === curPage;
       pages.push(
         <PbBut
@@ -232,8 +244,9 @@ class PageBrowser extends Component<Props> {
 
     const totalPages = this.getTotalPages(itemCount, perPage);
     let classes = 'PageBrowser';
-    if (this.props.className && this.props.className !== '')
+    if (this.props.className && this.props.className !== '') {
       classes += ' ' + this.props.className;
+    }
 
     let pb = null;
     if (itemCount > 0) {

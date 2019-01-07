@@ -55,7 +55,9 @@ export default function reducer(
     case DELETE_CLASS: // Must delete all pupils for this class (action.payload.id === the class ID).
       return state.filter((item: PupilType) => {
         const { payload }: Object = action;
-        if (payload.id !== undefined) return item.classId !== payload.id;
+        if (payload.id !== undefined) {
+          return item.classId !== payload.id;
+        }
         return true;
       });
 

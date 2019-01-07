@@ -27,8 +27,9 @@ export class HeaderTitle extends Component<Props> {
     super(props);
 
     this.appName = text('Name', 'App');
-    if (this.appName.substr(0, 1) === '?')
+    if (this.appName.substr(0, 1) === '?') {
       this.appName = window.reportr.appName;
+    }
   }
 
   render() {

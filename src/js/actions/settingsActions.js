@@ -40,8 +40,9 @@ export function loaded(settings: Object): ActionCreator {
   if (
     settings.settings !== undefined &&
     settings.settings.language !== undefined
-  )
+  ) {
     window.reportr.curLang = settings.settings.language;
+  }
 
   return {
     type: SETTINGS_LOADED,

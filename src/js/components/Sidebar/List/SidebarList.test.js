@@ -64,7 +64,9 @@ describe('<SidebarList />', () => {
     const testExistingItems = [];
 
     props.items.forEach(item => {
-      if (!testExistingItems.includes(item.id)) testExistingItems.push(item.id);
+      if (!testExistingItems.includes(item.id)) {
+        testExistingItems.push(item.id);
+      }
     });
 
     expect(wrapper.state().existingItems).toEqual(testExistingItems);

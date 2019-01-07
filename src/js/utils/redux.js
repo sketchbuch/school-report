@@ -140,7 +140,9 @@ function getBreadcrumb(
 ): ClassType | null {
   if (objId) {
     const neededObj = stateSlice.find(obj => obj.id === objId);
-    if (neededObj !== undefined) return { ...neededObj };
+    if (neededObj !== undefined) {
+      return { ...neededObj };
+    }
   }
 
   return null;
@@ -227,7 +229,9 @@ export function getClassPupils(
   pupils: Array<PupilType>,
   classId: string
 ): Array<PupilType> {
-  if (classId !== '') return pupils.filter(p => p.classId === classId);
+  if (classId !== '') {
+    return pupils.filter(p => p.classId === classId);
+  }
   return [];
 }
 
