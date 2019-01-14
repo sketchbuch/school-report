@@ -9,11 +9,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
 
-  .SettingsLayout .form {
-    width: 100%;
-    padding: 0px 20px;
-    margin: 0px auto;
-    max-width: 400px;
-  }
+.SettingsLayout .form {
+  width: 100%;
+  padding: 0px 20px;
+  margin: 0px auto;
+  max-width: 400px;
 }
