@@ -16,7 +16,6 @@
     "lint:css": "stylelint --config=.stylelintrc '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{css}'",
     "lint:js": "eslint --config .eslintrc --fix '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{js,jsx}'",
     "lint:js:dry": "eslint --config .eslintrc --fix-dry-run '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{js,jsx}'",
-    "precommit": "npm run lint:css && npm run lint:js && npm run prettier",
     "prettier": "prettier --config .prettierrc --write '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{js,json,jsx,md}'",
     "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
