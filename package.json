@@ -13,7 +13,7 @@
     "electron": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
     "electron-build": "build --em.main=build/electron.js",
     "flow": "flow",
-    "lint:css": "stylelint --config=.stylelintrc '**/*.css'",
+    "lint:css": "stylelint --config=.stylelintrc '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{css}'",
     "lint:js": "eslint --config .eslintrc --fix '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{js,jsx}'",
     "lint:js:dry": "eslint --config .eslintrc --fix-dry-run '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{js,jsx}'",
     "precommit": "lint-staged",
@@ -68,7 +68,7 @@
     "prettier": "^1.15.3",
     "redux-mock-store": "^1.5.3",
     "stylelint": "^9.9.0",
-    "stylelint-config-standard": "^18.2.0",
+    "stylelint-config-recommended": "^2.1.0",
     "wait-on": "^2.1.2"
   },
   "jest2": {
