@@ -90,7 +90,7 @@ export class SettingsLayout extends Component<Props, State> {
 
   handleSubmit(values: SettingsType) {
     this.setState({
-      settings: { ...values },
+      settings: { ...values }
       saving: true,
     });
   }
