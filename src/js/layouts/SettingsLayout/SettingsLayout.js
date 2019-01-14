@@ -74,7 +74,8 @@ export class SettingsLayout extends Component<Props, State> {
 
       this.props.dispatch(
         settingsActions.update(
-          { ...this.state.settings }          updateLang,
+          { ...this.state.settings }
+          updateLang,
           this.dataSaved
         )
       );
