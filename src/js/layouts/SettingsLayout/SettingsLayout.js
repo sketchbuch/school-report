@@ -15,9 +15,9 @@ import { ROUTE_SETTINGS } from '../../constants/routes';
 import setTitle from '../../utils/title';
 import './SettingsLayout.css';
 
-type Props = 
+type Props = {
   dispatch: Function,
-  history: Object
+  history: Object,
   languages: Array<LangType>,
   location: Object,
   match: Object,
