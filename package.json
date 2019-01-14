@@ -101,7 +101,7 @@
   },
   "lint-staged": {
     "src/**/*.{js}": [
-      "eslint src/ --fix --max-warnings=0",
+      "eslint --config .eslintrc --fix --max-warnings=0",
       "prettier --config .prettierrc --write",
       "git add"
     ],

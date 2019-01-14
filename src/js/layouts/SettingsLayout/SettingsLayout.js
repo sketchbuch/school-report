@@ -17,7 +17,7 @@ import './SettingsLayout.css';
 
 type Props = 
   dispatch: Function,
-  history: Object,
+  history: Object
   languages: Array<LangType>,
   location: Object,
   match: Object,
