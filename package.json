@@ -100,12 +100,12 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js}": [
+    "src/**/*.js": [
       "eslint src/ --fix",
       "prettier --config .prettierrc --write",
       "git add"
     ],
-    "src/**/*.{css}": [
+    "src/**/*.css": [
       "stylelint --config=.stylelintrc --fix",
       "prettier --config .prettierrc --write",
       "git add"
