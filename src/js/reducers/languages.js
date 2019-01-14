@@ -35,18 +35,20 @@ export default function reducer(
       const { payload }: Object = action;
 
       if (payload.settings !== undefined && payload.settings.language) {
-        reqLang = payload.settings.language.current;
+        reqLang = payload.settings.language;
       } else if (payload.lang !== undefined) {
         reqLang = payload.lang;
       }
 
-      const langFound = state.available.find(lang => lang.key === reqLang);
-      if (langFound !== undefined) {
-        return {
-          ...state,
-          available: [...state.available],
-          current: langFound.key,
-        };
+      if (reqLang) {
+        const langFound = state.available.find(lang => lang.key === reqLang);
+        if (langFound !== undefined) {
+          return {
+            ...state,
+            available: [...state.available],
+            current: langFound.key,
+          };
+        }
       }
       break;
 

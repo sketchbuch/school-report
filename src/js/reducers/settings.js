@@ -23,6 +23,7 @@ export default function reducer(
         return { ...state, ...action.payload.settings };
       }
       break;
+
     default:
       return state;
   }

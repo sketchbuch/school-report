@@ -11,8 +11,7 @@ import settingsSchema from '../../validation/schemas/settings';
 import settingsDefault from '../../types/settings';
 import type { SettingsType } from '../../types/settings';
 import * as settingsActions from '../../actions/settingsActions';
-import * as languageActions from '../../actions/languageActions';
-import { ROUTE_HOME, ROUTE_SETTINGS } from '../../constants/routes';
+import { ROUTE_SETTINGS } from '../../constants/routes';
 import setTitle from '../../utils/title';
 import './SettingsLayout.css';
 
@@ -38,22 +37,22 @@ export class SettingsLayout extends Component<Props, State> {
   props: Props;
   dataSaved: Function;
   handleSubmit: Function;
-  initialValues: Object;
-  languageChanged: Function;
+  prevLang: string;
 
   constructor(props: Props) {
     super(props);
 
+    const defaultSettings = { ...settingsDefault, ...this.props.settings };
+
     this.state = {
       error: false,
       saving: false,
-      settings: { ...settingsDefault, ...this.props.settings },
+      settings: defaultSettings,
     };
 
     this.dataSaved = this.dataSaved.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.languageChanged = this.languageChanged.bind(this);
-    this.initialValues = { ...settingsDefault, ...this.props.settings };
+    this.prevLang = defaultSettings.language;
   }
 
   componentDidMount() {
@@ -70,9 +69,21 @@ export class SettingsLayout extends Component<Props, State> {
       //toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceEditError', 'Classes'));
       //this.props.history.push(ROUTE_CLASSES);
     } else if (this.state.saving) {
+      const newLang = this.state.settings.language;
+      const updateLang = newLang !== this.prevLang;
+
       this.props.dispatch(
-        settingsActions.update({ ...this.state.settings }, this.dataSaved)
+        settingsActions.update(
+          { ...this.state.settings },
+          updateLang,
+          this.dataSaved
+        )
       );
+
+      if (updateLang) {
+        this.prevLang = newLang;
+      }
+
       this.setState({ saving: false });
     }
   }
@@ -92,12 +103,6 @@ export class SettingsLayout extends Component<Props, State> {
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceEdit', 'Settings'));
-      this.props.dispatch(
-        languageActions.change(
-          this.state.settings.language,
-          this.languageChanged
-        )
-      );
     } else {
       this.setState({
         error: true,
@@ -106,19 +111,12 @@ export class SettingsLayout extends Component<Props, State> {
     }
   }
 
-  /**
-   * Callback used by languageActions.change.
-   */
-  languageChanged() {
-    this.props.history.push(ROUTE_HOME);
-  }
-
   render() {
     return (
       <div className="Panel">
         <div className="SettingsLayout">
           <Formik
-            initialValues={this.initialValues}
+            initialValues={{ ...settingsDefault, ...this.props.settings }}
             enableReinitialize={true}
             validationSchema={settingsSchema}
             onSubmit={this.handleSubmit}

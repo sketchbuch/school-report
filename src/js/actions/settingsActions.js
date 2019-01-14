@@ -7,6 +7,7 @@ import {
 } from '../constants/actionTypes';
 import persist from '../fs/persist';
 import { createDataFolder, readDataFile } from '../fs/fs';
+import * as languageActions from './languageActions';
 import { FILE_SETTINGS } from '../constants/io';
 import type { ActionCreator } from '../types/action';
 import type { SettingsType } from '../types/settings';
@@ -17,6 +18,7 @@ import type { SettingsType } from '../types/settings';
 
 export function update(
   settings: SettingsType,
+  loadLang: boolean,
   callback: Function
 ): ActionCreator {
   return (dispatch, getState) => {
@@ -24,6 +26,11 @@ export function update(
       type: UPDATE_SETTINGS,
       payload: { settings },
     });
+
+    if (loadLang) {
+      dispatch(languageActions.change(settings.language));
+    }
+
     persist(dispatch, getState, callback, [FILE_SETTINGS]);
   };
 }
