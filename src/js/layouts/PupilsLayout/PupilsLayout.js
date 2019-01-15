@@ -19,12 +19,7 @@ import { pupilSort } from '../../types/pupil';
 import type { ClassType } from '../../types/class';
 import type { PupilSortOptions, PupilType } from '../../types/pupil';
 import { ICON_ADD, ICON_CLOSE, ICON_DELETE } from '../../constants/icons';
-import {
-  ROUTE_DEL_PUPILS,
-  ROUTE_EDIT_PUPIL,
-  ROUTE_NEW_PUPIL,
-  ROUTE_PUPILS,
-} from '../../constants/routes';
+import { ROUTE_DEL_PUPILS, ROUTE_EDIT_PUPIL, ROUTE_NEW_PUPIL, ROUTE_PUPILS } from '../../constants/routes';
 import { getActiveClass, getClassPupils } from '../../utils/redux';
 import setTitle from '../../utils/title';
 
@@ -75,13 +70,8 @@ export class PupilsLayout extends Component<Props, State> {
   }
 
   componentDidUpdate() {
-    if (
-      window.location.pathname ===
-      ROUTE_PUPILS.replace(':classId', this.props.match.params.classId)
-    ) {
-      setTitle(
-        text('WinTitle', 'Pupils', { CLASS_NAME: this.getClassLabel() })
-      );
+    if (window.location.pathname === ROUTE_PUPILS.replace(':classId', this.props.match.params.classId)) {
+      setTitle(text('WinTitle', 'Pupils', { CLASS_NAME: this.getClassLabel() }));
     }
   }
 
@@ -104,19 +94,14 @@ export class PupilsLayout extends Component<Props, State> {
    * @return string
    */
   getClassLabel(): string {
-    return this.props.activeClass.label !== undefined
-      ? this.props.activeClass.label
-      : this.props.match.params.classId;
+    return this.props.activeClass.label !== undefined ? this.props.activeClass.label : this.props.match.params.classId;
   }
 
   render() {
     const HAS_PUPILS = this.props.pupils.length > 0 ? true : false;
     const leftActions = (
       <NavButtonCircular
-        to={ROUTE_NEW_PUPIL.replace(
-          ':classId',
-          this.props.match.params.classId
-        )}
+        to={ROUTE_NEW_PUPIL.replace(':classId', this.props.match.params.classId)}
         className="SidebarFooter__action"
         buttontype="pos-rollover"
         action="add-pupil"
@@ -128,10 +113,7 @@ export class PupilsLayout extends Component<Props, State> {
     const rightActions = (
       <NavButtonCircular
         disabled={!HAS_PUPILS}
-        to={ROUTE_DEL_PUPILS.replace(
-          ':classId',
-          this.props.match.params.classId
-        )}
+        to={ROUTE_DEL_PUPILS.replace(':classId', this.props.match.params.classId)}
         className="SidebarFooter__action"
         buttontype="neg-rollover"
         action="delete-pupils"
@@ -184,10 +166,7 @@ export class PupilsLayout extends Component<Props, State> {
             term={this.state.term}
             usePb
           />
-          <SidebarFooter
-            leftActions={leftActions}
-            rightActions={rightActions}
-          />
+          <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>
         <Switch>
           <Route

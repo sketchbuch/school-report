@@ -18,10 +18,7 @@ import type { ActionObj } from '../types/action';
  * Texts Reducer.
  */
 
-export default function reducer(
-  state: Array<TextType> = [],
-  action: ActionObj
-) {
+export default function reducer(state: Array<TextType> = [], action: ActionObj) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_DATA:

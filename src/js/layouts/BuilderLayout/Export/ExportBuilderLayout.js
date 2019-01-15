@@ -88,10 +88,7 @@ export class ExportBuilderLayout extends Component<Props, State> {
 
   exportResult(ioResult: Object) {
     if (ioResult.success === true) {
-      toastr.success(
-        text('PersistenceSuccess', 'ExportBuilderLayout'),
-        this.saveName
-      );
+      toastr.success(text('PersistenceSuccess', 'ExportBuilderLayout'), this.saveName);
     } else {
       toastr.error(
         text('PersistenceError', 'ExportBuilderLayout'),
@@ -120,11 +117,7 @@ export class ExportBuilderLayout extends Component<Props, State> {
             validationSchema={exportSchema}
             onSubmit={this.handleSubmit}
             render={formikProps => (
-              <ExportBuilderForm
-                {...formikProps}
-                saving={this.state.saving}
-                reportName={reportName}
-              />
+              <ExportBuilderForm {...formikProps} saving={this.state.saving} reportName={reportName} />
             )}
           />
         </EditPanelContent>

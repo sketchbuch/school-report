@@ -31,12 +31,8 @@ export class InfoMsg extends React.PureComponent<Props> {
 
         <h1 className="InfoMsg__headine">{this.props.headine}</h1>
 
-        {this.props.subtext !== '' && (
-          <p className="InfoMsg__subtext">{this.props.subtext}</p>
-        )}
-        {this.props.children && (
-          <div className="InfoMsg__sub">{this.props.children}</div>
-        )}
+        {this.props.subtext !== '' && <p className="InfoMsg__subtext">{this.props.subtext}</p>}
+        {this.props.children && <div className="InfoMsg__sub">{this.props.children}</div>}
       </section>
     );
   }

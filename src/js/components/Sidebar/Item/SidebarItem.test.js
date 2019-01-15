@@ -111,26 +111,14 @@ describe('<SidebarItem />', () => {
   describe('componentDidMount()', () => {
     test('updateExistingItems() not called if the item !isNew', () => {
       const mockUpdateExistingItems = jest.fn();
-      const wrapper = shallow(
-        <SidebarItem
-          {...props}
-          updateExistingItems={mockUpdateExistingItems}
-          isNew={false}
-        />
-      );
+      const wrapper = shallow(<SidebarItem {...props} updateExistingItems={mockUpdateExistingItems} isNew={false} />);
       jest.runAllTimers();
       expect(mockUpdateExistingItems).not.toHaveBeenCalled();
     });
 
     test('updateExistingItems() called if the item isNew', () => {
       const mockUpdateExistingItems = jest.fn();
-      const wrapper = shallow(
-        <SidebarItem
-          {...props}
-          updateExistingItems={mockUpdateExistingItems}
-          isNew={true}
-        />
-      );
+      const wrapper = shallow(<SidebarItem {...props} updateExistingItems={mockUpdateExistingItems} isNew={true} />);
       jest.runAllTimers();
       expect(mockUpdateExistingItems).toHaveBeenCalled();
     });

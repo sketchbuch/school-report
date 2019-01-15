@@ -10,12 +10,7 @@ import type { PupilType } from '../../../types/pupil';
 import type { ReportType } from '../../../types/report';
 import type { TextType } from '../../../types/text';
 import type { TimeoutID } from '../../../types/fixes';
-import {
-  ICON_DELETE,
-  ICON_EDIT,
-  ICON_ERROR,
-  ICON_SUCCESS,
-} from '../../../constants/icons';
+import { ICON_DELETE, ICON_EDIT, ICON_ERROR, ICON_SUCCESS } from '../../../constants/icons';
 import './SidebarItem.css';
 
 type DomainTypes = ClassType | PupilType | ReportType | TextType;
@@ -70,10 +65,7 @@ class SidebarItem extends Component<Props, State> {
 
   componentDidMount() {
     if (this.props.isNew) {
-      this.newTimer = setTimeout(
-        () => this.props.updateExistingItems(this.props.item.id),
-        this.props.itemDuration
-      );
+      this.newTimer = setTimeout(() => this.props.updateExistingItems(this.props.item.id), this.props.itemDuration);
     }
   }
 
@@ -81,10 +73,7 @@ class SidebarItem extends Component<Props, State> {
     if (this.state.confirmed) {
       this.props.onDelete(this.props.item.id);
     } else if (this.state.deleting) {
-      this.deletingTimer = setTimeout(
-        () => this.setState({ confirmed: true }),
-        this.props.itemDuration
-      );
+      this.deletingTimer = setTimeout(() => this.setState({ confirmed: true }), this.props.itemDuration);
     }
   }
 
@@ -100,10 +89,7 @@ class SidebarItem extends Component<Props, State> {
     switch (event.target.dataset.action) {
       case 'item-delete':
         this.setState({ delete: true });
-        this.deleteTimer = setTimeout(
-          () => this.setState({ delete: false }),
-          this.timeoutDuration
-        );
+        this.deleteTimer = setTimeout(() => this.setState({ delete: false }), this.timeoutDuration);
         break;
 
       case 'item-delete-no':
@@ -135,8 +121,7 @@ class SidebarItem extends Component<Props, State> {
 
     const editUrl = this.props.item.getUrl('edit');
     const canDelete = window.location.pathname !== editUrl;
-    const displayProp =
-      this.props.itemType === 'pupil' ? this.props.sortOrder[0] : undefined;
+    const displayProp = this.props.itemType === 'pupil' ? this.props.sortOrder[0] : undefined;
 
     return (
       <li className={classes} title={this.props.item.getTooltip(displayProp)}>

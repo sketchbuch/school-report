@@ -71,16 +71,10 @@ class SidebarBuilderItem extends Component<Props, State> {
           label={classRec.getLabel()}
           icon={classRec.getIcon()}
         >
-          <span
-            className="SidebarItem_expander"
-            title={text('Expand', 'Actions')}
-          >
+          <span className="SidebarItem_expander" title={text('Expand', 'Actions')}>
             <Icon type={ICON_EXPAND} />
           </span>
-          <span
-            className="SidebarItem_contractor"
-            title={text('Contract', 'Actions')}
-          >
+          <span className="SidebarItem_contractor" title={text('Contract', 'Actions')}>
             <Icon type={ICON_CONTRACT} />
           </span>
         </SidebarInner>
@@ -88,17 +82,11 @@ class SidebarBuilderItem extends Component<Props, State> {
           <ul className="SidebarBuilderItem__sub">
             {pupils.map(pupil => {
               return (
-                <li
-                  className="SidebarItem"
-                  key={pupil.id}
-                  title={pupil.getTooltip(this.props.sortOrder[0])}
-                >
+                <li className="SidebarItem" key={pupil.id} title={pupil.getTooltip(this.props.sortOrder[0])}>
                   <SidebarInner
                     description={
                       this.props.description
-                        ? String(
-                            this.props.description(pupil.id, pupil.classId)
-                          )
+                        ? String(this.props.description(pupil.id, pupil.classId))
                         : pupil.getDescription()
                     }
                     label={pupil.getLabel(this.props.sortOrder[0])}

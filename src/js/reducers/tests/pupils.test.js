@@ -35,9 +35,7 @@ describe('Reducer: Pupils', () => {
   });
 
   test('REPLACE_DATA should return the initial state if payload has no pupils array', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(
-      INITIAL_STATE
-    );
+    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: REPLACE_DATA,
@@ -47,9 +45,7 @@ describe('Reducer: Pupils', () => {
   });
 
   test('DATA_LOADED should return the initial state if payload has no pupils array', () => {
-    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(
-      INITIAL_STATE
-    );
+    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: DATA_LOADED,
@@ -59,9 +55,7 @@ describe('Reducer: Pupils', () => {
   });
 
   test('REPLACE_PUPILS should return the initial state if payload has no pupils array', () => {
-    expect(
-      reducer(INITIAL_STATE, { type: REPLACE_PUPILS, payload: {} })
-    ).toEqual(INITIAL_STATE);
+    expect(reducer(INITIAL_STATE, { type: REPLACE_PUPILS, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: REPLACE_PUPILS,
@@ -95,9 +89,7 @@ describe('Reducer: Pupils', () => {
       type: REPLACE_PUPILS,
       payload: TEST_PUPILS,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(TEST_PUPILS.pupils)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(TEST_PUPILS.pupils));
   });
 
   test('UPDATE_PUPIL should update existing pupils', () => {
@@ -111,9 +103,7 @@ describe('Reducer: Pupils', () => {
       type: UPDATE_PUPIL,
       payload: NEW_PUPIL,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_RESULT)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
   });
 
   test('ADD_PUPIL should add the payload to existing pupils.', () => {
@@ -130,9 +120,7 @@ describe('Reducer: Pupils', () => {
       type: ADD_PUPIL,
       payload: NEW_PUPIL,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_RESULT)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
   });
 
   test('ADD_PUPIL should not add the pupil if the ID already exists', () => {
@@ -148,9 +136,7 @@ describe('Reducer: Pupils', () => {
       type: ADD_PUPIL,
       payload: NEW_PUPIL,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(INITIAL_STATE)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(INITIAL_STATE));
   });
 
   test('DELETE_PUPIL should delete the category if the ID is found', () => {
@@ -180,17 +166,12 @@ describe('Reducer: Pupils', () => {
         lastname: 'Cat',
       },
     ];
-    const EXPECTED_STATE_DEL = reduce.arr.removeObj(
-      INITIAL_STATE_DEL,
-      INITIAL_STATE_DEL[1]
-    );
+    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[1]);
     const reducerResult = reducer(INITIAL_STATE_DEL, {
       type: DELETE_PUPIL,
       payload: INITIAL_STATE_DEL[1],
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_STATE_DEL)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
   });
 
   test('DELETE_ALL_CLASSES should return an empty array', () => {
@@ -233,18 +214,13 @@ describe('Reducer: Pupils', () => {
         lastname: '(Computer)',
       },
     ];
-    const EXPECTED_STATE_DEL = reduce.arr.removeObj(
-      INITIAL_STATE_DEL,
-      INITIAL_STATE_DEL[2]
-    );
+    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[2]);
     const reducerResult = reducer(INITIAL_STATE_DEL, {
       type: DELETE_ALL_CLASS_PUPILS,
       payload: { id: 'c3' },
     });
 
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_STATE_DEL)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
   });
 
   test('DELETE_CLASS should remove all pupils for the deleted class', () => {
@@ -282,18 +258,13 @@ describe('Reducer: Pupils', () => {
         lastname: '(Computer)',
       },
     ];
-    const EXPECTED_STATE_DEL = reduce.arr.removeObj(
-      INITIAL_STATE_DEL,
-      INITIAL_STATE_DEL[2]
-    );
+    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[2]);
     const reducerResult = reducer(INITIAL_STATE_DEL, {
       type: DELETE_CLASS,
       payload: { id: 'c3' },
     });
 
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_STATE_DEL)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
   });
 
   test('DELETE_CLASS handles undefined ID', () => {
@@ -301,8 +272,6 @@ describe('Reducer: Pupils', () => {
       type: DELETE_CLASS,
       payload: {},
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(INITIAL_STATE)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(INITIAL_STATE));
   });
 });

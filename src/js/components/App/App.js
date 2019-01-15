@@ -61,21 +61,14 @@ export class App extends Component<Props> {
 
   componentDidUpdate(prevProps: Props) {
     if (!this.props.app.loaded && !this.props.app.error) {
-      const {
-        dataCreated,
-        dataLoaded,
-        languageLoaded,
-        settingsLoaded,
-      } = this.props.app;
+      const { dataCreated, dataLoaded, languageLoaded, settingsLoaded } = this.props.app;
 
       if (dataLoaded || (!dataLoaded && languageLoaded && dataCreated)) {
         this.props.dispatch(appActions.loaded(hideLoader));
       } else if (languageLoaded && !dataCreated) {
         this.props.dispatch(dataActions.load(this.dataLoaded));
       } else if (settingsLoaded || dataCreated) {
-        this.props.dispatch(
-          languageActions.load(this.props.currentLang, this.languageLoaded)
-        );
+        this.props.dispatch(languageActions.load(this.props.currentLang, this.languageLoaded));
       }
     }
   }

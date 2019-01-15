@@ -13,7 +13,7 @@
     "electron": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
     "electron-build": "build --em.main=build/electron.js",
     "flow": "flow",
-    "lint:css": "stylelint --config=.stylelintrc '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{css}'",
+    "lint:css": "stylelint --config=.stylelintrc '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{css|less|sass}'",
     "lint:js": "eslint --config .eslintrc --fix '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{js,jsx}'",
     "lint:js:dry": "eslint --config .eslintrc --fix-dry-run '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{js,jsx}'",
     "precommit": "lint-staged",
@@ -24,7 +24,8 @@
     "test:c": "react-scripts test --env=jsdom --coverage",
     "test:cw": "react-scripts test --env=jsdom --coverage --watch",
     "test:v": "react-scripts test --env=jsdom --verbose",
-    "test:w": "react-scripts test --env=jsdom --watch"
+    "test:w": "react-scripts test --env=jsdom --watch",
+    "test:wv": "react-scripts test --env=jsdom --watch --verbose"
   },
   "dependencies": {
     "debounce": "^1.2.0",
@@ -100,12 +101,12 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js|jsx}": [
       "eslint --config .eslintrc --fix --max-warnings=0",
       "prettier --config .prettierrc --write",
       "git add"
     ],
-    "*.css": [
+    "*.{css|less|sass}": [
       "stylelint --config=.stylelintrc --fix",
       "prettier --config .prettierrc --write",
       "git add"

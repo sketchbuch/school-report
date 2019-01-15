@@ -28,16 +28,8 @@ describe('<Translation />', () => {
   });
 
   test('Replaces placeholders', () => {
-    const wrapper = shallow(
-      <Translation
-        name="Placeholder"
-        ns="App"
-        placeholders={{ PH: 'Find me' }}
-      />
-    );
-    expect(wrapper.text()).toBe(
-      window.reportr.translations.EN.App.Placeholder.replace('%PH%', 'Find me')
-    );
+    const wrapper = shallow(<Translation name="Placeholder" ns="App" placeholders={{ PH: 'Find me' }} />);
+    expect(wrapper.text()).toBe(window.reportr.translations.EN.App.Placeholder.replace('%PH%', 'Find me'));
   });
 
   describe('Handles window.reportr correctly', () => {

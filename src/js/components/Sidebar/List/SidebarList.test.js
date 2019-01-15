@@ -8,17 +8,10 @@ import textDefault, { TextFactory } from '../../../types/text';
 import SidebarList from './SidebarList';
 import { DELETE_TEXT } from '../../../constants/actionTypes';
 
-jest.mock('../Inner/SidebarInner', () => () => (
-  <div className="SidebarInner" />
-));
+jest.mock('../Inner/SidebarInner', () => () => <div className="SidebarInner" />);
 jest.mock(
   '../../../fs/persist',
-  () => (
-    dispatch: Function,
-    getState: Function,
-    callback: Function,
-    content: Array<string>
-  ) => {
+  () => (dispatch: Function, getState: Function, callback: Function, content: Array<string>) => {
     callback();
   }
 );
@@ -31,21 +24,9 @@ describe('<SidebarList />', () => {
   const props = {
     dispatch: jest.fn(store.dispatch),
     items: [
-      TextFactory(
-        { ...textDefault, bodytext: 'Red Dwarf', categories: ['c1'] },
-        Date.now(),
-        'EN'
-      ),
-      TextFactory(
-        { ...textDefault, bodytext: 'Blue Midget', categories: [] },
-        Date.now(),
-        'EN'
-      ),
-      TextFactory(
-        { ...textDefault, bodytext: 'Starbug', categories: ['c1', 'c2'] },
-        Date.now(),
-        'EN'
-      ),
+      TextFactory({ ...textDefault, bodytext: 'Red Dwarf', categories: ['c1'] }, Date.now(), 'EN'),
+      TextFactory({ ...textDefault, bodytext: 'Blue Midget', categories: [] }, Date.now(), 'EN'),
+      TextFactory({ ...textDefault, bodytext: 'Starbug', categories: ['c1', 'c2'] }, Date.now(), 'EN'),
     ],
     listType: 'text',
     noItemsTxt: 'No items in list',
@@ -74,9 +55,7 @@ describe('<SidebarList />', () => {
 
   test('onDelete() dispatches correct action', () => {
     const callback = jest.fn();
-    const EXPECTED_ACTIONS = [
-      { type: DELETE_TEXT, payload: { id: existingId } },
-    ];
+    const EXPECTED_ACTIONS = [{ type: DELETE_TEXT, payload: { id: existingId } }];
     const wrapper = shallow(<SidebarList {...props} />);
 
     expect.assertions(3);

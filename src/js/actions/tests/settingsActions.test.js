@@ -3,11 +3,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as settingsActions from '../settingsActions';
-import {
-  LOAD_SETTINGS,
-  UPDATE_SETTINGS,
-  SETTINGS_LOADED,
-} from '../../constants/actionTypes';
+import { LOAD_SETTINGS, UPDATE_SETTINGS, SETTINGS_LOADED } from '../../constants/actionTypes';
 import settingsDefault from '../../types/settings';
 
 const middlewares = [thunk];
@@ -29,9 +25,7 @@ describe('Actions: settingsActions:', () => {
   });
 
   test('update() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: UPDATE_SETTINGS, payload: { settings: testSettings } },
-    ];
+    const EXPECTED_ACTIONS = [{ type: UPDATE_SETTINGS, payload: { settings: testSettings } }];
 
     expect.assertions(1);
     store.dispatch(settingsActions.update(testSettings, callback));
@@ -49,9 +43,7 @@ describe('Actions: settingsActions:', () => {
   });
 
   test('loaded() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: SETTINGS_LOADED, payload: { settings: testSettings } },
-    ];
+    const EXPECTED_ACTIONS = [{ type: SETTINGS_LOADED, payload: { settings: testSettings } }];
 
     expect.assertions(3);
     expect(window.reportr.curLang).toBe('EN');
@@ -62,9 +54,7 @@ describe('Actions: settingsActions:', () => {
   });
 
   test('loaded() only sets the current language if it is in the settings loaded', () => {
-    const EXPECTED_ACTIONS = [
-      { type: SETTINGS_LOADED, payload: { settings: {} } },
-    ];
+    const EXPECTED_ACTIONS = [{ type: SETTINGS_LOADED, payload: { settings: {} } }];
 
     expect.assertions(3);
     expect(window.reportr.curLang).toBe('EN');

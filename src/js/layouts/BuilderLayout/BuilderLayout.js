@@ -23,11 +23,7 @@ import type { TextType } from '../../types/text';
 import type { SidebarBuilderItemType } from '../../types/sidebarBuilderItem';
 import { getSelectedTexts } from '../../utils/redux';
 import { ICON_EXPORT } from '../../constants/icons';
-import {
-  ROUTE_BUILDER,
-  ROUTE_EDIT_BUILDER,
-  ROUTE_EXPORT_BUILDER,
-} from '../../constants/routes';
+import { ROUTE_BUILDER, ROUTE_EDIT_BUILDER, ROUTE_EXPORT_BUILDER } from '../../constants/routes';
 import { getActiveReport } from '../../utils/redux';
 import setTitle from '../../utils/title';
 
@@ -79,19 +75,12 @@ export class BuilderLayout extends Component<Props> {
     let items: Array<SidebarBuilderItemType> = [];
 
     if (this.props.activeReport.id !== undefined) {
-      const reportClasses = this.props.classes.filter(c =>
-        this.props.activeReport.classes.includes(c.id)
-      );
+      const reportClasses = this.props.classes.filter(c => this.props.activeReport.classes.includes(c.id));
       const sortedClasses = sortObjectsAz(reportClasses, classSort);
 
       sortedClasses.forEach(item => {
-        const newClassPupils = this.props.pupils.filter(
-          p => p.classId === item.id
-        );
-        const sortedClassPupils = sortObjectsAz(
-          newClassPupils,
-          pupilSort[this.props.pupilsSort]
-        );
+        const newClassPupils = this.props.pupils.filter(p => p.classId === item.id);
+        const sortedClassPupils = sortObjectsAz(newClassPupils, pupilSort[this.props.pupilsSort]);
 
         items.push({
           classRec: { ...item },
@@ -114,10 +103,7 @@ export class BuilderLayout extends Component<Props> {
       items.forEach(item => {
         if (reportData[item.id] !== undefined) {
           item.pupils.forEach(pupil => {
-            if (
-              reportData[item.id][pupil.id] !== undefined &&
-              reportData[item.id][pupil.id].length > 0
-            ) {
+            if (reportData[item.id][pupil.id] !== undefined && reportData[item.id][pupil.id].length > 0) {
               canExport = true;
             }
           });
@@ -132,10 +118,7 @@ export class BuilderLayout extends Component<Props> {
     const { activeReport, builder } = this.props;
     const items = this.getItems();
     const classCount = items.length;
-    const pupilCount = items.reduce(
-      (curCount, curClass) => curCount + curClass.classRec.pupilCount,
-      0
-    );
+    const pupilCount = items.reduce((curCount, curClass) => curCount + curClass.classRec.pupilCount, 0);
     const CAN_EXPORT = this.canExport(items);
     const leftActions = (
       <NavButtonCircular
@@ -150,16 +133,8 @@ export class BuilderLayout extends Component<Props> {
       </NavButtonCircular>
     );
 
-    const pupilBuilderSelectedCount = (
-      pupilId: string,
-      classId: string
-    ): string => {
-      const selectedTexts = getSelectedTexts(
-        builder,
-        activeReport.id,
-        classId,
-        pupilId
-      );
+    const pupilBuilderSelectedCount = (pupilId: string, classId: string): string => {
+      const selectedTexts = getSelectedTexts(builder, activeReport.id, classId, pupilId);
       return selectedTexts.length > 0 ? `(${selectedTexts.length})` : '';
     };
 
@@ -188,11 +163,7 @@ export class BuilderLayout extends Component<Props> {
           <Route
             path={ROUTE_EXPORT_BUILDER}
             render={routerProps => (
-              <ExportBuilderLayout
-                {...routerProps}
-                activeReport={this.props.activeReport}
-                items={items}
-              />
+              <ExportBuilderLayout {...routerProps} activeReport={this.props.activeReport} items={items} />
             )}
           />
           <Route
@@ -211,11 +182,7 @@ export class BuilderLayout extends Component<Props> {
           <Route
             path={ROUTE_BUILDER}
             render={routerProps => (
-              <InfoMsg
-                {...routerProps}
-                headine={text('Builder', 'InfoMsg')}
-                subtext={text('BuilderMsg', 'InfoMsg')}
-              />
+              <InfoMsg {...routerProps} headine={text('Builder', 'InfoMsg')} subtext={text('BuilderMsg', 'InfoMsg')} />
             )}
           />
         </Switch>

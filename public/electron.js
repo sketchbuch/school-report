@@ -8,11 +8,7 @@ let mainWindow;
 
 function createWindow() {
   if (isDev) {
-    const {
-      default: installExtension,
-      REACT_DEVELOPER_TOOLS,
-      REDUX_DEVTOOLS,
-    } = require('electron-devtools-installer');
+    const { default: installExtension, REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require('electron-devtools-installer');
     [REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS].forEach(extension => {
       installExtension(extension)
         .then(name => console.log(`Added Extension: ${name}`))
@@ -27,11 +23,7 @@ function createWindow() {
     width: 900,
   });
 
-  mainWindow.loadURL(
-    isDev
-      ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, '../build/index.html')}`
-  );
+  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
   mainWindow.on('closed', () => (mainWindow = null));
   if (isDev) {
     mainWindow.openDevTools();

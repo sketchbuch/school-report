@@ -72,13 +72,7 @@ export class SettingsLayout extends Component<Props, State> {
       const newLang = this.state.settings.language;
       const updateLang = newLang !== this.prevLang;
 
-      this.props.dispatch(
-        settingsActions.update(
-          { ...this.state.settings },
-          updateLang,
-          this.dataSaved
-        )
-      );
+      this.props.dispatch(settingsActions.update({ ...this.state.settings }, updateLang, this.dataSaved));
 
       if (updateLang) {
         this.prevLang = newLang;
@@ -121,11 +115,7 @@ export class SettingsLayout extends Component<Props, State> {
             validationSchema={settingsSchema}
             onSubmit={this.handleSubmit}
             render={formikProps => (
-              <SettingsForm
-                {...formikProps}
-                saving={this.state.saving}
-                languages={this.props.languages}
-              />
+              <SettingsForm {...formikProps} saving={this.state.saving} languages={this.props.languages} />
             )}
           />
         </div>

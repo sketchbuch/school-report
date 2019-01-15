@@ -34,10 +34,7 @@ const menuItemDefault: MenuItemType = {
  * @param MenuItemType menuitemObj The initial class object.
  * @return MenuItemType The new menu item object.
  */
-export function MenuItemFactory(
-  menuitemObj: MenuItemType,
-  ts: number
-): MenuItemType {
+export function MenuItemFactory(menuitemObj: MenuItemType, ts: number): MenuItemType {
   const keyUpper = menuitemObj.key.toUpperCase();
   const keyCapped = ucFirst(menuitemObj.key);
 

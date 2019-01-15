@@ -25,9 +25,7 @@ describe('Reducer: Classes', () => {
   });
 
   test('REPLACE_DATA should return the initial state if payload has no classes array', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(
-      INITIAL_STATE
-    );
+    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: REPLACE_DATA,
@@ -37,9 +35,7 @@ describe('Reducer: Classes', () => {
   });
 
   test('DATA_LOADED should return the initial state if payload has no classes array', () => {
-    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(
-      INITIAL_STATE
-    );
+    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: DATA_LOADED,
@@ -49,9 +45,7 @@ describe('Reducer: Classes', () => {
   });
 
   test('REPLACE_CLASSES should return the initial state if payload has no classes array', () => {
-    expect(
-      reducer(INITIAL_STATE, { type: REPLACE_CLASSES, payload: {} })
-    ).toEqual(INITIAL_STATE);
+    expect(reducer(INITIAL_STATE, { type: REPLACE_CLASSES, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: REPLACE_CLASSES,
@@ -62,18 +56,13 @@ describe('Reducer: Classes', () => {
 
   test('REPLACE_CLASSES should return payload replacing existing classes.', () => {
     const TEST_CLASSES = {
-      classes: [
-        { ...classDefault, label: 'Class 2', id: 'c2' },
-        { ...classDefault, label: 'Class 3', id: 'c3' },
-      ],
+      classes: [{ ...classDefault, label: 'Class 2', id: 'c2' }, { ...classDefault, label: 'Class 3', id: 'c3' }],
     };
     const reducerResult = reducer(INITIAL_STATE, {
       type: REPLACE_CLASSES,
       payload: TEST_CLASSES,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(TEST_CLASSES.classes)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(TEST_CLASSES.classes));
   });
 
   test('UPDATE_CLASS should update existing categories', () => {
@@ -83,9 +72,7 @@ describe('Reducer: Classes', () => {
       type: UPDATE_CLASS,
       payload: NEW_CAT,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_RESULT)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
   });
 
   test('ADD_CLASS should add the payload to existing classes.', () => {
@@ -95,9 +82,7 @@ describe('Reducer: Classes', () => {
       type: ADD_CLASS,
       payload: NEW_CLASS,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_RESULT)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
   });
 
   test('ADD_CLASS should not add the class if the ID already exists', () => {
@@ -106,9 +91,7 @@ describe('Reducer: Classes', () => {
       type: ADD_CLASS,
       payload: NEW_CLASS,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(INITIAL_STATE)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(INITIAL_STATE));
   });
 
   test('DELETE_CLASS should delete the category if the ID is found', () => {
@@ -117,17 +100,12 @@ describe('Reducer: Classes', () => {
       { ...classDefault, label: 'Class 2', id: 'c2' },
       { ...classDefault, label: 'Class 3', id: 'c3' },
     ];
-    const EXPECTED_STATE_DEL = reduce.arr.removeObj(
-      INITIAL_STATE_DEL,
-      INITIAL_STATE_DEL[1]
-    );
+    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[1]);
     const reducerResult = reducer(INITIAL_STATE_DEL, {
       type: DELETE_CLASS,
       payload: INITIAL_STATE_DEL[1],
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_STATE_DEL)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
   });
 
   test('DELETE_ALL_CLASSES should return an empty array', () => {

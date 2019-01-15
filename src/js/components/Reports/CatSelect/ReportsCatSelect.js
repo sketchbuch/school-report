@@ -33,14 +33,7 @@ export class ReportsCatSelect extends React.Component<Props> {
   props: Props;
 
   render() {
-    const {
-      categories,
-      onChange,
-      option,
-      selectedCount,
-      texts,
-      useSelected,
-    } = this.props;
+    const { categories, onChange, option, selectedCount, texts, useSelected } = this.props;
 
     if (categories.length < 1) {
       return null;
@@ -54,11 +47,7 @@ export class ReportsCatSelect extends React.Component<Props> {
 
     return (
       <div className="ReportsCatSelect">
-        <select
-          value={option}
-          onChange={onChange}
-          title={text('Tooltip', 'ReportsCatSelect')}
-        >
+        <select value={option} onChange={onChange} title={text('Tooltip', 'ReportsCatSelect')}>
           <option key="category-all" value="category-all">
             {text('CatsAll', 'ReportsCatSelect')} ({texts.length})
           </option>
@@ -74,22 +63,15 @@ export class ReportsCatSelect extends React.Component<Props> {
           )}
           {(uncategorisedCount > 0 || option === 'category-nocat') && (
             <option key="category-nocat" value="category-nocat">
-              {text('CatsUncategorised', 'ReportsCatSelect')} (
-              {uncategorisedCount})
+              {text('CatsUncategorised', 'ReportsCatSelect')} ({uncategorisedCount})
             </option>
           )}
-          <option
-            key="category-disabled"
-            disabled
-            className="ReportsCatSelect_sep"
-          >
+          <option key="category-disabled" disabled className="ReportsCatSelect_sep">
             ---
           </option>
 
           {sortedCategories.map(cat => {
-            const textCount = texts.filter(text =>
-              text.categories.includes(cat.id)
-            ).length;
+            const textCount = texts.filter(text => text.categories.includes(cat.id)).length;
 
             if (textCount < 1 && option !== cat.id) {
               return null;

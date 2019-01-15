@@ -38,11 +38,7 @@ export const textSort = ['bodytext', 'updated'];
  * @param string lang The language code for the the text.
  * @return TextType The new text object.
  */
-export function TextFactory(
-  textObj: TextType,
-  ts: number,
-  lang: string
-): TextType {
+export function TextFactory(textObj: TextType, ts: number, lang: string): TextType {
   return hydrateText({
     ...textObj,
     created: ts,
@@ -88,10 +84,7 @@ export function hydrateText(textObj: TextType): TextType {
       return ICON_TEXTS;
     },
     getLabel: function(cropLength: number) {
-      return cropStr(
-        this.bodytext,
-        cropLength !== undefined ? cropLength : TEXT_CROP_LEN
-      );
+      return cropStr(this.bodytext, cropLength !== undefined ? cropLength : TEXT_CROP_LEN);
     },
     getTooltip: function() {
       return this.getLabel();

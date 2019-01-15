@@ -10,12 +10,7 @@ import type { TextType } from './text';
  * Domain object type def.
  */
 
-export type DomainType =
-  | ClassType
-  | PupilType
-  | ReportType
-  | TextType
-  | CategoryType;
+export type DomainType = ClassType | PupilType | ReportType | TextType | CategoryType;
 
 export type DomainBaseType = {
   contains: Function,

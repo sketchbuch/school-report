@@ -20,12 +20,7 @@ import { textSort } from '../../types/text';
 import type { CategoryType } from '../../types/category';
 import type { TextType } from '../../types/text';
 import { ICON_ADD, ICON_CLOSE, ICON_DELETE } from '../../constants/icons';
-import {
-  ROUTE_DEL_TEXTS,
-  ROUTE_EDIT_TEXT,
-  ROUTE_NEW_TEXT,
-  ROUTE_TEXTS,
-} from '../../constants/routes';
+import { ROUTE_DEL_TEXTS, ROUTE_EDIT_TEXT, ROUTE_NEW_TEXT, ROUTE_TEXTS } from '../../constants/routes';
 import setTitle from '../../utils/title';
 
 type Props = {
@@ -187,10 +182,7 @@ export class TextsLayout extends React.Component<Props, State> {
               useSelected={false}
             />
           </SidebarList>
-          <SidebarFooter
-            leftActions={leftActions}
-            rightActions={rightActions}
-          />
+          <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>
         <Switch>
           <Route
@@ -206,12 +198,7 @@ export class TextsLayout extends React.Component<Props, State> {
           />
           <Route
             path={ROUTE_DEL_TEXTS}
-            render={routerProps => (
-              <DeleteTextsLayout
-                {...routerProps}
-                dispatch={this.props.dispatch}
-              />
-            )}
+            render={routerProps => <DeleteTextsLayout {...routerProps} dispatch={this.props.dispatch} />}
           />
           <Route
             path={ROUTE_NEW_TEXT}
@@ -227,11 +214,7 @@ export class TextsLayout extends React.Component<Props, State> {
           <Route
             path={ROUTE_TEXTS}
             render={routerProps => (
-              <InfoMsg
-                {...routerProps}
-                headine={text('Texts', 'InfoMsg')}
-                subtext={text('TextsMsg', 'InfoMsg')}
-              />
+              <InfoMsg {...routerProps} headine={text('Texts', 'InfoMsg')} subtext={text('TextsMsg', 'InfoMsg')} />
             )}
           />
         </Switch>

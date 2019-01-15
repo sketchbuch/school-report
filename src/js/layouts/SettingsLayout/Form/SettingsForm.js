@@ -29,14 +29,7 @@ export class SettingsFrom extends Component<Props> {
   props: Props;
 
   render() {
-    const {
-      dirty,
-      handleBlur,
-      handleChange,
-      handleSubmit,
-      saving,
-      values,
-    } = this.props;
+    const { dirty, handleBlur, handleChange, handleSubmit, saving, values } = this.props;
 
     const btnIsDisabled = saving || !dirty ? true : false;
 
@@ -49,11 +42,7 @@ export class SettingsFrom extends Component<Props> {
               <Translation name="LabelLanguage" ns="Settings" />
             </div>
             <div className="fieldwrap__right">
-              <select
-                name="language"
-                value={values.language}
-                onChange={handleChange}
-              >
+              <select name="language" value={values.language} onChange={handleChange}>
                 {this.props.languages.map(lang => {
                   return (
                     <option value={lang.key} key={lang.key}>
@@ -73,11 +62,7 @@ export class SettingsFrom extends Component<Props> {
               <Translation name="LabelPupilsSort" ns="Settings" />
             </div>
             <div className="fieldwrap__right">
-              <select
-                name="pupilsSort"
-                value={values.pupilsSort}
-                onChange={handleChange}
-              >
+              <select name="pupilsSort" value={values.pupilsSort} onChange={handleChange}>
                 {pupilSortOptions.map(sortOpt => {
                   return (
                     <option value={sortOpt} key={'pupilsort-' + sortOpt}>

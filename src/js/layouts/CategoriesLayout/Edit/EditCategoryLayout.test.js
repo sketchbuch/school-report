@@ -7,10 +7,7 @@ import { ROUTE_CATEGORIES } from '../../../constants/routes';
 import categoryDefault, { CategoryFactory } from '../../../types/category';
 
 describe('<EditCategoryLayout />', () => {
-  const cat = CategoryFactory(
-    { ...categoryDefault, label: 'Test' },
-    Date.now()
-  );
+  const cat = CategoryFactory({ ...categoryDefault, label: 'Test' }, Date.now());
   const props = {
     categories: [cat],
     dispatch: jest.fn(),
@@ -64,9 +61,7 @@ describe('<EditCategoryLayout />', () => {
 
     test('state.saving calls props.dispatch', () => {
       const mockDispatch = jest.fn();
-      const wrapper = shallow(
-        <EditCategoryLayout {...props} dispatch={mockDispatch} />
-      );
+      const wrapper = shallow(<EditCategoryLayout {...props} dispatch={mockDispatch} />);
       const instance = wrapper.instance();
 
       wrapper.setState({ saving: true });

@@ -75,14 +75,8 @@ export class EditBuilderLayout extends Component<Props, State> {
   }
 
   render() {
-    const activeItem = getItemById(
-      this.props.items,
-      this.props.match.params.classId
-    );
-    const activePupil = getItemById(
-      activeItem.pupils,
-      this.props.match.params.pupilId
-    );
+    const activeItem = getItemById(this.props.items, this.props.match.params.classId);
+    const activePupil = getItemById(activeItem.pupils, this.props.match.params.pupilId);
     const maxChars = this.props.activeReport.maxChars;
     let searchBox = null;
 
@@ -131,11 +125,10 @@ export class EditBuilderLayout extends Component<Props, State> {
             PUPIL_NAME: activePupil.getLabel(),
             CLASS_NAME: activeItem.classRec.getLabel(),
           })}
-          subtitle={text(
-            maxChars > 0 ? 'ReportBuilderCount' : 'ReportBuilderCountNoLimit',
-            'EditPanelHeader',
-            { TEXT_COUNT: textCount, MAX_CHARS: maxChars }
-          )}
+          subtitle={text(maxChars > 0 ? 'ReportBuilderCount' : 'ReportBuilderCountNoLimit', 'EditPanelHeader', {
+            TEXT_COUNT: textCount,
+            MAX_CHARS: maxChars,
+          })}
         >
           {searchBox}
         </EditPanelHeader>
@@ -145,16 +138,11 @@ export class EditBuilderLayout extends Component<Props, State> {
               activeClass={activeItem.classRec}
               activePupil={activePupil}
               activeReport={this.props.activeReport}
-              disableTexts={
-                maxChars > 0 && textCount >= maxChars ? true : false
-              }
+              disableTexts={maxChars > 0 && textCount >= maxChars ? true : false}
               term={this.state.term}
             />
           ) : (
-            <InfoMsg
-              headine={text('BuilderNoTexts', 'InfoMsg')}
-              subtext={text('BuilderNoTextsMsg', 'InfoMsg')}
-            />
+            <InfoMsg headine={text('BuilderNoTexts', 'InfoMsg')} subtext={text('BuilderNoTextsMsg', 'InfoMsg')} />
           )}
         </EditPanelContent>
       </EditPanel>

@@ -35,19 +35,13 @@ describe('FS: Export:', () => {
 
   const items = [
     {
-      classRec: ClassFactory(
-        { ...classDefault, label: 'Dave Lister' },
-        Date.now()
-      ),
+      classRec: ClassFactory({ ...classDefault, label: 'Dave Lister' }, Date.now()),
       id: '',
       pupils: [],
       reportId: 'r1',
     },
     {
-      classRec: ClassFactory(
-        { ...classDefault, label: 'Arnold Rimmer' },
-        Date.now()
-      ),
+      classRec: ClassFactory({ ...classDefault, label: 'Arnold Rimmer' }, Date.now()),
       id: '',
       pupils: [],
       reportId: 'r1',
@@ -65,32 +59,16 @@ describe('FS: Export:', () => {
   });
 
   items[1].pupils.push(
-    PupilFactory(
-      { ...pupilDefault, firstname: 'John', lastname: 'Smith' },
-      Date.now(),
-      items[1].id
-    )
+    PupilFactory({ ...pupilDefault, firstname: 'John', lastname: 'Smith' }, Date.now(), items[1].id)
   );
   items[1].pupils.push(
-    PupilFactory(
-      { ...pupilDefault, firstname: 'Sarah', lastname: 'Smith' },
-      Date.now(),
-      items[1].id
-    )
+    PupilFactory({ ...pupilDefault, firstname: 'Sarah', lastname: 'Smith' }, Date.now(), items[1].id)
   );
   items[1].pupils.push(
-    PupilFactory(
-      { ...pupilDefault, firstname: 'Robert', lastname: 'Fletcher' },
-      Date.now(),
-      items[1].id
-    )
+    PupilFactory({ ...pupilDefault, firstname: 'Robert', lastname: 'Fletcher' }, Date.now(), items[1].id)
   );
   items[2].pupils.push(
-    PupilFactory(
-      { ...pupilDefault, firstname: 'John', lastname: 'Roberts' },
-      Date.now(),
-      items[2].id
-    )
+    PupilFactory({ ...pupilDefault, firstname: 'John', lastname: 'Roberts' }, Date.now(), items[2].id)
   );
 
   const dummyBuilderData = {};
@@ -108,15 +86,8 @@ describe('FS: Export:', () => {
     dummyTexts[3].id,
     dummyTexts[5].id,
   ];
-  dummyBuilderData[items[1].id][items[1].pupils[1].id] = [
-    dummyTexts[7].id,
-    dummyTexts[5].id,
-  ];
-  dummyBuilderData[items[1].id][items[1].pupils[2].id] = [
-    dummyTexts[5].id,
-    dummyTexts[6].id,
-    dummyTexts[7].id,
-  ];
+  dummyBuilderData[items[1].id][items[1].pupils[1].id] = [dummyTexts[7].id, dummyTexts[5].id];
+  dummyBuilderData[items[1].id][items[1].pupils[2].id] = [dummyTexts[5].id, dummyTexts[6].id, dummyTexts[7].id];
   dummyBuilderData[items[2].id][items[1].pupils[0].id] = [
     dummyTexts[2].id,
     dummyTexts[7].id,
@@ -150,8 +121,7 @@ describe('FS: Export:', () => {
 
     test('Returns the correct content', () => {
       const result = getContent(items, dummyBuilderData, dummyTexts);
-      const expectedClassCount = items.filter(item => item.pupils.length > 0)
-        .length;
+      const expectedClassCount = items.filter(item => item.pupils.length > 0).length;
       const expectedPupilCount = items.reduce(
         (accumulator, currentValue) => accumulator + currentValue.pupils.length,
         0

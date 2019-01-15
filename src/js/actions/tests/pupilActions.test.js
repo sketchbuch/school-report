@@ -66,9 +66,7 @@ describe('Actions: pupilActions:', () => {
   });
 
   test('deletePupils dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: DELETE_ALL_CLASS_PUPILS, payload: { id: 'c1' } },
-    ];
+    const EXPECTED_ACTIONS = [{ type: DELETE_ALL_CLASS_PUPILS, payload: { id: 'c1' } }];
 
     expect.assertions(1);
     store.dispatch(pupilActions.deletePupils('c1', callback));

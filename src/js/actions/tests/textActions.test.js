@@ -3,13 +3,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as textActions from '../textActions';
-import {
-  ADD_TEXT,
-  DELETE_ALL_TEXTS,
-  DELETE_TEXT,
-  REPLACE_TEXTS,
-  UPDATE_TEXT,
-} from '../../constants/actionTypes';
+import { ADD_TEXT, DELETE_ALL_TEXTS, DELETE_TEXT, REPLACE_TEXTS, UPDATE_TEXT } from '../../constants/actionTypes';
 import textDefault from '../../types/text';
 
 const middlewares = [thunk];

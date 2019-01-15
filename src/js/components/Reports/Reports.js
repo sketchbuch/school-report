@@ -131,10 +131,7 @@ export class Reports extends Component<Props, State> {
   };
 
   render() {
-    const selectedTexts =
-      this.state.dragSelected.length > 0
-        ? this.state.dragSelected
-        : this.props.selected;
+    const selectedTexts = this.state.dragSelected.length > 0 ? this.state.dragSelected : this.props.selected;
 
     return (
       <section className="Reports">
@@ -166,12 +163,7 @@ export class Reports extends Component<Props, State> {
 
 const mapStateToProps = (state: Object, props: Props) => {
   return {
-    selected: getSelectedTexts(
-      state.builder,
-      props.activeReport.id,
-      props.activeClass.id,
-      props.activePupil.id
-    ),
+    selected: getSelectedTexts(state.builder, props.activeReport.id, props.activeClass.id, props.activePupil.id),
     categories: state.categories,
     texts: state.texts,
   };
@@ -187,16 +179,7 @@ const mapDispatchToProps = (dispatch: DispatchType) => {
       callback?: Function = () => {},
       immediate: boolean
     ) => {
-      dispatch(
-        builderActions.save(
-          reportId,
-          classId,
-          pupilId,
-          selected,
-          callback,
-          immediate
-        )
-      );
+      dispatch(builderActions.save(reportId, classId, pupilId, selected, callback, immediate));
     },
   };
 };

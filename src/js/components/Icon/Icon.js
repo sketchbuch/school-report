@@ -9,8 +9,6 @@ type Props = {
 /**
  * Iconfont Icon component.
  */
-const Icon = (props: Props) => (
-  <i className={'Icon icofont icofont-' + props.type} />
-);
+const Icon = (props: Props) => <i className={'Icon icofont icofont-' + props.type} />;
 
 export default Icon;

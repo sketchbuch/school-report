@@ -55,11 +55,9 @@ export class EditTextForm extends Component<Props> {
 
     const cValid = validate('categories', errors, touched);
     const btValid = validate('bodytext', errors, touched);
-    const btnIsDisabled =
-      !cValid || !btValid || saving || !dirty ? true : false;
+    const btnIsDisabled = !cValid || !btValid || saving || !dirty ? true : false;
     const sortedCategories = sortObjectsAz(categories, categorySort);
-    const selCount = categories.filter(c => values.categories.includes(c.id))
-      .length;
+    const selCount = categories.filter(c => values.categories.includes(c.id)).length;
 
     return (
       <form className="form" onSubmit={handleSubmit}>
@@ -75,11 +73,7 @@ export class EditTextForm extends Component<Props> {
           {!btValid && <p className="invalid-feedback">{errors.bodytext}</p>}
           <div className="fiedwrap__placeholders">
             {placeholderMap.map(ph => (
-              <span
-                key={ph.symbol}
-                className="fiedwrap__placeholder"
-                title={text('Title' + ph.symbol, '##')}
-              >
+              <span key={ph.symbol} className="fiedwrap__placeholder" title={text('Title' + ph.symbol, '##')}>
                 #{ph.symbol}#
               </span>
             ))}
@@ -97,11 +91,7 @@ export class EditTextForm extends Component<Props> {
             />
           </p>
 
-          <ItemSelection
-            items={sortedCategories}
-            name="categories"
-            selected={values.categories}
-          />
+          <ItemSelection items={sortedCategories} name="categories" selected={values.categories} />
           {!cValid && <p className="invalid-feedback">{errors.categories}</p>}
         </div>
         <div className="fieldwrap">

@@ -19,12 +19,7 @@ import { reportSort } from '../../types/report';
 import type { ReportType } from '../../types/report';
 import type { ClassType } from '../../types/class';
 import { ICON_ADD, ICON_CLOSE, ICON_DELETE } from '../../constants/icons';
-import {
-  ROUTE_DEL_REPORTS,
-  ROUTE_EDIT_REPORT,
-  ROUTE_NEW_REPORT,
-  ROUTE_REPORTS,
-} from '../../constants/routes';
+import { ROUTE_DEL_REPORTS, ROUTE_EDIT_REPORT, ROUTE_NEW_REPORT, ROUTE_REPORTS } from '../../constants/routes';
 import setTitle from '../../utils/title';
 
 type Props = {
@@ -163,10 +158,7 @@ export class ReportsLayout extends Component<Props, State> {
             term={this.state.term}
             usePb
           />
-          <SidebarFooter
-            leftActions={leftActions}
-            rightActions={rightActions}
-          />
+          <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>
         <Switch>
           u
@@ -184,12 +176,7 @@ export class ReportsLayout extends Component<Props, State> {
           />
           <Route
             path={ROUTE_DEL_REPORTS}
-            render={routerProps => (
-              <DeleteReportsLayout
-                {...routerProps}
-                dispatch={this.props.dispatch}
-              />
-            )}
+            render={routerProps => <DeleteReportsLayout {...routerProps} dispatch={this.props.dispatch} />}
           />
           <Route
             path={ROUTE_NEW_REPORT}
@@ -205,11 +192,7 @@ export class ReportsLayout extends Component<Props, State> {
           <Route
             path={ROUTE_REPORTS}
             render={routerProps => (
-              <InfoMsg
-                {...routerProps}
-                headine={text('Reports', 'InfoMsg')}
-                subtext={text('ReportsMsg', 'InfoMsg')}
-              />
+              <InfoMsg {...routerProps} headine={text('Reports', 'InfoMsg')} subtext={text('ReportsMsg', 'InfoMsg')} />
             )}
           />
         </Switch>

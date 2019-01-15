@@ -33,17 +33,7 @@ export class EditCategoryForm extends Component<Props> {
   props: Props;
 
   render() {
-    const {
-      dirty,
-      errors,
-      handleBlur,
-      handleChange,
-      handleSubmit,
-      isNew,
-      saving,
-      touched,
-      values,
-    } = this.props;
+    const { dirty, errors, handleBlur, handleChange, handleSubmit, isNew, saving, touched, values } = this.props;
 
     const lValid = validate('label', errors, touched);
     const btnIsDisabled = !lValid || saving || !dirty;

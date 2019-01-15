@@ -54,10 +54,7 @@ export class DeleteCategoriesLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceDeleteError', 'Categories')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceDeleteError', 'Categories'));
       this.props.history.push(ROUTE_CATEGORIES);
     } else if (this.state.deleting) {
       this.props.dispatch(categoryActions.deleteAll(this.dataSaved));
@@ -94,10 +91,7 @@ export class DeleteCategoriesLayout extends Component<Props, State> {
         <EditPanelContent>
           <h2 className="form__headline">
             {this.state.deleting ? (
-              <Translation
-                name="HeadlineDeleting"
-                ns="DeleteCategoriesLayout"
-              />
+              <Translation name="HeadlineDeleting" ns="DeleteCategoriesLayout" />
             ) : (
               <Translation name="Headline" ns="DeleteCategoriesLayout" />
             )}

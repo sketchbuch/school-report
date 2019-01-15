@@ -19,9 +19,7 @@ class NoItems extends React.PureComponent<Props> {
   props: Props;
 
   render() {
-    return (
-      <p className="NoItems">{this.props.message || this.props.children}</p>
-    );
+    return <p className="NoItems">{this.props.message || this.props.children}</p>;
   }
 }
 

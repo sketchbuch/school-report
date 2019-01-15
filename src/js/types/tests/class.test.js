@@ -3,11 +3,7 @@
 import classDefault, { ClassFactory, getClassIdStr } from '../class';
 import { ICON_CLASSES } from '../../constants/icons';
 import { generateId } from '../../utils/ids';
-import {
-  ROUTE_DEL_CLASS,
-  ROUTE_EDIT_CLASS,
-  ROUTE_PUPILS,
-} from '../../constants/routes';
+import { ROUTE_DEL_CLASS, ROUTE_EDIT_CLASS, ROUTE_PUPILS } from '../../constants/routes';
 
 describe('Types: Class', () => {
   const classObj = {
@@ -42,9 +38,7 @@ describe('Types: Class', () => {
     const newClassObj = ClassFactory(classObj, ts);
 
     test('getDescription() correctly returns the description', () => {
-      expect(newClassObj.getDescription()).toEqual(
-        '(' + newClassObj.pupilCount + ')'
-      );
+      expect(newClassObj.getDescription()).toEqual('(' + newClassObj.pupilCount + ')');
     });
 
     test('getIcon() correctly returns the icon', () => {
@@ -56,9 +50,7 @@ describe('Types: Class', () => {
     });
 
     test('getTooltip() correctly returns the tooltip', () => {
-      expect(newClassObj.getTooltip()).toEqual(
-        newClassObj.getLabel() + ' - ' + newClassObj.getDescription()
-      );
+      expect(newClassObj.getTooltip()).toEqual(newClassObj.getLabel() + ' - ' + newClassObj.getDescription());
     });
 
     describe('contains()', () => {
@@ -82,15 +74,11 @@ describe('Types: Class', () => {
 
     describe('getUrl()', () => {
       test('Returns ROUTE_EDIT_CLASS if linkType is edit', () => {
-        expect(newClassObj.getUrl('edit')).toBe(
-          ROUTE_EDIT_CLASS.replace(':classId', newClassObj.id)
-        );
+        expect(newClassObj.getUrl('edit')).toBe(ROUTE_EDIT_CLASS.replace(':classId', newClassObj.id));
       });
 
       test('Returns ROUTE_DEL_CLASS if linkType is delete', () => {
-        expect(newClassObj.getUrl('delete')).toBe(
-          ROUTE_DEL_CLASS.replace(':classId', newClassObj.id)
-        );
+        expect(newClassObj.getUrl('delete')).toBe(ROUTE_DEL_CLASS.replace(':classId', newClassObj.id));
       });
 
       test('Returns ROUTE_PUPILS for any other linkType', () => {

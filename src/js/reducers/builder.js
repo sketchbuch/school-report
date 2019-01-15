@@ -1,11 +1,6 @@
 // @flow
 
-import {
-  DATA_LOADED,
-  REPLACE_BUILDER,
-  REPLACE_DATA,
-  SAVE_BUILDER,
-} from '../constants/actionTypes';
+import { DATA_LOADED, REPLACE_BUILDER, REPLACE_DATA, SAVE_BUILDER } from '../constants/actionTypes';
 import type { ActionObj } from '../types/action';
 
 /**
@@ -17,11 +12,7 @@ export default function reducer(state: {} = {}, action: ActionObj) {
     case DATA_LOADED:
     case REPLACE_BUILDER:
     case REPLACE_DATA:
-      if (
-        action.payload &&
-        action.payload.builder !== undefined &&
-        typeof action.payload.builder === 'object'
-      ) {
+      if (action.payload && action.payload.builder !== undefined && typeof action.payload.builder === 'object') {
         return action.payload.builder;
       }
 

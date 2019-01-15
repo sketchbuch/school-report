@@ -18,10 +18,7 @@ import type { ActionObj } from '../types/action';
  * Reports Reducer.
  */
 
-export default function reducer(
-  state: Array<ReportType> = [],
-  action: ActionObj
-) {
+export default function reducer(state: Array<ReportType> = [], action: ActionObj) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_REPORTS:

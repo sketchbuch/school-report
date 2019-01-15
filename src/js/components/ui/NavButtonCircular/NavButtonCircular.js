@@ -33,16 +33,7 @@ class NavButtonCircular extends React.Component<Props> {
   props: Props;
 
   render() {
-    const {
-      action,
-      buttontype,
-      children,
-      className,
-      disabled,
-      title,
-      to,
-      type,
-    } = this.props;
+    const { action, buttontype, children, className, disabled, title, to, type } = this.props;
 
     let classes = 'ButtonCircular';
     if (className && className !== '') {

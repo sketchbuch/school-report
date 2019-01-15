@@ -7,20 +7,10 @@ import { sortObjectsAz, sortObjectsZa } from '../sort';
  */
 
 describe('Util: sort', () => {
-  const testArr = [
-    { label: 'b' },
-    { label: 'a' },
-    { label: 'd' },
-    { label: 'c' },
-  ];
+  const testArr = [{ label: 'b' }, { label: 'a' }, { label: 'd' }, { label: 'c' }];
 
   test('sortObjectsAz() should return the array sorted a-z', () => {
-    const expectedArr = [
-      { label: 'a' },
-      { label: 'b' },
-      { label: 'c' },
-      { label: 'd' },
-    ];
+    const expectedArr = [{ label: 'a' }, { label: 'b' }, { label: 'c' }, { label: 'd' }];
 
     expect(sortObjectsAz(testArr, ['label'])).toEqual(expectedArr);
   });
@@ -31,12 +21,7 @@ describe('Util: sort', () => {
   });
 
   test('sortObjectsZa() should return the array sorted z-a', () => {
-    const expectedArr = [
-      { label: 'd' },
-      { label: 'c' },
-      { label: 'b' },
-      { label: 'a' },
-    ];
+    const expectedArr = [{ label: 'd' }, { label: 'c' }, { label: 'b' }, { label: 'a' }];
 
     expect(sortObjectsZa(testArr, ['label'])).toEqual(expectedArr);
   });

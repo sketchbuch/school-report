@@ -18,10 +18,7 @@ import type { ActionObj } from '../types/action';
  * Classes Reducer.
  */
 
-export default function reducer(
-  state: Array<ClassType> = [],
-  action: ActionObj
-) {
+export default function reducer(state: Array<ClassType> = [], action: ActionObj) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_CLASSES:

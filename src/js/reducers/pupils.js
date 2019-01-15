@@ -19,10 +19,7 @@ import type { ActionObj } from '../types/action';
 /**
  * Pupils Reducer.
  */
-export default function reducer(
-  state: Array<PupilType> = [],
-  action: ActionObj
-) {
+export default function reducer(state: Array<PupilType> = [], action: ActionObj) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_DATA:

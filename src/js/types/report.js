@@ -4,11 +4,7 @@ import type { DomainBaseType } from './domain';
 import domainBaseDefault from './domain';
 import { generateId } from '../utils/ids';
 import { ICON_REPORTS } from '../constants/icons';
-import {
-  ROUTE_BUILDER,
-  ROUTE_DEL_REPORT,
-  ROUTE_EDIT_REPORT,
-} from '../constants/routes';
+import { ROUTE_BUILDER, ROUTE_DEL_REPORT, ROUTE_EDIT_REPORT } from '../constants/routes';
 
 /**
  * Report type def.

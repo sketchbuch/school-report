@@ -66,10 +66,7 @@ export class ReportsTexts extends Component<Props> {
         ))}
       </div>
     ) : (
-      <InfoMsg
-        headine={text('ReportsNoneSel', 'InfoMsg')}
-        subtext={text('ReportsNoneSelMsg', 'InfoMsg')}
-      />
+      <InfoMsg headine={text('ReportsNoneSel', 'InfoMsg')} subtext={text('ReportsNoneSelMsg', 'InfoMsg')} />
     );
   }
 }

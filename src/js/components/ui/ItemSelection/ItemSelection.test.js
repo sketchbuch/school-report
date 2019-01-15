@@ -28,11 +28,7 @@ describe('<ItemSelection />', () => {
 
     props = {
       ...defaultProps,
-      items: [
-        { ...classDefault, id: '1' },
-        { ...classDefault, id: '2' },
-        { ...classDefault, id: '3' },
-      ],
+      items: [{ ...classDefault, id: '1' }, { ...classDefault, id: '2' }, { ...classDefault, id: '3' }],
     };
     wrapper = shallow(<ItemSelection {...props} />);
     expect(wrapper.find('.ItemSelection__search')).toHaveLength(1);
@@ -41,11 +37,7 @@ describe('<ItemSelection />', () => {
   test('Renders the ItemList', () => {
     const props = {
       ...defaultProps,
-      items: [
-        { ...classDefault, id: '1' },
-        { ...classDefault, id: '2' },
-        { ...classDefault, id: '3' },
-      ],
+      items: [{ ...classDefault, id: '1' }, { ...classDefault, id: '2' }, { ...classDefault, id: '3' }],
     };
     const wrapper = mount(<ItemSelection {...props} />);
     expect(wrapper.find('.ItemList')).toHaveLength(1);

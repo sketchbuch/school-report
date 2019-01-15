@@ -16,10 +16,7 @@ import type { ReportType } from '../types/report';
  * Report Actions (the list items)
  */
 
-export function replace(
-  updatedData: Array<ReportType>,
-  callback: Function
-): ActionCreator {
+export function replace(updatedData: Array<ReportType>, callback: Function): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: REPLACE_REPORTS,
@@ -29,10 +26,7 @@ export function replace(
   };
 }
 
-export function update(
-  reportToUpdate: ReportType,
-  callback: Function
-): ActionCreator {
+export function update(reportToUpdate: ReportType, callback: Function): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_REPORT,
@@ -42,10 +36,7 @@ export function update(
   };
 }
 
-export function add(
-  reportToAdd: ReportType,
-  callback: Function
-): ActionCreator {
+export function add(reportToAdd: ReportType, callback: Function): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: ADD_REPORT,

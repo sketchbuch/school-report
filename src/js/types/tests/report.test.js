@@ -3,11 +3,7 @@
 import reportDefault, { ReportFactory, getReportIdStr } from '../report';
 import { ICON_REPORTS } from '../../constants/icons';
 import { generateId } from '../../utils/ids';
-import {
-  ROUTE_BUILDER,
-  ROUTE_DEL_REPORT,
-  ROUTE_EDIT_REPORT,
-} from '../../constants/routes';
+import { ROUTE_BUILDER, ROUTE_DEL_REPORT, ROUTE_EDIT_REPORT } from '../../constants/routes';
 
 describe('Types: Report', () => {
   const reportObj = {
@@ -44,9 +40,7 @@ describe('Types: Report', () => {
     const newReportObj = ReportFactory(reportObj, ts);
 
     test('getDescription() correctly returns the description', () => {
-      expect(newReportObj.getDescription()).toEqual(
-        `(${reportObj.classes.length})`
-      );
+      expect(newReportObj.getDescription()).toEqual(`(${reportObj.classes.length})`);
     });
 
     test('getIcon() correctly returns the icon', () => {
@@ -58,9 +52,7 @@ describe('Types: Report', () => {
     });
 
     test('getTooltip() correctly returns the tooltip', () => {
-      expect(newReportObj.getTooltip()).toEqual(
-        `${newReportObj.label} - (${reportObj.classes.length})`
-      );
+      expect(newReportObj.getTooltip()).toEqual(`${newReportObj.label} - (${reportObj.classes.length})`);
     });
 
     describe('contains()', () => {
@@ -84,15 +76,11 @@ describe('Types: Report', () => {
 
     describe('getUrl()', () => {
       test('Returns ROUTE_EDIT_REPORT if linkType is edit', () => {
-        expect(newReportObj.getUrl('edit')).toBe(
-          ROUTE_EDIT_REPORT.replace(':reportId', newReportObj.id)
-        );
+        expect(newReportObj.getUrl('edit')).toBe(ROUTE_EDIT_REPORT.replace(':reportId', newReportObj.id));
       });
 
       test('Returns ROUTE_DEL_REPORT if linkType is delete', () => {
-        expect(newReportObj.getUrl('delete')).toBe(
-          ROUTE_DEL_REPORT.replace(':reportId', newReportObj.id)
-        );
+        expect(newReportObj.getUrl('delete')).toBe(ROUTE_DEL_REPORT.replace(':reportId', newReportObj.id));
       });
 
       test('Returns ROUTE_BUILDER for any other linkType', () => {

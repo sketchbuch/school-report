@@ -49,9 +49,7 @@ describe('<HeaderPath />', () => {
   });
 
   test('<Returns null if no breadcrumbs', () => {
-    const wrapper = shallow(
-      <HeaderPath.WrappedComponent store={store} breadcrumbs={[]} />
-    );
+    const wrapper = shallow(<HeaderPath.WrappedComponent store={store} breadcrumbs={[]} />);
     expect(wrapper.get(0)).toBeNull();
   });
 });

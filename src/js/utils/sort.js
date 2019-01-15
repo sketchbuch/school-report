@@ -7,10 +7,7 @@
  * @prop array props An array of props to sort against.
  * @return array A copy of arr sorted by prop.
  */
-export function sortObjectsAz(
-  arr: Array<Object>,
-  props: Array<string>
-): Array<Object> {
+export function sortObjectsAz(arr: Array<Object>, props: Array<string>): Array<Object> {
   if (arr.length < 1 || props.length < 1) {
     return arr;
   }
@@ -29,10 +26,7 @@ export function sortObjectsAz(
  * @prop array props An array of props to sort against.
  * @return array A copy of arr sorted by prop.
  */
-export function sortObjectsZa(
-  arr: Array<Object>,
-  props: Array<string>
-): Array<Object> {
+export function sortObjectsZa(arr: Array<Object>, props: Array<string>): Array<Object> {
   return sortObjectsAz(arr, props).reverse();
 }
 

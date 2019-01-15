@@ -19,9 +19,7 @@ export class EditPanelContent extends React.Component<Props> {
   props: Props;
 
   render() {
-    const classes = this.props.noPadding
-      ? 'EditPanelContent EditPanelContent--noPadding'
-      : 'EditPanelContent';
+    const classes = this.props.noPadding ? 'EditPanelContent EditPanelContent--noPadding' : 'EditPanelContent';
 
     return <div className={classes}>{this.props.children}</div>;
   }

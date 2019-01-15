@@ -12,8 +12,7 @@ if (window !== undefined && window.require) {
 }
 
 const APP_PATH = electron !== null ? electron.remote.app.getAppPath() : '';
-const DATA_PATH =
-  electron !== null ? electron.remote.app.getPath('userData') : '';
+const DATA_PATH = electron !== null ? electron.remote.app.getPath('userData') : '';
 const FOLDER = window.location.hostname === 'localhost' ? 'public' : 'build';
 
 /**
@@ -90,8 +89,7 @@ export function createDataFolder(fileName: string) {
     if (folders[folders.length - 1].indexOf('.') > -1) {
       folders.pop();
     }
-    let finalPath =
-      DATA_PATH + '/' + (folders.length > 1 ? folders.join('/') : folders[0]);
+    let finalPath = DATA_PATH + '/' + (folders.length > 1 ? folders.join('/') : folders[0]);
 
     try {
       fs.mkdirSync(finalPath);
@@ -173,18 +171,13 @@ export function writeAppData(content: Object, callback: Function) {
     return new Promise((resolve, reject) => {
       const FILE_PATH = getDataPath(fileName);
 
-      fs.writeFile(
-        FILE_PATH,
-        JSON.stringify(content[fileName]),
-        'UTF-8',
-        (err?: any) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(FILE_PATH);
-          }
+      fs.writeFile(FILE_PATH, JSON.stringify(content[fileName]), 'UTF-8', (err?: any) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(FILE_PATH);
         }
-      );
+      });
     });
   });
 

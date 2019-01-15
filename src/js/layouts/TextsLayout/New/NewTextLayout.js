@@ -64,10 +64,7 @@ export class NewTextLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceNewError', 'Texts')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Texts'));
       this.props.history.push(ROUTE_TEXTS);
     } else if (this.state.saving) {
       this.props.dispatch(textActions.add(this.state.text, this.dataSaved));
@@ -92,10 +89,7 @@ export class NewTextLayout extends Component<Props, State> {
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
       this.props.history.push(ROUTE_TEXTS);
-      toastr.success(
-        text('PersistenceNew', 'Texts'),
-        cropStr(this.state.text.getLabel(), TEXT_CROP_LEN)
-      );
+      toastr.success(text('PersistenceNew', 'Texts'), cropStr(this.state.text.getLabel(), TEXT_CROP_LEN));
     } else {
       this.setState({
         error: true,

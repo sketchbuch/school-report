@@ -55,9 +55,7 @@ describe('<NewCategoryLayout />', () => {
 
     test('state.saving calls props.dispatch', () => {
       const mockDispatch = jest.fn();
-      const wrapper = shallow(
-        <NewCategoryLayout {...props} dispatch={mockDispatch} />
-      );
+      const wrapper = shallow(<NewCategoryLayout {...props} dispatch={mockDispatch} />);
       const instance = wrapper.instance();
 
       wrapper.setState({ saving: true });

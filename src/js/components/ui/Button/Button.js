@@ -34,17 +34,7 @@ class Button extends React.Component<Props> {
   props: Props;
 
   render() {
-    const {
-      buttontype,
-      className,
-      children,
-      disabled,
-      busy,
-      name,
-      onClick,
-      title,
-      type,
-    } = this.props;
+    const { buttontype, className, children, disabled, busy, name, onClick, title, type } = this.props;
 
     let classes = 'Button';
     if (className && className !== '') {

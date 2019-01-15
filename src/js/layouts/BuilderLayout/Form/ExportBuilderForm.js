@@ -32,15 +32,7 @@ export class ExportBuilderForm extends Component<Props> {
   props: Props;
 
   render() {
-    const {
-      errors,
-      handleBlur,
-      handleChange,
-      handleSubmit,
-      saving,
-      touched,
-      values,
-    } = this.props;
+    const { errors, handleBlur, handleChange, handleSubmit, saving, touched, values } = this.props;
 
     const lValid = validate('name', errors, touched);
     const btnIsDisabled = !lValid || saving || values.name === '';
@@ -48,11 +40,7 @@ export class ExportBuilderForm extends Component<Props> {
     return (
       <form className="form" onSubmit={handleSubmit}>
         <p className="form__headline">
-          <Translation
-            name="Headline"
-            ns="ExportBuilderForm"
-            placeholders={{ REPORT_NAME: this.props.reportName }}
-          />
+          <Translation name="Headline" ns="ExportBuilderForm" placeholders={{ REPORT_NAME: this.props.reportName }} />
         </p>
         <div className="fieldwrap">
           <TextInput

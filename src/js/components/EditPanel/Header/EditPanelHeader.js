@@ -30,14 +30,10 @@ export class EditPanelHeader extends React.Component<Props> {
       <header className="EditPanelHeader">
         <h1 className="EditPanelHeader__headline">
           {this.props.title}
-          {this.props.count > -1 && (
-            <span data-count={this.props.count}>{this.props.count}</span>
-          )}
+          {this.props.count > -1 && <span data-count={this.props.count}>{this.props.count}</span>}
           <span data-alert={this.props.alert}>{this.props.subtitle}</span>
         </h1>
-        {this.props.children && (
-          <div className="EditPanelHeader__controls">{this.props.children}</div>
-        )}
+        {this.props.children && <div className="EditPanelHeader__controls">{this.props.children}</div>}
       </header>
     );
   }

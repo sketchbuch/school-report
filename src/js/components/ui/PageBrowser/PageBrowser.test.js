@@ -90,9 +90,7 @@ describe('<PageBrowser />', () => {
 
     test('Calls onChange with the correct value for "first"', () => {
       const mockOnChange = jest.fn();
-      const wrapper = shallow(
-        <PageBrowser {...handleClickProps} onChange={mockOnChange} />
-      );
+      const wrapper = shallow(<PageBrowser {...handleClickProps} onChange={mockOnChange} />);
       const instance = wrapper.instance();
       instance.handleClick({ currentTarget: { dataset: { action: 'first' } } });
       expect(mockOnChange).toHaveBeenCalledTimes(1);
@@ -101,9 +99,7 @@ describe('<PageBrowser />', () => {
 
     test('Calls onChange with the correct value for "prev" if curPage = 1', () => {
       const mockOnChange = jest.fn();
-      const wrapper = shallow(
-        <PageBrowser {...handleClickProps} onChange={mockOnChange} />
-      );
+      const wrapper = shallow(<PageBrowser {...handleClickProps} onChange={mockOnChange} />);
       const instance = wrapper.instance();
       instance.handleClick({ currentTarget: { dataset: { action: 'prev' } } });
       expect(mockOnChange).toHaveBeenCalledTimes(1);
@@ -112,13 +108,7 @@ describe('<PageBrowser />', () => {
 
     test('Calls onChange with the correct value for "prev" if curPage = 3', () => {
       const mockOnChange = jest.fn();
-      const wrapper = shallow(
-        <PageBrowser
-          {...handleClickProps}
-          curPage={3}
-          onChange={mockOnChange}
-        />
-      );
+      const wrapper = shallow(<PageBrowser {...handleClickProps} curPage={3} onChange={mockOnChange} />);
       const instance = wrapper.instance();
       instance.handleClick({ currentTarget: { dataset: { action: 'prev' } } });
       expect(mockOnChange).toHaveBeenCalledTimes(1);
@@ -127,13 +117,7 @@ describe('<PageBrowser />', () => {
 
     test('Calls onChange with the correct value for "next" if curPage = totalPages', () => {
       const mockOnChange = jest.fn();
-      const wrapper = shallow(
-        <PageBrowser
-          {...handleClickProps}
-          curPage={3}
-          onChange={mockOnChange}
-        />
-      );
+      const wrapper = shallow(<PageBrowser {...handleClickProps} curPage={3} onChange={mockOnChange} />);
       const instance = wrapper.instance();
       instance.handleClick({ currentTarget: { dataset: { action: 'next' } } });
       expect(mockOnChange).toHaveBeenCalledTimes(1);
@@ -142,13 +126,7 @@ describe('<PageBrowser />', () => {
 
     test('Calls onChange with the correct value for "next" if curPage < totalPages', () => {
       const mockOnChange = jest.fn();
-      const wrapper = shallow(
-        <PageBrowser
-          {...handleClickProps}
-          curPage={1}
-          onChange={mockOnChange}
-        />
-      );
+      const wrapper = shallow(<PageBrowser {...handleClickProps} curPage={1} onChange={mockOnChange} />);
       const instance = wrapper.instance();
       instance.handleClick({ currentTarget: { dataset: { action: 'next' } } });
       expect(mockOnChange).toHaveBeenCalledTimes(1);
@@ -157,13 +135,7 @@ describe('<PageBrowser />', () => {
 
     test('Calls onChange with the correct value for "last"', () => {
       const mockOnChange = jest.fn();
-      const wrapper = shallow(
-        <PageBrowser
-          {...handleClickProps}
-          curPage={1}
-          onChange={mockOnChange}
-        />
-      );
+      const wrapper = shallow(<PageBrowser {...handleClickProps} curPage={1} onChange={mockOnChange} />);
       const instance = wrapper.instance();
       instance.handleClick({ currentTarget: { dataset: { action: 'last' } } });
       expect(mockOnChange).toHaveBeenCalledTimes(1);
@@ -172,13 +144,7 @@ describe('<PageBrowser />', () => {
 
     test('Calls onChange with the correct value for a page', () => {
       const mockOnChange = jest.fn();
-      const wrapper = shallow(
-        <PageBrowser
-          {...handleClickProps}
-          curPage={3}
-          onChange={mockOnChange}
-        />
-      );
+      const wrapper = shallow(<PageBrowser {...handleClickProps} curPage={3} onChange={mockOnChange} />);
       const instance = wrapper.instance();
       instance.handleClick({ currentTarget: { dataset: { action: '2' } } });
       expect(mockOnChange).toHaveBeenCalledTimes(1);

@@ -45,9 +45,7 @@ describe('<ReportsCatSelect />', () => {
   test('Shows the unselected option when needed', () => {
     const option = 'option[value="category-unselected"]';
     const wrapper1 = shallow(<ReportsCatSelect {...props} />);
-    const wrapper2 = shallow(
-      <ReportsCatSelect {...props} selectedCount={props.texts.length} />
-    );
+    const wrapper2 = shallow(<ReportsCatSelect {...props} selectedCount={props.texts.length} />);
 
     expect(wrapper1.find(option)).toHaveLength(1);
     expect(wrapper2.find(option)).toHaveLength(0);

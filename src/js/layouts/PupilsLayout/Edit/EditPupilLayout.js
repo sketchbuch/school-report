@@ -75,17 +75,10 @@ export class EditPupilLayout extends Component<Props, State> {
     );
 
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceNewError', 'Pupils')
-      );
-      this.props.history.push(
-        ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Pupils'));
+      this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));
     } else if (this.state.saving) {
-      this.props.dispatch(
-        pupilActions.update(this.state.pupil, this.dataSaved)
-      );
+      this.props.dispatch(pupilActions.update(this.state.pupil, this.dataSaved));
       this.setState({ saving: false });
     }
   }
@@ -116,13 +109,8 @@ export class EditPupilLayout extends Component<Props, State> {
    */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
-      toastr.success(
-        text('PersistenceEdit', 'Pupils'),
-        this.state.pupil.getLabel()
-      );
-      this.props.history.push(
-        ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)
-      );
+      toastr.success(text('PersistenceEdit', 'Pupils'), this.state.pupil.getLabel());
+      this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));
     } else {
       this.setState({
         error: true,
@@ -148,11 +136,7 @@ export class EditPupilLayout extends Component<Props, State> {
             validationSchema={pupilSchema}
             onSubmit={this.handleSubmit}
             render={formikProps => (
-              <EditPupilForm
-                {...formikProps}
-                saving={this.state.saving}
-                classId={this.props.activeClass.id}
-              />
+              <EditPupilForm {...formikProps} saving={this.state.saving} classId={this.props.activeClass.id} />
             )}
           />
         </EditPanelContent>

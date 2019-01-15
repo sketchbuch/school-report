@@ -35,12 +35,7 @@ describe('<SidebarItemButton />', () => {
     const handlePropClickMock = jest.fn();
     SidebarItemButton.WrappedComponent.prototype.handleClick = handleClickMock;
 
-    const wrapper = mount(
-      <SidebarItemButton.WrappedComponent
-        {...props}
-        handleClick={handlePropClickMock}
-      />
-    );
+    const wrapper = mount(<SidebarItemButton.WrappedComponent {...props} handleClick={handlePropClickMock} />);
     const component = wrapper.find('.SidebarItemButton').first();
     component.simulate('click');
 

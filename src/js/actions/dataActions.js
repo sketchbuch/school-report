@@ -26,10 +26,7 @@ import type { ActionCreator } from '../types/action';
  * Data Actions
  */
 
-export function replace(
-  updatedData?: Object,
-  callback: Function
-): ActionCreator {
+export function replace(updatedData?: Object, callback: Function): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: REPLACE_DATA,
@@ -70,15 +67,7 @@ export function load(callback: Function): ActionCreator {
   return (dispatch, getState) => {
     dispatch({ type: LOAD_DATA });
     readAppData(
-      [
-        FILE_BUILDER,
-        FILE_CATEGORIES,
-        FILE_CLASSES,
-        FILE_PUPILS,
-        FILE_REPORTS,
-        FILE_SETTINGS,
-        FILE_TEXTS,
-      ],
+      [FILE_BUILDER, FILE_CATEGORIES, FILE_CLASSES, FILE_PUPILS, FILE_REPORTS, FILE_SETTINGS, FILE_TEXTS],
       callback
     );
   };

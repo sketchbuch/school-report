@@ -158,39 +158,23 @@ export class CategoriesLayout extends Component<Props, State> {
             term={this.state.term}
             usePb
           />
-          <SidebarFooter
-            leftActions={leftActions}
-            rightActions={rightActions}
-          />
+          <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>
         <Switch>
           <Route
             path={ROUTE_EDIT_CATEGORY}
             render={routerProps => (
-              <EditCategoryLayout
-                {...routerProps}
-                categories={this.props.categories}
-                dispatch={this.props.dispatch}
-              />
+              <EditCategoryLayout {...routerProps} categories={this.props.categories} dispatch={this.props.dispatch} />
             )}
           />
           <Route
             path={ROUTE_DEL_CATEGORIES}
-            render={routerProps => (
-              <DeleteCategoriesLayout
-                {...routerProps}
-                dispatch={this.props.dispatch}
-              />
-            )}
+            render={routerProps => <DeleteCategoriesLayout {...routerProps} dispatch={this.props.dispatch} />}
           />
           <Route
             path={ROUTE_NEW_CATEGORY}
             render={routerProps => (
-              <NewCategoryLayout
-                {...routerProps}
-                categories={this.props.categories}
-                dispatch={this.props.dispatch}
-              />
+              <NewCategoryLayout {...routerProps} categories={this.props.categories} dispatch={this.props.dispatch} />
             )}
           />
           <Route

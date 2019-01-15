@@ -50,11 +50,7 @@ class ItemList extends Component<Props> {
         {totalCount > 0 && items.length > 0 ? (
           items.map(item => {
             return (
-              <label
-                className="ItemList__item"
-                key={item.id}
-                title={item.getTooltip()}
-              >
+              <label className="ItemList__item" key={item.id} title={item.getTooltip()}>
                 <input
                   type="checkbox"
                   value={item.id}
@@ -68,31 +64,17 @@ class ItemList extends Component<Props> {
                     }
                   }}
                 />
-                <div
-                  className="ItemList__inner"
-                  key={item.id}
-                  title={item.getTooltip()}
-                >
-                  {selected.includes(item.id) ? (
-                    <Icon type={ICON_SUCCESS} />
-                  ) : (
-                    <Icon type={item.getIcon()} />
-                  )}
+                <div className="ItemList__inner" key={item.id} title={item.getTooltip()}>
+                  {selected.includes(item.id) ? <Icon type={ICON_SUCCESS} /> : <Icon type={item.getIcon()} />}
                   <span className="ItemList__label">{item.getLabel()}</span>
-                  <span className="ItemList__description">
-                    {item.getDescription()}
-                  </span>
+                  <span className="ItemList__description">{item.getDescription()}</span>
                 </div>
               </label>
             );
           })
         ) : (
           <NoItems>
-            <Translation
-              name={labelName}
-              ns="ItemList"
-              placeholders={{ NAME: name }}
-            />
+            <Translation name={labelName} ns="ItemList" placeholders={{ NAME: name }} />
           </NoItems>
         )}
       </div>

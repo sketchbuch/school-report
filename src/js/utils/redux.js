@@ -134,10 +134,7 @@ function getBreadcrumbLink(path: string, matchParams: Object) {
  * @param string objId The id of the obect needed.
  * @return object|null Either a copy of the object needed or null.
  */
-function getBreadcrumb(
-  stateSlice: Array<BcStateType>,
-  objId: string
-): ClassType | null {
+function getBreadcrumb(stateSlice: Array<BcStateType>, objId: string): ClassType | null {
   if (objId) {
     const neededObj = stateSlice.find(obj => obj.id === objId);
     if (neededObj !== undefined) {
@@ -155,10 +152,7 @@ function getBreadcrumb(
  * @param string classId The id of the class looked for.
  * @return object Either the class or an empty object.
  */
-export function getActiveClass(
-  classes: Array<ClassType>,
-  classId: string
-): ClassType | Object {
+export function getActiveClass(classes: Array<ClassType>, classId: string): ClassType | Object {
   return getItemById(classes, classId);
 }
 
@@ -169,10 +163,7 @@ export function getActiveClass(
  * @param string pupilId The id of the pupil looked for.
  * @return object Either the pupil or an empty object.
  */
-export function getActivePupil(
-  pupils: Array<PupilType>,
-  pupilId: string
-): PupilType | Object {
+export function getActivePupil(pupils: Array<PupilType>, pupilId: string): PupilType | Object {
   return getItemById(pupils, pupilId);
 }
 
@@ -183,10 +174,7 @@ export function getActivePupil(
  * @param string textId The id of the text looked for.
  * @return object Either the text or an empty object.
  */
-export function getActiveText(
-  texts: Array<TextType>,
-  textId: string
-): TextType | Object {
+export function getActiveText(texts: Array<TextType>, textId: string): TextType | Object {
   return getItemById(texts, textId);
 }
 
@@ -197,10 +185,7 @@ export function getActiveText(
  * @param string reportId The id of the report looked for.
  * @return object Either the text or an empty object.
  */
-export function getActiveReport(
-  reports: Array<ReportType>,
-  reportId: string
-): ReportType | Object {
+export function getActiveReport(reports: Array<ReportType>, reportId: string): ReportType | Object {
   return getItemById(reports, reportId);
 }
 
@@ -211,10 +196,7 @@ export function getActiveReport(
  * @param string categoryId The id of the category looked for.
  * @return object Either the category or an empty object.
  */
-export function getActiveCategory(
-  categories: Array<CategoryType>,
-  categoryId: string
-): CategoryType | Object {
+export function getActiveCategory(categories: Array<CategoryType>, categoryId: string): CategoryType | Object {
   return getItemById(categories, categoryId);
 }
 
@@ -225,10 +207,7 @@ export function getActiveCategory(
  * @param string classId The id of the class looked for.
  * @return array Either the matching pupils or an empty array.
  */
-export function getClassPupils(
-  pupils: Array<PupilType>,
-  classId: string
-): Array<PupilType> {
+export function getClassPupils(pupils: Array<PupilType>, classId: string): Array<PupilType> {
   if (classId !== '') {
     return pupils.filter(p => p.classId === classId);
   }
@@ -253,9 +232,7 @@ export const getSelectedTexts = (
   let selected = [];
   if (builderData[activeReportId] !== undefined) {
     if (builderData[activeReportId][activeClassId] !== undefined) {
-      if (
-        builderData[activeReportId][activeClassId][activePupilId] !== undefined
-      ) {
+      if (builderData[activeReportId][activeClassId][activePupilId] !== undefined) {
         selected = builderData[activeReportId][activeClassId][activePupilId];
       }
     }

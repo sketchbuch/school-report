@@ -62,10 +62,7 @@ export class NewReportLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceNewError', 'Reports')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Reports'));
       this.props.history.push(ROUTE_REPORTS);
     } else if (this.state.saving) {
       this.props.dispatch(reportActions.add(this.state.report, this.dataSaved));
@@ -89,10 +86,7 @@ export class NewReportLayout extends Component<Props, State> {
    */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
-      toastr.success(
-        text('PersistenceNew', 'Reports'),
-        this.state.report.getLabel()
-      );
+      toastr.success(text('PersistenceNew', 'Reports'), this.state.report.getLabel());
       this.props.history.push(ROUTE_REPORTS);
     } else {
       this.setState({
@@ -113,12 +107,7 @@ export class NewReportLayout extends Component<Props, State> {
             validationSchema={reportSchema}
             onSubmit={this.handleSubmit}
             render={formikProps => (
-              <EditReportForm
-                {...formikProps}
-                saving={this.state.saving}
-                classes={this.props.classes}
-                isNew={true}
-              />
+              <EditReportForm {...formikProps} saving={this.state.saving} classes={this.props.classes} isNew={true} />
             )}
           />
         </EditPanelContent>

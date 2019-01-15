@@ -55,10 +55,7 @@ export class NewClassLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceNewError', 'Classes')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Classes'));
       this.props.history.push(ROUTE_CLASSES);
     } else if (this.state.saving) {
       this.props.dispatch(classActions.add(this.state.class, this.dataSaved));
@@ -82,10 +79,7 @@ export class NewClassLayout extends Component<Props, State> {
    */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
-      toastr.success(
-        text('PersistenceNew', 'Classes'),
-        this.state.class.getLabel()
-      );
+      toastr.success(text('PersistenceNew', 'Classes'), this.state.class.getLabel());
       this.props.history.push(ROUTE_CLASSES);
     } else {
       this.setState({
@@ -105,13 +99,7 @@ export class NewClassLayout extends Component<Props, State> {
             enableReinitialize={true}
             validationSchema={classSchema}
             onSubmit={this.handleSubmit}
-            render={formikProps => (
-              <EditClassForm
-                {...formikProps}
-                saving={this.state.saving}
-                isNew={true}
-              />
-            )}
+            render={formikProps => <EditClassForm {...formikProps} saving={this.state.saving} isNew={true} />}
           />
         </EditPanelContent>
       </EditPanel>

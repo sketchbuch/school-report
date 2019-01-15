@@ -61,15 +61,10 @@ export class NewCategoryLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceNewError', 'Categories')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Categories'));
       this.props.history.push(ROUTE_CATEGORIES);
     } else if (this.state.saving) {
-      this.props.dispatch(
-        categoryActions.add(this.state.category, this.dataSaved)
-      );
+      this.props.dispatch(categoryActions.add(this.state.category, this.dataSaved));
       this.setState({ saving: false });
     }
   }
@@ -91,10 +86,7 @@ export class NewCategoryLayout extends Component<Props, State> {
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
       this.props.history.push(ROUTE_CATEGORIES);
-      toastr.success(
-        text('PersistenceNew', 'Categories'),
-        this.state.category.getLabel()
-      );
+      toastr.success(text('PersistenceNew', 'Categories'), this.state.category.getLabel());
     } else {
       this.setState({
         error: true,
@@ -113,13 +105,7 @@ export class NewCategoryLayout extends Component<Props, State> {
             enableReinitialize={true}
             validationSchema={categorySchema}
             onSubmit={this.handleSubmit}
-            render={formikProps => (
-              <EditCategoryForm
-                {...formikProps}
-                saving={this.state.saving}
-                isNew={true}
-              />
-            )}
+            render={formikProps => <EditCategoryForm {...formikProps} saving={this.state.saving} isNew={true} />}
           />
         </EditPanelContent>
       </EditPanel>

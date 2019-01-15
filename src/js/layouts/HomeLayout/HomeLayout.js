@@ -22,13 +22,9 @@ export class HomeLayout extends Component<Props> {
     super(props);
 
     this.menuItems = [];
-    ['classes', 'texts', 'categories', 'reports', 'settings'].forEach(
-      (item, index) => {
-        this.menuItems.push(
-          MenuItemFactory({ ...menuItemDefault, key: item }, Date.now())
-        );
-      }
-    );
+    ['classes', 'texts', 'categories', 'reports', 'settings'].forEach((item, index) => {
+      this.menuItems.push(MenuItemFactory({ ...menuItemDefault, key: item }, Date.now()));
+    });
   }
 
   componentDidMount() {
@@ -47,9 +43,7 @@ export class HomeLayout extends Component<Props> {
                     <Icon type={item.icon} />
                   </ButtonCircular>
                   <span className="HomeLayout__title">{item.label}</span>
-                  <span className="HomeLayout__description">
-                    {item.description}
-                  </span>
+                  <span className="HomeLayout__description">{item.description}</span>
                 </Link>
               </div>
             );

@@ -50,10 +50,7 @@ export class DeleteClassesLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceDeleteError', 'Classes')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceDeleteError', 'Classes'));
       this.props.history.push(ROUTE_CLASSES);
     } else if (this.state.deleting) {
       this.props.dispatch(classActions.deleteAll(this.dataSaved));

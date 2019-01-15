@@ -1,12 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import {
-  DragSource,
-  DropTarget,
-  DragSourceConnector,
-  DragSourceMonitor,
-} from 'react-dnd';
+import { DragSource, DropTarget, DragSourceConnector, DragSourceMonitor } from 'react-dnd';
 import LetterCount from '../../LetterCount/LetterCount';
 import { getPupilTextHtml } from '../../../utils/html';
 import { dndTypes } from '../../../constants/dndTypes';
@@ -29,28 +24,16 @@ type Props = {
 
 // DnD Source and Target:
 const textSource = {
-  beginDrag(
-    props: Props,
-    monitor: DragSourceMonitor | Function,
-    component: Object | Function
-  ) {
+  beginDrag(props: Props, monitor: DragSourceMonitor | Function, component: Object | Function) {
     return { id: props.txt.id };
   },
-  endDrag(
-    props: Props,
-    monitor: DragSourceMonitor | Function,
-    component: Object | Function
-  ) {
+  endDrag(props: Props, monitor: DragSourceMonitor | Function, component: Object | Function) {
     props.onEndDrag();
   },
 };
 
 const textTarget = {
-  hover(
-    props: Props,
-    monitor: DragSourceMonitor | Function,
-    component: Object | Function
-  ) {
+  hover(props: Props, monitor: DragSourceMonitor | Function, component: Object | Function) {
     if (!component) {
       return null;
     }
@@ -85,14 +68,7 @@ export class ReportsTextItem extends Component<Props> {
   ele: ?HTMLElement;
 
   render() {
-    const {
-      activePupil,
-      connectDragSource,
-      connectDropTarget,
-      isDragging,
-      onClick,
-      txt,
-    } = this.props;
+    const { activePupil, connectDragSource, connectDropTarget, isDragging, onClick, txt } = this.props;
 
     let classes = 'ReportsTextItem';
     if (isDragging) {
@@ -103,15 +79,9 @@ export class ReportsTextItem extends Component<Props> {
 
     return connectDragSource(
       connectDropTarget(
-        <div
-          className={classes}
-          onClick={onClick(txt.id)}
-          ref={ele => (this.ele = ele)}
-        >
+        <div className={classes} onClick={onClick(txt.id)} ref={ele => (this.ele = ele)}>
           <span dangerouslySetInnerHTML={pupilText} />
-          <LetterCount
-            count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length}
-          />
+          <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length} />
         </div>
       )
     );
@@ -119,25 +89,17 @@ export class ReportsTextItem extends Component<Props> {
 }
 
 // DnD Source and Target connection:
-ReportsTextItem = DragSource(
-  dndTypes.TEXT,
-  textSource,
-  (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
-    connectDragSource: connect.dragSource(),
-    isDragging: monitor.isDragging(),
-  })
-)(ReportsTextItem);
+ReportsTextItem = DragSource(dndTypes.TEXT, textSource, (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
+  connectDragSource: connect.dragSource(),
+  isDragging: monitor.isDragging(),
+}))(ReportsTextItem);
 
-ReportsTextItem = DropTarget(
-  dndTypes.TEXT,
-  textTarget,
-  (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver(),
-    isOverCurrent: monitor.isOver({ shallow: true }),
-    canDrop: monitor.canDrop(),
-    itemType: monitor.getItemType(),
-  })
-)(ReportsTextItem);
+ReportsTextItem = DropTarget(dndTypes.TEXT, textTarget, (connect: DragSourceConnector, monitor: DragSourceMonitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver(),
+  isOverCurrent: monitor.isOver({ shallow: true }),
+  canDrop: monitor.canDrop(),
+  itemType: monitor.getItemType(),
+}))(ReportsTextItem);
 
 export default ReportsTextItem;

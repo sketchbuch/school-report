@@ -29,11 +29,7 @@ describe('<ItemList />', () => {
     expect(wrapper.find('.ItemList__item')).toHaveLength(0);
 
     let props = {
-      items: [
-        { ...classDefault, id: '1' },
-        { ...classDefault, id: '2' },
-        { ...classDefault, id: '3' },
-      ],
+      items: [{ ...classDefault, id: '1' }, { ...classDefault, id: '2' }, { ...classDefault, id: '3' }],
       totalCount: 5,
     };
 

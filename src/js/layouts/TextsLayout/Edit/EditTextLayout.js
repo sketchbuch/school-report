@@ -60,22 +60,15 @@ export class EditTextLayout extends Component<Props, State> {
   }
 
   componentDidMount() {
-    setTitle(
-      text('WinTitle', 'EditTextLayout', { TEXT: this.state.text.getLabel() })
-    );
+    setTitle(text('WinTitle', 'EditTextLayout', { TEXT: this.state.text.getLabel() }));
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     const activeText = this.getActiveText();
-    setTitle(
-      text('WinTitle', 'EditTextLayout', { TEXT: activeText.getLabel() })
-    );
+    setTitle(text('WinTitle', 'EditTextLayout', { TEXT: activeText.getLabel() }));
 
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceNewError', 'Texts')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Texts'));
       this.props.history.push(ROUTE_TEXTS);
     } else if (this.state.saving) {
       this.props.dispatch(textActions.update(this.state.text, this.dataSaved));
@@ -110,10 +103,7 @@ export class EditTextLayout extends Component<Props, State> {
    */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
-      toastr.success(
-        text('PersistenceEdit', 'Texts'),
-        this.state.text.getLabel()
-      );
+      toastr.success(text('PersistenceEdit', 'Texts'), this.state.text.getLabel());
       this.props.history.push(ROUTE_TEXTS);
     } else {
       this.setState({
@@ -140,11 +130,7 @@ export class EditTextLayout extends Component<Props, State> {
             validationSchema={textSchema}
             onSubmit={this.handleSubmit}
             render={formikProps => (
-              <EditTextForm
-                {...formikProps}
-                saving={this.state.saving}
-                categories={this.props.categories}
-              />
+              <EditTextForm {...formikProps} saving={this.state.saving} categories={this.props.categories} />
             )}
           />
         </EditPanelContent>

@@ -36,9 +36,7 @@ describe('<Panels />', () => {
         path: ROUTE_HOME,
       },
     };
-    const wrapper = shallow(
-      <Panels.WrappedComponent {...props} {...routerProps} />
-    );
+    const wrapper = shallow(<Panels.WrappedComponent {...props} {...routerProps} />);
     expect(routerProps.history.push).toHaveBeenCalledWith(ROUTE_HOME);
   });
 });

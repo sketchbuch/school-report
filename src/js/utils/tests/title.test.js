@@ -14,9 +14,7 @@ describe('Util: Titles', () => {
 
   test('setTitle() handles suffix correctly', () => {
     setTitle('Test');
-    expect(window.document.title).toBe(
-      window.reportr.translations.EN.App.Name + titleSep + 'Test'
-    );
+    expect(window.document.title).toBe(window.reportr.translations.EN.App.Name + titleSep + 'Test');
     setTitle(' ');
     expect(window.document.title).toBe(window.reportr.translations.EN.App.Name);
   });

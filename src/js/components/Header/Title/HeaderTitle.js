@@ -38,9 +38,7 @@ export class HeaderTitle extends Component<Props> {
         <span className="HeaderTitle_icon">
           <Icon type={this.props.icon} />
         </span>
-        <span className="HeaderTitle_text">
-          {this.props.appName || this.appName}
-        </span>
+        <span className="HeaderTitle_text">{this.props.appName || this.appName}</span>
       </span>
     );
   }

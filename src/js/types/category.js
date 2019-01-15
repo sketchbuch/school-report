@@ -29,10 +29,7 @@ export const categorySort = ['label', 'updated'];
  * @param number ts A timestamp used for the id, created, and updated.
  * @return CategoryType The new category object.
  */
-export function CategoryFactory(
-  categoryObj: CategoryType,
-  ts: number
-): CategoryType {
+export function CategoryFactory(categoryObj: CategoryType, ts: number): CategoryType {
   const newObj = hydrateCategory({
     ...categoryObj,
     created: ts,

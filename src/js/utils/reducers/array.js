@@ -20,16 +20,8 @@ export function addItem(state: Array<any>, newEle: any): Array<any> {
  * @param integer toIndex The index to move theEle to.
  * @return array An updated copy of state.
  */
-export function moveItem(
-  state: Array<any>,
-  newEle: any,
-  fromIndex: number,
-  toIndex: number
-): Array<any> {
-  const newState = [
-    ...state.slice(0, fromIndex),
-    ...state.slice(fromIndex + 1),
-  ];
+export function moveItem(state: Array<any>, newEle: any, fromIndex: number, toIndex: number): Array<any> {
+  const newState = [...state.slice(0, fromIndex), ...state.slice(fromIndex + 1)];
 
   return [...newState.slice(0, toIndex), newEle, ...newState.slice(toIndex)];
 }
@@ -42,11 +34,7 @@ export function moveItem(
  * @param integer arrIndex The index to insert newEle at.
  * @return array An updated copy of state.
  */
-export function insertItem(
-  state: Array<any>,
-  newEle: any,
-  arrIndex: number
-): Array<any> {
+export function insertItem(state: Array<any>, newEle: any, arrIndex: number): Array<any> {
   return [...state.slice(0, arrIndex), newEle, ...state.slice(arrIndex)];
 }
 
@@ -69,11 +57,7 @@ export function removeItem(state: Array<any>, arrIndex: number): Array<any> {
  * @param mixed newEle The element to update.
  * @return array An updated copy of state.
  */
-export function updateItem(
-  state: Array<any>,
-  arrIndex: number,
-  newEle: any
-): Array<any> {
+export function updateItem(state: Array<any>, arrIndex: number, newEle: any): Array<any> {
   return [...state.slice(0, arrIndex), newEle, ...state.slice(arrIndex + 1)];
 }
 

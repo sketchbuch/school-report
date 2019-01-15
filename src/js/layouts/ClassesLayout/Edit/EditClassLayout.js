@@ -72,15 +72,10 @@ export class EditClassLayout extends Component<Props, State> {
     );
 
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceEditError', 'Classes')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceEditError', 'Classes'));
       this.props.history.push(ROUTE_CLASSES);
     } else if (this.state.saving) {
-      this.props.dispatch(
-        classActions.update(this.state.class, this.dataSaved)
-      );
+      this.props.dispatch(classActions.update(this.state.class, this.dataSaved));
       this.setState({ saving: false });
     }
   }
@@ -111,10 +106,7 @@ export class EditClassLayout extends Component<Props, State> {
    */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
-      toastr.success(
-        text('PersistenceEdit', 'Classes'),
-        this.state.class.getLabel()
-      );
+      toastr.success(text('PersistenceEdit', 'Classes'), this.state.class.getLabel());
       this.props.history.push(ROUTE_CLASSES);
     } else {
       this.setState({
@@ -140,9 +132,7 @@ export class EditClassLayout extends Component<Props, State> {
             enableReinitialize={true}
             validationSchema={classSchema}
             onSubmit={this.handleSubmit}
-            render={formikProps => (
-              <EditClassForm {...formikProps} saving={this.state.saving} />
-            )}
+            render={formikProps => <EditClassForm {...formikProps} saving={this.state.saving} />}
           />
         </EditPanelContent>
       </EditPanel>

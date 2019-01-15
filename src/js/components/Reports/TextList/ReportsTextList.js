@@ -63,30 +63,20 @@ export class ReportsTextList extends Component<Props, State> {
 
     if (this.state.option !== 'category-all') {
       if (this.state.option === 'category-nocat') {
-        visibleTexts = this.props.texts.filter(
-          text => text.categories.length === 0
-        );
+        visibleTexts = this.props.texts.filter(text => text.categories.length === 0);
       } else if (this.state.option === 'category-selected') {
-        visibleTexts = this.props.texts.filter(
-          text => this.props.selectedTexts.indexOf(text.id) > -1
-        );
+        visibleTexts = this.props.texts.filter(text => this.props.selectedTexts.indexOf(text.id) > -1);
       } else if (this.state.option === 'category-unselected') {
-        visibleTexts = this.props.texts.filter(
-          text => this.props.selectedTexts.indexOf(text.id) < 0
-        );
+        visibleTexts = this.props.texts.filter(text => this.props.selectedTexts.indexOf(text.id) < 0);
       } else {
-        visibleTexts = this.props.texts.filter(text =>
-          text.categories.includes(this.state.option)
-        );
+        visibleTexts = this.props.texts.filter(text => text.categories.includes(this.state.option));
       }
     } else {
       visibleTexts = [...this.props.texts];
     }
 
     if (this.props.term !== '') {
-      visibleTexts = visibleTexts.filter(text =>
-        text.contains(this.props.term)
-      );
+      visibleTexts = visibleTexts.filter(text => text.contains(this.props.term));
     }
 
     return visibleTexts;
@@ -108,12 +98,8 @@ export class ReportsTextList extends Component<Props, State> {
         {visibleTexts.length > 0 ? (
           <ul className="ReportsTextList_list">
             {visibleTexts.map(text => {
-              const pupilText = getPupilTextHtml(
-                text.getLabel(0),
-                this.props.activePupil
-              );
-              const isSelected =
-                this.props.selectedTexts.indexOf(text.id) > -1 ? true : false;
+              const pupilText = getPupilTextHtml(text.getLabel(0), this.props.activePupil);
+              const isSelected = this.props.selectedTexts.indexOf(text.id) > -1 ? true : false;
               const isActive = !isSelected && this.props.disableTexts;
               let classes = isSelected
                 ? 'ReportsTextList__item ReportsTextList__item--selected'
@@ -123,17 +109,9 @@ export class ReportsTextList extends Component<Props, State> {
               }
 
               return (
-                <li
-                  key={text.id}
-                  className={classes}
-                  onClick={
-                    isActive ? null : this.props.handleTextToggle(text.id)
-                  }
-                >
+                <li key={text.id} className={classes} onClick={isActive ? null : this.props.handleTextToggle(text.id)}>
                   <span dangerouslySetInnerHTML={pupilText} />
-                  <LetterCount
-                    count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length}
-                  />
+                  <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length} />
                   {isSelected && (
                     <span className="ReportsTextList__itemselected">
                       <Icon type={ICON_SUCCESS} />

@@ -34,16 +34,12 @@ describe('Reducer: App', () => {
 
   test('LANGUAGE_LOADED should return with loaded = true', () => {
     const testState = { ...appDefault, languageLoaded: true };
-    expect(reducer(INITIAL_STATE, { type: LANGUAGE_LOADED })).toEqual(
-      testState
-    );
+    expect(reducer(INITIAL_STATE, { type: LANGUAGE_LOADED })).toEqual(testState);
   });
 
   test('SETTINGS_LOADED should return with error = true', () => {
     const testState = { ...appDefault, settingsLoaded: true };
-    expect(reducer(INITIAL_STATE, { type: SETTINGS_LOADED })).toEqual(
-      testState
-    );
+    expect(reducer(INITIAL_STATE, { type: SETTINGS_LOADED })).toEqual(testState);
   });
 
   test('DATA_LOADED should return with dataLoaded = true', () => {

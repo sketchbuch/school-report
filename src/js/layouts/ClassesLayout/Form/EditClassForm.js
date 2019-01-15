@@ -33,21 +33,10 @@ export class EditClassForm extends Component<Props> {
   props: Props;
 
   render() {
-    const {
-      dirty,
-      errors,
-      handleBlur,
-      handleChange,
-      handleSubmit,
-      isNew,
-      saving,
-      touched,
-      values,
-    } = this.props;
+    const { dirty, errors, handleBlur, handleChange, handleSubmit, isNew, saving, touched, values } = this.props;
 
     const clValid = validate('label', errors, touched);
-    const btnIsDisabled =
-      !clValid || values.label === '' || saving || !dirty ? true : false;
+    const btnIsDisabled = !clValid || values.label === '' || saving || !dirty ? true : false;
 
     return (
       <form className="form" onSubmit={handleSubmit}>

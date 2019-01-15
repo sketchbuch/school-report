@@ -69,13 +69,9 @@ export class DeletePupilsLayout extends Component<Props, State> {
           CLASS_NAME: this.getClassLabel(),
         })
       );
-      this.props.history.push(
-        ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)
-      );
+      this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));
     } else if (this.state.deleting) {
-      this.props.dispatch(
-        pupilActions.deletePupils(this.props.activeClass.id, this.dataSaved)
-      );
+      this.props.dispatch(pupilActions.deletePupils(this.props.activeClass.id, this.dataSaved));
       this.setState({ deleting: false });
     }
   }
@@ -100,9 +96,7 @@ export class DeletePupilsLayout extends Component<Props, State> {
           CLASS_NAME: this.getClassLabel(),
         })
       );
-      this.props.history.push(
-        ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)
-      );
+      this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));
     } else {
       this.setState({
         deleting: false,
@@ -156,12 +150,7 @@ export class DeletePupilsLayout extends Component<Props, State> {
 
             {!this.state.deleting && (
               <p className="form__submsg">
-                <Link
-                  to={ROUTE_PUPILS.replace(
-                    ':classId',
-                    this.props.activeClass.id
-                  )}
-                >
+                <Link to={ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)}>
                   <Translation name="Back" ns="DeletePupilsLayout" />
                 </Link>
               </p>

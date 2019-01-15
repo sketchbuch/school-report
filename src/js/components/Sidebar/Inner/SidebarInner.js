@@ -55,12 +55,7 @@ class SidebarInner extends React.Component<Props> {
 
     if (this.props.link) {
       return (
-        <Link
-          className={
-            isSelected ? 'SidebarInner SidebarInner--selected' : 'SidebarInner'
-          }
-          to={this.props.link}
-        >
+        <Link className={isSelected ? 'SidebarInner SidebarInner--selected' : 'SidebarInner'} to={this.props.link}>
           <ItemContent {...this.props} />
         </Link>
       );

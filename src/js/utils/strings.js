@@ -18,11 +18,7 @@ export function ucFirst(str: string): string {
  * @param ellipsize boolean should ellipsis be added?
  * @return string
  */
-export function cropStr(
-  str: string,
-  len: number,
-  ellipsize?: boolean = true
-): string {
+export function cropStr(str: string, len: number, ellipsize?: boolean = true): string {
   let trimmedStr = str.trim();
   const cropLen = parseInt(len, 10);
   const ellipsis = ellipsize ? '…' : '';

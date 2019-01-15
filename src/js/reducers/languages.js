@@ -24,10 +24,7 @@ const defaultState = {
 /**
  * Languages Reducer.
  */
-export default function reducer(
-  state: initialState = defaultState,
-  action: ActionObj
-) {
+export default function reducer(state: initialState = defaultState, action: ActionObj) {
   switch (action.type) {
     case CHANGE_LANGUAGE:
     case SETTINGS_LOADED:

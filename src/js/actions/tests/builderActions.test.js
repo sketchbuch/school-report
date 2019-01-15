@@ -46,9 +46,7 @@ describe('Actions: builderActions:', () => {
     ];
 
     expect.assertions(3);
-    store.dispatch(
-      builderActions.save(REPORT_ID, CLASS_ID, PUPIL_ID, selected, mockCallback)
-    );
+    store.dispatch(builderActions.save(REPORT_ID, CLASS_ID, PUPIL_ID, selected, mockCallback));
     expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
     expect(persist).toHaveBeenCalled();
     expect(mockCallback).toHaveBeenCalled();

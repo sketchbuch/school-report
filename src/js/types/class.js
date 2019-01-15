@@ -4,11 +4,7 @@ import type { DomainBaseType } from './domain';
 import domainBaseDefault from './domain';
 import { generateId } from '../utils/ids';
 import { ICON_CLASSES } from '../constants/icons';
-import {
-  ROUTE_DEL_CLASS,
-  ROUTE_EDIT_CLASS,
-  ROUTE_PUPILS,
-} from '../constants/routes';
+import { ROUTE_DEL_CLASS, ROUTE_EDIT_CLASS, ROUTE_PUPILS } from '../constants/routes';
 
 /**
  * Class type def.

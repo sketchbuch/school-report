@@ -60,10 +60,7 @@ export class ItemSelection extends React.Component<Props, State> {
 
   render() {
     const { items, name, searchMin, selected } = this.props;
-    const visibleItems =
-      this.state.term === ''
-        ? items
-        : items.filter(item => item.contains(this.state.term));
+    const visibleItems = this.state.term === '' ? items : items.filter(item => item.contains(this.state.term));
 
     return (
       <div className="ItemSelection">
@@ -86,12 +83,7 @@ export class ItemSelection extends React.Component<Props, State> {
         <FieldArray
           name={name}
           render={arrayHelpers => (
-            <ItemList
-              {...arrayHelpers}
-              totalCount={items.length}
-              items={visibleItems}
-              selected={selected}
-            />
+            <ItemList {...arrayHelpers} totalCount={items.length} items={visibleItems} selected={selected} />
           )}
         />
       </div>

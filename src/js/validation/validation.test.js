@@ -14,8 +14,6 @@ describe('Util: validation', () => {
   });
 
   test('validate() should return false if there are errors', () => {
-    expect(validate(field, { label: 'something' }, { label: true })).toBe(
-      false
-    );
+    expect(validate(field, { label: 'something' }, { label: true })).toBe(false);
   });
 });

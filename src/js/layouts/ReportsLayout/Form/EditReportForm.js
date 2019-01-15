@@ -53,14 +53,7 @@ export class EditReportForm extends Component<Props> {
     const rlValid = validate('label', errors, touched);
     const rcValid = validate('classes', errors, touched);
     const btnIsDisabled =
-      !rcValid ||
-      !rlValid ||
-      values.label === '' ||
-      values.classes.length < 1 ||
-      saving ||
-      !dirty
-        ? true
-        : false;
+      !rcValid || !rlValid || values.label === '' || values.classes.length < 1 || saving || !dirty ? true : false;
     const sortedClasses = sortObjectsAz(classes, ['label', 'updated']);
     const selCount = classes.filter(c => values.classes.includes(c.id)).length;
 
@@ -88,11 +81,7 @@ export class EditReportForm extends Component<Props> {
               }}
             />
           </p>
-          <ItemSelection
-            items={sortedClasses}
-            name="classes"
-            selected={values.classes}
-          />
+          <ItemSelection items={sortedClasses} name="classes" selected={values.classes} />
           {!rcValid && <p className="invalid-feedback">{errors.classes}</p>}
         </div>
         <div className="fieldwrap">

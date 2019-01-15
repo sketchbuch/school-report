@@ -32,15 +32,7 @@ class GenderSwitch extends React.Component<Props> {
   props: Props;
 
   render() {
-    const {
-      value,
-      large,
-      name,
-      onBlur,
-      onChange,
-      titleFemale,
-      titleMale,
-    } = this.props;
+    const { value, large, name, onBlur, onChange, titleFemale, titleMale } = this.props;
 
     let classes = 'GenderSwitch';
     if (large) {

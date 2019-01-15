@@ -9,11 +9,7 @@ import ReportsTextList from './ReportsTextList';
 
 describe('<ReportsTextList />', () => {
   const props = {
-    activePupil: PupilFactory(
-      { ...pupilDefault, firstname: 'Dr', lastname: 'Who' },
-      Date.now(),
-      'cl1'
-    ),
+    activePupil: PupilFactory({ ...pupilDefault, firstname: 'Dr', lastname: 'Who' }, Date.now(), 'cl1'),
     categories: [
       { ...categoryDefault, label: 'Lister', id: 'c1' },
       { ...categoryDefault, label: 'Rimmer', id: 'c2' },
@@ -22,21 +18,9 @@ describe('<ReportsTextList />', () => {
     handleTextToggle: jest.fn(),
     selectedTexts: [],
     texts: [
-      TextFactory(
-        { ...textDefault, bodytext: 'Red Dwarf', categories: ['c1'] },
-        Date.now(),
-        'EN'
-      ),
-      TextFactory(
-        { ...textDefault, bodytext: 'Blue Midget', categories: [] },
-        Date.now(),
-        'EN'
-      ),
-      TextFactory(
-        { ...textDefault, bodytext: 'Starbug', categories: ['c1', 'c2'] },
-        Date.now(),
-        'EN'
-      ),
+      TextFactory({ ...textDefault, bodytext: 'Red Dwarf', categories: ['c1'] }, Date.now(), 'EN'),
+      TextFactory({ ...textDefault, bodytext: 'Blue Midget', categories: [] }, Date.now(), 'EN'),
+      TextFactory({ ...textDefault, bodytext: 'Starbug', categories: ['c1', 'c2'] }, Date.now(), 'EN'),
     ],
   };
 
@@ -61,30 +45,18 @@ describe('<ReportsTextList />', () => {
     });
 
     test('"category-nocat" returns all texts without a category', () => {
-      wrapper
-        .instance()
-        .onFilterChanage({ target: { value: 'category-nocat' } });
-      expect(wrapper.instance().getVisibleTexts()).toEqual(
-        props.texts.slice(1, 2)
-      );
+      wrapper.instance().onFilterChanage({ target: { value: 'category-nocat' } });
+      expect(wrapper.instance().getVisibleTexts()).toEqual(props.texts.slice(1, 2));
     });
 
     test('"category-selected" returns all selected texts', () => {
-      wrapper
-        .instance()
-        .onFilterChanage({ target: { value: 'category-selected' } });
-      expect(wrapper.instance().getVisibleTexts()).toEqual(
-        props.texts.slice(0, 2)
-      );
+      wrapper.instance().onFilterChanage({ target: { value: 'category-selected' } });
+      expect(wrapper.instance().getVisibleTexts()).toEqual(props.texts.slice(0, 2));
     });
 
     test('"category-unselected" returns all unselected texts', () => {
-      wrapper
-        .instance()
-        .onFilterChanage({ target: { value: 'category-unselected' } });
-      expect(wrapper.instance().getVisibleTexts()).toEqual(
-        props.texts.slice(2)
-      );
+      wrapper.instance().onFilterChanage({ target: { value: 'category-unselected' } });
+      expect(wrapper.instance().getVisibleTexts()).toEqual(props.texts.slice(2));
     });
 
     test('A cat ID returns all texts in the category', () => {

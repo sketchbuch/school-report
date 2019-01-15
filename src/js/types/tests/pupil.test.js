@@ -3,11 +3,7 @@
 import pupilDefault, { PupilFactory, getPupilIdStr } from '../pupil';
 import { ICON_PUPILS_FEMALE, ICON_PUPILS_MALE } from '../../constants/icons';
 import { generateId } from '../../utils/ids';
-import {
-  ROUTE_EDIT_BUILDER,
-  ROUTE_DEL_PUPIL,
-  ROUTE_EDIT_PUPIL,
-} from '../../constants/routes';
+import { ROUTE_EDIT_BUILDER, ROUTE_DEL_PUPIL, ROUTE_EDIT_PUPIL } from '../../constants/routes';
 
 describe('Types: Pupil', () => {
   const pupilObj = {
@@ -54,25 +50,17 @@ describe('Types: Pupil', () => {
     });
 
     test('getIcon() correctly returns the icon', () => {
-      const femalePupilObj = PupilFactory(
-        { ...pupilObj, gender: 'f' },
-        ts,
-        classId
-      );
+      const femalePupilObj = PupilFactory({ ...pupilObj, gender: 'f' }, ts, classId);
       expect(newPupilObj.getIcon()).toEqual(ICON_PUPILS_MALE);
       expect(femalePupilObj.getIcon()).toEqual(ICON_PUPILS_FEMALE);
     });
 
     test('getLabel() correctly returns the label', () => {
-      expect(newPupilObj.getLabel()).toEqual(
-        newPupilObj.firstname + ' ' + newPupilObj.lastname
-      );
+      expect(newPupilObj.getLabel()).toEqual(newPupilObj.firstname + ' ' + newPupilObj.lastname);
     });
 
     test('getTooltip() correctly returns the tooltip', () => {
-      expect(newPupilObj.getTooltip()).toEqual(
-        newPupilObj.getLabel() + ' - ' + newPupilObj.getDescription()
-      );
+      expect(newPupilObj.getTooltip()).toEqual(newPupilObj.getLabel() + ' - ' + newPupilObj.getDescription());
       newPupilObj.description = '';
       expect(newPupilObj.getTooltip()).toEqual(newPupilObj.getLabel());
     });
@@ -107,18 +95,12 @@ describe('Types: Pupil', () => {
 
       test('Returns ROUTE_DEL_PUPIL if linkType is delete', () => {
         expect(newPupilObj.getUrl('delete')).toBe(
-          ROUTE_DEL_PUPIL.replace(':pupilId', newPupilObj.id).replace(
-            ':classId',
-            newPupilObj.classId
-          )
+          ROUTE_DEL_PUPIL.replace(':pupilId', newPupilObj.id).replace(':classId', newPupilObj.classId)
         );
       });
 
       test('Returns ROUTE_EDIT_PUPIL for any other linkType', () => {
-        const expects = ROUTE_EDIT_PUPIL.replace(
-          ':pupilId',
-          newPupilObj.id
-        ).replace(':classId', newPupilObj.classId);
+        const expects = ROUTE_EDIT_PUPIL.replace(':pupilId', newPupilObj.id).replace(':classId', newPupilObj.classId);
         expect(newPupilObj.getUrl()).toBe(expects);
         expect(newPupilObj.getUrl('something')).toBe(expects);
       });

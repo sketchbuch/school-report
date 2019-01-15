@@ -8,11 +8,7 @@ import ClassForm from './Forms/ClassForm';
 import PupilForm from './Forms/PupilForm';
 import TextForm from './Forms/TextForm';
 import { text } from '../Translation/Translation';
-import {
-  prefixedClassSchema,
-  prefixedPupilSchema,
-  prefixedTextSchema,
-} from '../../validation/schemas';
+import { prefixedClassSchema, prefixedPupilSchema, prefixedTextSchema } from '../../validation/schemas';
 import * as dataActions from '../../actions/dataActions';
 import type { ClassType } from '../../types/class';
 import type { PupilType } from '../../types/pupil';
@@ -73,10 +69,7 @@ export class NoData extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceError', 'NoData')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceError', 'NoData'));
     } else if (this.state.saving) {
       this.props.dispatch(
         dataActions.replace(
@@ -108,11 +101,7 @@ export class NoData extends Component<Props, State> {
 
   handleClick(values: Object) {
     if (this.state.step === 'pupil') {
-      const newPupil = PupilFactory(
-        values.pupil,
-        Date.now(),
-        this.state.class.id
-      );
+      const newPupil = PupilFactory(values.pupil, Date.now(), this.state.class.id);
 
       this.setState({
         step: 'text',
@@ -155,13 +144,7 @@ export class NoData extends Component<Props, State> {
             enableReinitialize={false}
             validationSchema={prefixedTextSchema}
             onSubmit={this.handleSubmit}
-            render={formikProps => (
-              <TextForm
-                {...formikProps}
-                handleClick={this.handleClick}
-                busy={busy}
-              />
-            )}
+            render={formikProps => <TextForm {...formikProps} handleClick={this.handleClick} busy={busy} />}
           />
         );
 
@@ -172,9 +155,7 @@ export class NoData extends Component<Props, State> {
             enableReinitialize={false}
             validationSchema={prefixedPupilSchema}
             onSubmit={this.handleSubmit}
-            render={formikProps => (
-              <PupilForm {...formikProps} handleClick={this.handleClick} />
-            )}
+            render={formikProps => <PupilForm {...formikProps} handleClick={this.handleClick} />}
           />
         );
 
@@ -186,9 +167,7 @@ export class NoData extends Component<Props, State> {
             enableReinitialize={false}
             validationSchema={prefixedClassSchema}
             onSubmit={this.handleSubmit}
-            render={formikProps => (
-              <ClassForm {...formikProps} handleClick={this.handleClick} />
-            )}
+            render={formikProps => <ClassForm {...formikProps} handleClick={this.handleClick} />}
           />
         );
     }

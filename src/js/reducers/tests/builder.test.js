@@ -1,11 +1,7 @@
 // @flow
 
 import reducer from '../builder';
-import {
-  DATA_LOADED,
-  REPLACE_BUILDER,
-  REPLACE_DATA,
-} from '../../constants/actionTypes';
+import { DATA_LOADED, REPLACE_BUILDER, REPLACE_DATA } from '../../constants/actionTypes';
 
 /**
  * Builder Reducer Tests
@@ -40,9 +36,7 @@ describe('Reducer: Categories', () => {
   });
 
   test('REPLACE_DATA should return the initial state if payload has no builder object', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(
-      INITIAL_STATE
-    );
+    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: REPLACE_DATA,
@@ -52,9 +46,7 @@ describe('Reducer: Categories', () => {
   });
 
   test('DATA_LOADED should return the initial state if payload has no builder object', () => {
-    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(
-      INITIAL_STATE
-    );
+    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: DATA_LOADED,
@@ -64,9 +56,7 @@ describe('Reducer: Categories', () => {
   });
 
   test('REPLACE_BUILDER should return the initial state if payload has no builder object', () => {
-    expect(
-      reducer(INITIAL_STATE, { type: REPLACE_BUILDER, payload: {} })
-    ).toEqual(INITIAL_STATE);
+    expect(reducer(INITIAL_STATE, { type: REPLACE_BUILDER, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: REPLACE_BUILDER,
@@ -80,8 +70,6 @@ describe('Reducer: Categories', () => {
       type: REPLACE_BUILDER,
       payload: TEST_BUILDER,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(TEST_BUILDER.builder)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(TEST_BUILDER.builder));
   });
 });

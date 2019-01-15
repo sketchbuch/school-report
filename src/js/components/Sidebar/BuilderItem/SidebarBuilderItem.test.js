@@ -8,15 +8,8 @@ import classDefault, { ClassFactory } from '../../../types/class';
 import pupilDefault, { PupilFactory } from '../../../types/pupil';
 
 describe('<SidebarBuilderItem />', () => {
-  const classRec = ClassFactory(
-    { ...classDefault, label: 'Starbug' },
-    Date.now()
-  );
-  const pupilRec = PupilFactory(
-    { ...pupilDefault, firstname: 'Arnold', lastname: 'Rimme' },
-    Date.now(),
-    classRec.id
-  );
+  const classRec = ClassFactory({ ...classDefault, label: 'Starbug' }, Date.now());
+  const pupilRec = PupilFactory({ ...pupilDefault, firstname: 'Arnold', lastname: 'Rimme' }, Date.now(), classRec.id);
   const props = {
     item: {
       classRec: classRec,

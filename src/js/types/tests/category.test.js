@@ -1,15 +1,9 @@
 // @flow
 
-import categoryDefault, {
-  CategoryFactory,
-  getCategoryIdStr,
-} from '../category';
+import categoryDefault, { CategoryFactory, getCategoryIdStr } from '../category';
 import { ICON_CATEGORIES } from '../../constants/icons';
 import { generateId } from '../../utils/ids';
-import {
-  ROUTE_DEL_CATEGORY,
-  ROUTE_EDIT_CATEGORY,
-} from '../../constants/routes';
+import { ROUTE_DEL_CATEGORY, ROUTE_EDIT_CATEGORY } from '../../constants/routes';
 
 describe('Types: Class', () => {
   const categoryObj = {
@@ -80,16 +74,11 @@ describe('Types: Class', () => {
 
     describe('getUrl()', () => {
       test('Returns ROUTE_DEL_CATEGORY if linkType is delete', () => {
-        expect(newCategoryObj.getUrl('delete')).toBe(
-          ROUTE_DEL_CATEGORY.replace(':categoryId', newCategoryObj.id)
-        );
+        expect(newCategoryObj.getUrl('delete')).toBe(ROUTE_DEL_CATEGORY.replace(':categoryId', newCategoryObj.id));
       });
 
       test('Returns ROUTE_EDIT_CATEGORY for any other linkType', () => {
-        const expects = ROUTE_EDIT_CATEGORY.replace(
-          ':categoryId',
-          newCategoryObj.id
-        );
+        const expects = ROUTE_EDIT_CATEGORY.replace(':categoryId', newCategoryObj.id);
         expect(newCategoryObj.getUrl()).toBe(expects);
         expect(newCategoryObj.getUrl('something')).toBe(expects);
       });

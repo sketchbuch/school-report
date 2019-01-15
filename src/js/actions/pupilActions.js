@@ -16,10 +16,7 @@ import type { PupilType } from '../types/pupil';
  * Pupil Actions
  */
 
-export function replace(
-  updatedData: Array<PupilType>,
-  callback: Function
-): ActionCreator {
+export function replace(updatedData: Array<PupilType>, callback: Function): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: REPLACE_PUPILS,
@@ -29,10 +26,7 @@ export function replace(
   };
 }
 
-export function update(
-  pupilToUpdate: PupilType,
-  callback: Function
-): ActionCreator {
+export function update(pupilToUpdate: PupilType, callback: Function): ActionCreator {
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_PUPIL,

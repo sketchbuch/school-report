@@ -36,11 +36,7 @@ describe('<TextInput />', () => {
     const iv2Props = { isValid: false };
     const iv2Wrapper = shallow(<TextInput {...iv2Props} />);
 
-    expect(iv1Wrapper.find('.TextInput').hasClass(UI_ERROR_CLASS)).toEqual(
-      false
-    );
-    expect(iv2Wrapper.find('.TextInput').hasClass(UI_ERROR_CLASS)).toEqual(
-      true
-    );
+    expect(iv1Wrapper.find('.TextInput').hasClass(UI_ERROR_CLASS)).toEqual(false);
+    expect(iv2Wrapper.find('.TextInput').hasClass(UI_ERROR_CLASS)).toEqual(true);
   });
 });

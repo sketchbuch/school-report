@@ -34,8 +34,7 @@ window.reportr = {
         DateFormat: '%D%/%M%/%Y%',
       },
       NoData: {
-        ClassMessage:
-          "Doesn't look like you have any reports yet, why not create your first class?",
+        ClassMessage: "Doesn't look like you have any reports yet, why not create your first class?",
         ClassPlaceholder: 'Name of class...',
         ClassBtnLabel: 'Create Class',
         PupilMessage: 'A class is no good without pupils, so add one now:',
@@ -76,8 +75,7 @@ window.reportr = {
         DateFormat: 'DE - %D%.%M%.%Y%',
       },
       NoData: {
-        ClassMessage:
-          "DE - Doesn't look like you have any reports yet, why not create your first class?",
+        ClassMessage: "DE - Doesn't look like you have any reports yet, why not create your first class?",
         ClassPlaceholder: 'DE - Name of class...',
         ClassBtnLabel: 'DE - Create Class',
         PupilMessage: 'DE - A class is no good without pupils, so add one now:',

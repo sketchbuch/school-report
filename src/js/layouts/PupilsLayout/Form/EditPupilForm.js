@@ -52,13 +52,7 @@ export class EditPupilForm extends Component<Props> {
     const lnValid = validate('lastname', errors, touched);
     const dValid = validate('description', errors, touched);
     const btnIsDisabled =
-      saving ||
-      !fnValid ||
-      !lnValid ||
-      !dValid ||
-      values.firstname === '' ||
-      values.lastname === '' ||
-      !dirty
+      saving || !fnValid || !lnValid || !dValid || values.firstname === '' || values.lastname === '' || !dirty
         ? true
         : false;
 

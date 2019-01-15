@@ -69,15 +69,10 @@ export class EditReportLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceEditError', 'Reports')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceEditError', 'Reports'));
       this.props.history.push(ROUTE_REPORTS);
     } else if (this.state.saving) {
-      this.props.dispatch(
-        reportActions.update(this.state.report, this.dataSaved)
-      );
+      this.props.dispatch(reportActions.update(this.state.report, this.dataSaved));
       this.setState({ saving: false });
     }
   }
@@ -98,10 +93,7 @@ export class EditReportLayout extends Component<Props, State> {
    * @return ReportType | object
    */
   getActiveReport() {
-    return getActiveReport(
-      this.props.reports,
-      this.props.match.params.reportId
-    );
+    return getActiveReport(this.props.reports, this.props.match.params.reportId);
   }
 
   /**
@@ -111,10 +103,7 @@ export class EditReportLayout extends Component<Props, State> {
    */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
-      toastr.success(
-        text('PersistenceEdit', 'Reports'),
-        this.state.report.getLabel()
-      );
+      toastr.success(text('PersistenceEdit', 'Reports'), this.state.report.getLabel());
       this.props.history.push(ROUTE_REPORTS);
     } else {
       this.setState({
@@ -141,11 +130,7 @@ export class EditReportLayout extends Component<Props, State> {
             validationSchema={reportSchema}
             onSubmit={this.handleSubmit}
             render={formikProps => (
-              <EditReportForm
-                {...formikProps}
-                saving={this.state.saving}
-                classes={this.props.classes}
-              />
+              <EditReportForm {...formikProps} saving={this.state.saving} classes={this.props.classes} />
             )}
           />
         </EditPanelContent>

@@ -54,9 +54,7 @@ describe('Types: Text', () => {
     });
 
     test('getLabel() correctly crops the label', () => {
-      expect(newTextObj.getLabel(3)).toEqual(
-        newTextObj.bodytext.substr(0, 3) + '…'
-      );
+      expect(newTextObj.getLabel(3)).toEqual(newTextObj.bodytext.substr(0, 3) + '…');
     });
 
     test('getTooltip() correctly returns the tooltip', () => {
@@ -84,9 +82,7 @@ describe('Types: Text', () => {
 
     describe('getUrl()', () => {
       test('Returns ROUTE_DEL_TEXT if linkType is delete', () => {
-        expect(newTextObj.getUrl('delete')).toBe(
-          ROUTE_DEL_TEXT.replace(':textId', newTextObj.id)
-        );
+        expect(newTextObj.getUrl('delete')).toBe(ROUTE_DEL_TEXT.replace(':textId', newTextObj.id));
       });
 
       test('Returns ROUTE_EDIT_TEXT for any other linkType', () => {

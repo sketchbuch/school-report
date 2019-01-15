@@ -1,10 +1,6 @@
 // @flow
 
-import {
-  LANGUAGE_LOADED,
-  LOAD_LANGUAGE,
-  CHANGE_LANGUAGE,
-} from '../constants/actionTypes';
+import { LANGUAGE_LOADED, LOAD_LANGUAGE, CHANGE_LANGUAGE } from '../constants/actionTypes';
 import { readLangFile } from '../fs/fs';
 import type { ActionCreator } from '../types/action';
 

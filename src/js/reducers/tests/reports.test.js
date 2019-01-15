@@ -29,9 +29,7 @@ describe('Reducer: Reports', () => {
   });
 
   test('REPLACE_DATA should return the initial state if payload has no reports array', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(
-      INITIAL_STATE
-    );
+    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: REPLACE_DATA,
@@ -41,9 +39,7 @@ describe('Reducer: Reports', () => {
   });
 
   test('DATA_LOADED should return the initial state if payload has no reports array', () => {
-    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(
-      INITIAL_STATE
-    );
+    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: DATA_LOADED,
@@ -53,9 +49,7 @@ describe('Reducer: Reports', () => {
   });
 
   test('REPLACE_REPORTS should return the initial state if payload has no reports array', () => {
-    expect(
-      reducer(INITIAL_STATE, { type: REPLACE_REPORTS, payload: {} })
-    ).toEqual(INITIAL_STATE);
+    expect(reducer(INITIAL_STATE, { type: REPLACE_REPORTS, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: REPLACE_REPORTS,
@@ -76,25 +70,17 @@ describe('Reducer: Reports', () => {
       type: REPLACE_REPORTS,
       payload: TEST_TEXTS,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(TEST_TEXTS.reports)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(TEST_TEXTS.reports));
   });
 
   test('UPDATE_REPORT should update existing reports', () => {
     const NEW_REPORT = { ...reportDefault, label: 'Report 3 Edited', id: 'r3' };
-    const EXPECTED_RESULT = [
-      { ...INITIAL_STATE[0] },
-      { ...INITIAL_STATE[1] },
-      { ...NEW_REPORT },
-    ];
+    const EXPECTED_RESULT = [{ ...INITIAL_STATE[0] }, { ...INITIAL_STATE[1] }, { ...NEW_REPORT }];
     const reducerResult = reducer(INITIAL_STATE, {
       type: UPDATE_REPORT,
       payload: NEW_REPORT,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_RESULT)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
   });
 
   test('ADD_REPORT should add the payload to existing reports', () => {
@@ -104,9 +90,7 @@ describe('Reducer: Reports', () => {
       type: ADD_REPORT,
       payload: NEW_REPORT,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_RESULT)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
   });
 
   test('ADD_REPORT should not add the report if the ID already exists', () => {
@@ -115,25 +99,18 @@ describe('Reducer: Reports', () => {
       type: ADD_REPORT,
       payload: NEW_REPORT,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(INITIAL_STATE)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(INITIAL_STATE));
   });
 
   test('DELETE_REPORT should delete the report if the ID is found', () => {
     const INITIAL_STATE_DEL = [...INITIAL_STATE];
-    const EXPECTED_STATE_DEL = reduce.arr.removeObj(
-      INITIAL_STATE_DEL,
-      INITIAL_STATE_DEL[1]
-    );
+    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[1]);
 
     const reducerResult = reducer(INITIAL_STATE_DEL, {
       type: DELETE_REPORT,
       payload: INITIAL_STATE_DEL[1],
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_STATE_DEL)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
   });
 
   test('DELETE_ALL_REPORTS should return an empty array', () => {

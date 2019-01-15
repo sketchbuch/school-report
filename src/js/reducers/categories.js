@@ -18,10 +18,7 @@ import { hydrateCategory } from '../types/category';
  * Categories Reducer.
  */
 
-export default function reducer(
-  state: Array<CategoryType> = [],
-  action: ActionObj
-) {
+export default function reducer(state: Array<CategoryType> = [], action: ActionObj) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_CATEGORIES:

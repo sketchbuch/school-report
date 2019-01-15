@@ -50,10 +50,7 @@ export class DeleteReportsLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceDeleteError', 'Reports')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceDeleteError', 'Reports'));
       this.props.history.push(ROUTE_REPORTS);
     } else if (this.state.deleting) {
       this.props.dispatch(reportActions.deleteAll(this.dataSaved));

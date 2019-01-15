@@ -13,35 +13,13 @@ import textDefault, { TextFactory } from '../../types/text';
 import { CLIENT_RENEG_LIMIT } from 'tls';
 
 describe('<Reports />', () => {
-  const ACTIVE_REPORT = ReportFactory(
-    { ...reportDefault, label: 'Test Report' },
-    Date.now()
-  );
-  const ACTIVE_CLASS = ClassFactory(
-    { ...classDefault, label: 'Latimer Yr.1' },
-    Date.now()
-  );
-  const ACTIVE_PUPIL = PupilFactory(
-    { ...pupilDefault, firstname: 'Dr', lastname: 'Who' },
-    Date.now(),
-    ACTIVE_CLASS.id
-  );
+  const ACTIVE_REPORT = ReportFactory({ ...reportDefault, label: 'Test Report' }, Date.now());
+  const ACTIVE_CLASS = ClassFactory({ ...classDefault, label: 'Latimer Yr.1' }, Date.now());
+  const ACTIVE_PUPIL = PupilFactory({ ...pupilDefault, firstname: 'Dr', lastname: 'Who' }, Date.now(), ACTIVE_CLASS.id);
   const texts = [
-    TextFactory(
-      { ...textDefault, bodytext: 'Red Dwarf', categories: [] },
-      Date.now(),
-      'EN'
-    ),
-    TextFactory(
-      { ...textDefault, bodytext: 'Blue Midget', categories: [] },
-      Date.now(),
-      'EN'
-    ),
-    TextFactory(
-      { ...textDefault, bodytext: 'Starbug', categories: [] },
-      Date.now(),
-      'EN'
-    ),
+    TextFactory({ ...textDefault, bodytext: 'Red Dwarf', categories: [] }, Date.now(), 'EN'),
+    TextFactory({ ...textDefault, bodytext: 'Blue Midget', categories: [] }, Date.now(), 'EN'),
+    TextFactory({ ...textDefault, bodytext: 'Starbug', categories: [] }, Date.now(), 'EN'),
   ];
   const props = {
     activeClass: ACTIVE_CLASS,

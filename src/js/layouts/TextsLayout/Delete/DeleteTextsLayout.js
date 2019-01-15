@@ -50,10 +50,7 @@ export class DeleteTextsLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceDeleteError', 'Texts')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceDeleteError', 'Texts'));
       this.props.history.push(ROUTE_TEXTS);
     } else if (this.state.deleting) {
       this.props.dispatch(textActions.deleteAll(this.dataSaved));

@@ -46,8 +46,7 @@ export class EditCategoryLayout extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    const activeId =
-      props.match.params !== undefined ? props.match.params.categoryId : '';
+    const activeId = props.match.params !== undefined ? props.match.params.categoryId : '';
     const activeCat = getActiveCategory(props.categories, activeId);
 
     this.state = {
@@ -69,25 +68,15 @@ export class EditCategoryLayout extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    const activeId =
-      this.props.match.params !== undefined
-        ? this.props.match.params.categoryId
-        : '';
+    const activeId = this.props.match.params !== undefined ? this.props.match.params.categoryId : '';
     const activeCategory = getActiveCategory(this.props.categories, activeId);
-    setTitle(
-      text('WinTitle', 'EditCategoryLayout', { CAT: activeCategory.getLabel() })
-    );
+    setTitle(text('WinTitle', 'EditCategoryLayout', { CAT: activeCategory.getLabel() }));
 
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceNewError', 'Texts')
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Texts'));
       this.props.history.push(ROUTE_CATEGORIES);
     } else if (this.state.saving) {
-      this.props.dispatch(
-        categoryActions.update(this.state.category, this.dataSaved)
-      );
+      this.props.dispatch(categoryActions.update(this.state.category, this.dataSaved));
       this.setState({ saving: false });
     }
   }
@@ -109,10 +98,7 @@ export class EditCategoryLayout extends Component<Props, State> {
    */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
-      toastr.success(
-        text('PersistenceEdit', 'Texts'),
-        this.state.category.getLabel()
-      );
+      toastr.success(text('PersistenceEdit', 'Texts'), this.state.category.getLabel());
       this.props.history.push(ROUTE_CATEGORIES);
     } else {
       this.setState({
@@ -123,13 +109,9 @@ export class EditCategoryLayout extends Component<Props, State> {
   }
 
   render() {
-    const activeId =
-      this.props.match.params !== undefined
-        ? this.props.match.params.categoryId
-        : '';
+    const activeId = this.props.match.params !== undefined ? this.props.match.params.categoryId : '';
     const activeCategory = getActiveCategory(this.props.categories, activeId);
-    const activeLabel =
-      activeCategory.getLabel !== undefined ? activeCategory.getLabel() : '';
+    const activeLabel = activeCategory.getLabel !== undefined ? activeCategory.getLabel() : '';
 
     return (
       <EditPanel>
@@ -144,9 +126,7 @@ export class EditCategoryLayout extends Component<Props, State> {
             enableReinitialize={true}
             validationSchema={categorySchema}
             onSubmit={this.handleSubmit}
-            render={formikProps => (
-              <EditCategoryForm {...formikProps} saving={this.state.saving} />
-            )}
+            render={formikProps => <EditCategoryForm {...formikProps} saving={this.state.saving} />}
           />
         </EditPanelContent>
       </EditPanel>

@@ -35,18 +35,7 @@ class ButtonCircular extends React.Component<Props> {
   props: Props;
 
   render() {
-    const {
-      action,
-      buttontype,
-      children,
-      className,
-      disabled,
-      name,
-      onClick,
-      title,
-      type,
-      visual,
-    } = this.props;
+    const { action, buttontype, children, className, disabled, name, onClick, title, type, visual } = this.props;
 
     let classes = 'ButtonCircular';
     if (className && className !== '') {

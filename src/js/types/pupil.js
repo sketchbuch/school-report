@@ -4,11 +4,7 @@ import type { DomainBaseType } from './domain';
 import domainBaseDefault from './domain';
 import { generateId } from '../utils/ids';
 import { ICON_PUPILS_FEMALE, ICON_PUPILS_MALE } from '../constants/icons';
-import {
-  ROUTE_EDIT_BUILDER,
-  ROUTE_DEL_PUPIL,
-  ROUTE_EDIT_PUPIL,
-} from '../constants/routes';
+import { ROUTE_EDIT_BUILDER, ROUTE_DEL_PUPIL, ROUTE_EDIT_PUPIL } from '../constants/routes';
 import { text } from '../components/Translation/Translation';
 
 /**
@@ -54,11 +50,7 @@ export const pupilSort = {
  * @param string classId The id for the pupil's class.
  * @return PupilType The new pupil object.
  */
-export function PupilFactory(
-  pupilObj: PupilType,
-  ts: number,
-  classId: string
-): PupilType {
+export function PupilFactory(pupilObj: PupilType, ts: number, classId: string): PupilType {
   return hydratePupil({
     ...pupilObj,
     created: ts,
@@ -78,25 +70,13 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
   return {
     ...pupilDefault,
     ...pupilObj,
-    contains: function(
-      term?: string,
-      anywhere?: boolean = false,
-      sortOrder: PupilSortOptions = pupilSortDefault
-    ) {
+    contains: function(term?: string, anywhere?: boolean = false, sortOrder: PupilSortOptions = pupilSortDefault) {
       if (term) {
         term = term.toLowerCase();
-        let searchStr = (
-          this.firstname +
-          this.lastname +
-          this.description
-        ).toLowerCase();
+        let searchStr = (this.firstname + this.lastname + this.description).toLowerCase();
 
         if (sortOrder === pupilSortLast) {
-          searchStr = (
-            this.lastname +
-            this.firstname +
-            this.description
-          ).toLowerCase();
+          searchStr = (this.lastname + this.firstname + this.description).toLowerCase();
         }
 
         if (anywhere) {
@@ -175,16 +155,7 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
  * @return string The string to be used in creating the ID.
  */
 export function getPupilIdStr(pupilObj: PupilType): string {
-  return (
-    'pupil:' +
-    pupilObj.firstname +
-    '_' +
-    pupilObj.lastname +
-    '_' +
-    pupilObj.description +
-    '_' +
-    pupilObj.gender
-  );
+  return 'pupil:' + pupilObj.firstname + '_' + pupilObj.lastname + '_' + pupilObj.description + '_' + pupilObj.gender;
 }
 
 export default pupilDefault;

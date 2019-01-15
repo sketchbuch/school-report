@@ -30,9 +30,7 @@ describe('Actions: categoryActions:', () => {
   });
 
   test('replace() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
-      { type: REPLACE_CATEGORIES, payload: [testCategory] },
-    ];
+    const EXPECTED_ACTIONS = [{ type: REPLACE_CATEGORIES, payload: [testCategory] }];
 
     expect.assertions(1);
     store.dispatch(categoryActions.replace([testCategory], callback));

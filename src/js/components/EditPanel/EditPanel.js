@@ -46,9 +46,7 @@ export class EditPanel extends React.Component<Props, State> {
   render() {
     return (
       <div className="EditPanel" data-state={this.state.display}>
-        <section className="EditPanel__container">
-          {this.props.children}
-        </section>
+        <section className="EditPanel__container">{this.props.children}</section>
       </div>
     );
   }

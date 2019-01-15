@@ -24,14 +24,7 @@ export class ClassForm extends Component<Props> {
   props: Props;
 
   render() {
-    const {
-      errors,
-      handleBlur,
-      handleChange,
-      handleSubmit,
-      touched,
-      values,
-    } = this.props;
+    const { errors, handleBlur, handleChange, handleSubmit, touched, values } = this.props;
 
     const clValid = validate('label', errors.class, touched.class);
     const btnIsDisabled = !clValid || values.class.label === '' ? true : false;
@@ -53,11 +46,7 @@ export class ClassForm extends Component<Props> {
           {!clValid && <p className="invalid-feedback">{errors.class.label}</p>}
         </div>
         <div className="fieldwrap">
-          <Button
-            type="button"
-            disabled={btnIsDisabled}
-            onClick={() => this.props.handleClick(values)}
-          >
+          <Button type="button" disabled={btnIsDisabled} onClick={() => this.props.handleClick(values)}>
             <Translation name="CreateClassBtnLabel" ns="Classes" />
           </Button>
         </div>

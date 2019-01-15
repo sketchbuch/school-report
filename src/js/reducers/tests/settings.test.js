@@ -1,11 +1,7 @@
 // @flow
 
 import reducer from '../settings';
-import {
-  REPLACE_DATA,
-  SETTINGS_LOADED,
-  UPDATE_SETTINGS,
-} from '../../constants/actionTypes';
+import { REPLACE_DATA, SETTINGS_LOADED, UPDATE_SETTINGS } from '../../constants/actionTypes';
 import settingsDefault from '../../types/settings';
 
 /**
@@ -25,9 +21,7 @@ describe('Reducer: Settings', () => {
   });
 
   test('REPLACE_DATA should return the initial state if payload has no settings object', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(
-      INITIAL_STATE
-    );
+    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: REPLACE_DATA,

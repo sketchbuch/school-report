@@ -73,10 +73,7 @@ class PageBrowser extends Component<Props> {
     if (this.props.onChange) {
       const btn = event.currentTarget;
       const { action } = btn.dataset;
-      const totalPages = this.getTotalPages(
-        this.props.itemCount,
-        this.props.perPage
-      );
+      const totalPages = this.getTotalPages(this.props.itemCount, this.props.perPage);
 
       switch (action) {
         case 'first':
@@ -89,10 +86,7 @@ class PageBrowser extends Component<Props> {
           break;
 
         case 'next':
-          const next =
-            this.props.curPage + 1 < totalPages
-              ? this.props.curPage + 1
-              : totalPages;
+          const next = this.props.curPage + 1 < totalPages ? this.props.curPage + 1 : totalPages;
           this.props.onChange(next);
           break;
 
@@ -111,30 +105,12 @@ class PageBrowser extends Component<Props> {
     return Math.ceil(itemCount / perPage);
   }
 
-  renderLeft(
-    first: boolean,
-    prev: boolean,
-    curPage: number
-  ): null | React.Node {
+  renderLeft(first: boolean, prev: boolean, curPage: number): null | React.Node {
     if (first || prev) {
       return (
         <div className="PageBrowser__left">
-          {first && (
-            <PbBut
-              label="&lt;&lt;"
-              type="first"
-              disabled={curPage === 1}
-              onClick={this.handleClick}
-            />
-          )}
-          {prev && (
-            <PbBut
-              label="&lt;"
-              type="prev"
-              disabled={curPage === 1}
-              onClick={this.handleClick}
-            />
-          )}
+          {first && <PbBut label="&lt;&lt;" type="first" disabled={curPage === 1} onClick={this.handleClick} />}
+          {prev && <PbBut label="&lt;" type="prev" disabled={curPage === 1} onClick={this.handleClick} />}
         </div>
       );
     }
@@ -142,31 +118,12 @@ class PageBrowser extends Component<Props> {
     return null;
   }
 
-  renderRight(
-    next: boolean,
-    last: boolean,
-    curPage: number,
-    totalPages: number
-  ): null | React.Node {
+  renderRight(next: boolean, last: boolean, curPage: number, totalPages: number): null | React.Node {
     if (next || last) {
       return (
         <div className="PageBrowser__right">
-          {next && (
-            <PbBut
-              label="&gt;"
-              type="next"
-              disabled={curPage === totalPages}
-              onClick={this.handleClick}
-            />
-          )}
-          {last && (
-            <PbBut
-              label="&gt;&gt;"
-              type="last"
-              disabled={curPage === totalPages}
-              onClick={this.handleClick}
-            />
-          )}
+          {next && <PbBut label="&gt;" type="next" disabled={curPage === totalPages} onClick={this.handleClick} />}
+          {last && <PbBut label="&gt;&gt;" type="last" disabled={curPage === totalPages} onClick={this.handleClick} />}
         </div>
       );
     }
@@ -174,11 +131,7 @@ class PageBrowser extends Component<Props> {
     return null;
   }
 
-  renderCentre(
-    curPage: number,
-    pagesToShow: number,
-    totalPages: number
-  ): React.Node {
+  renderCentre(curPage: number, pagesToShow: number, totalPages: number): React.Node {
     const pages = [];
     const middle = Math.ceil(pagesToShow / 2);
 
@@ -204,22 +157,12 @@ class PageBrowser extends Component<Props> {
       }
       const sel = p === curPage;
       pages.push(
-        <PbBut
-          key={'page-' + p}
-          label={p}
-          title={p}
-          type={p}
-          selected={sel}
-          page
-          onClick={this.handleClick}
-        />
+        <PbBut key={'page-' + p} label={p} title={p} type={p} selected={sel} page onClick={this.handleClick} />
       );
     }
 
     const showLeftMore = curPage > middle && totalPages > pagesToShow;
-    const showRightMore =
-      curPage < totalPages - Math.floor(pagesToShow / 2) &&
-      totalPages > pagesToShow;
+    const showRightMore = curPage < totalPages - Math.floor(pagesToShow / 2) && totalPages > pagesToShow;
 
     return (
       <div className="PageBrowser__centre">
@@ -231,16 +174,7 @@ class PageBrowser extends Component<Props> {
   }
 
   render() {
-    const {
-      curPage,
-      first,
-      itemCount,
-      last,
-      next,
-      pagesToShow,
-      perPage,
-      prev,
-    } = this.props;
+    const { curPage, first, itemCount, last, next, pagesToShow, perPage, prev } = this.props;
 
     const totalPages = this.getTotalPages(itemCount, perPage);
     let classes = 'PageBrowser';
@@ -258,11 +192,7 @@ class PageBrowser extends Component<Props> {
             {this.renderRight(next, last, curPage, totalPages)}
           </div>
           <p className="PageBrowser__info">
-            <Translation
-              name="InfoText"
-              ns="PageBrowser"
-              placeholders={{ CUR: curPage, TOTAL: totalPages }}
-            />
+            <Translation name="InfoText" ns="PageBrowser" placeholders={{ CUR: curPage, TOTAL: totalPages }} />
           </p>
         </div>
       );

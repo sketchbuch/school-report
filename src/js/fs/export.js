@@ -96,11 +96,7 @@ export function getDateFromTs(ts: number): string {
  * @param {array} ittextsems The texts.
  * @param {object} content an object containing content data including an array of pupils and their selected texts.
  */
-export function getContent(
-  items: Array<SidebarBuilderItemType>,
-  builderData: Object,
-  texts: Array<TextType>
-) {
+export function getContent(items: Array<SidebarBuilderItemType>, builderData: Object, texts: Array<TextType>) {
   const content = {
     classCount: 0,
     content: [],
@@ -117,10 +113,7 @@ export function getContent(
       };
 
       item.pupils.forEach(function(pupil) {
-        if (
-          builderData[item.id] !== undefined &&
-          builderData[item.id][pupil.id] !== undefined
-        ) {
+        if (builderData[item.id] !== undefined && builderData[item.id][pupil.id] !== undefined) {
           const newContentItem = {
             pupil_name: `${pupil.getLabel()}`,
             texts: [],
@@ -129,11 +122,7 @@ export function getContent(
           builderData[item.id][pupil.id].forEach(function(textId: string) {
             var textEle = texts.find((text: TextType) => text.id === textId);
             if (textEle !== undefined) {
-              const textHtml = getPupilTextHtml(
-                textEle.getLabel(0),
-                pupil,
-                false
-              );
+              const textHtml = getPupilTextHtml(textEle.getLabel(0), pupil, false);
               newContentItem.texts.push(textHtml.__html);
             }
           });

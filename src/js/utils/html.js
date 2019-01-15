@@ -18,11 +18,7 @@ export const placeholderMap = [
  * @param {string} text The text to change.
  * @return {object}
  */
-export function getPupilTextHtml(
-  text: string,
-  pupil: PupilType | Object,
-  highlight: boolean = true
-): Object {
+export function getPupilTextHtml(text: string, pupil: PupilType | Object, highlight: boolean = true): Object {
   const highlightStart = highlight ? '<strong>' : '';
   const highlightEnd = highlight ? '</strong>' : '';
   let newText = text;
@@ -49,10 +45,7 @@ export function getPupilTextHtml(
         '. ' + highlightStart + ucFirst(phVal) + highlightEnd
       );
     }
-    newText = newText.replace(
-      new RegExp(phSymbol, 'g'),
-      highlightStart + phVal + highlightEnd
-    );
+    newText = newText.replace(new RegExp(phSymbol, 'g'), highlightStart + phVal + highlightEnd);
   });
 
   return { __html: newText };

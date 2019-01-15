@@ -25,9 +25,7 @@ describe('Reducer: Categories', () => {
   });
 
   test('REPLACE_DATA should return the initial state if payload has no categories array', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(
-      INITIAL_STATE
-    );
+    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: REPLACE_DATA,
@@ -37,9 +35,7 @@ describe('Reducer: Categories', () => {
   });
 
   test('DATA_LOADED should return the initial state if payload has no categories array', () => {
-    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(
-      INITIAL_STATE
-    );
+    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: DATA_LOADED,
@@ -49,9 +45,7 @@ describe('Reducer: Categories', () => {
   });
 
   test('REPLACE_CATEGORIES should return the initial state if payload has no categories array', () => {
-    expect(
-      reducer(INITIAL_STATE, { type: REPLACE_CATEGORIES, payload: {} })
-    ).toEqual(INITIAL_STATE);
+    expect(reducer(INITIAL_STATE, { type: REPLACE_CATEGORIES, payload: {} })).toEqual(INITIAL_STATE);
     expect(
       reducer(INITIAL_STATE, {
         type: REPLACE_CATEGORIES,
@@ -72,9 +66,7 @@ describe('Reducer: Categories', () => {
       type: REPLACE_CATEGORIES,
       payload: TEST_CATEGORIES,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(TEST_CATEGORIES.categories)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(TEST_CATEGORIES.categories));
   });
 
   test('UPDATE_CATEGORY should update existing categories', () => {
@@ -88,9 +80,7 @@ describe('Reducer: Categories', () => {
       type: UPDATE_CATEGORY,
       payload: NEW_CAT,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_RESULT)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
   });
 
   test('ADD_CATEGORY should add the payload to existing categories', () => {
@@ -100,9 +90,7 @@ describe('Reducer: Categories', () => {
       type: ADD_CATEGORY,
       payload: NEW_CAT,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_RESULT)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
   });
 
   test('ADD_CATEGORY should not add the category if the ID already exists', () => {
@@ -111,9 +99,7 @@ describe('Reducer: Categories', () => {
       type: ADD_CATEGORY,
       payload: NEW_CAT,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(INITIAL_STATE)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(INITIAL_STATE));
   });
 
   test('DELETE_CATEGORY should delete the category if the ID is found', () => {
@@ -122,18 +108,13 @@ describe('Reducer: Categories', () => {
       { ...categoryDefault, label: 'Category 2', id: 'c2' },
       { ...categoryDefault, label: 'Category 3', id: 'c3' },
     ];
-    const EXPECTED_STATE_DEL = reduce.arr.removeObj(
-      INITIAL_STATE_DEL,
-      INITIAL_STATE_DEL[1]
-    );
+    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[1]);
 
     const reducerResult = reducer(INITIAL_STATE_DEL, {
       type: DELETE_CATEGORY,
       payload: INITIAL_STATE_DEL[1],
     });
-    expect(JSON.stringify(reducerResult)).toEqual(
-      JSON.stringify(EXPECTED_STATE_DEL)
-    );
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
   });
 
   test('DELETE_ALL_CATEGORIES should return an empty array', () => {

@@ -32,10 +32,7 @@ describe('Actions: classActions:', () => {
 
   test('replace() should return expected action', () => {
     const TEST_DATA = {
-      classes: [
-        { label: 'Class 1 Edited', id: '1' },
-        { label: 'Class 2 Edited', id: '2' },
-      ],
+      classes: [{ label: 'Class 1 Edited', id: '1' }, { label: 'Class 2 Edited', id: '2' }],
     };
     const EXPECTED_ACTIONS = [{ type: REPLACE_DATA, payload: TEST_DATA }];
 
@@ -79,9 +76,7 @@ describe('Actions: classActions:', () => {
       type: PERSISTING_SUCCESS,
       payload: { dataType: testDataType },
     };
-    expect(dataActions.persistenceSuccess(testDataType)).toEqual(
-      EXPECTED_ACTIONS
-    );
+    expect(dataActions.persistenceSuccess(testDataType)).toEqual(EXPECTED_ACTIONS);
   });
 
   test('persistenceError() should return the expected action', () => {
@@ -89,8 +84,6 @@ describe('Actions: classActions:', () => {
       type: PERSISTING_ERROR,
       payload: { dataType: testDataType },
     };
-    expect(dataActions.persistenceError(testDataType)).toEqual(
-      EXPECTED_ACTIONS
-    );
+    expect(dataActions.persistenceError(testDataType)).toEqual(EXPECTED_ACTIONS);
   });
 });

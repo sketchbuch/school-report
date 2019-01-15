@@ -63,13 +63,8 @@ export class NewPupilLayout extends Component<Props, State> {
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
-      toastr.error(
-        text('PersistenceError', 'Toastr'),
-        text('PersistenceNewError', 'Pupils')
-      );
-      this.props.history.push(
-        ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)
-      );
+      toastr.error(text('PersistenceError', 'Toastr'), text('PersistenceNewError', 'Pupils'));
+      this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));
     } else if (this.state.saving) {
       this.props.dispatch(pupilActions.add(this.state.pupil, this.dataSaved));
       this.setState({ saving: false });
@@ -77,11 +72,7 @@ export class NewPupilLayout extends Component<Props, State> {
   }
 
   handleSubmit(values: Object) {
-    const newPupil = PupilFactory(
-      values,
-      Date.now(),
-      this.props.match.params.classId
-    );
+    const newPupil = PupilFactory(values, Date.now(), this.props.match.params.classId);
 
     this.setState({
       pupil: newPupil,
@@ -96,13 +87,8 @@ export class NewPupilLayout extends Component<Props, State> {
    */
   dataSaved(ioResult: Object) {
     if (ioResult.success === true) {
-      this.props.history.push(
-        ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)
-      );
-      toastr.success(
-        text('PersistenceNew', 'Pupils'),
-        this.state.pupil.getLabel()
-      );
+      this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));
+      toastr.success(text('PersistenceNew', 'Pupils'), this.state.pupil.getLabel());
     } else {
       this.setState({
         error: true,

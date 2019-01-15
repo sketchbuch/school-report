@@ -117,23 +117,16 @@ class SidebarList extends React.Component<Props, State> {
     if (this.props.filter) {
       if (this.props.filter !== 'category-all') {
         if (this.props.filter === 'category-nocat') {
-          sortedItems = sortedItems.filter(
-            item => item.categories.length === 0
-          );
+          sortedItems = sortedItems.filter(item => item.categories.length === 0);
         } else {
-          sortedItems = sortedItems.filter(item =>
-            item.categories.includes(this.props.filter)
-          );
+          sortedItems = sortedItems.filter(item => item.categories.includes(this.props.filter));
         }
       }
     }
 
     if (this.props.term !== '') {
-      const displayProp =
-        this.props.listType === 'pupil' ? this.props.sortOrder[0] : undefined;
-      sortedItems = sortedItems.filter(item =>
-        item.contains(this.props.term, false, displayProp)
-      );
+      const displayProp = this.props.listType === 'pupil' ? this.props.sortOrder[0] : undefined;
+      sortedItems = sortedItems.filter(item => item.contains(this.props.term, false, displayProp));
     }
 
     return sortedItems;
@@ -145,10 +138,7 @@ class SidebarList extends React.Component<Props, State> {
 
     if (this.props.usePb) {
       const itemstart = 0 + this.props.perPage * (this.props.curPage - 1);
-      sortedItems = sortedItems.slice(
-        itemstart,
-        itemstart + this.props.perPage
-      );
+      sortedItems = sortedItems.slice(itemstart, itemstart + this.props.perPage);
     }
 
     if (itemForPaging > 0) {
@@ -169,9 +159,7 @@ class SidebarList extends React.Component<Props, State> {
 
       return (
         <React.Fragment>
-          {this.props.children && (
-            <SidebarSubheader>{this.props.children}</SidebarSubheader>
-          )}
+          {this.props.children && <SidebarSubheader>{this.props.children}</SidebarSubheader>}
           <ul className={classes} data-type={this.props.listType}>
             {sortedItems.map(item => {
               if (this.props.builder) {
@@ -200,9 +188,7 @@ class SidebarList extends React.Component<Props, State> {
               }
             })}
           </ul>
-          {showPb && (
-            <SidebarPageBrowser {...pbProps} onChange={this.props.onChange} />
-          )}
+          {showPb && <SidebarPageBrowser {...pbProps} onChange={this.props.onChange} />}
         </React.Fragment>
       );
     } else if (this.props.term !== '' || this.props.filter !== '') {
@@ -214,9 +200,7 @@ class SidebarList extends React.Component<Props, State> {
 
       return (
         <React.Fragment>
-          {this.props.children && (
-            <SidebarSubheader>{this.props.children}</SidebarSubheader>
-          )}
+          {this.props.children && <SidebarSubheader>{this.props.children}</SidebarSubheader>}
           <NoItems>
             <Translation name={searchNone} ns="SidebarList" />
           </NoItems>

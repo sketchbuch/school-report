@@ -1,12 +1,6 @@
 // @flow
 
-import {
-  getActiveCategory,
-  getActiveClass,
-  getActivePupil,
-  getActiveReport,
-  getActiveText,
-} from '../redux';
+import { getActiveCategory, getActiveClass, getActivePupil, getActiveReport, getActiveText } from '../redux';
 import categoryDefault, { CategoryFactory } from '../../types/category';
 import classDefault, { ClassFactory } from '../../types/class';
 import pupilDefault, { PupilFactory } from '../../types/pupil';
@@ -25,9 +19,7 @@ describe('Util: Redux', () => {
       CategoryFactory({ ...categoryDefault, label: 'Category 3' }, Date.now()),
     ];
 
-    expect(getActiveCategory(categories, categories[1].id)).toEqual(
-      categories[1]
-    );
+    expect(getActiveCategory(categories, categories[1].id)).toEqual(categories[1]);
   });
 
   test('getActiveClass() returns the correct class', () => {
@@ -42,21 +34,9 @@ describe('Util: Redux', () => {
 
   test('getActivePupil() returns the correct pupil', () => {
     const pupils = [
-      PupilFactory(
-        { ...pupilDefault, firstname: 'Dave', lastname: 'Lister' },
-        Date.now(),
-        'c1'
-      ),
-      PupilFactory(
-        { ...pupilDefault, firstname: 'Arnold', lastname: 'Rimmer' },
-        Date.now(),
-        'c1'
-      ),
-      PupilFactory(
-        { ...pupilDefault, firstname: 'The', lastname: 'Cat' },
-        Date.now(),
-        'c1'
-      ),
+      PupilFactory({ ...pupilDefault, firstname: 'Dave', lastname: 'Lister' }, Date.now(), 'c1'),
+      PupilFactory({ ...pupilDefault, firstname: 'Arnold', lastname: 'Rimmer' }, Date.now(), 'c1'),
+      PupilFactory({ ...pupilDefault, firstname: 'The', lastname: 'Cat' }, Date.now(), 'c1'),
     ];
 
     expect(getActivePupil(pupils, pupils[1].id)).toEqual(pupils[1]);

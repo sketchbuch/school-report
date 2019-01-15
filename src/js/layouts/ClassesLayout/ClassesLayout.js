@@ -19,12 +19,7 @@ import { classSort } from '../../types/class';
 import type { ClassType } from '../../types/class';
 import type { PupilType } from '../../types/pupil';
 import { ICON_ADD, ICON_CLOSE, ICON_DELETE } from '../../constants/icons';
-import {
-  ROUTE_CLASSES,
-  ROUTE_DEL_CLASSES,
-  ROUTE_EDIT_CLASS,
-  ROUTE_NEW_CLASS,
-} from '../../constants/routes';
+import { ROUTE_CLASSES, ROUTE_DEL_CLASSES, ROUTE_EDIT_CLASS, ROUTE_NEW_CLASS } from '../../constants/routes';
 import setTitle from '../../utils/title';
 
 type Props = {
@@ -99,12 +94,7 @@ export class ClassesLayout extends Component<Props, State> {
    */
   getItems() {
     let items = [...this.props.classes];
-    items.forEach(
-      item =>
-        (item.pupilCount = this.props.pupils.filter(
-          pupil => pupil.classId === item.id
-        ).length)
-    );
+    items.forEach(item => (item.pupilCount = this.props.pupils.filter(pupil => pupil.classId === item.id).length));
 
     return items;
   }
@@ -178,45 +168,27 @@ export class ClassesLayout extends Component<Props, State> {
             term={this.state.term}
             usePb
           />
-          <SidebarFooter
-            leftActions={leftActions}
-            rightActions={rightActions}
-          />
+          <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>
         <Switch>
           <Route
             path={ROUTE_EDIT_CLASS}
             render={routerProps => (
-              <EditClassLayout
-                {...routerProps}
-                dispatch={this.props.dispatch}
-                classes={this.props.classes}
-              />
+              <EditClassLayout {...routerProps} dispatch={this.props.dispatch} classes={this.props.classes} />
             )}
           />
           <Route
             path={ROUTE_DEL_CLASSES}
-            render={routerProps => (
-              <DeleteClassesLayout
-                {...routerProps}
-                dispatch={this.props.dispatch}
-              />
-            )}
+            render={routerProps => <DeleteClassesLayout {...routerProps} dispatch={this.props.dispatch} />}
           />
           <Route
             path={ROUTE_NEW_CLASS}
-            render={routerProps => (
-              <NewClassLayout {...routerProps} dispatch={this.props.dispatch} />
-            )}
+            render={routerProps => <NewClassLayout {...routerProps} dispatch={this.props.dispatch} />}
           />
           <Route
             path={ROUTE_CLASSES}
             render={routerProps => (
-              <InfoMsg
-                {...routerProps}
-                headine={text('Classes', 'InfoMsg')}
-                subtext={text('ClassesMsg', 'InfoMsg')}
-              />
+              <InfoMsg {...routerProps} headine={text('Classes', 'InfoMsg')} subtext={text('ClassesMsg', 'InfoMsg')} />
             )}
           />
         </Switch>

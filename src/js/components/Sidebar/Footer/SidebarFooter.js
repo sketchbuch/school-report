@@ -18,12 +18,8 @@ class SidebarFooter extends React.Component<Props> {
     return (
       <footer className="SidebarFooter">
         <div className="SidebarFooter__actionsBox">
-          <div className="SidebarFooter__actions SidebarFooter__actions--left">
-            {this.props.leftActions}
-          </div>
-          <div className="SidebarFooter__actions SidebarFooter__actions--right">
-            {this.props.rightActions}
-          </div>
+          <div className="SidebarFooter__actions SidebarFooter__actions--left">{this.props.leftActions}</div>
+          <div className="SidebarFooter__actions SidebarFooter__actions--right">{this.props.rightActions}</div>
         </div>
       </footer>
     );
