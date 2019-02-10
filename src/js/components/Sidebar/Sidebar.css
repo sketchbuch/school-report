@@ -3,7 +3,7 @@
 
 .Sidebar {
   height: 100%;
-  width: var(--sidebar-max-width);
+  width: 25%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
