@@ -102,10 +102,8 @@
   --sidebar-max-width: 480px;
   --sidebar-header-height: 5rem;
   --sidebar-footer-height: 7rem;
-  --sidebar-pb-height: 9rem;
-  --sidebar-footer-height-pb: calc(
-    var(--sidebar-footer-height) + var(--sidebar-pb-height)
-  );
+  --sidebar-pb-height: 7rem;
+  --sidebar-footer-height-pb: calc(var(--sidebar-footer-height) + var(--sidebar-pb-height));
   --sidebar-item-height: 5rem;
   --toastr-max-width: 440px;
 

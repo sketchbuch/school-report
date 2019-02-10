@@ -2,15 +2,17 @@
 
 import React, { Component } from 'react';
 import Icon from '../../Icon/Icon';
-import NoItems from '../../NoItems/NoItems';
 import LetterCount from '../../LetterCount/LetterCount';
+import NoItems from '../../NoItems/NoItems';
+//import PageBrowser from '../../ui/PageBrowser/PageBrowser';
 import ReportsCatSelect from '../CatSelect/ReportsCatSelect';
 import Translation from '../../Translation/Translation';
 import type { CategoryType } from '../../../types/category';
+//import type { PageBrowserProps } from '../../../types/pageBrowser';
 import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
-import { getPupilTextHtml } from '../../../utils/html';
 import { ICON_SUCCESS } from '../../../constants/icons';
+import { getPupilTextHtml } from '../../../utils/html';
 import './ReportsTextList.css';
 
 type Props = {

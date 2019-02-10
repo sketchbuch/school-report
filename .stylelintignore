@@ -1,0 +1,8 @@
+/.vscode
+/build
+/coverage
+/dist
+/docs
+/flow-typed
+/public/css/base/normalize.css
+/public/css/fonts

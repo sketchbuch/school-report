@@ -131,50 +131,18 @@ class PageBrowser extends Component<Props> {
     return null;
   }
 
-  renderCentre(curPage: number, pagesToShow: number, totalPages: number): React.Node {
-    const pages = [];
-    const middle = Math.ceil(pagesToShow / 2);
-
-    let start = 1;
-    if (curPage > totalPages - middle) {
-      start = Math.floor(totalPages - (pagesToShow - 1));
-    } else if (curPage > middle) {
-      start = Math.floor(curPage - middle / 2);
-    }
-
-    if (start < 1) {
-      start = 1;
-    }
-
-    let finish = pagesToShow + start;
-    if (finish > totalPages) {
-      finish = totalPages;
-    }
-
-    for (let p = start; p <= finish; p++) {
-      if (p >= start + pagesToShow) {
-        break;
-      }
-      const sel = p === curPage;
-      pages.push(
-        <PbBut key={'page-' + p} label={p} title={p} type={p} selected={sel} page onClick={this.handleClick} />
-      );
-    }
-
-    const showLeftMore = curPage > middle && totalPages > pagesToShow;
-    const showRightMore = curPage < totalPages - Math.floor(pagesToShow / 2) && totalPages > pagesToShow;
-
+  renderCentre(curPage: number, totalPages: number): React.Node {
     return (
       <div className="PageBrowser__centre">
-        {showLeftMore ? <PbMore /> : <PbMore hidden />}
-        {pages}
-        {showRightMore ? <PbMore /> : <PbMore hidden />}
+        <p className="PageBrowser__info">
+          <Translation name="InfoText" ns="PageBrowser" placeholders={{ CUR: curPage, TOTAL: totalPages }} />
+        </p>
       </div>
     );
   }
 
   render() {
-    const { curPage, first, itemCount, last, next, pagesToShow, perPage, prev } = this.props;
+    const { curPage, first, itemCount, last, next, perPage, prev } = this.props;
 
     const totalPages = this.getTotalPages(itemCount, perPage);
     let classes = 'PageBrowser';
@@ -188,12 +156,9 @@ class PageBrowser extends Component<Props> {
         <div className={classes}>
           <div className="PageBrowser__controls">
             {this.renderLeft(first, prev, curPage)}
-            {this.renderCentre(curPage, pagesToShow, totalPages)}
+            {this.renderCentre(curPage, totalPages)}
             {this.renderRight(next, last, curPage, totalPages)}
           </div>
-          <p className="PageBrowser__info">
-            <Translation name="InfoText" ns="PageBrowser" placeholders={{ CUR: curPage, TOTAL: totalPages }} />
-          </p>
         </div>
       );
     }
