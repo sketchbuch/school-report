@@ -136,16 +136,6 @@ export class Reports extends Component<Props, State> {
     return (
       <section className="Reports">
         <div className="Reports__left">
-          <ReportsTexts
-            activePupil={this.props.activePupil}
-            handleEndDrag={this.handleEndDrag}
-            handleTextMove={this.handleTextMove}
-            handleTextToggle={this.handleTextToggle}
-            selectedTexts={selectedTexts}
-            texts={this.props.texts}
-          />
-        </div>
-        <div className="Reports__right">
           <ReportsTextList
             activePupil={this.props.activePupil}
             categories={this.props.categories}
@@ -153,6 +143,16 @@ export class Reports extends Component<Props, State> {
             handleTextToggle={this.handleTextToggle}
             selectedTexts={selectedTexts}
             term={this.props.term}
+            texts={this.props.texts}
+          />
+        </div>
+        <div className="Reports__right">
+          <ReportsTexts
+            activePupil={this.props.activePupil}
+            handleEndDrag={this.handleEndDrag}
+            handleTextMove={this.handleTextMove}
+            handleTextToggle={this.handleTextToggle}
+            selectedTexts={selectedTexts}
             texts={this.props.texts}
           />
         </div>
