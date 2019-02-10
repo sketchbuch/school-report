@@ -7,34 +7,19 @@
   height: 100%;
   overflow-y: auto;
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
 }
 
 .Reports__left {
   position: relative;
-  width: 100%;
+  width: 50%;
 }
 
 .Reports__right {
   position: relative;
-  width: 100%;
+  width: 50%;
   border-left: 1px solid var(--col-darken-1);
-}
-
-@media screen and (min-width: 1024px) {
-    .Reports {
-      flex-direction: row;
-      flex-wrap: nowrap;
-      align-items: stretch;
-    }
-
-    .Reports__left {
-      width: 50%;
-    }
-
-    .Reports__right {
-      width: 50%;
-    }
 }

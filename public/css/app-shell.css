@@ -1,22 +1,29 @@
 /* App Shell CSS */
 /* ------------- */
 
-  /* Fonts */
-@import "./fonts/fonts.css";
+/* Fonts */
+@import './fonts/fonts.css';
 
-  /* Vendor */
-@import "./vendor/icofont.css";
-@import "./vendor/react-redux-toastr.css";
-@import "./vendor/react-select.css";
+/* Vars */
+@import './vars/colours.css';
+@import './vars/ui.css';
+@import './vars/typography.css';
+@import './vars/misc.css';
+@import './vars/dimensions.css';
+@import './vars/zindexes.css';
 
-  /* Base */
-@import "./base/normalize.css";
-@import "./base/vars.css";
-@import "./base/keyframes.css";
-@import "./base/tags.css";
-@import "./base/apploader.css";
-@import "./base/toastr.css";
+/* Vendor */
+@import './vendor/icofont.css';
+@import './vendor/react-redux-toastr.css';
+@import './vendor/react-select.css';
 
-  /* UI */
-@import "./ui/forms.css";
-@import "./ui/select.css";
+/* Base */
+@import './base/normalize.css';
+@import './base/keyframes.css';
+@import './base/tags.css';
+@import './base/apploader.css';
+@import './base/toastr.css';
+
+/* UI */
+@import './ui/forms.css';
+@import './ui/select.css';

@@ -11,6 +11,7 @@
   height: var(--sidebar-footer-height);
   border-top: 1px solid var(--col-darken-1);
   background: var(--col-lighten-5);
+  border-right: 1px solid var(--col-sidebar-border);
 }
 
 .SidebarFooter__actionsBox {
@@ -57,10 +58,4 @@
 
 .SidebarPageBrowser + .SidebarFooter {
   border-top-color: var(--col-darken-2);
-}
-
-@media screen and (min-width: 1024px) {
-    .SidebarFooter {
-      border-right: 1px solid var(--col-sidebar-border);
-    }
 }

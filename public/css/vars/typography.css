@@ -1,0 +1,15 @@
+:root {
+  --font-sans: 'PT Sans', sans-serif;
+  --font-serif: 'PT Serif', serif;
+  --font-size-base: 10px;
+  --font-size-small: 1.5rem;
+  --font-size: 2rem;
+  --font-size-medium: 2.5rem;
+  --font-size-large: 3rem;
+  --font-size-vlarge: 3.5rem;
+  --font-size-huge: 4rem;
+  --lh-std: 1.6;
+  --lh-reduced: 1.3;
+  --ls-std: 2px;
+  --mar-bottom-std: 1.6rem;
+}

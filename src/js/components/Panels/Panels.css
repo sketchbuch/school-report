@@ -5,26 +5,18 @@
   height: 100%;
   width: 100%;
   padding-top: var(--header-height);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
-
 
 .Panel {
   height: 100%;
   width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-}
-
-@media screen and (min-width: 1024px) {
-    .Panel {
-  	   flex-direction: row;
-   	   flex-wrap: nowrap;
-     	 justify-content: flex-start;
-    }
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
 }

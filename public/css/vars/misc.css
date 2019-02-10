@@ -1,0 +1,6 @@
+:root {
+  --apploader-ms: 2000;
+  --apploader-duration: 2000ms;
+  --sidebaritem-ms: 250;
+  --sidebaritem-duration: 250ms;
+}

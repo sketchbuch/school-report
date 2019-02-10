@@ -4,7 +4,7 @@
 .InfoMsg {
   width: 100%;
   height: 100%;
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
@@ -33,10 +33,4 @@
 
 .InfoMsg__subtext:empty {
   display: none;
-}
-
-@media screen and (min-width: 1024px) {
-  .InfoMsg {
-    display: flex;
-  }
 }

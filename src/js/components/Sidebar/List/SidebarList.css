@@ -9,6 +9,7 @@
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  border-right: 1px solid var(--col-sidebar-border);
 }
 
 .SidebarList--pb {
@@ -21,10 +22,4 @@
 
 .SidebarList--pb.SidebarList--sh {
   height: calc(100% - var(--sidebar-footer-height-pb));
-}
-
-@media screen and (min-width: 1024px) {
-  .SidebarList {
-    border-right: 1px solid var(--col-sidebar-border);
-  }
 }

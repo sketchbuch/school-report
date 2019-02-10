@@ -3,11 +3,11 @@
 
 .Sidebar {
   height: 100%;
-  width: 100%;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
+  width: var(--sidebar-max-width);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   position: relative;
   background: var(--col-sidebar-bg);
   flex-shrink: 0;
@@ -19,10 +19,4 @@
 
 .Sidebar--footer {
   padding-bottom: var(--sidebar-footer-height);
-}
-
-@media screen and (min-width: 1024px) {
-    .Sidebar {
-      width: var(--sidebar-max-width);
-    }
 }
