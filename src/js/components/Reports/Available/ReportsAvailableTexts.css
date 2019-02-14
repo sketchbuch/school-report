@@ -1,7 +1,7 @@
 /* Report Panel Text List */
 /* ---------------------- */
 
-.ReportsTextList {
+.ReportsAvailableTexts {
   display: block;
   position: relative;
   padding: 0px;
@@ -10,7 +10,7 @@
   border-top: 1px solid var(--col-darken-1);
 }
 
-.ReportsTextList_list {
+.ReportsAvailableTexts_list {
   display: block;
   position: relative;
   list-style: none;
@@ -18,7 +18,7 @@
   margin: 0px;
 }
 
-.ReportsTextList__item {
+.ReportsAvailableTexts__item {
   position: relative;
   display: block;
   padding: 5px 10px;
@@ -29,26 +29,26 @@
   -webkit-user-drag: element;
 }
 
-.ReportsTextList__item + .ReportsTextList__item {
+.ReportsAvailableTexts__item + .ReportsAvailableTexts__item {
   margin-top: 20px;
 }
 
-.ReportsTextList__item--selected {
+.ReportsAvailableTexts__item--selected {
   background: var(--col-brand-transparent);
 }
 
-.ReportsTextList__item--disabled {
+.ReportsAvailableTexts__item--disabled {
   opacity: 0.3;
   cursor: not-allowed;
 }
 
-.ReportsTextList_nolist {
+.ReportsAvailableTexts_nolist {
   line-height: var(--lh-reduced);
   color: var(--col-darken-5);
   padding: 10px 20px;
 }
 
-.ReportsTextList__itemselected {
+.ReportsAvailableTexts__itemselected {
   display: flex;
   flex-direction: column;
   justify-content: center;

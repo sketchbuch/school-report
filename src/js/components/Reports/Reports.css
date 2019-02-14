@@ -57,6 +57,7 @@
 
 .Reports__column .SidebarHeader {
   background: var(--col-darken-3);
+  border-right: 0;
 }
 
 .Reports__column .SidebarHeader .SearchField .TextInput {

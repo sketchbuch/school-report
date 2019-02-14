@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import ReportsCatSelect from './ReportsCatSelect';
-import categoryDefault from '../../../types/category';
-import textDefault from '../../../types/text';
+import CatSelect from './CatSelect';
+import categoryDefault from '../../types/category';
+import textDefault from '../../types/text';
 
-describe('<ReportsCatSelect />', () => {
+describe('<CatSelect />', () => {
   const props = {
     categories: [
       { ...categoryDefault, id: 'c1', label: 'Justice' },
@@ -20,14 +20,14 @@ describe('<ReportsCatSelect />', () => {
   };
 
   test('Renders without crashing', () => {
-    const wrapper = shallow(<ReportsCatSelect />);
+    const wrapper = shallow(<CatSelect />);
     expect(wrapper).toHaveLength(1);
   });
 
   test('Renders nothing if no categories', () => {
-    const content = '.ReportsCatSelect';
-    const wrapper1 = shallow(<ReportsCatSelect />);
-    const wrapper2 = shallow(<ReportsCatSelect {...props} />);
+    const content = '.CatSelect';
+    const wrapper1 = shallow(<CatSelect />);
+    const wrapper2 = shallow(<CatSelect {...props} />);
 
     expect(wrapper1.find(content)).toHaveLength(0);
     expect(wrapper2.find(content)).toHaveLength(1);
@@ -35,8 +35,8 @@ describe('<ReportsCatSelect />', () => {
 
   test('Shows the selected option when needed', () => {
     const option = 'option[value="category-selected"]';
-    const wrapper1 = shallow(<ReportsCatSelect {...props} />);
-    const wrapper2 = shallow(<ReportsCatSelect {...props} selectedCount={3} />);
+    const wrapper1 = shallow(<CatSelect {...props} />);
+    const wrapper2 = shallow(<CatSelect {...props} selectedCount={3} />);
 
     expect(wrapper1.find(option)).toHaveLength(0);
     expect(wrapper2.find(option)).toHaveLength(1);
@@ -44,8 +44,8 @@ describe('<ReportsCatSelect />', () => {
 
   test('Shows the unselected option when needed', () => {
     const option = 'option[value="category-unselected"]';
-    const wrapper1 = shallow(<ReportsCatSelect {...props} />);
-    const wrapper2 = shallow(<ReportsCatSelect {...props} selectedCount={props.texts.length} />);
+    const wrapper1 = shallow(<CatSelect {...props} />);
+    const wrapper2 = shallow(<CatSelect {...props} selectedCount={props.texts.length} />);
 
     expect(wrapper1.find(option)).toHaveLength(1);
     expect(wrapper2.find(option)).toHaveLength(0);
@@ -75,8 +75,8 @@ describe('<ReportsCatSelect />', () => {
     };
 
     const option = 'option[value="category-nocat"]';
-    const wrapper1 = shallow(<ReportsCatSelect {...props} />);
-    const wrapper2 = shallow(<ReportsCatSelect {...props2} />);
+    const wrapper1 = shallow(<CatSelect {...props} />);
+    const wrapper2 = shallow(<CatSelect {...props2} />);
 
     expect(wrapper1.find(option)).toHaveLength(1);
     expect(wrapper2.find(option)).toHaveLength(0);

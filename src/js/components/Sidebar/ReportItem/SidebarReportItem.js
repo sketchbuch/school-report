@@ -13,6 +13,7 @@ type Props = {
   item: CategoryType,
   itemType: SidebarListTypes,
   onReportClick: () => {},
+  selected: string | false,
   sortOrder: Array<string>,
 };
 
@@ -23,6 +24,7 @@ class SidebarReportItem extends Component<Props> {
   static defaultProps = {
     itemType: 'category',
     onReportClick: () => {},
+    selected: false,
     updateExistingItems: () => {},
   };
 
@@ -41,6 +43,7 @@ class SidebarReportItem extends Component<Props> {
           link={this.props.item.getUrl('link')}
           linkEdit={editUrl}
           onSubClick={this.props.onReportClick(this.props.item.id)}
+          selected={this.props.item.id === this.props.selected}
         >
           <SidebarItemButton
             title={text('SidebarItemEdit', 'Actions')}

@@ -10,7 +10,7 @@ import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
 import { ICON_SUCCESS } from '../../../constants/icons';
 import { getPupilTextHtml } from '../../../utils/html';
-import './ReportsTextList.css';
+import './ReportsAvailableTexts.css';
 
 type Props = {
   activePupil: PupilType | Object,
@@ -25,7 +25,7 @@ type Props = {
 /**
  * A list of available texts.
  */
-export class ReportsTextList extends Component<Props> {
+export class ReportsAvailableTexts extends Component<Props> {
   static defaultProps = {
     activePupil: {},
     categories: [],
@@ -39,18 +39,18 @@ export class ReportsTextList extends Component<Props> {
 
   render() {
     return (
-      <div className="ReportsTextList">
+      <div className="ReportsAvailableTexts">
         {this.props.texts.length > 0 ? (
-          <ul className="ReportsTextList_list">
+          <ul className="ReportsAvailableTexts_list">
             {this.props.texts.map(text => {
               const pupilText = getPupilTextHtml(text.getLabel(0), this.props.activePupil);
               const isSelected = this.props.selectedTexts.indexOf(text.id) > -1 ? true : false;
               const isActive = !isSelected && this.props.disableTexts;
               let classes = isSelected
-                ? 'ReportsTextList__item ReportsTextList__item--selected'
-                : 'ReportsTextList__item';
+                ? 'ReportsAvailableTexts__item ReportsAvailableTexts__item--selected'
+                : 'ReportsAvailableTexts__item';
               if (isActive) {
-                classes += ' ReportsTextList__item--disabled';
+                classes += ' ReportsAvailableTexts__item--disabled';
               }
 
               return (
@@ -58,7 +58,7 @@ export class ReportsTextList extends Component<Props> {
                   <span dangerouslySetInnerHTML={pupilText} />
                   <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length} />
                   {isSelected && (
-                    <span className="ReportsTextList__itemselected">
+                    <span className="ReportsAvailableTexts__itemselected">
                       <Icon type={ICON_SUCCESS} />
                     </span>
                   )}
@@ -68,11 +68,11 @@ export class ReportsTextList extends Component<Props> {
           </ul>
         ) : this.props.term !== '' ? (
           <NoItems>
-            <Translation name="NoneSearched" ns="ReportsTextList" />
+            <Translation name="NoneSearched" ns="ReportsAvailableTexts" />
           </NoItems>
         ) : (
           <NoItems>
-            <Translation name="None" ns="ReportsTextList" />
+            <Translation name="None" ns="ReportsAvailableTexts" />
           </NoItems>
         )}
       </div>
@@ -80,4 +80,4 @@ export class ReportsTextList extends Component<Props> {
   }
 }
 
-export default ReportsTextList;
+export default ReportsAvailableTexts;

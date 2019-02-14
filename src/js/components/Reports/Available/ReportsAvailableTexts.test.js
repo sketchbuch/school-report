@@ -5,9 +5,9 @@ import { shallow } from 'enzyme';
 import categoryDefault from '../../../types/category';
 import pupilDefault, { PupilFactory } from '../../../types/pupil';
 import textDefault, { TextFactory } from '../../../types/text';
-import ReportsTextList from './ReportsTextList';
+import ReportsAvailableTexts from './ReportsAvailableTexts';
 
-describe('<ReportsTextList />', () => {
+describe('<ReportsAvailableTexts />', () => {
   const props = {
     activePupil: PupilFactory({ ...pupilDefault, firstname: 'Dr', lastname: 'Who' }, Date.now(), 'cl1'),
     categories: [
@@ -28,17 +28,17 @@ describe('<ReportsTextList />', () => {
   props.selectedTexts.push(props.texts[1].id);
 
   test('Renders without crashing', () => {
-    const wrapper = shallow(<ReportsTextList {...props} />);
+    const wrapper = shallow(<ReportsAvailableTexts {...props} />);
     expect(wrapper).toHaveLength(1);
   });
 
   test('No visibleTexts renders NoItems', () => {
-    const wrapper = shallow(<ReportsTextList {...props} texts={[]} />);
+    const wrapper = shallow(<ReportsAvailableTexts {...props} texts={[]} />);
     expect(wrapper.find('NoItems')).toHaveLength(1);
   });
 
   describe('getVisibleTexts()', () => {
-    const wrapper = shallow(<ReportsTextList {...props} />);
+    const wrapper = shallow(<ReportsAvailableTexts {...props} />);
 
     test('"category-all" returns all texts', () => {
       expect(wrapper.instance().getVisibleTexts()).toEqual(props.texts);

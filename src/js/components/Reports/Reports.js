@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import HTML5Backend from 'react-dnd-html5-backend';
 import { DragDropContext } from 'react-dnd';
 import * as builderActions from '../../actions/builderActions';
-import ReportsTextList from './TextList/ReportsTextList';
-import ReportsTexts from './Texts/ReportsTexts';
+import ReportsAvailableTexts from './Available/ReportsAvailableTexts';
+import ReportsSelectedTexts from './Selected/ReportsSelectedTexts';
 import SearchField from '../ui/SearchField/SearchField';
 import Sidebar from '../Sidebar/Sidebar';
 import SidebarHeader from '../Sidebar/Header/SidebarHeader';
@@ -31,17 +31,20 @@ type Props = {
   disableTexts: boolean,
   saveReports: Function,
   selected: Array<string>,
-  term: string,
   texts: Array<TextType>,
 };
 
 type State = {
   catId: string,
+  catPage: number,
   catSearch: boolean,
   catSearchAnywhere: boolean,
   catTerm: string,
-  curPage: number,
   dragSelected: Array<string>,
+  textPage: number,
+  textSearch: boolean,
+  textSearchAnywhere: boolean,
+  textTerm: string,
 };
 
 /**
@@ -55,7 +58,6 @@ export class Reports extends Component<Props, State> {
     categories: [],
     disableTexts: false,
     saveReports: () => {},
-    term: '',
     texts: [],
   };
 
@@ -67,7 +69,7 @@ export class Reports extends Component<Props, State> {
   handleCatSearch: (event: SyntheticEvent<HTMLInputElement>) => void;
   handleCatSearchIconClick: (event: SyntheticEvent<MouseEvent>) => void;
   handleEndDrag: () => {};
-  handlePbChange: (curPage: number) => {};
+  handlePbChange: (catPage: number) => {};
   handleTextMove: (sourceId: string, targetId: string, before: boolean) => {};
   handleTextToggle: (textId: string) => {};
 
@@ -76,11 +78,15 @@ export class Reports extends Component<Props, State> {
 
     this.state = {
       catId: 'category-all',
+      catPage: 1,
       catSearch: false,
       catSearchAnywhere: false,
       catTerm: '',
-      curPage: 1,
       dragSelected: [],
+      textPage: 1,
+      textSearch: false,
+      textSearchAnywhere: false,
+      textTerm: '',
     };
 
     this.handleCatAnywhereIconClick = this.handleCatAnywhereIconClick.bind(this);
@@ -157,8 +163,8 @@ export class Reports extends Component<Props, State> {
     );
   };
 
-  handlePbChange(curPage: number) {
-    this.setState({ curPage });
+  handlePbChange(catPage: number) {
+    this.setState({ catPage });
   }
 
   handleCatClick = (catId: string) => (event: SyntheticEvent<>) => {
@@ -169,7 +175,7 @@ export class Reports extends Component<Props, State> {
     const newState = { catSearch: !this.state.catSearch };
     if (newState.catSearch === false) {
       newState.catTerm = '';
-      newState.curPage = 1;
+      newState.catPage = 1;
     }
 
     this.setState(newState);
@@ -180,16 +186,14 @@ export class Reports extends Component<Props, State> {
   }
 
   handleCatSearch(event: SyntheticEvent<HTMLInputElement>) {
-    const term = event.currentTarget.value;
-
     if (event.type === 'keyup') {
-      if (event.key === 'Escape' || term === '') {
+      if (event.key === 'Escape') {
         this.handleCatSearchIconClick(event);
       }
     } else {
-      const newState = { catTerm: term };
+      const newState = { catTerm: event.currentTarget.value };
       if (newState.catTerm !== this.state.catTerm) {
-        newState.curPage = 1;
+        newState.catPage = 1;
       }
 
       this.setState(newState);
@@ -213,8 +217,8 @@ export class Reports extends Component<Props, State> {
       visibleTexts = [...this.props.texts];
     }
 
-    if (this.props.term !== '') {
-      visibleTexts = visibleTexts.filter(text => text.contains(this.props.term, true));
+    if (this.state.textTerm !== '') {
+      visibleTexts = visibleTexts.filter(text => text.contains(this.state.textTerm, true));
     }
 
     return visibleTexts;
@@ -236,19 +240,19 @@ export class Reports extends Component<Props, State> {
                 iconOnClick={this.handleCatSearchIconClick}
                 onKeyUp={this.handleCatSearch}
                 onChange={this.handleCatSearch}
-                placeholder="Search categories..."
+                placeholder={text('SearchPlaceholder-category', 'SidebarHeader')}
                 term={this.state.catTerm}
                 visible={this.state.catSearch}
               />
             </SidebarHeader>
             <SidebarList
-              curPage={this.state.curPage}
+              catPage={this.state.catPage}
               dispatch={() => {}}
               items={this.props.categories}
               listType="category"
               noItemsTxt={text('Categories', 'SidebarNoItems')}
               onChange={this.handlePbChange}
-              reportSidebar
+              reportSidebar={this.state.catId}
               sortOrder={categorySort}
               onReportClick={this.handleCatClick}
               term={this.state.catTerm}
@@ -258,18 +262,18 @@ export class Reports extends Component<Props, State> {
           </Sidebar>
         </div>
         <div className="Reports__column Reports__column--cattexts Reports__column--offset">
-          <ReportsTextList
+          <ReportsAvailableTexts
             activePupil={this.props.activePupil}
             categories={this.props.categories}
             disableTexts={this.props.disableTexts}
             handleTextToggle={this.handleTextToggle}
             selectedTexts={selectedTexts}
-            term={this.props.term}
+            term={this.props.textTerm}
             texts={catTexts}
           />
         </div>
         <div className="Reports__column Reports__column--seltexts">
-          <ReportsTexts
+          <ReportsSelectedTexts
             activePupil={this.props.activePupil}
             handleEndDrag={this.handleEndDrag}
             handleTextMove={this.handleTextMove}

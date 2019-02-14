@@ -9,7 +9,7 @@ import Icon from '../../components/Icon/Icon';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCircular';
 import NewTextLayout from './New/NewTextLayout';
-import ReportsCatSelect from '../../components/Reports/CatSelect/ReportsCatSelect';
+import CatSelect from '../../components/CatSelect/CatSelect';
 import SearchField from '../../components/ui/SearchField/SearchField';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
@@ -36,6 +36,7 @@ type Props = {
 type State = {
   anywhere: boolean,
   curPage: number,
+  option: string,
   searchVisible: boolean,
   term: string,
 };
@@ -51,6 +52,7 @@ export class TextsLayout extends React.Component<Props, State> {
 
   props: Props;
   state: State;
+  handleFilterChanage: (event: SyntheticInputEvent<HTMLInputElement>) => void;
   handlePbChange: (curPage: number) => void;
   handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
   handleSearchAnywhereClick: (event: SyntheticEvent<MouseEvent>) => void;
@@ -62,10 +64,12 @@ export class TextsLayout extends React.Component<Props, State> {
     this.state = {
       anywhere: false,
       curPage: 1,
+      option: 'category-all',
       searchVisible: false,
       term: '',
     };
 
+    this.handleFilterChanage = this.handleFilterChanage.bind(this);
     this.handlePbChange = this.handlePbChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSearchAnywhereClick = this.handleSearchAnywhereClick.bind(this);
@@ -82,15 +86,23 @@ export class TextsLayout extends React.Component<Props, State> {
     }
   }
 
-  handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
-    const term = event.currentTarget.value;
+  handleFilterChanage(event: SyntheticInputEvent<HTMLInputElement>) {
+    const option = event.target.value;
 
+    if (this.state.option !== option) {
+      this.setState({ option, term: '', curPage: 1 });
+    } else {
+      this.setState({ option });
+    }
+  }
+
+  handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
     if (event.type === 'keyup') {
-      if (event.key === 'Escape' || term === '') {
+      if (event.key === 'Escape') {
         this.handleSearchIconClick(event);
       }
     } else {
-      const newState = { term };
+      const newState = { term: event.currentTarget.value };
       if (newState.term !== this.state.term) {
         newState.curPage = 1;
       }
@@ -185,7 +197,7 @@ export class TextsLayout extends React.Component<Props, State> {
             termAnywhere={this.state.anywhere}
             usePb
           >
-            <ReportsCatSelect
+            <CatSelect
               categories={this.props.categories}
               onChange={this.handleFilterChanage}
               option={this.state.option}

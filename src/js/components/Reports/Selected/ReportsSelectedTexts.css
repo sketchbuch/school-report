@@ -1,7 +1,7 @@
-/* Report Texts */
-/* ------------ */
+/* Report Selected Texts */
+/* --------------------- */
 
-.ReportsTexts {
+.ReportsSelectedTexts {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
   margin: 0px;
 }
 
-.ReportsTexts__adder {
+.ReportsSelectedTexts__adder {
   text-align: center;
   border: none;
   background: none;

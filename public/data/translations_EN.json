@@ -63,6 +63,13 @@
       "UpdateCategoryBtnLabel": "Update Category",
       "WinTitle": "Categories"
     },
+    "CatSelect": {
+      "CatsAll": "All",
+      "CatsUncategorised": "Uncategorised",
+      "CatsSelected": "Selected",
+      "CatsUnselected": "Unselected",
+      "Tooltip": "Select a category"
+    },
     "Classes": {
       "BackToClasses": "Cancel",
       "Breadcrumb": "Classes",
@@ -268,16 +275,9 @@
     "ReportPanel": {
       "NoneSelected": "Click the + button to add a text"
     },
-    "ReportsTextList": {
+    "ReportsAvailableTexts": {
       "None": "No texts available.",
       "NoneSearched": "No texts begin with your search term."
-    },
-    "ReportsCatSelect": {
-      "CatsAll": "All",
-      "CatsUncategorised": "Uncategorised",
-      "CatsSelected": "Selected",
-      "CatsUnselected": "Unselected",
-      "Tooltip": "Select a category"
     },
     "Reports": {
       "BackToReports": "Cancel",

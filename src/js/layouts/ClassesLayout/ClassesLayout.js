@@ -81,14 +81,12 @@ export class ClassesLayout extends Component<Props, State> {
   }
 
   handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
-    const term = event.currentTarget.value;
-
     if (event.type === 'keyup') {
-      if (event.key === 'Escape' || term === '') {
+      if (event.key === 'Escape') {
         this.handleSearchIconClick(event);
       }
     } else {
-      const newState = { term };
+      const newState = { term: event.currentTarget.value };
       if (newState.term !== this.state.term) {
         newState.curPage = 1;
       }

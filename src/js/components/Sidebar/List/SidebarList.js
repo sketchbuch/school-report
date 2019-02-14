@@ -33,7 +33,7 @@ type Props = {
   onReportClick: () => {},
   pagesToShow: number,
   perPage: number,
-  reportSidebar: boolean,
+  reportSidebar: string | false,
   sortOrder: Array<string>,
   term: string,
   termAnywhere: boolean,
@@ -174,6 +174,7 @@ class SidebarList extends React.Component<Props, State> {
                     item={item}
                     itemType={this.props.listType}
                     key={item.id}
+                    selected={this.props.reportSidebar}
                     onReportClick={this.props.onReportClick}
                   />
                 );

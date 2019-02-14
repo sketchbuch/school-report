@@ -6,7 +6,7 @@ import InfoMsg from '../../InfoMsg/InfoMsg';
 import { text } from '../../Translation/Translation';
 import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
-import './ReportsTexts.css';
+import './ReportsSelectedTexts.css';
 
 type Props = {
   activePupil: PupilType | Object,
@@ -20,7 +20,7 @@ type Props = {
 /**
  * Selected texts for a pupil in a report.
  */
-export class ReportsTexts extends Component<Props> {
+export class ReportsSelectedTexts extends Component<Props> {
   static defaultProps = {
     activePupil: {},
     handleEndDrag: () => {},
@@ -53,7 +53,7 @@ export class ReportsTexts extends Component<Props> {
     const selectedTexts = this.getSelectedTexts();
 
     return selectedTexts.length > 0 ? (
-      <div className="ReportsTexts">
+      <div className="ReportsSelectedTexts">
         {selectedTexts.map(text => (
           <ReportsTextItem
             activePupil={this.props.activePupil}
@@ -71,4 +71,4 @@ export class ReportsTexts extends Component<Props> {
   }
 }
 
-export default ReportsTexts;
+export default ReportsSelectedTexts;

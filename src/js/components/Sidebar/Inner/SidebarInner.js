@@ -14,6 +14,7 @@ type Props = {
   linkEdit: string,
   onClick: Function | null,
   onSubClick?: () => {} | null,
+  selected: boolean,
 };
 
 const ItemContent = (props: Props) => {
@@ -42,6 +43,7 @@ class SidebarInner extends React.Component<Props> {
     link: '',
     linkEdit: '',
     onClick: null,
+    selected: false,
   };
 
   props: Props;
@@ -51,6 +53,8 @@ class SidebarInner extends React.Component<Props> {
     if (this.props.link === window.location.pathname) {
       isSelected = true;
     } else if (this.props.linkEdit === window.location.pathname) {
+      isSelected = true;
+    } else if (this.props.selected) {
       isSelected = true;
     }
 

@@ -1,12 +1,12 @@
 // @flow
 
 import * as React from 'react';
-import { text } from '../../Translation/Translation';
-import { sortObjectsAz } from '../../../utils/sort';
-import type { CategoryType } from '../../../types/category';
-import type { TextType } from '../../../types/text';
-import { categorySort } from '../../../types/category';
-import './ReportsCatSelect.css';
+import type { CategoryType } from '../../types/category';
+import type { TextType } from '../../types/text';
+import { categorySort } from '../../types/category';
+import { sortObjectsAz } from '../../utils/sort';
+import { text } from '../Translation/Translation';
+import './CatSelect.css';
 
 type Props = {
   categories: Array<CategoryType>,
@@ -20,7 +20,7 @@ type Props = {
 /**
  * A category selector for texts.
  */
-export class ReportsCatSelect extends React.Component<Props> {
+export class CatSelect extends React.Component<Props> {
   static defaultProps = {
     categories: [],
     onChange: () => {},
@@ -46,27 +46,27 @@ export class ReportsCatSelect extends React.Component<Props> {
     const unselectedCount = texts.length - selectedCount;
 
     return (
-      <div className="ReportsCatSelect">
-        <select value={option} onChange={onChange} title={text('Tooltip', 'ReportsCatSelect')}>
+      <div className="CatSelect">
+        <select value={option} onChange={onChange} title={text('Tooltip', 'CatSelect')}>
           <option key="category-all" value="category-all">
-            {text('CatsAll', 'ReportsCatSelect')} ({texts.length})
+            {text('CatsAll', 'CatSelect')} ({texts.length})
           </option>
           {useSelected && selectedCount > 0 && (
             <option key="category-selected" value="category-selected">
-              {text('CatsSelected', 'ReportsCatSelect')} ({selectedCount})
+              {text('CatsSelected', 'CatSelect')} ({selectedCount})
             </option>
           )}
           {useSelected && unselectedCount > 0 && (
             <option key="category-unselected" value="category-unselected">
-              {text('CatsUnselected', 'ReportsCatSelect')} ({unselectedCount})
+              {text('CatsUnselected', 'CatSelect')} ({unselectedCount})
             </option>
           )}
           {(uncategorisedCount > 0 || option === 'category-nocat') && (
             <option key="category-nocat" value="category-nocat">
-              {text('CatsUncategorised', 'ReportsCatSelect')} ({uncategorisedCount})
+              {text('CatsUncategorised', 'CatSelect')} ({uncategorisedCount})
             </option>
           )}
-          <option key="category-disabled" disabled className="ReportsCatSelect_sep">
+          <option key="category-disabled" disabled className="CatSelect_sep">
             ---
           </option>
 
@@ -89,4 +89,4 @@ export class ReportsCatSelect extends React.Component<Props> {
   }
 }
 
-export default ReportsCatSelect;
+export default CatSelect;
