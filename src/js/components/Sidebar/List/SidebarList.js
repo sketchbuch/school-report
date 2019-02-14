@@ -1,21 +1,22 @@
 // @flow
 
 import * as React from 'react';
-import NoItems from '../../NoItems/NoItems';
-import Translation from '../../Translation/Translation';
-import SidebarSubheader from '../Subheader/SidebarSubheader';
-import SidebarItem from '../Item/SidebarItem';
-import SidebarPageBrowser from '../PageBrowser/SidebarPageBrowser';
-import SidebarBuilderItem from '../BuilderItem/SidebarBuilderItem';
-import type { PageBrowserProps } from '../../../types/pageBrowser';
-import type { SidebarListTypes } from '../../../types/sidebarList';
-import { sortObjectsAz } from '../../../utils/sort';
-import { getCustomNumProp } from '../../../utils/dom';
 import * as categoryActions from '../../../actions/categoryActions';
 import * as classActions from '../../../actions/classActions';
 import * as pupilActions from '../../../actions/pupilActions';
 import * as reportActions from '../../../actions/reportActions';
 import * as textActions from '../../../actions/textActions';
+import NoItems from '../../NoItems/NoItems';
+import SidebarBuilderItem from '../BuilderItem/SidebarBuilderItem';
+import SidebarItem from '../Item/SidebarItem';
+import SidebarPageBrowser from '../PageBrowser/SidebarPageBrowser';
+import SidebarReportItem from '../ReportItem/SidebarReportItem';
+import SidebarSubheader from '../Subheader/SidebarSubheader';
+import Translation from '../../Translation/Translation';
+import type { PageBrowserProps } from '../../../types/pageBrowser';
+import type { SidebarListTypes } from '../../../types/sidebarList';
+import { getCustomNumProp } from '../../../utils/dom';
+import { sortObjectsAz } from '../../../utils/sort';
 import './SidebarList.css';
 
 type Props = {
@@ -29,10 +30,13 @@ type Props = {
   listType: SidebarListTypes,
   noItemsTxt: string,
   onChange: (curPage: number) => void,
+  onReportClick: () => {},
   pagesToShow: number,
   perPage: number,
+  reportSidebar: boolean,
   sortOrder: Array<string>,
   term: string,
+  termAnywhere: boolean,
   usePb: boolean,
 };
 
@@ -62,8 +66,10 @@ class SidebarList extends React.Component<Props, State> {
     onChange: null,
     pagesToShow: 3,
     perPage: 20,
+    reportSidebar: false,
     sortOrder: ['updated'],
     term: '',
+    termAnywhere: false,
     usePb: false,
   };
 
@@ -126,7 +132,7 @@ class SidebarList extends React.Component<Props, State> {
 
     if (this.props.term !== '') {
       const displayProp = this.props.listType === 'pupil' ? this.props.sortOrder[0] : undefined;
-      sortedItems = sortedItems.filter(item => item.contains(this.props.term, false, displayProp));
+      sortedItems = sortedItems.filter(item => item.contains(this.props.term, this.props.termAnywhere, displayProp));
     }
 
     return sortedItems;
@@ -162,7 +168,16 @@ class SidebarList extends React.Component<Props, State> {
           {this.props.children && <SidebarSubheader>{this.props.children}</SidebarSubheader>}
           <ul className={classes} data-type={this.props.listType}>
             {sortedItems.map(item => {
-              if (this.props.builder) {
+              if (this.props.reportSidebar) {
+                return (
+                  <SidebarReportItem
+                    item={item}
+                    itemType={this.props.listType}
+                    key={item.id}
+                    onReportClick={this.props.onReportClick}
+                  />
+                );
+              } else if (this.props.builder) {
                 return (
                   <SidebarBuilderItem
                     description={this.props.description}
@@ -196,6 +211,8 @@ class SidebarList extends React.Component<Props, State> {
 
       if (this.props.term === '' && this.props.filter !== '') {
         searchNone = 'NoneCategory-' + this.props.listType;
+      } else if (this.props.term !== '' && this.props.termAnywhere) {
+        searchNone += '-anywhere';
       }
 
       return (

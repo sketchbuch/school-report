@@ -1,6 +1,5 @@
 :root {
   --header-height: 7rem;
-  --reports-catsel-height: 80px;
   --sidebar-footer-height-pb: calc(var(--sidebar-footer-height) + var(--sidebar-pb-height));
   --sidebar-footer-height: 7rem;
   --sidebar-header-height: 5rem;

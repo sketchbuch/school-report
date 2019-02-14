@@ -13,13 +13,52 @@
   align-items: stretch;
 }
 
-.Reports__left {
+.Reports__column {
   position: relative;
-  width: 50%;
+  width: 33.3333%;
+  border-left: 1px solid var(--col-darken-1);
 }
 
-.Reports__right {
-  position: relative;
-  width: 50%;
-  border-left: 1px solid var(--col-darken-1);
+.Reports__column--cats {
+  position: fixed;
+  width: 33.3333%;
+  height: calc(100% - var(--sidebar-header-height));
+}
+
+.Reports__column--cattexts {
+  position: fixed;
+  margin-left: 33.3333%;
+  overflow: auto;
+  height: calc(100% - var(--sidebar-header-height));
+}
+
+.Reports__column--seltexts {
+  position: fixed;
+  margin-left: 66.6666%;
+  overflow: auto;
+  height: calc(100% - var(--sidebar-header-height));
+}
+
+.Reports__column:first-child {
+  border-left: none;
+}
+
+.Reports__column .Sidebar {
+  width: 100%;
+}
+
+.Reports__column .SidebarList {
+  border-right: none;
+}
+
+.Reports__column .SidebarPageBrowser {
+  border-right: none;
+}
+
+.Reports__column .SidebarHeader {
+  background: var(--col-darken-3);
+}
+
+.Reports__column .SidebarHeader .SearchField .TextInput {
+  background: var(--col-darken-1);
 }

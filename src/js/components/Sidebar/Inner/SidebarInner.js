@@ -13,6 +13,7 @@ type Props = {
   link: string,
   linkEdit: string,
   onClick: Function | null,
+  onSubClick?: () => {} | null,
 };
 
 const ItemContent = (props: Props) => {
@@ -53,7 +54,16 @@ class SidebarInner extends React.Component<Props> {
       isSelected = true;
     }
 
-    if (this.props.link) {
+    if (this.props.onSubClick) {
+      return (
+        <div
+          onClick={this.props.onSubClick}
+          className={isSelected ? 'SidebarInner SidebarInner--selected' : 'SidebarInner'}
+        >
+          <ItemContent {...this.props} />
+        </div>
+      );
+    } else if (this.props.link) {
       return (
         <Link className={isSelected ? 'SidebarInner SidebarInner--selected' : 'SidebarInner'} to={this.props.link}>
           <ItemContent {...this.props} />

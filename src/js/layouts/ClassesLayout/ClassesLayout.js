@@ -3,24 +3,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import InfoMsg from '../../components/InfoMsg/InfoMsg';
-import TextInput from '../../components/ui/TextInput/TextInput';
+import DeleteClassesLayout from './Delete/DeleteClassesLayout';
+import EditClassLayout from './Edit/EditClassLayout';
 import Icon from '../../components/Icon/Icon';
+import InfoMsg from '../../components/InfoMsg/InfoMsg';
+import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCircular';
+import NewClassLayout from './New/NewClassLayout';
+import SearchField from '../../components/ui/SearchField/SearchField';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
-import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
-import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCircular';
-import EditClassLayout from './Edit/EditClassLayout';
-import DeleteClassesLayout from './Delete/DeleteClassesLayout';
-import NewClassLayout from './New/NewClassLayout';
-import { text } from '../../components/Translation/Translation';
-import { classSort } from '../../types/class';
+import setTitle from '../../utils/title';
 import type { ClassType } from '../../types/class';
 import type { PupilType } from '../../types/pupil';
-import { ICON_ADD, ICON_CLOSE, ICON_DELETE } from '../../constants/icons';
+import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
 import { ROUTE_CLASSES, ROUTE_DEL_CLASSES, ROUTE_EDIT_CLASS, ROUTE_NEW_CLASS } from '../../constants/routes';
-import setTitle from '../../utils/title';
+import { classSort } from '../../types/class';
+import { text } from '../../components/Translation/Translation';
 
 type Props = {
   classes: Array<ClassType>,
@@ -32,7 +32,9 @@ type Props = {
 };
 
 type State = {
+  anywhere: boolean,
   curPage: number,
+  searchVisible: boolean,
   term: string,
 };
 
@@ -47,21 +49,25 @@ export class ClassesLayout extends Component<Props, State> {
 
   props: Props;
   state: State;
-  handleClear: (event: SyntheticInputEvent<HTMLInputElement>) => void;
-  handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
   handlePbChange: (curPage: number) => void;
+  handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
+  handleSearchAnywhereClick: (event: SyntheticEvent<MouseEvent>) => void;
+  handleSearchIconClick: (event: SyntheticEvent<MouseEvent>) => void;
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
+      anywhere: false,
       curPage: 1,
+      searchVisible: false,
       term: '',
     };
 
-    this.handleClear = this.handleClear.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
     this.handlePbChange = this.handlePbChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleSearchAnywhereClick = this.handleSearchAnywhereClick.bind(this);
+    this.handleSearchIconClick = this.handleSearchIconClick.bind(this);
   }
 
   componentDidMount() {
@@ -74,17 +80,39 @@ export class ClassesLayout extends Component<Props, State> {
     }
   }
 
-  handleClear(event: SyntheticInputEvent<HTMLInputElement>) {
-    this.setState({ term: '', curPage: 1 });
-  }
-
   handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
     const term = event.currentTarget.value;
-    this.setState({ term, curPage: 1 });
+
+    if (event.type === 'keyup') {
+      if (event.key === 'Escape' || term === '') {
+        this.handleSearchIconClick(event);
+      }
+    } else {
+      const newState = { term };
+      if (newState.term !== this.state.term) {
+        newState.curPage = 1;
+      }
+
+      this.setState(newState);
+    }
   }
 
   handlePbChange(curPage: number) {
     this.setState({ curPage });
+  }
+
+  handleSearchIconClick(event: SyntheticEvent<MouseEvent>) {
+    const newState = { searchVisible: !this.state.searchVisible };
+    if (newState.searchVisible === false) {
+      newState.term = '';
+      newState.curPage = 1;
+    }
+
+    this.setState(newState);
+  }
+
+  handleSearchAnywhereClick(event: SyntheticEvent<MouseEvent>) {
+    this.setState({ anywhere: !this.state.anywhere });
   }
 
   /**
@@ -128,21 +156,17 @@ export class ClassesLayout extends Component<Props, State> {
 
     if (HAS_CLASSES) {
       searchBox = (
-        <React.Fragment>
-          <TextInput
-            className="SidebarHeader__search"
-            onChange={this.handleSearch}
-            placeholder={text('SearchPlaceholder', 'SidebarHeader')}
-            value={this.state.term}
-          />
-          <span
-            className="SidebarHeader__searchclear"
-            onClick={this.handleClear}
-            title={text('Clear', 'ItemSelection')}
-          >
-            <Icon type={ICON_CLOSE} />
-          </span>
-        </React.Fragment>
+        <SearchField
+          anywhere={this.state.anywhere}
+          anywhereOnClick={this.handleSearchAnywhereClick}
+          clearOnClick={this.handleSearchIconClick}
+          iconOnClick={this.handleSearchIconClick}
+          onKeyUp={this.handleSearch}
+          onChange={this.handleSearch}
+          placeholder={text('SearchPlaceholder-class', 'SidebarHeader')}
+          term={this.state.term}
+          visible={this.state.searchVisible}
+        />
       );
     }
 
@@ -150,6 +174,7 @@ export class ClassesLayout extends Component<Props, State> {
       <div className="Panel">
         <Sidebar>
           <SidebarHeader
+            controlsExpanded={this.state.searchVisible}
             title={text('Header-class', 'SidebarHeader')}
             subtitle={text('Subheader-count', 'SidebarHeader', {
               COUNT: this.props.classes.length,
@@ -166,6 +191,7 @@ export class ClassesLayout extends Component<Props, State> {
             onChange={this.handlePbChange}
             sortOrder={classSort}
             term={this.state.term}
+            termAnywhere={this.state.anywhere}
             usePb
           />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />

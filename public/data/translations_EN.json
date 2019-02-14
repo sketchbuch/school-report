@@ -298,6 +298,10 @@
       "UpdateReportsBtnLabel": "Update Report",
       "WinTitle": "Reports"
     },
+    "SearchField": {
+      "Anywhere": "Search anywhere",
+      "Clear": "Cancel search"
+    },
     "Settings": {
       "Breadcrumb": "Settings",
       "Cancel": "Cancel",
@@ -328,16 +332,26 @@
       "Header-report": "Reports",
       "Header-text": "Texts",
       "SearchPlaceholder": "Search texts...",
+      "SearchPlaceholder-category": "Search categories...",
+      "SearchPlaceholder-class": "Search classes...",
+      "SearchPlaceholder-pupil": "Search pupils...",
+      "SearchPlaceholder-report": "Search reports...",
+      "SearchPlaceholder-text": "Search texts...",
       "Subheader-count": "(%COUNT%)",
       "Subheader-countmulti": "(%COUNT1% / %COUNT2%)"
     },
     "SidebarList": {
       "NoneCategory-text": "This category contains no texts.",
       "NoneSearched-category": "No categories begin with your search term.",
+      "NoneSearched-category-anywhere": "No categories contain your search term.",
       "NoneSearched-class": "No classes begin with your search term.",
+      "NoneSearched-class-anywhere": "No classes contain your search term.",
       "NoneSearched-pupil": "No pupils begin with your search term.",
+      "NoneSearched-pupil-anywhere": "No pupils contain your search term.",
       "NoneSearched-report": "No reports begin with your search term.",
-      "NoneSearched-text": "No texts begin with your search term."
+      "NoneSearched-report-anywhere": "No reports contain your search term.",
+      "NoneSearched-text": "No texts begin with your search term.",
+      "NoneSearched-text-anywhere": "No texts contain your search term."
     },
     "Symbols": {
       "Add": "+",

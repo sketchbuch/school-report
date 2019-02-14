@@ -71,7 +71,7 @@
 
 .SidebarHeader__searchclear {
   width: 32px;
-  height: 32px;
+  height: 100%;
   display: none;
   position: absolute;
   flex-direction: column;
@@ -90,4 +90,21 @@
 
 .SidebarHeader + .NoItems {
   width: 100%;
+}
+
+.SidebarHeader--controlsExpanded .SidebarHeader__headline {
+  display: none;
+}
+
+.SidebarHeader--controlsExpanded .SidebarHeader__controls {
+  padding-left: 0;
+  width: 100%;
+}
+
+.SidebarHeader .SearchField__input {
+  background: var(--col-darken-1);
+  border: 1px solid var(--col-darken-2);
+  height: 32px;
+  color: var(--col-white);
+  padding-right: 40px;
 }

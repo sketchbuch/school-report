@@ -1,10 +1,12 @@
 // @flow
 
 import * as React from 'react';
+import classNames from 'classnames';
 import './SidebarHeader.css';
 
 type Props = {
   children?: React.Node,
+  controlsExpanded: boolean,
   subtitle: string,
   title: string,
 };
@@ -15,6 +17,7 @@ type Props = {
 class SidebarHeader extends React.PureComponent<Props> {
   static defaultProps = {
     children: null,
+    controlsExpanded: false,
     subtitle: '',
     title: '',
   };
@@ -22,13 +25,19 @@ class SidebarHeader extends React.PureComponent<Props> {
   props: Props;
 
   render() {
+    const { children, controlsExpanded, subtitle, title } = this.props;
+
     return (
-      <header className="SidebarHeader">
+      <header
+        className={classNames('SidebarHeader', {
+          'SidebarHeader--controlsExpanded': controlsExpanded,
+        })}
+      >
         <h1 className="SidebarHeader__headline">
-          {this.props.title}
-          {this.props.subtitle && <span className="SidebarHeader__subheadline">{this.props.subtitle}</span>}
+          {title}
+          {subtitle && <span className="SidebarHeader__subheadline">{subtitle}</span>}
         </h1>
-        {this.props.children && <div className="SidebarHeader__controls">{this.props.children}</div>}
+        {children && <div className="SidebarHeader__controls">{children}</div>}
       </header>
     );
   }
