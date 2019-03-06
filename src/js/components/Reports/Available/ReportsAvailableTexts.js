@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import Icon from '../../Icon/Icon';
 import LetterCount from '../../LetterCount/LetterCount';
 import NoItems from '../../NoItems/NoItems';
@@ -15,6 +15,7 @@ import './ReportsAvailableTexts.css';
 type Props = {
   activePupil: PupilType | Object,
   categories: Array<CategoryType>,
+  children?: React.Node,
   disableTexts: boolean,
   handleTextToggle: Function,
   selectedTexts: Array<string>,
@@ -25,10 +26,11 @@ type Props = {
 /**
  * A list of available texts.
  */
-export class ReportsAvailableTexts extends Component<Props> {
+export class ReportsAvailableTexts extends React.Component<Props> {
   static defaultProps = {
     activePupil: {},
     categories: [],
+    children: null,
     handleTextToggle: () => {},
     selectedTexts: [],
     term: '',
@@ -40,6 +42,7 @@ export class ReportsAvailableTexts extends Component<Props> {
   render() {
     return (
       <div className="ReportsAvailableTexts">
+        {this.props.children}
         {this.props.texts.length > 0 ? (
           <ul className="ReportsAvailableTexts_list">
             {this.props.texts.map(text => {

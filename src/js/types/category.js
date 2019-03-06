@@ -20,7 +20,7 @@ const categoryDefault: CategoryType = {
   label: '',
 };
 
-export const categorySort = ['label', 'updated'];
+export const categorySort = ['priority', 'label', 'updated'];
 
 /**
  * Returns an object of CategoryType based on categoryObj but with additional props set.

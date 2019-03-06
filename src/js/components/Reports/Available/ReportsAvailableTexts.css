@@ -7,7 +7,11 @@
   padding: 0px;
   margin: 0px;
   height: 100%;
-  border-top: 1px solid var(--col-darken-1);
+}
+
+.ReportsAvailableTexts .NoItems {
+  position: relative;
+  top: var(--sidebar-header-height);
 }
 
 .ReportsAvailableTexts_list {
@@ -16,6 +20,9 @@
   list-style: none;
   padding: 20px;
   margin: 0px;
+  top: var(--sidebar-header-height);
+  height: calc(100% - var(--sidebar-header-height));
+  overflow: auto;
 }
 
 .ReportsAvailableTexts__item {

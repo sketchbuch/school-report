@@ -11,6 +11,7 @@ import SearchField from '../ui/SearchField/SearchField';
 import Sidebar from '../Sidebar/Sidebar';
 import SidebarHeader from '../Sidebar/Header/SidebarHeader';
 import SidebarList from '../Sidebar/List/SidebarList';
+import categoryDefault, { CategoryFactory } from '../../types/category';
 import type { CategoryType } from '../../types/category';
 import type { ClassType } from '../../types/class';
 import type { DispatchType } from '../../types/functions';
@@ -36,6 +37,7 @@ type Props = {
 
 type State = {
   catId: string,
+  catLabel: string,
   catPage: number,
   catSearch: boolean,
   catSearchAnywhere: boolean,
@@ -63,21 +65,22 @@ export class Reports extends Component<Props, State> {
 
   props: Props;
   state: State;
+  catAnywhereIconClick: (event: SyntheticEvent<MouseEvent>) => void;
+  catClick: () => {};
+  catPbChange: (catPage: number) => {};
+  catSearch: (event: SyntheticEvent<HTMLInputElement>) => void;
+  catSearchIconClick: (event: SyntheticEvent<MouseEvent>) => void;
+  endDrag: () => {};
   pupilId: string;
-  handleCatAnywhereIconClick: (event: SyntheticEvent<MouseEvent>) => void;
-  handleCatClick: () => {};
-  handleCatSearch: (event: SyntheticEvent<HTMLInputElement>) => void;
-  handleCatSearchIconClick: (event: SyntheticEvent<MouseEvent>) => void;
-  handleEndDrag: () => {};
-  handlePbChange: (catPage: number) => {};
-  handleTextMove: (sourceId: string, targetId: string, before: boolean) => {};
-  handleTextToggle: (textId: string) => {};
+  textMove: (sourceId: string, targetId: string, before: boolean) => {};
+  textToggle: (textId: string) => {};
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
       catId: 'category-all',
+      catLabel: '',
       catPage: 1,
       catSearch: false,
       catSearchAnywhere: false,
@@ -89,22 +92,22 @@ export class Reports extends Component<Props, State> {
       textTerm: '',
     };
 
-    this.handleCatAnywhereIconClick = this.handleCatAnywhereIconClick.bind(this);
-    this.handleCatClick = this.handleCatClick.bind(this);
-    this.handleCatSearch = this.handleCatSearch.bind(this);
-    this.handleCatSearchIconClick = this.handleCatSearchIconClick.bind(this);
-    this.handleEndDrag = this.handleEndDrag.bind(this);
-    this.handlePbChange = this.handlePbChange.bind(this);
-    this.handleTextMove = this.handleTextMove.bind(this);
-    this.handleTextToggle = this.handleTextToggle.bind(this);
-    this.handleTextToggle = this.handleTextToggle.bind(this);
+    this.catAnywhereIconClick = this.catAnywhereIconClick.bind(this);
+    this.catClick = this.catClick.bind(this);
+    this.catSearch = this.catSearch.bind(this);
+    this.catSearchIconClick = this.catSearchIconClick.bind(this);
+    this.endDrag = this.endDrag.bind(this);
+    this.catPbChange = this.catPbChange.bind(this);
     this.pupilId = props.activePupil.id;
+    this.textMove = this.textMove.bind(this);
+    this.textToggle = this.textToggle.bind(this);
+    this.textToggle = this.textToggle.bind(this);
   }
 
   /**
    * Method called by drag and drop when a draging ends.
    */
-  handleEndDrag() {
+  endDrag() {
     if (this.state.dragSelected.length < 1) {
       return;
     }
@@ -124,7 +127,7 @@ export class Reports extends Component<Props, State> {
   /**
    * Method called by drag and drop when a drag source is hovering over a drop target.
    */
-  handleTextMove(sourceId: string, targetId: string, before: boolean = false) {
+  textMove(sourceId: string, targetId: string, before: boolean = false) {
     let dragSelected = [...this.props.selected];
     const sourceIndex = dragSelected.indexOf(sourceId);
     let targetIndex = dragSelected.indexOf(targetId);
@@ -143,7 +146,7 @@ export class Reports extends Component<Props, State> {
   /**
    * Toggles the selected state of a text.
    */
-  handleTextToggle = (textId: string) => (event: SyntheticEvent<>) => {
+  textToggle = (textId: string) => (event: SyntheticEvent<>) => {
     let selected = [...this.props.selected];
     const textIndex = selected.indexOf(textId);
 
@@ -163,15 +166,15 @@ export class Reports extends Component<Props, State> {
     );
   };
 
-  handlePbChange(catPage: number) {
+  catPbChange(catPage: number) {
     this.setState({ catPage });
   }
 
-  handleCatClick = (catId: string) => (event: SyntheticEvent<>) => {
-    this.setState({ catId });
+  catClick = (catId: string, catLabel: string) => (event: SyntheticEvent<>) => {
+    this.setState({ catId, catLabel });
   };
 
-  handleCatSearchIconClick(event: SyntheticEvent<MouseEvent>) {
+  catSearchIconClick(event: SyntheticEvent<MouseEvent>) {
     const newState = { catSearch: !this.state.catSearch };
     if (newState.catSearch === false) {
       newState.catTerm = '';
@@ -181,14 +184,14 @@ export class Reports extends Component<Props, State> {
     this.setState(newState);
   }
 
-  handleCatAnywhereIconClick(event: SyntheticEvent<MouseEvent>) {
+  catAnywhereIconClick(event: SyntheticEvent<MouseEvent>) {
     this.setState({ catSearchAnywhere: !this.state.catSearchAnywhere });
   }
 
-  handleCatSearch(event: SyntheticEvent<HTMLInputElement>) {
+  catSearch(event: SyntheticEvent<HTMLInputElement>) {
     if (event.type === 'keyup') {
       if (event.key === 'Escape') {
-        this.handleCatSearchIconClick(event);
+        this.catSearchIconClick(event);
       }
     } else {
       const newState = { catTerm: event.currentTarget.value };
@@ -200,7 +203,7 @@ export class Reports extends Component<Props, State> {
     }
   }
 
-  getCatTexts() {
+  getCatTexts(): TextType[] {
     let visibleTexts = [];
 
     if (this.state.catId !== 'category-all') {
@@ -217,14 +220,32 @@ export class Reports extends Component<Props, State> {
       visibleTexts = [...this.props.texts];
     }
 
-    if (this.state.textTerm !== '') {
-      visibleTexts = visibleTexts.filter(text => text.contains(this.state.textTerm, true));
+    if (this.state.catTerm !== '') {
+      visibleTexts = visibleTexts.filter(text => text.contains(this.state.catTerm, this.state.catSearchAnywhere));
     }
 
     return visibleTexts;
   }
 
+  getCats(): CategoryType[] {
+    const cats = [...this.props.categories];
+
+    // AddCategory All
+    const all = CategoryFactory({ ...categoryDefault, label: text('CatsAll', 'CatSelect') }, Date.now());
+    all.id = 'category-all';
+    cats.unshift(all);
+    const uncategorised = CategoryFactory(
+      { ...categoryDefault, label: text('CatsUncategorised', 'CatSelect') },
+      Date.now()
+    );
+    uncategorised.id = 'category-nocat';
+    cats.unshift(uncategorised);
+
+    return cats;
+  }
+
   render() {
+    const cats = this.getCats();
     const catTexts = this.getCatTexts();
     const selectedTexts = this.state.dragSelected.length > 0 ? this.state.dragSelected : this.props.selected;
 
@@ -235,26 +256,26 @@ export class Reports extends Component<Props, State> {
             <SidebarHeader controlsExpanded={this.state.catSearch} title={text('Header-category', 'SidebarHeader')}>
               <SearchField
                 anywhere={this.state.catSearchAnywhere}
-                anywhereOnClick={this.handleCatAnywhereIconClick}
-                clearOnClick={this.handleCatSearchIconClick}
-                iconOnClick={this.handleCatSearchIconClick}
-                onKeyUp={this.handleCatSearch}
-                onChange={this.handleCatSearch}
+                anywhereOnClick={this.catAnywhereIconClick}
+                clearOnClick={this.catSearchIconClick}
+                iconOnClick={this.catSearchIconClick}
+                onKeyUp={this.catSearch}
+                onChange={this.catSearch}
                 placeholder={text('SearchPlaceholder-category', 'SidebarHeader')}
                 term={this.state.catTerm}
                 visible={this.state.catSearch}
               />
             </SidebarHeader>
             <SidebarList
-              catPage={this.state.catPage}
+              curPage={this.state.catPage}
               dispatch={() => {}}
-              items={this.props.categories}
+              items={cats}
               listType="category"
               noItemsTxt={text('Categories', 'SidebarNoItems')}
-              onChange={this.handlePbChange}
+              onChange={this.catPbChange}
               reportSidebar={this.state.catId}
               sortOrder={categorySort}
-              onReportClick={this.handleCatClick}
+              onReportClick={this.catClick}
               term={this.state.catTerm}
               termAnywhere={this.state.catSearchAnywhere}
               usePb
@@ -266,18 +287,34 @@ export class Reports extends Component<Props, State> {
             activePupil={this.props.activePupil}
             categories={this.props.categories}
             disableTexts={this.props.disableTexts}
-            handleTextToggle={this.handleTextToggle}
+            textToggle={this.textToggle}
             selectedTexts={selectedTexts}
             term={this.props.textTerm}
             texts={catTexts}
-          />
+          >
+            <SidebarHeader controlsExpanded={this.state.catSearch} title={this.state.catLabel}>
+              <SearchField
+                anywhere={this.state.catSearchAnywhere}
+                anywhereOnClick={this.catAnywhereIconClick}
+                clearOnClick={this.catSearchIconClick}
+                iconOnClick={this.catSearchIconClick}
+                onKeyUp={this.catSearch}
+                onChange={this.catSearch}
+                placeholder={text('SearchPlaceholder-text', 'SidebarHeader', {
+                  CAT_LABEL: this.state.catLabel,
+                })}
+                term={this.state.catTerm}
+                visible={this.state.catSearch}
+              />
+            </SidebarHeader>
+          </ReportsAvailableTexts>
         </div>
         <div className="Reports__column Reports__column--seltexts">
           <ReportsSelectedTexts
             activePupil={this.props.activePupil}
-            handleEndDrag={this.handleEndDrag}
-            handleTextMove={this.handleTextMove}
-            handleTextToggle={this.handleTextToggle}
+            endDrag={this.endDrag}
+            textMove={this.textMove}
+            textToggle={this.textToggle}
             selectedTexts={selectedTexts}
             texts={this.props.texts}
           />

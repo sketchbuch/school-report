@@ -42,7 +42,7 @@ class SidebarReportItem extends Component<Props> {
           label={this.props.item.getLabel()}
           link={this.props.item.getUrl('link')}
           linkEdit={editUrl}
-          onSubClick={this.props.onReportClick(this.props.item.id)}
+          onSubClick={this.props.onReportClick(this.props.item.id, this.props.item.getLabel())}
           selected={this.props.item.id === this.props.selected}
         >
           <SidebarItemButton

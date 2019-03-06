@@ -1,181 +1,390 @@
 {
-  "DE": {
+  "EN": {
+    "##": {
+      "PO-f": "DE - her",
+      "PO-m": "DE - him",
+      "PP-f": "DE - her",
+      "PP-m": "DE - his",
+      "PS-f": "DE - she",
+      "PS-m": "DE - he",
+      "TitleF": "DE - First name",
+      "TitleL": "DE - Last name",
+      "TitleN": "DE - Full name",
+      "TitlePO": "DE - Him/Her",
+      "TitlePP": "DE - His/Her",
+      "TitlePS": "DE - He/She"
+    },
     "Actions": {
-      "ClassAdd": "DE: Add class",
-      "ClassDelete": "DE: Delete all classes",
-      "PupilAdd": "DE: Add pupil",
-      "PupilDelete": "DE: Delete all pupils",
-      "TextAdd": "DE: Add text",
-      "TextDelete": "DE: Delete all texts"
+      "CategoryAdd": "DE - Add category",
+      "CategoryDelete": "DE - Delete all categories",
+      "ClassAdd": "DE - Add class",
+      "ClassDelete": "DE - Delete all classes",
+      "No": "DE - No",
+      "PupilAdd": "DE - Add pupil",
+      "PupilDelete": "DE - Delete all pupils",
+      "ReportAdd": "DE - Add report",
+      "ReportDelete": "DE - Delete all reports",
+      "ReportExport": "DE - Save report as Word File",
+      "SidebarItemDelete": "DE - Delete",
+      "SidebarItemEdit": "DE - Edit",
+      "TextAdd": "DE - Add text",
+      "TextDelete": "DE - Delete all texts",
+      "Expand": "DE - Expand",
+      "Contract": "DE - Contract"
     },
     "App": {
-      "Name": "DE: School Report"
+      "Name": "DE - School Report"
     },
     "AppError": {
-      "ErrorTxt": "DE: Error Loading"
+      "ErrorTxt": "DE - Error Loading"
+    },
+    "Builder": {
+      "TextTitle": "DE - Text:",
+      "Breadcrumb": "DE - Build Report",
+      "ExportPlaceholder": "DE - Enter a filename",
+      "ExportReportBtn": "DE - Save as .docx",
+      "WinTitle": "DE - Build Report"
+    },
+    "BuildReportLayout": {
+      "WinTitle": "DE - Build report '%REPORT_NAME%'"
+    },
+    "Categories": {
+      "BackToCategories": "DE - Cancel",
+      "Breadcrumb": "DE - Categories",
+      "CreateCategoryBtnLabel": "DE - Create Category",
+      "Default": "DE - Uncategorised",
+      "LabelPlaceholder": "DE - Name of category...",
+      "PersistenceDeleted": "DE - All categories deleted",
+      "PersistenceDeleteError": "DE - Unable to delete categories",
+      "PersistenceEdit": "DE - Category updated",
+      "PersistenceEditError": "DE - Unable to save changes to category",
+      "PersistenceNew": "DE - New category saved",
+      "PersistenceNewError": "DE - Unable to save new category",
+      "UpdateCategoryBtnLabel": "DE - Update Category",
+      "WinTitle": "DE - Categories"
+    },
+    "CatSelect": {
+      "CatsAll": "DE - All",
+      "CatsUncategorised": "DE - Uncategorised",
+      "CatsSelected": "DE - Selected",
+      "CatsUnselected": "DE - Unselected",
+      "Tooltip": "DE - Select a category"
     },
     "Classes": {
-      "BackToClasses": "DE: Back to class list",
-      "CreateClassBtnLabel": "DE: Create Class",
-      "LabelPlaceholder": "DE: Name of class...",
-      "PersistenceDeleted": "DE: All classes deleted",
-      "PersistenceDeleteError": "DE: Unable to delete classes",
-      "PersistenceEdit": "DE: Class updated",
-      "PersistenceEditError": "DE: Unable to save changes to class",
-      "PersistenceNew": "DE: New class saved",
-      "PersistenceNewError": "DE: Unable to save new class",
-      "UpdateClassBtnLabel": "DE: Update Class",
-      "WinTitle": "DE: Classes"
+      "BackToClasses": "DE - Cancel",
+      "Breadcrumb": "DE - Classes",
+      "CreateClassBtnLabel": "DE - Create Class",
+      "LabelPlaceholder": "DE - Name of class...",
+      "PersistenceDeleted": "DE - All classes deleted",
+      "PersistenceDeleteError": "DE - Unable to delete classes",
+      "PersistenceEdit": "DE - Class updated",
+      "PersistenceEditError": "DE - Unable to save changes to class",
+      "PersistenceNew": "DE - New class saved",
+      "PersistenceNewError": "DE - Unable to save new class",
+      "UpdateClassBtnLabel": "DE - Update Class",
+      "WinTitle": "DE - Classes"
+    },
+    "DeleteCategoriesLayout": {
+      "BtnLabel": "DE - Delete all categories",
+      "Headline": "DE - Are you sure you want to delete ALL categories?",
+      "HeadlineDeleting": "DE - Deleting ALL categories",
+      "WinTitle": "DE - Delete all categories"
     },
     "DeleteClassesLayout": {
-      "BtnLabel": "DE: Delete all classes",
-      "Headline": "DE: Are you sure you want to delete ALL classes?",
-      "HeadlineDeleting": "DE: Deleting ALL classes",
-      "WinTitle": "DE: Delete all classes"
+      "BtnLabel": "DE - Delete all classes",
+      "Headline": "DE - Are you sure you want to delete ALL classes?",
+      "HeadlineDeleting": "DE - Deleting ALL classes",
+      "WinTitle": "DE - Delete all classes"
     },
     "DeletePupilsLayout": {
-      "Back": "DE: Back to pupils list",
-      "BtnLabel": "DE: Delete all pupils",
-      "Headline": "DE: Are you sure you want to delete ALL pupils from '%CLASS_NAME%'?",
-      "HeadlineDeleting": "DE: Deleting ALL pupils",
-      "WinTitle": "DE: Delete all pupils from '%CLASS_NAME%'"
+      "Back": "DE - Back to pupils list",
+      "BtnLabel": "DE - Delete all pupils",
+      "Headline": "DE - Are you sure you want to delete ALL pupils from '%CLASS_NAME%'?",
+      "HeadlineDeleting": "DE - Deleting ALL pupils",
+      "WinTitle": "DE - Delete all pupils from '%CLASS_NAME%'"
+    },
+    "DeleteReportsLayout": {
+      "Back": "DE - Back to reports list",
+      "BtnLabel": "DE - Delete all reports",
+      "Headline": "DE - Are you sure you want to delete ALL reports?",
+      "HeadlineDeleting": "DE - Deleting ALL reports",
+      "WinTitle": "DE - Delete all reports"
     },
     "DeleteTextsLayout": {
-      "Back": "DE: Back to texts list",
-      "BtnLabel": "DE: Delete all texts",
-      "Headline": "DE: Are you sure you want to delete ALL texts?",
-      "HeadlineDeleting": "DE: Deleting ALL texts",
-      "WinTitle": "DE: Delete all texts"
+      "Back": "DE - Back to texts list",
+      "BtnLabel": "DE - Delete all texts",
+      "Headline": "DE - Are you sure you want to delete ALL texts?",
+      "HeadlineDeleting": "DE - Deleting ALL texts",
+      "WinTitle": "DE - Delete all texts"
     },
-    "DeleteTextsLayout": {
-      "BtnLabel": "DE: Delete all texts",
-      "Headline": "DE: Are you sure you want to delete ALL texts?",
-      "HeadlineDeleting": "DE: Deleting ALL texts",
-      "WinTitle": "DE: Delete all texts"
+    "ExportBuilderForm": {
+      "Headline": "DE - Save your report as a Word file."
     },
     "EditClassesLayout": {
-      "WinTitle": "DE: Edit class '%CLASS_NAME%'"
+      "WinTitle": "DE - Edit class '%CLASS_NAME%'"
+    },
+    "EditCategoryLayout": {
+      "WinTitle": "DE - Edit category '%CAT%'"
     },
     "EditPupilLayout": {
-      "WinTitle": "DE: Edit pupil '%PUPIL_NAME%'"
+      "WinTitle": "DE - Edit pupil '%PUPIL_NAME%'"
+    },
+    "EditReportsLayout": {
+      "WinTitle": "DE - Edit report '%REPORT_NAME%'"
     },
     "EditTextLayout": {
-      "WinTitle": "DE: Edit text '%TEXT%'"
+      "WinTitle": "DE - Edit text '%TEXT%'"
     },
     "EditPanelHeader": {
-      "AddClass": "DE: Add new class",
-      "AddPupil": "DE: Add new pupil",
-      "AddText": "DE: Add new text",
-      "DeleteClasses": "DE: Delete classes",
-      "DeletePupils": "DE: Delete pupils",
-      "DeleteTexts": "DE: Delete texts",
-      "EditClass": "DE: Edit '%CLASS_NAME%'",
-      "EditPupil": "DE: Edit '%PUPIL_NAME%'",
-      "Settings": "DE: Settings",
-      "EditText": "DE: Edit '%TEXT%'"
+      "AddCategory": "DE - Add new category",
+      "AddClass": "DE - Add new class",
+      "AddPupil": "DE - Add new pupil",
+      "AddReport": "DE - Add new report",
+      "AddText": "DE - Add new text",
+      "BuildReport": "DE - Build '%REPORT_NAME%'",
+      "DeleteCategories": "DE - Delete categories",
+      "DeleteClasses": "DE - Delete classes",
+      "DeletePupils": "DE - Delete pupils",
+      "DeleteReports": "DE - Delete reports",
+      "DeleteTexts": "DE - Delete texts",
+      "EditCategory": "DE - Edit '%CATEGORY_NAME%'",
+      "EditClass": "DE - Edit '%CLASS_NAME%'",
+      "EditPupil": "DE - Edit '%PUPIL_NAME%'",
+      "EditReport": "DE - Edit '%REPORT_NAME%'",
+      "EditText": "DE - Edit '%TEXT%'",
+      "ReportBuilder": "DE - Report for '%PUPIL_NAME%'",
+      "ReportBuilderCount": "DE - %TEXT_COUNT%/%MAX_CHARS%",
+      "ReportBuilderCountNoLimit": "DE - %TEXT_COUNT%",
+      "ReportExport": "DE - Export '%REPORT_NAME%'",
+      "Settings": "DE - Settings",
+      "SearchPlaceholder": "DE - Search texts..."
+    },
+    "EditBuilderLayout": {
+      "WinTitle": "DE - Build Report"
+    },
+    "ExportBuilderLayout": {
+      "PersistenceError": "DE - Report not exported",
+      "PersistenceErrorMsg": "DE - Error whilst saving: '%ERROR%'",
+      "PersistenceSuccess": "DE - Report saved as",
+      "WinTitle": "DE - Export Report"
     },
     "Gender": {
-      "Female": "DE: Girl",
-      "Male": "DE: Boy"
+      "Female": "DE - Girl",
+      "Male": "DE - Boy"
     },
     "HomeLayout": {
-      "Classes": "DE: Classes",
-      "Reports": "DE: Reports",
-      "Texts": "DE: Texts",
-      "Settings": "DE: Settings",
-      "ClassesDescription": "DE: Create/Edit classes and pupils",
-      "ReportsDescription": "DE: Create/Edit school reports",
-      "TextsDescription": "DE: Create/Edit the texts for your reports",
-      "SettingsDescription": "DE: Manage school report settings"
+      "Categories": "DE - Categories",
+      "CategoriesDescription": "DE - Create/Edit text categories",
+      "Classes": "DE - Classes",
+      "ClassesDescription": "DE - Create/Edit classes and pupils",
+      "Reports": "DE - Reports",
+      "ReportsDescription": "DE - Create/Edit school reports",
+      "Settings": "DE - Settings",
+      "SettingsDescription": "DE - Manage school report settings",
+      "Texts": "DE - Texts",
+      "TextsDescription": "DE - Create/Edit the texts for your reports"
+    },
+    "InfoMsg": {
+      "Builder": "DE - Create/export your reports",
+      "BuilderMsg": "DE - You will not be able to edit classes or pupils here",
+      "BuilderNoTexts": "DE - You haven't created any texts",
+      "BuilderNoTextsMsg": "DE - Before you can create a report you will first need to create at least one text",
+      "Categories": "DE - Manage categories to organise and group your report texts",
+      "CategoriesMsg": "DE - ",
+      "Classes": "DE - Manage classes and pupils for use in your reports",
+      "ClassesMsg": "DE - Select a class to view/edit its pupils",
+      "Pupils": "DE - Manage pupils in %CLASS_NAME%",
+      "PupilsMsg": "DE - ",
+      "Reports": "DE - Manage your reports",
+      "ReportsMsg": "DE - ",
+      "ReportsNoneSel": "DE - No texts selected",
+      "ReportsNoneSelMsg": "DE - Texts will appear after you select them from the list of available texts",
+      "Texts": "DE - Manage your report texts",
+      "TextsMsg": "DE - "
+    },
+    "ItemList": {
+      "NoItems": "DE - No items matched your search",
+      "None": "DE - No %NAME% exist"
+    },
+    "ItemSelection": {
+      "Clear": "DE - Clear search",
+      "Placeholder": "DE - Search..."
+    },
+    "Lang": {
+      "DateFormat": "DE - %D%/%M%/%Y%"
+    },
+    "NewCategoryLayout": {
+      "WinTitle": "DE - Add new category"
     },
     "NewClassLayout": {
-      "WinTitle": "DE: Add new class"
+      "WinTitle": "DE - Add new class"
     },
     "NewPupilLayout": {
-      "WinTitle": "DE: Add new pupil"
+      "WinTitle": "DE - Add new pupil"
+    },
+    "NewReportLayout": {
+      "WinTitle": "DE - Add new report"
     },
     "NewTextLayout": {
-      "WinTitle": "DE: Add new text"
+      "WinTitle": "DE - Add new text"
     },
     "NoData": {
-      "BusyTxt": "DE: Saving Data",
-      "ClassMessage": "DE: Doesn't look like you have any reports yet, why not create your first class?",
-      "ClassMessageInfo": "DE: You can add more classes later.",
-      "DataPersisted": "DE: Initial data created",
-      "ErrorTxt": "DE: Error Saving Data",
-      "PersistenceError": "DE: Unable to save initial data",
-      "PupilMessage": "DE: A class is no good without pupils, so add one now:",
-      "PupilMessageInfo": "DE: You can add more pupils later.",
-      "TextBtnLabel": "DE: Create Text",
-      "TextMessage": "DE: And you also need to create at least one text for your reports to use:"
+      "BusyTxt": "DE - Saving Data",
+      "ClassMessage": "DE - Doesn't look like you have any reports yet, why not create your first class?",
+      "ClassMessageInfo": "DE - You can add more classes later.",
+      "DataPersisted": "DE - Initial data created",
+      "ErrorTxt": "DE - Error Saving Data",
+      "PersistenceError": "DE - Unable to save initial data",
+      "PupilMessage": "DE - A class is no good without pupils, so add one now:",
+      "PupilMessageInfo": "DE - You can add more pupils later.",
+      "TextBtnLabel": "DE - Create Text",
+      "TextMessage": "DE - And you also need to create at least one text for your reports to use:"
     },
     "NotFound": {
-      "Back": "DE: Back to School Report",
-      "Message": "DE: Page or resource not found"
+      "Back": "DE - Back to School Report",
+      "Message": "DE - Page or resource not found"
+    },
+    "PageBrowser": {
+      "Btn-first": "DE - First",
+      "Btn-last": "DE - Last",
+      "Btn-next": "DE - Next",
+      "Btn-prev": "DE - Previous",
+      "InfoText": "DE - Page %CUR% / %TOTAL%"
     },
     "Pupils": {
-      "BackToPupils": "DE: Back to pupil list",
-      "CreatePupilBtnLabel": "DE: Create Pupil",
-      "DescriptionPlaceholder": "DE: Optional description...",
-      "FirstnamePlaceholder": "DE: First name...",
-      "LastnamePlaceholder": "DE: Last name...",
-      "PersistenceDeleteByClassError": "DE: Unable to delete pupils from '%CLASS_NAME%'",
-      "PersistenceDeletedByClass": "DE: Pupils deleted from '%CLASS_NAME%'",
-      "PersistenceEdit": "DE: Pupil updated",
-      "PersistenceNew": "DE: New pupil created",
-      "PersistenceNewError": "DE: Unable to create new pupil",
-      "UpdatePupilBtnLabel": "DE: Update Pupil",
-      "WinTitle": "DE: Pupils in '%CLASS_NAME%'"
+      "BackToPupils": "DE - Cancel",
+      "Breadcrumb": "DE - Pupils in '%CLASS_NAME%'",
+      "CreatePupilBtnLabel": "DE - Create Pupil",
+      "DescriptionPlaceholder": "DE - Optional description...",
+      "FirstnamePlaceholder": "DE - First name...",
+      "LastnamePlaceholder": "DE - Last name...",
+      "PersistenceDeleteByClassError": "DE - Unable to delete pupils from '%CLASS_NAME%'",
+      "PersistenceDeletedByClass": "DE - Pupils deleted from '%CLASS_NAME%'",
+      "PersistenceEdit": "DE - Pupil updated",
+      "PersistenceNew": "DE - New pupil created",
+      "PersistenceNewError": "DE - Unable to create new pupil",
+      "UpdatePupilBtnLabel": "DE - Update Pupil",
+      "WinTitle": "DE - Pupils in '%CLASS_NAME%'"
     },
     "PupilForm": {
-      "AddBtnLabel": "DE: Add Pupil",
-      "FirstnamePlaceholder": "DE: First name...",
-      "DescriptionPlaceholder": "DE: Optional description...",
-      "LastnamePlaceholder": "DE: Last name..."
+      "AddBtnLabel": "DE - Add Pupil",
+      "FirstnamePlaceholder": "DE - First name...",
+      "DescriptionPlaceholder": "DE - Optional description...",
+      "LastnamePlaceholder": "DE - Last name..."
+    },
+    "ReportPanel": {
+      "NoneSelected": "DE - Click the + button to add a text"
+    },
+    "ReportsAvailableTexts": {
+      "None": "DE - No texts available.",
+      "NoneSearched": "DE - No texts begin with your search term."
+    },
+    "Reports": {
+      "BackToReports": "DE - Cancel",
+      "Breadcrumb": "DE - Reports",
+      "BreadcrumbExport": "DE - Export",
+      "CreateReportBtnLabel": "DE - Create Report",
+      "LabelPlaceholder": "DE - Name of report...",
+      "MaxCharsPlaceholder": "DE - Max characters...",
+      "PersistenceDeleteError": "DE - Unable to delete reports",
+      "PersistenceDeleted": "DE - All reports deleted",
+      "PersistenceEdit": "DE - Report updated",
+      "PersistenceEditError": "DE - Unable to save changes to report",
+      "PersistenceNew": "DE - New report saved",
+      "PersistenceNewError": "DE - Unable to save new report",
+      "ReportClasses": "DE - Select classes to include (%SELECTED%/%TOTAL%):",
+      "ReportMaxChars": "DE - Max characters per pupil:",
+      "ReportMaxCharsInfo": "DE - Use 0 for no limit",
+      "UpdateReportsBtnLabel": "DE - Update Report",
+      "WinTitle": "DE - Reports"
+    },
+    "SearchField": {
+      "Anywhere": "DE - Search anywhere",
+      "Clear": "DE - Cancel search"
     },
     "Settings": {
-      "Cancel": "DE: Cancel",
-      "LabelLanguage": "DE: Language",
-      "LanguageChanged": "DE: Language:",
-      "PersistenceEdit": "DE: Settings updated",
-      "UpdateSettingsBtnLabel": "DE: Update Settings",
-      "WinTitle": "DE: Settings"
+      "Breadcrumb": "DE - Settings",
+      "Cancel": "DE - Cancel",
+      "LabelLanguage": "DE - Language",
+      "LabelPupilsSort": "DE - Sort pupils by",
+      "LanguageChanged": "DE - Language:",
+      "PersistenceEdit": "DE - Settings updated",
+      "PupilsSort-firstname": "DE - First name",
+      "PupilsSort-lastname": "DE - Last name",
+      "UpdateSettingsBtnLabel": "DE - Update Settings",
+      "WinTitle": "DE - Settings"
     },
     "SidebarNoItems": {
-      "Classes": "DE: There are no classes, click the + button to add a new class.",
-      "Pupils": "DE: There are no pupils, click the + button to add a new pupil.",
-      "Texts": "DE: There are no texts, click the + button to add a new text."
+      "Categories": "DE - There are no categories, click the + button to add a new category.",
+      "Classes": "DE - There are no classes, click the + button to add a new class.",
+      "Pupils": "DE - There are no pupils, click the + button to add a new pupil.",
+      "Reports": "DE - There are no reports, click the + button to add a new report.",
+      "Texts": "DE - There are no texts, click the + button to add a new text."
+    },
+    "SidebarItem": {
+      "Delete": "DE - Delete"
     },
     "SidebarHeader": {
-      "Header-class": "DE: Classes",
-      "Header-pupil": "DE: Pupils",
-      "Header-text": "DE: Texts"
+      "Header-build": "DE - Report Classes / Pupils",
+      "Header-category": "DE - Categories",
+      "Header-class": "DE - Classes",
+      "Header-pupil": "DE - Pupils",
+      "Header-report": "DE - Reports",
+      "Header-text": "DE - Texts",
+      "SearchPlaceholder": "DE - Search texts...",
+      "SearchPlaceholder-category": "DE - Search categories...",
+      "SearchPlaceholder-class": "DE - Search classes...",
+      "SearchPlaceholder-pupil": "DE - Search pupils...",
+      "SearchPlaceholder-report": "DE - Search reports...",
+      "SearchPlaceholder-text": "DE - Search texts...",
+      "Subheader-count": "DE - (%COUNT%)",
+      "Subheader-countmulti": "DE - (%COUNT1% / %COUNT2%)"
+    },
+    "SidebarList": {
+      "NoneCategory-text": "DE - This category contains no texts.",
+      "NoneSearched-category": "DE - No categories begin with your search term.",
+      "NoneSearched-category-anywhere": "DE - No categories contain your search term.",
+      "NoneSearched-class": "DE - No classes begin with your search term.",
+      "NoneSearched-class-anywhere": "DE - No classes contain your search term.",
+      "NoneSearched-pupil": "DE - No pupils begin with your search term.",
+      "NoneSearched-pupil-anywhere": "DE - No pupils contain your search term.",
+      "NoneSearched-report": "DE - No reports begin with your search term.",
+      "NoneSearched-report-anywhere": "DE - No reports contain your search term.",
+      "NoneSearched-text": "DE - No texts begin with your search term.",
+      "NoneSearched-text-anywhere": "DE - No texts contain your search term."
     },
     "Symbols": {
-      "Add": "DE: +",
-      "Delete": "DE: -"
+      "Add": "DE - +",
+      "Delete": "DE - -"
     },
     "Texts": {
-      "BackToTexts": "DE: Back to text list",
-      "CreateTextBtnLabel": "DE: Create Text",
-      "PersistenceDeleted": "DE: All texts deleted",
-      "PersistenceDeleteError": "DE: Unable to delete texts",
-      "PersistenceEdit": "DE: Text updated",
-      "PersistenceEditError": "DE: Unable to save changes to text",
-      "PersistenceNew": "DE: New text created",
-      "PersistenceNewError": "DE: Unable to create new text",
-      "BodytextPlaceholder": "DE: Enter a text to be used in the report...",
-      "UpdateTextBtnLabel": "DE: Update Text",
-      "WinTitle": "DE: Report Texts"
+      "BackToTexts": "DE - Cancel",
+      "BodytextPlaceholder": "DE - Enter a text to be used in the report...",
+      "Breadcrumb": "DE - Texts",
+      "CreateTextBtnLabel": "DE - Create Text",
+      "PersistenceDeleted": "DE - All texts deleted",
+      "PersistenceDeleteError": "DE - Unable to delete texts",
+      "PersistenceEdit": "DE - Text updated",
+      "PersistenceEditError": "DE - Unable to save changes to text",
+      "PersistenceNew": "DE - New text created",
+      "PersistenceNewError": "DE - Unable to create new text",
+      "ReportCategories": "DE - Text categories (%SELECTED%/%TOTAL%):",
+      "UpdateTextBtnLabel": "DE - Update Text",
+      "WinTitle": "DE - Texts"
     },
     "Toastr": {
-      "PersistenceError": "DE: Error Saving"
+      "PersistenceError": "DE - Error Saving"
     },
     "Validation": {
-      "ClassLabel": "DE: A class name is required",
-      "PupilFirstname": "DE: A first name is required",
-      "PupilLastname": "DE: A last name is required",
-      "TextBodytext": "DE: A text is required"
+      "CategoryLabel": "DE - A category name is required",
+      "ClassLabel": "DE - A class name is required",
+      "PupilFirstname": "DE - A first name is required",
+      "PupilLastname": "DE - A last name is required",
+      "ReportClasses": "DE - Select at least 1 class",
+      "ReportExportName": "DE - A name for the export is required",
+      "ReportLabel": "DE - A report name is required",
+      "ReportMaxChars": "DE - Must be a whole number",
+      "TextBodytext": "DE - A text is required"
     }
   }
 }

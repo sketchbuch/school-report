@@ -28,7 +28,6 @@
 .Reports__column--cattexts {
   position: fixed;
   margin-left: 33.3333%;
-  overflow: auto;
   height: calc(100% - var(--sidebar-header-height));
 }
 
