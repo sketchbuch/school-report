@@ -1,23 +1,21 @@
 // @flow
 
 import React, { Component, Fragment } from 'react';
+import type { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import HeaderBreadcrumb from '../Breadcrumb/HeaderBreadcrumb';
-import { getBreadcrumbs } from '../../../utils/redux';
 import type { Breadcrumb } from '../../../types/breadcrumb';
+import type { ReactRouterProps } from '../../../types/misc';
+import type { ReduxState } from '../../../types/reduxstate';
+import { getBreadcrumbs } from '../../../utils/redux';
 import './HeaderPath.css';
 
 type Props = {
-  breadcrumbs: Array<Breadcrumb>,
-  dispatch: Function,
-  location: Object,
-  match: Object,
-  path: string,
+  ...ReactRouterProps,
+  breadcrumbs: Breadcrumb[],
+  dispatch: Dispatch,
 };
 
-/**
- * App Header path showing breadcrumb on desktop.
- */
 export class HeaderPath extends Component<Props> {
   props: Props;
 
@@ -36,7 +34,7 @@ export class HeaderPath extends Component<Props> {
   }
 }
 
-const mapStateToProps = (state: Object, props: Props) => {
+const mapStateToProps = (state: ReduxState, props: Props) => {
   return {
     breadcrumbs: getBreadcrumbs(state, props),
   };

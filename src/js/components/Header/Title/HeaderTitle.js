@@ -2,18 +2,15 @@
 
 import React, { Component } from 'react';
 import Icon from '../../Icon/Icon';
+import { ICON_BRAND } from '../../../constants/icons';
 import { text } from '../../Translation/Translation';
 import './HeaderTitle.css';
-import { ICON_BRAND } from '../../../constants/icons';
 
 type Props = {
   appName?: string,
   icon: string,
 };
 
-/**
- * App Header path showing breadcrumb on desktop.
- */
 export class HeaderTitle extends Component<Props> {
   static defaultProps = {
     appName: '',

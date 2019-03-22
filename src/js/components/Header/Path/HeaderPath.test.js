@@ -1,10 +1,11 @@
 // @flow
+
 import React from 'react';
-import { mount, shallow } from 'enzyme';
-import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import store from '../../../store/redux';
+import { Provider } from 'react-redux';
+import { mount, shallow } from 'enzyme';
 import HeaderPath from './HeaderPath';
+import store from '../../../store/redux';
 
 jest.mock('../../../utils/redux', () => {
   return {
@@ -31,7 +32,7 @@ describe('<HeaderPath />', () => {
   test('<Renders without crashing', () => {
     const wrapper = shallow(
       <Provider store={store}>
-        <HeaderPath breadcrumbs={[]} />
+        <HeaderPath {...props} />
       </Provider>
     );
     expect(wrapper).toHaveLength(1);
@@ -41,7 +42,7 @@ describe('<HeaderPath />', () => {
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter>
-          <HeaderPath />
+          <HeaderPath {...props} />
         </MemoryRouter>
       </Provider>
     );
@@ -49,7 +50,7 @@ describe('<HeaderPath />', () => {
   });
 
   test('<Returns null if no breadcrumbs', () => {
-    const wrapper = shallow(<HeaderPath.WrappedComponent store={store} breadcrumbs={[]} />);
+    const wrapper = shallow(<HeaderPath.WrappedComponent {...props} store={store} />);
     expect(wrapper.get(0)).toBeNull();
   });
 });

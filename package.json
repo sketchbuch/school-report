@@ -101,12 +101,12 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": [
+    "src/**/*.{js,jsx}": [
       "eslint --config .eslintrc --fix --max-warnings=0",
       "prettier --config .prettierrc --write",
       "git add"
     ],
-    "*.{css,less,sass}": [
+    "src/**/*.{css,less,sass}": [
       "stylelint --config=.stylelintrc --fix",
       "prettier --config .prettierrc --write",
       "git add"

@@ -26,9 +26,6 @@ import './Header.css';
 
 type Props = {};
 
-/**
- * App Header.
- */
 export class Header extends Component<Props> {
   props: Props;
 
