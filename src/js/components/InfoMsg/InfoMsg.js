@@ -11,9 +11,6 @@ type Props = {
   subtext?: string,
 };
 
-/**
- * An info message with optional icon, and subcontent.
- */
 export class InfoMsg extends React.PureComponent<Props> {
   props: Props;
 

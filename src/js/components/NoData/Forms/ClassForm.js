@@ -1,11 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
-import TextInput from '../../ui/TextInput/TextInput';
 import Button from '../../ui/Button/Button';
+import TextInput from '../../ui/TextInput/TextInput';
 import Translation, { text } from '../../Translation/Translation';
 import validate from '../../../validation/validation';
 
+// TODO - fix types
 type Props = {
   errors: Object,
   handleBlur: Function,
@@ -17,17 +18,13 @@ type Props = {
   values: Object,
 };
 
-/**
- * Class form for NoData component.
- */
 export class ClassForm extends Component<Props> {
   props: Props;
 
   render() {
     const { errors, handleBlur, handleChange, handleSubmit, touched, values } = this.props;
-
-    const clValid = validate('label', errors.class, touched.class);
-    const btnIsDisabled = !clValid || values.class.label === '' ? true : false;
+    const clValid: boolean = validate('label', errors.class, touched.class);
+    const btnIsDisabled: boolean = !clValid || values.class.label === '' ? true : false;
 
     return (
       <form className="NoData__step--class" onSubmit={handleSubmit}>

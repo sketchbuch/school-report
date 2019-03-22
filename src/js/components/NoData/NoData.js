@@ -1,27 +1,30 @@
 // @flow
 
 import React, { Component } from 'react';
+import type { Dispatch } from 'redux';
+import { Formik } from 'formik';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
-import { Formik } from 'formik';
+import * as dataActions from '../../actions/dataActions';
 import ClassForm from './Forms/ClassForm';
 import PupilForm from './Forms/PupilForm';
 import TextForm from './Forms/TextForm';
-import { text } from '../Translation/Translation';
-import { prefixedClassSchema, prefixedPupilSchema, prefixedTextSchema } from '../../validation/schemas';
-import * as dataActions from '../../actions/dataActions';
-import type { ClassType } from '../../types/class';
-import type { PupilType } from '../../types/pupil';
-import type { TextType } from '../../types/text';
 import classDefault, { ClassFactory } from '../../types/class';
 import pupilDefault, { PupilFactory } from '../../types/pupil';
 import textDefault, { TextFactory } from '../../types/text';
+import type { ClassType } from '../../types/class';
+import type { PupilType } from '../../types/pupil';
+import type { ReduxState } from '../../types/reduxstate';
+import type { RenderHelperReturn } from '../../types/misc';
+import type { TextType } from '../../types/text';
+import { prefixedClassSchema, prefixedPupilSchema, prefixedTextSchema } from '../../validation/schemas';
+import { text } from '../Translation/Translation';
 import 'react-select/dist/react-select.css';
 import './NoData.css';
 
 type Props = {
   curLang: string,
-  dispatch: Function,
+  dispatch: Dispatch,
 };
 
 type State = {
@@ -33,39 +36,27 @@ type State = {
   text: TextType,
 };
 
-/**
- * NoClasses
- */
+type ValuesObject = {
+  class: ClassType,
+  pupil: PupilType,
+  text: TextType,
+};
+
 export class NoData extends Component<Props, State> {
-  state: State;
   props: Props;
-  initialValues: Object;
-  handleSubmit: Function;
-  handleClick: Function;
-  dataSaved: Function;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      class: { ...classDefault },
-      error: false,
-      pupil: { ...pupilDefault },
-      saving: false,
-      step: 'class',
-      text: { ...textDefault },
-    };
-
-    this.initialValues = {
-      class: { ...classDefault },
-      pupil: { ...pupilDefault },
-      text: { ...textDefault },
-    };
-
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.dataSaved = this.dataSaved.bind(this);
-  }
+  state: State = {
+    class: { ...classDefault },
+    error: false,
+    pupil: { ...pupilDefault },
+    saving: false,
+    step: 'class',
+    text: { ...textDefault },
+  };
+  initialValues: ValuesObject = {
+    class: { ...classDefault },
+    pupil: { ...pupilDefault },
+    text: { ...textDefault },
+  };
 
   componentDidUpdate(prevProps: Props, prevState: State) {
     if (this.state.error) {
@@ -87,7 +78,7 @@ export class NoData extends Component<Props, State> {
     }
   }
 
-  handleSubmit(values: Object) {
+  handleSubmit = (values: ValuesObject): void => {
     values.text.lang = this.props.curLang;
 
     const newText = TextFactory(values.text, Date.now(), this.props.curLang);
@@ -97,9 +88,9 @@ export class NoData extends Component<Props, State> {
       step: 'save',
       text: newText,
     });
-  }
+  };
 
-  handleClick(values: Object) {
+  handleClick = (values: ValuesObject): void => {
     if (this.state.step === 'pupil') {
       const newPupil = PupilFactory(values.pupil, Date.now(), this.state.class.id);
 
@@ -116,23 +107,18 @@ export class NoData extends Component<Props, State> {
         class: newClass,
       });
     }
-  }
+  };
 
-  /**
-   * Callback used by writeAppData.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataSaved(ioResult: Object) {
+  dataSaved = (ioResult: Object): void => {
     if (ioResult.success === true) {
       toastr.success(text('DataPersisted', 'NoData'));
       //this.props.history.push(ROUTE_CLASSES);
     } else {
       this.setState({ error: true });
     }
-  }
+  };
 
-  renderStep() {
+  renderStep(): RenderHelperReturn {
     switch (this.state.step) {
       case 'save':
       case 'text':
@@ -178,7 +164,7 @@ export class NoData extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: Object) => ({
+const mapStateToProps = (state: ReduxState) => ({
   curLang: state.languages.current,
 });
 

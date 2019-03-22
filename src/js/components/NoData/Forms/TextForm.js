@@ -1,11 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
-import Textarea from '../../ui/Textarea/Textarea';
 import Button from '../../ui/Button/Button';
+import Textarea from '../../ui/Textarea/Textarea';
 import Translation, { text } from '../../Translation/Translation';
 import validate from '../../../validation/validation';
 
+// TODO - fix types
 type Props = {
   busy: boolean,
   errors: Object,
@@ -17,17 +18,13 @@ type Props = {
   values: Object,
 };
 
-/**
- * Text form for NoData component.
- */
 export class TextForm extends Component<Props> {
   props: Props;
 
   render() {
     const { busy, errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values } = this.props;
-
-    const btValid = validate('bodytext', errors.text, touched.text);
-    const btnIsDisabled = !btValid || values.text.bodytext === '' ? true : false;
+    const btValid: boolean = validate('bodytext', errors.text, touched.text);
+    const btnIsDisabled: boolean = !btValid || values.text.bodytext === '' ? true : false;
 
     return (
       <form className="NoData__step--text" onSubmit={handleSubmit}>

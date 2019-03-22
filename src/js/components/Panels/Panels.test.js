@@ -3,8 +3,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
-import store from '../../store/redux';
 import Panels from './Panels';
+import store from '../../store/redux';
 import { ROUTE_HOME } from '../../constants/routes';
 
 describe('<Panels />', () => {
@@ -36,7 +36,7 @@ describe('<Panels />', () => {
         path: ROUTE_HOME,
       },
     };
-    const wrapper = shallow(<Panels.WrappedComponent {...props} {...routerProps} />);
+    shallow(<Panels.WrappedComponent {...props} {...routerProps} />);
     expect(routerProps.history.push).toHaveBeenCalledWith(ROUTE_HOME);
   });
 });

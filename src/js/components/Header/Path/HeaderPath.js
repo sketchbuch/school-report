@@ -2,16 +2,16 @@
 
 import React, { Component, Fragment } from 'react';
 import type { Dispatch } from 'redux';
+import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import HeaderBreadcrumb from '../Breadcrumb/HeaderBreadcrumb';
 import type { Breadcrumb } from '../../../types/breadcrumb';
-import type { ReactRouterProps } from '../../../types/misc';
 import type { ReduxState } from '../../../types/reduxstate';
 import { getBreadcrumbs } from '../../../utils/redux';
 import './HeaderPath.css';
 
 type Props = {
-  ...ReactRouterProps,
+  ...RouteComponentProps,
   breadcrumbs: Breadcrumb[],
   dispatch: Dispatch,
 };

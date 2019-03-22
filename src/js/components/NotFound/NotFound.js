@@ -6,9 +6,6 @@ import Translation from '../Translation/Translation';
 import { ROUTE_HOME } from '../../constants/routes';
 import './NotFound.css';
 
-/**
- * NotFound
- */
 const NotFound = () => (
   <section className="NotFound">
     <p className="NotFound__msg">

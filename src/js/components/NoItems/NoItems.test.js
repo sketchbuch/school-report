@@ -18,4 +18,5 @@ describe('<NoItems />', () => {
     const wrapper = shallow(<NoItems>Test</NoItems>);
     expect(wrapper.find('p')).toHaveLength(1);
   });
+  // TODO - Add test for null
 });

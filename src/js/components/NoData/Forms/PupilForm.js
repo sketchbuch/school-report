@@ -1,12 +1,13 @@
 // @flow
 
 import React, { Component } from 'react';
-import TextInput from '../../ui/TextInput/TextInput';
-import GenderSwitch from '../../ui/GenderSwitch/GenderSwitch';
 import Button from '../../ui/Button/Button';
+import GenderSwitch from '../../ui/GenderSwitch/GenderSwitch';
+import TextInput from '../../ui/TextInput/TextInput';
 import Translation, { text } from '../../Translation/Translation';
 import validate from '../../../validation/validation';
 
+// TODO - fix types
 type Props = {
   errors: Object,
   handleBlur: Function,
@@ -18,18 +19,14 @@ type Props = {
   values: Object,
 };
 
-/**
- * Pupil form for NoData component.
- */
 export class PupilForm extends Component<Props> {
   props: Props;
 
   render() {
     const { errors, handleBlur, handleChange, handleSubmit, touched, values } = this.props;
-
-    const fnValid = validate('firstname', errors.pupil, touched.pupil);
-    const lnValid = validate('lastname', errors.pupil, touched.pupil);
-    const btnIsDisabled =
+    const fnValid: boolean = validate('firstname', errors.pupil, touched.pupil);
+    const lnValid: boolean = validate('lastname', errors.pupil, touched.pupil);
+    const btnIsDisabled: boolean =
       !fnValid || !lnValid || values.pupil.firstname === '' || values.pupil.lastname === '' ? true : false;
 
     return (

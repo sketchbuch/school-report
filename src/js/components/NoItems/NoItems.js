@@ -19,6 +19,9 @@ class NoItems extends React.PureComponent<Props> {
   props: Props;
 
   render() {
+    if (!this.props.message && !this.props.children) {
+      return null;
+    }
     return <p className="NoItems">{this.props.message || this.props.children}</p>;
   }
 }

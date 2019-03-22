@@ -1,13 +1,14 @@
 // @flow
 
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
-import NotFound from '../NotFound/NotFound';
+import { withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import BuilderLayout from '../../layouts/BuilderLayout/BuilderLayout';
 import CategoriesLayout from '../../layouts/CategoriesLayout/CategoriesLayout';
 import ClassesLayout from '../../layouts/ClassesLayout/ClassesLayout';
 import HomeLayout from '../../layouts/HomeLayout/HomeLayout';
+import NotFound from '../NotFound/NotFound';
 import PupilsLayout from '../../layouts/PupilsLayout/PupilsLayout';
 import ReportsLayout from '../../layouts/ReportsLayout/ReportsLayout';
 import SettingsLayout from '../../layouts/SettingsLayout/SettingsLayout';
@@ -25,9 +26,7 @@ import {
 import './Panels.css';
 
 type Props = {
-  history: Object,
-  location: Object,
-  match: Object,
+  ...RouteComponentProps,
 };
 
 /**

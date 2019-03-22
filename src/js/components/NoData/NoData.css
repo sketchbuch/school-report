@@ -1,6 +1,3 @@
-/* No Data */
-/* ------- */
-
 .NoData {
   width: 100%;
   height: 100%;
@@ -40,5 +37,5 @@
 .NoData textarea,
 .NoData button,
 .NoData input {
-  max-width: 32.0rem;
+  max-width: 32rem;
 }
