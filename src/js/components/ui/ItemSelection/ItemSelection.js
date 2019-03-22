@@ -10,7 +10,7 @@ import { ICON_CLOSE } from '../../../constants/icons';
 import { text } from '../../Translation/Translation';
 import './ItemSelection.css';
 
-type Props = {
+export type Props = {
   items: DomainType[], // Already sorted for display.
   name: string, // Name of property in Formik's values object.
   searchMin: number, // Minimum number of items before the search shows.

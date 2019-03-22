@@ -1,58 +1,49 @@
+// @flow
+
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import classDefault, { ClassFactory } from '../../../types/class';
 import ItemSelection from './ItemSelection';
+import classDefault, { ClassFactory } from '../../../types/class';
+import type { DomainType } from '../../../types/domain';
+import type { Props } from './ItemSelection';
 
 describe('<ItemSelection />', () => {
-  const defaultProps = {
+  const props: Props = {
     items: [],
     name: 'test',
+    searchMin: 3,
     selected: [],
   };
 
+  const items: DomainType[] = [
+    ClassFactory({ ...classDefault, label: 'USS Enterprise' }, Date.now()),
+    ClassFactory({ ...classDefault, label: 'Red Dwarf' }, Date.now()),
+    ClassFactory({ ...classDefault, label: 'White Dwarf' }, Date.now()),
+  ];
+
   test('Renders without crashing', () => {
-    const wrapper = shallow(<ItemSelection {...defaultProps} />);
+    const wrapper = shallow(<ItemSelection {...props} />);
     expect(wrapper).toHaveLength(1);
   });
 
   test('Renders the search field if required', () => {
-    let wrapper = shallow(<ItemSelection {...defaultProps} />);
+    let wrapper = shallow(<ItemSelection {...props} />);
     expect(wrapper.find('.ItemSelection__search')).toHaveLength(0);
 
-    let props = {
-      ...defaultProps,
-      items: [{ ...classDefault, id: '1' }, { ...classDefault, id: '2' }],
-    };
-    wrapper = shallow(<ItemSelection {...props} />);
+    wrapper = shallow(<ItemSelection {...props} items={items.slice(0, 2)} />);
     expect(wrapper.find('.ItemSelection__search')).toHaveLength(0);
 
-    props = {
-      ...defaultProps,
-      items: [{ ...classDefault, id: '1' }, { ...classDefault, id: '2' }, { ...classDefault, id: '3' }],
-    };
-    wrapper = shallow(<ItemSelection {...props} />);
+    wrapper = shallow(<ItemSelection {...props} items={items} />);
     expect(wrapper.find('.ItemSelection__search')).toHaveLength(1);
   });
 
   test('Renders the ItemList', () => {
-    const props = {
-      ...defaultProps,
-      items: [{ ...classDefault, id: '1' }, { ...classDefault, id: '2' }, { ...classDefault, id: '3' }],
-    };
-    const wrapper = mount(<ItemSelection {...props} />);
+    const wrapper = mount(<ItemSelection {...props} items={items} />);
     expect(wrapper.find('.ItemList')).toHaveLength(1);
   });
 
   test('handleSearch() works and shows a filtered number of list items that match the term', () => {
-    const props = {
-      ...defaultProps,
-      items: [
-        ClassFactory({ ...classDefault, label: 'USS Enterprise' }, Date.now()),
-        ClassFactory({ ...classDefault, label: 'Red Dwarf' }, Date.now()),
-        ClassFactory({ ...classDefault, label: 'White Dwarf' }, Date.now()),
-      ],
-    };
-    const wrapper = mount(<ItemSelection {...props} />);
+    const wrapper = mount(<ItemSelection {...props} items={items} />);
     const input = wrapper.find('.TextInput');
     expect(input).toHaveLength(1);
     expect(wrapper.find('.ItemList__item')).toHaveLength(3);
@@ -64,15 +55,7 @@ describe('<ItemSelection />', () => {
   });
 
   test('handleClear() resets the term and shows all items', () => {
-    const props = {
-      ...defaultProps,
-      items: [
-        ClassFactory({ ...classDefault, label: 'USS Enterprise' }, Date.now()),
-        ClassFactory({ ...classDefault, label: 'Red Dwarf' }, Date.now()),
-        ClassFactory({ ...classDefault, label: 'White Dwarf' }, Date.now()),
-      ],
-    };
-    const wrapper = mount(<ItemSelection {...props} />);
+    const wrapper = mount(<ItemSelection {...props} items={items} />);
     const input = wrapper.find('.TextInput');
     expect(input).toHaveLength(1);
     expect(wrapper.find('.ItemList__item')).toHaveLength(3);

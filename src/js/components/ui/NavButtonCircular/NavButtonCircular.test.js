@@ -1,10 +1,13 @@
+//@flow
+
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import NavButtonCircular from './NavButtonCircular';
+import type { Props } from './NavButtonCircular';
 
 describe('<NavButtonCircular />', () => {
-  const props = { to: '/classes' };
+  const props: Props = { action: 'test', className: '', to: '/classes' };
 
   test('Renders without crashing', () => {
     const wrapper = shallow(
@@ -16,16 +19,14 @@ describe('<NavButtonCircular />', () => {
   });
 
   test('Handles className property', () => {
-    const cn1Props = { className: '', to: '/classes' };
     const cn1Wrapper = mount(
       <MemoryRouter>
-        <NavButtonCircular {...cn1Props} />
+        <NavButtonCircular {...props} to="/classes" />
       </MemoryRouter>
     );
-    const cn2Props = { className: 'TestClass', to: '/classes' };
     const cn2Wrapper = mount(
       <MemoryRouter>
-        <NavButtonCircular {...cn2Props} />
+        <NavButtonCircular {...props} className="/TestClass" to="/classes" />
       </MemoryRouter>
     );
 

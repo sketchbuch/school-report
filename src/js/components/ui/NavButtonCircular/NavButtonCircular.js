@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import type { ButtonType } from '../../../types/button';
 import '../ButtonCircular/ButtonCircular.css';
 
-type Props = {
+export type Props = {
   action: string,
   buttontype?: ButtonType,
   children?: React.Node,
