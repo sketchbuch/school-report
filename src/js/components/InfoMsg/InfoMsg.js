@@ -4,7 +4,7 @@ import * as React from 'react';
 import Icon from '../Icon/Icon';
 import './InfoMsg.css';
 
-type Props = {
+export type Props = {
   children?: React.Node,
   headine: string,
   icon: string,

@@ -3,7 +3,7 @@
 import React from 'react';
 import './LetterCount.css';
 
-type Props = {
+export type Props = {
   count: string,
 };
 
