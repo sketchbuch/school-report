@@ -7,7 +7,7 @@ import type { EventHandlerType } from '../../../types/functions';
 import { ICON_BUSY } from '../../../constants/icons';
 import './Button.css';
 
-type Props = {
+export type Props = {
   busy: boolean,
   buttontype?: 'default' | 'warning',
   children?: React.Node,

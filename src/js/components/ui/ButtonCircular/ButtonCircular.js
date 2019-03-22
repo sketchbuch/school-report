@@ -6,7 +6,7 @@ import type { ButtonType } from '../../../types/button';
 import type { EventHandlerType } from '../../../types/functions';
 import './ButtonCircular.css';
 
-type Props = {
+export type Props = {
   action: string,
   buttontype?: ButtonType,
   children?: React.Node,

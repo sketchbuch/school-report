@@ -5,7 +5,7 @@ import type { RenderHelperReturn } from '../../../types/misc';
 import Icon from '../../Icon/Icon';
 import './Alert.css';
 
-type Props = {
+export type Props = {
   body: string,
   icon: boolean,
   title?: string,

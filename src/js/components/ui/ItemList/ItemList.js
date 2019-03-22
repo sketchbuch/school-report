@@ -9,7 +9,7 @@ import { ICON_SUCCESS } from '../../../constants/icons';
 import './ItemList.css';
 
 // TODO - fix types
-type Props = {
+export type Props = {
   form: Object,
   insert: Function,
   items: DomainType[], // Items, could be filtered so length != totalCount.
@@ -36,7 +36,7 @@ class ItemList extends Component<Props> {
 
   render() {
     const { items, name, push, remove, selected, totalCount } = this.props;
-    const labelName = totalCount === 0 ? 'None' : 'NoItems';
+    const labelName: string = totalCount === 0 ? 'None' : 'NoItems';
 
     return (
       <div className="ItemList">

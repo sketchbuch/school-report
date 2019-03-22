@@ -7,25 +7,25 @@ import { ICON_PUPILS_FEMALE, ICON_PUPILS_MALE } from '../../../constants/icons';
 import './GenderSwitch.css';
 
 // TODO - fix types
-type Props = {
-  value?: string,
+export type Props = {
   large?: boolean,
   name: string,
   onBlur: Function,
   onChange: Function,
   titleFemale: string,
   titleMale: string,
+  value?: string,
 };
 
 class GenderSwitch extends React.Component<Props> {
   static defaultProps = {
-    value: '',
     large: false,
     name: 'gender',
     onBlur: null,
     onChange: null,
     titleFemale: 'F',
     titleMale: 'M',
+    value: '',
   };
 
   props: Props;

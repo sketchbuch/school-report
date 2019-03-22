@@ -1,10 +1,14 @@
+//@flow
+
 import React from 'react';
 import { shallow } from 'enzyme';
-import classDefault from '../../../types/class';
 import ItemList from './ItemList';
+import classDefault, { ClassFactory } from '../../../types/class';
+import type { DomainType } from '../../../types/domain';
+import type { Props } from './ItemList';
 
 describe('<ItemList />', () => {
-  const defaultProps = {
+  const props: Props = {
     form: {},
     insert: () => {},
     items: [],
@@ -19,37 +23,34 @@ describe('<ItemList />', () => {
     unshift: () => {},
   };
 
+  const items: DomainType[] = [
+    ClassFactory({ ...classDefault, label: 'Class 1' }, Date.now()),
+    ClassFactory({ ...classDefault, label: 'Class 2' }, Date.now()),
+    ClassFactory({ ...classDefault, label: 'Class 3' }, Date.now()),
+  ];
+
   test('Renders without crashing', () => {
-    const wrapper = shallow(<ItemList {...defaultProps} />);
+    const wrapper = shallow(<ItemList {...props} />);
     expect(wrapper).toHaveLength(1);
   });
 
   test('Renders items correctly', () => {
-    let wrapper = shallow(<ItemList {...defaultProps} />);
+    let wrapper = shallow(<ItemList {...props} />);
     expect(wrapper.find('.ItemList__item')).toHaveLength(0);
 
-    let props = {
-      items: [{ ...classDefault, id: '1' }, { ...classDefault, id: '2' }, { ...classDefault, id: '3' }],
-      totalCount: 5,
-    };
-
-    wrapper = shallow(<ItemList {...props} />);
-    expect(wrapper.find('.ItemList__item')).toHaveLength(props.items.length);
-
-    props.totalCount = 0;
-    wrapper = shallow(<ItemList {...props} />);
-    expect(wrapper.find('.ItemList__item')).toHaveLength(0);
+    wrapper = shallow(<ItemList {...props} items={items} totalCount={5} />);
+    expect(wrapper.find('.ItemList__item')).toHaveLength(items.length);
   });
 
   test('Checkbox onChange calls push', () => {
-    const props = {
-      ...defaultProps,
-      items: [{ ...classDefault, id: '1' }],
+    const pushProps = {
+      ...props,
+      items: items.slice(0, 1),
       push: jest.fn(),
       remove: jest.fn(),
       totalCount: 1,
     };
-    const wrapper = shallow(<ItemList {...props} />);
+    const wrapper = shallow(<ItemList {...pushProps} />);
     const input = wrapper.find('input');
     expect(input).toHaveLength(1);
 
@@ -59,15 +60,15 @@ describe('<ItemList />', () => {
   });
 
   test('Checkbox onChange calls remove', () => {
-    const props = {
-      ...defaultProps,
-      items: [{ ...classDefault, id: '1' }],
+    const removeProps = {
+      ...props,
+      items: items.slice(0, 1),
       push: jest.fn(),
       remove: jest.fn(),
       selected: ['1'],
       totalCount: 1,
     };
-    const wrapper = shallow(<ItemList {...props} />);
+    const wrapper = shallow(<ItemList {...removeProps} />);
     const input = wrapper.find('input');
     expect(input).toHaveLength(1);
 

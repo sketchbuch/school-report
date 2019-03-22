@@ -1,10 +1,13 @@
+// @flow
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 import Alert from './Alert';
+import type { Props } from './Alert';
 
 describe('<Alert />', () => {
-  const props = {
+  const props: Props = {
     body: 'The body',
     icon: true,
     title: 'The title',
@@ -13,7 +16,7 @@ describe('<Alert />', () => {
 
   test('Renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<Alert />, div);
+    ReactDOM.render(<Alert {...props} />, div);
   });
 
   test('Renders warn icon', () => {
