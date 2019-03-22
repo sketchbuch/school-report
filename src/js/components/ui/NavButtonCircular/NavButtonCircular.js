@@ -1,6 +1,7 @@
 //@flow
 
 import * as React from 'react';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import type { ButtonType } from '../../../types/button';
 import '../ButtonCircular/ButtonCircular.css';
@@ -9,7 +10,7 @@ type Props = {
   action: string,
   buttontype?: ButtonType,
   children?: React.Node,
-  className?: string,
+  className: string,
   disabled?: boolean,
   title?: string,
   to: string,
@@ -35,14 +36,9 @@ class NavButtonCircular extends React.Component<Props> {
   render() {
     const { action, buttontype, children, className, disabled, title, to, type } = this.props;
 
-    let classes = 'ButtonCircular';
-    if (className && className !== '') {
-      classes += ' ' + className;
-    }
-
     return (
       <Link
-        className={classes}
+        className={classNames('ButtonCircular', { [className]: className !== '' })}
         data-action={action}
         data-buttontype={buttontype}
         disabled={disabled}

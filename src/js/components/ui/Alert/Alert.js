@@ -1,6 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react';
+import type { RenderHelperReturn } from '../../../types/misc';
 import Icon from '../../Icon/Icon';
 import './Alert.css';
 
@@ -18,9 +19,6 @@ const alertIcons = {
   success: 'thumbs-up',
 };
 
-/**
- * A message to display to the user.
- */
 class Alert extends PureComponent<Props> {
   static defaultProps = {
     body: 'A body text is required',
@@ -31,18 +29,17 @@ class Alert extends PureComponent<Props> {
 
   props: Props;
 
-  getIcon() {
+  renderIcon(): RenderHelperReturn {
     return <Icon type={alertIcons[this.props.type]} />;
   }
 
   render() {
     const { body, icon, title, type } = this.props;
-
     const tooltip = title ? `${title} - ${body}` : body;
 
     return (
       <section className={'Alert Alert--' + type} title={tooltip}>
-        {icon && this.getIcon()}
+        {icon && this.renderIcon()}
         {title && <h1 className="Alert__headline">{title}</h1>}
         <p className="Alert__body">{body}</p>
       </section>

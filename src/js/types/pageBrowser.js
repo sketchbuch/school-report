@@ -4,7 +4,7 @@
  * Page Browser props.
  */
 export type PageBrowserProps = {
-  className?: string,
+  className: string,
   curPage: number,
   first: boolean,
   itemCount: number,

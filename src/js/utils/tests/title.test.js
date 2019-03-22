@@ -2,10 +2,6 @@
 
 import setTitle, { titleSep } from '../title';
 
-/**
- * ID Tests
- */
-
 describe('Util: Titles', () => {
   test('setTitle() should set the default title if no prefix provided', () => {
     setTitle();

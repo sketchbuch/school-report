@@ -6,14 +6,15 @@ import classDefault, { ClassFactory } from '../../types/class';
 import pupilDefault, { PupilFactory } from '../../types/pupil';
 import reportDefault, { ReportFactory } from '../../types/report';
 import textDefault, { TextFactory } from '../../types/text';
-
-/**
- * Redux Tests
- */
+import type { CategoryType } from '../../types/category';
+import type { ClassType } from '../../types/class';
+import type { PupilType } from '../../types/pupil';
+import type { ReportType } from '../../types/report';
+import type { TextType } from '../../types/text';
 
 describe('Util: Redux', () => {
   test('getActiveCategory() returns the correct category', () => {
-    const categories = [
+    const categories: CategoryType[] = [
       CategoryFactory({ ...categoryDefault, label: 'Category 1' }, Date.now()),
       CategoryFactory({ ...categoryDefault, label: 'Category 2' }, Date.now()),
       CategoryFactory({ ...categoryDefault, label: 'Category 3' }, Date.now()),
@@ -23,7 +24,7 @@ describe('Util: Redux', () => {
   });
 
   test('getActiveClass() returns the correct class', () => {
-    const classes = [
+    const classes: ClassType[] = [
       ClassFactory({ ...classDefault, label: 'Class 1' }, Date.now()),
       ClassFactory({ ...classDefault, label: 'Class 2' }, Date.now()),
       ClassFactory({ ...classDefault, label: 'Class 3' }, Date.now()),
@@ -33,7 +34,7 @@ describe('Util: Redux', () => {
   });
 
   test('getActivePupil() returns the correct pupil', () => {
-    const pupils = [
+    const pupils: PupilType[] = [
       PupilFactory({ ...pupilDefault, firstname: 'Dave', lastname: 'Lister' }, Date.now(), 'c1'),
       PupilFactory({ ...pupilDefault, firstname: 'Arnold', lastname: 'Rimmer' }, Date.now(), 'c1'),
       PupilFactory({ ...pupilDefault, firstname: 'The', lastname: 'Cat' }, Date.now(), 'c1'),
@@ -43,7 +44,7 @@ describe('Util: Redux', () => {
   });
 
   test('getActiveReport() returns the correct report', () => {
-    const reports = [
+    const reports: ReportType[] = [
       ReportFactory({ ...reportDefault, label: 'Report 1' }, Date.now()),
       ReportFactory({ ...reportDefault, label: 'Report 2' }, Date.now()),
       ReportFactory({ ...reportDefault, label: 'Report 3' }, Date.now()),
@@ -53,7 +54,7 @@ describe('Util: Redux', () => {
   });
 
   test('getActiveText() returns the correct text', () => {
-    const texts = [
+    const texts: TextType[] = [
       TextFactory({ ...textDefault, bodytext: 'Text 1' }, Date.now(), 'EN'),
       TextFactory({ ...textDefault, bodytext: 'Text 2' }, Date.now(), 'EN'),
       TextFactory({ ...textDefault, bodytext: 'Text 3' }, Date.now(), 'EN'),

@@ -1,6 +1,3 @@
-/* Circular Button */
-/* --------------- */
-
 .ButtonCircular {
   background: var(--col-primary);
   border-radius: 50%;
@@ -36,38 +33,35 @@
   background: var(--col-primary-dark);
 }
 
-
 /* Positive */
-.ButtonCircular[data-buttontype="pos"] {
+.ButtonCircular[data-buttontype='pos'] {
   background: var(--col-pos);
 }
 
-.ButtonCircular[data-buttontype="pos-rollover"]:hover,
-.ButtonCircular[data-buttontype="pos"]:hover {
+.ButtonCircular[data-buttontype='pos-rollover']:hover,
+.ButtonCircular[data-buttontype='pos']:hover {
   background: var(--col-pos-light);
 }
 
-.ButtonCircular[data-buttontype="pos-rollover"]:active,
-.ButtonCircular[data-buttontype="pos"]:active {
+.ButtonCircular[data-buttontype='pos-rollover']:active,
+.ButtonCircular[data-buttontype='pos']:active {
   background: var(--col-pos-dark);
 }
 
-
 /* Negative */
-.ButtonCircular[data-buttontype="neg"] {
+.ButtonCircular[data-buttontype='neg'] {
   background: var(--col-neg);
 }
 
-.ButtonCircular[data-buttontype="neg-rollover"]:hover,
-.ButtonCircular[data-buttontype="neg"]:hover {
+.ButtonCircular[data-buttontype='neg-rollover']:hover,
+.ButtonCircular[data-buttontype='neg']:hover {
   background: var(--col-neg-light);
 }
 
-.ButtonCircular[data-buttontype="neg-rollover"]:active,
-.ButtonCircular[data-buttontype="neg"]:active {
+.ButtonCircular[data-buttontype='neg-rollover']:active,
+.ButtonCircular[data-buttontype='neg']:active {
   background: var(--col-neg-dark);
 }
-
 
 /* Disabled */
 .ButtonCircular[disabled],

@@ -39,11 +39,11 @@ export class CatSelect extends React.Component<Props> {
       return null;
     }
 
-    const uncategorisedCount = texts.filter(text => {
+    const uncategorisedCount: number = texts.filter(text => {
       return text.categories.length < 1;
     }).length;
-    const sortedCategories = sortObjectsAz(categories, categorySort);
-    const unselectedCount = texts.length - selectedCount;
+    const sortedCategories: CategoryType[] = sortObjectsAz(categories, categorySort);
+    const unselectedCount: number = texts.length - selectedCount;
 
     return (
       <div className="CatSelect">

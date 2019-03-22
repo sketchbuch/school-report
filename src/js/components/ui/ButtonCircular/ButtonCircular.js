@@ -1,6 +1,7 @@
 //@flow
 
 import * as React from 'react';
+import classNames from 'classnames';
 import type { ButtonType } from '../../../types/button';
 import type { EventHandlerType } from '../../../types/functions';
 import './ButtonCircular.css';
@@ -9,7 +10,7 @@ type Props = {
   action: string,
   buttontype?: ButtonType,
   children?: React.Node,
-  className?: string,
+  className: string,
   disabled?: boolean,
   name?: string,
   onClick?: EventHandlerType | null,
@@ -18,9 +19,6 @@ type Props = {
   visual?: boolean,
 };
 
-/**
- * A round action button.
- */
 class ButtonCircular extends React.Component<Props> {
   static defaultProps = {
     buttontype: 'default',
@@ -36,17 +34,12 @@ class ButtonCircular extends React.Component<Props> {
 
   render() {
     const { action, buttontype, children, className, disabled, name, onClick, title, type, visual } = this.props;
-
-    let classes = 'ButtonCircular';
-    if (className && className !== '') {
-      classes += ' ' + className;
-    }
     const tagName = visual ? 'span' : 'button';
 
     return React.createElement(
       tagName,
       {
-        className: classes,
+        className: classNames('ButtonCircular', { [className]: className !== '' }),
         'data-action': action,
         'data-buttontype': buttontype,
         disabled: disabled,

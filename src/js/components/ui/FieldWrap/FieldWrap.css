@@ -1,11 +1,8 @@
-/* Field Wrap */
-/* ---------- */
-
 .FieldWrap {
-    width: 100%;
-    position: relative;
+  width: 100%;
+  position: relative;
 }
 
 .FieldWrap + .FieldWrap {
-    margin-top: 10px;
+  margin-top: 10px;
 }

@@ -2,13 +2,8 @@
 
 import { text } from '../components/Translation/Translation';
 
-/**
- * Sets the window title.
- *
- * @param string titleTxt The text to used as the window title.
- */
-export default function setTitle(titleTxt: string = '') {
-  const trimmedTxt = titleTxt.trim();
+export default function setTitle(titleTxt: string = ''): void {
+  const trimmedTxt: string = titleTxt.trim();
 
   if (trimmedTxt === '') {
     document.title = text('Name', 'App');
@@ -17,4 +12,4 @@ export default function setTitle(titleTxt: string = '') {
   }
 }
 
-export const titleSep = ' - ';
+export const titleSep: string = ' - ';

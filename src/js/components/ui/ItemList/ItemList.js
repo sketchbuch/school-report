@@ -4,33 +4,26 @@ import React, { Component } from 'react';
 import Icon from '../../Icon/Icon';
 import NoItems from '../../NoItems/NoItems';
 import Translation from '../../Translation/Translation';
-import type { ClassType } from '../../../types/class';
-import type { PupilType } from '../../../types/pupil';
-import type { ReportType } from '../../../types/report';
-import type { TextType } from '../../../types/text';
+import type { DomainType } from '../../../types/domain';
 import { ICON_SUCCESS } from '../../../constants/icons';
 import './ItemList.css';
 
-type DomainTypes = ClassType | PupilType | ReportType | TextType;
-
+// TODO - fix types
 type Props = {
   form: Object,
   insert: Function,
-  items: Array<DomainTypes>, // Items, could be filtered so length != totalCount.
+  items: DomainType[], // Items, could be filtered so length != totalCount.
   move: Function,
   name: string,
   pop: Function,
   push: Function,
   remove: Function,
-  selected: Array<string>,
+  selected: string[],
   swap: Function,
   totalCount: number, // Total number of items
   unshift: Function,
 };
 
-/**
- * A list of items for selection.
- */
 class ItemList extends Component<Props> {
   static defaultProps = {
     items: [], // Already sorted for display.

@@ -1,5 +1,7 @@
 // @flow
 
+// TODO - fix types
+
 /**
  * Returns a copy of state with a new element added.
  *

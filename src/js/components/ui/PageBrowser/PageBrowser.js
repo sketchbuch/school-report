@@ -1,10 +1,12 @@
 //@flow
 
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import ButtonCircular from '../ButtonCircular/ButtonCircular';
 import Translation, { text } from '../../Translation/Translation';
-import type { PageBrowserProps } from '../../../types/pageBrowser';
 import pageBrowserPropsDefault from '../../../types/pageBrowser';
+import type { PageBrowserProps } from '../../../types/pageBrowser';
+import type { RenderHelperReturn } from '../../../types/misc';
 import './PageBrowser.css';
 
 type PbMoreProps = {
@@ -12,40 +14,30 @@ type PbMoreProps = {
 };
 
 export const PbMore = (props: PbMoreProps) => {
-  let classes = 'PageBrowser__more';
-  if (props.hidden) {
-    classes += ' PageBrowser__more--hidden';
-  }
-  return <span className={classes}>…</span>;
+  return <span className={classNames('PageBrowser__more', { 'PageBrowser__more--hidden': props.hidden })}>…</span>;
 };
 
 type PbButProps = {
   disabled: boolean,
   label: string,
-  page: boolean,
-  selected: boolean,
-  title: string,
+  page?: boolean,
+  selected?: boolean,
+  title?: string,
   onClick: (event: SyntheticInputEvent) => void,
   type: string,
 };
 
 export const PbBut = (props: PbButProps) => {
-  const title = props.title || text('Btn-' + props.type, 'PageBrowser');
-  let classes = `PageBrowser__btn PageBrowser__btn--${props.type}`;
-  if (props.page) {
-    classes += ' PageBrowser__btn--page';
-  }
-  if (props.selected) {
-    classes += ' PageBrowser__btn--selected';
-  }
-
   return (
     <ButtonCircular
       action={props.type}
-      className={classes}
+      className={classNames(`PageBrowser__btn PageBrowser__btn--${props.type}`, {
+        'PageBrowser__btn--page': props.page,
+        'PageBrowser__btn--selected': props.selected,
+      })}
       disabled={props.disabled}
       onClick={props.onClick}
-      title={title}
+      title={props.title || text('Btn-' + props.type, 'PageBrowser')}
     >
       {props.label}
     </ButtonCircular>
@@ -54,58 +46,50 @@ export const PbBut = (props: PbButProps) => {
 
 type Props = { ...PageBrowserProps };
 
-/**
- * A page browser.
- */
 class PageBrowser extends Component<Props> {
   static defaultProps = { ...pageBrowserPropsDefault };
 
   props: Props;
-  handleClick: (event: SyntheticInputEvent) => void;
 
-  constructor(props: Props) {
-    super(props);
+  handleClick = (event: SyntheticInputEvent): void => {
+    const { curPage, itemCount, onChange, perPage } = this.props;
 
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(event: SyntheticInputEvent) {
-    if (this.props.onChange) {
+    if (onChange) {
       const btn = event.currentTarget;
       const { action } = btn.dataset;
-      const totalPages = this.getTotalPages(this.props.itemCount, this.props.perPage);
+      const totalPages = this.getTotalPages(itemCount, perPage);
 
       switch (action) {
         case 'first':
-          this.props.onChange(1);
+          onChange(1);
           break;
 
         case 'prev':
-          const prev = this.props.curPage > 1 ? this.props.curPage - 1 : 1;
-          this.props.onChange(prev);
+          const prev = curPage > 1 ? curPage - 1 : 1;
+          onChange(prev);
           break;
 
         case 'next':
-          const next = this.props.curPage + 1 < totalPages ? this.props.curPage + 1 : totalPages;
-          this.props.onChange(next);
+          const next = curPage + 1 < totalPages ? curPage + 1 : totalPages;
+          onChange(next);
           break;
 
         case 'last':
-          this.props.onChange(totalPages);
+          onChange(totalPages);
           break;
 
         default:
-          this.props.onChange(parseInt(action, 10));
+          onChange(parseInt(action, 10));
           break;
       }
     }
-  }
+  };
 
-  getTotalPages(itemCount: number, perPage: number) {
+  getTotalPages(itemCount: number, perPage: number): number {
     return Math.ceil(itemCount / perPage);
   }
 
-  renderLeft(first: boolean, prev: boolean, curPage: number): null | React.Node {
+  renderLeft(first: boolean, prev: boolean, curPage: number): RenderHelperReturn {
     if (first || prev) {
       return (
         <div className="PageBrowser__left">
@@ -118,7 +102,7 @@ class PageBrowser extends Component<Props> {
     return null;
   }
 
-  renderRight(next: boolean, last: boolean, curPage: number, totalPages: number): null | React.Node {
+  renderRight(next: boolean, last: boolean, curPage: number, totalPages: number): RenderHelperReturn {
     if (next || last) {
       return (
         <div className="PageBrowser__right">
@@ -131,7 +115,7 @@ class PageBrowser extends Component<Props> {
     return null;
   }
 
-  renderCentre(curPage: number, totalPages: number): React.Node {
+  renderCentre(curPage: number, totalPages: number): RenderHelperReturn {
     return (
       <div className="PageBrowser__centre">
         <p className="PageBrowser__info">
@@ -142,18 +126,14 @@ class PageBrowser extends Component<Props> {
   }
 
   render() {
-    const { curPage, first, itemCount, last, next, perPage, prev } = this.props;
+    const { className, curPage, first, itemCount, last, next, perPage, prev } = this.props;
 
     const totalPages = this.getTotalPages(itemCount, perPage);
-    let classes = 'PageBrowser';
-    if (this.props.className && this.props.className !== '') {
-      classes += ' ' + this.props.className;
-    }
 
     let pb = null;
     if (itemCount > 0) {
       pb = (
-        <div className={classes}>
+        <div className={classNames('PageBrowser', { [className]: className !== '' })}>
           <div className="PageBrowser__controls">
             {this.renderLeft(first, prev, curPage)}
             {this.renderCentre(curPage, totalPages)}

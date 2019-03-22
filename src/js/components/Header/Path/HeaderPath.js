@@ -1,19 +1,15 @@
 // @flow
 
 import React, { Component, Fragment } from 'react';
-import type { Dispatch } from 'redux';
-import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import HeaderBreadcrumb from '../Breadcrumb/HeaderBreadcrumb';
-import type { Breadcrumb } from '../../../types/breadcrumb';
+import type { BreadcrumbProps } from '../../../types/breadcrumb';
 import type { ReduxState } from '../../../types/reduxstate';
 import { getBreadcrumbs } from '../../../utils/redux';
 import './HeaderPath.css';
 
 type Props = {
-  ...RouteComponentProps,
-  breadcrumbs: Breadcrumb[],
-  dispatch: Dispatch,
+  ...BreadcrumbProps,
 };
 
 export class HeaderPath extends Component<Props> {

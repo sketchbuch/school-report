@@ -2,13 +2,9 @@
 
 import { generateId } from '../ids';
 
-/**
- * ID Tests
- */
-
 describe('Util: IDs', () => {
-  const ts = Date.now();
-  const idstr = 'An ID';
+  const ts: number = Date.now();
+  const idstr: string = 'An ID';
 
   test('generateId() returns the same MD5 hash given the same arguments', () => {
     expect(generateId(idstr, ts)).toBe(generateId(idstr, ts));

@@ -21,9 +21,6 @@ type Props = {
   visible: boolean,
 };
 
-/**
- * A SearchField component.
- */
 class SearchField extends React.PureComponent<Props> {
   static defaultProps = {
     anywhere: false,

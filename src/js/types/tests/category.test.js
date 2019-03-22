@@ -1,21 +1,22 @@
 // @flow
 
 import categoryDefault, { CategoryFactory, getCategoryIdStr } from '../category';
+import type { CategoryType } from '../category';
 import { ICON_CATEGORIES } from '../../constants/icons';
-import { generateId } from '../../utils/ids';
 import { ROUTE_DEL_CATEGORY, ROUTE_EDIT_CATEGORY } from '../../constants/routes';
+import { generateId } from '../../utils/ids';
 
-describe('Types: Class', () => {
-  const categoryObj = {
+describe('Types: Category', () => {
+  const categoryObj: CategoryType = {
     ...categoryDefault,
     created: -1,
     label: 'Category 1',
     updated: -2,
   };
-  const ts = Date.now();
-  const idStr = getCategoryIdStr(categoryObj);
-  const id = generateId(idStr, ts);
-  const testClass = {
+  const ts: number = Date.now();
+  const idStr: string = getCategoryIdStr(categoryObj);
+  const id: string = generateId(idStr, ts);
+  const testCategory: CategoryType = {
     ...categoryDefault,
     created: ts,
     id: id,
@@ -24,18 +25,18 @@ describe('Types: Class', () => {
   };
 
   test('CategoryFactory() correctly returns a new category object', () => {
-    const newcategoryObj = CategoryFactory(categoryObj, ts);
-    expect(JSON.stringify(newcategoryObj)).toEqual(JSON.stringify(testClass));
+    const newcategoryObj: CategoryType = CategoryFactory(categoryObj, ts);
+    expect(JSON.stringify(newcategoryObj)).toEqual(JSON.stringify(testCategory));
     expect(newcategoryObj.created).toBe(newcategoryObj.updated);
   });
 
   test('getCategoryIdStr() returns the same string given the same object', () => {
-    const idStrCompare = getCategoryIdStr(categoryObj);
+    const idStrCompare: string = getCategoryIdStr(categoryObj);
     expect(idStr).toEqual(idStrCompare);
   });
 
   describe('Getters:', () => {
-    const newCategoryObj = CategoryFactory(categoryObj, ts);
+    const newCategoryObj: CategoryType = CategoryFactory(categoryObj, ts);
 
     test('getDescription() correctly returns the description', () => {
       expect(newCategoryObj.getDescription()).toEqual('');
@@ -55,19 +56,19 @@ describe('Types: Class', () => {
 
     describe('contains()', () => {
       test('Returns false if no search term', () => {
-        const result = newCategoryObj.contains();
+        const result: boolean = newCategoryObj.contains();
         expect(result).toBe(false);
       });
 
       test('Returns false if the category object does not contain the search term.', () => {
-        const term = 'Chalfont';
-        const result = newCategoryObj.contains(term);
+        const term: string = 'Chalfont';
+        const result: boolean = newCategoryObj.contains(term);
         expect(result).toBe(false);
       });
 
       test('Returns true if the category object contains the search term.', () => {
-        const term = 'gory';
-        const result = newCategoryObj.contains(term);
+        const term: string = 'gory';
+        const result: boolean = newCategoryObj.contains(term);
         expect(result).toBe(true);
       });
     });
@@ -78,7 +79,7 @@ describe('Types: Class', () => {
       });
 
       test('Returns ROUTE_EDIT_CATEGORY for any other linkType', () => {
-        const expects = ROUTE_EDIT_CATEGORY.replace(':categoryId', newCategoryObj.id);
+        const expects: string = ROUTE_EDIT_CATEGORY.replace(':categoryId', newCategoryObj.id);
         expect(newCategoryObj.getUrl()).toBe(expects);
         expect(newCategoryObj.getUrl('something')).toBe(expects);
       });

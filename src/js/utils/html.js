@@ -1,9 +1,16 @@
 // @flow
 
 import { ucFirst } from './strings';
+import type { InsertDangerousHtmlObj } from '../types/misc';
 import type { PupilType } from '../types/pupil';
 
-export const placeholderMap = [
+type PlaceHolderMapObject = {
+  function?: string,
+  property?: string,
+  symbol: string,
+};
+
+export const placeholderMap: PlaceHolderMapObject[] = [
   { symbol: 'N', function: 'getLabel' },
   { symbol: 'F', property: 'firstname' },
   { symbol: 'L', property: 'lastname' },
@@ -12,18 +19,16 @@ export const placeholderMap = [
   { symbol: 'PP', function: 'getPronoun' },
 ];
 
-/**
- * Returns the text with the placeholders replaced
- *
- * @param {string} text The text to change.
- * @return {object}
- */
-export function getPupilTextHtml(text: string, pupil: PupilType | Object, highlight: boolean = true): Object {
-  const highlightStart = highlight ? '<strong>' : '';
-  const highlightEnd = highlight ? '</strong>' : '';
-  let newText = text;
+export function getPupilTextHtml(
+  text: string,
+  pupil: PupilType | Object,
+  highlight: boolean = true
+): InsertDangerousHtmlObj {
+  const highlightStart: string = highlight ? '<strong>' : '';
+  const highlightEnd: string = highlight ? '</strong>' : '';
+  let newText: string = text;
 
-  placeholderMap.forEach(ph => {
+  placeholderMap.forEach((ph: PlaceHolderMapObject) => {
     const phSymbol = `#${ph.symbol}#`;
     let phVal = phSymbol;
     let isPronoun = false;

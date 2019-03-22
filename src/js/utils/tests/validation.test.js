@@ -2,10 +2,6 @@
 
 import validate from '../validation';
 
-/**
- * Validation Tests
- */
-
 describe('Util: validation', () => {
   const field = 'label';
 

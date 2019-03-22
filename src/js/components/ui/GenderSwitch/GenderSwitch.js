@@ -1,10 +1,12 @@
 //@flow
 
 import * as React from 'react';
+import classNames from 'classnames';
 import Icon from '../../Icon/Icon';
 import { ICON_PUPILS_FEMALE, ICON_PUPILS_MALE } from '../../../constants/icons';
 import './GenderSwitch.css';
 
+// TODO - fix types
 type Props = {
   value?: string,
   large?: boolean,
@@ -15,9 +17,6 @@ type Props = {
   titleMale: string,
 };
 
-/**
- * A gender switch using icons.
- */
 class GenderSwitch extends React.Component<Props> {
   static defaultProps = {
     value: '',
@@ -34,13 +33,8 @@ class GenderSwitch extends React.Component<Props> {
   render() {
     const { value, large, name, onBlur, onChange, titleFemale, titleMale } = this.props;
 
-    let classes = 'GenderSwitch';
-    if (large) {
-      classes += ' GenderSwitch--large';
-    }
-
     return (
-      <div className={classes}>
+      <div className={classNames('GenderSwitch', { 'GenderSwitch--large': large })}>
         <label title={titleMale}>
           <input
             onChange={onChange}

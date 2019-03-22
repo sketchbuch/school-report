@@ -1,6 +1,3 @@
-/* Button */
-/* ------ */
-
 .Button {
   position: relative;
   text-align: center;
@@ -9,7 +6,7 @@
   border-radius: var(--border-radius);
   outline: 0px;
   cursor: pointer;
-  padding: 0px 1.0rem;
+  padding: 0px 1rem;
   font-size: var(--font-size);
   line-height: var(--lh-reduced);
   width: 100%;
@@ -47,7 +44,6 @@
   animation: spinner 1s linear infinite;
 }
 
-
 /* Disabled */
 .Button[disabled],
 .Button[disabled]:focus,
@@ -60,27 +56,26 @@
   pointer-events: none;
 }
 
-
 /* Warning */
-.Button[data-buttontype="warning"] {
+.Button[data-buttontype='warning'] {
   background: var(--col-neg);
 }
 
-.Button[data-buttontype="warning"]:focus {
+.Button[data-buttontype='warning']:focus {
   box-shadow: var(--focus-error), var(--but-highlight);
 }
 
-.Button[data-buttontype="warning"]:hover {
+.Button[data-buttontype='warning']:hover {
   background: var(--col-neg-light);
 }
 
-.Button[data-buttontype="warning"]:active {
+.Button[data-buttontype='warning']:active {
   background: var(--col-neg);
 }
 
-.Button[disabled][data-buttontype="warning"],
-.Button[disabled][data-buttontype="warning"]:focus,
-.Button[disabled][data-buttontype="warning"]:hover,
-.Button[disabled][data-buttontype="warning"]:active {
+.Button[disabled][data-buttontype='warning'],
+.Button[disabled][data-buttontype='warning']:focus,
+.Button[disabled][data-buttontype='warning']:hover,
+.Button[disabled][data-buttontype='warning']:active {
   background: var(--col-neg);
 }

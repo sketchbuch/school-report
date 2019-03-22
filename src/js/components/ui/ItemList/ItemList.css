@@ -1,10 +1,7 @@
-/* Item List */
-/* --------- */
-
 .ItemList {
   position: relative;
   margin: 0px auto;
-  margin-bottom: 1.0rem;
+  margin-bottom: 1rem;
   max-height: 450px;
   width: 100%;
   background: var(--col-field-bg);
@@ -26,17 +23,17 @@
   margin: 0px;
 }
 
-.ItemList input[type=checkbox] {
+.ItemList input[type='checkbox'] {
   display: none;
 }
 
 .ItemList__inner {
   padding: 10px 15px;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
   color: var(--col-text);
   font-size: var(--font-size);
   outline: none;
@@ -47,34 +44,33 @@
   background: var(--col-darken-1);
 }
 
-.ItemList__item + .ItemList__item .ItemList__inner {
-  border-top: 1px solid var(--col-darken-1);
-}
-
 .ItemList__inner:focus {
   background: var(--col-primary);
 }
 
-.ItemList input[type=checkbox]:checked + .ItemList__inner:hover,
 .ItemList__inner:hover {
   background: var(--col-blue);
 }
 
-.ItemList input[type=checkbox]:checked + .ItemList__inner {
-background: var(--col-darken-2);
+.ItemList__item + .ItemList__item .ItemList__inner {
+  border-top: 1px solid var(--col-darken-1);
+}
+
+.ItemList input[type='checkbox']:checked + .ItemList__inner {
+  background: var(--col-darken-2);
+}
+
+.ItemList input[type='checkbox']:checked + .ItemList__inner:hover {
+  background: var(--col-blue);
 }
 
 .ItemList__description {
-  padding-left: 1.0rem;
+  padding-left: 1rem;
   opacity: 0.5;
 }
 
 .ItemList .Icon + .ItemList__label {
-  padding-left: 1.0rem;
-}
-
-.ItemList .Icon + .ItemList__label {
-  padding-left: 1.0rem;
+  padding-left: 1rem;
 }
 
 .ItemList .NoItems {
@@ -82,8 +78,8 @@ background: var(--col-darken-2);
   margin-bottom: 0px;
   padding-left: 10px;
   padding-right: 10px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }

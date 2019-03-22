@@ -35,7 +35,7 @@ export const pupilSortFirst = 'firstname';
 export const pupilSortLast = 'lastname';
 export const pupilSortDefault = pupilSortFirst;
 export const pupilSortOptions = [pupilSortFirst, pupilSortLast];
-export type PupilSortOptions = $Values<pupilSortOptions>;
+export type PupilSortOptions = typeof pupilSortFirst | typeof pupilSortLast;
 export const pupilSort = {
   [pupilSortFirst]: [...pupilSortOptions, 'updated'],
   [pupilSortLast]: [pupilSortLast, pupilSortFirst, 'updated'],

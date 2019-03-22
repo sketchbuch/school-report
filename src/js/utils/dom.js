@@ -1,12 +1,5 @@
 // @flow
 
-/**
- * Returns a custom number prop (CSS var) from the html element.
- *
- * @param { string } prop The name of the prop to get.
- * @param { string } prop The name of the prop to get.
- * @return { integer } The prop value or null.
- */
 export function getCustomNumProp(prop: string, styleObj?: Object): number {
   let val = 0;
 

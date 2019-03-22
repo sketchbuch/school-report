@@ -2,19 +2,19 @@
 
 import * as React from 'react';
 import { FieldArray } from 'formik';
-import { text } from '../../Translation/Translation';
-import TextInput from '../TextInput/TextInput';
-import ItemList from '../ItemList/ItemList';
 import Icon from '../../Icon/Icon';
-import { ICON_CLOSE } from '../../../constants/icons';
+import ItemList from '../ItemList/ItemList';
+import TextInput from '../TextInput/TextInput';
 import type { DomainType } from '../../../types/domain';
+import { ICON_CLOSE } from '../../../constants/icons';
+import { text } from '../../Translation/Translation';
 import './ItemSelection.css';
 
 type Props = {
-  items: Array<DomainType>, // Already sorted for display.
+  items: DomainType[], // Already sorted for display.
   name: string, // Name of property in Formik's values object.
   searchMin: number, // Minimum number of items before the search shows.
-  selected: Array<String>, // IDs from the domain objects.
+  selected: String[], // IDs from the domain objects.
 };
 
 type State = {
@@ -22,9 +22,6 @@ type State = {
   term: string,
 };
 
-/**
- * Item select with search and new item controls.
- */
 export class ItemSelection extends React.Component<Props, State> {
   static defaultProps = {
     items: [],
@@ -34,29 +31,19 @@ export class ItemSelection extends React.Component<Props, State> {
   };
 
   props: Props;
-  handleClear: Function;
-  handleSearch: Function;
+  state: State = {
+    newLabel: '',
+    term: '',
+  };
 
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      newLabel: '',
-      term: '',
-    };
-
-    this.handleClear = this.handleClear.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-  }
-
-  handleClear(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleClear = (event: SyntheticInputEvent<HTMLInputElement>): void => {
     this.setState({ term: '' });
-  }
+  };
 
-  handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleSearch = (event: SyntheticInputEvent<HTMLInputElement>): void => {
     const term = event.currentTarget.value;
     this.setState({ term });
-  }
+  };
 
   render() {
     const { items, name, searchMin, selected } = this.props;
