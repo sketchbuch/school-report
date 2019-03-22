@@ -3,7 +3,7 @@
 import * as React from 'react';
 import './NoItems.css';
 
-type Props = {
+export type Props = {
   children?: React.Node,
   message?: string,
 };

@@ -3,9 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import NoItems from './NoItems';
+import type { Props } from './NoItems';
 
 describe('<NoItems />', () => {
-  const props = {
+  const props: Props = {
+    children: null,
     message: 'No items',
   };
 

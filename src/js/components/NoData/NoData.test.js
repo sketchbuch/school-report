@@ -3,12 +3,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import NoData from './NoData';
-import store from '../../store/redux';
+import type { Props } from './NoData';
 
 describe('<NoData />', () => {
-  const props = {
+  const props: Props = {
     dispatch: jest.fn(),
-    store: store,
     curLang: 'EN',
   };
 

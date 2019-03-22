@@ -4,17 +4,21 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import Panels from './Panels';
+import type { Props } from './Panels';
 import store from '../../store/redux';
 import { ROUTE_HOME } from '../../constants/routes';
 
 describe('<Panels />', () => {
-  let props = {};
+  let props: Props = {};
 
   beforeEach(() => {
     props = {
-      dispatch: jest.fn(),
-      classes: [],
-      pupils: {},
+      history: {
+        push: jest.fn(),
+      },
+      match: {
+        path: ROUTE_HOME,
+      },
     };
   });
 
@@ -28,15 +32,7 @@ describe('<Panels />', () => {
   });
 
   test('history.push() called on mount if match path is /', () => {
-    const routerProps = {
-      history: {
-        push: jest.fn(),
-      },
-      match: {
-        path: ROUTE_HOME,
-      },
-    };
-    shallow(<Panels.WrappedComponent {...props} {...routerProps} />);
-    expect(routerProps.history.push).toHaveBeenCalledWith(ROUTE_HOME);
+    shallow(<Panels.WrappedComponent {...props} />);
+    expect(props.history.push).toHaveBeenCalledWith(ROUTE_HOME);
   });
 });

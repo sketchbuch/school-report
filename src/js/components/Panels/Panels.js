@@ -25,7 +25,7 @@ import {
 } from '../../constants/routes';
 import './Panels.css';
 
-type Props = {
+export type Props = {
   ...RouteComponentProps,
 };
 

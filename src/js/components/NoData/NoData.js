@@ -22,7 +22,7 @@ import { text } from '../Translation/Translation';
 import 'react-select/dist/react-select.css';
 import './NoData.css';
 
-type Props = {
+export type Props = {
   curLang: string,
   dispatch: Dispatch,
 };
