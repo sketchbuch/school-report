@@ -1,23 +1,24 @@
 // @flow
 
 import textDefault, { TextFactory, getTextIdStr } from '../text';
+import type { TextType } from '../text';
 import { ICON_TEXTS } from '../../constants/icons';
-import { generateId } from '../../utils/ids';
 import { ROUTE_DEL_TEXT, ROUTE_EDIT_TEXT } from '../../constants/routes';
+import { generateId } from '../../utils/ids';
 
 describe('Types: Text', () => {
-  const langCode = 'EN';
-  const textObj = {
+  const langCode: string = 'EN';
+  const textObj: TextType = {
     ...textDefault,
     bodytext: 'A text',
     charCount: 6,
     created: -1,
     updated: -2,
   };
-  const ts = Date.now();
-  const idStr = getTextIdStr(textObj);
-  const id = generateId(idStr, ts);
-  const testText = {
+  const ts: number = Date.now();
+  const idStr: string = getTextIdStr(textObj);
+  const id: string = generateId(idStr, ts);
+  const testText: TextType = {
     ...textDefault,
     bodytext: 'A text',
     charCount: 6,
@@ -28,18 +29,18 @@ describe('Types: Text', () => {
   };
 
   test('TextFactory() correctly returns a new pupil object', () => {
-    const newTextObj = TextFactory(textObj, ts, langCode);
+    const newTextObj: TextType = TextFactory(textObj, ts, langCode);
     expect(JSON.stringify(newTextObj)).toEqual(JSON.stringify(testText));
     expect(newTextObj.created).toBe(newTextObj.updated);
   });
 
   test('getTextIdStr() returns the same string given the same object', () => {
-    const idStrCompare = getTextIdStr(textObj);
+    const idStrCompare: string = getTextIdStr(textObj);
     expect(idStr).toEqual(idStrCompare);
   });
 
   describe('Getters:', () => {
-    const newTextObj = TextFactory(textObj, ts, langCode);
+    const newTextObj: TextType = TextFactory(textObj, ts, langCode);
 
     test('getDescription() correctly returns the description', () => {
       expect(newTextObj.getDescription()).toEqual('');
@@ -68,14 +69,14 @@ describe('Types: Text', () => {
       });
 
       test('Returns false if the text object does not contain the search term.', () => {
-        const term = 'Once upon';
-        const result = newTextObj.contains(term);
+        const term: string = 'Once upon';
+        const result: boolean = newTextObj.contains(term);
         expect(result).toBe(false);
       });
 
       test('Returns true if the text object contains the search term.', () => {
-        const term = 'A t';
-        const result = newTextObj.contains(term);
+        const term: string = 'A t';
+        const result: boolean = newTextObj.contains(term);
         expect(result).toBe(true);
       });
     });
@@ -86,7 +87,7 @@ describe('Types: Text', () => {
       });
 
       test('Returns ROUTE_EDIT_TEXT for any other linkType', () => {
-        const expects = ROUTE_EDIT_TEXT.replace(':textId', newTextObj.id);
+        const expects: string = ROUTE_EDIT_TEXT.replace(':textId', newTextObj.id);
         expect(newTextObj.getUrl()).toBe(expects);
         expect(newTextObj.getUrl('something')).toBe(expects);
       });

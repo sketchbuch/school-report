@@ -2,9 +2,10 @@
 
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import { SAVE_BUILDER } from '../../constants/actionTypes';
 import * as builderActions from '../builderActions';
 import persist from '../../fs/persist';
+import type { ActionObj } from '../../types/action';
+import { SAVE_BUILDER } from '../../constants/actionTypes';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -16,15 +17,11 @@ jest.mock('../../fs/persist', () =>
   })
 );
 
-/**
- * Builder Actions Tests
- */
-
 describe('Actions: builderActions:', () => {
-  const selected = [];
-  const REPORT_ID = 'r1';
-  const CLASS_ID = 'c1';
-  const PUPIL_ID = 'p1';
+  const selected: string[] = [];
+  const REPORT_ID: string = 'r1';
+  const CLASS_ID: string = 'c1';
+  const PUPIL_ID: string = 'p1';
   let store = () => {};
 
   beforeEach(() => {
@@ -33,7 +30,7 @@ describe('Actions: builderActions:', () => {
   });
 
   test('save() dispatches the correct action', () => {
-    const EXPECTED_ACTIONS = [
+    const expectedActions: ActionObj[] = [
       {
         type: SAVE_BUILDER,
         payload: { selected },
@@ -47,7 +44,7 @@ describe('Actions: builderActions:', () => {
 
     expect.assertions(3);
     store.dispatch(builderActions.save(REPORT_ID, CLASS_ID, PUPIL_ID, selected, mockCallback));
-    expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
+    expect(store.getActions()).toEqual(expectedActions);
     expect(persist).toHaveBeenCalled();
     expect(mockCallback).toHaveBeenCalled();
     store.clearActions();

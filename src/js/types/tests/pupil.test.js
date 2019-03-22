@@ -1,12 +1,13 @@
 // @flow
 
 import pupilDefault, { PupilFactory, getPupilIdStr } from '../pupil';
+import type { PupilType } from '../pupil';
 import { ICON_PUPILS_FEMALE, ICON_PUPILS_MALE } from '../../constants/icons';
-import { generateId } from '../../utils/ids';
 import { ROUTE_EDIT_BUILDER, ROUTE_DEL_PUPIL, ROUTE_EDIT_PUPIL } from '../../constants/routes';
+import { generateId } from '../../utils/ids';
 
 describe('Types: Pupil', () => {
-  const pupilObj = {
+  const pupilObj: PupilType = {
     ...pupilDefault,
     created: -1,
     description: 'Smeghead!',
@@ -15,11 +16,11 @@ describe('Types: Pupil', () => {
     lastname: 'Rimmer',
     updated: -2,
   };
-  const classId = 'c1';
-  const ts = Date.now();
-  const idStr = getPupilIdStr(pupilObj);
-  const id = generateId(idStr, ts);
-  const testPupil = {
+  const classId: string = 'c1';
+  const ts: number = Date.now();
+  const idStr: string = getPupilIdStr(pupilObj);
+  const id: string = generateId(idStr, ts);
+  const testPupil: PupilType = {
     ...pupilDefault,
     classId: classId,
     created: ts,
@@ -32,25 +33,25 @@ describe('Types: Pupil', () => {
   };
 
   test('PupilFactory() correctly returns a new pupil object', () => {
-    const newPupilObj = PupilFactory(pupilObj, ts, classId);
+    const newPupilObj: PupilType = PupilFactory(pupilObj, ts, classId);
     expect(JSON.stringify(newPupilObj)).toEqual(JSON.stringify(testPupil));
     expect(newPupilObj.created).toBe(newPupilObj.updated);
   });
 
   test('getPupilIdStr() returns the same string given the same object', () => {
-    const idStrCompare = getPupilIdStr(pupilObj);
+    const idStrCompare: string = getPupilIdStr(pupilObj);
     expect(idStr).toEqual(idStrCompare);
   });
 
   describe('Getters:', () => {
-    const newPupilObj = PupilFactory(pupilObj, ts, classId);
+    const newPupilObj: PupilType = PupilFactory(pupilObj, ts, classId);
 
     test('getDescription() correctly returns the description', () => {
       expect(newPupilObj.getDescription()).toEqual(newPupilObj.description);
     });
 
     test('getIcon() correctly returns the icon', () => {
-      const femalePupilObj = PupilFactory({ ...pupilObj, gender: 'f' }, ts, classId);
+      const femalePupilObj: PupilType = PupilFactory({ ...pupilObj, gender: 'f' }, ts, classId);
       expect(newPupilObj.getIcon()).toEqual(ICON_PUPILS_MALE);
       expect(femalePupilObj.getIcon()).toEqual(ICON_PUPILS_FEMALE);
     });
@@ -67,19 +68,19 @@ describe('Types: Pupil', () => {
 
     describe('contains()', () => {
       test('Returns false if no search term', () => {
-        const result = newPupilObj.contains();
+        const result: boolean = newPupilObj.contains();
         expect(result).toBe(false);
       });
 
       test('Returns false if the pupil object does not contain the search term.', () => {
-        const term = 'Lister';
-        const result = newPupilObj.contains(term);
+        const term: string = 'Lister';
+        const result: boolean = newPupilObj.contains(term);
         expect(result).toBe(false);
       });
 
       test('Returns true if the pupil object contains the search term.', () => {
-        const term = 'Arn';
-        const result = newPupilObj.contains(term);
+        const term: string = 'Arn';
+        const result: boolean = newPupilObj.contains(term);
         expect(result).toBe(true);
       });
     });
@@ -100,7 +101,10 @@ describe('Types: Pupil', () => {
       });
 
       test('Returns ROUTE_EDIT_PUPIL for any other linkType', () => {
-        const expects = ROUTE_EDIT_PUPIL.replace(':pupilId', newPupilObj.id).replace(':classId', newPupilObj.classId);
+        const expects: string = ROUTE_EDIT_PUPIL.replace(':pupilId', newPupilObj.id).replace(
+          ':classId',
+          newPupilObj.classId
+        );
         expect(newPupilObj.getUrl()).toBe(expects);
         expect(newPupilObj.getUrl('something')).toBe(expects);
       });

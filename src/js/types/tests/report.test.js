@@ -1,22 +1,23 @@
 // @flow
 
 import reportDefault, { ReportFactory, getReportIdStr } from '../report';
+import type { ReportType } from '../report';
 import { ICON_REPORTS } from '../../constants/icons';
-import { generateId } from '../../utils/ids';
 import { ROUTE_BUILDER, ROUTE_DEL_REPORT, ROUTE_EDIT_REPORT } from '../../constants/routes';
+import { generateId } from '../../utils/ids';
 
 describe('Types: Report', () => {
-  const reportObj = {
+  const reportObj: ReportType = {
     ...reportDefault,
     created: -1,
     classes: ['c1', 'c2'],
     label: 'Report 1',
     updated: -2,
   };
-  const ts = Date.now();
-  const idStr = getReportIdStr(reportObj);
-  const id = generateId(idStr, ts);
-  const testClass = {
+  const ts: number = Date.now();
+  const idStr: string = getReportIdStr(reportObj);
+  const id: string = generateId(idStr, ts);
+  const testClass: ReportType = {
     ...reportDefault,
     created: ts,
     classes: ['c1', 'c2'],
@@ -26,18 +27,18 @@ describe('Types: Report', () => {
   };
 
   test('ReportFactory() correctly returns a new category object', () => {
-    const newReportObj = ReportFactory(reportObj, ts);
+    const newReportObj: ReportType = ReportFactory(reportObj, ts);
     expect(JSON.stringify(newReportObj)).toEqual(JSON.stringify(testClass));
     expect(newReportObj.created).toBe(newReportObj.updated);
   });
 
   test('getReportIdStr() returns the same string given the same object', () => {
-    const idStrCompare = getReportIdStr(reportObj);
+    const idStrCompare: string = getReportIdStr(reportObj);
     expect(idStr).toEqual(idStrCompare);
   });
 
   describe('Getters:', () => {
-    const newReportObj = ReportFactory(reportObj, ts);
+    const newReportObj: ReportType = ReportFactory(reportObj, ts);
 
     test('getDescription() correctly returns the description', () => {
       expect(newReportObj.getDescription()).toEqual(`(${reportObj.classes.length})`);
@@ -57,19 +58,19 @@ describe('Types: Report', () => {
 
     describe('contains()', () => {
       test('Returns false if no search term', () => {
-        const result = newReportObj.contains();
+        const result: boolean = newReportObj.contains();
         expect(result).toBe(false);
       });
 
       test('Returns false if the report object does not contain the search term.', () => {
-        const term = 'text';
-        const result = newReportObj.contains(term);
+        const term: string = 'text';
+        const result: boolean = newReportObj.contains(term);
         expect(result).toBe(false);
       });
 
       test('Returns true if the report object contains the search term.', () => {
-        const term = 'port';
-        const result = newReportObj.contains(term);
+        const term: string = 'port';
+        const result: boolean = newReportObj.contains(term);
         expect(result).toBe(true);
       });
     });
@@ -84,7 +85,7 @@ describe('Types: Report', () => {
       });
 
       test('Returns ROUTE_BUILDER for any other linkType', () => {
-        const expects = ROUTE_BUILDER.replace(':reportId', newReportObj.id);
+        const expects: string = ROUTE_BUILDER.replace(':reportId', newReportObj.id);
         expect(newReportObj.getUrl()).toBe(expects);
         expect(newReportObj.getUrl('something')).toBe(expects);
       });
