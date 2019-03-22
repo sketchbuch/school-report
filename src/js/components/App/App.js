@@ -1,30 +1,35 @@
 // @flow
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import type { Dispatch } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
-import AppError from '../AppError/AppError';
-import Header from '../Header/Header';
-import Panels from '../Panels/Panels';
-import NoData from '../NoData/NoData';
-import { text } from '../Translation/Translation';
+import { connect } from 'react-redux';
 import * as appActions from '../../actions/appActions';
 import * as dataActions from '../../actions/dataActions';
-import * as settingsActions from '../../actions/settingsActions';
 import * as languageActions from '../../actions/languageActions';
-import { getCustomNumProp } from '../../utils/dom';
+import * as settingsActions from '../../actions/settingsActions';
+import AppError from '../AppError/AppError';
+import Header from '../Header/Header';
+import NoData from '../NoData/NoData';
+import Panels from '../Panels/Panels';
 import type { AppType } from '../../types/app';
+import type { ClassType } from '../../types/class';
+import type { RenderHelperReturn } from '../../types/misc';
+import type { SettingsType } from '../../types/settings';
+import type { ReduxState } from '../../types/reduxstate';
+import { getCustomNumProp } from '../../utils/dom';
+import { text } from '../Translation/Translation';
 import './App.css';
 
 type Props = {
   app: AppType,
-  classes: Array<Object>,
+  classes: ClassType[],
   currentLang: string,
-  dispatch: Function,
-  settings: Object,
+  dispatch: Dispatch,
+  settings: SettingsType,
 };
 
-const hideLoader = () => {
+const hideLoader = (): void => {
   const alDuration = getCustomNumProp('--apploader-ms');
   document.getElementsByTagName('html')[0].classList.add('app-initialised');
 
@@ -36,24 +41,8 @@ const hideLoader = () => {
   }, alDuration);
 };
 
-/**
- * App.
- */
 export class App extends Component<Props> {
   props: Props;
-  dataCreated: Function;
-  dataLoaded: Function;
-  languageLoaded: Function;
-  settingsLoaded: Function;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.dataCreated = this.dataCreated.bind(this);
-    this.dataLoaded = this.dataLoaded.bind(this);
-    this.languageLoaded = this.languageLoaded.bind(this);
-    this.settingsLoaded = this.settingsLoaded.bind(this);
-  }
 
   componentDidMount() {
     this.props.dispatch(settingsActions.load(this.settingsLoaded));
@@ -73,12 +62,7 @@ export class App extends Component<Props> {
     }
   }
 
-  /**
-   * Callback used when the settings have loaded.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: string}
-   */
-  settingsLoaded(ioResult: Object) {
+  settingsLoaded = (ioResult: Object): void => {
     if (ioResult.success === true) {
       this.props.dispatch(settingsActions.loaded(ioResult.data));
     } else if (ioResult.errorObj.code === 'ENOENT') {
@@ -87,59 +71,41 @@ export class App extends Component<Props> {
     } else {
       this.appError('settingsLoaded');
     }
-  }
+  };
 
-  /**
-   * Callback used when the language has loaded.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: object}
-   */
-  languageLoaded(ioResult: Object) {
+  languageLoaded = (ioResult: Object): void => {
     if (ioResult.success === true) {
       Object.assign(window.reportr.translations, ioResult.data);
       this.props.dispatch(languageActions.loaded());
     } else {
       this.appError('languageLoaded');
     }
-  }
+  };
 
-  /**
-   * Callback used by readAppData.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: string}
-   */
-  dataLoaded(ioResult: Object) {
+  dataLoaded = (ioResult: Object): void => {
     if (ioResult.success === true) {
       this.props.dispatch(dataActions.loaded(JSON.parse(ioResult.data)));
     } else {
       this.appError('dataLoaded');
     }
-  }
+  };
 
-  /**
-   * Callback used when initial data is created.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataCreated(ioResult: Object) {
+  dataCreated = (ioResult: Object): void => {
     if (ioResult.success === true) {
       this.props.dispatch(dataActions.created());
     } else {
       this.props.dispatch(appActions.errored(hideLoader));
     }
-  }
+  };
 
   /**
    * Update UI to show an error occured.
    */
-  appError(type: string) {
+  appError(type: string): void {
     this.props.dispatch(appActions.errored(hideLoader));
   }
 
-  /**
-   * Returns the correct panel content.
-   */
-  renderContent() {
+  renderContent(): RenderHelperReturn {
     if (this.props.app.error === false && this.props.app.loaded === true) {
       if (!this.props.app.dataCreated || this.props.classes.length > 0) {
         return <Panels />;
@@ -168,7 +134,7 @@ export class App extends Component<Props> {
   }
 }
 
-const mapStateToProps = (state: Object) => ({
+const mapStateToProps = (state: ReduxState) => ({
   app: state.app,
   classes: state.classes,
   currentLang: state.languages.current,

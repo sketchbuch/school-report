@@ -9,11 +9,11 @@ import { text } from '../Translation/Translation';
 import './CatSelect.css';
 
 type Props = {
-  categories: Array<CategoryType>,
+  categories: CategoryType[],
   onChange: Function,
   option: string,
   selectedCount: number,
-  texts: Array<TextType>,
+  texts: TextType[],
   useSelected: boolean,
 };
 

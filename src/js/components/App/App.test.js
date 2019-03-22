@@ -3,23 +3,22 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
-import { App } from './App';
 import appDefault from '../../types/app';
+import classDefault from '../../types/class';
+import settingsDefault from '../../types/settings';
 import store from '../../store/redux';
+import { App } from './App';
 
 describe('<App />', () => {
   const props = {
-    app: appDefault,
+    app: { ...appDefault },
     classes: [],
     currentLang: 'EN',
     dispatch: jest.fn(),
-    settings: {},
+    settings: { ...settingsDefault },
   };
-  const propsLoaded = Object.assign({}, props);
-  propsLoaded.app.loaded = true;
-  const propsLoadedWithClasses = Object.assign({}, propsLoaded, {
-    classes: [{}],
-  });
+  const propsLoaded = { ...props, app: { ...props.app, loaded: true } };
+  const propsLoadedWithClasses = { ...propsLoaded, classes: [{ ...classDefault }] };
 
   test('Renders without crashing', () => {
     const wrapper = shallow(

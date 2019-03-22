@@ -12,9 +12,6 @@ const defaultProps = {
   errorTxt: 'Error',
 };
 
-/**
- * App Error component.
- */
 const AppError = (props: Props) => (
   <div className="AppError">
     <div className="AppError__icon">

@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react';
-import type { TimeoutID } from '../../types/fixes';
 import './EditPanel.css';
 
 type Props = {
@@ -12,24 +11,12 @@ type State = {
   display: 'mounting' | 'slidein' | 'slideout' | 'unmounting',
 };
 
-/**
- * The Edit Panel.
- */
 export class EditPanel extends React.Component<Props, State> {
   props: Props;
-  state: State;
-  slidein: Function;
+  state: State = {
+    display: 'mounting',
+  };
   slideinTimer: TimeoutID;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      display: 'mounting',
-    };
-
-    this.slidein = this.slidein.bind(this);
-  }
 
   componentDidMount() {
     this.slideinTimer = setTimeout(this.slidein, 50);
@@ -39,9 +26,9 @@ export class EditPanel extends React.Component<Props, State> {
     clearTimeout(this.slideinTimer);
   }
 
-  slidein() {
+  slidein = (): void => {
     this.setState({ display: 'slidein' });
-  }
+  };
 
   render() {
     return (
