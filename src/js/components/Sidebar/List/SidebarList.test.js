@@ -30,6 +30,7 @@ describe('<SidebarList />', () => {
     ],
     listType: 'text',
     noItemsTxt: 'No items in list',
+    onReportClick: jest.fn(),
     sortOrder: ['created'],
   };
   const existingId = props.items[0].id;

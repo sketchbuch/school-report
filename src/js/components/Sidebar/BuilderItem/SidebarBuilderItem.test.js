@@ -18,6 +18,7 @@ describe('<SidebarBuilderItem />', () => {
       reportId: 'r1',
     },
     itemType: 'class',
+    sortOrder: [],
   };
 
   test('Renders without crashing', () => {

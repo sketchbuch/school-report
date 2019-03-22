@@ -3,14 +3,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
-import store from '../../store/redux';
 import ConnectedReports from './Reports';
 import categoryDefault, { CategoryFactory } from '../../types/category';
 import classDefault, { ClassFactory } from '../../types/class';
 import pupilDefault, { PupilFactory } from '../../types/pupil';
 import reportDefault, { ReportFactory } from '../../types/report';
+import store from '../../store/redux';
 import textDefault, { TextFactory } from '../../types/text';
-import { CLIENT_RENEG_LIMIT } from 'tls';
 
 describe('<Reports />', () => {
   const ACTIVE_REPORT = ReportFactory({ ...reportDefault, label: 'Test Report' }, Date.now());
@@ -32,11 +31,6 @@ describe('<Reports />', () => {
     ],
     texts,
   };
-  let saveReports = jest.fn();
-
-  beforeEach(() => {
-    saveReports = jest.fn();
-  });
 
   test('Renders without crashing', () => {
     const wrapper = shallow(

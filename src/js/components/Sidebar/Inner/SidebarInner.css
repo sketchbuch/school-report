@@ -1,13 +1,10 @@
-/* Sidebar Inner */
-/* ------------- */
-
 .SidebarInner {
   padding: 10px 20px;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
   color: var(--col-text);
   font-size: var(--font-size);
   border-top: 1px solid var(--col-darken-1);
@@ -51,7 +48,7 @@
 }
 
 .SidebarInner__description {
-  padding-left: 1.0rem;
+  padding-left: 1rem;
   opacity: 0.5;
 }
 
@@ -59,6 +56,6 @@
   font-size: var(--font-size-medium);
 }
 
-.SidebarInner__icon  .icofont-student {
+.SidebarInner__icon .icofont-student {
   color: #d838b5;
 }

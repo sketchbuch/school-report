@@ -1,25 +1,22 @@
 // @flow
 
 import React, { Component } from 'react';
-import { text } from '../../Translation/Translation';
 import SidebarInner from '../Inner/SidebarInner';
 import SidebarItemButton from '../Button/SidebarItemButton';
-import type { SidebarListTypes } from '../../../types/sidebarList';
 import type { CategoryType } from '../../../types/category';
+import type { SidebarListTypes } from '../../../types/sidebarList';
 import { ICON_EDIT } from '../../../constants/icons';
+import { text } from '../../Translation/Translation';
 import './SidebarReportItem.css';
 
 type Props = {
   item: CategoryType,
   itemType: SidebarListTypes,
-  onReportClick: () => {},
+  onReportClick: (id: string, label: string) => void,
   selected: string | false,
-  sortOrder: Array<string>,
+  sortOrder: string[],
 };
 
-/**
- * An item in a sidebar list on the report builder.
- */
 class SidebarReportItem extends Component<Props> {
   static defaultProps = {
     itemType: 'category',

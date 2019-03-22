@@ -2,24 +2,22 @@
 
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import Icon from '../../Icon/Icon';
+import * as H from 'history';
 import ButtonCircular from '../../ui/ButtonCircular/ButtonCircular';
+import Icon from '../../Icon/Icon';
 import type { ButtonType } from '../../../types/button';
 import './SidebarItemButton.css';
 
 type Props = {
   action: string,
   handleClick?: Function,
-  history: Object,
+  history: H.History,
   icon: string,
   link?: string,
   title: string,
   type: ButtonType,
 };
 
-/**
- * A button in a sidebar item.
- */
 class SidebarItemButton extends Component<Props> {
   props: Props;
   handleClick: Function;

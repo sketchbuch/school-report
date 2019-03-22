@@ -1,10 +1,6 @@
-/* Sidebar Icon */
-/* ------------ */
-
 .SidebarItemButton {
   display: none;
 }
-
 
 .SidebarItemButton:focus,
 .SidebarItemButton:hover,

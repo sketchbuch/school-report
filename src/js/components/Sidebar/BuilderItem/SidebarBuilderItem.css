@@ -1,6 +1,3 @@
-/* Sidebar Buildepr Item */
-/* -------------------- */
-
 .SidebarBuilderItem--active > .SidebarInner {
   cursor: pointer;
   padding-right: 10px;
@@ -12,7 +9,7 @@
 
 .SidebarBuilderItem--open > .SidebarInner::after {
   opacity: 0.1;
-  content: " ";
+  content: ' ';
   position: absolute;
   bottom: -11px;
   left: 0px;
@@ -20,29 +17,12 @@
   height: 10px;
   display: block;
 
-      /* http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+100 */
-  background: -moz-linear-gradient(top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
-  background: -webkit-linear-gradient(top, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
-  background: linear-gradient(to bottom, rgba(0,0,0,1) 0%,rgba(0,0,0,0) 100%);
+  /* http://colorzilla.com/gradient-editor/#000000+0,000000+100&1+0,0+100 */
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#00000000',GradientType=0 );
 }
-
-.SidebarBuilderItem__sub {
-  display: block;
-  list-style: none;
-  margin: 0px;
-  padding: 0px;
-  background: var(--col-darken-1);
-}
-
-.SidebarBuilderItem__sub  .SidebarItem .SidebarInner {
-  padding-left: 45px;
-}
-
-.SidebarBuilderItem__sub  .SidebarItem:first-child .SidebarInner {
-    border-top: none;
-}
-
 
 /* Inactive - no pupils */
 /* -------------------- */
@@ -63,6 +43,21 @@
   background: var(--col-darken-1);
 }
 
+.SidebarBuilderItem__sub {
+  display: block;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  background: var(--col-darken-1);
+}
+
+.SidebarBuilderItem__sub .SidebarItem .SidebarInner {
+  padding-left: 45px;
+}
+
+.SidebarBuilderItem__sub .SidebarItem:first-child .SidebarInner {
+  border-top: none;
+}
 
 /* Expander Controls */
 /* ----------------- */
@@ -70,9 +65,9 @@
 .SidebarItem_expander,
 .SidebarItem_contractor {
   display: none;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   min-width: 40px;
   width: 40px;
   height: 40px;

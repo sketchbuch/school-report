@@ -1,9 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import HTML5Backend from 'react-dnd-html5-backend';
+import type { Dispatch } from 'redux';
 import { DragDropContext } from 'react-dnd';
+import { connect } from 'react-redux';
 import * as builderActions from '../../actions/builderActions';
 import ReportsAvailableTexts from './Available/ReportsAvailableTexts';
 import ReportsSelectedTexts from './Selected/ReportsSelectedTexts';
@@ -14,8 +15,8 @@ import SidebarList from '../Sidebar/List/SidebarList';
 import categoryDefault, { CategoryFactory } from '../../types/category';
 import type { CategoryType } from '../../types/category';
 import type { ClassType } from '../../types/class';
-import type { DispatchType } from '../../types/functions';
 import type { PupilType } from '../../types/pupil';
+import type { ReduxState } from '../../types/reduxstate';
 import type { ReportType } from '../../types/report';
 import type { TextType } from '../../types/text';
 import { categorySort } from '../../types/category';
@@ -24,15 +25,16 @@ import { moveItem, removeItem } from '../../utils/reducers/array';
 import { text } from '../Translation/Translation';
 import './Reports.css';
 
+// TODO: fix types
 type Props = {
-  activeClass: ClassType | Object,
-  activePupil: PupilType | Object,
-  activeReport: ReportType | Object,
-  categories: Array<CategoryType>,
+  activeClass: ClassType,
+  activePupil: PupilType,
+  activeReport: ReportType,
+  categories: CategoryType[],
   disableTexts: boolean,
   saveReports: Function,
-  selected: Array<string>,
-  texts: Array<TextType>,
+  selected: string[],
+  texts: TextType[],
 };
 
 type State = {
@@ -42,16 +44,13 @@ type State = {
   catSearch: boolean,
   catSearchAnywhere: boolean,
   catTerm: string,
-  dragSelected: Array<string>,
+  dragSelected: string[],
   textPage: number,
   textSearch: boolean,
   textSearchAnywhere: boolean,
   textTerm: string,
 };
 
-/**
- * The interface to build a report.
- */
 export class Reports extends Component<Props, State> {
   static defaultProps = {
     activeClass: {},
@@ -64,50 +63,22 @@ export class Reports extends Component<Props, State> {
   };
 
   props: Props;
-  state: State;
-  catAnywhereIconClick: (event: SyntheticEvent<MouseEvent>) => void;
-  catClick: () => {};
-  catPbChange: (catPage: number) => {};
-  catSearch: (event: SyntheticEvent<HTMLInputElement>) => void;
-  catSearchIconClick: (event: SyntheticEvent<MouseEvent>) => void;
-  endDrag: () => {};
-  pupilId: string;
-  textMove: (sourceId: string, targetId: string, before: boolean) => {};
-  textToggle: (textId: string) => {};
+  state: State = {
+    catId: 'category-all',
+    catLabel: '',
+    catPage: 1,
+    catSearch: false,
+    catSearchAnywhere: false,
+    catTerm: '',
+    dragSelected: [],
+    textPage: 1,
+    textSearch: false,
+    textSearchAnywhere: false,
+    textTerm: '',
+  };
+  pupilId: string = this.props.activePupil.id;
 
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      catId: 'category-all',
-      catLabel: '',
-      catPage: 1,
-      catSearch: false,
-      catSearchAnywhere: false,
-      catTerm: '',
-      dragSelected: [],
-      textPage: 1,
-      textSearch: false,
-      textSearchAnywhere: false,
-      textTerm: '',
-    };
-
-    this.catAnywhereIconClick = this.catAnywhereIconClick.bind(this);
-    this.catClick = this.catClick.bind(this);
-    this.catSearch = this.catSearch.bind(this);
-    this.catSearchIconClick = this.catSearchIconClick.bind(this);
-    this.endDrag = this.endDrag.bind(this);
-    this.catPbChange = this.catPbChange.bind(this);
-    this.pupilId = props.activePupil.id;
-    this.textMove = this.textMove.bind(this);
-    this.textToggle = this.textToggle.bind(this);
-    this.textToggle = this.textToggle.bind(this);
-  }
-
-  /**
-   * Method called by drag and drop when a draging ends.
-   */
-  endDrag() {
+  endDrag = (): void => {
     if (this.state.dragSelected.length < 1) {
       return;
     }
@@ -122,12 +93,9 @@ export class Reports extends Component<Props, State> {
     );
 
     this.setState({ dragSelected: [] });
-  }
+  };
 
-  /**
-   * Method called by drag and drop when a drag source is hovering over a drop target.
-   */
-  textMove(sourceId: string, targetId: string, before: boolean = false) {
+  textMove = (sourceId: string, targetId: string, before: boolean = false): void => {
     let dragSelected = [...this.props.selected];
     const sourceIndex = dragSelected.indexOf(sourceId);
     let targetIndex = dragSelected.indexOf(targetId);
@@ -141,11 +109,8 @@ export class Reports extends Component<Props, State> {
 
     dragSelected = moveItem(dragSelected, sourceId, sourceIndex, targetIndex);
     this.setState({ dragSelected });
-  }
+  };
 
-  /**
-   * Toggles the selected state of a text.
-   */
   textToggle = (textId: string) => (event: SyntheticEvent<>) => {
     let selected = [...this.props.selected];
     const textIndex = selected.indexOf(textId);
@@ -166,53 +131,52 @@ export class Reports extends Component<Props, State> {
     );
   };
 
-  catPbChange(catPage: number) {
+  catPbChange = (catPage: number): void => {
     this.setState({ catPage });
-  }
+  };
 
-  catClick = (catId: string, catLabel: string) => (event: SyntheticEvent<>) => {
+  catClick = (catId: string, catLabel: string) => (event: SyntheticEvent<>): void => {
     this.setState({ catId, catLabel });
   };
 
-  catSearchIconClick(event: SyntheticEvent<MouseEvent>) {
-    const newState = { catSearch: !this.state.catSearch };
-    if (newState.catSearch === false) {
-      newState.catTerm = '';
-      newState.catPage = 1;
+  catSearchIconClick = (event: SyntheticEvent<EventTarget>): void => {
+    const newCatSearch: boolean = !this.state.catSearch;
+    if (newCatSearch === false) {
+      this.setState({ catPage: 1, catSearch: newCatSearch, catTerm: '' });
+    } else {
+      this.setState({ catSearch: newCatSearch });
     }
+  };
 
-    this.setState(newState);
-  }
-
-  catAnywhereIconClick(event: SyntheticEvent<MouseEvent>) {
+  catAnywhereIconClick = (event: SyntheticEvent<MouseEvent>): void => {
     this.setState({ catSearchAnywhere: !this.state.catSearchAnywhere });
-  }
+  };
 
-  catSearch(event: SyntheticEvent<HTMLInputElement>) {
+  // TODO - fix
+  catSearch = (event: SyntheticInputEvent<HTMLInputElement>): void => {
     if (event.type === 'keyup') {
       if (event.key === 'Escape') {
         this.catSearchIconClick(event);
       }
     } else {
-      const newState = { catTerm: event.currentTarget.value };
-      if (newState.catTerm !== this.state.catTerm) {
-        newState.catPage = 1;
+      if (event.currentTarget.value !== this.state.catTerm) {
+        this.setState({ catPage: 1, catTerm: event.currentTarget.value });
+      } else {
+        this.setState({ catTerm: event.currentTarget.value });
       }
-
-      this.setState(newState);
     }
-  }
+  };
 
   getCatTexts(): TextType[] {
-    let visibleTexts = [];
+    let visibleTexts: TextType[] = [];
 
     if (this.state.catId !== 'category-all') {
       if (this.state.catId === 'category-nocat') {
         visibleTexts = this.props.texts.filter(text => text.categories.length === 0);
       } else if (this.state.catId === 'category-selected') {
-        visibleTexts = this.props.texts.filter(text => this.props.selectedTexts.indexOf(text.id) > -1);
+        visibleTexts = this.props.texts.filter(text => this.props.selected.indexOf(text.id) > -1);
       } else if (this.state.catId === 'category-unselected') {
-        visibleTexts = this.props.texts.filter(text => this.props.selectedTexts.indexOf(text.id) < 0);
+        visibleTexts = this.props.texts.filter(text => this.props.selected.indexOf(text.id) < 0);
       } else {
         visibleTexts = this.props.texts.filter(text => text.categories.includes(this.state.catId));
       }
@@ -228,7 +192,7 @@ export class Reports extends Component<Props, State> {
   }
 
   getCats(): CategoryType[] {
-    const cats = [...this.props.categories];
+    const cats: CategoryType[] = [...this.props.categories];
 
     // AddCategory All
     const all = CategoryFactory({ ...categoryDefault, label: text('CatsAll', 'CatSelect') }, Date.now());
@@ -245,9 +209,9 @@ export class Reports extends Component<Props, State> {
   }
 
   render() {
-    const cats = this.getCats();
-    const catTexts = this.getCatTexts();
-    const selectedTexts = this.state.dragSelected.length > 0 ? this.state.dragSelected : this.props.selected;
+    const cats: CategoryType[] = this.getCats();
+    const catTexts: TextType[] = this.getCatTexts();
+    const selectedTexts: string[] = this.state.dragSelected.length > 0 ? this.state.dragSelected : this.props.selected;
 
     return (
       <section className="Reports">
@@ -324,7 +288,7 @@ export class Reports extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: Object, props: Props) => {
+const mapStateToProps = (state: ReduxState, props: Props) => {
   return {
     selected: getSelectedTexts(state.builder, props.activeReport.id, props.activeClass.id, props.activePupil.id),
     categories: state.categories,
@@ -332,13 +296,13 @@ const mapStateToProps = (state: Object, props: Props) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: DispatchType) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     saveReports: (
       reportId: string,
       classId: string,
       pupilId: string,
-      selected: Array<string>,
+      selected: string[],
       callback?: Function = () => {},
       immediate: boolean
     ) => {

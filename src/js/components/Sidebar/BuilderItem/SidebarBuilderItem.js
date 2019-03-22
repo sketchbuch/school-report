@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import Icon from '../../Icon/Icon';
 import SidebarInner from '../Inner/SidebarInner';
-import type { SidebarListTypes } from '../../../types/sidebarList';
 import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
+import type { SidebarListTypes } from '../../../types/sidebarList';
 import { ICON_CONTRACT, ICON_EXPAND } from '../../../constants/icons';
 import { text } from '../../Translation/Translation';
 import '../Item/SidebarItem.css';
@@ -14,16 +14,13 @@ type Props = {
   description: ?(pupilId: string, classId: string) => string | null,
   item: SidebarBuilderItemType,
   itemType: SidebarListTypes,
-  sortOrder: Array<string>,
+  sortOrder: string[],
 };
 
 type State = {
   open: boolean,
 };
 
-/**
- * An item in a sidebar list for the builder layout.
- */
 class SidebarBuilderItem extends Component<Props, State> {
   static defaultProps = {
     description: null,
@@ -31,24 +28,16 @@ class SidebarBuilderItem extends Component<Props, State> {
   };
 
   props: Props;
-  handleExpandClick: Function;
+  state: State = {
+    open: false,
+  };
 
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      open: false,
-    };
-
-    this.handleExpandClick = this.handleExpandClick.bind(this);
-  }
-
-  handleExpandClick(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleExpandClick = (event: SyntheticInputEvent<HTMLInputElement>): void => {
     event.preventDefault();
     if (this.props.item.pupils.length > 0) {
       this.setState({ open: !this.state.open });
     }
-  }
+  };
 
   render() {
     const { classRec, pupils } = this.props.item;

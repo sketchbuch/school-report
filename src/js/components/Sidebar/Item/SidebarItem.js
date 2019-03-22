@@ -1,27 +1,28 @@
 // @flow
 
 import React, { Component } from 'react';
-import { text } from '../../Translation/Translation';
 import SidebarInner from '../Inner/SidebarInner';
 import SidebarItemButton from '../Button/SidebarItemButton';
-import type { SidebarListTypes } from '../../../types/sidebarList';
 import type { ClassType } from '../../../types/class';
 import type { PupilType } from '../../../types/pupil';
 import type { ReportType } from '../../../types/report';
+import type { SidebarListTypes } from '../../../types/sidebarList';
 import type { TextType } from '../../../types/text';
-import type { TimeoutID } from '../../../types/fixes';
 import { ICON_DELETE, ICON_EDIT, ICON_ERROR, ICON_SUCCESS } from '../../../constants/icons';
+import { text } from '../../Translation/Translation';
 import './SidebarItem.css';
 
+// TODO - Move to external type
 type DomainTypes = ClassType | PupilType | ReportType | TextType;
 
+// TODO - Update types
 type Props = {
   isNew: boolean,
   item: DomainTypes,
   itemDuration: number,
   itemType: SidebarListTypes,
   onDelete: Function,
-  sortOrder: Array<string>,
+  sortOrder: string[],
   updateExistingItems: Function,
 };
 
@@ -31,9 +32,6 @@ type State = {
   confirmed: boolean,
 };
 
-/**
- * An item in a sidebar list.
- */
 class SidebarItem extends Component<Props, State> {
   static defaultProps = {
     isNew: false,
@@ -44,24 +42,15 @@ class SidebarItem extends Component<Props, State> {
   };
 
   props: Props;
+  state: State = {
+    delete: false,
+    deleting: false,
+    confirmed: false,
+  };
   deleteTimer: TimeoutID;
   deletingTimer: TimeoutID;
-  handleClick: Function;
   newTimer: TimeoutID;
-  timeoutDuration: number;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      delete: false,
-      deleting: false,
-      confirmed: false,
-    };
-
-    this.handleClick = this.handleClick.bind(this);
-    this.timeoutDuration = 3000;
-  }
+  timeoutDuration: number = 3000;
 
   componentDidMount() {
     if (this.props.isNew) {
@@ -83,7 +72,7 @@ class SidebarItem extends Component<Props, State> {
     clearTimeout(this.newTimer);
   }
 
-  handleClick(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleClick = (event: SyntheticInputEvent<HTMLInputElement>): void => {
     event.preventDefault();
 
     switch (event.target.dataset.action) {
@@ -105,7 +94,7 @@ class SidebarItem extends Component<Props, State> {
       default:
         break;
     }
-  }
+  };
 
   render() {
     let classes = 'SidebarItem';

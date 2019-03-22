@@ -7,7 +7,11 @@ import ClassDefault, { ClassFactory } from '../../../types/class';
 
 jest.mock('../Inner/SidebarInner', () => (props: Object) => {
   if (props.link) {
-    return <a href="#" className="SidebarInner" />;
+    return (
+      <a href="/" className="SidebarInner">
+        Test
+      </a>
+    );
   } else {
     return <div className="SidebarInner" />;
   }
@@ -22,6 +26,7 @@ describe('<SidebarItem />', () => {
     itemType: 'class',
     onDelete: () => {},
     updateExistingItems: () => {},
+    sortOrder: [],
   };
 
   test('Renders without crashing', () => {
@@ -111,14 +116,14 @@ describe('<SidebarItem />', () => {
   describe('componentDidMount()', () => {
     test('updateExistingItems() not called if the item !isNew', () => {
       const mockUpdateExistingItems = jest.fn();
-      const wrapper = shallow(<SidebarItem {...props} updateExistingItems={mockUpdateExistingItems} isNew={false} />);
+      shallow(<SidebarItem {...props} updateExistingItems={mockUpdateExistingItems} isNew={false} />);
       jest.runAllTimers();
       expect(mockUpdateExistingItems).not.toHaveBeenCalled();
     });
 
     test('updateExistingItems() called if the item isNew', () => {
       const mockUpdateExistingItems = jest.fn();
-      const wrapper = shallow(<SidebarItem {...props} updateExistingItems={mockUpdateExistingItems} isNew={true} />);
+      shallow(<SidebarItem {...props} updateExistingItems={mockUpdateExistingItems} isNew={true} />);
       jest.runAllTimers();
       expect(mockUpdateExistingItems).toHaveBeenCalled();
     });

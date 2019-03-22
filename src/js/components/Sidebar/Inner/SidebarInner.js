@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Icon from '../../Icon/Icon';
 import './SidebarInner.css';
 
+// TODO - fix types
 type Props = {
   children?: React.Node,
   description: string,
@@ -13,7 +14,7 @@ type Props = {
   link: string,
   linkEdit: string,
   onClick: Function | null,
-  onSubClick?: () => {} | null,
+  onSubClick?: (id: string, label: string) => void,
   selected: boolean,
 };
 
@@ -32,9 +33,6 @@ const ItemContent = (props: Props) => {
   );
 };
 
-/**
- * A sidebar item inner element.
- */
 class SidebarInner extends React.Component<Props> {
   static defaultProps = {
     description: '',

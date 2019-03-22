@@ -11,9 +11,6 @@ type Props = {
   title: string,
 };
 
-/**
- * Sidebar header.
- */
 class SidebarHeader extends React.PureComponent<Props> {
   static defaultProps = {
     children: null,

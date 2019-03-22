@@ -1,11 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import * as categoryActions from '../../../actions/categoryActions';
-import * as classActions from '../../../actions/classActions';
-import * as pupilActions from '../../../actions/pupilActions';
-import * as reportActions from '../../../actions/reportActions';
-import * as textActions from '../../../actions/textActions';
+import type { Dispatch } from 'redux';
 import NoItems from '../../NoItems/NoItems';
 import SidebarBuilderItem from '../BuilderItem/SidebarBuilderItem';
 import SidebarItem from '../Item/SidebarItem';
@@ -13,48 +9,40 @@ import SidebarPageBrowser from '../PageBrowser/SidebarPageBrowser';
 import SidebarReportItem from '../ReportItem/SidebarReportItem';
 import SidebarSubheader from '../Subheader/SidebarSubheader';
 import Translation from '../../Translation/Translation';
+import pageBrowserPropsDefault from '../../../types/pageBrowser';
+import type { DomainType } from '../../../types/domain';
 import type { PageBrowserProps } from '../../../types/pageBrowser';
 import type { SidebarListTypes } from '../../../types/sidebarList';
 import { getCustomNumProp } from '../../../utils/dom';
 import { sortObjectsAz } from '../../../utils/sort';
 import './SidebarList.css';
 
+// TODO - fix types
 type Props = {
   builder: boolean,
   children?: React.Node,
   curPage: number,
   description: ?(pupilId: string, classId: string) => string | null,
-  dispatch: Function,
+  dispatch: Dispatch,
   filter: string,
-  items: Array<Object>,
+  items: DomainType[],
   listType: SidebarListTypes,
   noItemsTxt: string,
-  onChange: (curPage: number) => void,
-  onReportClick: () => {},
+  onChange: ?(curPage: number) => void,
+  onReportClick: ?(id: string, label: string) => void | null,
   pagesToShow: number,
   perPage: number,
   reportSidebar: string | false,
-  sortOrder: Array<string>,
+  sortOrder: string[],
   term: string,
   termAnywhere: boolean,
   usePb: boolean,
 };
 
 type State = {
-  existingItems: Array<string>,
+  existingItems: string[],
 };
 
-const actions = {
-  category: categoryActions,
-  class: classActions,
-  pupil: pupilActions,
-  report: reportActions,
-  text: textActions,
-};
-
-/**
- * Sidebar list of items
- */
 class SidebarList extends React.Component<Props, State> {
   static defaultProps = {
     builder: false,
@@ -64,6 +52,7 @@ class SidebarList extends React.Component<Props, State> {
     items: [],
     listType: 'class',
     onChange: null,
+    onReportClick: null,
     pagesToShow: 3,
     perPage: 20,
     reportSidebar: false,
@@ -75,10 +64,8 @@ class SidebarList extends React.Component<Props, State> {
 
   props: Props;
   state: State;
-  existingItems: Array<string>;
-  itemDuration: number;
-  onDelete: Function;
-  updateExistingItems: (itemId: string) => void;
+  existingItems: string[] = [];
+  itemDuration: number = getCustomNumProp('--sidebaritem-ms');
 
   constructor(props: Props) {
     super(props);
@@ -92,12 +79,6 @@ class SidebarList extends React.Component<Props, State> {
         this.state.existingItems.push(item.id);
       }
     });
-
-    this.itemDuration = getCustomNumProp('--sidebaritem-ms');
-    this.onDelete = (id: string, callback?: Function = () => {}) =>
-      this.props.dispatch(actions[this.props.listType].deleteOne(id, callback));
-    this.onDelete = this.onDelete.bind(this);
-    this.updateExistingItems = this.updateExistingItems.bind(this);
   }
 
   componentDidUpdate(prevProps: Props) {
@@ -117,21 +98,21 @@ class SidebarList extends React.Component<Props, State> {
     }
   }
 
-  getSortedItems() {
-    let sortedItems = sortObjectsAz(this.props.items, this.props.sortOrder);
+  getSortedItems(): DomainType[] {
+    let sortedItems: DomainType[] = sortObjectsAz(this.props.items, this.props.sortOrder);
 
     if (this.props.filter) {
       if (this.props.filter !== 'category-all') {
         if (this.props.filter === 'category-nocat') {
-          sortedItems = sortedItems.filter(item => item.categories.length === 0);
+          sortedItems = sortedItems.filter((item: DomainType) => item.categories.length === 0);
         } else {
-          sortedItems = sortedItems.filter(item => item.categories.includes(this.props.filter));
+          sortedItems = sortedItems.filter((item: DomainType) => item.categories.includes(this.props.filter));
         }
       }
     }
 
     if (this.props.term !== '') {
-      const displayProp = this.props.listType === 'pupil' ? this.props.sortOrder[0] : undefined;
+      const displayProp: ?string = this.props.listType === 'pupil' ? this.props.sortOrder[0] : undefined;
       sortedItems = sortedItems.filter(item => item.contains(this.props.term, this.props.termAnywhere, displayProp));
     }
 
@@ -139,8 +120,8 @@ class SidebarList extends React.Component<Props, State> {
   }
 
   renderContent() {
-    let sortedItems = this.getSortedItems();
-    const itemForPaging = sortedItems.length;
+    let sortedItems: DomainType[] = this.getSortedItems();
+    const itemForPaging: number = sortedItems.length;
 
     if (this.props.usePb) {
       const itemstart = 0 + this.props.perPage * (this.props.curPage - 1);
@@ -150,6 +131,7 @@ class SidebarList extends React.Component<Props, State> {
     if (itemForPaging > 0) {
       const showPb = this.props.usePb && itemForPaging > this.props.perPage;
       const pbProps: PageBrowserProps = {
+        ...pageBrowserPropsDefault,
         curPage: this.props.curPage,
         itemCount: itemForPaging,
         pagesToShow: this.props.pagesToShow,
