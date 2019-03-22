@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import './HeaderBreadcrumb.css';
 
-type Props = {
+export type Props = {
   children?: React.Node,
   link?: string,
   text?: string,

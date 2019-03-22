@@ -3,9 +3,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import HeaderBreadcrumb from './HeaderBreadcrumb';
+import type { Props } from './HeaderBreadcrumb';
 
 test('<HeaderBreadcrumb />: Renders without crashing', () => {
-  const props = {
+  const props: Props = {
     link: '/',
     text: 'A link',
   };

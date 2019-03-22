@@ -3,7 +3,7 @@
 import * as React from 'react';
 import './EditPanelHeader.css';
 
-type Props = {
+export type Props = {
   alert: boolean,
   children?: React.Node,
   subtitle: string,

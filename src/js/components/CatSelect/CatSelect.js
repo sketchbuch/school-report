@@ -8,7 +8,7 @@ import { sortObjectsAz } from '../../utils/sort';
 import { text } from '../Translation/Translation';
 import './CatSelect.css';
 
-type Props = {
+export type Props = {
   categories: CategoryType[],
   onChange: Function,
   option: string,

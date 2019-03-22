@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
 import Header from './Header';
 import store from '../../store/redux';
+import type { Props } from './Header';
 import { ROUTE_CATEGORIES } from '../../constants/routes';
 
 jest.doMock('./Path/HeaderPath', () => {
@@ -16,11 +17,7 @@ jest.doMock('./Path/HeaderPath', () => {
 });
 
 describe('<Header />', () => {
-  const props = {
-    history: {},
-    location: {},
-    match: {},
-  };
+  const props: Props = {};
 
   test('Renders without crashing', () => {
     const wrapper = shallow(

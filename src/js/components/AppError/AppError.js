@@ -4,7 +4,7 @@ import React from 'react';
 import Icon from '../Icon/Icon';
 import './AppError.css';
 
-type Props = {
+export type Props = {
   errorTxt: string,
 };
 

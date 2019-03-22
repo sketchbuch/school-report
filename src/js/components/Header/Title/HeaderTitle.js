@@ -6,7 +6,7 @@ import { ICON_BRAND } from '../../../constants/icons';
 import { text } from '../../Translation/Translation';
 import './HeaderTitle.css';
 
-type Props = {
+export type Props = {
   appName?: string,
   icon: string,
 };

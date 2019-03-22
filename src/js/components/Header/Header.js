@@ -24,7 +24,7 @@ import {
 } from '../../constants/routes';
 import './Header.css';
 
-type Props = {};
+export type Props = {};
 
 export class Header extends Component<Props> {
   props: Props;

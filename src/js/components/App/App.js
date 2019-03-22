@@ -21,7 +21,7 @@ import { getCustomNumProp } from '../../utils/dom';
 import { text } from '../Translation/Translation';
 import './App.css';
 
-type Props = {
+export type Props = {
   app: AppType,
   classes: ClassType[],
   currentLang: string,

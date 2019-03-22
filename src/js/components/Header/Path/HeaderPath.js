@@ -8,7 +8,7 @@ import type { ReduxState } from '../../../types/reduxstate';
 import { getBreadcrumbs } from '../../../utils/redux';
 import './HeaderPath.css';
 
-type Props = {
+export type Props = {
   ...BreadcrumbProps,
 };
 

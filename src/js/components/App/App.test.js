@@ -8,17 +8,18 @@ import classDefault from '../../types/class';
 import settingsDefault from '../../types/settings';
 import store from '../../store/redux';
 import { App } from './App';
+import type { Props } from './App';
 
 describe('<App />', () => {
-  const props = {
+  const props: Props = {
     app: { ...appDefault },
     classes: [],
     currentLang: 'EN',
     dispatch: jest.fn(),
     settings: { ...settingsDefault },
   };
-  const propsLoaded = { ...props, app: { ...props.app, loaded: true } };
-  const propsLoadedWithClasses = { ...propsLoaded, classes: [{ ...classDefault }] };
+  const propsLoaded: Props = { ...props, app: { ...props.app, loaded: true } };
+  const propsLoadedWithClasses: Props = { ...propsLoaded, classes: [{ ...classDefault }] };
 
   test('Renders without crashing', () => {
     const wrapper = shallow(

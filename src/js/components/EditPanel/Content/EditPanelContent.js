@@ -3,7 +3,7 @@
 import * as React from 'react';
 import './EditPanelContent.css';
 
-type Props = {
+export type Props = {
   children?: React.Node,
   noPadding: boolean,
 };

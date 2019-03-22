@@ -3,20 +3,25 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import CatSelect from './CatSelect';
+import type { Props } from './CatSelect';
 import categoryDefault from '../../types/category';
 import textDefault from '../../types/text';
 
 describe('<CatSelect />', () => {
-  const props = {
+  const props: Props = {
     categories: [
       { ...categoryDefault, id: 'c1', label: 'Justice' },
       { ...categoryDefault, id: 'c2', label: 'Holoship' },
     ],
+    option: '',
+    onChange: jest.fn,
     texts: [
       { ...textDefault, id: 't1', bodytext: 'Red Dwarf' },
       { ...textDefault, id: 't2', bodytext: 'Blue Midget' },
       { ...textDefault, id: 't3', bodytext: 'Starbug' },
     ],
+    selectedCount: 0,
+    useSelected: false,
   };
 
   test('Renders without crashing', () => {
@@ -52,7 +57,8 @@ describe('<CatSelect />', () => {
   });
 
   test('Shows the uncategorised option when needed', () => {
-    const props2 = {
+    const props2: Props = {
+      ...props,
       categories: [
         { ...categoryDefault, id: 'c1', label: 'Justice' },
         { ...categoryDefault, id: 'c2', label: 'Holoship' },
@@ -74,7 +80,7 @@ describe('<CatSelect />', () => {
       ],
     };
 
-    const option = 'option[value="category-nocat"]';
+    const option: string = 'option[value="category-nocat"]';
     const wrapper1 = shallow(<CatSelect {...props} />);
     const wrapper2 = shallow(<CatSelect {...props2} />);
 

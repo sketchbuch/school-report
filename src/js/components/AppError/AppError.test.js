@@ -3,9 +3,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppError from './AppError';
+import type { Props } from './AppError';
 
 describe('<AppError />', () => {
-  const props = {
+  const props: Props = {
     errorTxt: 'Error Loading',
   };
 

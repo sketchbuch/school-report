@@ -5,6 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { mount, shallow } from 'enzyme';
 import HeaderPath from './HeaderPath';
+import type { Props } from './HeaderPath';
 import store from '../../../store/redux';
 
 jest.mock('../../../utils/redux', () => {
@@ -22,7 +23,7 @@ jest.mock('../../../utils/redux', () => {
 });
 
 describe('<HeaderPath />', () => {
-  const props = {
+  const props: Props = {
     breadcrumbs: [],
     location: {},
     match: {},
