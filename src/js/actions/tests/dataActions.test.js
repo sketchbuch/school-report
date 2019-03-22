@@ -2,7 +2,6 @@
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as dataActions from '../dataActions';
 import {
   CREATE_DATA,
   DATA_CREATED,
@@ -12,6 +11,7 @@ import {
   PERSISTING_SUCCESS,
   REPLACE_DATA,
 } from '../../constants/actionTypes';
+import * as dataActions from '../dataActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

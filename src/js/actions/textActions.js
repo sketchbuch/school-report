@@ -2,15 +2,11 @@
 
 import { ADD_TEXT, DELETE_ALL_TEXTS, DELETE_TEXT, REPLACE_TEXTS, UPDATE_TEXT } from '../constants/actionTypes';
 import persist from '../fs/persist';
-import { FILE_TEXTS } from '../constants/io';
 import type { ActionCreator } from '../types/action';
 import type { TextType } from '../types/text';
+import { FILE_TEXTS } from '../constants/io';
 
-/**
- * Text Actions
- */
-
-export function replace(updatedData?: Array<TextType>, callback: Function): ActionCreator {
+export const replace = (updatedData?: TextType[], callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: REPLACE_TEXTS,
@@ -18,9 +14,9 @@ export function replace(updatedData?: Array<TextType>, callback: Function): Acti
     });
     persist(dispatch, getState, callback, [FILE_TEXTS]);
   };
-}
+};
 
-export function update(textToUpdate: TextType, callback: Function): ActionCreator {
+export const update = (textToUpdate: TextType, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_TEXT,
@@ -28,9 +24,9 @@ export function update(textToUpdate: TextType, callback: Function): ActionCreato
     });
     persist(dispatch, getState, callback, [FILE_TEXTS]);
   };
-}
+};
 
-export function add(newText: TextType, callback: Function): ActionCreator {
+export const add = (newText: TextType, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: ADD_TEXT,
@@ -38,9 +34,9 @@ export function add(newText: TextType, callback: Function): ActionCreator {
     });
     persist(dispatch, getState, callback, [FILE_TEXTS]);
   };
-}
+};
 
-export function deleteOne(id: string, callback: Function): ActionCreator {
+export const deleteOne = (id: string, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: DELETE_TEXT,
@@ -48,11 +44,11 @@ export function deleteOne(id: string, callback: Function): ActionCreator {
     });
     persist(dispatch, getState, callback, [FILE_TEXTS]);
   };
-}
+};
 
-export function deleteAll(callback: Function): ActionCreator {
+export const deleteAll = (callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({ type: DELETE_ALL_TEXTS });
     persist(dispatch, getState, callback, [FILE_TEXTS]);
   };
-}
+};

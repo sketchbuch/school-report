@@ -2,7 +2,6 @@
 
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
-import * as categoryActions from '../categoryActions';
 import {
   ADD_CATEGORY,
   DELETE_ALL_CATEGORIES,
@@ -10,6 +9,7 @@ import {
   REPLACE_CATEGORIES,
   UPDATE_CATEGORY,
 } from '../../constants/actionTypes';
+import * as categoryActions from '../categoryActions';
 import catgeoryDefault from '../../types/category';
 
 const middlewares = [thunk];

@@ -2,21 +2,17 @@
 
 import { SAVE_BUILDER } from '../constants/actionTypes';
 import persist from '../fs/persist';
-import { FILE_BUILDER } from '../constants/io';
 import type { ActionCreator } from '../types/action';
+import { FILE_BUILDER } from '../constants/io';
 
-/**
- * Builder Actions
- */
-
-export function save(
+export const save = (
   reportId: string,
   classId: string,
   pupilId: string,
-  selected: Array<string>,
+  selected: string[],
   callback: Function,
-  immediate: boolean
-): ActionCreator {
+  immediate: boolean = false
+): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: SAVE_BUILDER,
@@ -29,4 +25,4 @@ export function save(
     });
     persist(dispatch, getState, callback, [FILE_BUILDER], immediate);
   };
-}
+};

@@ -24,7 +24,7 @@ type Props = {
   settings: Object,
 };
 
-function hideLoader() {
+const hideLoader = () => {
   const alDuration = getCustomNumProp('--apploader-ms');
   document.getElementsByTagName('html')[0].classList.add('app-initialised');
 
@@ -34,7 +34,7 @@ function hideLoader() {
       appLoaderEle.parentNode.removeChild(appLoaderEle);
     }
   }, alDuration);
-}
+};
 
 /**
  * App.

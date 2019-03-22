@@ -8,15 +8,11 @@ import {
   UPDATE_PUPIL,
 } from '../constants/actionTypes';
 import persist from '../fs/persist';
-import { FILE_PUPILS } from '../constants/io';
 import type { ActionCreator } from '../types/action';
 import type { PupilType } from '../types/pupil';
+import { FILE_PUPILS } from '../constants/io';
 
-/**
- * Pupil Actions
- */
-
-export function replace(updatedData: Array<PupilType>, callback: Function): ActionCreator {
+export const replace = (updatedData: PupilType[], callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: REPLACE_PUPILS,
@@ -24,9 +20,9 @@ export function replace(updatedData: Array<PupilType>, callback: Function): Acti
     });
     persist(dispatch, getState, callback, [FILE_PUPILS]);
   };
-}
+};
 
-export function update(pupilToUpdate: PupilType, callback: Function): ActionCreator {
+export const update = (pupilToUpdate: PupilType, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_PUPIL,
@@ -34,9 +30,9 @@ export function update(pupilToUpdate: PupilType, callback: Function): ActionCrea
     });
     persist(dispatch, getState, callback, [FILE_PUPILS]);
   };
-}
+};
 
-export function add(newPupil: PupilType, callback: Function): ActionCreator {
+export const add = (newPupil: PupilType, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: ADD_PUPIL,
@@ -44,9 +40,9 @@ export function add(newPupil: PupilType, callback: Function): ActionCreator {
     });
     persist(dispatch, getState, callback, [FILE_PUPILS]);
   };
-}
+};
 
-export function deleteOne(id: string, callback: Function): ActionCreator {
+export const deleteOne = (id: string, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: DELETE_PUPIL,
@@ -54,9 +50,9 @@ export function deleteOne(id: string, callback: Function): ActionCreator {
     });
     persist(dispatch, getState, callback, [FILE_PUPILS]);
   };
-}
+};
 
-export function deletePupils(id: string, callback: Function): ActionCreator {
+export const deletePupils = (id: string, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: DELETE_ALL_CLASS_PUPILS,
@@ -64,4 +60,4 @@ export function deletePupils(id: string, callback: Function): ActionCreator {
     });
     persist(dispatch, getState, callback, [FILE_PUPILS]);
   };
-}
+};

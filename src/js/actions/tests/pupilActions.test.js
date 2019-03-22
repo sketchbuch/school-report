@@ -2,7 +2,6 @@
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as pupilActions from '../pupilActions';
 import {
   ADD_PUPIL,
   DELETE_ALL_CLASS_PUPILS,
@@ -10,6 +9,7 @@ import {
   DELETE_PUPIL,
   UPDATE_PUPIL,
 } from '../../constants/actionTypes';
+import * as pupilActions from '../pupilActions';
 import pupilDefault from '../../types/pupil';
 
 const middlewares = [thunk];

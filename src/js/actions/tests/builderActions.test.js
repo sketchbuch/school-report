@@ -2,9 +2,9 @@
 
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
+import { SAVE_BUILDER } from '../../constants/actionTypes';
 import * as builderActions from '../builderActions';
 import persist from '../../fs/persist';
-import { SAVE_BUILDER } from '../../constants/actionTypes';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

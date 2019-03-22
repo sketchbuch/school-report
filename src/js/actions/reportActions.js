@@ -8,15 +8,11 @@ import {
   UPDATE_REPORT,
 } from '../constants/actionTypes';
 import persist from '../fs/persist';
-import { FILE_REPORTS } from '../constants/io';
 import type { ActionCreator } from '../types/action';
 import type { ReportType } from '../types/report';
+import { FILE_REPORTS } from '../constants/io';
 
-/**
- * Report Actions (the list items)
- */
-
-export function replace(updatedData: Array<ReportType>, callback: Function): ActionCreator {
+export const replace = (updatedData: ReportType[], callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: REPLACE_REPORTS,
@@ -24,9 +20,9 @@ export function replace(updatedData: Array<ReportType>, callback: Function): Act
     });
     persist(dispatch, getState, callback, [FILE_REPORTS]);
   };
-}
+};
 
-export function update(reportToUpdate: ReportType, callback: Function): ActionCreator {
+export const update = (reportToUpdate: ReportType, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: UPDATE_REPORT,
@@ -34,9 +30,9 @@ export function update(reportToUpdate: ReportType, callback: Function): ActionCr
     });
     persist(dispatch, getState, callback, [FILE_REPORTS]);
   };
-}
+};
 
-export function add(reportToAdd: ReportType, callback: Function): ActionCreator {
+export const add = (reportToAdd: ReportType, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: ADD_REPORT,
@@ -44,9 +40,9 @@ export function add(reportToAdd: ReportType, callback: Function): ActionCreator 
     });
     persist(dispatch, getState, callback, [FILE_REPORTS]);
   };
-}
+};
 
-export function deleteOne(id: string, callback: Function): ActionCreator {
+export const deleteOne = (id: string, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: DELETE_REPORT,
@@ -54,11 +50,11 @@ export function deleteOne(id: string, callback: Function): ActionCreator {
     });
     persist(dispatch, getState, callback, [FILE_REPORTS]);
   };
-}
+};
 
-export function deleteAll(callback: Function): ActionCreator {
+export const deleteAll = (callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({ type: DELETE_ALL_REPORTS });
     persist(dispatch, getState, callback, [FILE_REPORTS]);
   };
-}
+};

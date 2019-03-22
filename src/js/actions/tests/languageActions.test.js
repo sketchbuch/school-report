@@ -2,8 +2,8 @@
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as languageActions from '../languageActions';
 import { LANGUAGE_LOADED, LOAD_LANGUAGE, CHANGE_LANGUAGE } from '../../constants/actionTypes';
+import * as languageActions from '../languageActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

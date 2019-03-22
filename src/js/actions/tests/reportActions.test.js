@@ -2,7 +2,6 @@
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as reportActions from '../reportActions';
 import {
   ADD_REPORT,
   DELETE_ALL_REPORTS,
@@ -10,6 +9,7 @@ import {
   REPLACE_REPORTS,
   UPDATE_REPORT,
 } from '../../constants/actionTypes';
+import * as reportActions from '../reportActions';
 import reportDefault from '../../types/report';
 
 const middlewares = [thunk];

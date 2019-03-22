@@ -9,6 +9,8 @@ import {
   PERSISTING_SUCCESS,
   REPLACE_DATA,
 } from '../constants/actionTypes';
+import persist from '../fs/persist';
+import type { ActionCreator } from '../types/action';
 import {
   FILE_BUILDER,
   FILE_CATEGORIES,
@@ -19,14 +21,8 @@ import {
   FILE_TEXTS,
 } from '../constants/io';
 import { readAppData, writeAppData } from '../fs/fs';
-import persist from '../fs/persist';
-import type { ActionCreator } from '../types/action';
 
-/**
- * Data Actions
- */
-
-export function replace(updatedData?: Object, callback: Function): ActionCreator {
+export const replace = (updatedData?: Object, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: REPLACE_DATA,
@@ -41,9 +37,9 @@ export function replace(updatedData?: Object, callback: Function): ActionCreator
       FILE_REPORTS,
     ]);
   };
-}
+};
 
-export function create(callback: Function): ActionCreator {
+export const create = (callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     const content = {
       [FILE_BUILDER]: { builder: {} },
@@ -57,13 +53,13 @@ export function create(callback: Function): ActionCreator {
     dispatch({ type: CREATE_DATA });
     writeAppData(content, callback);
   };
-}
+};
 
-export function created(): ActionCreator {
+export const created = (): ActionCreator => {
   return { type: DATA_CREATED };
-}
+};
 
-export function load(callback: Function): ActionCreator {
+export const load = (callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({ type: LOAD_DATA });
     readAppData(
@@ -71,25 +67,25 @@ export function load(callback: Function): ActionCreator {
       callback
     );
   };
-}
+};
 
-export function loaded(loadedData?: Object): ActionCreator {
+export const loaded = (loadedData?: Object): ActionCreator => {
   return {
     type: DATA_LOADED,
     payload: loadedData,
   };
-}
+};
 
-export function persistenceSuccess(dataType: string): ActionCreator {
+export const persistenceSuccess = (dataType: string): ActionCreator => {
   return {
     type: PERSISTING_SUCCESS,
     payload: { dataType },
   };
-}
+};
 
-export function persistenceError(dataType: string): ActionCreator {
+export const persistenceError = (dataType: string): ActionCreator => {
   return {
     type: PERSISTING_ERROR,
     payload: { dataType },
   };
-}
+};

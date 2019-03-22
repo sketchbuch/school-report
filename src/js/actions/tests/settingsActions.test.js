@@ -2,8 +2,8 @@
 
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as settingsActions from '../settingsActions';
 import { LOAD_SETTINGS, UPDATE_SETTINGS, SETTINGS_LOADED } from '../../constants/actionTypes';
+import * as settingsActions from '../settingsActions';
 import settingsDefault from '../../types/settings';
 
 const middlewares = [thunk];
@@ -14,13 +14,13 @@ const mockStore = configureMockStore(middlewares);
  */
 
 describe('Actions: settingsActions:', () => {
-  const testSettings = { language: 'DE' };
+  const testSettings = { ...settingsDefault, language: 'DE' };
   let callback = () => {};
   let store = () => {};
 
   beforeEach(() => {
     callback = jest.fn();
-    store = mockStore({ settings: {} });
+    store = mockStore({ settings: { ...settingsDefault } });
     window.reportr.curLang = 'EN';
   });
 
@@ -28,7 +28,7 @@ describe('Actions: settingsActions:', () => {
     const EXPECTED_ACTIONS = [{ type: UPDATE_SETTINGS, payload: { settings: testSettings } }];
 
     expect.assertions(1);
-    store.dispatch(settingsActions.update(testSettings, callback));
+    store.dispatch(settingsActions.update(testSettings, false, callback));
     expect(store.getActions()).toEqual(EXPECTED_ACTIONS);
     store.clearActions();
   });

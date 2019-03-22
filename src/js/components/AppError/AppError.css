@@ -1,14 +1,11 @@
-/* App Error */
-/* --------- */
-
 .AppError {
   height: 100%;
   width: 100%;
   padding-top: var(--header-height);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: var(--col-neg);
 }
 
@@ -25,6 +22,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 6.0rem;
-  font-size: 6.0rem;
+  height: 6rem;
+  font-size: 6rem;
 }

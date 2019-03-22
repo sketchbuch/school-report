@@ -1,14 +1,10 @@
 // @flow
 
 import { LANGUAGE_LOADED, LOAD_LANGUAGE, CHANGE_LANGUAGE } from '../constants/actionTypes';
-import { readLangFile } from '../fs/fs';
 import type { ActionCreator } from '../types/action';
+import { readLangFile } from '../fs/fs';
 
-/**
- * Language Actions
- */
-
-export function change(langKey: string, callback?: Function): ActionCreator {
+export const change = (langKey: string, callback?: Function): ActionCreator => {
   return (dispatch, getState) => {
     function langReady() {
       window.reportr.curLang = langKey;
@@ -34,9 +30,9 @@ export function change(langKey: string, callback?: Function): ActionCreator {
       langReady();
     }
   };
-}
+};
 
-export function load(lang: string, callback: Function): ActionCreator {
+export const load = (lang: string, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({
       type: LOAD_LANGUAGE,
@@ -44,8 +40,8 @@ export function load(lang: string, callback: Function): ActionCreator {
     });
     readLangFile(lang, callback);
   };
-}
+};
 
-export function loaded(): ActionCreator {
+export const loaded = (): ActionCreator => {
   return { type: LANGUAGE_LOADED };
-}
+};
