@@ -2,23 +2,19 @@
 
 type PupilEle = {
   pupil_name: string,
-  texts: Array<string>,
+  texts: string[],
 };
 
 type ClassEle = {
   class_name: string,
   class_name_count: string,
   pupil_count: number,
-  pupils: Array<PupilEle>,
+  pupils: PupilEle[],
 };
-
-/**
- * Export type def.
- */
 
 export type ExportType = {
   classCount: number,
-  content: Array<ClassEle>,
+  content: ClassEle[],
   exported: string,
   name: string,
   pupilCount: number,

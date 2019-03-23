@@ -8,13 +8,9 @@ import {
   APP_LOADED,
   SETTINGS_LOADED,
 } from '../constants/actionTypes';
-
 import type { AppType } from '../types/app';
 import appDefault from '../types/app';
 
-/**
- * App Reducer.
- */
 export default function reducer(state: AppType = appDefault, action: Object) {
   switch (action.type) {
     case APP_ERRORED:

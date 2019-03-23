@@ -16,17 +16,14 @@ import { hydratePupil } from '../types/pupil';
 import type { PupilType } from '../types/pupil';
 import type { ActionObj } from '../types/action';
 
-/**
- * Pupils Reducer.
- */
-export default function reducer(state: Array<PupilType> = [], action: ActionObj) {
+export default function reducer(state: PupilType[] = [], action: ActionObj) {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_DATA:
     case REPLACE_PUPILS:
       if (action.payload && action.payload.pupils !== undefined) {
         if (Array.isArray(action.payload.pupils)) {
-          const newState = [];
+          const newState: PupilType[] = [];
           action.payload.pupils.forEach(item => {
             newState.push(hydratePupil(item));
           });

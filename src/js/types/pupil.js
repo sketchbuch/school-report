@@ -7,10 +7,6 @@ import { ICON_PUPILS_FEMALE, ICON_PUPILS_MALE } from '../constants/icons';
 import { ROUTE_EDIT_BUILDER, ROUTE_DEL_PUPIL, ROUTE_EDIT_PUPIL } from '../constants/routes';
 import { text } from '../components/Translation/Translation';
 
-/**
- * Pupil type def.
- */
-
 export type PupilType = {
   ...$Exact<DomainBaseType>,
   classId: string,
@@ -41,15 +37,6 @@ export const pupilSort = {
   [pupilSortLast]: [pupilSortLast, pupilSortFirst, 'updated'],
 };
 
-/**
- * Returns an object of PupilType based on pupilObj but with additional props set.
- *
- * @param PupilType pupilObj The initial pupil object.
- * @param number ts A timestamp used for the id, created, and updated.
- * @param string id The id for the pupil.
- * @param string classId The id for the pupil's class.
- * @return PupilType The new pupil object.
- */
 export function PupilFactory(pupilObj: PupilType, ts: number, classId: string): PupilType {
   return hydratePupil({
     ...pupilObj,
@@ -60,12 +47,6 @@ export function PupilFactory(pupilObj: PupilType, ts: number, classId: string): 
   });
 }
 
-/**
- * Returns an updated pupilObj with getters.
- *
- * @param PupilType pupilObj The pupil object.
- * @return PupilType The hydrated pupil object.
- */
 export function hydratePupil(pupilObj: PupilType): PupilType {
   return {
     ...pupilDefault,
@@ -148,12 +129,6 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
   };
 }
 
-/**
- * Returns a string to be used when creating an ID for pupils.
- *
- * @param PupilType pupilObj The pupil record.
- * @return string The string to be used in creating the ID.
- */
 export function getPupilIdStr(pupilObj: PupilType): string {
   return 'pupil:' + pupilObj.firstname + '_' + pupilObj.lastname + '_' + pupilObj.description + '_' + pupilObj.gender;
 }

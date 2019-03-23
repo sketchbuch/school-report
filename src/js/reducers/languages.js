@@ -5,7 +5,7 @@ import type { LangType } from '../types/lang';
 import type { ActionObj } from '../types/action';
 
 type initialState = {
-  available: Array<LangType>,
+  available: LangType[],
   current: string,
   default: string,
 };
@@ -21,14 +21,11 @@ const defaultState = {
   default: 'EN',
 };
 
-/**
- * Languages Reducer.
- */
 export default function reducer(state: initialState = defaultState, action: ActionObj) {
   switch (action.type) {
     case CHANGE_LANGUAGE:
     case SETTINGS_LOADED:
-      let reqLang = '';
+      let reqLang: string = '';
       const { payload }: Object = action;
 
       if (payload.settings !== undefined && payload.settings.language) {
@@ -38,8 +35,8 @@ export default function reducer(state: initialState = defaultState, action: Acti
       }
 
       if (reqLang) {
-        const langFound = state.available.find(lang => lang.key === reqLang);
-        if (langFound !== undefined) {
+        const langFound: ?LangType = state.available.find(lang => lang.key === reqLang);
+        if (langFound != null) {
           return {
             ...state,
             available: [...state.available],

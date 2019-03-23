@@ -3,10 +3,6 @@
 import { DATA_LOADED, REPLACE_BUILDER, REPLACE_DATA, SAVE_BUILDER } from '../constants/actionTypes';
 import type { ActionObj } from '../types/action';
 
-/**
- * Reports Reducer.
- */
-
 export default function reducer(state: {} = {}, action: ActionObj) {
   switch (action.type) {
     case DATA_LOADED:

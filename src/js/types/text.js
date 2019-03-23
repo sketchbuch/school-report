@@ -8,10 +8,6 @@ import { TEXT_CROP_LEN } from '../constants/misc';
 import { cropStr } from '../utils/strings';
 import { ROUTE_DEL_TEXT, ROUTE_EDIT_TEXT } from '../constants/routes';
 
-/**
- * Report Text type def.
- */
-
 export type TextType = {
   ...$Exact<DomainBaseType>,
   bodytext: string,
@@ -30,14 +26,6 @@ const textDefault: TextType = {
 
 export const textSort = ['bodytext', 'updated'];
 
-/**
- * Returns an object of TextType based on textObj but with additional props set.
- *
- * @param TextType textObj The initial text object.
- * @param number ts A timestamp used for the id, created, and updated.
- * @param string lang The language code for the the text.
- * @return TextType The new text object.
- */
 export function TextFactory(textObj: TextType, ts: number, lang: string): TextType {
   return hydrateText({
     ...textObj,
@@ -49,12 +37,6 @@ export function TextFactory(textObj: TextType, ts: number, lang: string): TextTy
   });
 }
 
-/**
- * Returns an updated textObj with getters.
- *
- * @param TextType textObj The text object.
- * @return TextType The hydrated text object.
- */
 export function hydrateText(textObj: TextType): TextType {
   return {
     ...textDefault,
@@ -101,12 +83,6 @@ export function hydrateText(textObj: TextType): TextType {
   };
 }
 
-/**
- * Returns a string to be used when creating an ID for texts.
- *
- * @param TextType textObj The text record.
- * @return string The string to be used in creating the ID.
- */
 export function getTextIdStr(textObj: TextType): string {
   return 'text:' + textObj.bodytext + '_' + textObj.lang;
 }

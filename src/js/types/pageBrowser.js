@@ -1,8 +1,5 @@
 // @flow
 
-/**
- * Page Browser props.
- */
 export type PageBrowserProps = {
   className: string,
   curPage: number,

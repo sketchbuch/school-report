@@ -1,9 +1,5 @@
 // @flow
 
-/**
- * App type def.
- */
-
 export type AppType = {
   dataCreated: boolean,
   dataLoaded: boolean,

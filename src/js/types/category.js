@@ -6,10 +6,6 @@ import { generateId } from '../utils/ids';
 import { ICON_CATEGORIES } from '../constants/icons';
 import { ROUTE_DEL_CATEGORY, ROUTE_EDIT_CATEGORY } from '../constants/routes';
 
-/**
- * Category type def.
- */
-
 export type CategoryType = {
   ...$Exact<DomainBaseType>,
   label: string,
@@ -22,13 +18,6 @@ const categoryDefault: CategoryType = {
 
 export const categorySort = ['priority', 'label', 'updated'];
 
-/**
- * Returns an object of CategoryType based on categoryObj but with additional props set.
- *
- * @param CategoryType categoryObj The initial category object.
- * @param number ts A timestamp used for the id, created, and updated.
- * @return CategoryType The new category object.
- */
 export function CategoryFactory(categoryObj: CategoryType, ts: number): CategoryType {
   const newObj = hydrateCategory({
     ...categoryObj,
@@ -40,12 +29,6 @@ export function CategoryFactory(categoryObj: CategoryType, ts: number): Category
   return newObj;
 }
 
-/**
- * Returns an updated categoryObj with getters.
- *
- * @param CategoryType categoryObj The category object.
- * @return CategoryType The hydrated category object.
- */
 export function hydrateCategory(categoryObj: CategoryType): CategoryType {
   return {
     ...categoryDefault,
@@ -92,12 +75,6 @@ export function hydrateCategory(categoryObj: CategoryType): CategoryType {
   };
 }
 
-/**
- * Returns a string to be used when creating an ID for categories.
- *
- * @param CategoryType categoryObj The category record.
- * @return string The string to be used in creating the ID.
- */
 export function getCategoryIdStr(categoryObj: CategoryType): string {
   return 'category:' + categoryObj.label;
 }

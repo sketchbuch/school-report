@@ -6,10 +6,6 @@ import { generateId } from '../utils/ids';
 import { ICON_CLASSES } from '../constants/icons';
 import { ROUTE_DEL_CLASS, ROUTE_EDIT_CLASS, ROUTE_PUPILS } from '../constants/routes';
 
-/**
- * Class type def.
- */
-
 export type ClassType = {
   ...$Exact<DomainBaseType>,
   label: string,
@@ -24,13 +20,6 @@ const classDefault: ClassType = {
 
 export const classSort = ['label', 'updated'];
 
-/**
- * Returns an object of ClassType based on classObj but with additional props set.
- *
- * @param ClassType classObj The initial class object.
- * @param number ts A timestamp used for the id, created, and updated.
- * @return ClassType The new class object.
- */
 export function ClassFactory(classObj: ClassType, ts: number): ClassType {
   const newObj = hydrateClass({
     ...classObj,
@@ -42,12 +31,6 @@ export function ClassFactory(classObj: ClassType, ts: number): ClassType {
   return newObj;
 }
 
-/**
- * Returns an updated classObj with getters.
- *
- * @param ClassType classObj The class object.
- * @return ClassType The hydrated class object.
- */
 export function hydrateClass(classObj: ClassType): ClassType {
   return {
     ...classDefault,
@@ -96,12 +79,6 @@ export function hydrateClass(classObj: ClassType): ClassType {
   };
 }
 
-/**
- * Returns a string to be used when creating an ID for classes.
- *
- * @param ClassType classObj The class record.
- * @return string The string to be used in creating the ID.
- */
 export function getClassIdStr(classObj: ClassType): string {
   return 'class:' + classObj.label;
 }

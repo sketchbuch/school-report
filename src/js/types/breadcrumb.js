@@ -3,10 +3,6 @@
 import type { Dispatch } from 'redux';
 import { RouteComponentProps } from 'react-router';
 
-/**
- * Breadcrumb type def.
- */
-
 export type Breadcrumb = {
   id: string,
   link: string,

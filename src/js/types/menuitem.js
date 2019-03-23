@@ -6,10 +6,6 @@ import { text } from '../components/Translation/Translation';
 import * as routes from '../constants/routes';
 import * as icons from '../constants/icons';
 
-/**
- * Home Menu Item def.
- */
-
 export type MenuItemType = {
   description: string,
   icon: string,
@@ -28,12 +24,6 @@ const menuItemDefault: MenuItemType = {
   route: '',
 };
 
-/**
- * Returns an object of MenuItemType based on menuitemObj but with additional props set.
- *
- * @param MenuItemType menuitemObj The initial class object.
- * @return MenuItemType The new menu item object.
- */
 export function MenuItemFactory(menuitemObj: MenuItemType, ts: number): MenuItemType {
   const keyUpper = menuitemObj.key.toUpperCase();
   const keyCapped = ucFirst(menuitemObj.key);
@@ -49,12 +39,6 @@ export function MenuItemFactory(menuitemObj: MenuItemType, ts: number): MenuItem
   };
 }
 
-/**
- * Returns a string to be used when creating an ID for a menu item.
- *
- * @param MenuItemType menuitemObj The class record.
- * @return string The string to be used in creating the ID.
- */
 export function getMenuItemIdStr(menuitemObj: MenuItemType): string {
   return 'menuitem:' + menuitemObj.key;
 }
