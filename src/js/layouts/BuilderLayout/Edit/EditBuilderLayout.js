@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import { RouteComponentProps } from 'react-router';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
@@ -10,25 +11,21 @@ import { getSelectedTexts } from '../../../utils/redux';
 import { getPupilTextHtml } from '../../../utils/html';
 import { text } from '../../../components/Translation/Translation';
 import { getItemById } from '../../../utils/arrays';
+import type { InsertDangerousHtmlObj } from '../../../types/misc';
 import type { ReportType } from '../../../types/report';
 import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
 import type { TextType } from '../../../types/text';
 import setTitle from '../../../utils/title';
 
-type Props = {
+export type Props = {
+  ...RouteComponentProps,
   activeReport: ReportType | Object,
   builder: Object,
-  history: Object,
-  items: Array<SidebarBuilderItemType>,
-  location: Object,
-  match: Object,
+  items: SidebarBuilderItemType[],
   textCount: number,
-  texts: Array<TextType>,
+  texts: TextType[],
 };
 
-/**
- * Layout for creating a report.
- */
 export class EditBuilderLayout extends Component<Props> {
   static defaultProps = {
     activeReport: {},
@@ -39,29 +36,29 @@ export class EditBuilderLayout extends Component<Props> {
   };
 
   props: Props;
-  state: State;
 
   componentDidMount() {
     setTitle(text('WinTitle', 'EditBuilderLayout'));
   }
 
   render() {
-    const activeItem = getItemById(this.props.items, this.props.match.params.classId);
-    const activePupil = getItemById(activeItem.pupils, this.props.match.params.pupilId);
-    const maxChars = this.props.activeReport.maxChars;
+    // TODO - fix types
+    const activeItem: Object = getItemById(this.props.items, this.props.match.params.classId);
+    const activePupil: Object = getItemById(activeItem.pupils, this.props.match.params.pupilId);
+    const maxChars: number = this.props.activeReport.maxChars;
 
-    const selectedTexts = getSelectedTexts(
+    const selectedTexts: string[] = getSelectedTexts(
       this.props.builder,
       this.props.activeReport.id,
       activeItem.classRec.id,
       activePupil.id
     );
-    let textCount = 0;
+    let textCount: number = 0;
 
     selectedTexts.forEach(selTxtId => {
-      const txt = this.props.texts.find(txt => txt.id === selTxtId);
-      if (txt !== undefined) {
-        const pupilText = getPupilTextHtml(txt.getLabel(0), activePupil);
+      const txt: TextType = this.props.texts.find(txt => txt.id === selTxtId);
+      if (txt != null) {
+        const pupilText: InsertDangerousHtmlObj = getPupilTextHtml(txt.getLabel(0), activePupil);
         textCount += pupilText.__html.replace(/<(.|\n)*?>/g, '').length;
       }
     });

@@ -6,7 +6,8 @@ import Button from '../../../components/ui/Button/Button';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 
-type Props = {
+// TODO - fix types
+export type Props = {
   dirty: boolean,
   errors: Object,
   export: {},
@@ -20,9 +21,6 @@ type Props = {
   values: Object,
 };
 
-/**
- * Export form for the edit panel.
- */
 export class ExportBuilderForm extends Component<Props> {
   static defaultProps = {
     export: {},
@@ -33,9 +31,8 @@ export class ExportBuilderForm extends Component<Props> {
 
   render() {
     const { errors, handleBlur, handleChange, handleSubmit, saving, touched, values } = this.props;
-
-    const lValid = validate('name', errors, touched);
-    const btnIsDisabled = !lValid || saving || values.name === '';
+    const lValid: boolean = validate('name', errors, touched);
+    const btnIsDisabled: boolean = !lValid || saving || values.name === '';
 
     return (
       <form className="form" onSubmit={handleSubmit}>

@@ -3,12 +3,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import EditCategoryLayout from './EditCategoryLayout';
-import { ROUTE_CATEGORIES } from '../../../constants/routes';
 import categoryDefault, { CategoryFactory } from '../../../types/category';
+import type { Props } from './EditCategoryLayout';
+import type { CategoryType } from '../../../types/category';
+import { ROUTE_CATEGORIES } from '../../../constants/routes';
 
 describe('<EditCategoryLayout />', () => {
-  const cat = CategoryFactory({ ...categoryDefault, label: 'Test' }, Date.now());
-  const props = {
+  const cat: CategoryType = CategoryFactory({ ...categoryDefault, label: 'Test' }, Date.now());
+  const props: Props = {
     categories: [cat],
     dispatch: jest.fn(),
     history: {

@@ -59,6 +59,7 @@ export class NewPupilLayout extends Component<Props, State> {
     }
   }
 
+  // TODO - fix types
   handleSubmit = (values: Object): void => {
     const newPupil: PupilType = PupilFactory(values, Date.now(), this.props.match.params.classId);
 

@@ -3,10 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import NewCategoryLayout from './NewCategoryLayout';
+import type { Props } from './NewCategoryLayout';
 import { ROUTE_CATEGORIES } from '../../../constants/routes';
 
 describe('<NewCategoryLayout />', () => {
-  const props = {
+  const props: Props = {
     categories: [],
     dispatch: jest.fn(),
     history: {

@@ -1,8 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr';
+import type { Dispatch } from 'redux';
 import { Formik } from 'formik';
+import { RouteComponentProps } from 'react-router';
+import { toastr } from 'react-redux-toastr';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
@@ -11,17 +13,16 @@ import { text } from '../../../components/Translation/Translation';
 import categorySchema from '../../../validation/schemas/categories';
 import * as categoryActions from '../../../actions/categoryActions';
 import type { CategoryType } from '../../../types/category';
+import type { FsObject } from '../../../types/fsObject';
 import categoryDefault, { CategoryFactory } from '../../../types/category';
 import { ROUTE_CATEGORIES } from '../../../constants/routes';
 import setTitle from '../../../utils/title';
 
-type Props = {
-  categories: Array<CategoryType>,
+export type Props = {
+  ...RouteComponentProps,
+  categories: CategoryType[],
   curLang: string,
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
+  dispatch: Dispatch,
 };
 
 type State = {
@@ -30,30 +31,17 @@ type State = {
   saving: boolean,
 };
 
-/**
- * Layout for adding a new category.
- */
 export class NewCategoryLayout extends Component<Props, State> {
   static defaultProps = {
     categories: [],
   };
 
   props: Props;
-  dataSaved: Function;
-  handleSubmit: Function;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      error: false,
-      category: { ...categoryDefault },
-      saving: false,
-    };
-
-    this.dataSaved = this.dataSaved.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state: State = {
+    error: false,
+    category: { ...categoryDefault },
+    saving: false,
+  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'NewCategoryLayout'));
@@ -69,21 +57,17 @@ export class NewCategoryLayout extends Component<Props, State> {
     }
   }
 
-  handleSubmit(values: Object) {
-    const newCategory = CategoryFactory(values, Date.now());
+  // TODO - fix types
+  handleSubmit = (values: Object): void => {
+    const newCategory: CategoryType = CategoryFactory(values, Date.now());
 
     this.setState({
       category: newCategory,
       saving: true,
     });
-  }
+  };
 
-  /**
-   * Callback used by writeAppData.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataSaved(ioResult: Object) {
+  dataSaved(ioResult: FsObject) {
     if (ioResult.success === true) {
       this.props.history.push(ROUTE_CATEGORIES);
       toastr.success(text('PersistenceNew', 'Categories'), this.state.category.getLabel());

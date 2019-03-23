@@ -1,8 +1,10 @@
 // @flow
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import * as React from 'react';
+import type { Dispatch } from 'redux';
 import { Route, Switch } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router';
+import { connect } from 'react-redux';
 import DeleteCategoriesLayout from './Delete/DeleteCategoriesLayout';
 import EditCategoryLayout from './Edit/EditCategoryLayout';
 import Icon from '../../components/Icon/Icon';
@@ -15,9 +17,10 @@ import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
 import type { CategoryType } from '../../types/category';
+import type { ReduxState } from '../../types/reduxstate';
+import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
 import { categorySort } from '../../types/category';
 import { text } from '../../components/Translation/Translation';
-import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
 import {
   ROUTE_DEL_CATEGORIES,
   ROUTE_EDIT_CATEGORY,
@@ -26,12 +29,10 @@ import {
 } from '../../constants/routes';
 import setTitle from '../../utils/title';
 
-type Props = {
-  categories: Array<CategoryType>,
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
+export type Props = {
+  ...RouteComponentProps,
+  categories: CategoryType[],
+  dispatch: Dispatch,
 };
 
 type State = {
@@ -41,36 +42,18 @@ type State = {
   term: string,
 };
 
-/**
- * Layout for displaying catgeories.
- */
-export class CategoriesLayout extends Component<Props, State> {
+export class CategoriesLayout extends React.Component<Props, State> {
   static defaultProps = {
     categories: [],
   };
 
   props: Props;
-  state: State;
-  handlePbChange: (curPage: number) => void;
-  handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
-  handleSearchAnywhereClick: (event: SyntheticEvent<MouseEvent>) => void;
-  handleSearchIconClick: (event: SyntheticEvent<MouseEvent>) => void;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      anywhere: false,
-      curPage: 1,
-      searchVisible: false,
-      term: '',
-    };
-
-    this.handlePbChange = this.handlePbChange.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleSearchAnywhereClick = this.handleSearchAnywhereClick.bind(this);
-    this.handleSearchIconClick = this.handleSearchIconClick.bind(this);
-  }
+  state: State = {
+    anywhere: false,
+    curPage: 1,
+    searchVisible: false,
+    term: '',
+  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'Categories'));
@@ -82,42 +65,43 @@ export class CategoriesLayout extends Component<Props, State> {
     }
   }
 
-  handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleSearch = (event: SyntheticInputEvent<HTMLInputElement>): void => {
     if (event.type === 'keyup') {
       if (event.key === 'Escape') {
         this.handleSearchIconClick(event);
       }
     } else {
-      const newState = { term: event.currentTarget.value };
-      if (newState.term !== this.state.term) {
-        newState.curPage = 1;
+      const newTerm: string = event.currentTarget.value;
+
+      if (newTerm !== this.state.term) {
+        this.setState({ curPage: 1, term: newTerm });
+      } else {
+        this.setState({ term: newTerm });
       }
-
-      this.setState(newState);
     }
-  }
+  };
 
-  handlePbChange(curPage: number) {
+  handlePbChange = (curPage: number): void => {
     this.setState({ curPage });
-  }
+  };
 
-  handleSearchIconClick(event: SyntheticEvent<MouseEvent>) {
-    const newState = { searchVisible: !this.state.searchVisible };
-    if (newState.searchVisible === false) {
-      newState.term = '';
-      newState.curPage = 1;
+  handleSearchIconClick = (event: SyntheticEvent<MouseEvent>): void => {
+    const newSearchVisible: boolean = !this.state.searchVisible;
+
+    if (newSearchVisible === false) {
+      this.setState({ curPage: 1, searchVisible: newSearchVisible, term: '' });
+    } else {
+      this.setState({ searchVisible: newSearchVisible });
     }
+  };
 
-    this.setState(newState);
-  }
-
-  handleSearchAnywhereClick(event: SyntheticEvent<MouseEvent>) {
+  handleSearchAnywhereClick = (event: SyntheticEvent<MouseEvent>): void => {
     this.setState({ anywhere: !this.state.anywhere });
-  }
+  };
 
   render() {
-    const HAS_CATGEORIES = this.props.categories.length > 0 ? true : false;
-    const leftActions = (
+    const HAS_CATGEORIES: boolean = this.props.categories.length > 0 ? true : false;
+    const leftActions: React.Element<*> = (
       <NavButtonCircular
         to={ROUTE_NEW_CATEGORY}
         className="SidebarFooter__action"
@@ -128,7 +112,7 @@ export class CategoriesLayout extends Component<Props, State> {
         <Icon type={ICON_ADD} />
       </NavButtonCircular>
     );
-    const rightActions = (
+    const rightActions: React.Element<*> = (
       <NavButtonCircular
         disabled={!HAS_CATGEORIES}
         to={ROUTE_DEL_CATEGORIES}
@@ -217,7 +201,7 @@ export class CategoriesLayout extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: Object) => ({
+const mapStateToProps = (state: ReduxState) => ({
   categories: state.categories,
 });
 

@@ -3,9 +3,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import ExportBuilderForm from './ExportBuilderForm';
+import type { Props } from './ExportBuilderForm';
 
 describe('<ExportBuilderForm />', () => {
-  const props = {
+  const props: Props = {
     dirty: false,
     errors: {},
     export: {},

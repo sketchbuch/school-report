@@ -3,9 +3,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import DeleteClassesLayout from './DeleteClassesLayout';
+import type { Props } from './DeleteClassesLayout';
 
 describe('<DeleteClassesLayout />', () => {
-  const props = {
+  const props: Props = {
     dispatch: jest.fn(),
     history: {},
     location: {},

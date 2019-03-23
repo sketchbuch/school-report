@@ -1,8 +1,10 @@
 // @flow
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import * as React from 'react';
+import type { Dispatch } from 'redux';
 import { Route, Switch } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router';
+import { connect } from 'react-redux';
 import DeleteClassesLayout from './Delete/DeleteClassesLayout';
 import EditClassLayout from './Edit/EditClassLayout';
 import Icon from '../../components/Icon/Icon';
@@ -17,18 +19,17 @@ import SidebarList from '../../components/Sidebar/List/SidebarList';
 import setTitle from '../../utils/title';
 import type { ClassType } from '../../types/class';
 import type { PupilType } from '../../types/pupil';
+import type { ReduxState } from '../../types/reduxstate';
 import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
 import { ROUTE_CLASSES, ROUTE_DEL_CLASSES, ROUTE_EDIT_CLASS, ROUTE_NEW_CLASS } from '../../constants/routes';
 import { classSort } from '../../types/class';
 import { text } from '../../components/Translation/Translation';
 
-type Props = {
-  classes: Array<ClassType>,
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
-  pupils: Array<PupilType>,
+export type Props = {
+  ...RouteComponentProps,
+  classes: ClassType[],
+  dispatch: Dispatch,
+  pupils: PupilType[],
 };
 
 type State = {
@@ -38,37 +39,19 @@ type State = {
   term: string,
 };
 
-/**
- * Layout for displaying classes.
- */
-export class ClassesLayout extends Component<Props, State> {
+export class ClassesLayout extends React.Component<Props, State> {
   static defaultProps = {
     classes: [],
     pupils: [],
   };
 
   props: Props;
-  state: State;
-  handlePbChange: (curPage: number) => void;
-  handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
-  handleSearchAnywhereClick: (event: SyntheticEvent<MouseEvent>) => void;
-  handleSearchIconClick: (event: SyntheticEvent<MouseEvent>) => void;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      anywhere: false,
-      curPage: 1,
-      searchVisible: false,
-      term: '',
-    };
-
-    this.handlePbChange = this.handlePbChange.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleSearchAnywhereClick = this.handleSearchAnywhereClick.bind(this);
-    this.handleSearchIconClick = this.handleSearchIconClick.bind(this);
-  }
+  state: State = {
+    anywhere: false,
+    curPage: 1,
+    searchVisible: false,
+    term: '',
+  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'Classes'));
@@ -80,54 +63,54 @@ export class ClassesLayout extends Component<Props, State> {
     }
   }
 
-  handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleSearch = (event: SyntheticInputEvent<HTMLInputElement>): void => {
     if (event.type === 'keyup') {
       if (event.key === 'Escape') {
         this.handleSearchIconClick(event);
       }
     } else {
-      const newState = { term: event.currentTarget.value };
-      if (newState.term !== this.state.term) {
-        newState.curPage = 1;
+      const newTerm: string = event.currentTarget.value;
+
+      if (newTerm !== this.state.term) {
+        this.setState({ curPage: 1, term: newTerm });
+      } else {
+        this.setState({ term: newTerm });
       }
-
-      this.setState(newState);
     }
-  }
+  };
 
-  handlePbChange(curPage: number) {
+  handlePbChange = (curPage: number): void => {
     this.setState({ curPage });
-  }
+  };
 
-  handleSearchIconClick(event: SyntheticEvent<MouseEvent>) {
-    const newState = { searchVisible: !this.state.searchVisible };
-    if (newState.searchVisible === false) {
-      newState.term = '';
-      newState.curPage = 1;
+  handleSearchIconClick = (event: SyntheticEvent<MouseEvent>): void => {
+    const newSearchVisible: boolean = !this.state.searchVisible;
+
+    if (newSearchVisible === false) {
+      this.setState({ curPage: 1, searchVisible: newSearchVisible, term: '' });
+    } else {
+      this.setState({ searchVisible: newSearchVisible });
     }
+  };
 
-    this.setState(newState);
-  }
-
-  handleSearchAnywhereClick(event: SyntheticEvent<MouseEvent>) {
+  handleSearchAnywhereClick = (event: SyntheticEvent<MouseEvent>): void => {
     this.setState({ anywhere: !this.state.anywhere });
-  }
+  };
 
-  /**
-   * Returns the correct prop to be used as the items in the sidebar list.
-   *
-   * @return array The items to be rendered.
-   */
-  getItems() {
-    let items = [...this.props.classes];
-    items.forEach(item => (item.pupilCount = this.props.pupils.filter(pupil => pupil.classId === item.id).length));
-
-    return items;
+  getClasses(): ClassType[] {
+    return this.props.classes.map(
+      (item: ClassType): ClassType => {
+        return {
+          ...item,
+          pupilCount: this.props.pupils.filter((pupil: PupilType): boolean => pupil.classId === item.id).length,
+        };
+      }
+    );
   }
 
   render() {
-    const HAS_CLASSES = this.props.classes.length > 0 ? true : false;
-    const leftActions = (
+    const HAS_CLASSES: boolean = this.props.classes.length > 0 ? true : false;
+    const leftActions: React.Element<*> = (
       <NavButtonCircular
         to={ROUTE_NEW_CLASS}
         className="SidebarFooter__action"
@@ -138,7 +121,7 @@ export class ClassesLayout extends Component<Props, State> {
         <Icon type={ICON_ADD} />
       </NavButtonCircular>
     );
-    const rightActions = (
+    const rightActions: React.Element<*> = (
       <NavButtonCircular
         disabled={!HAS_CLASSES}
         to={ROUTE_DEL_CLASSES}
@@ -183,7 +166,7 @@ export class ClassesLayout extends Component<Props, State> {
           <SidebarList
             curPage={this.state.curPage}
             dispatch={this.props.dispatch}
-            items={this.getItems()}
+            items={this.getClasses()}
             listType="class"
             noItemsTxt={text('Classes', 'SidebarNoItems')}
             onChange={this.handlePbChange}
@@ -221,7 +204,7 @@ export class ClassesLayout extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: Object, props: Props) => {
+const mapStateToProps = (state: ReduxState, props: Props) => {
   return {
     classes: state.classes,
     pupils: state.pupils,

@@ -8,7 +8,8 @@ import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 import { ROUTE_CATEGORIES } from '../../../constants/routes';
 
-type Props = {
+// TODO - fix types
+export type Props = {
   dirty: boolean,
   errors: Object,
   handleBlur: Function,
@@ -21,9 +22,6 @@ type Props = {
   values: Object,
 };
 
-/**
- * Category form for the edit panel.
- */
 export class EditCategoryForm extends Component<Props> {
   static defaultProps = {
     dirty: false,
@@ -34,9 +32,8 @@ export class EditCategoryForm extends Component<Props> {
 
   render() {
     const { dirty, errors, handleBlur, handleChange, handleSubmit, isNew, saving, touched, values } = this.props;
-
-    const lValid = validate('label', errors, touched);
-    const btnIsDisabled = !lValid || saving || !dirty;
+    const lValid: boolean = validate('label', errors, touched);
+    const btnIsDisabled: boolean = !lValid || saving || !dirty;
 
     return (
       <form className="form" onSubmit={handleSubmit}>

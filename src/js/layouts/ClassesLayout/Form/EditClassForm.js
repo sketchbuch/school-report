@@ -8,6 +8,7 @@ import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 import { ROUTE_CLASSES } from '../../../constants/routes';
 
+// TODO - fix types
 type Props = {
   dirty: boolean,
   errors: Object,
@@ -21,9 +22,6 @@ type Props = {
   values: Object,
 };
 
-/**
- * Class form for the edit panel.
- */
 export class EditClassForm extends Component<Props> {
   static defaultProps = {
     dirty: false,
@@ -34,9 +32,8 @@ export class EditClassForm extends Component<Props> {
 
   render() {
     const { dirty, errors, handleBlur, handleChange, handleSubmit, isNew, saving, touched, values } = this.props;
-
-    const clValid = validate('label', errors, touched);
-    const btnIsDisabled = !clValid || values.label === '' || saving || !dirty ? true : false;
+    const clValid: boolean = validate('label', errors, touched);
+    const btnIsDisabled: boolean = !clValid || values.label === '' || saving || !dirty ? true : false;
 
     return (
       <form className="form" onSubmit={handleSubmit}>

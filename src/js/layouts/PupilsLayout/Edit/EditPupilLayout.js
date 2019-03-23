@@ -71,6 +71,7 @@ export class EditPupilLayout extends Component<Props, State> {
     }
   }
 
+  // TODO - fix types
   handleSubmit = (values: Object): void => {
     const updatedPupil = { ...values };
     updatedPupil.updated = Date.now();

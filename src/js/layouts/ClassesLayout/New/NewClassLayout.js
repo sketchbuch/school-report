@@ -1,25 +1,26 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr';
+import type { Dispatch } from 'redux';
 import { Formik } from 'formik';
-import EditPanel from '../../../components/EditPanel/EditPanel';
-import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
-import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
-import EditClassForm from '../Form/EditClassForm';
-import { text } from '../../../components/Translation/Translation';
-import { classSchema } from '../../../validation/schemas';
+import { RouteComponentProps } from 'react-router';
+import { toastr } from 'react-redux-toastr';
 import * as classActions from '../../../actions/classActions';
+import EditClassForm from '../Form/EditClassForm';
+import EditPanel from '../../../components/EditPanel/EditPanel';
+import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
+import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import classDefault, { ClassFactory } from '../../../types/class';
-import type { ClassType } from '../../../types/class';
-import { ROUTE_CLASSES } from '../../../constants/routes';
 import setTitle from '../../../utils/title';
+import type { ClassType } from '../../../types/class';
+import type { FsObject } from '../../../types/fsObject';
+import { ROUTE_CLASSES } from '../../../constants/routes';
+import { classSchema } from '../../../validation/schemas';
+import { text } from '../../../components/Translation/Translation';
 
-type Props = {
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
+export type Props = {
+  ...RouteComponentProps,
+  dispatch: Dispatch,
 };
 
 type State = {
@@ -28,26 +29,13 @@ type State = {
   saving: boolean,
 };
 
-/**
- * Layout for adding a new class.
- */
 export class NewClassLayout extends Component<Props, State> {
   props: Props;
-  dataSaved: Function;
-  handleSubmit: Function;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      error: false,
-      class: { ...classDefault },
-      saving: false,
-    };
-
-    this.dataSaved = this.dataSaved.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state: State = {
+    error: false,
+    class: { ...classDefault },
+    saving: false,
+  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'NewClassLayout'));
@@ -63,21 +51,17 @@ export class NewClassLayout extends Component<Props, State> {
     }
   }
 
-  handleSubmit(values: Object) {
+  // TODO - fix types
+  handleSubmit = (values: Object): void => {
     const newClass = ClassFactory(values, Date.now());
 
     this.setState({
       class: newClass,
       saving: true,
     });
-  }
+  };
 
-  /**
-   * Callback used by electron fs functions.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataSaved(ioResult: Object) {
+  dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceNew', 'Classes'), this.state.class.getLabel());
       this.props.history.push(ROUTE_CLASSES);
@@ -87,7 +71,7 @@ export class NewClassLayout extends Component<Props, State> {
         saving: false,
       });
     }
-  }
+  };
 
   render() {
     return (

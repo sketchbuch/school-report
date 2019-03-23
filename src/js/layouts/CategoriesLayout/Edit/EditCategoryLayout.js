@@ -1,8 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr';
+import type { Dispatch } from 'redux';
 import { Formik } from 'formik';
+import { RouteComponentProps } from 'react-router';
+import { toastr } from 'react-redux-toastr';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
@@ -11,17 +13,16 @@ import { text } from '../../../components/Translation/Translation';
 import categorySchema from '../../../validation/schemas/categories';
 import * as categoryActions from '../../../actions/categoryActions';
 import type { CategoryType } from '../../../types/category';
+import type { FsObject } from '../../../types/fsObject';
 import categoryDefault from '../../../types/category';
 import { ROUTE_CATEGORIES } from '../../../constants/routes';
 import { getActiveCategory } from '../../../utils/redux';
 import setTitle from '../../../utils/title';
 
-type Props = {
-  categories: Array<CategoryType>,
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
+export type Props = {
+  ...RouteComponentProps,
+  categories: CategoryType[],
+  dispatch: Dispatch,
 };
 
 type State = {
@@ -30,34 +31,20 @@ type State = {
   saving: boolean,
 };
 
-/**
- * Layout for editing an existing category.
- */
 export class EditCategoryLayout extends Component<Props, State> {
   static defaultProps = {
     categories: [],
   };
 
   props: Props;
-  dataSaved: Function;
-  handleSubmit: Function;
-  initialValues: Object;
-
-  constructor(props: Props) {
-    super(props);
-
-    const activeId = props.match.params !== undefined ? props.match.params.categoryId : '';
-    const activeCat = getActiveCategory(props.categories, activeId);
-
-    this.state = {
-      category: { ...categoryDefault, ...activeCat },
-      error: false,
-      saving: false,
-    };
-
-    this.dataSaved = this.dataSaved.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state: State = {
+    category: {
+      ...categoryDefault,
+      ...getActiveCategory(this.props.categories, this.getactiveId()),
+    },
+    error: false,
+    saving: false,
+  };
 
   componentDidMount() {
     setTitle(
@@ -68,8 +55,8 @@ export class EditCategoryLayout extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    const activeId = this.props.match.params !== undefined ? this.props.match.params.categoryId : '';
-    const activeCategory = getActiveCategory(this.props.categories, activeId);
+    const activeId: string = this.getactiveId();
+    const activeCategory: CategoryType = getActiveCategory(this.props.categories, activeId);
     setTitle(text('WinTitle', 'EditCategoryLayout', { CAT: activeCategory.getLabel() }));
 
     if (this.state.error) {
@@ -81,7 +68,8 @@ export class EditCategoryLayout extends Component<Props, State> {
     }
   }
 
-  handleSubmit(values: Object) {
+  // TODO - fix types
+  handleSubmit = (values: Object): void => {
     const updatedCategory = { ...values };
     updatedCategory.updated = Date.now();
 
@@ -89,14 +77,9 @@ export class EditCategoryLayout extends Component<Props, State> {
       category: updatedCategory,
       saving: true,
     });
-  }
+  };
 
-  /**
-   * Callback used by writeAppData.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataSaved(ioResult: Object) {
+  dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceEdit', 'Texts'), this.state.category.getLabel());
       this.props.history.push(ROUTE_CATEGORIES);
@@ -106,12 +89,16 @@ export class EditCategoryLayout extends Component<Props, State> {
         saving: false,
       });
     }
-  }
+  };
+
+  getactiveId = (): string => {
+    return this.props.match.params !== undefined ? this.props.match.params.categoryId : '';
+  };
 
   render() {
-    const activeId = this.props.match.params !== undefined ? this.props.match.params.categoryId : '';
-    const activeCategory = getActiveCategory(this.props.categories, activeId);
-    const activeLabel = activeCategory.getLabel !== undefined ? activeCategory.getLabel() : '';
+    const activeId: string = this.getactiveId();
+    const activeCategory: CategoryType = getActiveCategory(this.props.categories, activeId);
+    const activeLabel: string = activeCategory.getLabel !== undefined ? activeCategory.getLabel() : '';
 
     return (
       <EditPanel>

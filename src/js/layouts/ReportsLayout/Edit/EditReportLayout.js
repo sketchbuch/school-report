@@ -65,6 +65,7 @@ export class EditReportLayout extends Component<Props, State> {
     }
   }
 
+  // TODO - fix types
   handleSubmit = (values: Object): void => {
     const updatedReport = { ...values };
     updatedReport.updated = Date.now();

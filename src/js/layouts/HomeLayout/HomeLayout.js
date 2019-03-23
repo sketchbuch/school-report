@@ -2,30 +2,22 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Icon from '../../components/Icon/Icon';
 import ButtonCircular from '../../components/ui/ButtonCircular/ButtonCircular';
-import type { MenuItemType } from '../../types/menuitem';
+import Icon from '../../components/Icon/Icon';
 import menuItemDefault, { MenuItemFactory } from '../../types/menuitem';
 import setTitle from '../../utils/title';
+import type { MenuItemType } from '../../types/menuitem';
 import './HomeLayout.css';
 
-type Props = {};
+const menuTypes: string[] = ['classes', 'texts', 'categories', 'reports', 'settings'];
 
-/**
- * Home Layout.
- */
+export type Props = {};
+
 export class HomeLayout extends Component<Props> {
   props: Props;
-  menuItems: Array<MenuItemType>;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.menuItems = [];
-    ['classes', 'texts', 'categories', 'reports', 'settings'].forEach((item, index) => {
-      this.menuItems.push(MenuItemFactory({ ...menuItemDefault, key: item }, Date.now()));
-    });
-  }
+  menuItems: MenuItemType[] = menuTypes.map((mt: string) => {
+    return MenuItemFactory({ ...menuItemDefault, key: mt }, Date.now());
+  });
 
   componentDidMount() {
     setTitle('');
@@ -39,7 +31,7 @@ export class HomeLayout extends Component<Props> {
             return (
               <div key={item.id} className="HomeLayout__item">
                 <Link to={item.route} className="HomeLayout__link">
-                  <ButtonCircular className="HomeLayout__icon" visual={true}>
+                  <ButtonCircular action="start-action" className="HomeLayout__icon" visual={true}>
                     <Icon type={item.icon} />
                   </ButtonCircular>
                   <span className="HomeLayout__title">{item.label}</span>

@@ -3,10 +3,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import DeleteCategoriesLayout from './DeleteCategoriesLayout';
+import type { Props } from './DeleteCategoriesLayout';
 import { ROUTE_CATEGORIES } from '../../../constants/routes';
 
 describe('<DeleteCategoriesLayout />', () => {
-  const props = {
+  const props: Props = {
     dispatch: jest.fn(),
     history: {
       push: jest.fn(),

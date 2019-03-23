@@ -1,8 +1,10 @@
 // @flow
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import * as React from 'react';
+import type { Dispatch } from 'redux';
 import { Route, Switch } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router';
+import { connect } from 'react-redux';
 import EditBuilderLayout from './Edit/EditBuilderLayout';
 import ExportBuilderLayout from './Export/ExportBuilderLayout';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
@@ -18,6 +20,7 @@ import { classSort } from '../../types/class';
 import { pupilSort } from '../../types/pupil';
 import type { ClassType } from '../../types/class';
 import type { PupilSortOptions, PupilType } from '../../types/pupil';
+import type { ReduxState } from '../../types/reduxstate';
 import type { ReportType } from '../../types/report';
 import type { TextType } from '../../types/text';
 import type { SidebarBuilderItemType } from '../../types/sidebarBuilderItem';
@@ -27,24 +30,19 @@ import { ROUTE_BUILDER, ROUTE_EDIT_BUILDER, ROUTE_EXPORT_BUILDER } from '../../c
 import { getActiveReport } from '../../utils/redux';
 import setTitle from '../../utils/title';
 
-type Props = {
+export type Props = {
+  ...RouteComponentProps,
   activeReport: ReportType | Object,
   builder: Object,
-  classes: Array<ClassType>,
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
-  pupils: Array<PupilType>,
+  classes: ClassType[],
+  dispatch: Dispatch,
+  pupils: PupilType[],
   pupilsSort: PupilSortOptions,
   textCount: number,
-  texts: Array<TextType>,
+  texts: TextType[],
 };
 
-/**
- * Layout for building reports.
- */
-export class BuilderLayout extends Component<Props> {
+export class BuilderLayout extends React.Component<Props> {
   static defaultProps = {
     activeReport: {},
     builder: {},
@@ -66,21 +64,16 @@ export class BuilderLayout extends Component<Props> {
     }
   }
 
-  /**
-   * Returns the correct prop to be used as the items in the sidebar list.
-   *
-   * @return array The items to be rendered.
-   */
-  getItems() {
-    let items: Array<SidebarBuilderItemType> = [];
+  getItems(): SidebarBuilderItemType[] {
+    let items: SidebarBuilderItemType[] = [];
 
     if (this.props.activeReport.id !== undefined) {
-      const reportClasses = this.props.classes.filter(c => this.props.activeReport.classes.includes(c.id));
-      const sortedClasses = sortObjectsAz(reportClasses, classSort);
+      const reportClasses: ClassType[] = this.props.classes.filter(c => this.props.activeReport.classes.includes(c.id));
+      const sortedClasses: ClassType[] = sortObjectsAz(reportClasses, classSort);
 
-      sortedClasses.forEach(item => {
-        const newClassPupils = this.props.pupils.filter(p => p.classId === item.id);
-        const sortedClassPupils = sortObjectsAz(newClassPupils, pupilSort[this.props.pupilsSort]);
+      sortedClasses.forEach((item: ClassType) => {
+        const newClassPupils: PupilType[] = this.props.pupils.filter(p => p.classId === item.id);
+        const sortedClassPupils: PupilType[] = sortObjectsAz(newClassPupils, pupilSort[this.props.pupilsSort]);
 
         items.push({
           classRec: { ...item },
@@ -94,15 +87,15 @@ export class BuilderLayout extends Component<Props> {
     return items;
   }
 
-  canExport(items: Array<SidebarBuilderItemType>): boolean {
+  canExport(items: SidebarBuilderItemType[]): boolean {
     const { activeReport, builder } = this.props;
     const reportData = builder[activeReport.id];
-    let canExport = false;
+    let canExport: boolean = false;
 
     if (reportData !== undefined) {
-      items.forEach(item => {
+      items.forEach((item: SidebarBuilderItemType) => {
         if (reportData[item.id] !== undefined) {
-          item.pupils.forEach(pupil => {
+          item.pupils.forEach((pupil: PupilType) => {
             if (reportData[item.id][pupil.id] !== undefined && reportData[item.id][pupil.id].length > 0) {
               canExport = true;
             }
@@ -116,11 +109,11 @@ export class BuilderLayout extends Component<Props> {
 
   render() {
     const { activeReport, builder } = this.props;
-    const items = this.getItems();
-    const classCount = items.length;
-    const pupilCount = items.reduce((curCount, curClass) => curCount + curClass.classRec.pupilCount, 0);
-    const CAN_EXPORT = this.canExport(items);
-    const leftActions = (
+    const items: SidebarBuilderItemType[] = this.getItems();
+    const classCount: number = items.length;
+    const pupilCount: number = items.reduce((curCount, curClass) => curCount + curClass.classRec.pupilCount, 0);
+    const CAN_EXPORT: boolean = this.canExport(items);
+    const leftActions: React.Element<*> = (
       <NavButtonCircular
         action="add-category"
         buttontype="pos-rollover"
@@ -134,7 +127,7 @@ export class BuilderLayout extends Component<Props> {
     );
 
     const pupilBuilderSelectedCount = (pupilId: string, classId: string): string => {
-      const selectedTexts = getSelectedTexts(builder, activeReport.id, classId, pupilId);
+      const selectedTexts: string[] = getSelectedTexts(builder, activeReport.id, classId, pupilId);
       return selectedTexts.length > 0 ? `(${selectedTexts.length})` : '';
     };
 
@@ -191,7 +184,7 @@ export class BuilderLayout extends Component<Props> {
   }
 }
 
-const mapStateToProps = (state: Object, props: Props) => {
+const mapStateToProps = (state: ReduxState, props: Props) => {
   return {
     activeReport: getActiveReport(state.reports, props.match.params.reportId),
     builder: state.builder,

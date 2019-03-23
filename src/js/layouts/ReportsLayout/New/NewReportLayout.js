@@ -58,7 +58,7 @@ export class NewReportLayout extends Component<Props, State> {
     }
   }
 
-  // TODO: fix types
+  // TODO - fix types
   handleSubmit = (values: Object): void => {
     const newReport: ReportType = ReportFactory(values, Date.now());
 

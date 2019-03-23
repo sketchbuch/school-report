@@ -4,16 +4,18 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import EditCategoryForm from './EditCategoryForm';
+import type { Props } from './EditCategoryForm';
 import { text } from '../../../components/Translation/Translation';
 
 describe('<EditCategoryForm />', () => {
-  const props = {
+  const props: Props = {
     dirty: false,
     errors: {},
     export: {},
     handleBlur: jest.fn(),
     handleChange: jest.fn(),
     handleSubmit: jest.fn(),
+    isNew: false,
     isSubmitting: false,
     saving: false,
     touched: {},

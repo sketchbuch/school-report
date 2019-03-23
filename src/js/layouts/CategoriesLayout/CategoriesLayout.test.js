@@ -5,12 +5,19 @@ import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import store from '../../store/redux';
 import CategoriesLayout from './CategoriesLayout';
+import type { Props } from './CategoriesLayout';
 
-test('<CategoriesLayout />: Renders without crashing', () => {
-  const wrapper = shallow(
-    <Provider store={store}>
-      <CategoriesLayout />
-    </Provider>
-  );
-  expect(wrapper).toHaveLength(1);
+describe('<CategoriesLayout />:', () => {
+  const props: Props = {
+    categories: [],
+  };
+
+  test('Renders without crashing', () => {
+    const wrapper = shallow(
+      <Provider store={store}>
+        <CategoriesLayout {...props} />
+      </Provider>
+    );
+    expect(wrapper).toHaveLength(1);
+  });
 });

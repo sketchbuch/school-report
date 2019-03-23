@@ -1,8 +1,9 @@
 // @flow
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Formik } from 'formik';
+import { RouteComponentProps } from 'react-router';
+import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 import ExportBuilderForm from '../Form/ExportBuilderForm';
 import EditPanel from '../../../components/EditPanel/EditPanel';
@@ -12,6 +13,7 @@ import exportSchema from '../../../validation/schemas/export';
 import { text } from '../../../components/Translation/Translation';
 import exportDefault from '../../../types/export';
 import type { ExportType } from '../../../types/export';
+import type { ReduxState } from '../../../types/reduxstate';
 import type { ReportType } from '../../../types/report';
 import type { TextType } from '../../../types/text';
 import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
@@ -19,14 +21,12 @@ import { exportWord, getContent, getDateFromTs } from '../../../fs/export';
 import setTitle from '../../../utils/title';
 import { TOASTR_DURATION_LONG } from '../../../constants/misc';
 
-type Props = {
+export type Props = {
+  ...RouteComponentProps,
   activeReport: ReportType | Object,
   builder: Object,
-  history: Object,
-  items: Array<SidebarBuilderItemType>,
-  location: Object,
-  match: Object,
-  texts: Array<TextType>,
+  items: SidebarBuilderItemType[],
+  texts: TextType[],
 };
 
 type State = {
@@ -35,9 +35,6 @@ type State = {
   saving: boolean,
 };
 
-/**
- * Layout for exporting a report
- */
 export class ExportBuilderLayout extends Component<Props, State> {
   static defaultProps = {
     activeReport: {},
@@ -47,33 +44,21 @@ export class ExportBuilderLayout extends Component<Props, State> {
   };
 
   props: Props;
-  state: State;
-  exportResult: (ioResult: Object) => {};
-  handleSubmit: (values: ExportType) => {};
-  saveName: string;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      export: { ...exportDefault },
-      error: false,
-      saving: false,
-    };
-
-    this.exportResult = this.exportResult.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.saveName = '';
-  }
+  state: State = {
+    export: { ...exportDefault },
+    error: false,
+    saving: false,
+  };
+  saveName: string = '';
 
   componentDidMount() {
     setTitle(text('WinTitle', 'ExportBuilderLayout'));
   }
 
   handleSubmit(values: ExportType) {
-    const { activeReport, builder, items, texts } = this.props;
+    const { activeReport, builder, items, texts }: Props = this.props;
     const content = getContent(items, builder[activeReport.id] || {}, texts);
-    const exportValues = {
+    const exportValues: ExportType = {
       ...values,
       classCount: content.classCount,
       content: content.content,
@@ -86,6 +71,7 @@ export class ExportBuilderLayout extends Component<Props, State> {
     exportWord(exportValues, this.exportResult);
   }
 
+  // TODO - fix type
   exportResult(ioResult: Object) {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceSuccess', 'ExportBuilderLayout'), this.saveName);
@@ -101,7 +87,7 @@ export class ExportBuilderLayout extends Component<Props, State> {
   }
 
   render() {
-    const reportName = this.props.activeReport.getLabel();
+    const reportName: string = this.props.activeReport.getLabel();
 
     return (
       <EditPanel>
@@ -126,7 +112,7 @@ export class ExportBuilderLayout extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: Object, props: Props) => {
+const mapStateToProps = (state: ReduxState, props: Props) => {
   return {
     builder: state.builder,
     texts: state.texts,
