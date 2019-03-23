@@ -10,12 +10,12 @@ import './SearchField.css';
 
 export type Props = {
   anywhere: boolean,
-  anywhereOnClick: (event: SyntheticEvent<MouseEvent>) => void | null,
+  anywhereOnClick: (event: SyntheticMouseEvent<EventTarget>) => void,
   classes: string,
-  clearOnClick: (event: SyntheticEvent<MouseEvent>) => void | null,
-  iconOnClick: (event: SyntheticEvent<MouseEvent>) => void | null,
-  onChange: (event: SyntheticMouseEvent<HTMLInputElement>) => void | null,
-  onKeyUp: (event: SyntheticMouseEvent<HTMLInputElement>) => void | null,
+  clearOnClick: (event: SyntheticMouseEvent<EventTarget>) => void,
+  iconOnClick: (event: SyntheticEvent<EventTarget>) => void,
+  onChange: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
+  onKeyUp: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
   placeholder: string,
   term: string,
   visible: boolean,
@@ -24,12 +24,7 @@ export type Props = {
 class SearchField extends React.PureComponent<Props> {
   static defaultProps = {
     anywhere: false,
-    anywhereOnClick: null,
     classes: '',
-    clearOnClick: null,
-    iconOnClick: null,
-    onChange: null,
-    onKeyUp: null,
     placeholder: '',
     term: '',
     visible: false,

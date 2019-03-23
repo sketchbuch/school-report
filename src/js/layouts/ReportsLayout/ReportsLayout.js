@@ -64,7 +64,7 @@ export class ReportsLayout extends React.Component<Props, State> {
     }
   }
 
-  handleSearch = (event: SyntheticInputEvent<HTMLInputElement>): void => {
+  handleSearch = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
     if (event.type === 'keyup') {
       if (event.key === 'Escape') {
         this.handleSearchIconClick(event);
@@ -84,7 +84,7 @@ export class ReportsLayout extends React.Component<Props, State> {
     this.setState({ curPage });
   };
 
-  handleSearchIconClick = (event: SyntheticEvent<MouseEvent>): void => {
+  handleSearchIconClick = (event: SyntheticEvent<EventTarget>): void => {
     const newSearchVisible: boolean = !this.state.searchVisible;
 
     if (newSearchVisible === false) {
@@ -94,7 +94,7 @@ export class ReportsLayout extends React.Component<Props, State> {
     }
   };
 
-  handleSearchAnywhereClick = (event: SyntheticEvent<MouseEvent>): void => {
+  handleSearchAnywhereClick = (event: SyntheticMouseEvent<EventTarget>): void => {
     this.setState({ anywhere: !this.state.anywhere });
   };
 

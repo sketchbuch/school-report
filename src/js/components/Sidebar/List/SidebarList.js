@@ -29,7 +29,7 @@ type Props = {
   listType: SidebarListTypes,
   noItemsTxt: string,
   onChange: ?(curPage: number) => void,
-  onReportClick: ?(id: string, label: string) => void | null,
+  onReportClick: ?(id: string, label: string) => (event: SyntheticMouseEvent<EventTarget>) => void | null,
   pagesToShow: number,
   perPage: number,
   reportSidebar: string | false,

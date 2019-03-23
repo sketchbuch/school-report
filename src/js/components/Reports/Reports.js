@@ -135,7 +135,7 @@ export class Reports extends Component<Props, State> {
     this.setState({ catPage });
   };
 
-  catClick = (catId: string, catLabel: string) => (event: SyntheticEvent<>): void => {
+  catClick = (catId: string, catLabel: string) => (event: SyntheticMouseEvent<EventTarget>): void => {
     this.setState({ catId, catLabel });
   };
 
@@ -148,12 +148,11 @@ export class Reports extends Component<Props, State> {
     }
   };
 
-  catAnywhereIconClick = (event: SyntheticEvent<MouseEvent>): void => {
+  catAnywhereIconClick = (event: SyntheticMouseEvent<EventTarget>): void => {
     this.setState({ catSearchAnywhere: !this.state.catSearchAnywhere });
   };
 
-  // TODO - fix
-  catSearch = (event: SyntheticInputEvent<HTMLInputElement>): void => {
+  catSearch = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
     if (event.type === 'keyup') {
       if (event.key === 'Escape') {
         this.catSearchIconClick(event);

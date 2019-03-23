@@ -3,7 +3,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import { UI_ERROR_CLASS } from '../../../constants/ui';
-import type { EventHandlerType } from '../../../types/functions';
 import './TextInput.css';
 
 export type Props = {
@@ -13,9 +12,9 @@ export type Props = {
   isValid?: boolean,
   maxLength?: number,
   name?: string,
-  onBlur?: EventHandlerType | null,
-  onChange?: EventHandlerType | null,
-  onKeyUp?: EventHandlerType | null,
+  onBlur?: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
+  onChange?: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
+  onKeyUp?: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
   placeholder?: string,
   title?: string,
   type?: string,
@@ -27,9 +26,6 @@ class TextInput extends React.Component<Props> {
     className: '',
     disabled: false,
     isValid: true,
-    onBlur: null,
-    onChange: null,
-    onKeyUp: null,
     type: 'text',
   };
 

@@ -36,11 +36,11 @@ export class ItemSelection extends React.Component<Props, State> {
     term: '',
   };
 
-  handleClear = (event: SyntheticInputEvent<HTMLInputElement>): void => {
+  handleClear = (event: SyntheticMouseEvent<EventTarget>): void => {
     this.setState({ term: '' });
   };
 
-  handleSearch = (event: SyntheticInputEvent<HTMLInputElement>): void => {
+  handleSearch = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
     const term = event.currentTarget.value;
     this.setState({ term });
   };
