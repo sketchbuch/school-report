@@ -1,40 +1,51 @@
+//@flow
+
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import TextInput from './TextInput';
+import type { Props } from './TextInput';
 import { UI_ERROR_CLASS } from '../../../constants/ui';
 
 describe('<TextInput />', () => {
+  const props: Props = {
+    className: '',
+    disabled: false,
+    isValid: true,
+    maxLength: 20,
+    name: 'test',
+    onBlur: jest.fn(),
+    onChange: jest.fn(),
+    onKeyUp: jest.fn(),
+    placeholder: 'Enter text...',
+    title: 'An input',
+    type: 'text',
+    value: '',
+  };
+
   test('Renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<TextInput />, div);
+    const wrapper = shallow(<TextInput {...props} />);
+    expect(wrapper).toHaveLength(1);
   });
 
   test('Handles disabled property', () => {
-    const props = {
-      onChange: jest.fn(),
-      disabled: true,
-    };
-    const wrapper = mount(<TextInput {...props} />);
+    const mockOnChange = jest.fn();
+    const wrapper = mount(<TextInput {...props} disabled onChange={mockOnChange} />);
     wrapper.simulate('change');
-    expect(props.onChange.mock.calls.length).toBe(0);
+    expect(mockOnChange.mock.calls.length).toBe(0);
   });
 
   test('Handles className property', () => {
-    const cn1Props = { className: '' };
-    const cn1Wrapper = shallow(<TextInput {...cn1Props} />);
-    const cn2Props = { className: 'TestClass' };
-    const cn2Wrapper = shallow(<TextInput {...cn2Props} />);
+    const CLASS_NAME = 'TestClass';
+    const cn1Wrapper = shallow(<TextInput {...props} />);
+    const cn2Wrapper = shallow(<TextInput {...props} className={CLASS_NAME} />);
 
-    expect(cn1Wrapper.find('.TextInput').hasClass('TestClass')).toEqual(false);
-    expect(cn2Wrapper.find('.TextInput').hasClass('TestClass')).toEqual(true);
+    expect(cn1Wrapper.find('.TextInput').hasClass(CLASS_NAME)).toEqual(false);
+    expect(cn2Wrapper.find('.TextInput').hasClass(CLASS_NAME)).toEqual(true);
   });
 
   test('Handles isValid property', () => {
-    const iv1Props = { isValid: true };
-    const iv1Wrapper = shallow(<TextInput {...iv1Props} />);
-    const iv2Props = { isValid: false };
-    const iv2Wrapper = shallow(<TextInput {...iv2Props} />);
+    const iv1Wrapper = shallow(<TextInput {...props} />);
+    const iv2Wrapper = shallow(<TextInput {...props} isValid={false} />);
 
     expect(iv1Wrapper.find('.TextInput').hasClass(UI_ERROR_CLASS)).toEqual(false);
     expect(iv2Wrapper.find('.TextInput').hasClass(UI_ERROR_CLASS)).toEqual(true);

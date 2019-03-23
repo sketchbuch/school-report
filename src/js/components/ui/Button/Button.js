@@ -37,7 +37,7 @@ class Button extends React.Component<Props> {
 
     return (
       <button
-        className={classNames('Button', { [className]: className !== '' })}
+        className={classNames('Button', { [className]: !!className })}
         data-buttontype={buttontype}
         disabled={disabled}
         name={name}

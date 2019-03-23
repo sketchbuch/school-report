@@ -30,6 +30,8 @@ Tests:
 
 - utils/redux move get array element to new function and also use in reducers
 - Tests for layouts
+- remove mount where possible
+- make sure crashing test uses enzyme
 
 
 Breadcrumb:

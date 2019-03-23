@@ -9,7 +9,7 @@ import type { PageBrowserProps } from '../../../types/pageBrowser';
 import type { RenderHelperReturn } from '../../../types/misc';
 import './PageBrowser.css';
 
-type PbMoreProps = {
+export type PbMoreProps = {
   hidden: boolean,
 };
 
@@ -17,13 +17,13 @@ export const PbMore = (props: PbMoreProps) => {
   return <span className={classNames('PageBrowser__more', { 'PageBrowser__more--hidden': props.hidden })}>…</span>;
 };
 
-type PbButProps = {
+export type PbButProps = {
   disabled: boolean,
   label: string,
+  onClick: (event: SyntheticInputEvent) => void,
   page?: boolean,
   selected?: boolean,
   title?: string,
-  onClick: (event: SyntheticInputEvent) => void,
   type: string,
 };
 
@@ -44,7 +44,7 @@ export const PbBut = (props: PbButProps) => {
   );
 };
 
-type Props = { ...PageBrowserProps };
+export type Props = { ...PageBrowserProps };
 
 class PageBrowser extends Component<Props> {
   static defaultProps = { ...pageBrowserPropsDefault };
@@ -133,7 +133,7 @@ class PageBrowser extends Component<Props> {
     let pb = null;
     if (itemCount > 0) {
       pb = (
-        <div className={classNames('PageBrowser', { [className]: className !== '' })}>
+        <div className={classNames('PageBrowser', { [className]: !!className })}>
           <div className="PageBrowser__controls">
             {this.renderLeft(first, prev, curPage)}
             {this.renderCentre(curPage, totalPages)}

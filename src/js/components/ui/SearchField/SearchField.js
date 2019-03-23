@@ -8,7 +8,7 @@ import { ICON_CLOSE, ICON_SEARCH, ICON_SEARCH_ANYWHERE } from '../../../constant
 import { text } from '../../Translation/Translation';
 import './SearchField.css';
 
-type Props = {
+export type Props = {
   anywhere: boolean,
   anywhereOnClick: (event: SyntheticEvent<MouseEvent>) => void | null,
   classes: string,
@@ -25,10 +25,12 @@ class SearchField extends React.PureComponent<Props> {
   static defaultProps = {
     anywhere: false,
     anywhereOnClick: null,
+    classes: '',
     clearOnClick: null,
     iconOnClick: null,
     onChange: null,
     onKeyUp: null,
+    placeholder: '',
     term: '',
     visible: false,
   };
@@ -36,13 +38,23 @@ class SearchField extends React.PureComponent<Props> {
   props: Props;
 
   render() {
-    const { anywhereOnClick, clearOnClick, iconOnClick, onChange, onKeyUp, placeholder, term, visible } = this.props;
+    const {
+      anywhereOnClick,
+      classes,
+      clearOnClick,
+      iconOnClick,
+      onChange,
+      onKeyUp,
+      placeholder,
+      term,
+      visible,
+    } = this.props;
 
     return (
       <div
         className={classNames('SearchField', {
           'SearchField--visible': visible,
-          [this.props.classes]: !!this.props.classes,
+          [classes]: !!classes,
         })}
       >
         {visible ? (

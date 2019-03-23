@@ -1,12 +1,13 @@
 //@flow
 
 import * as React from 'react';
+import classNames from 'classnames';
 import { UI_ERROR_CLASS } from '../../../constants/ui';
 import type { EventHandlerType } from '../../../types/functions';
 import './TextInput.css';
 
-type Props = {
-  className?: string,
+export type Props = {
+  className: string,
   defaultValue?: string,
   disabled?: boolean,
   isValid?: boolean,
@@ -21,11 +22,9 @@ type Props = {
   value?: string,
 };
 
-/**
- * Generic input tag.
- */
 class TextInput extends React.Component<Props> {
   static defaultProps = {
+    className: '',
     disabled: false,
     isValid: true,
     onBlur: null,
@@ -53,17 +52,9 @@ class TextInput extends React.Component<Props> {
       value,
     } = this.props;
 
-    let classes = 'TextInput';
-    if (className) {
-      classes += ` ${className}`;
-    }
-    if (isValid === false) {
-      classes += ` ${UI_ERROR_CLASS}`;
-    }
-
     return (
       <input
-        className={classes}
+        className={classNames('TextInput', { [className]: !!className, [UI_ERROR_CLASS]: isValid })}
         defaultValue={defaultValue}
         disabled={disabled}
         name={name}

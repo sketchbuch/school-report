@@ -1,8 +1,7 @@
 //@flow
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import ButtonCircular from './ButtonCircular';
 import type { Props } from './ButtonCircular';
 
@@ -13,8 +12,8 @@ describe('<ButtonCircular />', () => {
   };
 
   test('Renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<ButtonCircular {...props} />, div);
+    const wrapper = shallow(<ButtonCircular {...props} />);
+    expect(wrapper).toHaveLength(1);
   });
 
   test('Handles visual property', () => {

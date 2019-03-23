@@ -1,6 +1,3 @@
-/* Textareas */
-/* --------- */
-
 .Textarea {
   background: var(--col-white);
   color: var(--col-text);
@@ -8,12 +5,12 @@
   border-radius: var(--border-radius);
   outline: 0px;
   text-align: left;
-  padding: 1.0rem;
+  padding: 1rem;
   font-size: var(--font-size);
   line-height: var(--lh-reduced);
   width: 100%;
   margin: 0px auto;
-  height: 10.0rem;
+  height: 10rem;
   transition: all 250ms ease;
 }
 
@@ -30,9 +27,8 @@
 }
 
 .Textarea + .invalid-feedback {
-  margin-top: -1.0rem;
+  margin-top: -1rem;
 }
-
 
 /* Error */
 .Textarea.has--error,
@@ -40,7 +36,6 @@
 .Textarea.has--error:active {
   border-color: var(--col-neg);
 }
-
 
 /* Disabled */
 .Textarea[disabled],

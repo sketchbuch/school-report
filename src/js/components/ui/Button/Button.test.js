@@ -1,8 +1,7 @@
 //@flow
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Button from './Button';
 import type { Props } from './Button';
 
@@ -13,8 +12,8 @@ describe('<Button />', () => {
   };
 
   test('Renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Button {...props} />, div);
+    const wrapper = shallow(<Button {...props} />);
+    expect(wrapper).toHaveLength(1);
   });
 
   test('Handles busy property', () => {

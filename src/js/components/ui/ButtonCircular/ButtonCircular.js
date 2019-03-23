@@ -39,7 +39,7 @@ class ButtonCircular extends React.Component<Props> {
     return React.createElement(
       tagName,
       {
-        className: classNames('ButtonCircular', { [className]: className !== '' }),
+        className: classNames('ButtonCircular', { [className]: !!className }),
         'data-action': action,
         'data-buttontype': buttontype,
         disabled: disabled,

@@ -1,10 +1,13 @@
+//@flow
+
 import React from 'react';
 import { shallow } from 'enzyme';
-import pageBrowserPropsDefault from '../../../types/pageBrowser';
 import PageBrowser, { PbBut, PbMore } from './PageBrowser';
+import pageBrowserPropsDefault from '../../../types/pageBrowser';
+import type { PbButProps, PbMoreProps, Props } from './PageBrowser';
 
 describe('<PageBrowser />', () => {
-  const props = { ...pageBrowserPropsDefault };
+  const props: Props = { ...pageBrowserPropsDefault };
 
   test('Renders without crashing', () => {
     const wrapper = shallow(<PageBrowser {...props} />);
@@ -154,13 +157,13 @@ describe('<PageBrowser />', () => {
 });
 
 describe('PbBut():', () => {
-  const props = {
+  const props: PbButProps = {
     disabled: false,
     label: '1',
+    onClick: jest.fn(),
     page: false,
     selected: false,
     title: '1',
-    onClick: jest.fn(),
     type: '1',
   };
 
@@ -195,14 +198,18 @@ describe('PbBut():', () => {
 });
 
 describe('PbMore():', () => {
+  const props: PbMoreProps = {
+    hidden: false,
+  };
+
   test('Renders a PbMore SFC', () => {
-    const wrapper = shallow(<PbMore hidden={false} />);
+    const wrapper = shallow(<PbMore {...props} />);
     expect(wrapper).toHaveLength(1);
     expect(wrapper.find('.PageBrowser__more--hidden')).toHaveLength(0);
   });
 
   test('Renders a hidden PbMore SFC', () => {
-    const wrapper = shallow(<PbMore hidden={true} />);
+    const wrapper = shallow(<PbMore {...props} hidden />);
     expect(wrapper).toHaveLength(1);
     expect(wrapper.find('.PageBrowser__more--hidden')).toHaveLength(1);
   });

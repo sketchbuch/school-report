@@ -1,10 +1,11 @@
 //@flow
 
 import * as React from 'react';
+import classNames from 'classnames';
 import './Textarea.css';
 
-type Props = {
-  className?: string,
+export type Props = {
+  className: string,
   disabled?: boolean,
   isValid?: boolean,
   name?: string,
@@ -15,9 +16,6 @@ type Props = {
   value?: string,
 };
 
-/**
- * Textarea tag.
- */
 class Textarea extends React.Component<Props> {
   static defaultProps = {
     className: '',
@@ -34,24 +32,18 @@ class Textarea extends React.Component<Props> {
   props: Props;
 
   render() {
-    let classes = 'Textarea';
-    if (this.props.className && this.props.className !== '') {
-      classes += ' ' + this.props.className;
-    }
-    if (this.props.isValid === false) {
-      classes += ' has--error';
-    }
+    const { className, disabled, isValid, name, onBlur, onChange, placeholder, title, value } = this.props;
 
     return (
       <textarea
-        className={classes}
-        disabled={this.props.disabled}
-        onBlur={this.props.disabled ? null : this.props.onBlur}
-        onChange={this.props.disabled ? null : this.props.onChange}
-        name={this.props.name}
-        placeholder={this.props.placeholder}
-        title={this.props.title}
-        value={this.props.value}
+        className={classNames('Textarea', { [className]: !!className, 'has--error': isValid })}
+        disabled={disabled}
+        onBlur={disabled ? null : onBlur}
+        onChange={disabled ? null : onChange}
+        name={name}
+        placeholder={placeholder}
+        title={title}
+        value={value}
       />
     );
   }

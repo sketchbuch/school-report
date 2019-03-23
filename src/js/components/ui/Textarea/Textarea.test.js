@@ -1,39 +1,47 @@
+//@flow
+
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { shallow, mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Textarea from './Textarea';
+import type { Props } from './Textarea';
 
 describe('<Textarea />', () => {
+  const props: Props = {
+    className: '',
+    disabled: false,
+    isValid: true,
+    name: '',
+    onBlur: jest.fn(),
+    onChange: jest.fn(),
+    placeholder: '',
+    title: '',
+    value: '',
+  };
+
   test('Renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Textarea />, div);
+    const wrapper = shallow(<Textarea {...props} />);
+    expect(wrapper).toHaveLength(1);
   });
 
   test('Handles disabled property', () => {
-    const props = {
-      onChange: jest.fn(),
-      disabled: true,
-    };
-    const wrapper = mount(<Textarea {...props} />);
+    const mockOnChange = jest.fn();
+    const wrapper = mount(<Textarea {...props} disabled onChange={mockOnChange} />);
     wrapper.simulate('change');
-    expect(props.onChange.mock.calls.length).toBe(0);
+    expect(mockOnChange.mock.calls.length).toBe(0);
   });
 
   test('Handles className property', () => {
-    const cn1Props = { className: '', to: '/classes' };
-    const cn1Wrapper = shallow(<Textarea {...cn1Props} />);
-    const cn2Props = { className: 'TestClass', to: '/classes' };
-    const cn2Wrapper = shallow(<Textarea {...cn2Props} />);
+    const CLASS_NAME = 'TestClass';
+    const cn1Wrapper = shallow(<Textarea {...props} />);
+    const cn2Wrapper = shallow(<Textarea {...props} classnamesName={CLASS_NAME} />);
 
-    expect(cn1Wrapper.find('textarea').hasClass('TestClass')).toEqual(false);
-    expect(cn2Wrapper.find('textarea').hasClass('TestClass')).toEqual(true);
+    expect(cn1Wrapper.find('textarea').hasClass(CLASS_NAME)).toEqual(false);
+    expect(cn2Wrapper.find('textarea').hasClass(CLASS_NAME)).toEqual(true);
   });
 
   test('Handles isValid property', () => {
-    const props1 = { to: '/classes', isValid: true };
-    const wrapper1 = shallow(<Textarea {...props1} />);
-    const props2 = { to: '/classes', isValid: false };
-    const wrapper2 = shallow(<Textarea {...props2} />);
+    const wrapper1 = shallow(<Textarea {...props} />);
+    const wrapper2 = shallow(<Textarea {...props} isValid={false} />);
 
     expect(wrapper1.find('textarea').hasClass('has--error')).toEqual(false);
     expect(wrapper2.find('textarea').hasClass('has--error')).toEqual(true);
