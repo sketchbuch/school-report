@@ -63,7 +63,8 @@ export class App extends Component<Props> {
     }
   }
 
-  settingsLoaded = (ioResult: FsObject): void => {
+  // TODO - fix types
+  settingsLoaded = (ioResult: Object): void => {
     if (ioResult.success === true) {
       this.props.dispatch(settingsActions.loaded(ioResult.data));
     } else if (ioResult.errorObj.code === 'ENOENT') {
@@ -83,7 +84,8 @@ export class App extends Component<Props> {
     }
   };
 
-  dataLoaded = (ioResult: FsObject): void => {
+  // TODO - fix types
+  dataLoaded = (ioResult: Object): void => {
     if (ioResult.success === true) {
       this.props.dispatch(dataActions.loaded(JSON.parse(ioResult.data)));
     } else {
