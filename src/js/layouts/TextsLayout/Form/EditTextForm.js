@@ -14,6 +14,7 @@ import { categorySort } from '../../../types/category';
 import { placeholderMap } from '../../../utils/html';
 import { sortObjectsAz } from '../../../utils/sort';
 
+// TODO - fix types
 export type Props = {
   categories: CategoryType[],
   dirty: boolean,

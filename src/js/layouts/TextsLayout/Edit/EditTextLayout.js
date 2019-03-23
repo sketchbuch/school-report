@@ -12,8 +12,9 @@ import EditTextForm from '../Form/EditTextForm';
 import { text } from '../../../components/Translation/Translation';
 import { textSchema } from '../../../validation/schemas';
 import * as textActions from '../../../actions/textActions';
-import type { TextType } from '../../../types/text';
 import type { CategoryType } from '../../../types/category';
+import type { FsObject } from '../../../types/fsObject';
+import type { TextType } from '../../../types/text';
 import textDefault from '../../../types/text';
 import { ROUTE_TEXTS } from '../../../constants/routes';
 import { getActiveText } from '../../../utils/redux';
@@ -50,7 +51,7 @@ export class EditTextLayout extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    const activeText = this.getActiveText();
+    const activeText: TextType = this.getActiveText();
     setTitle(text('WinTitle', 'EditTextLayout', { TEXT: activeText.getLabel() }));
 
     if (this.state.error) {
@@ -73,7 +74,7 @@ export class EditTextLayout extends Component<Props, State> {
     });
   };
 
-  dataSaved = (ioResult: Object): void => {
+  dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceEdit', 'Texts'), this.state.text.getLabel());
       this.props.history.push(ROUTE_TEXTS);

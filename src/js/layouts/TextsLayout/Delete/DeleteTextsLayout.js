@@ -12,6 +12,7 @@ import EditPanelContent from '../../../components/EditPanel/Content/EditPanelCon
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import Translation, { text } from '../../../components/Translation/Translation';
 import setTitle from '../../../utils/title';
+import type { FsObject } from '../../../types/fsObject';
 import { ROUTE_TEXTS } from '../../../constants/routes';
 
 export type Props = {
@@ -50,7 +51,7 @@ export class DeleteTextsLayout extends Component<Props, State> {
     this.setState({ deleting: true });
   };
 
-  dataSaved = (ioResult: Object): void => {
+  dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceDeleted', 'Texts'));
       this.props.history.push(ROUTE_TEXTS);

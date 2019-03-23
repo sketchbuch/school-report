@@ -1,26 +1,28 @@
 // @flow
 
 import React, { Component } from 'react';
+import type { Dispatch } from 'redux';
+import { Formik } from 'formik';
+import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
-import { Formik } from 'formik';
 import SettingsForm from './Form/SettingsForm';
 import { text } from '../../components/Translation/Translation';
 import type { LangType } from '../../types/lang';
 import settingsSchema from '../../validation/schemas/settings';
 import settingsDefault from '../../types/settings';
+import type { FsObject } from '../../types/fsObject';
+import type { ReduxState } from '../../types/reduxstate';
 import type { SettingsType } from '../../types/settings';
 import * as settingsActions from '../../actions/settingsActions';
 import { ROUTE_SETTINGS } from '../../constants/routes';
 import setTitle from '../../utils/title';
 import './SettingsLayout.css';
 
-type Props = {
-  dispatch: Function,
-  history: Object,
-  languages: Array<LangType>,
-  location: Object,
-  match: Object,
+export type Props = {
+  ...RouteComponentProps,
+  dispatch: Dispatch,
+  languages: LangType[],
   settings: SettingsType,
 };
 
@@ -30,30 +32,16 @@ type State = {
   settings: Object,
 };
 
-/**
- * Home Layout.
- */
 export class SettingsLayout extends Component<Props, State> {
   props: Props;
+  state: State = {
+    error: false,
+    saving: false,
+    settings: { ...settingsDefault, ...this.props.settings },
+  };
   dataSaved: Function;
   handleSubmit: Function;
-  prevLang: string;
-
-  constructor(props: Props) {
-    super(props);
-
-    const defaultSettings = { ...settingsDefault, ...this.props.settings };
-
-    this.state = {
-      error: false,
-      saving: false,
-      settings: defaultSettings,
-    };
-
-    this.dataSaved = this.dataSaved.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.prevLang = defaultSettings.language;
-  }
+  prevLang: string = { ...settingsDefault, ...this.props.settings }.language;
 
   componentDidMount() {
     setTitle(text('WinTitle', 'Settings'));
@@ -82,19 +70,14 @@ export class SettingsLayout extends Component<Props, State> {
     }
   }
 
-  handleSubmit(values: SettingsType) {
+  handleSubmit = (values: SettingsType): void => {
     this.setState({
       settings: { ...values },
       saving: true,
     });
-  }
+  };
 
-  /**
-   * Callback used by settingsActions.update.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataSaved(ioResult: Object) {
+  dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceEdit', 'Settings'));
     } else {
@@ -103,7 +86,7 @@ export class SettingsLayout extends Component<Props, State> {
         saving: false,
       });
     }
-  }
+  };
 
   render() {
     return (
@@ -124,7 +107,7 @@ export class SettingsLayout extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: Object) => ({
+const mapStateToProps = (state: ReduxState) => ({
   settings: state.settings,
   languages: state.languages.available,
 });

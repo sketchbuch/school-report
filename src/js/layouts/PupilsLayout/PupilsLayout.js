@@ -1,8 +1,10 @@
 // @flow
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import * as React from 'react';
+import type { Dispatch } from 'redux';
 import { Route, Switch } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router';
+import { connect } from 'react-redux';
 import DeletePupilsLayout from './Delete/DeletePupilsLayout';
 import EditPupilLayout from './Edit/EditPupilLayout';
 import Icon from '../../components/Icon/Icon';
@@ -17,19 +19,19 @@ import SidebarList from '../../components/Sidebar/List/SidebarList';
 import setTitle from '../../utils/title';
 import type { ClassType } from '../../types/class';
 import type { PupilSortOptions, PupilType } from '../../types/pupil';
+import type { ReduxState } from '../../types/reduxstate';
 import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
 import { ROUTE_DEL_PUPILS, ROUTE_EDIT_PUPIL, ROUTE_NEW_PUPIL, ROUTE_PUPILS } from '../../constants/routes';
 import { getActiveClass, getClassPupils } from '../../utils/redux';
 import { pupilSort } from '../../types/pupil';
 import { text } from '../../components/Translation/Translation';
 
-type Props = {
+export type Props = {
+  ...RouteComponentProps,
   activeClass: ClassType | Object,
-  dispatch: Function,
-  location: Object,
-  match: Object,
+  dispatch: Dispatch,
   pupilsSort: PupilSortOptions,
-  pupils: Array<PupilType>,
+  pupils: PupilType[],
 };
 
 type State = {
@@ -39,37 +41,19 @@ type State = {
   term: string,
 };
 
-/**
- * Layout for displaying pupils.
- */
-export class PupilsLayout extends Component<Props, State> {
+export class PupilsLayout extends React.Component<Props, State> {
   static defaultProps = {
     activeClass: {},
     pupils: [],
   };
 
   props: Props;
-  state: State;
-  handlePbChange: (curPage: number) => void;
-  handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
-  handleSearchAnywhereClick: (event: SyntheticEvent<MouseEvent>) => void;
-  handleSearchIconClick: (event: SyntheticEvent<MouseEvent>) => void;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      anywhere: false,
-      curPage: 1,
-      searchVisible: false,
-      term: '',
-    };
-
-    this.handlePbChange = this.handlePbChange.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleSearchAnywhereClick = this.handleSearchAnywhereClick.bind(this);
-    this.handleSearchIconClick = this.handleSearchIconClick.bind(this);
-  }
+  state: State = {
+    anywhere: false,
+    curPage: 1,
+    searchVisible: false,
+    term: '',
+  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'Pupils', { CLASS_NAME: this.getClassLabel() }));
@@ -81,51 +65,47 @@ export class PupilsLayout extends Component<Props, State> {
     }
   }
 
-  handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleSearch = (event: SyntheticInputEvent<HTMLInputElement>): void => {
     if (event.type === 'keyup') {
       if (event.key === 'Escape') {
         this.handleSearchIconClick(event);
       }
     } else {
-      const newState = { term: event.currentTarget.value };
-      if (newState.term !== this.state.term) {
-        newState.curPage = 1;
+      const newTerm: string = event.currentTarget.value;
+
+      if (newTerm !== this.state.term) {
+        this.setState({ curPage: 1, term: newTerm });
+      } else {
+        this.setState({ term: newTerm });
       }
-
-      this.setState(newState);
     }
-  }
+  };
 
-  handlePbChange(curPage: number) {
+  handlePbChange = (curPage: number): void => {
     this.setState({ curPage });
-  }
+  };
 
-  handleSearchIconClick(event: SyntheticEvent<MouseEvent>) {
-    const newState = { searchVisible: !this.state.searchVisible };
-    if (newState.searchVisible === false) {
-      newState.term = '';
-      newState.curPage = 1;
+  handleSearchIconClick = (event: SyntheticEvent<MouseEvent>): void => {
+    const newSearchVisible: boolean = !this.state.searchVisible;
+
+    if (newSearchVisible === false) {
+      this.setState({ curPage: 1, searchVisible: newSearchVisible, term: '' });
+    } else {
+      this.setState({ searchVisible: newSearchVisible });
     }
+  };
 
-    this.setState(newState);
-  }
-
-  handleSearchAnywhereClick(event: SyntheticEvent<MouseEvent>) {
+  handleSearchAnywhereClick = (event: SyntheticEvent<MouseEvent>): void => {
     this.setState({ anywhere: !this.state.anywhere });
-  }
+  };
 
-  /**
-   * Returns the class name or id if not found.
-   *
-   * @return string
-   */
   getClassLabel(): string {
     return this.props.activeClass.label !== undefined ? this.props.activeClass.label : this.props.match.params.classId;
   }
 
   render() {
-    const HAS_PUPILS = this.props.pupils.length > 0 ? true : false;
-    const leftActions = (
+    const HAS_PUPILS: boolean = this.props.pupils.length > 0 ? true : false;
+    const leftActions: React.Element<*> = (
       <NavButtonCircular
         to={ROUTE_NEW_PUPIL.replace(':classId', this.props.match.params.classId)}
         className="SidebarFooter__action"
@@ -136,7 +116,7 @@ export class PupilsLayout extends Component<Props, State> {
         <Icon type={ICON_ADD} />
       </NavButtonCircular>
     );
-    const rightActions = (
+    const rightActions: React.Element<*> = (
       <NavButtonCircular
         disabled={!HAS_PUPILS}
         to={ROUTE_DEL_PUPILS.replace(':classId', this.props.match.params.classId)}
@@ -247,7 +227,7 @@ export class PupilsLayout extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: Object, props: Props) => {
+const mapStateToProps = (state: ReduxState, props: Props) => {
   return {
     activeClass: getActiveClass(state.classes, props.match.params.classId),
     pupils: getClassPupils(state.pupils, props.match.params.classId),

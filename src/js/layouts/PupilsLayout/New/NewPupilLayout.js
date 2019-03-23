@@ -1,28 +1,29 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr';
+import type { Dispatch } from 'redux';
 import { Formik } from 'formik';
-import EditPanel from '../../../components/EditPanel/EditPanel';
-import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
-import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
-import EditPupilForm from '../Form/EditPupilForm';
-import { text } from '../../../components/Translation/Translation';
-import { pupilSchema } from '../../../validation/schemas';
+import { RouteComponentProps } from 'react-router';
+import { toastr } from 'react-redux-toastr';
 import * as pupilActions from '../../../actions/pupilActions';
+import EditPanel from '../../../components/EditPanel/EditPanel';
+import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
+import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
+import EditPupilForm from '../Form/EditPupilForm';
 import pupilDefault, { PupilFactory } from '../../../types/pupil';
+import setTitle from '../../../utils/title';
 import type { ClassType } from '../../../types/class';
+import type { FsObject } from '../../../types/fsObject';
 import type { PupilType } from '../../../types/pupil';
 import { ROUTE_PUPILS } from '../../../constants/routes';
-import setTitle from '../../../utils/title';
+import { pupilSchema } from '../../../validation/schemas';
+import { text } from '../../../components/Translation/Translation';
 
-type Props = {
+export type Props = {
+  ...RouteComponentProps,
   activeClass: ClassType,
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
-  pupils: Array<PupilType>,
+  dispatch: Dispatch,
+  pupils: PupilType[],
 };
 
 type State = {
@@ -31,9 +32,6 @@ type State = {
   saving: boolean,
 };
 
-/**
- * Layout for adding a new pupil.
- */
 export class NewPupilLayout extends Component<Props, State> {
   static defaultProps = {
     activeClass: {},
@@ -41,21 +39,11 @@ export class NewPupilLayout extends Component<Props, State> {
   };
 
   props: Props;
-  dataSaved: Function;
-  handleSubmit: Function;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      error: false,
-      pupil: { ...pupilDefault },
-      saving: false,
-    };
-
-    this.dataSaved = this.dataSaved.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state: State = {
+    error: false,
+    pupil: { ...pupilDefault },
+    saving: false,
+  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'NewPupilLayout'));
@@ -71,21 +59,16 @@ export class NewPupilLayout extends Component<Props, State> {
     }
   }
 
-  handleSubmit(values: Object) {
-    const newPupil = PupilFactory(values, Date.now(), this.props.match.params.classId);
+  handleSubmit = (values: Object): void => {
+    const newPupil: PupilType = PupilFactory(values, Date.now(), this.props.match.params.classId);
 
     this.setState({
       pupil: newPupil,
       saving: true,
     });
-  }
+  };
 
-  /**
-   * Callback used by writeAppData.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataSaved(ioResult: Object) {
+  dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));
       toastr.success(text('PersistenceNew', 'Pupils'), this.state.pupil.getLabel());
@@ -95,7 +78,7 @@ export class NewPupilLayout extends Component<Props, State> {
         saving: false,
       });
     }
-  }
+  };
 
   render() {
     return (

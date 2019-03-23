@@ -1,8 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr';
+import type { Dispatch } from 'redux';
 import { Formik } from 'formik';
+import { RouteComponentProps } from 'react-router';
+import { toastr } from 'react-redux-toastr';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
@@ -12,18 +14,17 @@ import { pupilSchema } from '../../../validation/schemas';
 import * as pupilActions from '../../../actions/pupilActions';
 import pupilDefault from '../../../types/pupil';
 import type { ClassType } from '../../../types/class';
+import type { FsObject } from '../../../types/fsObject';
 import type { PupilType } from '../../../types/pupil';
 import { ROUTE_PUPILS } from '../../../constants/routes';
 import { getActivePupil } from '../../../utils/redux';
 import setTitle from '../../../utils/title';
 
-type Props = {
+export type Props = {
+  ...RouteComponentProps,
   activeClass: ClassType,
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
-  pupils: Array<PupilType>,
+  dispatch: Dispatch,
+  pupils: PupilType[],
 };
 
 type State = {
@@ -32,9 +33,6 @@ type State = {
   saving: boolean,
 };
 
-/**
- * Layout for editing an existing pupil.
- */
 export class EditPupilLayout extends Component<Props, State> {
   static defaultProps = {
     activeClass: {},
@@ -42,21 +40,11 @@ export class EditPupilLayout extends Component<Props, State> {
   };
 
   props: Props;
-  dataSaved: Function;
-  handleSubmit: Function;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      error: false,
-      pupil: { ...pupilDefault, ...this.getActivePupil() },
-      saving: false,
-    };
-
-    this.dataSaved = this.dataSaved.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state: State = {
+    error: false,
+    pupil: { ...pupilDefault, ...this.getActivePupil() },
+    saving: false,
+  };
 
   componentDidMount() {
     setTitle(
@@ -67,7 +55,7 @@ export class EditPupilLayout extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    const activePupil = this.getActivePupil();
+    const activePupil: PupilType = this.getActivePupil();
     setTitle(
       text('WinTitle', 'EditPupilLayout', {
         PUPIL_NAME: activePupil.getLabel(),
@@ -83,7 +71,7 @@ export class EditPupilLayout extends Component<Props, State> {
     }
   }
 
-  handleSubmit(values: Object) {
+  handleSubmit = (values: Object): void => {
     const updatedPupil = { ...values };
     updatedPupil.updated = Date.now();
 
@@ -91,23 +79,9 @@ export class EditPupilLayout extends Component<Props, State> {
       pupil: updatedPupil,
       saving: true,
     });
-  }
+  };
 
-  /**
-   * Returns the matching pupil or an empty object
-   *
-   * @return PupilType | object
-   */
-  getActivePupil() {
-    return getActivePupil(this.props.pupils, this.props.match.params.pupilId);
-  }
-
-  /**
-   * Callback used by writeAppData.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataSaved(ioResult: Object) {
+  dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceEdit', 'Pupils'), this.state.pupil.getLabel());
       this.props.history.push(ROUTE_PUPILS.replace(':classId', this.props.activeClass.id));
@@ -117,10 +91,14 @@ export class EditPupilLayout extends Component<Props, State> {
         saving: false,
       });
     }
+  };
+
+  getActivePupil(): PupilType {
+    return getActivePupil(this.props.pupils, this.props.match.params.pupilId);
   }
 
   render() {
-    const activePupil = this.getActivePupil();
+    const activePupil: PupilType = this.getActivePupil();
 
     return (
       <EditPanel>

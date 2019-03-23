@@ -1,30 +1,31 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr';
+import type { Dispatch } from 'redux';
 import { Formik } from 'formik';
-import EditPanel from '../../../components/EditPanel/EditPanel';
-import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
-import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
-import EditReportForm from '../Form/EditReportForm';
-import { text } from '../../../components/Translation/Translation';
-import reportSchema from '../../../validation/schemas/reports';
+import { RouteComponentProps } from 'react-router';
+import { toastr } from 'react-redux-toastr';
 import * as reportActions from '../../../actions/reportActions';
+import EditPanel from '../../../components/EditPanel/EditPanel';
+import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
+import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
+import EditReportForm from '../Form/EditReportForm';
 import reportDefault from '../../../types/report';
-import type { ReportType } from '../../../types/report';
+import reportSchema from '../../../validation/schemas/reports';
+import setTitle from '../../../utils/title';
 import type { ClassType } from '../../../types/class';
+import type { FsObject } from '../../../types/fsObject';
+import type { ReportType } from '../../../types/report';
 import { ROUTE_REPORTS } from '../../../constants/routes';
 import { getActiveReport } from '../../../utils/redux';
-import setTitle from '../../../utils/title';
+import { text } from '../../../components/Translation/Translation';
 
-type Props = {
-  classes: Array<ClassType>,
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
+export type Props = {
+  ...RouteComponentProps,
+  classes: ClassType[],
+  dispatch: Dispatch,
   maxChars: number,
-  reports: Array<ReportType>,
+  reports: ReportType[],
 };
 
 type State = {
@@ -33,9 +34,6 @@ type State = {
   saving: boolean,
 };
 
-/**
- * Layout for editing an existing report.
- */
 export class EditReportLayout extends Component<Props, State> {
   static defaultProps = {
     classes: [],
@@ -43,21 +41,11 @@ export class EditReportLayout extends Component<Props, State> {
   };
 
   props: Props;
-  dataSaved: Function;
-  handleSubmit: Function;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      error: false,
-      report: { ...reportDefault, ...this.getActiveReport() },
-      saving: false,
-    };
-
-    this.dataSaved = this.dataSaved.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state: State = {
+    error: false,
+    report: { ...reportDefault, ...this.getActiveReport() },
+    saving: false,
+  };
 
   componentDidMount() {
     setTitle(
@@ -77,7 +65,7 @@ export class EditReportLayout extends Component<Props, State> {
     }
   }
 
-  handleSubmit(values: Object) {
+  handleSubmit = (values: Object): void => {
     const updatedReport = { ...values };
     updatedReport.updated = Date.now();
 
@@ -85,23 +73,9 @@ export class EditReportLayout extends Component<Props, State> {
       report: updatedReport,
       saving: true,
     });
-  }
+  };
 
-  /**
-   * Returns the matching report or an empty object
-   *
-   * @return ReportType | object
-   */
-  getActiveReport() {
-    return getActiveReport(this.props.reports, this.props.match.params.reportId);
-  }
-
-  /**
-   * Callback used by electron fs functions.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataSaved(ioResult: Object) {
+  dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceEdit', 'Reports'), this.state.report.getLabel());
       this.props.history.push(ROUTE_REPORTS);
@@ -111,10 +85,14 @@ export class EditReportLayout extends Component<Props, State> {
         saving: false,
       });
     }
+  };
+
+  getActiveReport(): ReportType {
+    return getActiveReport(this.props.reports, this.props.match.params.reportId);
   }
 
   render() {
-    const activeReport = this.getActiveReport();
+    const activeReport: ReportType = this.getActiveReport();
 
     return (
       <EditPanel>

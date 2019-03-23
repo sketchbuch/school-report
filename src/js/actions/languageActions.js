@@ -2,6 +2,7 @@
 
 import { LANGUAGE_LOADED, LOAD_LANGUAGE, CHANGE_LANGUAGE } from '../constants/actionTypes';
 import type { ActionCreator } from '../types/action';
+import type { FsObject } from '../types/fsObject';
 import { readLangFile } from '../fs/fs';
 
 export const change = (langKey: string, callback?: Function): ActionCreator => {
@@ -21,7 +22,7 @@ export const change = (langKey: string, callback?: Function): ActionCreator => {
 
     if (window.reportr.translations[langKey] === undefined) {
       dispatch(
-        load(langKey, function(ioResult: Object) {
+        load(langKey, function(ioResult: FsObject) {
           Object.assign(window.reportr.translations, ioResult.data);
           langReady();
         })

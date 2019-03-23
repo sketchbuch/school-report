@@ -5,12 +5,20 @@ import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import store from '../../store/redux';
 import PupilsLayout from './PupilsLayout';
+import type { Props } from './PupilsLayout';
 
-test('<PupilsLayout />: Renders without crashing', () => {
-  const wrapper = shallow(
-    <Provider store={store}>
-      <PupilsLayout />
-    </Provider>
-  );
-  expect(wrapper).toHaveLength(1);
+describe('<PupilsLayout />:', () => {
+  const props: Props = {
+    activeClass: {},
+    pupils: [],
+  };
+
+  test('Renders without crashing', () => {
+    const wrapper = shallow(
+      <Provider store={store}>
+        <PupilsLayout {...props} />
+      </Provider>
+    );
+    expect(wrapper).toHaveLength(1);
+  });
 });

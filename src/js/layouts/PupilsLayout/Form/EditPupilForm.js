@@ -2,14 +2,15 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import TextInput from '../../../components/ui/TextInput/TextInput';
 import Button from '../../../components/ui/Button/Button';
 import GenderSwitch from '../../../components/ui/GenderSwitch/GenderSwitch';
+import TextInput from '../../../components/ui/TextInput/TextInput';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 import { ROUTE_PUPILS } from '../../../constants/routes';
 
-type Props = {
+// TODO - fix types
+export type Props = {
   classId: string,
   dirty: boolean,
   errors: Object,
@@ -23,9 +24,6 @@ type Props = {
   values: Object,
 };
 
-/**
- * Pupil form for the edit panel.
- */
 export class EditPupilForm extends Component<Props> {
   static defaultProps = {
     dirty: false,
@@ -48,10 +46,10 @@ export class EditPupilForm extends Component<Props> {
       values,
     } = this.props;
 
-    const fnValid = validate('firstname', errors, touched);
-    const lnValid = validate('lastname', errors, touched);
-    const dValid = validate('description', errors, touched);
-    const btnIsDisabled =
+    const fnValid: boolean = validate('firstname', errors, touched);
+    const lnValid: boolean = validate('lastname', errors, touched);
+    const dValid: boolean = validate('description', errors, touched);
+    const btnIsDisabled: boolean =
       saving || !fnValid || !lnValid || !dValid || values.firstname === '' || values.lastname === '' || !dirty
         ? true
         : false;

@@ -1,22 +1,22 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr';
 import { Link } from 'react-router-dom';
-import EditPanel from '../../../components/EditPanel/EditPanel';
-import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
-import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
-import Button from '../../../components/ui/Button/Button';
-import Translation, { text } from '../../../components/Translation/Translation';
+import { RouteComponentProps } from 'react-router';
+import { toastr } from 'react-redux-toastr';
 import * as reportActions from '../../../actions/reportActions';
-import { ROUTE_REPORTS } from '../../../constants/routes';
+import Button from '../../../components/ui/Button/Button';
+import EditPanel from '../../../components/EditPanel/EditPanel';
+import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
+import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
+import Translation, { text } from '../../../components/Translation/Translation';
 import setTitle from '../../../utils/title';
+import type { FsObject } from '../../../types/fsObject';
+import { ROUTE_REPORTS } from '../../../constants/routes';
 
-type Props = {
+export type Props = {
+  ...RouteComponentProps,
   dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
 };
 
 type State = {
@@ -24,25 +24,12 @@ type State = {
   error: boolean,
 };
 
-/**
- * Layout for deleting all reports records.
- */
 export class DeleteReportsLayout extends Component<Props, State> {
-  dataSaved: Function;
   props: Props;
-  handleClick: Function;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      deleting: false,
-      error: false,
-    };
-
-    this.dataSaved = this.dataSaved.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-  }
+  state: State = {
+    deleting: false,
+    error: false,
+  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'DeleteReportsLayout'));
@@ -58,17 +45,12 @@ export class DeleteReportsLayout extends Component<Props, State> {
     }
   }
 
-  handleClick(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleClick = (event: SyntheticInputEvent<HTMLInputElement>): void => {
     event.preventDefault();
     this.setState({ deleting: true });
-  }
+  };
 
-  /**
-   * Callback used by electron fs functions.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataSaved(ioResult: Object) {
+  dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceDeleted', 'Reports'));
       this.props.history.push(ROUTE_REPORTS);
@@ -78,7 +60,7 @@ export class DeleteReportsLayout extends Component<Props, State> {
         error: true,
       });
     }
-  }
+  };
 
   render() {
     return (

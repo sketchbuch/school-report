@@ -8,11 +8,13 @@ import Button from '../../../components/ui/Button/Button';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 import type { ClassType } from '../../../types/class';
+import type { DomainType } from '../../../types/domain';
 import { ROUTE_REPORTS } from '../../../constants/routes';
 import { sortObjectsAz } from '../../../utils/sort';
 
+// TODO - fix types
 type Props = {
-  classes: Array<ClassType>,
+  classes: ClassType[],
   dirty: boolean,
   errors: Object,
   handleBlur: Function,
@@ -25,9 +27,6 @@ type Props = {
   values: Object,
 };
 
-/**
- * Report form for the edit panel.
- */
 export class EditReportForm extends Component<Props> {
   static defaultProps = {
     dirty: false,
@@ -50,12 +49,12 @@ export class EditReportForm extends Component<Props> {
       values,
     } = this.props;
 
-    const rlValid = validate('label', errors, touched);
-    const rcValid = validate('classes', errors, touched);
-    const btnIsDisabled =
+    const rlValid: boolean = validate('label', errors, touched);
+    const rcValid: boolean = validate('classes', errors, touched);
+    const btnIsDisabled: boolean =
       !rcValid || !rlValid || values.label === '' || values.classes.length < 1 || saving || !dirty ? true : false;
-    const sortedClasses = sortObjectsAz(classes, ['label', 'updated']);
-    const selCount = classes.filter(c => values.classes.includes(c.id)).length;
+    const sortedClasses: DomainType[] = sortObjectsAz(classes, ['label', 'updated']);
+    const selCount: number = classes.filter(c => values.classes.includes(c.id)).length;
 
     return (
       <form className="form" onSubmit={handleSubmit}>

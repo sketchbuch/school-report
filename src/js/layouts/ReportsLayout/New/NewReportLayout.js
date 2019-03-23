@@ -14,6 +14,7 @@ import reportSchema from '../../../validation/schemas/reports';
 import * as reportActions from '../../../actions/reportActions';
 import reportDefault, { ReportFactory } from '../../../types/report';
 import type { ReportType } from '../../../types/report';
+import type { FsObject } from '../../../types/fsObject';
 import type { ClassType } from '../../../types/class';
 import { ROUTE_REPORTS } from '../../../constants/routes';
 import setTitle from '../../../utils/title';
@@ -57,6 +58,7 @@ export class NewReportLayout extends Component<Props, State> {
     }
   }
 
+  // TODO: fix types
   handleSubmit = (values: Object): void => {
     const newReport: ReportType = ReportFactory(values, Date.now());
 
@@ -66,7 +68,7 @@ export class NewReportLayout extends Component<Props, State> {
     });
   };
 
-  dataSaved = (ioResult: Object): void => {
+  dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceNew', 'Reports'), this.state.report.getLabel());
       this.props.history.push(ROUTE_REPORTS);

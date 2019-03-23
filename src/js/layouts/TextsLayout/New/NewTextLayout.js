@@ -12,6 +12,7 @@ import EditTextForm from '../Form/EditTextForm';
 import { text } from '../../../components/Translation/Translation';
 import { textSchema } from '../../../validation/schemas';
 import * as textActions from '../../../actions/textActions';
+import type { FsObject } from '../../../types/fsObject';
 import type { TextType } from '../../../types/text';
 import type { CategoryType } from '../../../types/category';
 import textDefault, { TextFactory } from '../../../types/text';
@@ -68,7 +69,7 @@ export class NewTextLayout extends Component<Props, State> {
     });
   };
 
-  dataSaved = (ioResult: Object): void => {
+  dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       this.props.history.push(ROUTE_TEXTS);
       toastr.success(text('PersistenceNew', 'Texts'), cropStr(this.state.text.getLabel(), TEXT_CROP_LEN));
