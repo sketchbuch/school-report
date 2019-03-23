@@ -24,7 +24,7 @@ const menuItemDefault: MenuItemType = {
   route: '',
 };
 
-export function MenuItemFactory(menuitemObj: MenuItemType, ts: number): MenuItemType {
+export const MenuItemFactory = (menuitemObj: MenuItemType, ts: number): MenuItemType => {
   const keyUpper = menuitemObj.key.toUpperCase();
   const keyCapped = ucFirst(menuitemObj.key);
 
@@ -37,10 +37,10 @@ export function MenuItemFactory(menuitemObj: MenuItemType, ts: number): MenuItem
     label: text(keyCapped, 'HomeLayout'),
     route: routes['ROUTE_' + keyUpper],
   };
-}
+};
 
-export function getMenuItemIdStr(menuitemObj: MenuItemType): string {
+export const getMenuItemIdStr = (menuitemObj: MenuItemType): string => {
   return 'menuitem:' + menuitemObj.key;
-}
+};
 
 export default menuItemDefault;

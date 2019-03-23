@@ -22,16 +22,16 @@ const reportDefault: ReportType = {
 
 export const reportSort = ['label', 'updated'];
 
-export function ReportFactory(reportObj: ReportType, ts: number): ReportType {
+export const ReportFactory = (reportObj: ReportType, ts: number): ReportType => {
   return hydrateReport({
     ...reportObj,
     created: ts,
     updated: ts,
     id: generateId(getReportIdStr(reportObj), ts),
   });
-}
+};
 
-export function hydrateReport(reportObj: ReportType): ReportType {
+export const hydrateReport = (reportObj: ReportType): ReportType => {
   return {
     ...reportDefault,
     ...reportObj,
@@ -77,10 +77,10 @@ export function hydrateReport(reportObj: ReportType): ReportType {
       return theUrl.replace(':reportId', this.id);
     },
   };
-}
+};
 
-export function getReportIdStr(reportObj: ReportType): string {
+export const getReportIdStr = (reportObj: ReportType): string => {
   return 'report:' + reportObj.label;
-}
+};
 
 export default reportDefault;

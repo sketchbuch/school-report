@@ -18,7 +18,7 @@ const categoryDefault: CategoryType = {
 
 export const categorySort = ['priority', 'label', 'updated'];
 
-export function CategoryFactory(categoryObj: CategoryType, ts: number): CategoryType {
+export const CategoryFactory = (categoryObj: CategoryType, ts: number): CategoryType => {
   const newObj = hydrateCategory({
     ...categoryObj,
     created: ts,
@@ -27,9 +27,9 @@ export function CategoryFactory(categoryObj: CategoryType, ts: number): Category
   });
 
   return newObj;
-}
+};
 
-export function hydrateCategory(categoryObj: CategoryType): CategoryType {
+export const hydrateCategory = (categoryObj: CategoryType): CategoryType => {
   return {
     ...categoryDefault,
     ...categoryObj,
@@ -73,10 +73,10 @@ export function hydrateCategory(categoryObj: CategoryType): CategoryType {
       return theUrl.replace(':categoryId', this.id);
     },
   };
-}
+};
 
-export function getCategoryIdStr(categoryObj: CategoryType): string {
+export const getCategoryIdStr = (categoryObj: CategoryType): string => {
   return 'category:' + categoryObj.label;
-}
+};
 
 export default categoryDefault;

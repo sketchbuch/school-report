@@ -20,7 +20,7 @@ const classDefault: ClassType = {
 
 export const classSort = ['label', 'updated'];
 
-export function ClassFactory(classObj: ClassType, ts: number): ClassType {
+export const ClassFactory = (classObj: ClassType, ts: number): ClassType => {
   const newObj = hydrateClass({
     ...classObj,
     created: ts,
@@ -29,9 +29,9 @@ export function ClassFactory(classObj: ClassType, ts: number): ClassType {
   });
 
   return newObj;
-}
+};
 
-export function hydrateClass(classObj: ClassType): ClassType {
+export const hydrateClass = (classObj: ClassType): ClassType => {
   return {
     ...classDefault,
     ...classObj,
@@ -77,10 +77,10 @@ export function hydrateClass(classObj: ClassType): ClassType {
       return theUrl.replace(':classId', this.id);
     },
   };
-}
+};
 
-export function getClassIdStr(classObj: ClassType): string {
+export const getClassIdStr = (classObj: ClassType): string => {
   return 'class:' + classObj.label;
-}
+};
 
 export default classDefault;

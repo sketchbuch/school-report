@@ -11,7 +11,7 @@ import { ROUTE_DEL_TEXT, ROUTE_EDIT_TEXT } from '../constants/routes';
 export type TextType = {
   ...$Exact<DomainBaseType>,
   bodytext: string,
-  categories: Array<string>,
+  categories: string[],
   charCount: number,
   lang: string,
 };
@@ -26,7 +26,7 @@ const textDefault: TextType = {
 
 export const textSort = ['bodytext', 'updated'];
 
-export function TextFactory(textObj: TextType, ts: number, lang: string): TextType {
+export const TextFactory = (textObj: TextType, ts: number, lang: string): TextType => {
   return hydrateText({
     ...textObj,
     created: ts,
@@ -35,9 +35,9 @@ export function TextFactory(textObj: TextType, ts: number, lang: string): TextTy
     charCount: textObj.bodytext.length,
     id: generateId(getTextIdStr(textObj), ts),
   });
-}
+};
 
-export function hydrateText(textObj: TextType): TextType {
+export const hydrateText = (textObj: TextType): TextType => {
   return {
     ...textDefault,
     ...textObj,
@@ -81,10 +81,10 @@ export function hydrateText(textObj: TextType): TextType {
       return theUrl.replace(':textId', this.id);
     },
   };
-}
+};
 
-export function getTextIdStr(textObj: TextType): string {
+export const getTextIdStr = (textObj: TextType): string => {
   return 'text:' + textObj.bodytext + '_' + textObj.lang;
-}
+};
 
 export default textDefault;

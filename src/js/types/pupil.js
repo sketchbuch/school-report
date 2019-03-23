@@ -37,7 +37,7 @@ export const pupilSort = {
   [pupilSortLast]: [pupilSortLast, pupilSortFirst, 'updated'],
 };
 
-export function PupilFactory(pupilObj: PupilType, ts: number, classId: string): PupilType {
+export const PupilFactory = (pupilObj: PupilType, ts: number, classId: string): PupilType => {
   return hydratePupil({
     ...pupilObj,
     created: ts,
@@ -45,9 +45,9 @@ export function PupilFactory(pupilObj: PupilType, ts: number, classId: string): 
     classId: classId,
     id: generateId(getPupilIdStr(pupilObj), ts),
   });
-}
+};
 
-export function hydratePupil(pupilObj: PupilType): PupilType {
+export const hydratePupil = (pupilObj: PupilType): PupilType => {
   return {
     ...pupilDefault,
     ...pupilObj,
@@ -127,10 +127,10 @@ export function hydratePupil(pupilObj: PupilType): PupilType {
       }
     },
   };
-}
+};
 
-export function getPupilIdStr(pupilObj: PupilType): string {
+export const getPupilIdStr = (pupilObj: PupilType): string => {
   return 'pupil:' + pupilObj.firstname + '_' + pupilObj.lastname + '_' + pupilObj.description + '_' + pupilObj.gender;
-}
+};
 
 export default pupilDefault;
