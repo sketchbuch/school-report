@@ -6,17 +6,20 @@ import categoryDefault from '../../../types/category';
 import pupilDefault, { PupilFactory } from '../../../types/pupil';
 import textDefault, { TextFactory } from '../../../types/text';
 import ReportsAvailableTexts from './ReportsAvailableTexts';
+import type { Props } from './ReportsAvailableTexts';
 
 describe('<ReportsAvailableTexts />', () => {
-  const props = {
+  const props: Props = {
     activePupil: PupilFactory({ ...pupilDefault, firstname: 'Dr', lastname: 'Who' }, Date.now(), 'cl1'),
     categories: [
       { ...categoryDefault, label: 'Lister', id: 'c1' },
       { ...categoryDefault, label: 'Rimmer', id: 'c2' },
       { ...categoryDefault, label: 'The Cat', id: 'c3' },
     ],
+    disableTexts: false,
     handleTextToggle: jest.fn(),
     selectedTexts: [],
+    term: '',
     texts: [
       TextFactory({ ...textDefault, bodytext: 'Red Dwarf', categories: ['c1'] }, Date.now(), 'EN'),
       TextFactory({ ...textDefault, bodytext: 'Blue Midget', categories: [] }, Date.now(), 'EN'),

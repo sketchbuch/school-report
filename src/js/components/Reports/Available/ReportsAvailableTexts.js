@@ -1,31 +1,31 @@
 // @flow
 
 import * as React from 'react';
+import classNames from 'classnames';
 import Icon from '../../Icon/Icon';
 import LetterCount from '../../LetterCount/LetterCount';
 import NoItems from '../../NoItems/NoItems';
 import Translation from '../../Translation/Translation';
 import type { CategoryType } from '../../../types/category';
+import type { InsertDangerousHtmlObj } from '../../../types/misc';
 import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
 import { ICON_SUCCESS } from '../../../constants/icons';
 import { getPupilTextHtml } from '../../../utils/html';
 import './ReportsAvailableTexts.css';
 
-type Props = {
+// TODO - fix types
+export type Props = {
   activePupil: PupilType | Object,
-  categories: Array<CategoryType>,
+  categories: CategoryType[],
   children?: React.Node,
   disableTexts: boolean,
   handleTextToggle: Function,
-  selectedTexts: Array<string>,
+  selectedTexts: string[],
   term: string,
-  texts: Array<TextType>,
+  texts: TextType[],
 };
 
-/**
- * A list of available texts.
- */
 export class ReportsAvailableTexts extends React.Component<Props> {
   static defaultProps = {
     activePupil: {},
@@ -46,20 +46,21 @@ export class ReportsAvailableTexts extends React.Component<Props> {
         {this.props.texts.length > 0 ? (
           <ul className="ReportsAvailableTexts_list">
             {this.props.texts.map(text => {
-              const pupilText = getPupilTextHtml(text.getLabel(0), this.props.activePupil);
-              const isSelected = this.props.selectedTexts.indexOf(text.id) > -1 ? true : false;
-              const isActive = !isSelected && this.props.disableTexts;
-              let classes = isSelected
-                ? 'ReportsAvailableTexts__item ReportsAvailableTexts__item--selected'
-                : 'ReportsAvailableTexts__item';
-              if (isActive) {
-                classes += ' ReportsAvailableTexts__item--disabled';
-              }
+              const pupilText: InsertDangerousHtmlObj = getPupilTextHtml(text.getLabel(0), this.props.activePupil);
+              const isSelected: boolean = this.props.selectedTexts.indexOf(text.id) > -1 ? true : false;
+              const isActive: boolean = !isSelected && this.props.disableTexts;
 
               return (
-                <li key={text.id} className={classes} onClick={isActive ? null : this.props.handleTextToggle(text.id)}>
+                <li
+                  key={text.id}
+                  className={classNames('ReportsAvailableTexts__item', {
+                    'ReportsAvailableTexts__item--selected': isSelected,
+                    'ReportsAvailableTexts__item--disabled': isActive,
+                  })}
+                  onClick={isActive ? null : this.props.handleTextToggle(text.id)}
+                >
                   <span dangerouslySetInnerHTML={pupilText} />
-                  <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length} />
+                  <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length.toString()} />
                   {isSelected && (
                     <span className="ReportsAvailableTexts__itemselected">
                       <Icon type={ICON_SUCCESS} />

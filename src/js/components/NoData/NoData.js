@@ -13,6 +13,7 @@ import classDefault, { ClassFactory } from '../../types/class';
 import pupilDefault, { PupilFactory } from '../../types/pupil';
 import textDefault, { TextFactory } from '../../types/text';
 import type { ClassType } from '../../types/class';
+import type { FsObject } from '../../types/fsObject';
 import type { PupilType } from '../../types/pupil';
 import type { ReduxState } from '../../types/reduxstate';
 import type { RenderHelperReturn } from '../../types/misc';
@@ -109,7 +110,7 @@ export class NoData extends Component<Props, State> {
     }
   };
 
-  dataSaved = (ioResult: Object): void => {
+  dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       toastr.success(text('DataPersisted', 'NoData'));
       //this.props.history.push(ROUTE_CLASSES);

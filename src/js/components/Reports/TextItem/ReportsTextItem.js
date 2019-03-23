@@ -1,15 +1,19 @@
 // @flow
 
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { DragSource, DropTarget, DragSourceConnector, DragSourceMonitor } from 'react-dnd';
 import LetterCount from '../../LetterCount/LetterCount';
-import { getPupilTextHtml } from '../../../utils/html';
-import { dndTypes } from '../../../constants/dndTypes';
+import type { InsertDangerousHtmlObj } from '../../../types/misc';
 import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
+import { dndTypes } from '../../../constants/dndTypes';
+import { getPupilTextHtml } from '../../../utils/html';
 import './ReportsTextItem.css';
 
-type Props = {
+// TODO - Fix types
+
+export type Props = {
   activePupil: PupilType | Object,
   onClick: (id: string) => {},
   onMove: (sourceId: string, targetId: string, before?: boolean) => {},
@@ -69,19 +73,17 @@ export class ReportsTextItem extends Component<Props> {
 
   render() {
     const { activePupil, connectDragSource, connectDropTarget, isDragging, onClick, txt } = this.props;
-
-    let classes = 'ReportsTextItem';
-    if (isDragging) {
-      classes += ' ReportsTextItem--dragging';
-    }
-
-    const pupilText = getPupilTextHtml(txt.getLabel(0), activePupil);
+    const pupilText: InsertDangerousHtmlObj = getPupilTextHtml(txt.getLabel(0), activePupil);
 
     return connectDragSource(
       connectDropTarget(
-        <div className={classes} onClick={onClick(txt.id)} ref={ele => (this.ele = ele)}>
+        <div
+          className={classNames('ReportsTextItem', { 'ReportsTextItem--dragging': isDragging })}
+          onClick={onClick(txt.id)}
+          ref={ele => (this.ele = ele)}
+        >
           <span dangerouslySetInnerHTML={pupilText} />
-          <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length} />
+          <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length.toString()} />
         </div>
       )
     );

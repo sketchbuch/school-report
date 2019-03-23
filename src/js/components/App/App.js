@@ -14,9 +14,10 @@ import NoData from '../NoData/NoData';
 import Panels from '../Panels/Panels';
 import type { AppType } from '../../types/app';
 import type { ClassType } from '../../types/class';
+import type { FsObject } from '../../types/fsObject';
+import type { ReduxState } from '../../types/reduxstate';
 import type { RenderHelperReturn } from '../../types/misc';
 import type { SettingsType } from '../../types/settings';
-import type { ReduxState } from '../../types/reduxstate';
 import { getCustomNumProp } from '../../utils/dom';
 import { text } from '../Translation/Translation';
 import './App.css';
@@ -62,7 +63,7 @@ export class App extends Component<Props> {
     }
   }
 
-  settingsLoaded = (ioResult: Object): void => {
+  settingsLoaded = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       this.props.dispatch(settingsActions.loaded(ioResult.data));
     } else if (ioResult.errorObj.code === 'ENOENT') {
@@ -73,7 +74,7 @@ export class App extends Component<Props> {
     }
   };
 
-  languageLoaded = (ioResult: Object): void => {
+  languageLoaded = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       Object.assign(window.reportr.translations, ioResult.data);
       this.props.dispatch(languageActions.loaded());
@@ -82,7 +83,7 @@ export class App extends Component<Props> {
     }
   };
 
-  dataLoaded = (ioResult: Object): void => {
+  dataLoaded = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       this.props.dispatch(dataActions.loaded(JSON.parse(ioResult.data)));
     } else {
@@ -90,7 +91,7 @@ export class App extends Component<Props> {
     }
   };
 
-  dataCreated = (ioResult: Object): void => {
+  dataCreated = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       this.props.dispatch(dataActions.created());
     } else {

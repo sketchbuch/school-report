@@ -8,18 +8,16 @@ import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
 import './ReportsSelectedTexts.css';
 
-type Props = {
+// TODO - fix types
+export type Props = {
   activePupil: PupilType | Object,
   handleEndDrag: Function,
   handleTextMove: Function,
   handleTextToggle: Function,
-  selectedTexts: Array<string>,
-  texts: Array<TextType>,
+  selectedTexts: string[],
+  texts: TextType[],
 };
 
-/**
- * Selected texts for a pupil in a report.
- */
 export class ReportsSelectedTexts extends Component<Props> {
   static defaultProps = {
     activePupil: {},
@@ -32,25 +30,19 @@ export class ReportsSelectedTexts extends Component<Props> {
 
   props: Props;
 
-  /**
-   * Returns the selected texts in the order that they are selected.
-   * this.props.selectedTexts is just an array of IDs.
-   */
-  getSelectedTexts() {
-    const visibleTexts = [];
-
-    this.props.selectedTexts.forEach(selTxtId => {
-      const txt = this.props.texts.find(txt => txt.id === selTxtId);
-      if (txt !== undefined) {
-        visibleTexts.push({ ...txt });
+  getSelectedTexts(): TextType[] {
+    return this.props.selectedTexts.reduce((allTexts: TextType[], curSelText: string) => {
+      const txt: ?TextType = this.props.texts.find((txt: TextType) => txt.id === curSelText);
+      if (txt != null) {
+        return [...allTexts, txt];
       }
-    });
 
-    return visibleTexts;
+      return [...allTexts];
+    }, []);
   }
 
   render() {
-    const selectedTexts = this.getSelectedTexts();
+    const selectedTexts: TextType[] = this.getSelectedTexts();
 
     return selectedTexts.length > 0 ? (
       <div className="ReportsSelectedTexts">

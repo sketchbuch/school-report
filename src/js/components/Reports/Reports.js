@@ -26,7 +26,7 @@ import { text } from '../Translation/Translation';
 import './Reports.css';
 
 // TODO: fix types
-type Props = {
+export type Props = {
   activeClass: ClassType,
   activePupil: PupilType,
   activeReport: ReportType,
@@ -96,9 +96,9 @@ export class Reports extends Component<Props, State> {
   };
 
   textMove = (sourceId: string, targetId: string, before: boolean = false): void => {
-    let dragSelected = [...this.props.selected];
-    const sourceIndex = dragSelected.indexOf(sourceId);
-    let targetIndex = dragSelected.indexOf(targetId);
+    let dragSelected: string[] = [...this.props.selected];
+    const sourceIndex: number = dragSelected.indexOf(sourceId);
+    let targetIndex: number = dragSelected.indexOf(targetId);
 
     if (sourceIndex < 0 || targetIndex < 0) {
       return;
@@ -112,8 +112,8 @@ export class Reports extends Component<Props, State> {
   };
 
   textToggle = (textId: string) => (event: SyntheticEvent<>) => {
-    let selected = [...this.props.selected];
-    const textIndex = selected.indexOf(textId);
+    let selected: string[] = [...this.props.selected];
+    const textIndex: number = selected.indexOf(textId);
 
     if (textIndex > -1) {
       selected = removeItem(selected, textIndex);
@@ -195,10 +195,10 @@ export class Reports extends Component<Props, State> {
     const cats: CategoryType[] = [...this.props.categories];
 
     // AddCategory All
-    const all = CategoryFactory({ ...categoryDefault, label: text('CatsAll', 'CatSelect') }, Date.now());
+    const all: CategoryType = CategoryFactory({ ...categoryDefault, label: text('CatsAll', 'CatSelect') }, Date.now());
     all.id = 'category-all';
     cats.unshift(all);
-    const uncategorised = CategoryFactory(
+    const uncategorised: CategoryType = CategoryFactory(
       { ...categoryDefault, label: text('CatsUncategorised', 'CatSelect') },
       Date.now()
     );
