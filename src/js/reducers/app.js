@@ -11,7 +11,7 @@ import {
 import type { AppType } from '../types/app';
 import appDefault from '../types/app';
 
-export default function reducer(state: AppType = appDefault, action: Object) {
+export default function reducer(state: AppType = appDefault, action: Object): AppType {
   switch (action.type) {
     case APP_ERRORED:
       return { ...state, error: true };

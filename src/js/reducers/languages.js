@@ -4,13 +4,13 @@ import { CHANGE_LANGUAGE, SETTINGS_LOADED } from '../constants/actionTypes';
 import type { LangType } from '../types/lang';
 import type { ActionObj } from '../types/action';
 
-type initialState = {
+type LanguageState = {
   available: LangType[],
   current: string,
   default: string,
 };
 
-const defaultState = {
+const defaultLanguageState = {
   available: [
     {
       key: 'EN',
@@ -21,7 +21,7 @@ const defaultState = {
   default: 'EN',
 };
 
-export default function reducer(state: initialState = defaultState, action: ActionObj) {
+export default function reducer(state: LanguageState = defaultLanguageState, action: ActionObj): LanguageState {
   switch (action.type) {
     case CHANGE_LANGUAGE:
     case SETTINGS_LOADED:

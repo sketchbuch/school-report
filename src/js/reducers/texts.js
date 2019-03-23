@@ -18,14 +18,14 @@ import type { ActionObj } from '../types/action';
  * Texts Reducer.
  */
 
-export default function reducer(state: Array<TextType> = [], action: ActionObj) {
+export default function reducer(state: TextType[] = [], action: ActionObj): TextType[] {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_DATA:
     case REPLACE_TEXTS:
       if (action.payload && action.payload.texts !== undefined) {
         if (Array.isArray(action.payload.texts)) {
-          const newState = [];
+          const newState: TextType[] = [];
           action.payload.texts.forEach(item => {
             newState.push(hydrateText(item));
           });

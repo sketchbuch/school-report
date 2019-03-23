@@ -14,7 +14,7 @@ import { hydrateClass } from '../types/class';
 import type { ClassType } from '../types/class';
 import type { ActionObj } from '../types/action';
 
-export default function reducer(state: ClassType[] = [], action: ActionObj) {
+export default function reducer(state: ClassType[] = [], action: ActionObj): ClassType[] {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_CLASSES:

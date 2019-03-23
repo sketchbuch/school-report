@@ -14,7 +14,7 @@ import type { ActionObj } from '../types/action';
 import type { CategoryType } from '../types/category';
 import { hydrateCategory } from '../types/category';
 
-export default function reducer(state: CategoryType[] = [], action: ActionObj) {
+export default function reducer(state: CategoryType[] = [], action: ActionObj): CategoryType[] {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_CATEGORIES:

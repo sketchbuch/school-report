@@ -3,7 +3,10 @@
 import { DATA_LOADED, REPLACE_BUILDER, REPLACE_DATA, SAVE_BUILDER } from '../constants/actionTypes';
 import type { ActionObj } from '../types/action';
 
-export default function reducer(state: {} = {}, action: ActionObj) {
+type BuilderType = {};
+const builderDefault = {};
+
+export default function reducer(state: BuilderType = builderDefault, action: ActionObj): BuilderType {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_BUILDER:

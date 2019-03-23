@@ -16,7 +16,7 @@ import { hydratePupil } from '../types/pupil';
 import type { PupilType } from '../types/pupil';
 import type { ActionObj } from '../types/action';
 
-export default function reducer(state: PupilType[] = [], action: ActionObj) {
+export default function reducer(state: PupilType[] = [], action: ActionObj): PupilType[] {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_DATA:
