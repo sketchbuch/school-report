@@ -1,8 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr';
+import type { Dispatch } from 'redux';
 import { Formik } from 'formik';
+import { RouteComponentProps } from 'react-router';
+import { toastr } from 'react-redux-toastr';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
@@ -17,13 +19,11 @@ import { ROUTE_TEXTS } from '../../../constants/routes';
 import { getActiveText } from '../../../utils/redux';
 import setTitle from '../../../utils/title';
 
-type Props = {
-  categories: Array<CategoryType>,
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
-  texts: Array<TextType>,
+export type Props = {
+  ...RouteComponentProps,
+  categories: CategoryType[],
+  dispatch: Dispatch,
+  texts: TextType[],
 };
 
 type State = {
@@ -32,9 +32,6 @@ type State = {
   saving: boolean,
 };
 
-/**
- * Layout for editing an existing text.
- */
 export class EditTextLayout extends Component<Props, State> {
   static defaultProps = {
     categories: [],
@@ -42,22 +39,11 @@ export class EditTextLayout extends Component<Props, State> {
   };
 
   props: Props;
-  dataSaved: Function;
-  handleSubmit: Function;
-  initialValues: Object;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      error: false,
-      saving: false,
-      text: { ...textDefault, ...this.getActiveText() },
-    };
-
-    this.dataSaved = this.dataSaved.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state: State = {
+    error: false,
+    saving: false,
+    text: { ...textDefault, ...this.getActiveText() },
+  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'EditTextLayout', { TEXT: this.state.text.getLabel() }));
@@ -76,7 +62,7 @@ export class EditTextLayout extends Component<Props, State> {
     }
   }
 
-  handleSubmit(values: Object) {
+  handleSubmit = (values: Object): void => {
     const updatedText = { ...values };
     updatedText.updated = Date.now();
     updatedText.charCount = updatedText.bodytext.length;
@@ -85,23 +71,9 @@ export class EditTextLayout extends Component<Props, State> {
       text: updatedText,
       saving: true,
     });
-  }
+  };
 
-  /**
-   * Returns the matching class or an empty object
-   *
-   * @return ClassType | object
-   */
-  getActiveText() {
-    return getActiveText(this.props.texts, this.props.match.params.textId);
-  }
-
-  /**
-   * Callback used by writeAppData.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataSaved(ioResult: Object) {
+  dataSaved = (ioResult: Object): void => {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceEdit', 'Texts'), this.state.text.getLabel());
       this.props.history.push(ROUTE_TEXTS);
@@ -111,10 +83,14 @@ export class EditTextLayout extends Component<Props, State> {
         saving: false,
       });
     }
+  };
+
+  getActiveText(): TextType {
+    return getActiveText(this.props.texts, this.props.match.params.textId);
   }
 
   render() {
-    const activeText = this.getActiveText();
+    const activeText: TextType = this.getActiveText();
 
     return (
       <EditPanel>

@@ -3,9 +3,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import DeleteTextsLayout from './DeleteTextsLayout';
+import type { Props } from './DeleteTextsLayout';
 
 describe.skip('<DeleteTextsLayout />', () => {
-  const props = {
+  const props: Props = {
     dispatch: jest.fn(),
     history: {},
     location: {},

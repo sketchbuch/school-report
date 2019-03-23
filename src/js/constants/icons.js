@@ -1,7 +1,3 @@
-/**
- * Icon Constants (for icofont)
- */
-
 export const ICON_ADD = 'plus';
 export const ICON_BRAND = 'hat';
 export const ICON_BUSY = 'refresh';

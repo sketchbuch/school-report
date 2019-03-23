@@ -1,6 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
+import type { Dispatch } from 'redux';
+import { RouteComponentProps } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import { Formik } from 'formik';
 import EditPanel from '../../../components/EditPanel/EditPanel';
@@ -17,11 +19,9 @@ import { ROUTE_REPORTS } from '../../../constants/routes';
 import setTitle from '../../../utils/title';
 
 type Props = {
-  classes: Array<ClassType>,
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
+  ...RouteComponentProps,
+  classes: ClassType[],
+  dispatch: Dispatch,
   maxChars: number,
 };
 
@@ -31,30 +31,17 @@ type State = {
   saving: boolean,
 };
 
-/**
- * Layout for adding a new report.
- */
 export class NewReportLayout extends Component<Props, State> {
   static defaultProps = {
     classes: [],
   };
 
   props: Props;
-  dataSaved: Function;
-  handleSubmit: Function;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      error: false,
-      report: { ...reportDefault },
-      saving: false,
-    };
-
-    this.dataSaved = this.dataSaved.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state: State = {
+    error: false,
+    report: { ...reportDefault },
+    saving: false,
+  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'NewReportLayout'));
@@ -70,21 +57,16 @@ export class NewReportLayout extends Component<Props, State> {
     }
   }
 
-  handleSubmit(values: Object) {
-    const newReport = ReportFactory(values, Date.now());
+  handleSubmit = (values: Object): void => {
+    const newReport: ReportType = ReportFactory(values, Date.now());
 
     this.setState({
       report: newReport,
       saving: true,
     });
-  }
+  };
 
-  /**
-   * Callback used by electron fs functions.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataSaved(ioResult: Object) {
+  dataSaved = (ioResult: Object): void => {
     if (ioResult.success === true) {
       toastr.success(text('PersistenceNew', 'Reports'), this.state.report.getLabel());
       this.props.history.push(ROUTE_REPORTS);
@@ -94,7 +76,7 @@ export class NewReportLayout extends Component<Props, State> {
         saving: false,
       });
     }
-  }
+  };
 
   render() {
     return (

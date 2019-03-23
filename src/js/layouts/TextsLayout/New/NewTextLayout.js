@@ -1,8 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr';
+import type { Dispatch } from 'redux';
 import { Formik } from 'formik';
+import { RouteComponentProps } from 'react-router';
+import { toastr } from 'react-redux-toastr';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
@@ -18,13 +20,11 @@ import { cropStr } from '../../../utils/strings';
 import { TEXT_CROP_LEN } from '../../../constants/misc';
 import setTitle from '../../../utils/title';
 
-type Props = {
-  categories: Array<CategoryType>,
+export type Props = {
+  ...RouteComponentProps,
+  categories: CategoryType[],
   curLang: string,
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
+  dispatch: Dispatch,
 };
 
 type State = {
@@ -33,30 +33,17 @@ type State = {
   saving: boolean,
 };
 
-/**
- * Layout for adding a new text.
- */
 export class NewTextLayout extends Component<Props, State> {
   static defaultProps = {
     categories: [],
   };
 
   props: Props;
-  dataSaved: Function;
-  handleSubmit: Function;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      error: false,
-      text: { ...textDefault },
-      saving: false,
-    };
-
-    this.dataSaved = this.dataSaved.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state: State = {
+    error: false,
+    text: { ...textDefault },
+    saving: false,
+  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'NewTextLayout'));
@@ -72,21 +59,16 @@ export class NewTextLayout extends Component<Props, State> {
     }
   }
 
-  handleSubmit(values: Object) {
-    const newText = TextFactory(values, Date.now(), this.props.curLang);
+  handleSubmit = (values: Object): void => {
+    const newText: TextType = TextFactory(values, Date.now(), this.props.curLang);
 
     this.setState({
       text: newText,
       saving: true,
     });
-  }
+  };
 
-  /**
-   * Callback used by writeAppData.
-   *
-   * @param object ioResult An object: {success: boolean, errorObj?: object, data?: json}
-   */
-  dataSaved(ioResult: Object) {
+  dataSaved = (ioResult: Object): void => {
     if (ioResult.success === true) {
       this.props.history.push(ROUTE_TEXTS);
       toastr.success(text('PersistenceNew', 'Texts'), cropStr(this.state.text.getLabel(), TEXT_CROP_LEN));
@@ -96,7 +78,7 @@ export class NewTextLayout extends Component<Props, State> {
         saving: false,
       });
     }
-  }
+  };
 
   render() {
     return (

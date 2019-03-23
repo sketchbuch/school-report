@@ -1,7 +1,3 @@
-/**
- * Action Type Constants
- */
-
 // App
 export const APP_ERRORED = 'APP_ERRORED';
 export const APP_LOADED = 'APP_LOADED';

@@ -2,19 +2,20 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Textarea from '../../../components/ui/Textarea/Textarea';
-import ItemSelection from '../../../components/ui/ItemSelection/ItemSelection';
 import Button from '../../../components/ui/Button/Button';
+import ItemSelection from '../../../components/ui/ItemSelection/ItemSelection';
+import Textarea from '../../../components/ui/Textarea/Textarea';
 import Translation, { text } from '../../../components/Translation/Translation';
-import validate from '../../../validation/validation';
 import type { CategoryType } from '../../../types/category';
-import { categorySort } from '../../../types/category';
+import type { DomainType } from '../../../types/domain';
+import validate from '../../../validation/validation';
 import { ROUTE_TEXTS } from '../../../constants/routes';
+import { categorySort } from '../../../types/category';
 import { placeholderMap } from '../../../utils/html';
 import { sortObjectsAz } from '../../../utils/sort';
 
-type Props = {
-  categories: Array<CategoryType>,
+export type Props = {
+  categories: CategoryType[],
   dirty: boolean,
   errors: Object,
   handleBlur: Function,
@@ -27,9 +28,6 @@ type Props = {
   values: Object,
 };
 
-/**
- * Text form for the edit panel.W
- */
 export class EditTextForm extends Component<Props> {
   static defaultProps = {
     categories: [],
@@ -53,11 +51,11 @@ export class EditTextForm extends Component<Props> {
       values,
     } = this.props;
 
-    const cValid = validate('categories', errors, touched);
-    const btValid = validate('bodytext', errors, touched);
-    const btnIsDisabled = !cValid || !btValid || saving || !dirty ? true : false;
-    const sortedCategories = sortObjectsAz(categories, categorySort);
-    const selCount = categories.filter(c => values.categories.includes(c.id)).length;
+    const cValid: boolean = validate('categories', errors, touched);
+    const btValid: boolean = validate('bodytext', errors, touched);
+    const btnIsDisabled: boolean = !cValid || !btValid || saving || !dirty ? true : false;
+    const sortedCategories: DomainType[] = sortObjectsAz(categories, categorySort);
+    const selCount: number = categories.filter(c => values.categories.includes(c.id)).length;
 
     return (
       <form className="form" onSubmit={handleSubmit}>

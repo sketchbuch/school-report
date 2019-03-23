@@ -1,15 +1,17 @@
 // @flow
 
 import * as React from 'react';
-import { connect } from 'react-redux';
+import type { Dispatch } from 'redux';
 import { Route, Switch } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router';
+import { connect } from 'react-redux';
+import CatSelect from '../../components/CatSelect/CatSelect';
 import DeleteTextsLayout from './Delete/DeleteTextsLayout';
 import EditTextLayout from './Edit/EditTextLayout';
 import Icon from '../../components/Icon/Icon';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCircular';
 import NewTextLayout from './New/NewTextLayout';
-import CatSelect from '../../components/CatSelect/CatSelect';
 import SearchField from '../../components/ui/SearchField/SearchField';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
@@ -17,20 +19,19 @@ import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
 import setTitle from '../../utils/title';
 import type { CategoryType } from '../../types/category';
+import type { ReduxState } from '../../types/reduxstate';
 import type { TextType } from '../../types/text';
 import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
 import { ROUTE_DEL_TEXTS, ROUTE_EDIT_TEXT, ROUTE_NEW_TEXT, ROUTE_TEXTS } from '../../constants/routes';
 import { text } from '../../components/Translation/Translation';
 import { textSort } from '../../types/text';
 
-type Props = {
-  categories: Array<CategoryType>,
+export type Props = {
+  ...RouteComponentProps,
+  categories: CategoryType[],
   curLang: string,
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
-  texts: Array<TextType>,
+  dispatch: Dispatch,
+  texts: TextType[],
 };
 
 type State = {
@@ -41,9 +42,6 @@ type State = {
   term: string,
 };
 
-/**
- * Layout for displaying classes.
- */
 export class TextsLayout extends React.Component<Props, State> {
   static defaultProps = {
     categories: [],
@@ -51,30 +49,13 @@ export class TextsLayout extends React.Component<Props, State> {
   };
 
   props: Props;
-  state: State;
-  handleFilterChanage: (event: SyntheticInputEvent<HTMLInputElement>) => void;
-  handlePbChange: (curPage: number) => void;
-  handleSearch: (event: SyntheticInputEvent<HTMLInputElement>) => void;
-  handleSearchAnywhereClick: (event: SyntheticEvent<MouseEvent>) => void;
-  handleSearchIconClick: (event: SyntheticEvent<MouseEvent>) => void;
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      anywhere: false,
-      curPage: 1,
-      option: 'category-all',
-      searchVisible: false,
-      term: '',
-    };
-
-    this.handleFilterChanage = this.handleFilterChanage.bind(this);
-    this.handlePbChange = this.handlePbChange.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.handleSearchAnywhereClick = this.handleSearchAnywhereClick.bind(this);
-    this.handleSearchIconClick = this.handleSearchIconClick.bind(this);
-  }
+  state: State = {
+    anywhere: false,
+    curPage: 1,
+    option: 'category-all',
+    searchVisible: false,
+    term: '',
+  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'Texts'));
@@ -86,7 +67,7 @@ export class TextsLayout extends React.Component<Props, State> {
     }
   }
 
-  handleFilterChanage(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleFilterChanage = (event: SyntheticInputEvent<HTMLInputElement>) => {
     const option = event.target.value;
 
     if (this.state.option !== option) {
@@ -94,44 +75,45 @@ export class TextsLayout extends React.Component<Props, State> {
     } else {
       this.setState({ option });
     }
-  }
+  };
 
-  handleSearch(event: SyntheticInputEvent<HTMLInputElement>) {
+  handleSearch = (event: SyntheticInputEvent<HTMLInputElement>) => {
     if (event.type === 'keyup') {
       if (event.key === 'Escape') {
         this.handleSearchIconClick(event);
       }
     } else {
-      const newState = { term: event.currentTarget.value };
-      if (newState.term !== this.state.term) {
-        newState.curPage = 1;
+      const newTerm: string = event.currentTarget.value;
+
+      if (newTerm !== this.state.term) {
+        this.setState({ curPage: 1, term: newTerm });
+      } else {
+        this.setState({ term: newTerm });
       }
-
-      this.setState(newState);
     }
-  }
+  };
 
-  handlePbChange(curPage: number) {
+  handlePbChange = (curPage: number) => {
     this.setState({ curPage });
-  }
+  };
 
-  handleSearchIconClick(event: SyntheticEvent<MouseEvent>) {
-    const newState = { searchVisible: !this.state.searchVisible };
-    if (newState.searchVisible === false) {
-      newState.term = '';
-      newState.curPage = 1;
+  handleSearchIconClick = (event: SyntheticEvent<MouseEvent>) => {
+    const newSearchVisible: boolean = !this.state.searchVisible;
+
+    if (newSearchVisible === false) {
+      this.setState({ curPage: 1, searchVisible: newSearchVisible, term: '' });
+    } else {
+      this.setState({ searchVisible: newSearchVisible });
     }
+  };
 
-    this.setState(newState);
-  }
-
-  handleSearchAnywhereClick(event: SyntheticEvent<MouseEvent>) {
+  handleSearchAnywhereClick = (event: SyntheticEvent<MouseEvent>) => {
     this.setState({ anywhere: !this.state.anywhere });
-  }
+  };
 
   render() {
-    const HAS_TEXTS = this.props.texts.length > 0 ? true : false;
-    const leftActions = (
+    const HAS_TEXTS: boolean = this.props.texts.length > 0 ? true : false;
+    const leftActions: React.Element<*> = (
       <NavButtonCircular
         to={ROUTE_NEW_TEXT}
         className="SidebarFooter__action"
@@ -142,7 +124,7 @@ export class TextsLayout extends React.Component<Props, State> {
         <Icon type={ICON_ADD} />
       </NavButtonCircular>
     );
-    const rightActions = (
+    const rightActions: React.Element<*> = (
       <NavButtonCircular
         disabled={!HAS_TEXTS}
         to={ROUTE_DEL_TEXTS}
@@ -247,7 +229,7 @@ export class TextsLayout extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: Object) => ({
+const mapStateToProps = (state: ReduxState) => ({
   categories: state.categories,
   curLang: state.languages.current,
   texts: state.texts,
