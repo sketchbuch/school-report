@@ -46,7 +46,7 @@ export class DeleteClassesLayout extends Component<Props, State> {
     }
   }
 
-  handleClick = (event: SyntheticInputEvent<HTMLInputElement>): void => {
+  handleClick = (event: SyntheticMouseEvent<HTMLElement>): void => {
     event.preventDefault();
     this.setState({ deleting: true });
   };

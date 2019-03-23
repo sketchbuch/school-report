@@ -3,7 +3,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import Icon from '../../Icon/Icon';
-import type { EventHandlerType } from '../../../types/functions';
 import { ICON_BUSY } from '../../../constants/icons';
 import './Button.css';
 
@@ -14,7 +13,7 @@ export type Props = {
   className: string,
   disabled?: boolean,
   name?: string,
-  onClick?: EventHandlerType | null,
+  onClick?: (event: SyntheticMouseEvent<HTMLElement>) => void,
   title?: string,
   type?: string,
 };
@@ -26,7 +25,6 @@ class Button extends React.Component<Props> {
     children: null,
     className: '',
     disabled: false,
-    onClick: null,
     type: 'button',
   };
 

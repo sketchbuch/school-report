@@ -107,7 +107,7 @@ export class TextsLayout extends React.Component<Props, State> {
     }
   };
 
-  handleSearchAnywhereClick = (event: SyntheticMouseEvent<EventTarget>) => {
+  handleSearchAnywhereClick = (event: SyntheticMouseEvent<HTMLElement>) => {
     this.setState({ anywhere: !this.state.anywhere });
   };
 

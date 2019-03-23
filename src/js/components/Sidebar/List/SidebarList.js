@@ -29,7 +29,7 @@ type Props = {
   listType: SidebarListTypes,
   noItemsTxt: string,
   onChange: ?(curPage: number) => void,
-  onReportClick: ?(id: string, label: string) => (event: SyntheticMouseEvent<EventTarget>) => void | null,
+  onReportClick: ?(id: string, label: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
   pagesToShow: number,
   perPage: number,
   reportSidebar: string | false,
@@ -51,8 +51,6 @@ class SidebarList extends React.Component<Props, State> {
     filter: '',
     items: [],
     listType: 'class',
-    onChange: null,
-    onReportClick: null,
     pagesToShow: 3,
     perPage: 20,
     reportSidebar: false,
@@ -150,7 +148,7 @@ class SidebarList extends React.Component<Props, State> {
           {this.props.children && <SidebarSubheader>{this.props.children}</SidebarSubheader>}
           <ul className={classes} data-type={this.props.listType}>
             {sortedItems.map(item => {
-              if (this.props.reportSidebar) {
+              if (this.props.reportSidebar && this.props.onReportClick) {
                 return (
                   <SidebarReportItem
                     item={item}

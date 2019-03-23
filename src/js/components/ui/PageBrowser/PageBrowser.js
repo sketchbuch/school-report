@@ -20,7 +20,7 @@ export const PbMore = (props: PbMoreProps) => {
 export type PbButProps = {
   disabled: boolean,
   label: string,
-  onClick: (event: SyntheticInputEvent) => void,
+  onClick: (event: SyntheticMouseEvent<HTMLElement>) => void,
   page?: boolean,
   selected?: boolean,
   title?: string,
@@ -51,7 +51,7 @@ class PageBrowser extends Component<Props> {
 
   props: Props;
 
-  handleClick = (event: SyntheticInputEvent): void => {
+  handleClick = (event: SyntheticMouseEvent<HTMLElement>): void => {
     const { curPage, itemCount, onChange, perPage } = this.props;
 
     if (onChange) {

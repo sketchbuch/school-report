@@ -12,7 +12,7 @@ import './SidebarReportItem.css';
 type Props = {
   item: CategoryType,
   itemType: SidebarListTypes,
-  onReportClick: (id: string, label: string) => void,
+  onReportClick: (id: string, label: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
   selected: string | false,
   sortOrder: string[],
 };

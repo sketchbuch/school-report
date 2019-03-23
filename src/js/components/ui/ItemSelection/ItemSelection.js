@@ -36,7 +36,7 @@ export class ItemSelection extends React.Component<Props, State> {
     term: '',
   };
 
-  handleClear = (event: SyntheticMouseEvent<EventTarget>): void => {
+  handleClear = (event: SyntheticMouseEvent<HTMLElement>): void => {
     this.setState({ term: '' });
   };
 

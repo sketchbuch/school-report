@@ -17,9 +17,6 @@ export type Props = {
   type?: string,
 };
 
-/**
- * A round action react router Nav link.
- */
 class NavButtonCircular extends React.Component<Props> {
   static defaultProps = {
     action: '',

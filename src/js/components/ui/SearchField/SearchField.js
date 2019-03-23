@@ -10,9 +10,9 @@ import './SearchField.css';
 
 export type Props = {
   anywhere: boolean,
-  anywhereOnClick: (event: SyntheticMouseEvent<EventTarget>) => void,
+  anywhereOnClick: (event: SyntheticMouseEvent<HTMLElement>) => void,
   classes: string,
-  clearOnClick: (event: SyntheticMouseEvent<EventTarget>) => void,
+  clearOnClick: (event: SyntheticMouseEvent<HTMLElement>) => void,
   iconOnClick: (event: SyntheticEvent<EventTarget>) => void,
   onChange: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
   onKeyUp: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,

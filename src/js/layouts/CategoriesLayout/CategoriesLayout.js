@@ -95,7 +95,7 @@ export class CategoriesLayout extends React.Component<Props, State> {
     }
   };
 
-  handleSearchAnywhereClick = (event: SyntheticMouseEvent<EventTarget>): void => {
+  handleSearchAnywhereClick = (event: SyntheticMouseEvent<HTMLElement>): void => {
     this.setState({ anywhere: !this.state.anywhere });
   };
 

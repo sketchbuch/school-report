@@ -135,7 +135,7 @@ export class Reports extends Component<Props, State> {
     this.setState({ catPage });
   };
 
-  catClick = (catId: string, catLabel: string) => (event: SyntheticMouseEvent<EventTarget>): void => {
+  catClick = (catId: string, catLabel: string) => (event: SyntheticMouseEvent<HTMLElement>): void => {
     this.setState({ catId, catLabel });
   };
 
@@ -148,7 +148,7 @@ export class Reports extends Component<Props, State> {
     }
   };
 
-  catAnywhereIconClick = (event: SyntheticMouseEvent<EventTarget>): void => {
+  catAnywhereIconClick = (event: SyntheticMouseEvent<HTMLElement>): void => {
     this.setState({ catSearchAnywhere: !this.state.catSearchAnywhere });
   };
 
@@ -252,7 +252,7 @@ export class Reports extends Component<Props, State> {
             disableTexts={this.props.disableTexts}
             textToggle={this.textToggle}
             selectedTexts={selectedTexts}
-            term={this.props.textTerm}
+            term={this.state.textTerm}
             texts={catTexts}
           >
             <SidebarHeader controlsExpanded={this.state.catSearch} title={this.state.catLabel}>

@@ -14,7 +14,7 @@ type Props = {
   link: string,
   linkEdit: string,
   onClick: Function | null,
-  onSubClick?: (id: string, label: string) => void,
+  onSubClick?: (id: string, label: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
   selected: boolean,
 };
 

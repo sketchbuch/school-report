@@ -3,7 +3,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import type { ButtonType } from '../../../types/button';
-import type { EventHandlerType } from '../../../types/functions';
 import './ButtonCircular.css';
 
 export type Props = {
@@ -13,7 +12,7 @@ export type Props = {
   className: string,
   disabled?: boolean,
   name?: string,
-  onClick?: EventHandlerType | null,
+  onClick?: (event: SyntheticMouseEvent<HTMLElement>) => void,
   title?: string,
   type?: string,
   visual?: boolean,
@@ -25,7 +24,6 @@ class ButtonCircular extends React.Component<Props> {
     children: null,
     className: '',
     disabled: false,
-    onClick: null,
     type: 'button',
     visual: false,
   };
