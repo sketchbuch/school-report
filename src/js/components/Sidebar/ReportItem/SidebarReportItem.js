@@ -14,7 +14,6 @@ type Props = {
   itemType: SidebarListTypes,
   onReportClick: (id: string, label: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
   selected: string | false,
-  sortOrder: string[],
 };
 
 class SidebarReportItem extends Component<Props> {
@@ -36,10 +35,11 @@ class SidebarReportItem extends Component<Props> {
         <SidebarInner
           description={this.props.item.getDescription()}
           icon={this.props.item.getIcon()}
+          id={this.props.item.id}
           label={this.props.item.getLabel()}
           link={this.props.item.getUrl('link')}
           linkEdit={editUrl}
-          onSubClick={this.props.onReportClick(this.props.item.id, this.props.item.getLabel())}
+          onSubClick={this.props.onReportClick}
           selected={this.props.item.id === this.props.selected}
         >
           <SidebarItemButton

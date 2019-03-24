@@ -18,6 +18,7 @@ import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
 import setTitle from '../../utils/title';
 import type { ClassType } from '../../types/class';
+import type { DomainType } from '../../types/domain';
 import type { PupilType } from '../../types/pupil';
 import type { ReduxState } from '../../types/reduxstate';
 import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
@@ -97,7 +98,7 @@ export class ClassesLayout extends React.Component<Props, State> {
     this.setState({ anywhere: !this.state.anywhere });
   };
 
-  getClasses(): ClassType[] {
+  getClasses(): DomainType[] {
     return this.props.classes.map(
       (item: ClassType): ClassType => {
         return {

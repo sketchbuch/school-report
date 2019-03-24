@@ -1,7 +1,13 @@
 // @flow
 
 import * as React from 'react';
+import classNames from 'classnames';
 import type { Dispatch } from 'redux';
+import * as categoryActions from '../../../actions/categoryActions';
+import * as classActions from '../../../actions/classActions';
+import * as pupilActions from '../../../actions/pupilActions';
+import * as reportActions from '../../../actions/reportActions';
+import * as textActions from '../../../actions/textActions';
 import NoItems from '../../NoItems/NoItems';
 import SidebarBuilderItem from '../BuilderItem/SidebarBuilderItem';
 import SidebarItem from '../Item/SidebarItem';
@@ -13,9 +19,19 @@ import pageBrowserPropsDefault from '../../../types/pageBrowser';
 import type { DomainType } from '../../../types/domain';
 import type { PageBrowserProps } from '../../../types/pageBrowser';
 import type { SidebarListTypes } from '../../../types/sidebarList';
+// import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
+import type { TextType } from '../../../types/text';
 import { getCustomNumProp } from '../../../utils/dom';
 import { sortObjectsAz } from '../../../utils/sort';
 import './SidebarList.css';
+
+const actions = {
+  category: categoryActions,
+  class: classActions,
+  pupil: pupilActions,
+  report: reportActions,
+  text: textActions,
+};
 
 // TODO - fix types
 type Props = {
@@ -28,8 +44,8 @@ type Props = {
   items: DomainType[],
   listType: SidebarListTypes,
   noItemsTxt: string,
-  onChange: ?(curPage: number) => void,
-  onReportClick: ?(id: string, label: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
+  onChange?: (curPage: number) => void,
+  onReportClick?: (id: string, label: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
   pagesToShow: number,
   perPage: number,
   reportSidebar: string | false,
@@ -65,6 +81,7 @@ class SidebarList extends React.Component<Props, State> {
   existingItems: string[] = [];
   itemDuration: number = getCustomNumProp('--sidebaritem-ms');
 
+  // TODO - try and remove
   constructor(props: Props) {
     super(props);
 
@@ -85,10 +102,12 @@ class SidebarList extends React.Component<Props, State> {
     }
   }
 
+  onDelete = (id: string, callback?: Function = () => {}): void => {
+    this.props.dispatch(actions[this.props.listType].deleteOne(id, callback));
+  };
+
   /**
    * Updates the local state of existing items. Called by an item after its new animation finishes.
-   *
-   * @param string itemId The ID of a new item for the existing items.
    */
   updateExistingItems(itemId: string): void {
     if (!this.state.existingItems.includes(itemId)) {
@@ -102,9 +121,29 @@ class SidebarList extends React.Component<Props, State> {
     if (this.props.filter) {
       if (this.props.filter !== 'category-all') {
         if (this.props.filter === 'category-nocat') {
-          sortedItems = sortedItems.filter((item: DomainType) => item.categories.length === 0);
+          sortedItems = sortedItems.filter((item: DomainType) => {
+            if (item.categories !== undefined) {
+              const textItem: TextType = { ...item };
+
+              if (textItem.categories.length < 1) {
+                return true;
+              }
+            }
+
+            return false;
+          });
         } else {
-          sortedItems = sortedItems.filter((item: DomainType) => item.categories.includes(this.props.filter));
+          sortedItems = sortedItems.filter((item: DomainType) => {
+            if (item.categories !== undefined) {
+              const textItem: TextType = { ...item };
+
+              if (textItem.categories.includes(this.props.filter)) {
+                return true;
+              }
+            }
+
+            return false;
+          });
         }
       }
     }
@@ -122,12 +161,12 @@ class SidebarList extends React.Component<Props, State> {
     const itemForPaging: number = sortedItems.length;
 
     if (this.props.usePb) {
-      const itemstart = 0 + this.props.perPage * (this.props.curPage - 1);
+      const itemstart: number = 0 + this.props.perPage * (this.props.curPage - 1);
       sortedItems = sortedItems.slice(itemstart, itemstart + this.props.perPage);
     }
 
     if (itemForPaging > 0) {
-      const showPb = this.props.usePb && itemForPaging > this.props.perPage;
+      const showPb: boolean = this.props.usePb && itemForPaging > this.props.perPage;
       const pbProps: PageBrowserProps = {
         ...pageBrowserPropsDefault,
         curPage: this.props.curPage,
@@ -135,19 +174,15 @@ class SidebarList extends React.Component<Props, State> {
         pagesToShow: this.props.pagesToShow,
         perPage: this.props.perPage,
       };
-      let classes = 'SidebarList';
-      if (showPb) {
-        classes += ' SidebarList--pb';
-      }
-      if (this.props.children) {
-        classes += ' SidebarList--sh';
-      }
 
       return (
         <React.Fragment>
           {this.props.children && <SidebarSubheader>{this.props.children}</SidebarSubheader>}
-          <ul className={classes} data-type={this.props.listType}>
-            {sortedItems.map(item => {
+          <ul
+            className={classNames('SidebarList', { 'SidebarList--pb': showPb, 'SidebarList--sh': this.props.children })}
+            data-type={this.props.listType}
+          >
+            {sortedItems.map((item: Object) => {
               if (this.props.reportSidebar && this.props.onReportClick) {
                 return (
                   <SidebarReportItem

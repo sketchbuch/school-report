@@ -4,8 +4,8 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import textDefault, { TextFactory } from '../../../types/text';
 import SidebarList from './SidebarList';
+import textDefault, { TextFactory } from '../../../types/text';
 import { DELETE_TEXT } from '../../../constants/actionTypes';
 
 jest.mock('../Inner/SidebarInner', () => () => <div className="SidebarInner" />);

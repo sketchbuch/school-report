@@ -15,6 +15,7 @@ import SidebarList from '../Sidebar/List/SidebarList';
 import categoryDefault, { CategoryFactory } from '../../types/category';
 import type { CategoryType } from '../../types/category';
 import type { ClassType } from '../../types/class';
+import type { DomainType } from '../../types/domain';
 import type { PupilType } from '../../types/pupil';
 import type { ReduxState } from '../../types/reduxstate';
 import type { ReportType } from '../../types/report';
@@ -190,14 +191,14 @@ export class Reports extends Component<Props, State> {
     return visibleTexts;
   }
 
-  getCats(): CategoryType[] {
-    const cats: CategoryType[] = [...this.props.categories];
+  getCats(): DomainType[] {
+    const cats: DomainType[] = [...this.props.categories];
 
     // AddCategory All
-    const all: CategoryType = CategoryFactory({ ...categoryDefault, label: text('CatsAll', 'CatSelect') }, Date.now());
+    const all: DomainType = CategoryFactory({ ...categoryDefault, label: text('CatsAll', 'CatSelect') }, Date.now());
     all.id = 'category-all';
     cats.unshift(all);
-    const uncategorised: CategoryType = CategoryFactory(
+    const uncategorised: DomainType = CategoryFactory(
       { ...categoryDefault, label: text('CatsUncategorised', 'CatSelect') },
       Date.now()
     );
@@ -208,7 +209,7 @@ export class Reports extends Component<Props, State> {
   }
 
   render() {
-    const cats: CategoryType[] = this.getCats();
+    const cats: DomainType[] = this.getCats();
     const catTexts: TextType[] = this.getCatTexts();
     const selectedTexts: string[] = this.state.dragSelected.length > 0 ? this.state.dragSelected : this.props.selected;
 

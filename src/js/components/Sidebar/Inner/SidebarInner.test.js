@@ -9,6 +9,7 @@ describe('<SidebarInner />', () => {
     const props = {
       description: '',
       icon: '',
+      id: '',
       label: '',
       link: '',
       linkEdit: '',
