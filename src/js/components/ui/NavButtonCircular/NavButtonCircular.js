@@ -22,7 +22,6 @@ class NavButtonCircular extends React.Component<Props> {
     action: '',
     buttontype: 'default',
     children: null,
-    className: '',
     disabled: false,
     title: '',
     type: 'button',

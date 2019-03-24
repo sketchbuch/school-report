@@ -43,6 +43,8 @@ describe('<ItemList />', () => {
   });
 
   test('Checkbox onChange calls push', () => {
+    const mockPush = jest.fn();
+    const mockRemove = jest.fn();
     const pushProps = {
       ...props,
       items: items.slice(0, 1),
@@ -50,16 +52,18 @@ describe('<ItemList />', () => {
       remove: jest.fn(),
       totalCount: 1,
     };
-    const wrapper = shallow(<ItemList {...pushProps} />);
+    const wrapper = shallow(<ItemList {...pushProps} push={mockPush} remove={mockRemove} />);
     const input = wrapper.find('input');
     expect(input).toHaveLength(1);
 
     input.simulate('change', { target: { checked: true } });
-    expect(props.push).toHaveBeenCalled();
-    expect(props.remove).not.toHaveBeenCalled();
+    expect(mockPush).toHaveBeenCalled();
+    expect(mockRemove).not.toHaveBeenCalled();
   });
 
   test('Checkbox onChange calls remove', () => {
+    const mockPush = jest.fn();
+    const mockRemove = jest.fn();
     const removeProps = {
       ...props,
       items: items.slice(0, 1),
@@ -68,12 +72,12 @@ describe('<ItemList />', () => {
       selected: ['1'],
       totalCount: 1,
     };
-    const wrapper = shallow(<ItemList {...removeProps} />);
+    const wrapper = shallow(<ItemList {...removeProps} push={mockPush} remove={mockRemove} />);
     const input = wrapper.find('input');
     expect(input).toHaveLength(1);
 
     input.simulate('change', { target: { checked: false } });
-    expect(props.remove).toHaveBeenCalled();
-    expect(props.push).not.toHaveBeenCalled();
+    expect(mockRemove).toHaveBeenCalled();
+    expect(mockPush).not.toHaveBeenCalled();
   });
 });

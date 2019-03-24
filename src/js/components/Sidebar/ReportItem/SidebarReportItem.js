@@ -12,16 +12,14 @@ import './SidebarReportItem.css';
 type Props = {
   item: CategoryType,
   itemType: SidebarListTypes,
-  onReportClick: (id: string, label: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
+  onReportClick?: (id: string, label: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
   selected: string | false,
 };
 
 class SidebarReportItem extends Component<Props> {
   static defaultProps = {
     itemType: 'category',
-    onReportClick: () => {},
     selected: false,
-    updateExistingItems: () => {},
   };
 
   props: Props;

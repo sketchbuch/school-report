@@ -60,15 +60,21 @@ describe('Types: Class', () => {
         expect(result).toBe(false);
       });
 
-      test('Returns false if the class object does not contain the search term.', () => {
-        const term: string = 'Pendley';
+      test('Returns false if the class object does not begin with the search term.', () => {
+        const term: string = 'Yr';
         const result: boolean = newClassObj.contains(term);
         expect(result).toBe(false);
       });
 
-      test('Returns true if the class object contains the search term.', () => {
-        const term: string = 'Yr.';
+      test('Returns true if the class object begins with the search term.', () => {
+        const term: string = 'Latimer';
         const result: boolean = newClassObj.contains(term);
+        expect(result).toBe(true);
+      });
+
+      test('Returns true if the class object contains the search term.', () => {
+        const term: string = 'Yr';
+        const result: boolean = newClassObj.contains(term, true);
         expect(result).toBe(true);
       });
     });

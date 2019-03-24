@@ -36,7 +36,7 @@ class Textarea extends React.Component<Props> {
 
     return (
       <textarea
-        className={classNames('Textarea', { [className]: !!className, 'has--error': isValid })}
+        className={classNames('Textarea', { [className]: !!className, 'has--error': !isValid })}
         disabled={disabled}
         onBlur={disabled ? null : onBlur}
         onChange={disabled ? null : onChange}

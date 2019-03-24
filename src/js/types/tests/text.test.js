@@ -68,15 +68,21 @@ describe('Types: Text', () => {
         expect(result).toBe(false);
       });
 
-      test('Returns false if the text object does not contain the search term.', () => {
-        const term: string = 'Once upon';
+      test('Returns false if the text object does not begin with the search term.', () => {
+        const term: string = 'text';
         const result: boolean = newTextObj.contains(term);
         expect(result).toBe(false);
       });
 
-      test('Returns true if the text object contains the search term.', () => {
+      test('Returns true if the text object begins with the search term.', () => {
         const term: string = 'A t';
         const result: boolean = newTextObj.contains(term);
+        expect(result).toBe(true);
+      });
+
+      test('Returns true if the text object contains the search term.', () => {
+        const term: string = 'text';
+        const result: boolean = newTextObj.contains(term, true);
         expect(result).toBe(true);
       });
     });

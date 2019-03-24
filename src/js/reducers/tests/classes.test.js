@@ -13,103 +13,99 @@ import {
 import classDefault from '../../types/class';
 import reduce from '../../utils/reducers';
 
-/**
- * Classes Reducer Tests
- */
-
 describe('Reducer: Classes', () => {
-  const INITIAL_STATE = [{ ...classDefault, label: 'Class 1', id: 'c1' }];
+  const initialState = [{ ...classDefault, label: 'Class 1', id: 'c1' }];
 
   test('Should return the initial state if no type matches', () => {
-    expect(reducer(INITIAL_STATE, { type: 'IGNORE' })).toEqual(INITIAL_STATE);
+    expect(reducer(initialState, { type: 'IGNORE' })).toEqual(initialState);
   });
 
   test('REPLACE_DATA should return the initial state if payload has no classes array', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(INITIAL_STATE);
+    expect(reducer(initialState, { type: REPLACE_DATA, payload: {} })).toEqual(initialState);
     expect(
-      reducer(INITIAL_STATE, {
+      reducer(initialState, {
         type: REPLACE_DATA,
         payload: { classes: 'wrong' },
       })
-    ).toEqual(INITIAL_STATE);
+    ).toEqual(initialState);
   });
 
   test('DATA_LOADED should return the initial state if payload has no classes array', () => {
-    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(INITIAL_STATE);
+    expect(reducer(initialState, { type: DATA_LOADED, payload: {} })).toEqual(initialState);
     expect(
-      reducer(INITIAL_STATE, {
+      reducer(initialState, {
         type: DATA_LOADED,
         payload: { classes: 'wrong' },
       })
-    ).toEqual(INITIAL_STATE);
+    ).toEqual(initialState);
   });
 
   test('REPLACE_CLASSES should return the initial state if payload has no classes array', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_CLASSES, payload: {} })).toEqual(INITIAL_STATE);
+    expect(reducer(initialState, { type: REPLACE_CLASSES, payload: {} })).toEqual(initialState);
     expect(
-      reducer(INITIAL_STATE, {
+      reducer(initialState, {
         type: REPLACE_CLASSES,
         payload: { classes: 'wrong' },
       })
-    ).toEqual(INITIAL_STATE);
+    ).toEqual(initialState);
   });
 
   test('REPLACE_CLASSES should return payload replacing existing classes.', () => {
-    const TEST_CLASSES = {
+    const testClasses = {
       classes: [{ ...classDefault, label: 'Class 2', id: 'c2' }, { ...classDefault, label: 'Class 3', id: 'c3' }],
     };
-    const reducerResult = reducer(INITIAL_STATE, {
+    const reducerResult = reducer(initialState, {
       type: REPLACE_CLASSES,
-      payload: TEST_CLASSES,
+      payload: testClasses,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(TEST_CLASSES.classes));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(testClasses.classes));
   });
 
   test('UPDATE_CLASS should update existing categories', () => {
-    const NEW_CAT = { ...classDefault, label: 'Class 1 Edited', id: 'c1' };
-    const EXPECTED_RESULT = [{ ...NEW_CAT }];
-    const reducerResult = reducer(INITIAL_STATE, {
+    const newCat = { ...classDefault, label: 'Class 1 Edited', id: 'c1' };
+    const expectedResult = [{ ...newCat }];
+    const reducerResult = reducer(initialState, {
       type: UPDATE_CLASS,
-      payload: NEW_CAT,
+      payload: newCat,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(expectedResult));
   });
 
   test('ADD_CLASS should add the payload to existing classes.', () => {
-    const NEW_CLASS = { ...classDefault, label: 'Class 2', id: 'c2' };
-    const EXPECTED_RESULT = [{ ...INITIAL_STATE[0] }, { ...NEW_CLASS }];
-    const reducerResult = reducer(INITIAL_STATE, {
+    const newClass = { ...classDefault, label: 'Class 2', id: 'c2' };
+    const expectedResult = [{ ...initialState[0] }, { ...newClass }];
+    const reducerResult = reducer(initialState, {
       type: ADD_CLASS,
-      payload: NEW_CLASS,
+      payload: newClass,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(expectedResult));
   });
 
   test('ADD_CLASS should not add the class if the ID already exists', () => {
-    const NEW_CLASS = { ...classDefault, label: 'Class 2', id: 'c1' };
-    const reducerResult = reducer(INITIAL_STATE, {
+    const newClass = { ...classDefault, label: 'Class 2', id: 'c1' };
+    const reducerResult = reducer(initialState, {
       type: ADD_CLASS,
-      payload: NEW_CLASS,
+      payload: newClass,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(INITIAL_STATE));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(initialState));
   });
 
   test('DELETE_CLASS should delete the category if the ID is found', () => {
-    const INITIAL_STATE_DEL = [
+    const initialStateDel = [
       { ...classDefault, label: 'Class 1', id: 'c1' },
       { ...classDefault, label: 'Class 2', id: 'c2' },
       { ...classDefault, label: 'Class 3', id: 'c3' },
     ];
-    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[1]);
-    const reducerResult = reducer(INITIAL_STATE_DEL, {
+    const expectedStateDel = reduce.arr.removeObj(initialStateDel, initialStateDel[1]);
+    const reducerResult = reducer(initialStateDel, {
       type: DELETE_CLASS,
-      payload: INITIAL_STATE_DEL[1],
+      payload: initialStateDel[1],
     });
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(expectedStateDel));
   });
 
   test('DELETE_ALL_CLASSES should return an empty array', () => {
-    const reducerResult = reducer(INITIAL_STATE, { type: DELETE_ALL_CLASSES });
+    const reducerResult = reducer(initialState, { type: DELETE_ALL_CLASSES });
     expect(reducerResult).toEqual([]);
   });
 });

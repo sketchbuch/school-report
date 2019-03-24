@@ -15,12 +15,8 @@ import {
 import pupilDefault from '../../types/pupil';
 import reduce from '../../utils/reducers';
 
-/**
- * Pupils Reducer Tests
- */
-
 describe('Reducer: Pupils', () => {
-  const INITIAL_STATE = [
+  const initialState = [
     {
       ...pupilDefault,
       firstname: 'Arnold',
@@ -31,41 +27,41 @@ describe('Reducer: Pupils', () => {
   ];
 
   test('Should return the initial state if no type matches', () => {
-    expect(reducer(INITIAL_STATE, { type: 'IGNORE' })).toEqual(INITIAL_STATE);
+    expect(reducer(initialState, { type: 'IGNORE' })).toEqual(initialState);
   });
 
   test('REPLACE_DATA should return the initial state if payload has no pupils array', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(INITIAL_STATE);
+    expect(reducer(initialState, { type: REPLACE_DATA, payload: {} })).toEqual(initialState);
     expect(
-      reducer(INITIAL_STATE, {
+      reducer(initialState, {
         type: REPLACE_DATA,
         payload: { pupils: 'wrong' },
       })
-    ).toEqual(INITIAL_STATE);
+    ).toEqual(initialState);
   });
 
   test('DATA_LOADED should return the initial state if payload has no pupils array', () => {
-    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(INITIAL_STATE);
+    expect(reducer(initialState, { type: DATA_LOADED, payload: {} })).toEqual(initialState);
     expect(
-      reducer(INITIAL_STATE, {
+      reducer(initialState, {
         type: DATA_LOADED,
         payload: { pupils: 'wrong' },
       })
-    ).toEqual(INITIAL_STATE);
+    ).toEqual(initialState);
   });
 
   test('REPLACE_PUPILS should return the initial state if payload has no pupils array', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_PUPILS, payload: {} })).toEqual(INITIAL_STATE);
+    expect(reducer(initialState, { type: REPLACE_PUPILS, payload: {} })).toEqual(initialState);
     expect(
-      reducer(INITIAL_STATE, {
+      reducer(initialState, {
         type: REPLACE_PUPILS,
         payload: { pupils: 'wrong' },
       })
-    ).toEqual(INITIAL_STATE);
+    ).toEqual(initialState);
   });
 
   test('REPLACE_PUPILS should return payload replacing existing pupils.', () => {
-    const TEST_PUPILS = {
+    const testPupils = {
       pupils: [
         {
           ...pupilDefault,
@@ -85,29 +81,29 @@ describe('Reducer: Pupils', () => {
         },
       ],
     };
-    const reducerResult = reducer(INITIAL_STATE, {
+    const reducerResult = reducer(initialState, {
       type: REPLACE_PUPILS,
-      payload: TEST_PUPILS,
+      payload: testPupils,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(TEST_PUPILS.pupils));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(testPupils.pupils));
   });
 
   test('UPDATE_PUPIL should update existing pupils', () => {
-    const NEW_PUPIL = {
+    const newPupil = {
       ...pupilDefault,
       lastname: 'Rimmer (Edited)',
       id: 'p1',
     };
-    const EXPECTED_RESULT = [{ ...NEW_PUPIL }];
-    const reducerResult = reducer(INITIAL_STATE, {
+    const expectedResult = [{ ...newPupil }];
+    const reducerResult = reducer(initialState, {
       type: UPDATE_PUPIL,
-      payload: NEW_PUPIL,
+      payload: newPupil,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(expectedResult));
   });
 
   test('ADD_PUPIL should add the payload to existing pupils.', () => {
-    const NEW_PUPIL = {
+    const newPupil = {
       ...pupilDefault,
       classId: 'c2',
       firstname: 'The',
@@ -115,16 +111,16 @@ describe('Reducer: Pupils', () => {
       id: 'p4',
       lastname: 'Cat',
     };
-    const EXPECTED_RESULT = [{ ...INITIAL_STATE[0] }, { ...NEW_PUPIL }];
-    const reducerResult = reducer(INITIAL_STATE, {
+    const expectedResult = [{ ...initialState[0] }, { ...newPupil }];
+    const reducerResult = reducer(initialState, {
       type: ADD_PUPIL,
-      payload: NEW_PUPIL,
+      payload: newPupil,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_RESULT));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(expectedResult));
   });
 
   test('ADD_PUPIL should not add the pupil if the ID already exists', () => {
-    const NEW_PUPIL = {
+    const newPupil = {
       ...pupilDefault,
       classId: 'c1',
       firstname: 'Arnold',
@@ -132,15 +128,15 @@ describe('Reducer: Pupils', () => {
       id: 'p1',
       lastname: 'Rimmer',
     };
-    const reducerResult = reducer(INITIAL_STATE, {
+    const reducerResult = reducer(initialState, {
       type: ADD_PUPIL,
-      payload: NEW_PUPIL,
+      payload: newPupil,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(INITIAL_STATE));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(initialState));
   });
 
   test('DELETE_PUPIL should delete the category if the ID is found', () => {
-    const INITIAL_STATE_DEL = [
+    const initialStateDel = [
       {
         ...pupilDefault,
         classId: 'c1',
@@ -166,21 +162,21 @@ describe('Reducer: Pupils', () => {
         lastname: 'Cat',
       },
     ];
-    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[1]);
-    const reducerResult = reducer(INITIAL_STATE_DEL, {
+    const expectedStateDel = reduce.arr.removeObj(initialStateDel, initialStateDel[1]);
+    const reducerResult = reducer(initialStateDel, {
       type: DELETE_PUPIL,
-      payload: INITIAL_STATE_DEL[1],
+      payload: initialStateDel[1],
     });
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(expectedStateDel));
   });
 
   test('DELETE_ALL_CLASSES should return an empty array', () => {
-    const reducerResult = reducer(INITIAL_STATE, { type: DELETE_ALL_CLASSES });
+    const reducerResult = reducer(initialState, { type: DELETE_ALL_CLASSES });
     expect(reducerResult).toEqual([]);
   });
 
   test('DELETE_ALL_CLASS_PUPILS should remove all pupils for the deleted class', () => {
-    const INITIAL_STATE_DEL = [
+    const initialStateDel = [
       {
         ...pupilDefault,
         classId: 'c1',
@@ -214,17 +210,17 @@ describe('Reducer: Pupils', () => {
         lastname: '(Computer)',
       },
     ];
-    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[2]);
-    const reducerResult = reducer(INITIAL_STATE_DEL, {
+    const expectedStateDel = reduce.arr.removeObj(initialStateDel, initialStateDel[2]);
+    const reducerResult = reducer(initialStateDel, {
       type: DELETE_ALL_CLASS_PUPILS,
       payload: { id: 'c3' },
     });
 
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(expectedStateDel));
   });
 
   test('DELETE_CLASS should remove all pupils for the deleted class', () => {
-    const INITIAL_STATE_DEL = [
+    const initialStateDel = [
       {
         ...pupilDefault,
         classId: 'c1',
@@ -258,20 +254,20 @@ describe('Reducer: Pupils', () => {
         lastname: '(Computer)',
       },
     ];
-    const EXPECTED_STATE_DEL = reduce.arr.removeObj(INITIAL_STATE_DEL, INITIAL_STATE_DEL[2]);
-    const reducerResult = reducer(INITIAL_STATE_DEL, {
+    const expectedStateDel = reduce.arr.removeObj(initialStateDel, initialStateDel[2]);
+    const reducerResult = reducer(initialStateDel, {
       type: DELETE_CLASS,
       payload: { id: 'c3' },
     });
 
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(EXPECTED_STATE_DEL));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(expectedStateDel));
   });
 
   test('DELETE_CLASS handles undefined ID', () => {
-    const reducerResult = reducer(INITIAL_STATE, {
+    const reducerResult = reducer(initialState, {
       type: DELETE_CLASS,
       payload: {},
     });
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(INITIAL_STATE));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(initialState));
   });
 });

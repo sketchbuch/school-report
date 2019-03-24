@@ -33,7 +33,7 @@ describe('<Textarea />', () => {
   test('Handles className property', () => {
     const CLASS_NAME = 'TestClass';
     const cn1Wrapper = shallow(<Textarea {...props} />);
-    const cn2Wrapper = shallow(<Textarea {...props} classnamesName={CLASS_NAME} />);
+    const cn2Wrapper = shallow(<Textarea {...props} className={CLASS_NAME} />);
 
     expect(cn1Wrapper.find('textarea').hasClass(CLASS_NAME)).toEqual(false);
     expect(cn2Wrapper.find('textarea').hasClass(CLASS_NAME)).toEqual(true);

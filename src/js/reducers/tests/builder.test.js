@@ -3,13 +3,9 @@
 import reducer from '../builder';
 import { DATA_LOADED, REPLACE_BUILDER, REPLACE_DATA } from '../../constants/actionTypes';
 
-/**
- * Builder Reducer Tests
- */
-
 describe('Reducer: Categories', () => {
-  const INITIAL_STATE = {};
-  const TEST_BUILDER = {
+  const initialState = {};
+  const testBuilder = {
     builder: {
       r1: {
         c1: {
@@ -32,44 +28,44 @@ describe('Reducer: Categories', () => {
   };
 
   test('Should return the initial state if no type matches', () => {
-    expect(reducer(INITIAL_STATE, { type: 'IGNORE' })).toEqual(INITIAL_STATE);
+    expect(reducer(initialState, { type: 'IGNORE' })).toEqual(initialState);
   });
 
   test('REPLACE_DATA should return the initial state if payload has no builder object', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_DATA, payload: {} })).toEqual(INITIAL_STATE);
+    expect(reducer(initialState, { type: REPLACE_DATA, payload: {} })).toEqual(initialState);
     expect(
-      reducer(INITIAL_STATE, {
+      reducer(initialState, {
         type: REPLACE_DATA,
         payload: { builder: 'wrong' },
       })
-    ).toEqual(INITIAL_STATE);
+    ).toEqual(initialState);
   });
 
   test('DATA_LOADED should return the initial state if payload has no builder object', () => {
-    expect(reducer(INITIAL_STATE, { type: DATA_LOADED, payload: {} })).toEqual(INITIAL_STATE);
+    expect(reducer(initialState, { type: DATA_LOADED, payload: {} })).toEqual(initialState);
     expect(
-      reducer(INITIAL_STATE, {
+      reducer(initialState, {
         type: DATA_LOADED,
         payload: { builder: 'wrong' },
       })
-    ).toEqual(INITIAL_STATE);
+    ).toEqual(initialState);
   });
 
   test('REPLACE_BUILDER should return the initial state if payload has no builder object', () => {
-    expect(reducer(INITIAL_STATE, { type: REPLACE_BUILDER, payload: {} })).toEqual(INITIAL_STATE);
+    expect(reducer(initialState, { type: REPLACE_BUILDER, payload: {} })).toEqual(initialState);
     expect(
-      reducer(INITIAL_STATE, {
+      reducer(initialState, {
         type: REPLACE_BUILDER,
         payload: { builder: 'wrong' },
       })
-    ).toEqual(INITIAL_STATE);
+    ).toEqual(initialState);
   });
 
   test('REPLACE_BUILDER should return payload replacing existing builder object', () => {
-    const reducerResult = reducer(INITIAL_STATE, {
+    const reducerResult = reducer(initialState, {
       type: REPLACE_BUILDER,
-      payload: TEST_BUILDER,
+      payload: testBuilder,
     });
-    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(TEST_BUILDER.builder));
+    expect(JSON.stringify(reducerResult)).toEqual(JSON.stringify(testBuilder.builder));
   });
 });

@@ -60,15 +60,21 @@ describe('Types: Category', () => {
         expect(result).toBe(false);
       });
 
-      test('Returns false if the category object does not contain the search term.', () => {
+      test('Returns false if the category object does not begin with the search term.', () => {
         const term: string = 'Chalfont';
         const result: boolean = newCategoryObj.contains(term);
         expect(result).toBe(false);
       });
 
+      test('Returns true if the category object begins with the search term.', () => {
+        const term: string = 'Category';
+        const result: boolean = newCategoryObj.contains(term);
+        expect(result).toBe(true);
+      });
+
       test('Returns true if the category object contains the search term.', () => {
         const term: string = 'gory';
-        const result: boolean = newCategoryObj.contains(term);
+        const result: boolean = newCategoryObj.contains(term, true);
         expect(result).toBe(true);
       });
     });

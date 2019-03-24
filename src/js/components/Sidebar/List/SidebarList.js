@@ -19,7 +19,6 @@ import pageBrowserPropsDefault from '../../../types/pageBrowser';
 import type { DomainType } from '../../../types/domain';
 import type { PageBrowserProps } from '../../../types/pageBrowser';
 import type { SidebarListTypes } from '../../../types/sidebarList';
-// import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
 import type { TextType } from '../../../types/text';
 import { getCustomNumProp } from '../../../utils/dom';
 import { sortObjectsAz } from '../../../utils/sort';
@@ -41,7 +40,7 @@ type Props = {
   description: ?(pupilId: string, classId: string) => string | null,
   dispatch: Dispatch,
   filter: string,
-  items: DomainType[],
+  items: Object[],
   listType: SidebarListTypes,
   noItemsTxt: string,
   onChange?: (curPage: number) => void,
@@ -156,7 +155,7 @@ class SidebarList extends React.Component<Props, State> {
     return sortedItems;
   }
 
-  renderContent() {
+  render() {
     let sortedItems: DomainType[] = this.getSortedItems();
     const itemForPaging: number = sortedItems.length;
 
@@ -242,10 +241,6 @@ class SidebarList extends React.Component<Props, State> {
     } else {
       return <NoItems message={this.props.noItemsTxt} />;
     }
-  }
-
-  render() {
-    return this.renderContent();
   }
 }
 

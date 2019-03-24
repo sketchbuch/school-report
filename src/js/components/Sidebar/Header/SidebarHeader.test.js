@@ -3,7 +3,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
-import renderer from 'react-test-renderer';
 import SidebarHeader from './SidebarHeader';
 
 describe('<SidebarHeader />', () => {
@@ -12,11 +11,6 @@ describe('<SidebarHeader />', () => {
   test('Renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<SidebarHeader {...props} />, div);
-  });
-
-  test('Props render correctly', () => {
-    const testRender = renderer.create(<SidebarHeader {...props} />).toJSON();
-    expect(testRender).toMatchSnapshot();
   });
 
   test('Subtitle not displayed if not supplied', () => {

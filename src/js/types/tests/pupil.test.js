@@ -72,15 +72,21 @@ describe('Types: Pupil', () => {
         expect(result).toBe(false);
       });
 
-      test('Returns false if the pupil object does not contain the search term.', () => {
-        const term: string = 'Lister';
+      test('Returns false if the pupil object does not begin with the search term.', () => {
+        const term: string = 'Rimmer';
         const result: boolean = newPupilObj.contains(term);
         expect(result).toBe(false);
       });
 
-      test('Returns true if the pupil object contains the search term.', () => {
+      test('Returns true if the pupil object begins with the search term.', () => {
         const term: string = 'Arn';
         const result: boolean = newPupilObj.contains(term);
+        expect(result).toBe(true);
+      });
+
+      test('Returns true if the pupil object contains the search term.', () => {
+        const term: string = 'Rimmer';
+        const result: boolean = newPupilObj.contains(term, true);
         expect(result).toBe(true);
       });
     });

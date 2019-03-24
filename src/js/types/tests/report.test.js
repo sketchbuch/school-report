@@ -62,15 +62,21 @@ describe('Types: Report', () => {
         expect(result).toBe(false);
       });
 
-      test('Returns false if the report object does not contain the search term.', () => {
-        const term: string = 'text';
+      test('Returns false if the report object does not begin with the search term.', () => {
+        const term: string = 'ort';
         const result: boolean = newReportObj.contains(term);
         expect(result).toBe(false);
       });
 
-      test('Returns true if the report object contains the search term.', () => {
-        const term: string = 'port';
+      test('Returns true if the report object begins with the search term.', () => {
+        const term: string = 'Rep';
         const result: boolean = newReportObj.contains(term);
+        expect(result).toBe(true);
+      });
+
+      test('Returns true if the report object contains the search term.', () => {
+        const term: string = 'ort';
+        const result: boolean = newReportObj.contains(term, true);
         expect(result).toBe(true);
       });
     });

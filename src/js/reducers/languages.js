@@ -29,7 +29,7 @@ export default function reducer(state: LanguageState = defaultLanguageState, act
       const { payload }: Object = action;
 
       if (payload.settings !== undefined && payload.settings.language) {
-        reqLang = payload.settings.language;
+        reqLang = payload.settings.language.current;
       } else if (payload.lang !== undefined) {
         reqLang = payload.lang;
       }

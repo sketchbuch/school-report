@@ -50,7 +50,7 @@ class TextInput extends React.Component<Props> {
 
     return (
       <input
-        className={classNames('TextInput', { [className]: !!className, [UI_ERROR_CLASS]: isValid })}
+        className={classNames('TextInput', { [className]: !!className, [UI_ERROR_CLASS]: !isValid })}
         defaultValue={defaultValue}
         disabled={disabled}
         name={name}

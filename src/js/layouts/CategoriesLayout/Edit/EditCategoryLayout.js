@@ -36,11 +36,15 @@ export class EditCategoryLayout extends Component<Props, State> {
     categories: [],
   };
 
+  getActiveId = (): string => {
+    return this.props.match.params !== undefined ? this.props.match.params.categoryId : '';
+  };
+
   props: Props;
   state: State = {
     category: {
       ...categoryDefault,
-      ...getActiveCategory(this.props.categories, this.getactiveId()),
+      ...getActiveCategory(this.props.categories, this.getActiveId()),
     },
     error: false,
     saving: false,
@@ -55,7 +59,7 @@ export class EditCategoryLayout extends Component<Props, State> {
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    const activeId: string = this.getactiveId();
+    const activeId: string = this.getActiveId();
     const activeCategory: CategoryType = getActiveCategory(this.props.categories, activeId);
     setTitle(text('WinTitle', 'EditCategoryLayout', { CAT: activeCategory.getLabel() }));
 
@@ -91,12 +95,8 @@ export class EditCategoryLayout extends Component<Props, State> {
     }
   };
 
-  getactiveId = (): string => {
-    return this.props.match.params !== undefined ? this.props.match.params.categoryId : '';
-  };
-
   render() {
-    const activeId: string = this.getactiveId();
+    const activeId: string = this.getActiveId();
     const activeCategory: CategoryType = getActiveCategory(this.props.categories, activeId);
     const activeLabel: string = activeCategory.getLabel !== undefined ? activeCategory.getLabel() : '';
 
