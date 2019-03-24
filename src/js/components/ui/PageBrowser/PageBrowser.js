@@ -2,49 +2,14 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import ButtonCircular from '../ButtonCircular/ButtonCircular';
-import Translation, { text } from '../../Translation/Translation';
+import Button from './Button/Button';
+import Translation from '../../Translation/Translation';
 import pageBrowserPropsDefault from '../../../types/pageBrowser';
 import type { PageBrowserProps } from '../../../types/pageBrowser';
 import type { RenderHelperReturn } from '../../../types/misc';
 import './PageBrowser.css';
 
-export type PbMoreProps = {
-  hidden: boolean,
-};
-
-export const PbMore = (props: PbMoreProps) => {
-  return <span className={classNames('PageBrowser__more', { 'PageBrowser__more--hidden': props.hidden })}>…</span>;
-};
-
-export type PbButProps = {
-  disabled: boolean,
-  label: string,
-  onClick: (event: SyntheticMouseEvent<HTMLElement>) => void,
-  page?: boolean,
-  selected?: boolean,
-  title?: string,
-  type: string,
-};
-
-export const PbBut = (props: PbButProps) => {
-  return (
-    <ButtonCircular
-      action={props.type}
-      className={classNames(`PageBrowser__btn PageBrowser__btn--${props.type}`, {
-        'PageBrowser__btn--page': props.page,
-        'PageBrowser__btn--selected': props.selected,
-      })}
-      disabled={props.disabled}
-      onClick={props.onClick}
-      title={props.title || text('Btn-' + props.type, 'PageBrowser')}
-    >
-      {props.label}
-    </ButtonCircular>
-  );
-};
-
-export type Props = { ...PageBrowserProps };
+export type Props = PageBrowserProps;
 
 class PageBrowser extends Component<Props> {
   static defaultProps = { ...pageBrowserPropsDefault };
@@ -93,8 +58,8 @@ class PageBrowser extends Component<Props> {
     if (first || prev) {
       return (
         <div className="PageBrowser__left">
-          {first && <PbBut label="&lt;&lt;" type="first" disabled={curPage === 1} onClick={this.handleClick} />}
-          {prev && <PbBut label="&lt;" type="prev" disabled={curPage === 1} onClick={this.handleClick} />}
+          {first && <Button label="&lt;&lt;" type="first" disabled={curPage === 1} onClick={this.handleClick} />}
+          {prev && <Button label="&lt;" type="prev" disabled={curPage === 1} onClick={this.handleClick} />}
         </div>
       );
     }
@@ -106,8 +71,8 @@ class PageBrowser extends Component<Props> {
     if (next || last) {
       return (
         <div className="PageBrowser__right">
-          {next && <PbBut label="&gt;" type="next" disabled={curPage === totalPages} onClick={this.handleClick} />}
-          {last && <PbBut label="&gt;&gt;" type="last" disabled={curPage === totalPages} onClick={this.handleClick} />}
+          {next && <Button label="&gt;" type="next" disabled={curPage === totalPages} onClick={this.handleClick} />}
+          {last && <Button label="&gt;&gt;" type="last" disabled={curPage === totalPages} onClick={this.handleClick} />}
         </div>
       );
     }
@@ -127,7 +92,6 @@ class PageBrowser extends Component<Props> {
 
   render() {
     const { className, curPage, first, itemCount, last, next, perPage, prev } = this.props;
-
     const totalPages = this.getTotalPages(itemCount, perPage);
 
     let pb = null;

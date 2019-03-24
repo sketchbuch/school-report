@@ -2,9 +2,10 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import PageBrowser, { PbBut, PbMore } from './PageBrowser';
+import PageBrowser from './PageBrowser';
+import Button from './Button/Button';
 import pageBrowserPropsDefault from '../../../types/pageBrowser';
-import type { PbButProps, PbMoreProps, Props } from './PageBrowser';
+import type { Props } from './PageBrowser';
 
 describe('<PageBrowser />', () => {
   const props: Props = { ...pageBrowserPropsDefault };
@@ -35,19 +36,19 @@ describe('<PageBrowser />', () => {
     test('Renders a component if first is "true"', () => {
       const result = shallow(instance.renderLeft(true, false, 1));
       expect(result).toHaveLength(1);
-      expect(result.find(PbBut)).toHaveLength(1);
+      expect(result.find(Button)).toHaveLength(1);
     });
 
     test('Renders a component if prev is "true"', () => {
       const result = shallow(instance.renderLeft(false, true, 1));
       expect(result).toHaveLength(1);
-      expect(result.find(PbBut)).toHaveLength(1);
+      expect(result.find(Button)).toHaveLength(1);
     });
 
-    test('Renders a component with 2 PbBut components if first and prev are "true"', () => {
+    test('Renders a component with 2 Button components if first and prev are "true"', () => {
       const result = shallow(instance.renderLeft(true, true, 1));
       expect(result).toHaveLength(1);
-      expect(result.find(PbBut)).toHaveLength(2);
+      expect(result.find(Button)).toHaveLength(2);
     });
   });
 
@@ -62,19 +63,19 @@ describe('<PageBrowser />', () => {
     test('Renders a component if next is "true"', () => {
       const result = shallow(instance.renderRight(true, false, 1, 3, 10));
       expect(result).toHaveLength(1);
-      expect(result.find(PbBut)).toHaveLength(1);
+      expect(result.find(Button)).toHaveLength(1);
     });
 
     test('Renders a component if last is "true"', () => {
       const result = shallow(instance.renderRight(false, true, 1, 3, 10));
       expect(result).toHaveLength(1);
-      expect(result.find(PbBut)).toHaveLength(1);
+      expect(result.find(Button)).toHaveLength(1);
     });
 
-    test('Renders a component with 2 PbBut components if next and last are "true"', () => {
+    test('Renders a component with 2 Button components if next and last are "true"', () => {
       const result = shallow(instance.renderRight(true, true, 1, 3, 10));
       expect(result).toHaveLength(1);
-      expect(result.find(PbBut)).toHaveLength(2);
+      expect(result.find(Button)).toHaveLength(2);
     });
   });
 
@@ -153,64 +154,5 @@ describe('<PageBrowser />', () => {
       expect(mockOnChange).toHaveBeenCalledTimes(1);
       expect(mockOnChange).toHaveBeenCalledWith(2);
     });
-  });
-});
-
-describe('PbBut():', () => {
-  const props: PbButProps = {
-    disabled: false,
-    label: '1',
-    onClick: jest.fn(),
-    page: false,
-    selected: false,
-    title: '1',
-    type: '1',
-  };
-
-  test('Renders a PbBut SFC', () => {
-    const wrapper = shallow(<PbBut {...props} />);
-    expect(wrapper).toHaveLength(1);
-  });
-
-  describe('page property:', () => {
-    test('Renders without page class if "false"', () => {
-      const wrapper = shallow(<PbBut {...props} />);
-      expect(wrapper.find('.PageBrowser__btn--page')).toHaveLength(0);
-    });
-
-    test('Renders with page class if "true"', () => {
-      const wrapper = shallow(<PbBut {...props} page />);
-      expect(wrapper.find('.PageBrowser__btn--page')).toHaveLength(1);
-    });
-  });
-
-  describe('selected property:', () => {
-    test('Renders without selected class if "false"', () => {
-      const wrapper = shallow(<PbBut {...props} />);
-      expect(wrapper.find('.PageBrowser__btn--selected')).toHaveLength(0);
-    });
-
-    test('Renders with page selected if "true"', () => {
-      const wrapper = shallow(<PbBut {...props} selected />);
-      expect(wrapper.find('.PageBrowser__btn--selected')).toHaveLength(1);
-    });
-  });
-});
-
-describe('PbMore():', () => {
-  const props: PbMoreProps = {
-    hidden: false,
-  };
-
-  test('Renders a PbMore SFC', () => {
-    const wrapper = shallow(<PbMore {...props} />);
-    expect(wrapper).toHaveLength(1);
-    expect(wrapper.find('.PageBrowser__more--hidden')).toHaveLength(0);
-  });
-
-  test('Renders a hidden PbMore SFC', () => {
-    const wrapper = shallow(<PbMore {...props} hidden />);
-    expect(wrapper).toHaveLength(1);
-    expect(wrapper.find('.PageBrowser__more--hidden')).toHaveLength(1);
   });
 });

@@ -7,9 +7,6 @@ import './SidebarPageBrowser.css';
 
 type Props = { ...PageBrowserProps };
 
-/**
- * Sidebar page browser.
- */
 class SidebarPageBrowser extends React.Component<Props> {
   props: Props;
 
