@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { shallow } from 'enzyme';
 import SidebarHeader from './SidebarHeader';
 
@@ -9,8 +8,8 @@ describe('<SidebarHeader />', () => {
   const props = { title: 'Test title', subtitle: '' };
 
   test('Renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<SidebarHeader {...props} />, div);
+    const wrapper = shallow(<SidebarHeader />);
+    expect(wrapper).toHaveLength(1);
   });
 
   test('Subtitle not displayed if not supplied', () => {

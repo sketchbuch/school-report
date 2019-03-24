@@ -29,9 +29,6 @@ export type Props = {
   ...RouteComponentProps,
 };
 
-/**
- * Panels containing the main app content.
- */
 export class Panels extends Component<Props> {
   props: Props;
 

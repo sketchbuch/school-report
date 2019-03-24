@@ -1,11 +1,9 @@
 // @flow
 
 import React from 'react';
-import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import Panels from './Panels';
 import type { Props } from './Panels';
-import store from '../../store/redux';
 import { ROUTE_HOME } from '../../constants/routes';
 
 describe('<Panels />', () => {
@@ -23,11 +21,7 @@ describe('<Panels />', () => {
   });
 
   test('Renders without crashing', () => {
-    const wrapper = shallow(
-      <Provider store={store}>
-        <Panels {...props} />
-      </Provider>
-    );
+    const wrapper = shallow(<Panels {...props} />);
     expect(wrapper).toHaveLength(1);
   });
 

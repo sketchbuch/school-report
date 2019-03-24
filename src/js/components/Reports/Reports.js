@@ -167,7 +167,7 @@ export class Reports extends Component<Props, State> {
     }
   };
 
-  getCatTexts(): TextType[] {
+  getCatTexts = (): TextType[] => {
     let visibleTexts: TextType[] = [];
 
     if (this.state.catId !== 'category-all') {
@@ -189,7 +189,7 @@ export class Reports extends Component<Props, State> {
     }
 
     return visibleTexts;
-  }
+  };
 
   getCats(): DomainType[] {
     const cats: DomainType[] = [...this.props.categories];

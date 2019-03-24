@@ -39,35 +39,4 @@ describe('<ReportsAvailableTexts />', () => {
     const wrapper = shallow(<ReportsAvailableTexts {...props} texts={[]} />);
     expect(wrapper.find('NoItems')).toHaveLength(1);
   });
-
-  describe('getVisibleTexts()', () => {
-    const wrapper = shallow(<ReportsAvailableTexts {...props} />);
-
-    test('"category-all" returns all texts', () => {
-      expect(wrapper.instance().getVisibleTexts()).toEqual(props.texts);
-    });
-
-    test('"category-nocat" returns all texts without a category', () => {
-      wrapper.instance().onFilterChanage({ target: { value: 'category-nocat' } });
-      expect(wrapper.instance().getVisibleTexts()).toEqual(props.texts.slice(1, 2));
-    });
-
-    test('"category-selected" returns all selected texts', () => {
-      wrapper.instance().onFilterChanage({ target: { value: 'category-selected' } });
-      expect(wrapper.instance().getVisibleTexts()).toEqual(props.texts.slice(0, 2));
-    });
-
-    test('"category-unselected" returns all unselected texts', () => {
-      wrapper.instance().onFilterChanage({ target: { value: 'category-unselected' } });
-      expect(wrapper.instance().getVisibleTexts()).toEqual(props.texts.slice(2));
-    });
-
-    test('A cat ID returns all texts in the category', () => {
-      const expectedResult = [];
-      expectedResult.push(props.texts[0]);
-      expectedResult.push(props.texts[2]);
-      wrapper.instance().onFilterChanage({ target: { value: 'c1' } });
-      expect(wrapper.instance().getVisibleTexts()).toEqual(expectedResult);
-    });
-  });
 });

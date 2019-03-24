@@ -1,12 +1,12 @@
 // @flow
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import SidebarFooter from './SidebarFooter';
 
 describe('<SidebarFooter />', () => {
   test('Renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<SidebarFooter />, div);
+    const wrapper = shallow(<SidebarFooter />);
+    expect(wrapper).toHaveLength(1);
   });
 });

@@ -1,8 +1,9 @@
 // @flow
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import NoData from './NoData';
+import store from '../../store/redux';
 import type { Props } from './NoData';
 
 describe('<NoData />', () => {
@@ -12,7 +13,7 @@ describe('<NoData />', () => {
   };
 
   test('Renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<NoData {...props} />, div);
+    const wrapper = shallow(<NoData {...props} store={store} />);
+    expect(wrapper).toHaveLength(1);
   });
 });

@@ -21,7 +21,7 @@ describe('<CatSelect />', () => {
       { ...textDefault, id: 't3', bodytext: 'Starbug' },
     ],
     selectedCount: 0,
-    useSelected: false,
+    useSelected: true,
   };
 
   test('Renders without crashing', () => {
@@ -38,7 +38,7 @@ describe('<CatSelect />', () => {
     expect(wrapper2.find(content)).toHaveLength(1);
   });
 
-  test('Shows the selected option when needed', () => {
+  test('Shows the selected option if useSelected and selectedCount > 0', () => {
     const option = 'option[value="category-selected"]';
     const wrapper1 = shallow(<CatSelect {...props} />);
     const wrapper2 = shallow(<CatSelect {...props} selectedCount={3} />);
@@ -47,7 +47,7 @@ describe('<CatSelect />', () => {
     expect(wrapper2.find(option)).toHaveLength(1);
   });
 
-  test('Shows the unselected option when needed', () => {
+  test('Shows the unselected option if useSelected and unselectedCount > 0', () => {
     const option = 'option[value="category-unselected"]';
     const wrapper1 = shallow(<CatSelect {...props} />);
     const wrapper2 = shallow(<CatSelect {...props} selectedCount={props.texts.length} />);

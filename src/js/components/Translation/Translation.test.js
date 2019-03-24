@@ -1,16 +1,15 @@
 // @flow
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import Translation from './Translation';
 
 const windowApp = { ...window.reportr };
 
 describe('<Translation />', () => {
   test('Renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Translation name="Name" ns="App" />, div);
+    const wrapper = shallow(<Translation name="Name" ns="App" />);
+    expect(wrapper).toHaveLength(1);
   });
 
   test('Renders the correct translation', () => {
@@ -19,7 +18,7 @@ describe('<Translation />', () => {
   });
 
   test('Handles Language change', () => {
-    const wrapper = mount(<Translation name="Name" ns="App" />);
+    const wrapper = shallow(<Translation name="Name" ns="App" />);
     expect(wrapper.text()).toBe(window.reportr.translations.EN.App.Name);
     window.reportr.curLang = 'DE';
     wrapper.instance().forceUpdate();
@@ -95,7 +94,7 @@ describe('<Translation />', () => {
   });
 
   test('componentWillUpdate()', () => {
-    const wrapper = mount(<Translation name="Name" ns="App" />);
+    const wrapper = shallow(<Translation name="Name" ns="App" />);
     const wrapperInstance = wrapper.instance();
     expect(wrapperInstance.prevLang).toBe('EN');
     window.reportr.curLang = 'DE';
