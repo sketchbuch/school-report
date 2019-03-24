@@ -4,6 +4,9 @@ import { exportWord, getContent, getDateFromTs } from '../export';
 import classDefault, { ClassFactory } from '../../types/class';
 import pupilDefault, { PupilFactory } from '../../types/pupil';
 import textDefault, { TextFactory } from '../../types/text';
+import type { TextType } from '../../types/text';
+import type { PupilType } from '../../types/pupil';
+import type { SidebarBuilderItemType } from '../../types/sidebarBuilderItem';
 import { text } from '../../components/Translation/Translation';
 
 jest.mock('jszip', () => jest.fn(() => {}));
@@ -17,12 +20,8 @@ jest.mock('docxtemplater', () => {
   };
 });
 
-/**
- * FS Export Tests
- */
-
 describe('FS: Export:', () => {
-  const dummyTexts = [
+  const dummyTexts: TextType[] = [
     TextFactory({ ...textDefault, bodytext: 'A text' }, Date.now(), 'EN'),
     TextFactory({ ...textDefault, bodytext: 'A text' }, Date.now(), 'EN'),
     TextFactory({ ...textDefault, bodytext: 'A text' }, Date.now(), 'EN'),
@@ -33,7 +32,7 @@ describe('FS: Export:', () => {
     TextFactory({ ...textDefault, bodytext: 'A text' }, Date.now(), 'EN'),
   ];
 
-  const items = [
+  const items: SidebarBuilderItemType[] = [
     {
       classRec: ClassFactory({ ...classDefault, label: 'Dave Lister' }, Date.now()),
       id: '',
@@ -54,7 +53,7 @@ describe('FS: Export:', () => {
     },
   ];
 
-  items.forEach(item => {
+  items.forEach((item: SidebarBuilderItemType) => {
     item.id = item.classRec.id;
   });
 
@@ -72,10 +71,10 @@ describe('FS: Export:', () => {
   );
 
   const dummyBuilderData = {};
-  items.forEach(item => {
+  items.forEach((item: SidebarBuilderItemType) => {
     dummyBuilderData[item.id] = {};
 
-    item.pupils.forEach(pupil => {
+    item.pupils.forEach((pupil: PupilType) => {
       dummyBuilderData[item.id][pupil.id] = [];
     });
   });
@@ -133,8 +132,9 @@ describe('FS: Export:', () => {
     });
   });
 
-  describe.skip('exportWord():', () => {
-    test('Returns a default content object if builderData is undefined', () => {
+  describe('exportWord():', () => {
+    // TODO: fix test
+    test.skip('Returns a default content object if builderData is undefined', () => {
       const content = getContent(items, dummyBuilderData, dummyTexts);
 
       expect(

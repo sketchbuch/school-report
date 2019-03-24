@@ -1,7 +1,7 @@
 //@flow
 
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import Button from './Button';
 import type { Props } from './Button';
 
@@ -17,8 +17,8 @@ describe('<Button />', () => {
   });
 
   test('Handles busy property', () => {
-    const wrapper = mount(<Button {...props} busy />);
-    expect(wrapper.find('.icofont-refresh')).toHaveLength(1);
+    const wrapper = shallow(<Button {...props} busy />);
+    expect(wrapper.find('Icon')).toHaveLength(1);
   });
 
   test('Handles className property', () => {

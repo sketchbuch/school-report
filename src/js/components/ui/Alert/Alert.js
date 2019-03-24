@@ -5,14 +5,16 @@ import type { RenderHelperReturn } from '../../../types/misc';
 import Icon from '../../Icon/Icon';
 import './Alert.css';
 
+export type AlertTypes = 'info' | 'success' | 'warn' | 'error';
+
 export type Props = {
   body: string,
   icon: boolean,
   title?: string,
-  type: 'info' | 'success' | 'warn' | 'error',
+  type: AlertTypes,
 };
 
-const alertIcons = {
+export const alertIcons = {
   info: 'info-circle',
   warn: 'warning-alt',
   error: 'thumbs-down',

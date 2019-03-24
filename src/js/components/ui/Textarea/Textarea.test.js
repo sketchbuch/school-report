@@ -1,7 +1,7 @@
 //@flow
 
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import Textarea from './Textarea';
 import type { Props } from './Textarea';
 
@@ -25,7 +25,7 @@ describe('<Textarea />', () => {
 
   test('Handles disabled property', () => {
     const mockOnChange = jest.fn();
-    const wrapper = mount(<Textarea {...props} disabled onChange={mockOnChange} />);
+    const wrapper = shallow(<Textarea {...props} disabled onChange={mockOnChange} />);
     wrapper.simulate('change');
     expect(mockOnChange.mock.calls.length).toBe(0);
   });

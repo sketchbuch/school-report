@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 import AppError from './AppError';
 import type { Props } from './AppError';
 
@@ -11,7 +11,7 @@ describe('<AppError />', () => {
   };
 
   test('Renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<AppError {...props} />, div);
+    const wrapper = shallow(<AppError {...props} />);
+    expect(wrapper).toHaveLength(1);
   });
 });

@@ -1,14 +1,12 @@
 // @flow
 
 import React from 'react';
-import { Provider } from 'react-redux';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import appDefault from '../../types/app';
 import classDefault from '../../types/class';
 import settingsDefault from '../../types/settings';
-import store from '../../store/redux';
-import { App } from './App';
 import type { Props } from './App';
+import { App } from './App';
 
 describe('<App />', () => {
   const props: Props = {
@@ -19,23 +17,21 @@ describe('<App />', () => {
     settings: { ...settingsDefault },
   };
   const propsLoaded: Props = { ...props, app: { ...props.app, loaded: true } };
-  const propsLoadedWithClasses: Props = { ...propsLoaded, classes: [{ ...classDefault }] };
 
   test('Renders without crashing', () => {
-    const wrapper = shallow(
-      <Provider store={store}>
-        <App {...props} />
-      </Provider>
-    );
+    const wrapper = shallow(<App {...props} />);
     expect(wrapper).toHaveLength(1);
   });
 
-  test('Shows content if "loaded" is true & "error" is false and dataFolderCreated is false', () => {
-    const wrapperWithClasses = mount(
-      <Provider store={store}>
-        <App {...propsLoadedWithClasses} />
-      </Provider>
-    );
-    expect(wrapperWithClasses.find('.Panels')).toHaveLength(1);
+  test('Shows Panels if "loaded" is true & "error" is false and dataFolderCreated is false', () => {
+    const propsLoadedWithClasses: Props = { ...propsLoaded, classes: [{ ...classDefault }] };
+    const wrapper = shallow(<App {...propsLoadedWithClasses} />);
+    expect(wrapper.find('withRouter(Panels)')).toHaveLength(1);
+  });
+
+  test('Shows AppError if "app.error" is true', () => {
+    const propsError: Props = { ...props, app: { ...props.app, error: true } };
+    const wrapper = shallow(<App {...propsError} />);
+    expect(wrapper.find('AppError')).toHaveLength(1);
   });
 });

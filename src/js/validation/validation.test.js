@@ -1,9 +1,5 @@
 // @flow
 
-/**
- * Validation Tests
- */
-
 import validate from './validation';
 
 describe('Util: validation', () => {

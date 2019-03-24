@@ -1,7 +1,7 @@
 //@flow
 
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import TextInput from './TextInput';
 import type { Props } from './TextInput';
 import { UI_ERROR_CLASS } from '../../../constants/ui';
@@ -29,8 +29,8 @@ describe('<TextInput />', () => {
 
   test('Handles disabled property', () => {
     const mockOnChange = jest.fn();
-    const wrapper = mount(<TextInput {...props} disabled onChange={mockOnChange} />);
-    wrapper.simulate('change');
+    const wrapper = shallow(<TextInput {...props} disabled onChange={mockOnChange} />);
+    wrapper.simulate('shallow');
     expect(mockOnChange.mock.calls.length).toBe(0);
   });
 

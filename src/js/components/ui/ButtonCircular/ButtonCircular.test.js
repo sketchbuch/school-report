@@ -1,7 +1,7 @@
 //@flow
 
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import ButtonCircular from './ButtonCircular';
 import type { Props } from './ButtonCircular';
 
@@ -17,7 +17,7 @@ describe('<ButtonCircular />', () => {
   });
 
   test('Handles visual property', () => {
-    const wrapper = mount(<ButtonCircular {...props} visual />);
+    const wrapper = shallow(<ButtonCircular {...props} visual />);
     expect(wrapper.find('button')).toHaveLength(0);
   });
 
