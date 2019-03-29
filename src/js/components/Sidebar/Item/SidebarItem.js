@@ -117,8 +117,9 @@ class SidebarItem extends Component<Props, State> {
         {this.state.delete ? (
           <SidebarInner
             description={this.props.item.getLabel(displayProp)}
-            label={text('Delete', 'SidebarItem')}
             icon={ICON_DELETE}
+            id={this.props.item.id}
+            label={text('Delete', 'SidebarItem')}
           >
             <SidebarItemButton
               handleClick={this.handleClick}
@@ -139,6 +140,7 @@ class SidebarItem extends Component<Props, State> {
           <SidebarInner
             description={this.props.item.getDescription()}
             icon={this.props.item.getIcon()}
+            id={this.props.item.id}
             label={this.props.item.getLabel(displayProp)}
             link={this.props.item.getUrl('link')}
             linkEdit={editUrl}

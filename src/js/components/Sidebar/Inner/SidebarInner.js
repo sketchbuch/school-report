@@ -10,7 +10,7 @@ type Props = {
   children?: React.Node,
   description: string,
   icon: string,
-  id?: string,
+  id: string,
   label: string,
   link: string,
   linkEdit: string,
@@ -60,7 +60,7 @@ class SidebarInner extends React.Component<Props> {
     if (this.props.onSubClick) {
       return (
         <div
-          onClick={this.props.onSubClick('ee', this.props.label)}
+          onClick={this.props.onSubClick(this.props.id, this.props.label)}
           className={isSelected ? 'SidebarInner SidebarInner--selected' : 'SidebarInner'}
         >
           <ItemContent {...this.props} />

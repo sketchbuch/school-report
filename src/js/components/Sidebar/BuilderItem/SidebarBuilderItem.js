@@ -55,10 +55,11 @@ class SidebarBuilderItem extends Component<Props, State> {
     return (
       <li className={classes} title={classRec.getTooltip()}>
         <SidebarInner
-          onClick={this.handleExpandClick}
           description={classRec.getDescription()}
-          label={classRec.getLabel()}
           icon={classRec.getIcon()}
+          id={classRec.id}
+          label={classRec.getLabel()}
+          onClick={this.handleExpandClick}
         >
           <span className="SidebarItem_expander" title={text('Expand', 'Actions')}>
             <Icon type={ICON_EXPAND} />
@@ -80,6 +81,7 @@ class SidebarBuilderItem extends Component<Props, State> {
                     }
                     label={pupil.getLabel(this.props.sortOrder[0])}
                     icon={pupil.getIcon()}
+                    id={pupil.id}
                     link={pupil.getUrl('builder', this.props.item.reportId)}
                   />
                 </li>
