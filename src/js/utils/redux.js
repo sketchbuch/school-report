@@ -172,6 +172,7 @@ export const getSelectedTexts = (
   activePupilId: string
 ): string[] => {
   let selected = [];
+  // TODO - Rewrite
   if (builderData[activeReportId] !== undefined) {
     if (builderData[activeReportId][activeClassId] !== undefined) {
       if (builderData[activeReportId][activeClassId][activePupilId] !== undefined) {
