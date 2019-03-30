@@ -43,7 +43,7 @@ type Props = {
   items: Object[],
   listType: SidebarListTypes,
   noItemsTxt: string,
-  onChange?: (curPage: number) => void,
+  onPbChange?: (curPage: number) => void,
   onReportClick?: (id: string, label: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
   pagesToShow: number,
   perPage: number,
@@ -218,7 +218,7 @@ class SidebarList extends React.Component<Props, State> {
               }
             })}
           </ul>
-          {showPb && <SidebarPageBrowser {...pbProps} onChange={this.props.onChange} />}
+          {showPb && <SidebarPageBrowser {...pbProps} onChange={this.props.onPbChange} />}
         </React.Fragment>
       );
     } else if (this.props.term !== '' || this.props.filter !== '') {

@@ -30,7 +30,7 @@ describe('<SidebarList />', () => {
     ],
     listType: 'text',
     noItemsTxt: 'No items in list',
-    onChange: jest.fn(),
+    onPbChange: jest.fn(),
     onReportClick: jest.fn(),
     sortOrder: ['created'],
   };

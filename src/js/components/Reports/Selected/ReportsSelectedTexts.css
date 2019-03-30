@@ -1,16 +1,18 @@
 .ReportsSelectedTexts {
-  position: relative;
+  align-items: center;
   display: flex;
   flex-direction: column;
+  height: calc(100% - var(--sidebar-header-height));
   justify-content: flex-start;
-  align-items: center;
-  padding: 20px 20px;
   list-style: none;
   margin: 0px;
+  overflow: auto;
+  padding: 20px 20px;
+  position: relative;
 }
 
 .ReportsSelectedTexts__adder {
-  text-align: center;
-  border: none;
   background: none;
+  border: none;
+  text-align: center;
 }

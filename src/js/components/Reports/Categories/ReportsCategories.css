@@ -1,0 +1,5 @@
+.ReportsCategories {
+  height: calc(100% - var(--sidebar-header-height));
+  position: relative;
+  width: 100%;
+}

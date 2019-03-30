@@ -13,6 +13,7 @@
   background: var(--col-brand-dark);
   border-bottom: 1px solid var(--col-darken-1);
   border-right: 1px solid var(--col-sidebar-border);
+  z-index: var(--z-puller);
 }
 
 .SidebarHeader::after {

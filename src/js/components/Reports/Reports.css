@@ -11,44 +11,30 @@
 }
 
 .Reports__column {
+  border-left: 1px solid var(--col-darken-1);
+  height: 100%;
+  margin: 0px;
+  margin-left: 33.3333%;
+  padding: 0px;
   position: relative;
   width: 33.3333%;
-  border-left: 1px solid var(--col-darken-1);
-}
-
-.Reports__column--cats {
-  position: fixed;
-  width: 33.3333%;
-  height: calc(100% - var(--sidebar-header-height));
-}
-
-.Reports__column--cattexts {
-  position: fixed;
-  margin-left: 33.3333%;
-  height: calc(100% - var(--sidebar-header-height));
-}
-
-.Reports__column--seltexts {
-  position: fixed;
-  margin-left: 66.6666%;
-  overflow: auto;
-  height: calc(100% - var(--sidebar-header-height));
 }
 
 .Reports__column:first-child {
   border-left: none;
+  margin-left: 0;
+  position: fixed;
+  width: 33.3333%;
+}
+
+.Reports__column:last-child {
+  margin-left: 66.6666%;
+  position: fixed;
 }
 
 .Reports__column .Sidebar {
   width: 100%;
-}
-
-.Reports__column .SidebarList {
-  border-right: none;
-}
-
-.Reports__column .SidebarPageBrowser {
-  border-right: none;
+  margin: 0px;
 }
 
 .Reports__column .SidebarHeader {
@@ -58,4 +44,12 @@
 
 .Reports__column .SidebarHeader .SearchField .TextInput {
   background: var(--col-darken-1);
+}
+
+.Reports__column .SidebarList {
+  border-right: none;
+}
+
+.Reports__column .SidebarPageBrowser {
+  border-right: none;
 }
