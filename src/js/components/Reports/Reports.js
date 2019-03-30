@@ -15,8 +15,6 @@ import type { PupilType } from '../../types/pupil';
 import type { ReduxState } from '../../types/reduxstate';
 import type { ReportType } from '../../types/report';
 import type { TextType } from '../../types/text';
-import type { WithSearchProps } from '../../hoc/withSearch';
-import withSearch from '../../hoc/withSearch';
 import { getSelectedTexts } from '../../utils/redux';
 import { moveItem, removeItem } from '../../utils/reducers/array';
 import './Reports.css';
@@ -31,7 +29,7 @@ export type Props = {
   saveReports: Function,
   selected: string[],
   texts: TextType[],
-} & WithSearchProps;
+};
 
 type State = {
   catId: string,
@@ -117,13 +115,13 @@ export class Reports extends Component<Props, State> {
 
   render() {
     const { catId, catLabel, dragSelected } = this.state;
-    const { activePupil, categories, disableTexts, search, selected, texts } = this.props;
+    const { activePupil, categories, disableTexts, selected, texts } = this.props;
     const selectedTexts: string[] = dragSelected.length > 0 ? dragSelected : selected;
 
     return (
       <section className="Reports">
         <div className="Reports__column">
-          <ReportsCategories catClick={this.catClick} catId={catId} categories={categories} searchProps={search.cat} />
+          <ReportsCategories catClick={this.catClick} catId={catId} categories={categories} />
         </div>
         <div className="Reports__column">
           <ReportsAvailableTexts
@@ -132,7 +130,6 @@ export class Reports extends Component<Props, State> {
             categoryId={catId}
             categoryLabel={catLabel}
             disableTexts={disableTexts}
-            searchProps={search.text}
             selectedTexts={selectedTexts}
             textToggle={this.textToggle}
             texts={texts}
@@ -176,7 +173,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   };
 };
 
-Reports = DragDropContext(HTML5Backend)(withSearch(Reports, ['text', 'cat']));
+Reports = DragDropContext(HTML5Backend)(Reports);
 
 export default connect(
   mapStateToProps,

@@ -20,7 +20,7 @@ describe('<ReportsAvailableTexts />', () => {
     categoryLabel: '',
     disableTexts: false,
     handleTextToggle: jest.fn(),
-    searchProps: {
+    search: {
       anywhere: false,
       anywhereIconClick: jest.fn(),
       page: 1,

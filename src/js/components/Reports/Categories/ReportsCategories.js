@@ -5,77 +5,78 @@ import SearchField from '../../ui/SearchField/SearchField';
 import Sidebar from '../../Sidebar/Sidebar';
 import SidebarHeader from '../../Sidebar/Header/SidebarHeader';
 import SidebarList from '../../Sidebar/List/SidebarList';
-import type { SearchkeyProp } from '../../../hoc/withSearch';
-import type { CategoryType } from '../../../types/category';
-import { categorySort } from '../../../types/category';
 import categoryDefault, { CategoryFactory } from '../../../types/category';
+import type { CategoryType } from '../../../types/category';
+import type { WithSearchProps } from '../../../hoc/withSearch';
+import withSearch from '../../../hoc/withSearch';
+import { categorySort } from '../../../types/category';
 import { text } from '../../Translation/Translation';
 import './ReportsCategories.css';
 
-// TODO: fix types
 export type Props = {
   catClick: (catId: string, catLabel: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
   catId: string,
   categories: CategoryType[],
-  searchProps: SearchkeyProp,
-};
+} & WithSearchProps;
 
 export class ReportsCategories extends Component<Props> {
   static defaultProps = {};
 
   props: Props;
 
-  getCats(categories: CategoryType[]): CategoryType[] {
-    const cats: CategoryType[] = [...categories];
+  getSpecialCats(): CategoryType[] {
+    const specialCats: CategoryType[] = [];
 
     // AddCategory All
     const all: CategoryType = CategoryFactory({ ...categoryDefault, label: text('CatsAll', 'CatSelect') }, Date.now());
     all.id = 'category-all';
-    cats.unshift(all);
+    specialCats.unshift(all);
+
     const uncategorised: CategoryType = CategoryFactory(
       { ...categoryDefault, label: text('CatsUncategorised', 'CatSelect') },
       Date.now()
     );
     uncategorised.id = 'category-nocat';
-    cats.unshift(uncategorised);
+    specialCats.unshift(uncategorised);
 
-    return cats;
+    return specialCats;
   }
 
   render() {
-    const { catClick, catId, categories, searchProps } = this.props;
-    const cats: CategoryType[] = this.getCats(categories);
+    const { catClick, catId, categories, search } = this.props;
+    const specialCats: CategoryType[] = this.getSpecialCats();
 
     console.log();
 
     return (
       <div className="ReportsCategories">
         <Sidebar footer={false}>
-          <SidebarHeader controlsExpanded={searchProps.visible} title={text('Header-category', 'SidebarHeader')}>
+          <SidebarHeader controlsExpanded={search.visible} title={text('Header-category', 'SidebarHeader')}>
             <SearchField
-              anywhere={searchProps.anywhere}
-              anywhereOnClick={searchProps.anywhereIconClick}
-              clearOnClick={searchProps.searchIconClick}
-              iconOnClick={searchProps.searchIconClick}
-              onChange={searchProps.searchChange}
-              onKeyUp={searchProps.searchChange}
+              anywhere={search.anywhere}
+              anywhereOnClick={search.anywhereIconClick}
+              clearOnClick={search.searchIconClick}
+              iconOnClick={search.searchIconClick}
+              onChange={search.searchChange}
+              onKeyUp={search.searchChange}
               placeholder={text('SearchPlaceholder-category', 'SidebarHeader')}
-              term={searchProps.term}
-              visible={searchProps.visible}
+              term={search.term}
+              visible={search.visible}
             />
           </SidebarHeader>
           <SidebarList
-            curPage={searchProps.page}
+            curPage={search.page}
             dispatch={() => {}}
-            items={cats}
+            items={categories}
+            prefixItems={specialCats}
             listType="category"
             noItemsTxt={text('Categories', 'SidebarNoItems')}
-            onPbChange={searchProps.pageChange}
+            onPbChange={search.pageChange}
             onReportClick={catClick}
             reportSidebar={catId}
             sortOrder={categorySort}
-            term={searchProps.term}
-            termAnywhere={searchProps.anywhere}
+            term={search.term}
+            termAnywhere={search.anywhere}
             usePb
           />
         </Sidebar>
@@ -84,4 +85,4 @@ export class ReportsCategories extends Component<Props> {
   }
 }
 
-export default ReportsCategories;
+export default withSearch(ReportsCategories);

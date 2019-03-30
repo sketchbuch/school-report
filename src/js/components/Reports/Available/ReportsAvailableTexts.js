@@ -11,8 +11,10 @@ import Translation from '../../Translation/Translation';
 import type { CategoryType } from '../../../types/category';
 import type { InsertDangerousHtmlObj } from '../../../types/misc';
 import type { PupilType } from '../../../types/pupil';
-import type { SearchkeyProp } from '../../../hoc/withSearch';
+import type { SearchProps } from '../../../hoc/withSearch';
 import type { TextType } from '../../../types/text';
+import type { WithSearchProps } from '../../../hoc/withSearch';
+import withSearch from '../../../hoc/withSearch';
 import { ICON_SUCCESS } from '../../../constants/icons';
 import { getPupilTextHtml } from '../../../utils/html';
 import { text } from '../../Translation/Translation';
@@ -27,10 +29,9 @@ export type Props = {
   children?: React.Node,
   disableTexts: boolean,
   handleTextToggle: Function,
-  searchProps: SearchkeyProp,
   selectedTexts: string[],
   texts: TextType[],
-};
+} & WithSearchProps;
 
 export class ReportsAvailableTexts extends React.Component<Props> {
   static defaultProps = {
@@ -44,7 +45,7 @@ export class ReportsAvailableTexts extends React.Component<Props> {
 
   props: Props;
 
-  getCatTexts = (categoryId: string, texts: TextType[], selectedTexts: string[], search: SearchkeyProp): TextType[] => {
+  getCatTexts = (categoryId: string, texts: TextType[], selectedTexts: string[], search: SearchProps): TextType[] => {
     let visibleTexts: TextType[] = [];
 
     if (categoryId !== 'category-all') {
@@ -75,27 +76,27 @@ export class ReportsAvailableTexts extends React.Component<Props> {
       categoryLabel,
       disableTexts,
       handleTextToggle,
-      searchProps,
+      search,
       selectedTexts,
       texts,
     } = this.props;
-    const catTexts: TextType[] = this.getCatTexts(categoryId, texts, selectedTexts, searchProps);
+    const catTexts: TextType[] = this.getCatTexts(categoryId, texts, selectedTexts, search);
 
     return (
       <div className="ReportsAvailableTexts">
-        <SidebarHeader controlsExpanded={searchProps.visible} title={categoryLabel}>
+        <SidebarHeader controlsExpanded={search.visible} title={categoryLabel}>
           <SearchField
-            anywhere={searchProps.anywhere}
-            anywhereOnClick={searchProps.anywhereIconClick}
-            clearOnClick={searchProps.searchIconClick}
-            iconOnClick={searchProps.searchIconClick}
-            onKeyUp={searchProps.searchChange}
-            onChange={searchProps.searchChange}
+            anywhere={search.anywhere}
+            anywhereOnClick={search.anywhereIconClick}
+            clearOnClick={search.searchIconClick}
+            iconOnClick={search.searchIconClick}
+            onKeyUp={search.searchChange}
+            onChange={search.searchChange}
             placeholder={text('SearchPlaceholder-text', 'SidebarHeader', {
               CAT_LABEL: categoryLabel,
             })}
-            term={searchProps.term}
-            visible={searchProps.visible}
+            term={search.term}
+            visible={search.visible}
           />
         </SidebarHeader>
         {catTexts.length > 0 ? (
@@ -125,7 +126,7 @@ export class ReportsAvailableTexts extends React.Component<Props> {
               );
             })}
           </ul>
-        ) : searchProps.term !== '' ? (
+        ) : search.term !== '' ? (
           <NoItems>
             <Translation name="NoneSearched" ns="ReportsAvailableTexts" />
           </NoItems>
@@ -139,4 +140,4 @@ export class ReportsAvailableTexts extends React.Component<Props> {
   }
 }
 
-export default ReportsAvailableTexts;
+export default withSearch(ReportsAvailableTexts);

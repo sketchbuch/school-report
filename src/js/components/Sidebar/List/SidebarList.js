@@ -47,6 +47,7 @@ type Props = {
   onReportClick?: (id: string, label: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
   pagesToShow: number,
   perPage: number,
+  prefixItems: Object[],
   reportSidebar: string | false,
   sortOrder: string[],
   term: string,
@@ -68,6 +69,7 @@ class SidebarList extends React.Component<Props, State> {
     listType: 'class',
     pagesToShow: 3,
     perPage: 20,
+    prefixItems: [],
     reportSidebar: false,
     sortOrder: ['updated'],
     term: '',
@@ -173,6 +175,10 @@ class SidebarList extends React.Component<Props, State> {
         pagesToShow: this.props.pagesToShow,
         perPage: this.props.perPage,
       };
+
+      if (this.props.prefixItems.length > 0) {
+        sortedItems = this.props.prefixItems.concat(sortedItems);
+      }
 
       return (
         <React.Fragment>

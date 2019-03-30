@@ -3,115 +3,85 @@
 import * as React from 'react';
 import { getDisplayName } from '../utils/strings';
 
-type Searchkey = {
+type State = {
   anywhere: boolean,
   page: number,
   term: string,
   visible: boolean,
 };
 
-export type SearchkeyProp = {
-  ...Searchkey,
+export type SearchProps = {
+  ...State,
   anywhereIconClick: (event: SyntheticMouseEvent<HTMLElement>) => void,
   pageChange: (page: number) => void,
   searchChange: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
   searchIconClick: (event: SyntheticEvent<EventTarget>) => void,
 };
 
-type SearchkeyProps = {
-  [key: string]: SearchkeyProp,
-};
-
-type State = {
-  [key: string]: Searchkey,
+export type WithSearchPropsDiff = {
+  search: SearchProps | void,
 };
 
 export type WithSearchProps = {
-  search: SearchkeyProps,
-};
-
-export type WithSearchDiffProps = {
-  search: SearchkeyProps | void,
+  search: SearchProps,
 };
 
 function withSearch<PassedProps: {}>(
-  WrappedComponent: React.AbstractComponent<PassedProps>,
-  searchKeys: string[]
-): React.AbstractComponent<$Diff<PassedProps, WithSearchDiffProps>> {
+  WrappedComponent: React.AbstractComponent<PassedProps>
+): React.AbstractComponent<$Diff<PassedProps, WithSearchPropsDiff>> {
   class WithSearch extends React.Component<PassedProps, State> {
-    props: $Diff<PassedProps, WithSearchDiffProps>;
-    state: State = searchKeys.reduce(function(curState: State, searchKey: string) {
-      return {
-        ...curState,
-        [searchKey]: {
-          anywhere: false,
-          page: 1,
-          term: '',
-          visible: false,
-        },
-      };
-    }, {});
-
-    handleAnywhereIconClick = (event: SyntheticMouseEvent<HTMLElement>, searchKey: string): void => {
-      this.setState({ [searchKey]: { ...this.state[searchKey], anywhere: !this.state[searchKey].anywhere } });
+    props: $Diff<PassedProps, WithSearchPropsDiff>;
+    state: State = {
+      anywhere: false,
+      page: 1,
+      term: '',
+      visible: false,
     };
 
-    handlePageChange = (page: number, searchKey: string): void => {
-      this.setState({ [searchKey]: { ...this.state[searchKey], page } });
+    handleAnywhereIconClick = (event: SyntheticMouseEvent<HTMLElement>): void => {
+      this.setState({ anywhere: !this.state.anywhere });
     };
 
-    handleSearchIconClick = (event: SyntheticEvent<EventTarget>, searchKey: string): void => {
-      const searchVisible: boolean = !this.state[searchKey].visible;
-      if (searchVisible === false) {
-        this.setState({
-          [searchKey]: { ...this.state[searchKey], anywhere: false, page: 1, term: '', visible: searchVisible },
-        });
+    handlePageChange = (page: number): void => {
+      this.setState({ page });
+    };
+
+    handleSearchIconClick = (event: SyntheticEvent<EventTarget>): void => {
+      const visible: boolean = !this.state.visible;
+      if (visible === false) {
+        this.setState({ anywhere: false, page: 1, term: '', visible });
       } else {
-        this.setState({ [searchKey]: { ...this.state[searchKey], visible: searchVisible } });
+        this.setState({ visible });
       }
     };
 
-    handleSearchChange = (event: SyntheticKeyboardEvent<HTMLInputElement>, searchKey: string): void => {
+    handleSearchChange = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
       if (event.type === 'keyup') {
         if (event.key === 'Escape') {
-          this.handleSearchIconClick(event, searchKey);
+          this.handleSearchIconClick(event);
         }
       } else {
-        const searchTerm = event.currentTarget.value;
+        const term = event.currentTarget.value;
 
-        if (searchTerm !== this.state.searchTerm) {
-          this.setState({ [searchKey]: { ...this.state[searchKey], page: 1, term: searchTerm } });
+        if (term !== this.state.term) {
+          this.setState({ page: 1, term });
         } else {
-          this.setState({ [searchKey]: { ...this.state[searchKey], term: searchTerm } });
+          this.setState({ term });
         }
       }
     };
 
-    // TODO - fix curSearch type
     render() {
       return (
         <WrappedComponent
           {...this.props} // PassedProps
-          search={Object.keys(this.state).reduce((curSearch: Object, searchKey: string) => {
-            return {
-              ...curSearch,
-              [searchKey]: {
-                ...this.state[searchKey],
-                anywhereIconClick: (event: SyntheticMouseEvent<HTMLElement>) => {
-                  this.handleAnywhereIconClick(event, searchKey);
-                },
-                pageChange: (page: number) => {
-                  this.handlePageChange(page, searchKey);
-                },
-                searchChange: (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
-                  this.handleSearchChange(event, searchKey);
-                },
-                searchIconClick: (event: SyntheticEvent<EventTarget>) => {
-                  this.handleSearchIconClick(event, searchKey);
-                },
-              },
-            };
-          }, {})}
+          search={{
+            ...this.state,
+            anywhereIconClick: this.handleAnywhereIconClick,
+            pageChange: this.handlePageChange,
+            searchChange: this.handleSearchChange,
+            searchIconClick: this.handleSearchIconClick,
+          }}
         />
       );
     }
