@@ -6,6 +6,13 @@ import type { TextType } from '../../types/text';
 import { categorySort } from '../../types/category';
 import { sortObjectsAz } from '../../utils/sort';
 import { text } from '../Translation/Translation';
+import {
+  CATEGORY_ALL,
+  CATEGORY_DISABLED,
+  CATEGORY_NONE,
+  CATEGORY_SELECTED,
+  CATEGORY_UNSELECTED,
+} from '../../constants/misc';
 import './CatSelect.css';
 
 export type Props = {
@@ -48,25 +55,25 @@ export class CatSelect extends React.Component<Props> {
     return (
       <div className="CatSelect">
         <select value={option} onChange={onChange} title={text('Tooltip', 'CatSelect')}>
-          <option key="category-all" value="category-all">
+          <option key={CATEGORY_ALL} value={CATEGORY_ALL}>
             {text('CatsAll', 'CatSelect')} ({texts.length})
           </option>
           {useSelected && selectedCount > 0 && (
-            <option key="category-selected" value="category-selected">
+            <option key={CATEGORY_SELECTED} value={CATEGORY_SELECTED}>
               {text('CatsSelected', 'CatSelect')} ({selectedCount})
             </option>
           )}
           {useSelected && unselectedCount > 0 && (
-            <option key="category-unselected" value="category-unselected">
+            <option key={CATEGORY_UNSELECTED} value={CATEGORY_UNSELECTED}>
               {text('CatsUnselected', 'CatSelect')} ({unselectedCount})
             </option>
           )}
-          {(uncategorisedCount > 0 || option === 'category-nocat') && (
-            <option key="category-nocat" value="category-nocat">
+          {(uncategorisedCount > 0 || option === CATEGORY_NONE) && (
+            <option key={CATEGORY_NONE} value={CATEGORY_NONE}>
               {text('CatsUncategorised', 'CatSelect')} ({uncategorisedCount})
             </option>
           )}
-          <option key="category-disabled" disabled className="CatSelect_sep">
+          <option key={CATEGORY_DISABLED} disabled className="CatSelect_sep">
             ---
           </option>
 

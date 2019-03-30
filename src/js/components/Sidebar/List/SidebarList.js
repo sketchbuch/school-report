@@ -20,6 +20,7 @@ import type { DomainType } from '../../../types/domain';
 import type { PageBrowserProps } from '../../../types/pageBrowser';
 import type { SidebarListTypes } from '../../../types/sidebarList';
 import type { TextType } from '../../../types/text';
+import { CATEGORY_ALL, CATEGORY_NONE } from '../../../constants/misc';
 import { getCustomNumProp } from '../../../utils/dom';
 import { sortObjectsAz } from '../../../utils/sort';
 import './SidebarList.css';
@@ -120,8 +121,8 @@ class SidebarList extends React.Component<Props, State> {
     let sortedItems: DomainType[] = sortObjectsAz(this.props.items, this.props.sortOrder);
 
     if (this.props.filter) {
-      if (this.props.filter !== 'category-all') {
-        if (this.props.filter === 'category-nocat') {
+      if (this.props.filter !== CATEGORY_ALL) {
+        if (this.props.filter === CATEGORY_NONE) {
           sortedItems = sortedItems.filter((item: DomainType) => {
             if (item.categories !== undefined) {
               const textItem: TextType = { ...item };

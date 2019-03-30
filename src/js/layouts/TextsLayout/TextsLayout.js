@@ -21,6 +21,7 @@ import setTitle from '../../utils/title';
 import type { CategoryType } from '../../types/category';
 import type { ReduxState } from '../../types/reduxstate';
 import type { TextType } from '../../types/text';
+import { CATEGORY_ALL } from '../../constants/misc';
 import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
 import { ROUTE_DEL_TEXTS, ROUTE_EDIT_TEXT, ROUTE_NEW_TEXT, ROUTE_TEXTS } from '../../constants/routes';
 import { text } from '../../components/Translation/Translation';
@@ -52,7 +53,7 @@ export class TextsLayout extends React.Component<Props, State> {
   state: State = {
     anywhere: false,
     curPage: 1,
-    option: 'category-all',
+    option: CATEGORY_ALL,
     searchVisible: false,
     term: '',
   };

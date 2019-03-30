@@ -6,8 +6,8 @@ import type { Dispatch } from 'redux';
 import { DragDropContext } from 'react-dnd';
 import { connect } from 'react-redux';
 import * as builderActions from '../../actions/builderActions';
-import ReportsCategories from './Categories/ReportsCategories';
 import ReportsAvailableTexts from './Available/ReportsAvailableTexts';
+import ReportsCategories from './Categories/ReportsCategories';
 import ReportsSelectedTexts from './Selected/ReportsSelectedTexts';
 import type { CategoryType } from '../../types/category';
 import type { ClassType } from '../../types/class';
@@ -15,6 +15,7 @@ import type { PupilType } from '../../types/pupil';
 import type { ReduxState } from '../../types/reduxstate';
 import type { ReportType } from '../../types/report';
 import type { TextType } from '../../types/text';
+import { CATEGORY_ALL } from '../../constants/misc';
 import { getSelectedTexts } from '../../utils/redux';
 import { moveItem, removeItem } from '../../utils/reducers/array';
 import './Reports.css';
@@ -50,7 +51,7 @@ export class Reports extends Component<Props, State> {
 
   props: Props;
   state: State = {
-    catId: 'category-all',
+    catId: CATEGORY_ALL,
     catLabel: '',
     dragSelected: [],
   };

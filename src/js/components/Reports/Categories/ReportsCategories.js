@@ -9,6 +9,7 @@ import categoryDefault, { CategoryFactory } from '../../../types/category';
 import type { CategoryType } from '../../../types/category';
 import type { WithSearchProps } from '../../../hoc/withSearch';
 import withSearch from '../../../hoc/withSearch';
+import { CATEGORY_ALL, CATEGORY_NONE, CATEGORY_SELECTED, CATEGORY_UNSELECTED } from '../../../constants/misc';
 import { categorySort } from '../../../types/category';
 import { text } from '../../Translation/Translation';
 import './ReportsCategories.css';
@@ -27,17 +28,30 @@ export class ReportsCategories extends Component<Props> {
   getSpecialCats(): CategoryType[] {
     const specialCats: CategoryType[] = [];
 
-    // AddCategory All
     const all: CategoryType = CategoryFactory({ ...categoryDefault, label: text('CatsAll', 'CatSelect') }, Date.now());
-    all.id = 'category-all';
-    specialCats.unshift(all);
+    all.id = CATEGORY_ALL;
+    specialCats.push(all);
+
+    const selected: CategoryType = CategoryFactory(
+      { ...categoryDefault, label: text('CatsSelected', 'CatSelect') },
+      Date.now()
+    );
+    selected.id = CATEGORY_SELECTED;
+    specialCats.push(selected);
+
+    const unselected: CategoryType = CategoryFactory(
+      { ...categoryDefault, label: text('CatsUnselected', 'CatSelect') },
+      Date.now()
+    );
+    unselected.id = CATEGORY_UNSELECTED;
+    specialCats.push(unselected);
 
     const uncategorised: CategoryType = CategoryFactory(
       { ...categoryDefault, label: text('CatsUncategorised', 'CatSelect') },
       Date.now()
     );
-    uncategorised.id = 'category-nocat';
-    specialCats.unshift(uncategorised);
+    uncategorised.id = CATEGORY_NONE;
+    specialCats.push(uncategorised);
 
     return specialCats;
   }
@@ -45,8 +59,6 @@ export class ReportsCategories extends Component<Props> {
   render() {
     const { catClick, catId, categories, search } = this.props;
     const specialCats: CategoryType[] = this.getSpecialCats();
-
-    console.log();
 
     return (
       <div className="ReportsCategories">
@@ -68,11 +80,11 @@ export class ReportsCategories extends Component<Props> {
             curPage={search.page}
             dispatch={() => {}}
             items={categories}
-            prefixItems={specialCats}
             listType="category"
             noItemsTxt={text('Categories', 'SidebarNoItems')}
             onPbChange={search.pageChange}
             onReportClick={catClick}
+            prefixItems={specialCats}
             reportSidebar={catId}
             sortOrder={categorySort}
             term={search.term}

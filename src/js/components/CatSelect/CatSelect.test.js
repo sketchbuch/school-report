@@ -2,10 +2,11 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
+import { CATEGORY_NONE, CATEGORY_SELECTED, CATEGORY_UNSELECTED } from '../../constants/misc';
 import CatSelect from './CatSelect';
-import type { Props } from './CatSelect';
 import categoryDefault from '../../types/category';
 import textDefault from '../../types/text';
+import type { Props } from './CatSelect';
 
 describe('<CatSelect />', () => {
   const props: Props = {
@@ -39,7 +40,7 @@ describe('<CatSelect />', () => {
   });
 
   test('Shows the selected option if useSelected and selectedCount > 0', () => {
-    const option = 'option[value="category-selected"]';
+    const option = 'option[value="' + CATEGORY_SELECTED + '"]';
     const wrapper1 = shallow(<CatSelect {...props} />);
     const wrapper2 = shallow(<CatSelect {...props} selectedCount={3} />);
 
@@ -48,7 +49,7 @@ describe('<CatSelect />', () => {
   });
 
   test('Shows the unselected option if useSelected and unselectedCount > 0', () => {
-    const option = 'option[value="category-unselected"]';
+    const option = 'option[value="' + CATEGORY_UNSELECTED + '"]';
     const wrapper1 = shallow(<CatSelect {...props} />);
     const wrapper2 = shallow(<CatSelect {...props} selectedCount={props.texts.length} />);
 
@@ -80,7 +81,7 @@ describe('<CatSelect />', () => {
       ],
     };
 
-    const option: string = 'option[value="category-nocat"]';
+    const option: string = 'option[value="' + CATEGORY_NONE + '"]';
     const wrapper1 = shallow(<CatSelect {...props} />);
     const wrapper2 = shallow(<CatSelect {...props2} />);
 

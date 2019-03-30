@@ -15,6 +15,7 @@ import type { SearchProps } from '../../../hoc/withSearch';
 import type { TextType } from '../../../types/text';
 import type { WithSearchProps } from '../../../hoc/withSearch';
 import withSearch from '../../../hoc/withSearch';
+import { CATEGORY_ALL, CATEGORY_NONE, CATEGORY_SELECTED, CATEGORY_UNSELECTED } from '../../../constants/misc';
 import { ICON_SUCCESS } from '../../../constants/icons';
 import { getPupilTextHtml } from '../../../utils/html';
 import { text } from '../../Translation/Translation';
@@ -48,12 +49,12 @@ export class ReportsAvailableTexts extends React.Component<Props> {
   getCatTexts = (categoryId: string, texts: TextType[], selectedTexts: string[], search: SearchProps): TextType[] => {
     let visibleTexts: TextType[] = [];
 
-    if (categoryId !== 'category-all') {
-      if (categoryId === 'category-nocat') {
+    if (categoryId !== CATEGORY_ALL) {
+      if (categoryId === CATEGORY_NONE) {
         visibleTexts = texts.filter((text: TextType) => text.categories.length === 0);
-      } else if (categoryId === 'category-selected') {
+      } else if (categoryId === CATEGORY_SELECTED) {
         visibleTexts = texts.filter((text: TextType) => selectedTexts.indexOf(text.id) > -1);
-      } else if (categoryId === 'category-unselected') {
+      } else if (categoryId === CATEGORY_UNSELECTED) {
         visibleTexts = texts.filter((text: TextType) => selectedTexts.indexOf(text.id) < 0);
       } else {
         visibleTexts = texts.filter((text: TextType) => text.categories.includes(categoryId));

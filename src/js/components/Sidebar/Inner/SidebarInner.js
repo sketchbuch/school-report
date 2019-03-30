@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import Icon from '../../Icon/Icon';
 import './SidebarInner.css';
@@ -60,8 +61,8 @@ class SidebarInner extends React.Component<Props> {
     if (this.props.onSubClick) {
       return (
         <div
-          onClick={this.props.onSubClick(this.props.id, this.props.label)}
-          className={isSelected ? 'SidebarInner SidebarInner--selected' : 'SidebarInner'}
+          className={classNames('SidebarInner', { 'SidebarInner--selected': isSelected })}
+          onClick={this.props.onSubClick && this.props.onSubClick(this.props.id, this.props.label)}
         >
           <ItemContent {...this.props} />
         </div>
