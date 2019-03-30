@@ -18,17 +18,21 @@ const reportDefault: ReportType = {
   classes: [],
   label: '',
   maxChars: 0,
+  type: 'report',
 };
 
 export const reportSort = ['label', 'updated'];
 
 export const ReportFactory = (reportObj: ReportType, ts: number): ReportType => {
-  return hydrateReport({
-    ...reportObj,
-    created: ts,
-    updated: ts,
-    id: generateId(getReportIdStr(reportObj), ts),
-  });
+  const newObj: ReportType = hydrateReport({ ...reportObj });
+
+  if (reportObj.id !== '') {
+    newObj.created = ts;
+    newObj.updated = ts;
+    newObj.id = generateId(getReportIdStr(reportObj), ts);
+  }
+
+  return newObj;
 };
 
 export const hydrateReport = (reportObj: ReportType): ReportType => {

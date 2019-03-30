@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import Icon from '../../Icon/Icon';
 import SidebarInner from '../Inner/SidebarInner';
 import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
@@ -42,23 +43,22 @@ class SidebarBuilderItem extends Component<Props, State> {
   render() {
     const { classRec, pupils } = this.props.item;
 
-    let classes = 'SidebarItem SidebarBuilderItem';
-    if (this.state.open) {
-      classes += ' SidebarBuilderItem--open';
-    }
-    if (this.props.item.pupils.length > 0) {
-      classes += ' SidebarBuilderItem--active';
-    } else {
-      classes += ' SidebarBuilderItem--inactive';
-    }
-
     return (
-      <li className={classes} title={classRec.getTooltip()}>
+      <li
+        className={classNames('SidebarItem', 'SidebarBuilderItem', {
+          'SidebarBuilderItem--open': this.state.open,
+          'SidebarBuilderItem--active': pupils.length > 0,
+          'SidebarBuilderItem--inactive': pupils.length < 1,
+          ['SidebarItem--type-' + classRec.type]: classRec.type,
+        })}
+        title={classRec.getTooltip()}
+      >
         <SidebarInner
           description={classRec.getDescription()}
           icon={classRec.getIcon()}
           id={classRec.id}
           label={classRec.getLabel()}
+          type={classRec.type}
           onClick={this.handleExpandClick}
         >
           <span className="SidebarItem_expander" title={text('Expand', 'Actions')}>
@@ -79,9 +79,9 @@ class SidebarBuilderItem extends Component<Props, State> {
                         ? String(this.props.description(pupil.id, pupil.classId))
                         : pupil.getDescription()
                     }
-                    label={pupil.getLabel(this.props.sortOrder[0])}
                     icon={pupil.getIcon()}
                     id={pupil.id}
+                    label={pupil.getLabel(this.props.sortOrder[0])}
                     link={pupil.getUrl('builder', this.props.item.reportId)}
                   />
                 </li>

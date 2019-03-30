@@ -18,6 +18,7 @@ import type { TextType } from '../../types/text';
 import { CATEGORY_ALL } from '../../constants/misc';
 import { getSelectedTexts } from '../../utils/redux';
 import { moveItem, removeItem } from '../../utils/reducers/array';
+import { text } from '../Translation/Translation';
 import './Reports.css';
 
 // TODO: fix types
@@ -52,12 +53,12 @@ export class Reports extends Component<Props, State> {
   props: Props;
   state: State = {
     catId: CATEGORY_ALL,
-    catLabel: '',
+    catLabel: text('CatsAll', 'CatSelect'),
     dragSelected: [],
   };
   pupilId: string = this.props.activePupil.id;
 
-  endDrag = (): void => {
+  handleEndDrag = (): void => {
     if (this.state.dragSelected.length < 1) {
       return;
     }
@@ -74,7 +75,7 @@ export class Reports extends Component<Props, State> {
     this.setState({ dragSelected: [] });
   };
 
-  textMove = (sourceId: string, targetId: string, before: boolean = false): void => {
+  handleTextMove = (sourceId: string, targetId: string, before: boolean = false): void => {
     let dragSelected: string[] = [...this.props.selected];
     const sourceIndex: number = dragSelected.indexOf(sourceId);
     let targetIndex: number = dragSelected.indexOf(targetId);
@@ -90,7 +91,7 @@ export class Reports extends Component<Props, State> {
     this.setState({ dragSelected });
   };
 
-  textToggle = (textId: string) => (event: SyntheticEvent<>) => {
+  handleTextToggle = (textId: string) => (event: SyntheticEvent<>): void => {
     let selected: string[] = [...this.props.selected];
     const textIndex: number = selected.indexOf(textId);
 
@@ -132,17 +133,17 @@ export class Reports extends Component<Props, State> {
             categoryLabel={catLabel}
             disableTexts={disableTexts}
             selectedTexts={selectedTexts}
-            textToggle={this.textToggle}
+            onTextToggle={this.handleTextToggle}
             texts={texts}
           />
         </div>
         <div className="Reports__column">
           <ReportsSelectedTexts
             activePupil={activePupil}
-            endDrag={this.endDrag}
+            onEndDrag={this.handleEndDrag}
             selectedTexts={selectedTexts}
-            textMove={this.textMove}
-            textToggle={this.textToggle}
+            onTextMove={this.handleTextMove}
+            onTextToggle={this.handleTextToggle}
             texts={texts}
           />
         </div>

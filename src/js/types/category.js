@@ -14,17 +14,19 @@ export type CategoryType = {
 const categoryDefault: CategoryType = {
   ...domainBaseDefault,
   label: '',
+  type: 'category',
 };
 
 export const categorySort = ['priority', 'label', 'updated'];
 
 export const CategoryFactory = (categoryObj: CategoryType, ts: number): CategoryType => {
-  const newObj = hydrateCategory({
-    ...categoryObj,
-    created: ts,
-    updated: ts,
-    id: generateId(getCategoryIdStr(categoryObj), ts),
-  });
+  const newObj: CategoryType = hydrateCategory({ ...categoryObj });
+
+  if (categoryObj.id !== '') {
+    newObj.created = ts;
+    newObj.updated = ts;
+    newObj.id = generateId(getCategoryIdStr(categoryObj), ts);
+  }
 
   return newObj;
 };

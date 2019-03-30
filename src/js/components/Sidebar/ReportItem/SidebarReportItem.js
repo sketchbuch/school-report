@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import SidebarInner from '../Inner/SidebarInner';
 import SidebarItemButton from '../Button/SidebarItemButton';
 import type { CategoryType } from '../../../types/category';
@@ -25,11 +26,15 @@ class SidebarReportItem extends Component<Props> {
   props: Props;
 
   render() {
-    const classes = 'SidebarItem SidebarItem--report';
     const editUrl = this.props.item.getUrl('edit');
 
     return (
-      <li className={classes} title={this.props.item.getTooltip(undefined)}>
+      <li
+        className={classNames('SidebarItem', 'SidebarItem--report', {
+          ['SidebarItem--type-' + this.props.item.type]: this.props.item.type,
+        })}
+        title={this.props.item.getTooltip(undefined)}
+      >
         <SidebarInner
           description={this.props.item.getDescription()}
           icon={this.props.item.getIcon()}

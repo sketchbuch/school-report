@@ -30,6 +30,7 @@ export class ReportsCategories extends Component<Props> {
 
     const all: CategoryType = CategoryFactory({ ...categoryDefault, label: text('CatsAll', 'CatSelect') }, Date.now());
     all.id = CATEGORY_ALL;
+    all.type = 'special';
     specialCats.push(all);
 
     const selected: CategoryType = CategoryFactory(
@@ -37,6 +38,7 @@ export class ReportsCategories extends Component<Props> {
       Date.now()
     );
     selected.id = CATEGORY_SELECTED;
+    selected.type = 'special';
     specialCats.push(selected);
 
     const unselected: CategoryType = CategoryFactory(
@@ -44,6 +46,7 @@ export class ReportsCategories extends Component<Props> {
       Date.now()
     );
     unselected.id = CATEGORY_UNSELECTED;
+    unselected.type = 'special';
     specialCats.push(unselected);
 
     const uncategorised: CategoryType = CategoryFactory(
@@ -51,6 +54,7 @@ export class ReportsCategories extends Component<Props> {
       Date.now()
     );
     uncategorised.id = CATEGORY_NONE;
+    uncategorised.type = 'special-last';
     specialCats.push(uncategorised);
 
     return specialCats;

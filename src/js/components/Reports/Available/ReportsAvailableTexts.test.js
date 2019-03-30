@@ -19,7 +19,9 @@ describe('<ReportsAvailableTexts />', () => {
     categoryId: '',
     categoryLabel: '',
     disableTexts: false,
-    handleTextToggle: jest.fn(),
+    onTextToggle: jest.fn(),
+    pagesToShow: 3,
+    perPage: 20,
     search: {
       anywhere: false,
       anywhereIconClick: jest.fn(),
@@ -36,6 +38,7 @@ describe('<ReportsAvailableTexts />', () => {
       TextFactory({ ...textDefault, bodytext: 'Blue Midget', categories: [] }, Date.now(), 'EN'),
       TextFactory({ ...textDefault, bodytext: 'Starbug', categories: ['c1', 'c2'] }, Date.now(), 'EN'),
     ],
+    usePb: true,
   };
 
   props.selectedTexts.push(props.texts[0].id);

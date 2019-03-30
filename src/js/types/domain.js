@@ -17,6 +17,7 @@ export type DomainBaseType = {
   getTooltip: Function,
   getUrl: Function,
   id: string,
+  type: string,
   updated: number,
 };
 
@@ -29,6 +30,7 @@ const domainBaseDefault: DomainBaseType = {
   getTooltip: () => {},
   getUrl: () => {},
   id: '',
+  type: 'domain',
   updated: -1,
 };
 

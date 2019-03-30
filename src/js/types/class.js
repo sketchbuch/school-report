@@ -16,17 +16,19 @@ const classDefault: ClassType = {
   ...domainBaseDefault,
   label: '',
   pupilCount: 0,
+  type: 'class',
 };
 
 export const classSort = ['label', 'updated'];
 
 export const ClassFactory = (classObj: ClassType, ts: number): ClassType => {
-  const newObj = hydrateClass({
-    ...classObj,
-    created: ts,
-    updated: ts,
-    id: generateId(getClassIdStr(classObj), ts),
-  });
+  const newObj: ClassType = hydrateClass({ ...classObj });
+
+  if (classObj.id !== '') {
+    newObj.created = ts;
+    newObj.updated = ts;
+    newObj.id = generateId(getClassIdStr(classObj), ts);
+  }
 
   return newObj;
 };

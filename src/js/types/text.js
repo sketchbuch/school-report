@@ -22,19 +22,23 @@ const textDefault: TextType = {
   categories: [],
   charCount: 0,
   lang: '',
+  type: 'text',
 };
 
 export const textSort = ['bodytext', 'updated'];
 
 export const TextFactory = (textObj: TextType, ts: number, lang: string): TextType => {
-  return hydrateText({
-    ...textObj,
-    created: ts,
-    updated: ts,
-    lang: lang,
-    charCount: textObj.bodytext.length,
-    id: generateId(getTextIdStr(textObj), ts),
-  });
+  const newObj: TextType = hydrateText({ ...textObj });
+
+  if (textObj.id !== '') {
+    newObj.created = ts;
+    newObj.updated = ts;
+    newObj.lang = lang;
+    newObj.charCount = textObj.bodytext.length;
+    newObj.id = generateId(getTextIdStr(textObj), ts);
+  }
+
+  return newObj;
 };
 
 export const hydrateText = (textObj: TextType): TextType => {

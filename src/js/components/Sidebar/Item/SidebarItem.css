@@ -5,6 +5,10 @@
   opacity: 1;
 }
 
+.SidebarItem--type-special-last {
+  margin-bottom: 10px;
+}
+
 .SidebarItem--new {
   opacity: 0;
   width: 0%;

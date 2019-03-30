@@ -7,4 +7,5 @@
   --sidebar-max-width: 480px;
   --sidebar-pb-height: 7rem;
   --toastr-max-width: 440px;
+  --reports-available-list-height: calc(var(--sidebar-footer-height) + var(--sidebar-header-height));
 }

@@ -57,11 +57,14 @@ class SidebarInner extends React.Component<Props> {
     } else if (this.props.selected) {
       isSelected = true;
     }
+    const classes = classNames('SidebarInner', {
+      'SidebarInner--selected': isSelected,
+    });
 
     if (this.props.onSubClick) {
       return (
         <div
-          className={classNames('SidebarInner', { 'SidebarInner--selected': isSelected })}
+          className={classes}
           onClick={this.props.onSubClick && this.props.onSubClick(this.props.id, this.props.label)}
         >
           <ItemContent {...this.props} />
@@ -69,7 +72,7 @@ class SidebarInner extends React.Component<Props> {
       );
     } else if (this.props.link) {
       return (
-        <Link className={isSelected ? 'SidebarInner SidebarInner--selected' : 'SidebarInner'} to={this.props.link}>
+        <Link className={classes} to={this.props.link}>
           <ItemContent {...this.props} />
         </Link>
       );

@@ -8,12 +8,11 @@ import type { PupilType } from '../../../types/pupil';
 import type { TextType } from '../../../types/text';
 import './ReportsSelectedTexts.css';
 
-// TODO - fix types
 export type Props = {
   activePupil: PupilType | Object,
-  handleEndDrag: Function,
-  handleTextMove: Function,
-  handleTextToggle: Function,
+  onEndDrag: () => void,
+  onTextMove: (sourceId: string, targetId: string, before: boolean) => void,
+  onTextToggle: (textId: string) => (event: SyntheticEvent<>) => void,
   selectedTexts: string[],
   texts: TextType[],
 };
@@ -21,9 +20,9 @@ export type Props = {
 export class ReportsSelectedTexts extends Component<Props> {
   static defaultProps = {
     activePupil: {},
-    handleEndDrag: () => {},
-    handleTextMove: () => {},
-    handleTextToggle: () => {},
+    onEndDrag: () => {},
+    onTextMove: () => {},
+    onTextToggle: () => () => {},
     selectedTexts: [],
     texts: [],
   };
@@ -50,9 +49,9 @@ export class ReportsSelectedTexts extends Component<Props> {
           <ReportsTextItem
             activePupil={this.props.activePupil}
             key={text.id}
-            onClick={this.props.handleTextToggle}
-            onMove={this.props.handleTextMove}
-            onEndDrag={this.props.handleEndDrag}
+            onClick={this.props.onTextToggle}
+            onMove={this.props.onTextMove}
+            onEndDrag={this.props.onEndDrag}
             txt={text}
           />
         ))}

@@ -14,6 +14,7 @@ describe('<SidebarInner />', () => {
       link: '',
       linkEdit: '',
       onClick: null,
+      type: '',
     };
 
     const wrapper = shallow(<SidebarInner {...props} />);

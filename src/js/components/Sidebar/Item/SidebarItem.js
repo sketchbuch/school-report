@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import SidebarInner from '../Inner/SidebarInner';
 import SidebarItemButton from '../Button/SidebarItemButton';
 import type { ClassType } from '../../../types/class';
@@ -97,23 +98,20 @@ class SidebarItem extends Component<Props, State> {
   };
 
   render() {
-    let classes = 'SidebarItem';
-    if (this.props.isNew) {
-      classes += ' SidebarItem--new';
-    }
-    if (this.state.delete) {
-      classes += ' SidebarItem--delete';
-    }
-    if (this.state.deleting) {
-      classes += ' SidebarItem--deleting';
-    }
-
     const editUrl = this.props.item.getUrl('edit');
     const canDelete = window.location.pathname !== editUrl;
     const displayProp = this.props.itemType === 'pupil' ? this.props.sortOrder[0] : undefined;
 
     return (
-      <li className={classes} title={this.props.item.getTooltip(displayProp)}>
+      <li
+        className={classNames('SidebarItem', {
+          'SidebarItem--delete': this.state.delete,
+          'SidebarItem--deleting': this.state.deleting,
+          'SidebarItem--new': this.props.isNew,
+          ['SidebarItem--type-' + this.props.item.type]: this.props.item.type,
+        })}
+        title={this.props.item.getTooltip(displayProp)}
+      >
         {this.state.delete ? (
           <SidebarInner
             description={this.props.item.getLabel(displayProp)}

@@ -22,6 +22,14 @@
   overflow: auto;
 }
 
+.ReportsAvailableTexts_list--pb {
+  height: calc(100% - var(--reports-available-list-height));
+}
+
+.ReportsAvailableTexts_list--pb + .SidebarPageBrowser {
+  bottom: 0;
+}
+
 .ReportsAvailableTexts__item {
   position: relative;
   display: block;

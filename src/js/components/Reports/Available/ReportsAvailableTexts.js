@@ -7,9 +7,12 @@ import LetterCount from '../../LetterCount/LetterCount';
 import NoItems from '../../NoItems/NoItems';
 import SearchField from '../../ui/SearchField/SearchField';
 import SidebarHeader from '../../Sidebar/Header/SidebarHeader';
+import SidebarPageBrowser from '../../Sidebar/PageBrowser/SidebarPageBrowser';
 import Translation from '../../Translation/Translation';
+import pageBrowserPropsDefault from '../../../types/pageBrowser';
 import type { CategoryType } from '../../../types/category';
 import type { InsertDangerousHtmlObj } from '../../../types/misc';
+import type { PageBrowserProps } from '../../../types/pageBrowser';
 import type { PupilType } from '../../../types/pupil';
 import type { SearchProps } from '../../../hoc/withSearch';
 import type { TextType } from '../../../types/text';
@@ -21,17 +24,19 @@ import { getPupilTextHtml } from '../../../utils/html';
 import { text } from '../../Translation/Translation';
 import './ReportsAvailableTexts.css';
 
-// TODO - fix types
 export type Props = {
   activePupil: PupilType | Object,
+  categories: CategoryType[],
   categoryId: string,
   categoryLabel: string,
-  categories: CategoryType[],
   children?: React.Node,
   disableTexts: boolean,
-  handleTextToggle: Function,
+  onTextToggle: (textId: string) => (event: SyntheticEvent<>) => void,
+  pagesToShow: number,
+  perPage: number,
   selectedTexts: string[],
   texts: TextType[],
+  usePb: boolean,
 } & WithSearchProps;
 
 export class ReportsAvailableTexts extends React.Component<Props> {
@@ -39,12 +44,21 @@ export class ReportsAvailableTexts extends React.Component<Props> {
     activePupil: {},
     categories: [],
     children: null,
-    handleTextToggle: () => {},
+    onTextToggle: () => () => {},
+    pagesToShow: 3,
+    perPage: 20,
     selectedTexts: [],
     texts: [],
+    usePb: true,
   };
 
   props: Props;
+
+  componentDidUpdate = (prevProps: Props) => {
+    if (this.props.categoryId !== prevProps.categoryId) {
+      this.props.search.pageChange(1);
+    }
+  };
 
   getCatTexts = (categoryId: string, texts: TextType[], selectedTexts: string[], search: SearchProps): TextType[] => {
     let visibleTexts: TextType[] = [];
@@ -76,12 +90,27 @@ export class ReportsAvailableTexts extends React.Component<Props> {
       categoryId,
       categoryLabel,
       disableTexts,
-      handleTextToggle,
+      onTextToggle,
       search,
       selectedTexts,
       texts,
     } = this.props;
-    const catTexts: TextType[] = this.getCatTexts(categoryId, texts, selectedTexts, search);
+    let catTexts: TextType[] = this.getCatTexts(categoryId, texts, selectedTexts, search);
+    const catsForPaging: number = catTexts.length;
+
+    if (this.props.usePb) {
+      const itemstart: number = 0 + this.props.perPage * ((search.page || 1) - 1);
+      catTexts = catTexts.slice(itemstart, itemstart + this.props.perPage);
+    }
+
+    const showPb: boolean = this.props.usePb && catsForPaging > this.props.perPage;
+    const pbProps: PageBrowserProps = {
+      ...pageBrowserPropsDefault,
+      curPage: search.page,
+      itemCount: catsForPaging,
+      pagesToShow: this.props.pagesToShow,
+      perPage: this.props.perPage,
+    };
 
     return (
       <div className="ReportsAvailableTexts">
@@ -101,32 +130,35 @@ export class ReportsAvailableTexts extends React.Component<Props> {
           />
         </SidebarHeader>
         {catTexts.length > 0 ? (
-          <ul className="ReportsAvailableTexts_list">
-            {catTexts.map(text => {
-              const pupilText: InsertDangerousHtmlObj = getPupilTextHtml(text.getLabel(0), activePupil);
-              const isSelected: boolean = selectedTexts.indexOf(text.id) > -1 ? true : false;
-              const isActive: boolean = !isSelected && disableTexts;
+          <React.Fragment>
+            <ul className={classNames('ReportsAvailableTexts_list', { 'ReportsAvailableTexts_list--pb': showPb })}>
+              {catTexts.map(text => {
+                const pupilText: InsertDangerousHtmlObj = getPupilTextHtml(text.getLabel(0), activePupil);
+                const isSelected: boolean = selectedTexts.indexOf(text.id) > -1 ? true : false;
+                const isActive: boolean = !isSelected && disableTexts;
 
-              return (
-                <li
-                  key={text.id}
-                  className={classNames('ReportsAvailableTexts__item', {
-                    'ReportsAvailableTexts__item--selected': isSelected,
-                    'ReportsAvailableTexts__item--disabled': isActive,
-                  })}
-                  onClick={isActive ? null : handleTextToggle(text.id)}
-                >
-                  <span dangerouslySetInnerHTML={pupilText} />
-                  <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length.toString()} />
-                  {isSelected && (
-                    <span className="ReportsAvailableTexts__itemselected">
-                      <Icon type={ICON_SUCCESS} />
-                    </span>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+                return (
+                  <li
+                    key={text.id}
+                    className={classNames('ReportsAvailableTexts__item', {
+                      'ReportsAvailableTexts__item--selected': isSelected,
+                      'ReportsAvailableTexts__item--disabled': isActive,
+                    })}
+                    onClick={isActive ? null : onTextToggle(text.id)}
+                  >
+                    <span dangerouslySetInnerHTML={pupilText} />
+                    <LetterCount count={pupilText.__html.replace(/<(.|\n)*?>/g, '').length.toString()} />
+                    {isSelected && (
+                      <span className="ReportsAvailableTexts__itemselected">
+                        <Icon type={ICON_SUCCESS} />
+                      </span>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+            {showPb && <SidebarPageBrowser {...pbProps} onChange={search.pageChange} />}
+          </React.Fragment>
         ) : search.term !== '' ? (
           <NoItems>
             <Translation name="NoneSearched" ns="ReportsAvailableTexts" />

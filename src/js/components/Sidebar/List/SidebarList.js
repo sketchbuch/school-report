@@ -177,7 +177,7 @@ class SidebarList extends React.Component<Props, State> {
         perPage: this.props.perPage,
       };
 
-      if (this.props.prefixItems.length > 0) {
+      if (this.props.prefixItems.length > 0 && this.props.term === '') {
         sortedItems = this.props.prefixItems.concat(sortedItems);
       }
 

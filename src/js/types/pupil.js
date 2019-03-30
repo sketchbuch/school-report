@@ -25,6 +25,7 @@ const pupilDefault: PupilType = {
   gender: 'm',
   getPronoun: () => {},
   lastname: '',
+  type: 'pupil',
 };
 
 export const pupilSortFirst = 'firstname';
@@ -38,13 +39,16 @@ export const pupilSort = {
 };
 
 export const PupilFactory = (pupilObj: PupilType, ts: number, classId: string): PupilType => {
-  return hydratePupil({
-    ...pupilObj,
-    created: ts,
-    updated: ts,
-    classId: classId,
-    id: generateId(getPupilIdStr(pupilObj), ts),
-  });
+  const newObj: PupilType = hydratePupil({ ...pupilObj });
+
+  if (pupilObj.id !== '') {
+    newObj.created = ts;
+    newObj.updated = ts;
+    newObj.classId = classId;
+    newObj.id = generateId(getPupilIdStr(pupilObj), ts);
+  }
+
+  return newObj;
 };
 
 export const hydratePupil = (pupilObj: PupilType): PupilType => {
