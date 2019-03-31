@@ -21,7 +21,7 @@ export type Props = {
   value?: string,
 };
 
-class TextInput extends React.Component<Props> {
+class TextInput extends React.PureComponent<Props> {
   static defaultProps = {
     className: '',
     disabled: false,

@@ -1,6 +1,6 @@
 //@flow
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Icon from '../../Icon/Icon';
 import NoItems from '../../NoItems/NoItems';
 import Translation from '../../Translation/Translation';
@@ -24,7 +24,7 @@ export type Props = {
   unshift: Function,
 };
 
-class ItemList extends Component<Props> {
+class ItemList extends PureComponent<Props> {
   static defaultProps = {
     items: [], // Already sorted for display.
     name: '',

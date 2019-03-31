@@ -10,7 +10,7 @@ export type Props = {
   htmlFor: string,
 };
 
-class Label extends React.Component<Props> {
+class Label extends React.PureComponent<Props> {
   static defaultProps = {
     children: null,
   };

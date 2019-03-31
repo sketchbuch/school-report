@@ -17,7 +17,7 @@ export type Props = {
   value?: string,
 };
 
-class GenderSwitch extends React.Component<Props> {
+class GenderSwitch extends React.PureComponent<Props> {
   static defaultProps = {
     large: false,
     name: 'gender',

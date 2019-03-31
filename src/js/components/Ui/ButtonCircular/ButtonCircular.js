@@ -18,7 +18,7 @@ export type Props = {
   visual?: boolean,
 };
 
-class ButtonCircular extends React.Component<Props> {
+class ButtonCircular extends React.PureComponent<Props> {
   static defaultProps = {
     buttontype: 'default',
     children: null,

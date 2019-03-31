@@ -18,7 +18,7 @@ export type Props = {
   type?: string,
 };
 
-class Button extends React.Component<Props> {
+class Button extends React.PureComponent<Props> {
   static defaultProps = {
     busy: false,
     buttontype: 'default',

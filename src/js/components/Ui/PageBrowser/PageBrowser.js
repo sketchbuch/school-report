@@ -1,6 +1,6 @@
 //@flow
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import Button from './Button/Button';
 import Translation from '../../Translation/Translation';
@@ -11,7 +11,7 @@ import './PageBrowser.css';
 
 export type Props = PageBrowserProps;
 
-class PageBrowser extends Component<Props> {
+class PageBrowser extends PureComponent<Props> {
   static defaultProps = { ...pageBrowserPropsDefault };
 
   props: Props;

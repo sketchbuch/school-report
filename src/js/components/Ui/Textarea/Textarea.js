@@ -16,7 +16,7 @@ export type Props = {
   value?: string,
 };
 
-class Textarea extends React.Component<Props> {
+class Textarea extends React.PureComponent<Props> {
   static defaultProps = {
     className: '',
     disabled: false,

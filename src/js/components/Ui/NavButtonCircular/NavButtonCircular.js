@@ -17,7 +17,7 @@ export type Props = {
   type?: string,
 };
 
-class NavButtonCircular extends React.Component<Props> {
+class NavButtonCircular extends React.PureComponent<Props> {
   static defaultProps = {
     action: '',
     buttontype: 'default',

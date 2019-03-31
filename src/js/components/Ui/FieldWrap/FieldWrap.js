@@ -7,7 +7,7 @@ export type Props = {
   children?: React.Node,
 };
 
-class FieldWrap extends React.Component<Props> {
+class FieldWrap extends React.PureComponent<Props> {
   static defaultProps = {
     children: null,
   };
