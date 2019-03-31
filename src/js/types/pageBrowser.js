@@ -11,6 +11,7 @@ export type PageBrowserProps = {
   pagesToShow: number,
   perPage: number,
   prev: boolean,
+  reduced: boolean,
 };
 
 const pageBrowserPropsDefault = {
@@ -24,6 +25,7 @@ const pageBrowserPropsDefault = {
   pagesToShow: 3,
   perPage: 20,
   prev: true,
+  reduced: false,
 };
 
 export default pageBrowserPropsDefault;

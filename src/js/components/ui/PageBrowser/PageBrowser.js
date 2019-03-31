@@ -81,10 +81,12 @@ class PageBrowser extends Component<Props> {
   }
 
   renderCentre(curPage: number, totalPages: number): RenderHelperReturn {
+    const TEXT_TYPE = this.props.reduced ? 'InfoTextSmall' : 'InfoText';
+
     return (
       <div className="PageBrowser__centre">
         <p className="PageBrowser__info">
-          <Translation name="InfoText" ns="PageBrowser" placeholders={{ CUR: curPage, TOTAL: totalPages }} />
+          <Translation name={TEXT_TYPE} ns="PageBrowser" placeholders={{ CUR: curPage, TOTAL: totalPages }} />
         </p>
       </div>
     );

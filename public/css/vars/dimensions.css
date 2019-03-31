@@ -8,4 +8,7 @@
   --sidebar-pb-height: 7rem;
   --toastr-max-width: 440px;
   --reports-available-list-height: calc(var(--sidebar-footer-height) + var(--sidebar-header-height));
+  --reports-column-wrapper-padding: 20px;
+  --reports-column-wrapper-offset: calc(2 * var(--reports-column-wrapper-padding));
+  --reports-column-wrapper-height: calc(100% - (var(--sidebar-header-height) + var(--reports-column-wrapper-offset)));
 }

@@ -122,22 +122,22 @@ export class Reports extends Component<Props, State> {
 
     return (
       <section className="Reports">
-        <div className="Reports__column">
-          <ReportsCategories catClick={this.catClick} catId={catId} categories={categories} />
+        <div className="Reports__column Reports__columnAvailable">
+          <div className="Reports__columnWrapper">
+            <ReportsCategories catClick={this.catClick} catId={catId} categories={categories} />
+            <ReportsAvailableTexts
+              activePupil={activePupil}
+              categories={categories}
+              categoryId={catId}
+              categoryLabel={catLabel}
+              disableTexts={disableTexts}
+              selectedTexts={selectedTexts}
+              onTextToggle={this.handleTextToggle}
+              texts={texts}
+            />
+          </div>
         </div>
-        <div className="Reports__column">
-          <ReportsAvailableTexts
-            activePupil={activePupil}
-            categories={categories}
-            categoryId={catId}
-            categoryLabel={catLabel}
-            disableTexts={disableTexts}
-            selectedTexts={selectedTexts}
-            onTextToggle={this.handleTextToggle}
-            texts={texts}
-          />
-        </div>
-        <div className="Reports__column">
+        <div className="Reports__column Reports__columnSelected">
           <ReportsSelectedTexts
             activePupil={activePupil}
             onEndDrag={this.handleEndDrag}

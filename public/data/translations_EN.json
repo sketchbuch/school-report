@@ -250,7 +250,8 @@
       "Btn-last": "Last",
       "Btn-next": "Next",
       "Btn-prev": "Previous",
-      "InfoText": "Page %CUR% / %TOTAL%"
+      "InfoText": "Page %CUR% / %TOTAL%",
+      "InfoTextSmall": "%CUR% / %TOTAL%"
     },
     "Pupils": {
       "BackToPupils": "Cancel",

@@ -49,6 +49,7 @@ type Props = {
   pagesToShow: number,
   perPage: number,
   prefixItems: Object[],
+  reducedSidebar: boolean,
   reportSidebar: string | false,
   sortOrder: string[],
   term: string,
@@ -71,6 +72,7 @@ class SidebarList extends React.Component<Props, State> {
     pagesToShow: 3,
     perPage: 20,
     prefixItems: [],
+    reducedSidebar: false,
     reportSidebar: false,
     sortOrder: ['updated'],
     term: '',
@@ -225,7 +227,9 @@ class SidebarList extends React.Component<Props, State> {
               }
             })}
           </ul>
-          {showPb && <SidebarPageBrowser {...pbProps} onChange={this.props.onPbChange} />}
+          {showPb && (
+            <SidebarPageBrowser {...pbProps} reduced={this.props.reducedSidebar} onChange={this.props.onPbChange} />
+          )}
         </React.Fragment>
       );
     } else if (this.props.term !== '' || this.props.filter !== '') {

@@ -1,35 +1,54 @@
 .Reports {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
+  align-items: stretch;
   display: flex;
-  justify-content: flex-start;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-items: stretch;
+  height: 100%;
+  justify-content: flex-start;
+  overflow-y: auto;
+  position: relative;
+  width: 100%;
 }
 
 .Reports__column {
-  border-left: 1px solid var(--col-darken-2);
   height: 100%;
   margin: 0px;
-  margin-left: 33.3333%;
   padding: 0px;
   position: relative;
+  width: 50%;
+}
+
+.Reports__columnAvailable {
+  height: 100%;
+  padding: var(--reports-column-wrapper-padding);
+  width: 66.6666%;
+}
+
+.Reports__columnSelected {
   width: 33.3333%;
 }
 
-.Reports__column:first-child {
-  border-left: none;
-  margin-left: 0;
+.Reports__columnWrapper {
+  align-items: stretch;
+  border: 1px solid var(--col-darken-3);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow: hidden;
   position: fixed;
-  width: 33.3333%;
+  width: calc(66.6666% - var(--reports-column-wrapper-offset));
+  height: var(--reports-column-wrapper-height);
 }
 
-.Reports__column:last-child {
-  margin-left: 66.6666%;
-  position: fixed;
+.Reports__columnWrapper > * {
+  margin: 0px;
+  width: 50%;
+}
+
+.Reports__columnWrapper > *:first-child {
+  border-right: 1px solid var(--col-darken-2);
 }
 
 .Reports__column .Sidebar {
@@ -40,6 +59,16 @@
 .Reports__column .SidebarHeader {
   background: var(--col-darken-3);
   border-right: 0;
+}
+
+.Reports__columnWrapper > *:first-child .SidebarHeader:before {
+  content: ' ';
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  background: var(--col-darken-3);
+  top: 0px;
+  right: -1px;
 }
 
 .Reports__column .SidebarHeader .SearchField .TextInput {

@@ -89,6 +89,7 @@ export class ReportsCategories extends Component<Props> {
             onPbChange={search.pageChange}
             onReportClick={catClick}
             prefixItems={specialCats}
+            reducedSidebar={true}
             reportSidebar={catId}
             sortOrder={categorySort}
             term={search.term}

@@ -157,7 +157,7 @@ export class ReportsAvailableTexts extends React.Component<Props> {
                 );
               })}
             </ul>
-            {showPb && <SidebarPageBrowser {...pbProps} onChange={search.pageChange} />}
+            {showPb && <SidebarPageBrowser {...pbProps} reduced={true} onChange={search.pageChange} />}
           </React.Fragment>
         ) : search.term !== '' ? (
           <NoItems>
