@@ -127,25 +127,6 @@
   color: var(--col-darken-5);
 }
 
-.form__submsg {
-  text-align: center;
-}
-
-.form__submsg a {
-  color: var(--col-primary);
-  text-decoration: none;
-}
-
-.form__submsg a:hover {
-  color: var(--col-primary-light);
-  text-decoration: underline;
-}
-
-.form__submsg a:active {
-  color: var(--col-primary-dark);
-  text-decoration: none;
-}
-
 fieldset {
   margin-bottom: var(--mar-bottom-std);
   border-color: var(--col-darken-1);

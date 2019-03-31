@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Button, GenderSwitch, TextInput } from '../../Ui';
+import { Button, FieldError, FieldWrap, Form, FormHeader, GenderSwitch, TextInput } from '../../Ui';
 import Translation, { text } from '../../Translation/Translation';
 import validate from '../../../validation/validation';
 
@@ -28,11 +28,9 @@ export class PupilForm extends Component<Props> {
       !fnValid || !lnValid || values.pupil.firstname === '' || values.pupil.lastname === '' ? true : false;
 
     return (
-      <form className="NoData__step--pupil" onSubmit={handleSubmit}>
-        <p className="NoData__msg">
-          <Translation name="PupilMessage" ns="NoData" />
-        </p>
-        <div className="fieldwrap">
+      <Form classes="NoData__step--pupil" onSubmit={handleSubmit}>
+        <FormHeader text={text('PupilMessage', 'NoData')} />
+        <FieldWrap>
           <TextInput
             onChange={handleChange}
             onBlur={handleBlur}
@@ -41,9 +39,9 @@ export class PupilForm extends Component<Props> {
             placeholder={text('FirstnamePlaceholder', 'Pupils')}
             isValid={fnValid}
           />
-          {!fnValid && <p className="invalid-feedback">{errors.pupil.firstname}</p>}
-        </div>
-        <div className="fieldwrap">
+          {!fnValid && <FieldError errors={[errors.pupil.firstname]} />}
+        </FieldWrap>
+        <FieldWrap>
           <TextInput
             onChange={handleChange}
             onBlur={handleBlur}
@@ -52,9 +50,9 @@ export class PupilForm extends Component<Props> {
             placeholder={text('FirstnamePlaceholder', 'Pupils')}
             isValid={lnValid}
           />
-          {!lnValid && <p className="invalid-feedback">{errors.pupil.lastname}</p>}
-        </div>
-        <div className="fieldwrap">
+          {!lnValid && <FieldError errors={[errors.pupil.lastname]} />}
+        </FieldWrap>
+        <FieldWrap>
           <GenderSwitch
             large={true}
             onChange={handleChange}
@@ -64,16 +62,16 @@ export class PupilForm extends Component<Props> {
             titleFemale={text('Female', 'Gender')}
             titleMale={text('Male', 'Gender')}
           />
-        </div>
-        <div className="fieldwrap">
+        </FieldWrap>
+        <FieldWrap>
           <Button type="button" disabled={btnIsDisabled} onClick={() => this.props.handleClick(values)}>
             <Translation name="CreatePupilBtnLabel" ns="Pupils" />
           </Button>
-        </div>
+        </FieldWrap>
         <p className="NoData__msginfo">
           <Translation name="PupilMessageInfo" ns="NoData" />
         </p>
-      </form>
+      </Form>
     );
   }
 }

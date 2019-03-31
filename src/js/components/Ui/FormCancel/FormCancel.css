@@ -1,0 +1,19 @@
+.FormCancel {
+  text-align: center;
+  width: 100%;
+}
+
+.FormCancel a {
+  color: var(--col-primary);
+  text-decoration: none;
+}
+
+.FormCancel a:hover {
+  color: var(--col-primary-light);
+  text-decoration: underline;
+}
+
+.FormCancel a:active {
+  color: var(--col-primary-dark);
+  text-decoration: none;
+}

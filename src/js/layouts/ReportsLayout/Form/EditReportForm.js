@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, ItemSelection, TextInput } from '../../../components/Ui';
+import { Button, FieldError, FieldWrap, Form, FormCancel, ItemSelection, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 import type { ClassType } from '../../../types/class';
@@ -55,8 +55,8 @@ export class EditReportForm extends Component<Props> {
     const selCount: number = classes.filter(c => values.classes.includes(c.id)).length;
 
     return (
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="fieldwrap">
+      <Form onSubmit={handleSubmit}>
+        <FieldWrap>
           <TextInput
             isValid={rlValid}
             name="label"
@@ -65,9 +65,9 @@ export class EditReportForm extends Component<Props> {
             placeholder={text('LabelPlaceholder', 'Reports')}
             value={values.label}
           />
-          {!rlValid && <p className="invalid-feedback">{errors.label}</p>}
-        </div>
-        <div className="fieldwrap">
+          {!rlValid && <FieldError errors={[errors.label]} />}
+        </FieldWrap>
+        <FieldWrap>
           <p>
             <Translation
               name="ReportClasses"
@@ -79,9 +79,9 @@ export class EditReportForm extends Component<Props> {
             />
           </p>
           <ItemSelection items={sortedClasses} name="classes" selected={values.classes} />
-          {!rcValid && <p className="invalid-feedback">{errors.classes}</p>}
-        </div>
-        <div className="fieldwrap">
+          {!rcValid && <FieldError errors={[errors.classes]} />}
+        </FieldWrap>
+        <FieldWrap>
           <p>
             <Translation name="ReportMaxChars" ns="Reports" />
           </p>
@@ -102,8 +102,8 @@ export class EditReportForm extends Component<Props> {
               </span>
             </div>
           </div>
-        </div>
-        <div className="fieldwrap">
+        </FieldWrap>
+        <FieldWrap>
           <Button type="submit" disabled={btnIsDisabled} busy={saving}>
             {isNew ? (
               <Translation name="CreateReportBtnLabel" ns="Reports" />
@@ -111,16 +111,16 @@ export class EditReportForm extends Component<Props> {
               <Translation name="UpdateReportsBtnLabel" ns="Reports" />
             )}
           </Button>
-        </div>
+        </FieldWrap>
 
         {!saving && (
-          <p className="form__submsg">
+          <FormCancel>
             <Link to={ROUTE_REPORTS}>
               <Translation name="BackToReports" ns="Reports" />
             </Link>
-          </p>
+          </FormCancel>
         )}
-      </form>
+      </Form>
     );
   }
 }

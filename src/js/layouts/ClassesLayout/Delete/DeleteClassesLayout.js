@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import * as classActions from '../../../actions/classActions';
-import { Button } from '../../../components/Ui';
+import { Button, FieldWrap, Form, FormCancel } from '../../../components/Ui';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
@@ -75,8 +75,8 @@ export class DeleteClassesLayout extends Component<Props, State> {
               <Translation name="Headline" ns="DeleteClassesLayout" />
             )}
           </h2>
-          <form className="form">
-            <div className="fieldwrap">
+          <Form>
+            <FieldWrap>
               <Button
                 type="button"
                 onClick={this.handleClick}
@@ -86,16 +86,16 @@ export class DeleteClassesLayout extends Component<Props, State> {
               >
                 <Translation name="BtnLabel" ns="DeleteClassesLayout" />
               </Button>
-            </div>
+            </FieldWrap>
 
             {!this.state.deleting && (
-              <p className="form__submsg">
+              <FormCancel>
                 <Link to={ROUTE_CLASSES}>
                   <Translation name="BackToClasses" ns="Classes" />
                 </Link>
-              </p>
+              </FormCancel>
             )}
-          </form>
+          </Form>
         </EditPanelContent>
       </EditPanel>
     );

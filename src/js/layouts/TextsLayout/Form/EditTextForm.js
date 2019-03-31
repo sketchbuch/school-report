@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, ItemSelection, Textarea } from '../../../components/Ui';
+import { Button, FieldError, FieldWrap, Form, FormCancel, ItemSelection, Textarea } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import type { CategoryType } from '../../../types/category';
 import type { DomainType } from '../../../types/domain';
@@ -57,8 +57,8 @@ export class EditTextForm extends Component<Props> {
     const selCount: number = categories.filter(c => values.categories.includes(c.id)).length;
 
     return (
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="fieldwrap">
+      <Form onSubmit={handleSubmit}>
+        <FieldWrap>
           <Textarea
             onChange={handleChange}
             onBlur={handleBlur}
@@ -67,7 +67,7 @@ export class EditTextForm extends Component<Props> {
             placeholder={text('BodytextPlaceholder', 'Texts')}
             isValid={btValid}
           />
-          {!btValid && <p className="invalid-feedback">{errors.bodytext}</p>}
+          {!btValid && <FieldError errors={[errors.bodytext]} />}
           <div className="fiedwrap__placeholders">
             {placeholderMap.map(ph => (
               <span key={ph.symbol} className="fiedwrap__placeholder" title={text('Title' + ph.symbol, '##')}>
@@ -75,8 +75,8 @@ export class EditTextForm extends Component<Props> {
               </span>
             ))}
           </div>
-        </div>
-        <div className="fieldwrap">
+        </FieldWrap>
+        <FieldWrap>
           <p>
             <Translation
               name="ReportCategories"
@@ -89,9 +89,9 @@ export class EditTextForm extends Component<Props> {
           </p>
 
           <ItemSelection items={sortedCategories} name="categories" selected={values.categories} />
-          {!cValid && <p className="invalid-feedback">{errors.categories}</p>}
-        </div>
-        <div className="fieldwrap">
+          {!cValid && <FieldError errors={[errors.categories]} />}
+        </FieldWrap>
+        <FieldWrap>
           <Button type="submit" disabled={btnIsDisabled} busy={saving}>
             {isNew ? (
               <Translation name="CreateTextBtnLabel" ns="Texts" />
@@ -99,16 +99,16 @@ export class EditTextForm extends Component<Props> {
               <Translation name="UpdateTextBtnLabel" ns="Texts" />
             )}
           </Button>
-        </div>
+        </FieldWrap>
 
         {!saving && (
-          <p className="form__submsg">
+          <FormCancel>
             <Link to={ROUTE_TEXTS}>
               <Translation name="BackToTexts" ns="Texts" />
             </Link>
-          </p>
+          </FormCancel>
         )}
-      </form>
+      </Form>
     );
   }
 }

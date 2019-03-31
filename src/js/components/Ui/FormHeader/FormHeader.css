@@ -6,6 +6,6 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: var(--font-size-large);
-  color: var(--col-brand);
+  color: var(--col-text);
   font-weight: normal;
 }

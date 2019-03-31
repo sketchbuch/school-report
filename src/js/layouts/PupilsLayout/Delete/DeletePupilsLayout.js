@@ -8,7 +8,7 @@ import { toastr } from 'react-redux-toastr';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
-import { Button } from '../../../components/Ui';
+import { Button, FieldWrap, Form, FormCancel } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import * as pupilActions from '../../../actions/pupilActions';
 import type { ClassType } from '../../../types/class';
@@ -113,8 +113,8 @@ export class DeletePupilsLayout extends Component<Props, State> {
               />
             )}
           </h2>
-          <form className="form">
-            <div className="fieldwrap">
+          <Form>
+            <FieldWrap>
               <Button
                 type="button"
                 onClick={this.handleClick}
@@ -124,16 +124,16 @@ export class DeletePupilsLayout extends Component<Props, State> {
               >
                 <Translation name="BtnLabel" ns="DeletePupilsLayout" />
               </Button>
-            </div>
+            </FieldWrap>
 
             {!this.state.deleting && (
-              <p className="form__submsg">
+              <FormCancel>
                 <Link to={ROUTE_PUPILS.replace(':classId', this.props.activeClass.id)}>
                   <Translation name="Back" ns="DeletePupilsLayout" />
                 </Link>
-              </p>
+              </FormCancel>
             )}
-          </form>
+          </Form>
         </EditPanelContent>
       </EditPanel>
     );

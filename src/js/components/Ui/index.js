@@ -7,6 +7,7 @@ export { default as Field } from './Field/Field';
 export { default as FieldError } from './FieldError/FieldError';
 export { default as FieldWrap } from './FieldWrap/FieldWrap';
 export { default as Form } from './Form/Form';
+export { default as FormCancel } from './FormCancel/FormCancel';
 export { default as FormDescription } from './FormDescription/FormDescription';
 export { default as FormHeader } from './FormHeader/FormHeader';
 export { default as GenderSwitch } from './GenderSwitch/GenderSwitch';

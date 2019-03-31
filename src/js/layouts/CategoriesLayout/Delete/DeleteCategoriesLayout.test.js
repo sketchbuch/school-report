@@ -21,18 +21,18 @@ describe('<DeleteCategoriesLayout />', () => {
     expect(wrapper).toHaveLength(1);
   });
 
-  test('form__submsg is hidden when state.deleting = true', () => {
+  test('FormCancel is hidden when state.deleting = true', () => {
     const wrapper = shallow(<DeleteCategoriesLayout {...props} />);
     const instance = wrapper.instance();
 
-    expect(wrapper.find('.form__submsg')).toHaveLength(1);
+    expect(wrapper.find('FormCancel')).toHaveLength(1);
     expect(wrapper.state().deleting).toBe(false);
 
     instance.componentDidUpdate = jest.fn();
     wrapper.setState({ deleting: true });
 
     expect(wrapper.state().deleting).toBe(true);
-    expect(wrapper.find('.form__submsg')).toHaveLength(0);
+    expect(wrapper.find('FormCancel')).toHaveLength(0);
     expect(wrapper.instance().componentDidUpdate).toHaveBeenCalledTimes(1);
   });
 

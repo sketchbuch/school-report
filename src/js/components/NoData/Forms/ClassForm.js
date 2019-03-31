@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Button, TextInput } from '../../Ui';
+import { Button, FieldError, FieldWrap, Form, FormHeader, TextInput } from '../../Ui';
 import Translation, { text } from '../../Translation/Translation';
 import validate from '../../../validation/validation';
 
@@ -26,11 +26,9 @@ export class ClassForm extends Component<Props> {
     const btnIsDisabled: boolean = !clValid || values.class.label === '' ? true : false;
 
     return (
-      <form className="NoData__step--class" onSubmit={handleSubmit}>
-        <p className="NoData__msg">
-          <Translation name="ClassMessage" ns="NoData" />
-        </p>
-        <div className="fieldwrap">
+      <Form classes="NoData__step--class" onSubmit={handleSubmit}>
+        <FormHeader text={text('ClassMessage', 'NoData')} />
+        <FieldWrap>
           <TextInput
             onChange={handleChange}
             onBlur={handleBlur}
@@ -39,17 +37,17 @@ export class ClassForm extends Component<Props> {
             placeholder={text('LabelPlaceholder', 'Classes')}
             isValid={clValid}
           />
-          {!clValid && <p className="invalid-feedback">{errors.class.label}</p>}
-        </div>
-        <div className="fieldwrap">
+          {!clValid && <FieldError errors={[errors.class.label]} />}
+        </FieldWrap>
+        <FieldWrap>
           <Button type="button" disabled={btnIsDisabled} onClick={() => this.props.handleClick(values)}>
             <Translation name="CreateClassBtnLabel" ns="Classes" />
           </Button>
-        </div>
+        </FieldWrap>
         <p className="NoData__msginfo">
           <Translation name="ClassMessageInfo" ns="NoData" />
         </p>
-      </form>
+      </Form>
     );
   }
 }

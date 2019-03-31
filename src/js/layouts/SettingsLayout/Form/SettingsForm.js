@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, TextInput } from '../../../components/Ui';
+import { Button, FieldWrap, Form, FormCancel, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import type { LangType } from '../../../types/lang';
 import { ROUTE_HOME } from '../../../constants/routes';
@@ -33,7 +33,7 @@ export class SettingsFrom extends Component<Props> {
     const btnIsDisabled = saving || !dirty ? true : false;
 
     return (
-      <form className="form" onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <fieldset>
           <legend>Misc.</legend>
           <div className="fieldwrap fieldwrap--labeled">
@@ -101,20 +101,20 @@ export class SettingsFrom extends Component<Props> {
             </div>
           </div>
         </fieldset>
-        <div className="fieldwrap">
+        <FieldWrap>
           <Button type="submit" disabled={btnIsDisabled} busy={saving}>
             <Translation name="UpdateSettingsBtnLabel" ns="Settings" />
           </Button>
-        </div>
+        </FieldWrap>
 
         {!saving && (
-          <p className="form__submsg">
+          <FormCancel>
             <Link to={ROUTE_HOME}>
               <Translation name="Cancel" ns="Settings" />
             </Link>
-          </p>
+          </FormCancel>
         )}
-      </form>
+      </Form>
     );
   }
 }

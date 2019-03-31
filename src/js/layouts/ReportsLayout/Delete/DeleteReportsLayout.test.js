@@ -21,8 +21,8 @@ describe('<DeleteClassesLayout />', () => {
   test.skip('Handles deleting correctly', () => {
     let wrapper = shallow(<DeleteReportsLayout {...props} />);
     wrapper.instance().saveData = jest.fn();
-    expect(wrapper.dive().find('.form__submsg')).toHaveLength(1);
+    expect(wrapper.dive().find('FormCancel')).toHaveLength(1);
     wrapper.setState({ deleting: true });
-    expect(wrapper.dive().find('.form__submsg')).toHaveLength(0);
+    expect(wrapper.dive().find('FormCancel')).toHaveLength(0);
   });
 });

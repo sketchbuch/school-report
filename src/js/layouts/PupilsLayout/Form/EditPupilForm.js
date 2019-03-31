@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, GenderSwitch, TextInput } from '../../../components/Ui';
+import { Button, FieldError, FieldWrap, Form, FormCancel, GenderSwitch, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 import { ROUTE_PUPILS } from '../../../constants/routes';
@@ -53,8 +53,8 @@ export class EditPupilForm extends Component<Props> {
         : false;
 
     return (
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="fieldwrap">
+      <Form onSubmit={handleSubmit}>
+        <FieldWrap>
           <TextInput
             onChange={handleChange}
             onBlur={handleBlur}
@@ -63,9 +63,9 @@ export class EditPupilForm extends Component<Props> {
             placeholder={text('FirstnamePlaceholder', 'Pupils')}
             isValid={fnValid}
           />
-          {!fnValid && <p className="invalid-feedback">{errors.firstname}</p>}
-        </div>
-        <div className="fieldwrap">
+          {!fnValid && <FieldError errors={[errors.firstname]} />}
+        </FieldWrap>
+        <FieldWrap>
           <TextInput
             onChange={handleChange}
             onBlur={handleBlur}
@@ -74,9 +74,9 @@ export class EditPupilForm extends Component<Props> {
             placeholder={text('LastnamePlaceholder', 'Pupils')}
             isValid={lnValid}
           />
-          {!lnValid && <p className="invalid-feedback">{errors.lastname}</p>}
-        </div>
-        <div className="fieldwrap">
+          {!lnValid && <FieldError errors={[errors.lastname]} />}
+        </FieldWrap>
+        <FieldWrap>
           <GenderSwitch
             large={true}
             onChange={handleChange}
@@ -86,8 +86,8 @@ export class EditPupilForm extends Component<Props> {
             titleFemale={text('Female', 'Gender')}
             titleMale={text('Male', 'Gender')}
           />
-        </div>
-        <div className="fieldwrap">
+        </FieldWrap>
+        <FieldWrap>
           <TextInput
             onChange={handleChange}
             onBlur={handleBlur}
@@ -96,9 +96,9 @@ export class EditPupilForm extends Component<Props> {
             placeholder={text('DescriptionPlaceholder', 'Pupils')}
             isValid={dValid}
           />
-          {!dValid && <p className="invalid-feedback">{errors.description}</p>}
-        </div>
-        <div className="fieldwrap">
+          {!dValid && <FieldError errors={[errors.description]} />}
+        </FieldWrap>
+        <FieldWrap>
           <Button type="submit" disabled={btnIsDisabled} busy={saving}>
             {isNew ? (
               <Translation name="CreatePupilBtnLabel" ns="Pupils" />
@@ -106,16 +106,16 @@ export class EditPupilForm extends Component<Props> {
               <Translation name="UpdatePupilBtnLabel" ns="Pupils" />
             )}
           </Button>
-        </div>
+        </FieldWrap>
 
         {!saving && (
-          <p className="form__submsg">
+          <FormCancel>
             <Link to={ROUTE_PUPILS.replace(':classId', classId)}>
               <Translation name="BackToPupils" ns="Pupils" />
             </Link>
-          </p>
+          </FormCancel>
         )}
-      </form>
+      </Form>
     );
   }
 }

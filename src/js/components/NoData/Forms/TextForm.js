@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Button, Textarea } from '../../Ui';
+import { Button, FieldError, FieldWrap, Form, FormHeader, Textarea } from '../../Ui';
 import Translation, { text } from '../../Translation/Translation';
 import validate from '../../../validation/validation';
 
@@ -26,11 +26,9 @@ export class TextForm extends Component<Props> {
     const btnIsDisabled: boolean = !btValid || values.text.bodytext === '' ? true : false;
 
     return (
-      <form className="NoData__step--text" onSubmit={handleSubmit}>
-        <p className="NoData__msg">
-          <Translation name="TextMessage" ns="NoData" />
-        </p>
-        <div className="fieldwrap">
+      <Form classes="NoData__step--text" onSubmit={handleSubmit}>
+        <FormHeader text={text('TextMessage', 'NoData')} />
+        <FieldWrap>
           <Textarea
             onChange={handleChange}
             onBlur={handleBlur}
@@ -39,14 +37,14 @@ export class TextForm extends Component<Props> {
             placeholder={text('BodytextPlaceholder', 'Texts')}
             isValid={btValid}
           />
-          {!btValid && <p className="invalid-feedback">{errors.text.bodytext}</p>}
-        </div>
-        <div className="fieldwrap">
+          {!btValid && <FieldError errors={[errors.text.bodytext]} />}
+        </FieldWrap>
+        <FieldWrap>
           <Button type="submit" disabled={busy || btnIsDisabled || isSubmitting} busy={busy}>
             <Translation name="TextBtnLabel" ns="NoData" />
           </Button>
-        </div>
-      </form>
+        </FieldWrap>
+      </Form>
     );
   }
 }

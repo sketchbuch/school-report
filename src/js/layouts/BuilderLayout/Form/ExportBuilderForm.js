@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Button, TextInput } from '../../../components/Ui';
+import { Button, FieldWrap, Form, FormHeader, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 
@@ -34,11 +34,9 @@ export class ExportBuilderForm extends Component<Props> {
     const btnIsDisabled: boolean = !lValid || saving || values.name === '';
 
     return (
-      <form className="form" onSubmit={handleSubmit}>
-        <p className="form__headline">
-          <Translation name="Headline" ns="ExportBuilderForm" placeholders={{ REPORT_NAME: this.props.reportName }} />
-        </p>
-        <div className="fieldwrap">
+      <Form onSubmit={handleSubmit}>
+        <FormHeader text={text('Headline', 'ExportBuilderForm', { REPORT_NAME: this.props.reportName })} />
+        <FieldWrap>
           <TextInput
             onChange={handleChange}
             onBlur={handleBlur}
@@ -48,13 +46,13 @@ export class ExportBuilderForm extends Component<Props> {
             isValid={lValid}
           />
           {!lValid && <p className="invalid-feedback">{errors.name}</p>}
-        </div>
-        <div className="fieldwrap">
+        </FieldWrap>
+        <FieldWrap>
           <Button type="submit" disabled={btnIsDisabled} busy={saving}>
             <Translation name="ExportReportBtn" ns="Builder" />
           </Button>
-        </div>
-      </form>
+        </FieldWrap>
+      </Form>
     );
   }
 }

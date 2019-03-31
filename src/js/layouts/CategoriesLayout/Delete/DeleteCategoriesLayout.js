@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { toastr } from 'react-redux-toastr';
 import { Link } from 'react-router-dom';
 import * as categoryActions from '../../../actions/categoryActions';
-import { Button } from '../../../components/Ui';
+import { Button, FieldWrap, Form, FormCancel } from '../../../components/Ui';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
@@ -79,8 +79,8 @@ export class DeleteCategoriesLayout extends Component<Props, State> {
               <Translation name="Headline" ns="DeleteCategoriesLayout" />
             )}
           </h2>
-          <form className="form">
-            <div className="fieldwrap">
+          <Form>
+            <FieldWrap>
               <Button
                 type="button"
                 onClick={this.handleClick}
@@ -90,16 +90,16 @@ export class DeleteCategoriesLayout extends Component<Props, State> {
               >
                 <Translation name="BtnLabel" ns="DeleteCategoriesLayout" />
               </Button>
-            </div>
+            </FieldWrap>
 
             {!this.state.deleting && (
-              <p className="form__submsg">
+              <FormCancel>
                 <Link to={ROUTE_CATEGORIES}>
                   <Translation name="BackToCategories" ns="Categories" />
                 </Link>
-              </p>
+              </FormCancel>
             )}
-          </form>
+          </Form>
         </EditPanelContent>
       </EditPanel>
     );

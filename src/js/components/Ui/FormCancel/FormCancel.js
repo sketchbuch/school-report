@@ -1,13 +1,13 @@
 //@flow
 
 import * as React from 'react';
-import './FieldWrap.css';
+import './FormCancel.css';
 
 export type Props = {
   children?: React.Node,
 };
 
-class FieldWrap extends React.Component<Props> {
+class FormCancel extends React.PureComponent<Props> {
   static defaultProps = {
     children: null,
   };
@@ -15,8 +15,8 @@ class FieldWrap extends React.Component<Props> {
   props: Props;
 
   render() {
-    return <div className="FieldWrap">{this.props.children}</div>;
+    return <p className="FormCancel">{this.props.children}</p>;
   }
 }
 
-export default FieldWrap;
+export default FormCancel;

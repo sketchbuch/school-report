@@ -2,18 +2,15 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import Form from './Form';
-import type { Props } from './Form';
+import FormCancel from './FormCancel';
+import type { Props } from './FormCancel';
 
-describe('<Form />', () => {
+describe('<FormCancel />', () => {
   const props: Props = {
     children: null,
-    classes: '',
-    onSubmit: jest.fn(),
   };
-
   test('Renders without crashing', () => {
-    const wrapper = shallow(<Form {...props} />);
+    const wrapper = shallow(<FormCancel {...props} />);
     expect(wrapper).toHaveLength(1);
   });
 });

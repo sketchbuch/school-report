@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, TextInput } from '../../../components/Ui';
+import { Button, FieldError, FieldWrap, Form, FormCancel, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 import { ROUTE_CATEGORIES } from '../../../constants/routes';
@@ -35,8 +35,8 @@ export class EditCategoryForm extends Component<Props> {
     const btnIsDisabled: boolean = !lValid || saving || !dirty;
 
     return (
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="fieldwrap">
+      <Form onSubmit={handleSubmit}>
+        <FieldWrap>
           <TextInput
             onChange={handleChange}
             onBlur={handleBlur}
@@ -45,9 +45,9 @@ export class EditCategoryForm extends Component<Props> {
             placeholder={text('LabelPlaceholder', 'Categories')}
             isValid={lValid}
           />
-          {!lValid && <p className="invalid-feedback">{errors.bodytext}</p>}
-        </div>
-        <div className="fieldwrap">
+          {!lValid && <FieldError errors={[errors.bodytext]} />}
+        </FieldWrap>
+        <FieldWrap>
           <Button type="submit" disabled={btnIsDisabled} busy={saving}>
             {isNew ? (
               <Translation name="CreateCategoryBtnLabel" ns="Categories" />
@@ -55,16 +55,16 @@ export class EditCategoryForm extends Component<Props> {
               <Translation name="UpdateCategoryBtnLabel" ns="Categories" />
             )}
           </Button>
-        </div>
+        </FieldWrap>
 
         {!saving && (
-          <p className="form__submsg">
+          <FormCancel>
             <Link to={ROUTE_CATEGORIES}>
               <Translation name="BackToCategories" ns="Categories" />
             </Link>
-          </p>
+          </FormCancel>
         )}
-      </form>
+      </Form>
     );
   }
 }
