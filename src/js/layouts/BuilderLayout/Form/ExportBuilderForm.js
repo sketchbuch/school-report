@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Button, FieldWrap, Form, FormHeader, TextInput } from '../../../components/Ui';
+import { Button, FieldError, FieldWrap, Form, FormHeader, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 
@@ -45,7 +45,7 @@ export class ExportBuilderForm extends Component<Props> {
             placeholder={text('ExportPlaceholder', 'Builder')}
             isValid={lValid}
           />
-          {!lValid && <p className="invalid-feedback">{errors.name}</p>}
+          {!lValid && <FieldError errors={[errors.name]} />}
         </FieldWrap>
         <FieldWrap>
           <Button type="submit" disabled={btnIsDisabled} busy={saving}>

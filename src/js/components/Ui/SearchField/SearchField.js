@@ -8,6 +8,8 @@ import { ICON_CLOSE, ICON_SEARCH, ICON_SEARCH_ANYWHERE } from '../../../constant
 import { text } from '../../Translation/Translation';
 import './SearchField.css';
 
+const NS = 'SearchField';
+
 export type Props = {
   anywhere: boolean,
   anywhereOnClick: (event: SyntheticMouseEvent<HTMLElement>) => void,
@@ -47,7 +49,7 @@ class SearchField extends React.PureComponent<Props> {
 
     return (
       <div
-        className={classNames('SearchField', {
+        className={classNames(NS, {
           'SearchField--visible': visible,
           [classes]: !!classes,
         })}
@@ -65,7 +67,7 @@ class SearchField extends React.PureComponent<Props> {
               className={classNames('SearchField__icon SearchField__icon--anywhere', {
                 'SearchField__icon--active': this.props.anywhere,
               })}
-              title={text('Anywhere', 'SearchField')}
+              title={text('Anywhere', NS)}
               onClick={anywhereOnClick}
             >
               <span className="SearchField__iconInner">
@@ -75,13 +77,17 @@ class SearchField extends React.PureComponent<Props> {
             <span
               className="SearchField__icon SearchField__icon--clear"
               onClick={clearOnClick}
-              title={text('Clear', 'SearchField')}
+              title={text('Clear', NS)}
             >
               <Icon type={ICON_CLOSE} />
             </span>
           </React.Fragment>
         ) : (
-          <span className="SearchField__icon SearchField__icon--toggle" onClick={iconOnClick}>
+          <span
+            className="SearchField__icon SearchField__icon--toggle"
+            onClick={iconOnClick}
+            title={text('Tooltip', NS)}
+          >
             <Icon type={ICON_SEARCH} />
           </span>
         )}

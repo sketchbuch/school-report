@@ -302,7 +302,8 @@
     },
     "SearchField": {
       "Anywhere": "Search anywhere",
-      "Clear": "Cancel search"
+      "Clear": "Cancel search",
+      "Tooltip": "Search"
     },
     "Settings": {
       "Breadcrumb": "Settings",
