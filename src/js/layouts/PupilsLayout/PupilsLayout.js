@@ -9,7 +9,6 @@ import DeletePupilsLayout from './Delete/DeletePupilsLayout';
 import EditPupilLayout from './Edit/EditPupilLayout';
 import Icon from '../../components/Icon/Icon';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
-import { NavButtonCircular, SearchField } from '../../components/Ui';
 import NewPupilLayout from './New/NewPupilLayout';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
@@ -19,7 +18,10 @@ import setTitle from '../../utils/title';
 import type { ClassType } from '../../types/class';
 import type { PupilSortOptions, PupilType } from '../../types/pupil';
 import type { ReduxState } from '../../types/reduxstate';
+import type { WithSearchProps } from '../../hoc/withSearch';
+import withSearch from '../../hoc/withSearch';
 import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
+import { NavButtonCircular, SearchField } from '../../components/Ui';
 import { ROUTE_DEL_PUPILS, ROUTE_EDIT_PUPIL, ROUTE_NEW_PUPIL, ROUTE_PUPILS } from '../../constants/routes';
 import { getActiveClass, getClassPupils } from '../../utils/redux';
 import { pupilSort } from '../../types/pupil';
@@ -31,28 +33,15 @@ export type Props = {
   dispatch: Dispatch,
   pupilsSort: PupilSortOptions,
   pupils: PupilType[],
-};
+} & WithSearchProps;
 
-type State = {
-  anywhere: boolean,
-  curPage: number,
-  searchVisible: boolean,
-  term: string,
-};
-
-export class PupilsLayout extends React.Component<Props, State> {
+export class PupilsLayout extends React.Component<Props> {
   static defaultProps = {
     activeClass: {},
     pupils: [],
   };
 
   props: Props;
-  state: State = {
-    anywhere: false,
-    curPage: 1,
-    searchVisible: false,
-    term: '',
-  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'Pupils', { CLASS_NAME: this.getClassLabel() }));
@@ -64,49 +53,16 @@ export class PupilsLayout extends React.Component<Props, State> {
     }
   }
 
-  handleSearch = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
-    if (event.type === 'keyup') {
-      if (event.key === 'Escape') {
-        this.handleSearchIconClick(event);
-      }
-    } else {
-      const newTerm: string = event.currentTarget.value;
-
-      if (newTerm !== this.state.term) {
-        this.setState({ curPage: 1, term: newTerm });
-      } else {
-        this.setState({ term: newTerm });
-      }
-    }
-  };
-
-  handlePbChange = (curPage: number): void => {
-    this.setState({ curPage });
-  };
-
-  handleSearchIconClick = (event: SyntheticEvent<EventTarget>): void => {
-    const newSearchVisible: boolean = !this.state.searchVisible;
-
-    if (newSearchVisible === false) {
-      this.setState({ curPage: 1, searchVisible: newSearchVisible, term: '' });
-    } else {
-      this.setState({ searchVisible: newSearchVisible });
-    }
-  };
-
-  handleSearchAnywhereClick = (event: SyntheticMouseEvent<HTMLElement>): void => {
-    this.setState({ anywhere: !this.state.anywhere });
-  };
-
   getClassLabel(): string {
     return this.props.activeClass.label !== undefined ? this.props.activeClass.label : this.props.match.params.classId;
   }
 
   render() {
-    const HAS_PUPILS: boolean = this.props.pupils.length > 0 ? true : false;
+    const { activeClass, dispatch, match, pupils, search } = this.props;
+    const HAS_PUPILS: boolean = pupils.length > 0 ? true : false;
     const leftActions: React.Element<*> = (
       <NavButtonCircular
-        to={ROUTE_NEW_PUPIL.replace(':classId', this.props.match.params.classId)}
+        to={ROUTE_NEW_PUPIL.replace(':classId', match.params.classId)}
         className="SidebarFooter__action"
         buttontype="pos-rollover"
         action="add-pupil"
@@ -118,7 +74,7 @@ export class PupilsLayout extends React.Component<Props, State> {
     const rightActions: React.Element<*> = (
       <NavButtonCircular
         disabled={!HAS_PUPILS}
-        to={ROUTE_DEL_PUPILS.replace(':classId', this.props.match.params.classId)}
+        to={ROUTE_DEL_PUPILS.replace(':classId', match.params.classId)}
         className="SidebarFooter__action"
         buttontype="neg-rollover"
         action="delete-pupils"
@@ -132,15 +88,15 @@ export class PupilsLayout extends React.Component<Props, State> {
     if (HAS_PUPILS) {
       searchBox = (
         <SearchField
-          anywhere={this.state.anywhere}
-          anywhereOnClick={this.handleSearchAnywhereClick}
-          clearOnClick={this.handleSearchIconClick}
-          iconOnClick={this.handleSearchIconClick}
-          onKeyUp={this.handleSearch}
-          onChange={this.handleSearch}
+          anywhere={search.anywhere}
+          anywhereOnClick={search.anywhereIconClick}
+          clearOnClick={search.searchIconClick}
+          iconOnClick={search.searchIconClick}
+          onKeyUp={search.searchChange}
+          onChange={search.searchChange}
           placeholder={text('SearchPlaceholder-pupil', 'SidebarHeader')}
-          term={this.state.term}
-          visible={this.state.searchVisible}
+          term={search.term}
+          visible={search.visible}
         />
       );
     }
@@ -149,24 +105,24 @@ export class PupilsLayout extends React.Component<Props, State> {
       <div className="Panel">
         <Sidebar>
           <SidebarHeader
-            controlsExpanded={this.state.searchVisible}
+            controlsExpanded={search.visible}
             title={text('Header-pupil', 'SidebarHeader')}
             subtitle={text('Subheader-count', 'SidebarHeader', {
-              COUNT: this.props.pupils.length,
+              COUNT: pupils.length,
             })}
           >
             {searchBox}
           </SidebarHeader>
           <SidebarList
-            curPage={this.state.curPage}
-            dispatch={this.props.dispatch}
-            items={this.props.pupils}
+            curPage={search.page}
+            dispatch={dispatch}
+            items={pupils}
             listType="pupil"
             noItemsTxt={text('Pupils', 'SidebarNoItems')}
-            onChange={this.handlePbChange}
+            onPbChange={search.pageChange}
             sortOrder={pupilSort[this.props.pupilsSort]}
-            term={this.state.term}
-            termAnywhere={this.state.anywhere}
+            term={search.term}
+            termAnywhere={search.anywhere}
             usePb
           />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
@@ -177,33 +133,23 @@ export class PupilsLayout extends React.Component<Props, State> {
             render={routerProps => (
               <EditPupilLayout
                 {...routerProps}
-                dispatch={this.props.dispatch}
-                pupils={this.props.pupils}
+                dispatch={dispatch}
+                pupils={pupils}
                 sortOrder={pupilSort[this.props.pupilsSort]}
-                activeClass={this.props.activeClass}
+                activeClass={activeClass}
               />
             )}
           />
           <Route
             path={ROUTE_DEL_PUPILS}
             render={routerProps => (
-              <DeletePupilsLayout
-                {...routerProps}
-                dispatch={this.props.dispatch}
-                pupils={this.props.pupils}
-                activeClass={this.props.activeClass}
-              />
+              <DeletePupilsLayout {...routerProps} dispatch={dispatch} pupils={pupils} activeClass={activeClass} />
             )}
           />
           <Route
             path={ROUTE_NEW_PUPIL}
             render={routerProps => (
-              <NewPupilLayout
-                {...routerProps}
-                dispatch={this.props.dispatch}
-                pupils={this.props.pupils}
-                activeClass={this.props.activeClass}
-              />
+              <NewPupilLayout {...routerProps} dispatch={dispatch} pupils={pupils} activeClass={activeClass} />
             )}
           />
           <Route
@@ -234,4 +180,4 @@ const mapStateToProps = (state: ReduxState, props: Props) => {
   };
 };
 
-export default connect(mapStateToProps)(PupilsLayout);
+export default connect(mapStateToProps)(withSearch(PupilsLayout));

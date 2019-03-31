@@ -3,12 +3,14 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
-import store from '../../store/redux';
 import PupilsLayout from './PupilsLayout';
+import mockSearch from '../../tests/mockSearch';
+import store from '../../store/redux';
 import type { Props } from './PupilsLayout';
 
 describe('<PupilsLayout />:', () => {
   const props: Props = {
+    ...mockSearch,
     activeClass: {},
     pupils: [],
   };

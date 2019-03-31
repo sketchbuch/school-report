@@ -9,7 +9,6 @@ import DeleteCategoriesLayout from './Delete/DeleteCategoriesLayout';
 import EditCategoryLayout from './Edit/EditCategoryLayout';
 import Icon from '../../components/Icon/Icon';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
-import { NavButtonCircular, SearchField } from '../../components/Ui';
 import NewCategoryLayout from './New/NewCategoryLayout';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
@@ -17,7 +16,10 @@ import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
 import type { CategoryType } from '../../types/category';
 import type { ReduxState } from '../../types/reduxstate';
+import type { WithSearchProps } from '../../hoc/withSearch';
+import withSearch from '../../hoc/withSearch';
 import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
+import { NavButtonCircular, SearchField } from '../../components/Ui';
 import { categorySort } from '../../types/category';
 import { text } from '../../components/Translation/Translation';
 import {
@@ -32,27 +34,14 @@ export type Props = {
   ...RouteComponentProps,
   categories: CategoryType[],
   dispatch: Dispatch,
-};
+} & WithSearchProps;
 
-type State = {
-  anywhere: boolean,
-  curPage: number,
-  searchVisible: boolean,
-  term: string,
-};
-
-export class CategoriesLayout extends React.Component<Props, State> {
+export class CategoriesLayout extends React.Component<Props> {
   static defaultProps = {
     categories: [],
   };
 
   props: Props;
-  state: State = {
-    anywhere: false,
-    curPage: 1,
-    searchVisible: false,
-    term: '',
-  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'Categories'));
@@ -64,42 +53,9 @@ export class CategoriesLayout extends React.Component<Props, State> {
     }
   }
 
-  handleSearch = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
-    if (event.type === 'keyup') {
-      if (event.key === 'Escape') {
-        this.handleSearchIconClick(event);
-      }
-    } else {
-      const newTerm: string = event.currentTarget.value;
-
-      if (newTerm !== this.state.term) {
-        this.setState({ curPage: 1, term: newTerm });
-      } else {
-        this.setState({ term: newTerm });
-      }
-    }
-  };
-
-  handlePbChange = (curPage: number): void => {
-    this.setState({ curPage });
-  };
-
-  handleSearchIconClick = (event: SyntheticEvent<EventTarget>): void => {
-    const newSearchVisible: boolean = !this.state.searchVisible;
-
-    if (newSearchVisible === false) {
-      this.setState({ curPage: 1, searchVisible: newSearchVisible, term: '' });
-    } else {
-      this.setState({ searchVisible: newSearchVisible });
-    }
-  };
-
-  handleSearchAnywhereClick = (event: SyntheticMouseEvent<HTMLElement>): void => {
-    this.setState({ anywhere: !this.state.anywhere });
-  };
-
   render() {
-    const HAS_CATGEORIES: boolean = this.props.categories.length > 0 ? true : false;
+    const { categories, dispatch, search } = this.props;
+    const HAS_CATGEORIES: boolean = categories.length > 0 ? true : false;
     const leftActions: React.Element<*> = (
       <NavButtonCircular
         to={ROUTE_NEW_CATEGORY}
@@ -128,41 +84,43 @@ export class CategoriesLayout extends React.Component<Props, State> {
     if (HAS_CATGEORIES) {
       searchBox = (
         <SearchField
-          anywhere={this.state.anywhere}
-          anywhereOnClick={this.handleSearchAnywhereClick}
-          clearOnClick={this.handleSearchIconClick}
-          iconOnClick={this.handleSearchIconClick}
-          onKeyUp={this.handleSearch}
-          onChange={this.handleSearch}
+          anywhere={search.anywhere}
+          anywhereOnClick={search.anywhereIconClick}
+          clearOnClick={search.searchIconClick}
+          iconOnClick={search.searchIconClick}
+          onKeyUp={search.searchChange}
+          onChange={search.searchChange}
           placeholder={text('SearchPlaceholder-category', 'SidebarHeader')}
-          term={this.state.term}
-          visible={this.state.searchVisible}
+          term={search.term}
+          visible={search.searchVisible}
         />
       );
     }
+
+    console.log('page', search.page);
 
     return (
       <div className="Panel">
         <Sidebar>
           <SidebarHeader
-            controlsExpanded={this.state.searchVisible}
+            controlsExpanded={search.visible}
             title={text('Header-category', 'SidebarHeader')}
             subtitle={text('Subheader-count', 'SidebarHeader', {
-              COUNT: this.props.categories.length,
+              COUNT: categories.length,
             })}
           >
             {searchBox}
           </SidebarHeader>
           <SidebarList
-            curPage={this.state.curPage}
-            dispatch={this.props.dispatch}
-            items={this.props.categories}
+            curPage={search.page}
+            dispatch={dispatch}
+            items={categories}
             listType="category"
             noItemsTxt={text('Categories', 'SidebarNoItems')}
-            onChange={this.handlePbChange}
+            onPbChange={search.pageChange}
             sortOrder={categorySort}
-            term={this.state.term}
-            termAnywhere={this.state.anywhere}
+            term={search.term}
+            termAnywhere={search.anywhere}
             usePb
           />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
@@ -170,19 +128,15 @@ export class CategoriesLayout extends React.Component<Props, State> {
         <Switch>
           <Route
             path={ROUTE_EDIT_CATEGORY}
-            render={routerProps => (
-              <EditCategoryLayout {...routerProps} categories={this.props.categories} dispatch={this.props.dispatch} />
-            )}
+            render={routerProps => <EditCategoryLayout {...routerProps} categories={categories} dispatch={dispatch} />}
           />
           <Route
             path={ROUTE_DEL_CATEGORIES}
-            render={routerProps => <DeleteCategoriesLayout {...routerProps} dispatch={this.props.dispatch} />}
+            render={routerProps => <DeleteCategoriesLayout {...routerProps} dispatch={dispatch} />}
           />
           <Route
             path={ROUTE_NEW_CATEGORY}
-            render={routerProps => (
-              <NewCategoryLayout {...routerProps} categories={this.props.categories} dispatch={this.props.dispatch} />
-            )}
+            render={routerProps => <NewCategoryLayout {...routerProps} categories={categories} dispatch={dispatch} />}
           />
           <Route
             path={ROUTE_CATEGORIES}
@@ -204,4 +158,4 @@ const mapStateToProps = (state: ReduxState) => ({
   categories: state.categories,
 });
 
-export default connect(mapStateToProps)(CategoriesLayout);
+export default connect(mapStateToProps)(withSearch(CategoriesLayout));

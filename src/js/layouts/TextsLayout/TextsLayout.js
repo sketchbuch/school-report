@@ -10,7 +10,6 @@ import DeleteTextsLayout from './Delete/DeleteTextsLayout';
 import EditTextLayout from './Edit/EditTextLayout';
 import Icon from '../../components/Icon/Icon';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
-import { NavButtonCircular, SearchField } from '../../components/Ui';
 import NewTextLayout from './New/NewTextLayout';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
@@ -20,8 +19,11 @@ import setTitle from '../../utils/title';
 import type { CategoryType } from '../../types/category';
 import type { ReduxState } from '../../types/reduxstate';
 import type { TextType } from '../../types/text';
+import type { WithSearchProps } from '../../hoc/withSearch';
+import withSearch from '../../hoc/withSearch';
 import { CATEGORY_ALL } from '../../constants/misc';
 import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
+import { NavButtonCircular, SearchField } from '../../components/Ui';
 import { ROUTE_DEL_TEXTS, ROUTE_EDIT_TEXT, ROUTE_NEW_TEXT, ROUTE_TEXTS } from '../../constants/routes';
 import { text } from '../../components/Translation/Translation';
 import { textSort } from '../../types/text';
@@ -32,14 +34,10 @@ export type Props = {
   curLang: string,
   dispatch: Dispatch,
   texts: TextType[],
-};
+} & WithSearchProps;
 
 type State = {
-  anywhere: boolean,
-  curPage: number,
   option: string,
-  searchVisible: boolean,
-  term: string,
 };
 
 export class TextsLayout extends React.Component<Props, State> {
@@ -50,11 +48,7 @@ export class TextsLayout extends React.Component<Props, State> {
 
   props: Props;
   state: State = {
-    anywhere: false,
-    curPage: 1,
     option: CATEGORY_ALL,
-    searchVisible: false,
-    term: '',
   };
 
   componentDidMount() {
@@ -70,49 +64,15 @@ export class TextsLayout extends React.Component<Props, State> {
   handleFilterChanage = (event: SyntheticInputEvent<HTMLInputElement>) => {
     const option = event.target.value;
 
+    this.setState({ option });
     if (this.state.option !== option) {
-      this.setState({ option, term: '', curPage: 1 });
-    } else {
-      this.setState({ option });
+      this.props.search.externalUpdate({ term: '', page: 1 });
     }
-  };
-
-  handleSearch = (event: SyntheticKeyboardEvent<HTMLInputElement>) => {
-    if (event.type === 'keyup') {
-      if (event.key === 'Escape') {
-        this.handleSearchIconClick(event);
-      }
-    } else {
-      const newTerm: string = event.currentTarget.value;
-
-      if (newTerm !== this.state.term) {
-        this.setState({ curPage: 1, term: newTerm });
-      } else {
-        this.setState({ term: newTerm });
-      }
-    }
-  };
-
-  handlePbChange = (curPage: number) => {
-    this.setState({ curPage });
-  };
-
-  handleSearchIconClick = (event: SyntheticEvent<EventTarget>) => {
-    const newSearchVisible: boolean = !this.state.searchVisible;
-
-    if (newSearchVisible === false) {
-      this.setState({ curPage: 1, searchVisible: newSearchVisible, term: '' });
-    } else {
-      this.setState({ searchVisible: newSearchVisible });
-    }
-  };
-
-  handleSearchAnywhereClick = (event: SyntheticMouseEvent<HTMLElement>) => {
-    this.setState({ anywhere: !this.state.anywhere });
   };
 
   render() {
-    const HAS_TEXTS: boolean = this.props.texts.length > 0 ? true : false;
+    const { categories, curLang, dispatch, search, texts } = this.props;
+    const HAS_TEXTS: boolean = texts.length > 0 ? true : false;
     const leftActions: React.Element<*> = (
       <NavButtonCircular
         to={ROUTE_NEW_TEXT}
@@ -141,15 +101,15 @@ export class TextsLayout extends React.Component<Props, State> {
     if (HAS_TEXTS) {
       searchBox = (
         <SearchField
-          anywhere={this.state.anywhere}
-          anywhereOnClick={this.handleSearchAnywhereClick}
-          clearOnClick={this.handleSearchIconClick}
-          iconOnClick={this.handleSearchIconClick}
-          onKeyUp={this.handleSearch}
-          onChange={this.handleSearch}
+          anywhere={search.anywhere}
+          anywhereOnClick={search.anywhereIconClick}
+          clearOnClick={search.searchIconClick}
+          iconOnClick={search.searchIconClick}
+          onKeyUp={search.searchChange}
+          onChange={search.searchChange}
           placeholder={text('SearchPlaceholder-text', 'SidebarHeader')}
-          term={this.state.term}
-          visible={this.state.searchVisible}
+          term={search.term}
+          visible={search.visible}
         />
       );
     }
@@ -158,33 +118,33 @@ export class TextsLayout extends React.Component<Props, State> {
       <div className="Panel">
         <Sidebar>
           <SidebarHeader
-            controlsExpanded={this.state.searchVisible}
+            controlsExpanded={search.visible}
             title={text('Header-text', 'SidebarHeader')}
             subtitle={text('Subheader-count', 'SidebarHeader', {
-              COUNT: this.props.texts.length,
+              COUNT: texts.length,
             })}
           >
             {searchBox}
           </SidebarHeader>
           <SidebarList
-            curPage={this.state.curPage}
-            dispatch={this.props.dispatch}
+            curPage={search.page}
+            dispatch={dispatch}
             filter={this.state.option}
-            items={this.props.texts}
+            items={texts}
             listType="text"
             noItemsTxt={text('Texts', 'SidebarNoItems')}
-            onChange={this.handlePbChange}
+            onPbChange={search.pageChange}
             sortOrder={textSort}
-            term={this.state.term}
-            termAnywhere={this.state.anywhere}
+            term={search.term}
+            termAnywhere={search.anywhere}
             usePb
           >
             <CatSelect
-              categories={this.props.categories}
+              categories={categories}
               onChange={this.handleFilterChanage}
               option={this.state.option}
               selectedCount={0}
-              texts={this.props.texts}
+              texts={texts}
               useSelected={false}
             />
           </SidebarList>
@@ -194,27 +154,17 @@ export class TextsLayout extends React.Component<Props, State> {
           <Route
             path={ROUTE_EDIT_TEXT}
             render={routerProps => (
-              <EditTextLayout
-                {...routerProps}
-                dispatch={this.props.dispatch}
-                categories={this.props.categories}
-                texts={this.props.texts}
-              />
+              <EditTextLayout {...routerProps} dispatch={dispatch} categories={categories} texts={texts} />
             )}
           />
           <Route
             path={ROUTE_DEL_TEXTS}
-            render={routerProps => <DeleteTextsLayout {...routerProps} dispatch={this.props.dispatch} />}
+            render={routerProps => <DeleteTextsLayout {...routerProps} dispatch={dispatch} />}
           />
           <Route
             path={ROUTE_NEW_TEXT}
             render={routerProps => (
-              <NewTextLayout
-                {...routerProps}
-                curLang={this.props.curLang}
-                categories={this.props.categories}
-                dispatch={this.props.dispatch}
-              />
+              <NewTextLayout {...routerProps} curLang={curLang} categories={categories} dispatch={dispatch} />
             )}
           />
           <Route
@@ -235,4 +185,4 @@ const mapStateToProps = (state: ReduxState) => ({
   texts: state.texts,
 });
 
-export default connect(mapStateToProps)(TextsLayout);
+export default connect(mapStateToProps)(withSearch(TextsLayout));

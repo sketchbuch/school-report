@@ -4,23 +4,15 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ItemSelection from './ItemSelection';
 import classDefault, { ClassFactory } from '../../../types/class';
+import mockSearch from '../../../tests/mockSearch';
 import type { DomainType } from '../../../types/domain';
 import type { Props } from './ItemSelection';
 
 describe('<ItemSelection />', () => {
   const props: Props = {
+    ...mockSearch,
     items: [],
     name: 'test',
-    search: {
-      anywhere: false,
-      anywhereIconClick: jest.fn(),
-      page: 1,
-      pageChange: jest.fn(),
-      searchChange: jest.fn(),
-      searchIconClick: jest.fn(),
-      term: '',
-      visible: false,
-    },
     searchMin: 2,
     selected: [],
   };

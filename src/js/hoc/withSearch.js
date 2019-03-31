@@ -13,6 +13,7 @@ type State = {
 export type SearchProps = {
   ...State,
   anywhereIconClick: (event: SyntheticMouseEvent<HTMLElement>) => void,
+  externalUpdate: (newState: State) => void,
   pageChange: (page: number) => void,
   searchChange: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
   searchIconClick: (event: SyntheticEvent<EventTarget>) => void,
@@ -40,6 +41,13 @@ function withSearch<PassedProps: {}>(
 
     handleAnywhereIconClick = (event: SyntheticMouseEvent<HTMLElement>): void => {
       this.setState({ anywhere: !this.state.anywhere });
+    };
+
+    /**
+     * Use only when an external event should trigger a state change (see TextLayout as an example)
+     */
+    handleExternalUpdate = (newState: State): void => {
+      this.setState({ ...newState });
     };
 
     handlePageChange = (page: number): void => {
@@ -78,6 +86,7 @@ function withSearch<PassedProps: {}>(
           search={{
             ...this.state,
             anywhereIconClick: this.handleAnywhereIconClick,
+            externalUpdate: this.handleExternalUpdate,
             pageChange: this.handlePageChange,
             searchChange: this.handleSearchChange,
             searchIconClick: this.handleSearchIconClick,

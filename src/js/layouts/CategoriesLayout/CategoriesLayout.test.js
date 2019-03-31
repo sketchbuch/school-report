@@ -3,12 +3,14 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
-import store from '../../store/redux';
 import CategoriesLayout from './CategoriesLayout';
+import mockSearch from '../../tests/mockSearch';
+import store from '../../store/redux';
 import type { Props } from './CategoriesLayout';
 
 describe('<CategoriesLayout />:', () => {
   const props: Props = {
+    ...mockSearch,
     categories: [],
   };
 

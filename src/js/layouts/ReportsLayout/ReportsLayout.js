@@ -9,7 +9,6 @@ import DeleteReportsLayout from './Delete/DeleteReportsLayout';
 import EditReportLayout from './Edit/EditReportLayout';
 import Icon from '../../components/Icon/Icon';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
-import { NavButtonCircular, SearchField } from '../../components/Ui';
 import NewReportLayout from './New/NewReportLayout';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
@@ -19,7 +18,10 @@ import setTitle from '../../utils/title';
 import type { ClassType } from '../../types/class';
 import type { ReduxState } from '../../types/reduxstate';
 import type { ReportType } from '../../types/report';
+import type { WithSearchProps } from '../../hoc/withSearch';
+import withSearch from '../../hoc/withSearch';
 import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
+import { NavButtonCircular, SearchField } from '../../components/Ui';
 import { ROUTE_DEL_REPORTS, ROUTE_EDIT_REPORT, ROUTE_NEW_REPORT, ROUTE_REPORTS } from '../../constants/routes';
 import { reportSort } from '../../types/report';
 import { text } from '../../components/Translation/Translation';
@@ -30,28 +32,15 @@ export type Props = {
   dispatch: Dispatch,
   maxChars: number,
   reports: ReportType[],
-};
+} & WithSearchProps;
 
-type State = {
-  anywhere: boolean,
-  curPage: number,
-  searchVisible: boolean,
-  term: string,
-};
-
-export class ReportsLayout extends React.Component<Props, State> {
+export class ReportsLayout extends React.Component<Props> {
   static defaultProps = {
     classes: [],
     reports: [],
   };
 
   props: Props;
-  state: State = {
-    anywhere: false,
-    curPage: 1,
-    searchVisible: false,
-    term: '',
-  };
 
   componentDidMount() {
     setTitle(text('WinTitle', 'Reports'));
@@ -63,42 +52,9 @@ export class ReportsLayout extends React.Component<Props, State> {
     }
   }
 
-  handleSearch = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
-    if (event.type === 'keyup') {
-      if (event.key === 'Escape') {
-        this.handleSearchIconClick(event);
-      }
-    } else {
-      const newTerm: string = event.currentTarget.value;
-
-      if (newTerm !== this.state.term) {
-        this.setState({ curPage: 1, term: newTerm });
-      } else {
-        this.setState({ term: newTerm });
-      }
-    }
-  };
-
-  handlePbChange = (curPage: number): void => {
-    this.setState({ curPage });
-  };
-
-  handleSearchIconClick = (event: SyntheticEvent<EventTarget>): void => {
-    const newSearchVisible: boolean = !this.state.searchVisible;
-
-    if (newSearchVisible === false) {
-      this.setState({ curPage: 1, searchVisible: newSearchVisible, term: '' });
-    } else {
-      this.setState({ searchVisible: newSearchVisible });
-    }
-  };
-
-  handleSearchAnywhereClick = (event: SyntheticMouseEvent<HTMLElement>): void => {
-    this.setState({ anywhere: !this.state.anywhere });
-  };
-
   render() {
-    const HAS_REPORTS: boolean = this.props.reports.length > 0 ? true : false;
+    const { classes, dispatch, maxChars, reports, search } = this.props;
+    const HAS_REPORTS: boolean = reports.length > 0 ? true : false;
     const leftActions: React.Element<*> = (
       <NavButtonCircular
         to={ROUTE_NEW_REPORT}
@@ -128,15 +84,15 @@ export class ReportsLayout extends React.Component<Props, State> {
     if (HAS_REPORTS) {
       searchBox = (
         <SearchField
-          anywhere={this.state.anywhere}
-          anywhereOnClick={this.handleSearchAnywhereClick}
-          clearOnClick={this.handleSearchIconClick}
-          iconOnClick={this.handleSearchIconClick}
-          onKeyUp={this.handleSearch}
-          onChange={this.handleSearch}
+          anywhere={search.anywhere}
+          anywhereOnClick={search.anywhereIconClick}
+          clearOnClick={search.searchIconClick}
+          iconOnClick={search.searchIconClick}
+          onKeyUp={search.searchChange}
+          onChange={search.searchChange}
           placeholder={text('SearchPlaceholder-report', 'SidebarHeader')}
-          term={this.state.term}
-          visible={this.state.searchVisible}
+          term={search.term}
+          visible={search.visible}
         />
       );
     }
@@ -145,24 +101,24 @@ export class ReportsLayout extends React.Component<Props, State> {
       <div className="Panel">
         <Sidebar>
           <SidebarHeader
-            controlsExpanded={this.state.searchVisible}
+            controlsExpanded={search.visible}
             title={text('Header-report', 'SidebarHeader')}
             subtitle={text('Subheader-count', 'SidebarHeader', {
-              COUNT: this.props.reports.length,
+              COUNT: reports.length,
             })}
           >
             {searchBox}
           </SidebarHeader>
           <SidebarList
-            curPage={this.state.curPage}
-            dispatch={this.props.dispatch}
-            items={this.props.reports}
+            curPage={search.page}
+            dispatch={dispatch}
+            items={reports}
             listType="report"
             noItemsTxt={text('Reports', 'SidebarNoItems')}
-            onChange={this.handlePbChange}
+            onPbChange={search.pageChange}
             sortOrder={reportSort}
-            term={this.state.term}
-            termAnywhere={this.state.anywhere}
+            term={search.term}
+            termAnywhere={search.anywhere}
             usePb
           />
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
@@ -174,26 +130,21 @@ export class ReportsLayout extends React.Component<Props, State> {
             render={routerProps => (
               <EditReportLayout
                 {...routerProps}
-                dispatch={this.props.dispatch}
-                reports={this.props.reports}
-                classes={this.props.classes}
-                maxChars={this.props.maxChars}
+                dispatch={dispatch}
+                reports={reports}
+                classes={classes}
+                maxChars={maxChars}
               />
             )}
           />
           <Route
             path={ROUTE_DEL_REPORTS}
-            render={routerProps => <DeleteReportsLayout {...routerProps} dispatch={this.props.dispatch} />}
+            render={routerProps => <DeleteReportsLayout {...routerProps} dispatch={dispatch} />}
           />
           <Route
             path={ROUTE_NEW_REPORT}
             render={routerProps => (
-              <NewReportLayout
-                {...routerProps}
-                dispatch={this.props.dispatch}
-                classes={this.props.classes}
-                maxChars={this.props.maxChars}
-              />
+              <NewReportLayout {...routerProps} dispatch={dispatch} classes={classes} maxChars={maxChars} />
             )}
           />
           <Route
@@ -214,4 +165,4 @@ const mapStateToProps = (state: ReduxState) => ({
   reports: state.reports,
 });
 
-export default connect(mapStateToProps)(ReportsLayout);
+export default connect(mapStateToProps)(withSearch(ReportsLayout));

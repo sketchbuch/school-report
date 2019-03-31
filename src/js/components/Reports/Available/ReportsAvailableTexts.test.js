@@ -2,14 +2,16 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
+import ReportsAvailableTexts from './ReportsAvailableTexts';
 import categoryDefault from '../../../types/category';
+import mockSearch from '../../../tests/mockSearch';
 import pupilDefault, { PupilFactory } from '../../../types/pupil';
 import textDefault, { TextFactory } from '../../../types/text';
-import ReportsAvailableTexts from './ReportsAvailableTexts';
 import type { Props } from './ReportsAvailableTexts';
 
 describe('<ReportsAvailableTexts />', () => {
   const props: Props = {
+    ...mockSearch,
     activePupil: PupilFactory({ ...pupilDefault, firstname: 'Dr', lastname: 'Who' }, Date.now(), 'cl1'),
     categories: [
       { ...categoryDefault, label: 'Lister', id: 'c1' },
@@ -22,16 +24,6 @@ describe('<ReportsAvailableTexts />', () => {
     onTextToggle: jest.fn(),
     pagesToShow: 3,
     perPage: 20,
-    search: {
-      anywhere: false,
-      anywhereIconClick: jest.fn(),
-      page: 1,
-      pageChange: jest.fn(),
-      searchChange: jest.fn(),
-      searchIconClick: jest.fn(),
-      term: '',
-      visible: false,
-    },
     selectedTexts: [],
     texts: [
       TextFactory({ ...textDefault, bodytext: 'Red Dwarf', categories: ['c1'] }, Date.now(), 'EN'),

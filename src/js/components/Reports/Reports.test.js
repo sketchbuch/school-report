@@ -42,28 +42,6 @@ describe('<Reports />', () => {
     categories,
     disableTexts: false,
     saveReports: jest.fn(),
-    search: {
-      cat: {
-        anywhere: false,
-        anywhereIconClick: jest.fn(),
-        page: 1,
-        pageChange: jest.fn(),
-        searchChange: jest.fn(),
-        searchIconClick: jest.fn(),
-        term: '',
-        visible: false,
-      },
-      text: {
-        anywhere: false,
-        anywhereIconClick: jest.fn(),
-        page: 1,
-        pageChange: jest.fn(),
-        searchChange: jest.fn(),
-        searchIconClick: jest.fn(),
-        term: '',
-        visible: false,
-      },
-    },
     selected: [],
     texts,
   };
