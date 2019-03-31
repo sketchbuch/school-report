@@ -67,7 +67,13 @@ export class EditBuilderLayout extends Component<Props> {
       <EditPanel>
         <EditPanelHeader
           alert={maxChars > 0 && textCount >= maxChars ? true : false}
-          count={selectedTexts.length > 0 ? selectedTexts.length : -1}
+          textCount={
+            selectedTexts.length > 0
+              ? text('ReportBuilderTextCount', 'EditPanelHeader', {
+                  COUNT: selectedTexts.length,
+                })
+              : ''
+          }
           title={text('ReportBuilder', 'EditPanelHeader', {
             PUPIL_NAME: activePupil.getLabel(),
             CLASS_NAME: activeItem.classRec.getLabel(),

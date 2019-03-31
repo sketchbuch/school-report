@@ -45,7 +45,7 @@
   color: var(--col-white);
 }
 
-.EditPanelHeader__headline span[data-count] {
+.EditPanelHeader__headline .EditPanelHeader__textCount {
   display: inline-block;
   background: transparent;
   color: var(--col-lighten-5);

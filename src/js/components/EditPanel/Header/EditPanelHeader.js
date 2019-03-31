@@ -7,7 +7,7 @@ export type Props = {
   alert: boolean,
   children?: React.Node,
   subtitle: string,
-  count: number,
+  textCount: string,
   title: string,
 };
 
@@ -17,9 +17,9 @@ export type Props = {
 export class EditPanelHeader extends React.Component<Props> {
   static defaultProps = {
     alert: false,
-    count: -1,
     children: null,
     subtitle: '',
+    textCount: '',
     title: '',
   };
 
@@ -30,7 +30,7 @@ export class EditPanelHeader extends React.Component<Props> {
       <header className="EditPanelHeader">
         <h1 className="EditPanelHeader__headline">
           {this.props.title}
-          {this.props.count > -1 && <span data-count={this.props.count}>{this.props.count}</span>}
+          {this.props.textCount && <span className="EditPanelHeader__textCount">{this.props.textCount}</span>}
           <span data-alert={this.props.alert}>{this.props.subtitle}</span>
         </h1>
         {this.props.children && <div className="EditPanelHeader__controls">{this.props.children}</div>}

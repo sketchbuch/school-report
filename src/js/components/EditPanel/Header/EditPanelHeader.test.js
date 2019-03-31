@@ -10,7 +10,7 @@ describe('<EditPanelHeader />', () => {
     alert: false,
     children: null,
     subtitle: '',
-    count: 0,
+    textCount: '',
     title: 'Test title',
   };
 
