@@ -1,9 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import Button from '../../ui/Button/Button';
-import GenderSwitch from '../../ui/GenderSwitch/GenderSwitch';
-import TextInput from '../../ui/TextInput/TextInput';
+import { Button, GenderSwitch, TextInput } from '../../Ui';
 import Translation, { text } from '../../Translation/Translation';
 import validate from '../../../validation/validation';
 

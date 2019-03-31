@@ -1,0 +1,92 @@
+.FieldWrap {
+  width: 100%;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.fiedwrap__placeholders {
+  position: relative;
+  margin: 0px -10px;
+}
+
+.fiedwrap__placeholder {
+  position: relative;
+  display: inline-block;
+  border-radius: var(--border-radius);
+  background: var(--col-darken-1);
+  border: 1px solid var(--col-darken-1);
+  padding: 2px 5px;
+  margin: 10px;
+}
+
+.fieldwrap--labeled {
+  position: relative;
+}
+
+.fieldwrap--labeled .fieldwrap__left {
+  position: relative;
+  padding-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.fieldwrap--labeled .fieldwrap__right {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fieldwrap2--labeled {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.fieldwrap2--labeled .fieldwrap__left {
+  padding-bottom: 0px;
+  padding-right: 0.5rem;
+  width: 50%;
+  align-items: flex-end;
+}
+
+.fieldwrap2--labeled .fieldwrap__right {
+  padding-left: 0.5rem;
+  width: 50%;
+  align-items: flex-start;
+}
+
+.fieldwrap__columns {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.fieldwrap__column {
+  width: 50%;
+}
+
+.fieldwrap__column:first-child {
+  padding-right: 10px;
+}
+
+.fieldwrap__column:last-child {
+  padding-left: 10px;
+}
+
+.fieldwrap__info {
+  line-height: var(--lh-reduced);
+  color: var(--col-darken-5);
+  font-size: var(--font-size-small);
+}
+
+.FieldWrap + .FieldWrap {
+  margin-top: 10px;
+}

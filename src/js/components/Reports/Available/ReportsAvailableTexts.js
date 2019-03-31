@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Icon from '../../Icon/Icon';
 import LetterCount from '../../LetterCount/LetterCount';
 import NoItems from '../../NoItems/NoItems';
-import SearchField from '../../ui/SearchField/SearchField';
+import { SearchField } from '../../Ui';
 import SidebarHeader from '../../Sidebar/Header/SidebarHeader';
 import SidebarPageBrowser from '../../Sidebar/PageBrowser/SidebarPageBrowser';
 import Translation from '../../Translation/Translation';

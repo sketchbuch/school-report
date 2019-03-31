@@ -1,8 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import Button from '../../ui/Button/Button';
-import Textarea from '../../ui/Textarea/Textarea';
+import { Button, Textarea } from '../../Ui';
 import Translation, { text } from '../../Translation/Translation';
 import validate from '../../../validation/validation';
 

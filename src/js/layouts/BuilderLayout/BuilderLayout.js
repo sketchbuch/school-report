@@ -13,7 +13,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
-import NavButtonCircular from '../../components/ui/NavButtonCircular/NavButtonCircular';
+import { NavButtonCircular } from '../../components/Ui';
 import { text } from '../../components/Translation/Translation';
 import { sortObjectsAz } from '../../utils/sort';
 import { classSort } from '../../types/class';

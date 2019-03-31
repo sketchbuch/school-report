@@ -1,0 +1,49 @@
+/* Inputs */
+/* ------ */
+
+.TextInput {
+  background: var(--col-white);
+  color: var(--col-text);
+  border: 1px solid var(--col-darken-3);
+  border-radius: var(--border-radius);
+  outline: 0px;
+  text-align: inherit;
+  padding: 1rem;
+  font-size: var(--font-size);
+  line-height: var(--lh-reduced);
+  width: 100%;
+  margin: 0px auto;
+  height: var(--form-ele-height);
+  transition: all 250ms ease;
+}
+
+.TextInput:focus {
+  box-shadow: var(--focus);
+}
+
+.TextInput:hover {
+  border-color: var(--col-primary-light);
+}
+
+.TextInput:active {
+  border-color: var(--col-primary);
+}
+
+/* Error */
+.TextInput.has--error,
+.TextInput.has--error:focus,
+.TextInput.has--error:active {
+  border-color: var(--col-neg);
+}
+
+/* Disabled */
+.TextInput[disabled],
+.TextInput[disabled]:focus,
+.TextInput[disabled]:hover,
+.TextInput[disabled]:active {
+  opacity: 0.33;
+  cursor: not-allowed;
+  box-shadow: none;
+  border-color: var(--col-darken-3);
+  user-select: none;
+}

@@ -2,9 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../../../components/ui/Button/Button';
-import GenderSwitch from '../../../components/ui/GenderSwitch/GenderSwitch';
-import TextInput from '../../../components/ui/TextInput/TextInput';
+import { Button, GenderSwitch, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 import { ROUTE_PUPILS } from '../../../constants/routes';

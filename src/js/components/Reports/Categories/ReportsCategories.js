@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react';
-import SearchField from '../../ui/SearchField/SearchField';
+import { SearchField } from '../../Ui';
 import Sidebar from '../../Sidebar/Sidebar';
 import SidebarHeader from '../../Sidebar/Header/SidebarHeader';
 import SidebarList from '../../Sidebar/List/SidebarList';

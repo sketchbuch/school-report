@@ -2,9 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import TextInput from '../../../components/ui/TextInput/TextInput';
-import ItemSelection from '../../../components/ui/ItemSelection/ItemSelection';
-import Button from '../../../components/ui/Button/Button';
+import { Button, ItemSelection, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 import type { ClassType } from '../../../types/class';

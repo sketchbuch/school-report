@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ButtonCircular from '../../components/ui/ButtonCircular/ButtonCircular';
+import { ButtonCircular } from '../../components/Ui';
 import Icon from '../../components/Icon/Icon';
 import menuItemDefault, { MenuItemFactory } from '../../types/menuitem';
 import setTitle from '../../utils/title';

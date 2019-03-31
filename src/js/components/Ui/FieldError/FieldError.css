@@ -1,0 +1,7 @@
+.FieldError {
+  position: relative;
+  padding-top: 1rem;
+  font-size: 1.4rem;
+  line-height: var(--lh-reduced);
+  color: var(--col-neg);
+}

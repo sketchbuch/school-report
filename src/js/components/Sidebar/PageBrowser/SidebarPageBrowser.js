@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import PageBrowser from '../../ui/PageBrowser/PageBrowser';
+import { PageBrowser } from '../../Ui';
 import type { PageBrowserProps } from '../../../types/pageBrowser';
 import './SidebarPageBrowser.css';
 

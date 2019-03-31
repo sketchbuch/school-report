@@ -2,9 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../../../components/ui/Button/Button';
-import ItemSelection from '../../../components/ui/ItemSelection/ItemSelection';
-import Textarea from '../../../components/ui/Textarea/Textarea';
+import { Button, ItemSelection, Textarea } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import type { CategoryType } from '../../../types/category';
 import type { DomainType } from '../../../types/domain';

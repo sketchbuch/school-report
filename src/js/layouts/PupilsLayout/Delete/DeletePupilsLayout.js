@@ -8,7 +8,7 @@ import { toastr } from 'react-redux-toastr';
 import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
-import Button from '../../../components/ui/Button/Button';
+import { Button } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import * as pupilActions from '../../../actions/pupilActions';
 import type { ClassType } from '../../../types/class';

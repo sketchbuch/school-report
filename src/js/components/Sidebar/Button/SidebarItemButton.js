@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import * as H from 'history';
-import ButtonCircular from '../../ui/ButtonCircular/ButtonCircular';
+import { ButtonCircular } from '../../Ui';
 import Icon from '../../Icon/Icon';
 import type { ButtonType } from '../../../types/button';
 import './SidebarItemButton.css';

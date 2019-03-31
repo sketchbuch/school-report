@@ -2,8 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import TextInput from '../../../components/ui/TextInput/TextInput';
-import Button from '../../../components/ui/Button/Button';
+import { Button, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 import { ROUTE_CLASSES } from '../../../constants/routes';
