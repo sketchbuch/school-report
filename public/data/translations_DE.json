@@ -153,8 +153,9 @@
       "EditReport": "DE - Edit '%REPORT_NAME%'",
       "EditText": "DE - Edit '%TEXT%'",
       "ReportBuilder": "DE - Report for '%PUPIL_NAME%'",
-      "ReportBuilderCount": "DE - %TEXT_COUNT%/%MAX_CHARS%",
-      "ReportBuilderCountNoLimit": "DE - %TEXT_COUNT%",
+      "ReportBuilderTextCount": "DE - %COUNT% texts",
+      "ReportBuilderCount": "DE - %TEXT_COUNT% / %MAX_CHARS% characters",
+      "ReportBuilderCountNoLimit": "DE - %TEXT_COUNT% characters",
       "ReportExport": "DE - Export '%REPORT_NAME%'",
       "Settings": "DE - Settings",
       "SearchPlaceholder": "DE - Search texts..."
@@ -190,17 +191,17 @@
       "BuilderNoTexts": "DE - You haven't created any texts",
       "BuilderNoTextsMsg": "DE - Before you can create a report you will first need to create at least one text",
       "Categories": "DE - Manage categories to organise and group your report texts",
-      "CategoriesMsg": "DE - ",
+      "CategoriesMsg": "",
       "Classes": "DE - Manage classes and pupils for use in your reports",
       "ClassesMsg": "DE - Select a class to view/edit its pupils",
       "Pupils": "DE - Manage pupils in %CLASS_NAME%",
-      "PupilsMsg": "DE - ",
+      "PupilsMsg": "",
       "Reports": "DE - Manage your reports",
-      "ReportsMsg": "DE - ",
+      "ReportsMsg": "",
       "ReportsNoneSel": "DE - No texts selected",
       "ReportsNoneSelMsg": "DE - Texts will appear after you select them from the list of available texts",
       "Texts": "DE - Manage your report texts",
-      "TextsMsg": "DE - "
+      "TextsMsg": ""
     },
     "ItemList": {
       "NoItems": "DE - No items matched your search",
@@ -249,7 +250,8 @@
       "Btn-last": "DE - Last",
       "Btn-next": "DE - Next",
       "Btn-prev": "DE - Previous",
-      "InfoText": "DE - Page %CUR% / %TOTAL%"
+      "InfoText": "DE - Page %CUR% / %TOTAL%",
+      "InfoTextSmall": "DE - %CUR% / %TOTAL%"
     },
     "Pupils": {
       "BackToPupils": "DE - Cancel",
@@ -300,7 +302,8 @@
     },
     "SearchField": {
       "Anywhere": "DE - Search anywhere",
-      "Clear": "DE - Cancel search"
+      "Clear": "DE - Cancel search",
+      "Tooltip": "DE - Search"
     },
     "Settings": {
       "Breadcrumb": "DE - Settings",
