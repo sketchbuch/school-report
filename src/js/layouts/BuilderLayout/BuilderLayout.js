@@ -126,9 +126,14 @@ export class BuilderLayout extends React.Component<Props> {
       </NavButtonCircular>
     );
 
-    const pupilBuilderSelectedCount = (pupilId: string, classId: string): string => {
-      const selectedTexts: string[] = getSelectedTexts(builder, activeReport.id, classId, pupilId);
-      return selectedTexts.length > 0 ? `(${selectedTexts.length})` : '';
+    const pupilBuilderSelectedCount = (config?: Object): string => {
+      if (config != null && config.pupilId != null && config.classId != null) {
+        const { pupilId, classId } = config;
+        const selectedTexts: string[] = getSelectedTexts(builder, activeReport.id, classId, pupilId);
+        return selectedTexts.length > 0 ? `(${selectedTexts.length})` : '';
+      }
+
+      return '';
     };
 
     return (

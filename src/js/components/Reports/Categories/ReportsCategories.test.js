@@ -20,6 +20,8 @@ describe('<ReportsCategories />', () => {
       term: '',
       visible: false,
     },
+    selectedTexts: [],
+    texts: [],
   };
 
   test('Renders without crashing', () => {

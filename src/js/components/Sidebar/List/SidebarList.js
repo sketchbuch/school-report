@@ -38,7 +38,7 @@ type Props = {
   builder: boolean,
   children?: React.Node,
   curPage: number,
-  description: ?(pupilId: string, classId: string) => string | null,
+  description: ?(config?: Object) => string | null,
   dispatch: Dispatch,
   filter: string,
   items: Object[],
@@ -194,6 +194,7 @@ class SidebarList extends React.Component<Props, State> {
               if (this.props.reportSidebar && this.props.onReportClick) {
                 return (
                   <SidebarReportItem
+                    description={this.props.description}
                     item={item}
                     itemType={this.props.listType}
                     key={item.id}

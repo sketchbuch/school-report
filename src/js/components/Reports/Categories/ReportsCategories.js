@@ -7,6 +7,7 @@ import SidebarHeader from '../../Sidebar/Header/SidebarHeader';
 import SidebarList from '../../Sidebar/List/SidebarList';
 import categoryDefault, { CategoryFactory } from '../../../types/category';
 import type { CategoryType } from '../../../types/category';
+import type { TextType } from '../../../types/text';
 import type { WithSearchProps } from '../../../hoc/withSearch';
 import withSearch from '../../../hoc/withSearch';
 import { CATEGORY_ALL, CATEGORY_NONE, CATEGORY_SELECTED, CATEGORY_UNSELECTED } from '../../../constants/misc';
@@ -18,47 +19,69 @@ export type Props = {
   catClick: (catId: string, catLabel: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
   catId: string,
   categories: CategoryType[],
+  selectedTexts: string[],
+  texts: TextType[],
 } & WithSearchProps;
 
+type SpecialType = { key: string, transName: string };
+
+const getSpecialCategory = ({ key, transName }: SpecialType, isLast: boolean): CategoryType => {
+  const specialCat: CategoryType = CategoryFactory(
+    { ...categoryDefault, label: text(transName, 'CatSelect') },
+    Date.now()
+  );
+  specialCat.id = key;
+  specialCat.type = isLast ? 'special-last' : 'special';
+  return specialCat;
+};
+
 export class ReportsCategories extends Component<Props> {
-  static defaultProps = {};
+  static defaultProps = {
+    categories: [],
+    selectedTexts: [],
+    texts: [],
+  };
 
   props: Props;
 
   getSpecialCats(): CategoryType[] {
-    const specialCats: CategoryType[] = [];
+    const specialTypes: SpecialType[] = [
+      { key: CATEGORY_ALL, transName: 'CatsAll' },
+      { key: CATEGORY_SELECTED, transName: 'CatsSelected' },
+      { key: CATEGORY_UNSELECTED, transName: 'CatsUnselected' },
+      { key: CATEGORY_NONE, transName: 'CatsUncategorised' },
+    ];
 
-    const all: CategoryType = CategoryFactory({ ...categoryDefault, label: text('CatsAll', 'CatSelect') }, Date.now());
-    all.id = CATEGORY_ALL;
-    all.type = 'special';
-    specialCats.push(all);
-
-    const selected: CategoryType = CategoryFactory(
-      { ...categoryDefault, label: text('CatsSelected', 'CatSelect') },
-      Date.now()
-    );
-    selected.id = CATEGORY_SELECTED;
-    selected.type = 'special';
-    specialCats.push(selected);
-
-    const unselected: CategoryType = CategoryFactory(
-      { ...categoryDefault, label: text('CatsUnselected', 'CatSelect') },
-      Date.now()
-    );
-    unselected.id = CATEGORY_UNSELECTED;
-    unselected.type = 'special';
-    specialCats.push(unselected);
-
-    const uncategorised: CategoryType = CategoryFactory(
-      { ...categoryDefault, label: text('CatsUncategorised', 'CatSelect') },
-      Date.now()
-    );
-    uncategorised.id = CATEGORY_NONE;
-    uncategorised.type = 'special-last';
-    specialCats.push(uncategorised);
-
-    return specialCats;
+    return specialTypes.map((specialType: SpecialType, index: number) => {
+      return getSpecialCategory(specialType, index + 1 === specialTypes.length);
+    });
   }
+
+  countCatTexts = (config?: Object): string => {
+    if (config != null && config.itemId != null) {
+      const CATEGORY_ID = config.itemId;
+      let textCount: number = this.props.texts.length;
+
+      if (CATEGORY_ID !== CATEGORY_ALL) {
+        if (CATEGORY_ID === CATEGORY_NONE) {
+          textCount = this.props.texts.filter((text: TextType) => text.categories.length === 0).length;
+        } else if (CATEGORY_ID === CATEGORY_SELECTED) {
+          textCount = this.props.texts.filter((text: TextType) => this.props.selectedTexts.indexOf(text.id) > -1)
+            .length;
+        } else if (CATEGORY_ID === CATEGORY_UNSELECTED) {
+          textCount = this.props.texts.filter((text: TextType) => this.props.selectedTexts.indexOf(text.id) < 0).length;
+        } else {
+          textCount = this.props.texts.filter((text: TextType) => text.categories.includes(CATEGORY_ID)).length;
+        }
+      }
+
+      if (textCount > 0) {
+        return '(' + textCount + ')';
+      }
+    }
+
+    return '';
+  };
 
   render() {
     const { catClick, catId, categories, search } = this.props;
@@ -84,6 +107,7 @@ export class ReportsCategories extends Component<Props> {
             curPage={search.page}
             dispatch={() => {}}
             items={categories}
+            description={this.countCatTexts}
             listType="category"
             noItemsTxt={text('Categories', 'SidebarNoItems')}
             onPbChange={search.pageChange}

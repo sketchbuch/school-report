@@ -16,6 +16,10 @@
   color: var(--col-lighten-5);
 }
 
+.SearchField--dark .SearchField__input::-webkit-input-placeholder {
+  color: var(--col-darken-5);
+}
+
 .SearchField__icon {
   cursor: pointer;
   color: var(--col-white);
@@ -25,6 +29,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.SearchField--dark .SearchField__icon {
+  color: var(--col-text);
 }
 
 .SearchField__iconInner {
@@ -44,6 +52,10 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   background: var(--col-darken-3);
+}
+
+.SearchField--dark .SearchField__icon--active .SearchField__iconInner {
+  background: var(--col-darken-2);
 }
 
 .SearchField__icon--anywhere {

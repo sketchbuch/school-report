@@ -15,6 +15,7 @@ export type Props = {
   anywhereOnClick: (event: SyntheticMouseEvent<HTMLElement>) => void,
   classes: string,
   clearOnClick: (event: SyntheticMouseEvent<HTMLElement>) => void,
+  dark: boolean,
   iconOnClick: (event: SyntheticEvent<EventTarget>) => void,
   onChange: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
   onKeyUp: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
@@ -27,6 +28,7 @@ class SearchField extends React.PureComponent<Props> {
   static defaultProps = {
     anywhere: false,
     classes: '',
+    dark: false,
     placeholder: '',
     term: '',
     visible: false,
@@ -39,6 +41,7 @@ class SearchField extends React.PureComponent<Props> {
       anywhereOnClick,
       classes,
       clearOnClick,
+      dark,
       iconOnClick,
       onChange,
       onKeyUp,
@@ -50,6 +53,7 @@ class SearchField extends React.PureComponent<Props> {
     return (
       <div
         className={classNames(NS, {
+          'SearchField--dark': dark,
           'SearchField--visible': visible,
           [classes]: !!classes,
         })}

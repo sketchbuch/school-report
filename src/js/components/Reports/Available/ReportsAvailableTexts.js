@@ -161,7 +161,7 @@ export class ReportsAvailableTexts extends React.Component<Props> {
           </React.Fragment>
         ) : search.term !== '' ? (
           <NoItems>
-            <Translation name="NoneSearched" ns="ReportsAvailableTexts" />
+            <Translation name={search.anywhere ? 'NoneSearchedAnywhere' : 'NoneSearched'} ns="ReportsAvailableTexts" />
           </NoItems>
         ) : (
           <NoItems>
@@ -172,5 +172,24 @@ export class ReportsAvailableTexts extends React.Component<Props> {
     );
   }
 }
+
+/*} else if (this.props.term !== '' || this.props.filter !== '') {
+      let searchNone = 'NoneSearched-' + this.props.listType;
+
+      if (this.props.term === '' && this.props.filter !== '') {
+        searchNone = 'NoneCategory-' + this.props.listType;
+      } else if (this.props.term !== '' && this.props.termAnywhere) {
+        searchNone += '-anywhere';
+      }
+
+      return (
+        <React.Fragment>
+          {this.props.children && <SidebarSubheader>{this.props.children}</SidebarSubheader>}
+          <NoItems>
+            <Translation name={searchNone} ns="SidebarList" />
+          </NoItems>
+        </React.Fragment>
+      );
+    } */
 
 export default withSearch(ReportsAvailableTexts);

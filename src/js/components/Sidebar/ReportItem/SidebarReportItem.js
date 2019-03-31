@@ -11,6 +11,7 @@ import { text } from '../../Translation/Translation';
 import './SidebarReportItem.css';
 
 type Props = {
+  description: ?(config?: Object) => string | null,
   item: CategoryType,
   itemType: SidebarListTypes,
   onReportClick?: (id: string, label: string) => (event: SyntheticMouseEvent<HTMLElement>) => void,
@@ -19,6 +20,7 @@ type Props = {
 
 class SidebarReportItem extends Component<Props> {
   static defaultProps = {
+    description: null,
     itemType: 'category',
     selected: false,
   };
@@ -36,7 +38,11 @@ class SidebarReportItem extends Component<Props> {
         title={this.props.item.getTooltip(undefined)}
       >
         <SidebarInner
-          description={this.props.item.getDescription()}
+          description={
+            this.props.description
+              ? String(this.props.description({ itemId: this.props.item.id }))
+              : this.props.item.getDescription()
+          }
           icon={this.props.item.getIcon()}
           id={this.props.item.id}
           label={this.props.item.getLabel()}

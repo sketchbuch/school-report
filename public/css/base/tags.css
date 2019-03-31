@@ -44,15 +44,3 @@ a {
   color: var(--col-placeholder);
   font-style: italic;
 }
-::-moz-placeholder {
-  color: var(--col-placeholder);
-  font-style: italic;
-}
-:-ms-input-placeholder {
-  color: var(--col-placeholder);
-  font-style: italic;
-}
-:-moz-placeholder {
-  color: var(--col-placeholder);
-  font-style: italic;
-}

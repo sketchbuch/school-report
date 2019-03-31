@@ -124,7 +124,13 @@ export class Reports extends Component<Props, State> {
       <section className="Reports">
         <div className="Reports__column Reports__columnAvailable">
           <div className="Reports__columnWrapper">
-            <ReportsCategories catClick={this.catClick} catId={catId} categories={categories} />
+            <ReportsCategories
+              catClick={this.catClick}
+              catId={catId}
+              categories={categories}
+              selectedTexts={selectedTexts}
+              texts={texts}
+            />
             <ReportsAvailableTexts
               activePupil={activePupil}
               categories={categories}

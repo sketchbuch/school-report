@@ -279,7 +279,8 @@
     },
     "ReportsAvailableTexts": {
       "None": "No texts available.",
-      "NoneSearched": "No texts begin with your search term."
+      "NoneSearched": "No texts begin with your search term.",
+      "NoneSearchedAnywhere": "No texts contain your search term."
     },
     "Reports": {
       "BackToReports": "Cancel",

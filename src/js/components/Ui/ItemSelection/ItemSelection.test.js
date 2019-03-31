@@ -11,6 +11,16 @@ describe('<ItemSelection />', () => {
   const props: Props = {
     items: [],
     name: 'test',
+    search: {
+      anywhere: false,
+      anywhereIconClick: jest.fn(),
+      page: 1,
+      pageChange: jest.fn(),
+      searchChange: jest.fn(),
+      searchIconClick: jest.fn(),
+      term: '',
+      visible: false,
+    },
     searchMin: 2,
     selected: [],
   };

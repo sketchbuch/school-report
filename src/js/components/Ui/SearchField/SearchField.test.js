@@ -11,6 +11,7 @@ describe('<SearchField />', () => {
     anywhereOnClick: jest.fn(),
     classes: '',
     clearOnClick: jest.fn(),
+    dark: false,
     iconOnClick: jest.fn(),
     onChange: jest.fn(),
     onKeyUp: jest.fn(),

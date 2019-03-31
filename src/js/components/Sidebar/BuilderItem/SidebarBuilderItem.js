@@ -12,7 +12,7 @@ import '../Item/SidebarItem.css';
 import './SidebarBuilderItem.css';
 
 type Props = {
-  description: ?(pupilId: string, classId: string) => string | null,
+  description: ?(config?: Object) => string | null,
   item: SidebarBuilderItemType,
   itemType: SidebarListTypes,
   sortOrder: string[],
@@ -76,7 +76,7 @@ class SidebarBuilderItem extends Component<Props, State> {
                   <SidebarInner
                     description={
                       this.props.description
-                        ? String(this.props.description(pupil.id, pupil.classId))
+                        ? String(this.props.description({ pupilId: pupil.id, classId: pupil.classId }))
                         : pupil.getDescription()
                     }
                     icon={pupil.getIcon()}

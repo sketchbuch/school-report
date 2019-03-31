@@ -18,6 +18,7 @@ type DomainTypes = ClassType | PupilType | ReportType | TextType;
 
 // TODO - Update types
 type Props = {
+  description: ?(config?: Object) => string | null,
   isNew: boolean,
   item: DomainTypes,
   itemDuration: number,
@@ -35,6 +36,7 @@ type State = {
 
 class SidebarItem extends Component<Props, State> {
   static defaultProps = {
+    description: null,
     isNew: false,
     itemDuration: 0,
     itemType: 'class',
@@ -136,7 +138,7 @@ class SidebarItem extends Component<Props, State> {
           </SidebarInner>
         ) : (
           <SidebarInner
-            description={this.props.item.getDescription()}
+            description={this.props.description ? String(this.props.description()) : this.props.item.getDescription()}
             icon={this.props.item.getIcon()}
             id={this.props.item.id}
             label={this.props.item.getLabel(displayProp)}
