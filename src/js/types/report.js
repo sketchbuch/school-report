@@ -26,7 +26,7 @@ export const reportSort = ['label', 'updated'];
 export const ReportFactory = (reportObj: ReportType, ts: number): ReportType => {
   const newObj: ReportType = hydrateReport({ ...reportObj });
 
-  if (reportObj.id !== '') {
+  if (reportObj.id === '') {
     newObj.created = ts;
     newObj.updated = ts;
     newObj.id = generateId(getReportIdStr(reportObj), ts);

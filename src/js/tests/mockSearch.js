@@ -5,12 +5,13 @@ import type { WithSearchProps } from '../hoc/withSearch';
 const mockSearch: WithSearchProps = {
   search: {
     anywhere: false,
-    anywhereIconClick: jest.fn(),
-    externalUpdate: jest.fn(),
+    handleChange: jest.fn(),
+    handleKeyUp: jest.fn(),
+    handlePageChange: jest.fn(),
+    handleReset: jest.fn(),
+    handleToggleAnywhere: jest.fn(),
+    handleToggleVisibility: jest.fn(),
     page: 1,
-    pageChange: jest.fn(),
-    searchChange: jest.fn(),
-    searchIconClick: jest.fn(),
     term: '',
     visible: false,
   },

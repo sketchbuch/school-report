@@ -85,11 +85,11 @@ export class CategoriesLayout extends React.Component<Props> {
       searchBox = (
         <SearchField
           anywhere={search.anywhere}
-          anywhereOnClick={search.anywhereIconClick}
-          clearOnClick={search.searchIconClick}
-          iconOnClick={search.searchIconClick}
-          onKeyUp={search.searchChange}
-          onChange={search.searchChange}
+          anywhereOnClick={search.handleToggleAnywhere}
+          clearOnClick={search.handleToggleVisibility}
+          iconOnClick={search.handleToggleVisibility}
+          onKeyUp={search.handleKeyUp}
+          onChange={search.handleChange}
           placeholder={text('SearchPlaceholder-category', 'SidebarHeader')}
           term={search.term}
           visible={search.searchVisible}
@@ -117,7 +117,7 @@ export class CategoriesLayout extends React.Component<Props> {
             items={categories}
             listType="category"
             noItemsTxt={text('Categories', 'SidebarNoItems')}
-            onPbChange={search.pageChange}
+            onPbChange={search.handlePageChange}
             sortOrder={categorySort}
             term={search.term}
             termAnywhere={search.anywhere}

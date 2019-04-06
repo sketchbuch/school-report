@@ -6,7 +6,8 @@
 
 .fiedwrap__placeholders {
   position: relative;
-  margin: 0px -10px;
+  margin: 0px;
+  padding-top: 1px;
 }
 
 .fiedwrap__placeholder {
@@ -15,32 +16,13 @@
   border-radius: var(--border-radius);
   background: var(--col-darken-1);
   border: 1px solid var(--col-darken-1);
-  padding: 2px 5px;
-  margin: 10px;
+  padding: 0px 5px;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .fieldwrap--labeled {
   position: relative;
-}
-
-.fieldwrap--labeled .fieldwrap__left {
-  position: relative;
-  padding-bottom: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
-}
-
-.fieldwrap--labeled .fieldwrap__right {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.fieldwrap2--labeled {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -48,14 +30,14 @@
   align-items: center;
 }
 
-.fieldwrap2--labeled .fieldwrap__left {
+.fieldwrap--labeled .fieldwrap__left {
   padding-bottom: 0px;
   padding-right: 0.5rem;
   width: 50%;
   align-items: flex-end;
 }
 
-.fieldwrap2--labeled .fieldwrap__right {
+.fieldwrap--labeled .fieldwrap__right {
   padding-left: 0.5rem;
   width: 50%;
   align-items: flex-start;
@@ -82,9 +64,10 @@
 }
 
 .fieldwrap__info {
-  line-height: var(--lh-reduced);
   color: var(--col-darken-5);
+  display: inline-block;
   font-size: var(--font-size-small);
+  line-height: var(--lh-reduced);
 }
 
 .FieldWrap + .FieldWrap {

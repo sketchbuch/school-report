@@ -2,35 +2,39 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, FieldWrap, Form, FormCancel, TextInput } from '../../../components/Ui';
+import { Button, FieldWrap, Form, FormCancel, Select as ReactSelect, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import type { LangType } from '../../../types/lang';
 import { ROUTE_HOME } from '../../../constants/routes';
 import { pupilSortOptions } from '../../../types/pupil';
+import type { SelectOption } from '../../../types/ui';
+import { defaultSelectOption } from '../../../types/ui';
 
+// TODO - fix types
 type Props = {
   dirty: boolean,
   errors: Object,
   handleBlur: Function,
   handleChange: Function,
   handleSubmit: Function,
+  setFieldValue: Function,
   isSubmitting: boolean,
-  languages: Array<LangType>,
+  languages: LangType[],
   saving: boolean,
   touched: Object,
   values: Object,
 };
 
-/**
- * Settings form.
- */
 export class SettingsFrom extends Component<Props> {
   props: Props;
 
+  handleSelectChange = (fieldName: string) => (option: SelectOption) => {
+    this.props.setFieldValue(fieldName, option.value);
+  };
+
   render() {
     const { dirty, handleBlur, handleChange, handleSubmit, saving, values } = this.props;
-
-    const btnIsDisabled = saving || !dirty ? true : false;
+    const btnIsDisabled: boolean = saving || !dirty ? true : false;
 
     return (
       <Form onSubmit={handleSubmit}>
@@ -41,15 +45,20 @@ export class SettingsFrom extends Component<Props> {
               <Translation name="LabelLanguage" ns="Settings" />
             </div>
             <div className="fieldwrap__right">
-              <select name="language" value={values.language} onChange={handleChange}>
-                {this.props.languages.map(lang => {
-                  return (
-                    <option value={lang.key} key={lang.key}>
-                      {lang.label}
-                    </option>
-                  );
-                })}
-              </select>
+              <ReactSelect
+                name="language"
+                value={values.language}
+                onChange={this.handleSelectChange('language')}
+                options={this.props.languages.map(
+                  (lang: LangType): SelectOption => {
+                    return {
+                      ...defaultSelectOption,
+                      label: lang.label,
+                      value: lang.key,
+                    };
+                  }
+                )}
+              />
             </div>
           </div>
         </fieldset>
@@ -61,15 +70,20 @@ export class SettingsFrom extends Component<Props> {
               <Translation name="LabelPupilsSort" ns="Settings" />
             </div>
             <div className="fieldwrap__right">
-              <select name="pupilsSort" value={values.pupilsSort} onChange={handleChange}>
-                {pupilSortOptions.map(sortOpt => {
-                  return (
-                    <option value={sortOpt} key={'pupilsort-' + sortOpt}>
-                      {text('PupilsSort-' + sortOpt, 'Settings')}
-                    </option>
-                  );
-                })}
-              </select>
+              <ReactSelect
+                name="pupilsSort"
+                value={values.pupilsSort}
+                onChange={this.handleSelectChange('pupilsSort')}
+                options={pupilSortOptions.map(
+                  (sortOpt: string): SelectOption => {
+                    return {
+                      ...defaultSelectOption,
+                      label: text('PupilsSort-' + sortOpt, 'Settings'),
+                      value: sortOpt,
+                    };
+                  }
+                )}
+              />
             </div>
           </div>
         </fieldset>

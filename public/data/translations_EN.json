@@ -204,12 +204,18 @@
       "TextsMsg": ""
     },
     "ItemList": {
-      "NoItems": "No items matched your search",
+      "NoItems": "No %NAME% begin with your search term",
+      "NoItemsAnywhere": "No %NAME% contain your search term",
+      "NoSelected": "No %NAME% are selected",
+      "NoUnselected": "All %NAME% are selected",
       "None": "No %NAME% exist"
     },
     "ItemSelection": {
       "Clear": "Clear search",
-      "Placeholder": "Search..."
+      "Placeholder": "Search...",
+      "TabAll": "All",
+      "TabSelected": "Selected",
+      "TabUnselected": "Unselected"
     },
     "Lang": {
       "DateFormat": "%D%/%M%/%Y%"
@@ -271,7 +277,7 @@
     "PupilForm": {
       "AddBtnLabel": "Add Pupil",
       "FirstnamePlaceholder": "First name...",
-      "DescriptionPlaceholder": "Optional description...",
+      "DescriptionPlaceholder": "Optional descriItemSelectionption...",
       "LastnamePlaceholder": "Last name..."
     },
     "ReportPanel": {

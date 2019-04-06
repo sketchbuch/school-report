@@ -56,7 +56,7 @@ export class ReportsAvailableTexts extends React.Component<Props> {
 
   componentDidUpdate = (prevProps: Props) => {
     if (this.props.categoryId !== prevProps.categoryId) {
-      this.props.search.pageChange(1);
+      this.props.search.handlePageChange(1);
     }
   };
 
@@ -117,11 +117,11 @@ export class ReportsAvailableTexts extends React.Component<Props> {
         <SidebarHeader controlsExpanded={search.visible} title={categoryLabel}>
           <SearchField
             anywhere={search.anywhere}
-            anywhereOnClick={search.anywhereIconClick}
-            clearOnClick={search.searchIconClick}
-            iconOnClick={search.searchIconClick}
-            onKeyUp={search.searchChange}
-            onChange={search.searchChange}
+            anywhereOnClick={search.handleToggleAnywhere}
+            clearOnClick={search.handleToggleVisibility}
+            iconOnClick={search.handleToggleVisibility}
+            onKeyUp={search.handleKeyUp}
+            onChange={search.handleChange}
             placeholder={text('SearchPlaceholder-text', 'SidebarHeader', {
               CAT_LABEL: categoryLabel,
             })}
@@ -157,7 +157,7 @@ export class ReportsAvailableTexts extends React.Component<Props> {
                 );
               })}
             </ul>
-            {showPb && <SidebarPageBrowser {...pbProps} reduced={true} onChange={search.pageChange} />}
+            {showPb && <SidebarPageBrowser {...pbProps} reduced={true} onChange={search.handlePageChange} />}
           </React.Fragment>
         ) : search.term !== '' ? (
           <NoItems>

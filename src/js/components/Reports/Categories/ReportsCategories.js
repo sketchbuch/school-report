@@ -93,11 +93,11 @@ export class ReportsCategories extends Component<Props> {
           <SidebarHeader controlsExpanded={search.visible} title={text('Header-category', 'SidebarHeader')}>
             <SearchField
               anywhere={search.anywhere}
-              anywhereOnClick={search.anywhereIconClick}
-              clearOnClick={search.searchIconClick}
-              iconOnClick={search.searchIconClick}
-              onChange={search.searchChange}
-              onKeyUp={search.searchChange}
+              anywhereOnClick={search.handleToggleAnywhere}
+              clearOnClick={search.handleToggleVisibility}
+              iconOnClick={search.handleToggleVisibility}
+              onChange={search.handleChange}
+              onKeyUp={search.handleKeyUp}
               placeholder={text('SearchPlaceholder-category', 'SidebarHeader')}
               term={search.term}
               visible={search.visible}
@@ -110,7 +110,7 @@ export class ReportsCategories extends Component<Props> {
             description={this.countCatTexts}
             listType="category"
             noItemsTxt={text('Categories', 'SidebarNoItems')}
-            onPbChange={search.pageChange}
+            onPbChange={search.handlePageChange}
             onReportClick={catClick}
             prefixItems={specialCats}
             reducedSidebar={true}

@@ -6,17 +6,17 @@ import { Formik } from 'formik';
 import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
+import * as settingsActions from '../../actions/settingsActions';
 import SettingsForm from './Form/SettingsForm';
-import { text } from '../../components/Translation/Translation';
-import type { LangType } from '../../types/lang';
-import settingsSchema from '../../validation/schemas/settings';
+import setTitle from '../../utils/title';
 import settingsDefault from '../../types/settings';
+import settingsSchema from '../../validation/schemas/settings';
 import type { FsObject } from '../../types/fsObject';
+import type { LangType } from '../../types/lang';
 import type { ReduxState } from '../../types/reduxstate';
 import type { SettingsType } from '../../types/settings';
-import * as settingsActions from '../../actions/settingsActions';
 import { ROUTE_SETTINGS } from '../../constants/routes';
-import setTitle from '../../utils/title';
+import { text } from '../../components/Translation/Translation';
 import './SettingsLayout.css';
 
 export type Props = {

@@ -30,7 +30,7 @@ export const textSort = ['bodytext', 'updated'];
 export const TextFactory = (textObj: TextType, ts: number, lang: string): TextType => {
   const newObj: TextType = hydrateText({ ...textObj });
 
-  if (textObj.id !== '') {
+  if (textObj.id === '') {
     newObj.created = ts;
     newObj.updated = ts;
     newObj.lang = lang;

@@ -66,7 +66,7 @@ export class EditBuilderLayout extends Component<Props> {
     return (
       <EditPanel>
         <EditPanelHeader
-          alert={maxChars > 0 && textCount >= maxChars ? true : false}
+          alert={maxChars > 0 && textCount >= maxChars}
           textCount={
             selectedTexts.length > 0
               ? text('ReportBuilderTextCount', 'EditPanelHeader', {

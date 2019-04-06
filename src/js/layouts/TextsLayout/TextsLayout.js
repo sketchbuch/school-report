@@ -18,6 +18,7 @@ import SidebarList from '../../components/Sidebar/List/SidebarList';
 import setTitle from '../../utils/title';
 import type { CategoryType } from '../../types/category';
 import type { ReduxState } from '../../types/reduxstate';
+import type { SelectOption } from '../../types/ui';
 import type { TextType } from '../../types/text';
 import type { WithSearchProps } from '../../hoc/withSearch';
 import withSearch from '../../hoc/withSearch';
@@ -61,12 +62,12 @@ export class TextsLayout extends React.Component<Props, State> {
     }
   }
 
-  handleFilterChanage = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    const option = event.target.value;
-
-    this.setState({ option });
-    if (this.state.option !== option) {
-      this.props.search.externalUpdate({ term: '', page: 1 });
+  handleFilterChanage = (option: SelectOption): void => {
+    if (!option.disabled) {
+      this.setState({ option: option.value });
+      if (this.state.option !== option.value) {
+        this.props.search.handleReset();
+      }
     }
   };
 
@@ -102,11 +103,11 @@ export class TextsLayout extends React.Component<Props, State> {
       searchBox = (
         <SearchField
           anywhere={search.anywhere}
-          anywhereOnClick={search.anywhereIconClick}
-          clearOnClick={search.searchIconClick}
-          iconOnClick={search.searchIconClick}
-          onKeyUp={search.searchChange}
-          onChange={search.searchChange}
+          anywhereOnClick={search.handleToggleAnywhere}
+          clearOnClick={search.handleToggleVisibility}
+          iconOnClick={search.handleToggleVisibility}
+          onKeyUp={search.handleKeyUp}
+          onChange={search.handleChange}
           placeholder={text('SearchPlaceholder-text', 'SidebarHeader')}
           term={search.term}
           visible={search.visible}
@@ -133,7 +134,7 @@ export class TextsLayout extends React.Component<Props, State> {
             items={texts}
             listType="text"
             noItemsTxt={text('Texts', 'SidebarNoItems')}
-            onPbChange={search.pageChange}
+            onPbChange={search.handlePageChange}
             sortOrder={textSort}
             term={search.term}
             termAnywhere={search.anywhere}

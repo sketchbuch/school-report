@@ -70,8 +70,8 @@ export class EditTextForm extends Component<Props> {
           {!btValid && <FieldError errors={[errors.bodytext]} />}
           <div className="fiedwrap__placeholders">
             {placeholderMap.map(ph => (
-              <span key={ph.symbol} className="fiedwrap__placeholder" title={text('Title' + ph.symbol, '##')}>
-                #{ph.symbol}#
+              <span key={ph.symbol} className="fiedwrap__placeholder" title={'#' + ph.symbol + '#'}>
+                <Translation name={'Title' + ph.symbol} ns="##" />
               </span>
             ))}
           </div>
@@ -89,7 +89,6 @@ export class EditTextForm extends Component<Props> {
           </p>
 
           <ItemSelection items={sortedCategories} name="categories" selected={values.categories} />
-          {!cValid && <FieldError errors={[errors.categories]} />}
         </FieldWrap>
         <FieldWrap>
           <Button type="submit" disabled={btnIsDisabled} busy={saving}>

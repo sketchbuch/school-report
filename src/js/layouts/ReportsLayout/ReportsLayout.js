@@ -85,11 +85,11 @@ export class ReportsLayout extends React.Component<Props> {
       searchBox = (
         <SearchField
           anywhere={search.anywhere}
-          anywhereOnClick={search.anywhereIconClick}
-          clearOnClick={search.searchIconClick}
-          iconOnClick={search.searchIconClick}
-          onKeyUp={search.searchChange}
-          onChange={search.searchChange}
+          anywhereOnClick={search.handleToggleAnywhere}
+          clearOnClick={search.handleToggleVisibility}
+          iconOnClick={search.handleToggleVisibility}
+          onKeyUp={search.handleKeyUp}
+          onChange={search.handleChange}
           placeholder={text('SearchPlaceholder-report', 'SidebarHeader')}
           term={search.term}
           visible={search.visible}
@@ -115,7 +115,7 @@ export class ReportsLayout extends React.Component<Props> {
             items={reports}
             listType="report"
             noItemsTxt={text('Reports', 'SidebarNoItems')}
-            onPbChange={search.pageChange}
+            onPbChange={search.handlePageChange}
             sortOrder={reportSort}
             term={search.term}
             termAnywhere={search.anywhere}

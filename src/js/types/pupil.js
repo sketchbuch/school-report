@@ -28,12 +28,12 @@ const pupilDefault: PupilType = {
   type: 'pupil',
 };
 
-export const pupilSortFirst = 'firstname';
-export const pupilSortLast = 'lastname';
-export const pupilSortDefault = pupilSortFirst;
-export const pupilSortOptions = [pupilSortFirst, pupilSortLast];
+export const pupilSortFirst: string = 'firstname';
+export const pupilSortLast: string = 'lastname';
+export const pupilSortDefault: string = pupilSortFirst;
+export const pupilSortOptions: string[] = [pupilSortFirst, pupilSortLast];
 export type PupilSortOptions = typeof pupilSortFirst | typeof pupilSortLast;
-export const pupilSort = {
+export const pupilSort: { [key: string]: string[] } = {
   [pupilSortFirst]: [...pupilSortOptions, 'updated'],
   [pupilSortLast]: [pupilSortLast, pupilSortFirst, 'updated'],
 };
@@ -41,7 +41,7 @@ export const pupilSort = {
 export const PupilFactory = (pupilObj: PupilType, ts: number, classId: string): PupilType => {
   const newObj: PupilType = hydratePupil({ ...pupilObj });
 
-  if (pupilObj.id !== '') {
+  if (pupilObj.id === '') {
     newObj.created = ts;
     newObj.updated = ts;
     newObj.classId = classId;

@@ -22,7 +22,7 @@ export const categorySort = ['priority', 'label', 'updated'];
 export const CategoryFactory = (categoryObj: CategoryType, ts: number): CategoryType => {
   const newObj: CategoryType = hydrateCategory({ ...categoryObj });
 
-  if (categoryObj.id !== '') {
+  if (categoryObj.id === '') {
     newObj.created = ts;
     newObj.updated = ts;
     newObj.id = generateId(getCategoryIdStr(categoryObj), ts);

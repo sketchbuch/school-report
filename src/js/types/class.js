@@ -24,7 +24,7 @@ export const classSort = ['label', 'updated'];
 export const ClassFactory = (classObj: ClassType, ts: number): ClassType => {
   const newObj: ClassType = hydrateClass({ ...classObj });
 
-  if (classObj.id !== '') {
+  if (classObj.id === '') {
     newObj.created = ts;
     newObj.updated = ts;
     newObj.id = generateId(getClassIdStr(classObj), ts);

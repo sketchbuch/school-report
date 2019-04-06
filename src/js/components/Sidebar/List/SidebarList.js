@@ -113,11 +113,11 @@ class SidebarList extends React.Component<Props, State> {
   /**
    * Updates the local state of existing items. Called by an item after its new animation finishes.
    */
-  updateExistingItems(itemId: string): void {
-    if (!this.state.existingItems.includes(itemId)) {
+  updateExistingItems = (itemId: string): void => {
+    if (itemId != null && !this.state.existingItems.includes(itemId)) {
       this.setState({ existingItems: [...this.state.existingItems, itemId] });
     }
-  }
+  };
 
   getSortedItems(): DomainType[] {
     let sortedItems: DomainType[] = sortObjectsAz(this.props.items, this.props.sortOrder);

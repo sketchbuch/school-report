@@ -1,0 +1,114 @@
+.App .Select-control {
+  align-items: flex-start;
+  background: var(--col-white);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--col-darken-3);
+  color: var(--col-text);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  font-size: var(--font-size);
+  height: var(--form-ele-height);
+  justify-content: flex-start;
+  line-height: var(--lh-reduced);
+  margin: 0px;
+  margin-right: auto;
+  min-width: 200px;
+  outline: 0px;
+  padding: 0px 1rem;
+  text-align: inherit;
+  transition: all 250ms ease;
+  width: 100%;
+}
+
+.App .Select-control:focus {
+  box-shadow: var(--focus);
+}
+
+.App .Select-control:hover {
+  border-color: var(--col-primary-light);
+}
+
+.App .Select-control:active {
+  border-color: var(--col-primary);
+}
+
+.App .Select-clear {
+  display: none;
+}
+
+.App .Select-multi-value-wrapper {
+  width: 100%;
+}
+
+.App .Select-value-label {
+  bottom: -3px;
+  position: relative;
+}
+
+.App .Select-arrow-zone {
+  bottom: -5px;
+  position: relative;
+}
+
+.App .Select-menu {
+  background: var(--col-select-bg);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--col-lighten-1);
+  box-shadow: 0px 0px 10px 2px var(--col-darken-2);
+  color: var(--col-text);
+  margin: 0;
+}
+
+.App .Select-option {
+  color: var(--col-text);
+  font-size: var(--font-size);
+  line-height: 1.3;
+  margin: 0px;
+  min-height: var(--form-ele-height);
+  padding: 0.5rem 1rem;
+}
+
+.App .Select-option.is-focused {
+  color: var(--col-text);
+}
+
+.App .Select-option.is-selected {
+  font-weight: bold;
+}
+
+.App .Select-input {
+  line-height: var(--lh-reduced);
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+}
+
+.App .Select-input input {
+  font-size: var(--font-size);
+  height: var(--form-ele-height);
+  line-height: var(--lh-reduced);
+  margin: 0px auto;
+  outline: 0px;
+  padding: 0px;
+  width: 100%;
+}
+
+/* Error */
+.App .Select.has--error,
+.App .Select.has--error:focus,
+.App .Select.has--error:active {
+  border-color: var(--col-neg);
+}
+
+/* Disabled */
+.App .Select[disabled],
+.App .Select[disabled]:focus,
+.App .Select[disabled]:hover,
+.App .Select[disabled]:active {
+  opacity: 0.33;
+  cursor: not-allowed;
+  box-shadow: none;
+  border-color: var(--col-darken-3);
+  user-select: none;
+}

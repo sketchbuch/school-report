@@ -45,7 +45,9 @@ export function textSchema(): Object {
     bodytext: Yup.string()
       .trim()
       .required(text('TextBodytext', 'Validation')),
-    categories: Yup.array().of(Yup.string()),
+    categories: Yup.array()
+      .of(Yup.string())
+      .min(0),
   });
 }
 

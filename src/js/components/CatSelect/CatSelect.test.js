@@ -15,7 +15,7 @@ describe('<CatSelect />', () => {
       { ...categoryDefault, id: 'c2', label: 'Holoship' },
     ],
     option: '',
-    onChange: jest.fn,
+    onChange: jest.fn(),
     texts: [
       { ...textDefault, id: 't1', bodytext: 'Red Dwarf' },
       { ...textDefault, id: 't2', bodytext: 'Blue Midget' },
@@ -26,7 +26,7 @@ describe('<CatSelect />', () => {
   };
 
   test('Renders without crashing', () => {
-    const wrapper = shallow(<CatSelect />);
+    const wrapper = shallow(<CatSelect {...props} />);
     expect(wrapper).toHaveLength(1);
   });
 

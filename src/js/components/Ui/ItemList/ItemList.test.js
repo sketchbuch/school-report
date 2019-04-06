@@ -9,6 +9,7 @@ import type { Props } from './ItemList';
 
 describe('<ItemList />', () => {
   const props: Props = {
+    anywhere: false,
     form: {},
     insert: () => {},
     items: [],

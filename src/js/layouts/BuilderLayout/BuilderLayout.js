@@ -110,8 +110,8 @@ export class BuilderLayout extends React.Component<Props> {
   render() {
     const { activeReport, builder } = this.props;
     const items: SidebarBuilderItemType[] = this.getItems();
-    const classCount: number = items.length;
-    const pupilCount: number = items.reduce((curCount, curClass) => curCount + curClass.classRec.pupilCount, 0);
+    const CLASS_COUNT: number = items.length;
+    const PUPIL_COUNT: number = items.reduce((curCount, curClass) => curCount + curClass.classRec.pupilCount, 0);
     const CAN_EXPORT: boolean = this.canExport(items);
     const leftActions: React.Element<*> = (
       <NavButtonCircular
@@ -142,8 +142,8 @@ export class BuilderLayout extends React.Component<Props> {
           <SidebarHeader
             title={text('Header-build', 'SidebarHeader')}
             subtitle={text('Subheader-countmulti', 'SidebarHeader', {
-              COUNT1: classCount,
-              COUNT2: pupilCount,
+              COUNT1: CLASS_COUNT,
+              COUNT2: PUPIL_COUNT,
             })}
           />
           <SidebarList

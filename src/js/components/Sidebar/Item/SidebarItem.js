@@ -57,7 +57,10 @@ class SidebarItem extends Component<Props, State> {
 
   componentDidMount() {
     if (this.props.isNew) {
-      this.newTimer = setTimeout(() => this.props.updateExistingItems(this.props.item.id), this.props.itemDuration);
+      this.newTimer = setTimeout(() => {
+        console.log('this.props.item', this.props.item);
+        this.props.updateExistingItems(this.props.item.id);
+      }, this.props.itemDuration);
     }
   }
 
@@ -100,9 +103,9 @@ class SidebarItem extends Component<Props, State> {
   };
 
   render() {
-    const editUrl = this.props.item.getUrl('edit');
-    const canDelete = window.location.pathname !== editUrl;
-    const displayProp = this.props.itemType === 'pupil' ? this.props.sortOrder[0] : undefined;
+    const editUrl: string = this.props.item.getUrl('edit');
+    const canDelete: boolean = window.location.pathname !== editUrl;
+    const displayProp: ?string = this.props.itemType === 'pupil' ? this.props.sortOrder[0] : undefined;
 
     return (
       <li

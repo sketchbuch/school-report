@@ -12,11 +12,12 @@ type State = {
 
 export type SearchProps = {
   ...State,
-  anywhereIconClick: (event: SyntheticMouseEvent<HTMLElement>) => void,
-  externalUpdate: (newState: State) => void,
-  pageChange: (page: number) => void,
-  searchChange: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
-  searchIconClick: (event: SyntheticEvent<EventTarget>) => void,
+  handleChange: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
+  handleKeyUp: (event: SyntheticKeyboardEvent<HTMLInputElement>) => void,
+  handlePageChange: (page: number) => void,
+  handleReset: (newState: State) => void,
+  handleToggleAnywhere: (event: SyntheticMouseEvent<HTMLElement>) => void,
+  handleToggleVisibility: (event: SyntheticEvent<EventTarget>) => void,
 };
 
 export type WithSearchPropsDiff = {
@@ -28,7 +29,8 @@ export type WithSearchProps = {
 };
 
 function withSearch<PassedProps: {}>(
-  WrappedComponent: React.AbstractComponent<PassedProps>
+  WrappedComponent: React.AbstractComponent<PassedProps>,
+  alwaysVisible: boolean = false
 ): React.AbstractComponent<$Diff<PassedProps, WithSearchPropsDiff>> {
   class WithSearch extends React.Component<PassedProps, State> {
     props: $Diff<PassedProps, WithSearchPropsDiff>;
@@ -38,44 +40,53 @@ function withSearch<PassedProps: {}>(
       term: '',
       visible: false,
     };
+    alwaysVisible: boolean = alwaysVisible;
 
-    handleAnywhereIconClick = (event: SyntheticMouseEvent<HTMLElement>): void => {
-      this.setState({ anywhere: !this.state.anywhere });
-    };
+    change = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
+      const term = event.currentTarget.value;
 
-    /**
-     * Use only when an external event should trigger a state change (see TextLayout as an example)
-     */
-    handleExternalUpdate = (newState: State): void => {
-      this.setState({ ...newState });
-    };
-
-    handlePageChange = (page: number): void => {
-      this.setState({ page });
-    };
-
-    handleSearchIconClick = (event: SyntheticEvent<EventTarget>): void => {
-      const visible: boolean = !this.state.visible;
-      if (visible === false) {
-        this.setState({ anywhere: false, page: 1, term: '', visible });
+      if (term !== this.state.term) {
+        this.setState({ page: 1, term });
       } else {
-        this.setState({ visible });
+        this.setState({ term });
       }
     };
 
-    handleSearchChange = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
-      if (event.type === 'keyup') {
-        if (event.key === 'Escape') {
-          this.handleSearchIconClick(event);
-        }
-      } else {
-        const term = event.currentTarget.value;
+    keyUp = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
+      if (event.key === 'Escape') {
+        this.toggleVisibility(event);
+      }
+    };
 
-        if (term !== this.state.term) {
-          this.setState({ page: 1, term });
-        } else {
-          this.setState({ term });
-        }
+    pageChange = (page: number): void => {
+      this.setState({ page });
+    };
+
+    reset = (newVisibility?: boolean): void => {
+      this.setState({
+        anywhere: false,
+        page: 1,
+        term: '',
+        visible: newVisibility != null ? newVisibility : this.state.visible,
+      });
+    };
+
+    toggleAnywhere = (event: SyntheticMouseEvent<HTMLElement>): void => {
+      this.setState({ anywhere: !this.state.anywhere });
+    };
+
+    toggleVisibility = (event: SyntheticEvent<EventTarget>): void => {
+      if (this.alwaysVisible) {
+        this.reset(true);
+        return;
+      }
+
+      const visible: boolean = !this.state.visible;
+
+      if (visible === false) {
+        this.reset(visible);
+      } else {
+        this.setState({ visible });
       }
     };
 
@@ -85,11 +96,12 @@ function withSearch<PassedProps: {}>(
           {...this.props} // PassedProps
           search={{
             ...this.state,
-            anywhereIconClick: this.handleAnywhereIconClick,
-            externalUpdate: this.handleExternalUpdate,
-            pageChange: this.handlePageChange,
-            searchChange: this.handleSearchChange,
-            searchIconClick: this.handleSearchIconClick,
+            handleChange: this.change,
+            handleKeyUp: this.keyUp,
+            handlePageChange: this.pageChange,
+            handleReset: this.reset,
+            handleToggleAnywhere: this.toggleAnywhere,
+            handleToggleVisibility: this.toggleVisibility,
           }}
         />
       );

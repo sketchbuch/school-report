@@ -89,11 +89,11 @@ export class PupilsLayout extends React.Component<Props> {
       searchBox = (
         <SearchField
           anywhere={search.anywhere}
-          anywhereOnClick={search.anywhereIconClick}
-          clearOnClick={search.searchIconClick}
-          iconOnClick={search.searchIconClick}
-          onKeyUp={search.searchChange}
-          onChange={search.searchChange}
+          anywhereOnClick={search.handleToggleAnywhere}
+          clearOnClick={search.handleToggleVisibility}
+          iconOnClick={search.handleToggleVisibility}
+          onKeyUp={search.handleKeyUp}
+          onChange={search.handleChange}
           placeholder={text('SearchPlaceholder-pupil', 'SidebarHeader')}
           term={search.term}
           visible={search.visible}
@@ -119,7 +119,7 @@ export class PupilsLayout extends React.Component<Props> {
             items={pupils}
             listType="pupil"
             noItemsTxt={text('Pupils', 'SidebarNoItems')}
-            onPbChange={search.pageChange}
+            onPbChange={search.handlePageChange}
             sortOrder={pupilSort[this.props.pupilsSort]}
             term={search.term}
             termAnywhere={search.anywhere}

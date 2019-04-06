@@ -2,8 +2,6 @@
 
 import React, { PureComponent } from 'react';
 import Icon from '../../Icon/Icon';
-import NoItems from '../../NoItems/NoItems';
-import Translation from '../../Translation/Translation';
 import type { DomainType } from '../../../types/domain';
 import { ICON_SUCCESS } from '../../../constants/icons';
 import './ItemList.css';
@@ -12,7 +10,7 @@ import './ItemList.css';
 export type Props = {
   form: Object,
   insert: Function,
-  items: DomainType[], // Items, could be filtered so length != totalCount.
+  items: DomainType[],
   move: Function,
   name: string,
   pop: Function,
@@ -20,7 +18,6 @@ export type Props = {
   remove: Function,
   selected: string[],
   swap: Function,
-  totalCount: number, // Total number of items
   unshift: Function,
 };
 
@@ -35,15 +32,14 @@ class ItemList extends PureComponent<Props> {
   props: Props;
 
   render() {
-    const { items, name, push, remove, selected, totalCount } = this.props;
-    const labelName: string = totalCount === 0 ? 'None' : 'NoItems';
+    const { items, name, push, remove, selected } = this.props;
 
     return (
-      <div className="ItemList">
-        {totalCount > 0 && items.length > 0 ? (
-          items.map(item => {
-            return (
-              <label className="ItemList__item" key={item.id} title={item.getTooltip()}>
+      <ul className="ItemList">
+        {items.map(item => {
+          return (
+            <li className="ItemList__item" key={item.id} title={item.getTooltip()}>
+              <label className="ItemList__itemLabel">
                 <input
                   type="checkbox"
                   value={item.id}
@@ -58,19 +54,24 @@ class ItemList extends PureComponent<Props> {
                   }}
                 />
                 <div className="ItemList__inner" key={item.id} title={item.getTooltip()}>
-                  {selected.includes(item.id) ? <Icon type={ICON_SUCCESS} /> : <Icon type={item.getIcon()} />}
-                  <span className="ItemList__label">{item.getLabel()}</span>
-                  <span className="ItemList__description">{item.getDescription()}</span>
+                  <span className="ItemList__iconItem">
+                    <Icon type={item.getIcon()} />
+                  </span>
+                  <span className="ItemList__text">
+                    <span className="ItemList__label">{item.getLabel()}</span>
+                    <span className="ItemList__description">{item.getDescription()}</span>
+                  </span>
+                  {selected.includes(item.id) && (
+                    <span className="ItemList__iconSelected">
+                      <Icon type={ICON_SUCCESS} />
+                    </span>
+                  )}
                 </div>
               </label>
-            );
-          })
-        ) : (
-          <NoItems>
-            <Translation name={labelName} ns="ItemList" placeholders={{ NAME: name }} />
-          </NoItems>
-        )}
-      </div>
+            </li>
+          );
+        })}
+      </ul>
     );
   }
 }
