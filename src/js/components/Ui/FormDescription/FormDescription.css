@@ -1,9 +1,16 @@
 .FormDescription {
-  text-align: center;
   font-size: var(--font-size);
   line-height: var(--lh-reduced);
-  width: 80%;
+  margin-bottom: var(--font-size-vlarge);
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: var(--font-size-vlarge);
+  text-align: center;
+  width: 80%;
+}
+
+.FormDescription--inline {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  width: auto;
 }

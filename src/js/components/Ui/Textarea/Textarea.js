@@ -12,6 +12,7 @@ export type Props = {
   onBlur?: Function,
   onChange?: Function,
   placeholder?: string,
+  refProp?: React.ElementRef<any>,
   title?: string,
   value?: string,
 };
@@ -32,7 +33,7 @@ class Textarea extends React.PureComponent<Props> {
   props: Props;
 
   render() {
-    const { className, disabled, isValid, name, onBlur, onChange, placeholder, title, value } = this.props;
+    const { className, disabled, isValid, name, onBlur, onChange, placeholder, refProp, title, value } = this.props;
 
     return (
       <textarea
@@ -42,6 +43,7 @@ class Textarea extends React.PureComponent<Props> {
         onChange={disabled ? null : onChange}
         name={name}
         placeholder={placeholder}
+        ref={refProp}
         title={title}
         value={value}
       />

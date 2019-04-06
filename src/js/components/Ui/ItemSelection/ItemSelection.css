@@ -4,43 +4,6 @@
   display: block;
 }
 
-.ItemSelection__tabs {
-  display: block;
-  list-style: none;
-  margin: 0px;
-  padding: 0px 15px;
-  position: relative;
-  width: 100%;
-}
-
-.ItemSelection__tab {
-  cursor: pointer;
-  display: inline-block;
-  margin: 0px;
-  padding: 5px 10px;
-  position: relative;
-  user-select: none;
-}
-
-.ItemSelection__tab--selected {
-  cursor: default;
-  font-weight: bold;
-}
-
-.ItemSelection__tab--selected::after {
-  background: var(--col-text);
-  bottom: 0;
-  content: ' ';
-  cursor: default;
-  display: inline-block;
-  font-weight: bold;
-  height: 1px;
-  height: 2px;
-  left: 0;
-  position: absolute;
-  width: 100%;
-}
-
 .ItemSelection__content {
   background: var(--col-darken-1);
   border-radius: var(--border-radius);

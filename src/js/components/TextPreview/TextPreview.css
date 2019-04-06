@@ -1,0 +1,20 @@
+.TextPreview {
+  position: relative;
+  display: block;
+  padding: 5px 10px;
+  margin: 0px;
+  border: 1px solid var(--col-darken-1);
+  background: var(--col-white);
+  user-select: none;
+  -webkit-user-drag: element;
+}
+
+.TextPreview--editor {
+  background: var(--col-white);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--col-darken-3);
+  color: var(--col-text);
+  font-size: var(--font-size);
+  line-height: var(--lh-reduced);
+  padding: 1rem;
+}

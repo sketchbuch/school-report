@@ -8,7 +8,7 @@ import { ICON_CLOSE, ICON_SEARCH, ICON_SEARCH_ANYWHERE } from '../../../constant
 import { text } from '../../Translation/Translation';
 import './SearchField.css';
 
-const NS = 'SearchField';
+const NS: string = 'SearchField';
 
 export type Props = {
   anywhere: boolean,

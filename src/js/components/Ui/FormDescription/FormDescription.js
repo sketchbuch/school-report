@@ -1,21 +1,31 @@
 // @flow
 
 import * as React from 'react';
+import classNames from 'classnames';
 import './FormDescription.css';
 
+const NS: string = 'FormDescription';
+
 export type Props = {
-  text: string,
+  children?: React.Node,
+  inline: boolean,
+  text?: string,
 };
 
 class FormDescription extends React.PureComponent<Props> {
   static defaultProps = {
-    text: '',
+    children: null,
+    inline: false,
   };
 
   props: Props;
 
   render() {
-    return <p className="FormDescription">{this.props.text}</p>;
+    return (
+      <p className={classNames(NS, { [NS + '--inline']: this.props.inline })}>
+        {this.props.text || this.props.children}
+      </p>
+    );
   }
 }
 

@@ -1,0 +1,36 @@
+.Tabs {
+  display: block;
+  list-style: none;
+  margin: 0px;
+  padding: 0px 15px;
+  position: relative;
+  width: 100%;
+}
+
+.Tabs__tab {
+  cursor: pointer;
+  display: inline-block;
+  margin: 0px;
+  padding: 5px 10px;
+  position: relative;
+  user-select: none;
+}
+
+.Tabs__tab--selected {
+  cursor: default;
+  font-weight: bold;
+}
+
+.Tabs__tab--selected::after {
+  background: var(--col-text);
+  bottom: 0;
+  margin-bottom: -1px;
+  content: ' ';
+  cursor: default;
+  display: inline-block;
+  font-weight: bold;
+  height: 3px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}

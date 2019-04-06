@@ -1,6 +1,8 @@
 // @flow
 
-export function cropStr(str: string, len: number, ellipsize?: boolean = true): string {
+export const DEFAULT_WRAP: string = '#';
+
+export const cropStr = (str: string, len: number, ellipsize?: boolean = true): string => {
   let trimmedStr: string = str.trim();
   const cropLen: number = parseInt(len, 10);
   const ellipsis: string = ellipsize ? '…' : '';
@@ -9,12 +11,16 @@ export function cropStr(str: string, len: number, ellipsize?: boolean = true): s
     return trimmedStr;
   }
   return `${trimmedStr.substr(0, cropLen)}${ellipsis}`;
-}
+};
 
-export function getDisplayName(hocName: string, component: React.AbstractComponent): string {
+export const getDisplayName = (hocName: string, component: React.AbstractComponent): string => {
   return `${hocName}(${component.displayName || component.name || 'Component'})`;
-}
+};
 
-export function ucFirst(str: string): string {
+export const ucFirst = (str: string): string => {
   return str.charAt(0).toUpperCase() + str.slice(1);
-}
+};
+
+export const wrapText = (textToWrap: string, wrapStr: string = DEFAULT_WRAP): string => {
+  return `${wrapStr}${textToWrap}${wrapStr}`;
+};

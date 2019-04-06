@@ -212,10 +212,7 @@
     },
     "ItemSelection": {
       "Clear": "Clear search",
-      "Placeholder": "Search...",
-      "TabAll": "All",
-      "TabSelected": "Selected",
-      "TabUnselected": "Unselected"
+      "Placeholder": "Search..."
     },
     "Lang": {
       "DateFormat": "%D%/%M%/%Y%"
@@ -367,18 +364,29 @@
       "Add": "+",
       "Delete": "-"
     },
+    "Tabs": {
+      "TabAll": "All",
+      "TabEdit": "Edit",
+      "TabPreview": "Preview",
+      "TabSelected": "Selected",
+      "TabUnselected": "Unselected"
+    },
+    "TextPreview": {
+      "NoText": "No text to preview"
+    },
     "Texts": {
       "BackToTexts": "Cancel",
       "BodytextPlaceholder": "Enter a text to be used in the report...",
       "Breadcrumb": "Texts",
       "CreateTextBtnLabel": "Create Text",
-      "PersistenceDeleted": "All texts deleted",
       "PersistenceDeleteError": "Unable to delete texts",
+      "PersistenceDeleted": "All texts deleted",
       "PersistenceEdit": "Text updated",
       "PersistenceEditError": "Unable to save changes to text",
       "PersistenceNew": "New text created",
       "PersistenceNewError": "Unable to create new text",
       "ReportCategories": "Text categories (%SELECTED%/%TOTAL%):",
+      "TextLabel": "Text:",
       "UpdateTextBtnLabel": "Update Text",
       "WinTitle": "Texts"
     },

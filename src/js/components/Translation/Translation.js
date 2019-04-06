@@ -8,15 +8,7 @@ type Props = {
   placeholders: ?Object,
 };
 
-/**
- * Returns the correct translation from the translations object.
- *
- * @param string name The name/key of the translation.
- * @param string ns The namespace that the name belongs to.
- * @param mixed placeholders An optional object of replacement texts: {search: replace}
- * @return string The translation or the name if no translation is found.
- */
-export function text(name: string, ns: string, placeholders: ?Object = null) {
+export const text = (name: string, ns: string, placeholders: ?Object): string => {
   const { translations, curLang } = window.reportr;
 
   if (translations !== undefined) {
@@ -38,11 +30,8 @@ export function text(name: string, ns: string, placeholders: ?Object = null) {
   }
 
   return `?${name.trim()}:${ns.trim()}`;
-}
+};
 
-/**
- * Translation component that renders a text string.
- */
 export default class Translation extends Component<Props> {
   static defaultProps = {
     placeholders: null,

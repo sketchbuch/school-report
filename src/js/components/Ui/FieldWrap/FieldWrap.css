@@ -4,23 +4,6 @@
   margin-bottom: 2rem;
 }
 
-.fiedwrap__placeholders {
-  position: relative;
-  margin: 0px;
-  padding-top: 1px;
-}
-
-.fiedwrap__placeholder {
-  position: relative;
-  display: inline-block;
-  border-radius: var(--border-radius);
-  background: var(--col-darken-1);
-  border: 1px solid var(--col-darken-1);
-  padding: 0px 5px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
 .fieldwrap--labeled {
   position: relative;
   display: flex;

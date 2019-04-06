@@ -1,17 +1,18 @@
 .Textarea {
   background: var(--col-white);
-  color: var(--col-text);
-  border: 1px solid var(--col-darken-3);
   border-radius: var(--border-radius);
-  outline: 0px;
-  text-align: left;
-  padding: 1rem;
+  border: 1px solid var(--col-darken-3);
+  color: var(--col-text);
   font-size: var(--font-size);
-  line-height: var(--lh-reduced);
-  width: 100%;
-  margin: 0px auto;
   height: 10rem;
+  line-height: var(--lh-reduced);
+  margin: 0px auto;
+  outline: 0px;
+  padding: 1rem;
+  resize: vertical;
+  text-align: left;
   transition: all 250ms ease;
+  width: 100%;
 }
 
 .Textarea:focus {

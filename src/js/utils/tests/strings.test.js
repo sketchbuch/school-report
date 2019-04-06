@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { cropStr, getDisplayName, ucFirst } from '../strings';
+import { cropStr, DEFAULT_WRAP, getDisplayName, ucFirst, wrapText } from '../strings';
 
 class MockComp extends React.Component<{}> {
   render() {
@@ -36,5 +36,18 @@ describe('Util: strings', () => {
 
   test('ucFirst() should capitalise the first letter of a string', () => {
     expect(ucFirst('test')).toBe('Test');
+  });
+
+  describe('wrapText()', () => {
+    test('Should wrap text with DEFAULT_WRAP', () => {
+      const TEXT: string = 'Red Dwarf';
+      expect(wrapText(TEXT)).toBe(`${DEFAULT_WRAP}${TEXT}${DEFAULT_WRAP}`);
+    });
+
+    test('Should wrap text with a wrapping string', () => {
+      const TEXT: string = 'Red Dwarf';
+      const WRAP: string = '!!!!';
+      expect(wrapText(TEXT, WRAP)).toBe(`${WRAP}${TEXT}${WRAP}`);
+    });
   });
 });

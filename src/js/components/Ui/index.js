@@ -17,5 +17,7 @@ export { default as NavButtonCircular } from './NavButtonCircular/NavButtonCircu
 export { default as PageBrowser } from './PageBrowser/PageBrowser';
 export { default as SearchField } from './SearchField/SearchField';
 export { default as Select } from './Select/Select';
+export { default as Tabs } from './Tabs/Tabs';
+export { default as TagList } from './TagList/TagList';
 export { default as TextInput } from './TextInput/TextInput';
 export { default as Textarea } from './Textarea/Textarea';

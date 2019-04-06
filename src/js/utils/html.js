@@ -1,10 +1,10 @@
 // @flow
 
-import { ucFirst } from './strings';
+import { ucFirst, wrapText } from './strings';
 import type { InsertDangerousHtmlObj } from '../types/misc';
 import type { PupilType } from '../types/pupil';
 
-type PlaceHolderMapObject = {
+export type PlaceHolderMapObject = {
   function?: string,
   property?: string,
   symbol: string,
@@ -29,7 +29,7 @@ export function getPupilTextHtml(
   let newText: string = text;
 
   placeholderMap.forEach((ph: PlaceHolderMapObject) => {
-    const phSymbol = `#${ph.symbol}#`;
+    const phSymbol = wrapText(ph.symbol);
     let phVal = phSymbol;
     let isPronoun = false;
 

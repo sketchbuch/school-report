@@ -1,0 +1,28 @@
+.TagList {
+  list-style: none;
+  margin: 0px;
+  padding: 1px 0px 0px 0px;
+  position: relative;
+}
+
+.TagList__tag {
+  background: var(--col-darken-1);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--col-darken-1);
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  padding: 0px 5px;
+  position: relative;
+  user-select: none;
+}
+
+.TagList__tag:focus,
+.TagList__tag:hover {
+  background: var(--col-darken-2);
+}
+
+.TagList__tag:active {
+  background: var(--col-darken-3);
+}

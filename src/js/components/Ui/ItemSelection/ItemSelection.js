@@ -6,20 +6,16 @@ import { FieldArray } from 'formik';
 import ItemList from '../ItemList/ItemList';
 import NoItems from '../../NoItems/NoItems';
 import SearchField from '../SearchField/SearchField';
+import Tabs from '../Tabs/Tabs';
 import Translation, { text } from '../../Translation/Translation';
 import type { DomainType } from '../../../types/domain';
 import type { SearchProps, WithSearchProps } from '../../../hoc/withSearch';
-import type { UiTab, UiView } from '../../../types/misc';
+import type { Tab, TabView } from '../../../types/ui';
 import withSearch from '../../../hoc/withSearch';
 import { UI_VIEW_ALL, UI_VIEW_SELECTED, UI_VIEW_UNSELECTED } from '../../../constants/ui';
 import './ItemSelection.css';
 
-const NS = 'ItemSelection';
-const tabs: UiTab[] = [
-  { view: UI_VIEW_ALL, transKey: 'TabAll' },
-  { view: UI_VIEW_SELECTED, transKey: 'TabSelected' },
-  { view: UI_VIEW_UNSELECTED, transKey: 'TabUnselected' },
-];
+const NS: string = 'ItemSelection';
 
 export type Props = {
   items: DomainType[], // Already sorted for display.
@@ -29,7 +25,7 @@ export type Props = {
 } & WithSearchProps;
 
 type State = {
-  view: UiView,
+  view: TabView,
 };
 
 export class ItemSelection extends React.PureComponent<Props, State> {
@@ -42,10 +38,10 @@ export class ItemSelection extends React.PureComponent<Props, State> {
 
   props: Props;
   state: State = {
-    view: 'all',
+    view: UI_VIEW_ALL,
   };
 
-  handleViewChange = (view: UiView) => {
+  handleViewChange = (view: TabView) => {
     if (this.state.view !== view) {
       this.setState({ view });
     }
@@ -114,26 +110,28 @@ export class ItemSelection extends React.PureComponent<Props, State> {
       return null;
     }
 
-    return (
-      <ul className="ItemSelection__tabs">
-        {tabs.map((tab: UiTab) => {
-          const label = text(tab.transKey, NS);
+    const tabs: Tab[] = [
+      {
+        label: text('TabAll', 'Tabs'),
+        onChange: this.handleViewChange,
+        tooltip: text('TabAll', 'Tabs'),
+        view: UI_VIEW_ALL,
+      },
+      {
+        label: text('TabSelected', 'Tabs'),
+        onChange: this.handleViewChange,
+        tooltip: text('TabSelected', 'Tabs'),
+        view: UI_VIEW_SELECTED,
+      },
+      {
+        label: text('TabUnselected', 'Tabs'),
+        onChange: this.handleViewChange,
+        tooltip: text('TabUnselected', 'Tabs'),
+        view: UI_VIEW_UNSELECTED,
+      },
+    ];
 
-          return (
-            <li
-              className={classNames('ItemSelection__tab', {
-                'ItemSelection__tab--selected': this.state.view === tab.view,
-              })}
-              key={tab.view}
-              onClick={() => this.handleViewChange(tab.view)}
-              title={label}
-            >
-              {label}
-            </li>
-          );
-        })}
-      </ul>
-    );
+    return <Tabs selected={this.state.view} tabs={tabs} />;
   };
 
   render() {
