@@ -66,6 +66,7 @@ export class EditTextLayout extends Component<Props, State> {
   // TODO - fix types
   handleSubmit = (values: Object): void => {
     const updatedText = { ...values };
+    updatedText.bodytext = updatedText.bodytext.trim();
     updatedText.updated = Date.now();
     updatedText.charCount = updatedText.bodytext.length;
 

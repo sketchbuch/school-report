@@ -63,6 +63,7 @@ export class NewTextLayout extends Component<Props, State> {
   // TODO - fix types
   handleSubmit = (values: Object): void => {
     const newText: TextType = TextFactory(values, Date.now(), this.props.curLang);
+    newText.bodytext = newText.bodytext.trim();
 
     this.setState({
       text: newText,

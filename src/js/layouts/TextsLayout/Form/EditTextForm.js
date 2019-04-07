@@ -32,23 +32,11 @@ import { sortObjectsAz } from '../../../utils/sort';
 import { wrapText } from '../../../utils/strings';
 
 const NS: string = 'Texts';
-
-export type RandomPupil = { firstname: string, lastname: string, gender: 'm' | 'f' };
-export const randomPupils: RandomPupil[] = [
-  { firstname: 'Arnold', lastname: 'Rimmer', gender: 'm' },
-  { firstname: 'Dave', lastname: 'Lister', gender: 'm' },
-  { firstname: 'Derek', lastname: 'Trotter', gender: 'm' },
-  { firstname: 'Edmund', lastname: 'Blackadder', gender: 'm' },
-  { firstname: 'Elizabeth', lastname: 'Tudor', gender: 'f' },
-  { firstname: 'Joe', lastname: 'Bloggs', gender: 'm' },
-  { firstname: 'Lydia', lastname: 'Dietz', gender: 'f' },
-  { firstname: 'Mary', lastname: 'Stuart', gender: 'f' },
-];
-
-export const getDummyPupil = (): PupilType => {
-  const randomPupil: RandomPupil = randomPupils[Math.floor(Math.random() * randomPupils.length)];
-  return PupilFactory({ ...pupilDefault, ...randomPupil }, Date.now(), 'c1');
-};
+const dummyPupil: PupilType = PupilFactory(
+  { ...pupilDefault, firstname: 'Lydia', gender: 'f', lastname: 'Dietz' },
+  Date.now(),
+  'c1'
+);
 
 // TODO - fix types
 export type Props = {
@@ -154,7 +142,7 @@ export class EditTextForm extends React.Component<Props, State> {
   };
 
   renderPreview = (): React.Node => {
-    return <TextPreview editor pupil={getDummyPupil()} text={this.props.values.bodytext} />;
+    return <TextPreview editor pupil={dummyPupil} text={this.props.values.bodytext} />;
   };
 
   render() {
