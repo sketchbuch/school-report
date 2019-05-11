@@ -56,173 +56,168 @@ describe('withSearch() HOC', () => {
       expect(JSON.parse(JSON.stringify(wrapperProps)).search).toEqual(defaultState);
     });
 
-    describe('handleChange function:', () => {
-      testFunctionIsInProps('handleChange', props, DummyComponentWithSearch);
+    testFunctionIsInProps('handleChange', props, DummyComponentWithSearch);
+    testFunctionIsInProps('handleKeyUp', props, DummyComponentWithSearch);
+    testFunctionIsInProps('handlePageChange', props, DummyComponentWithSearch);
+    testFunctionIsInProps('handleReset', props, DummyComponentWithSearch);
+    testFunctionIsInProps('handleToggleAnywhere', props, DummyComponentWithSearch);
+    testFunctionIsInProps('handleToggleVisibility', props, DummyComponentWithSearch);
+  });
 
-      test('state.term updated without changing page if state.term === value', () => {
-        const mockEvent = {
-          currentTarget: {
-            value: '',
-          },
-        };
+  describe('handleChange function:', () => {
+    test('state.term updated without changing page if state.term === value', () => {
+      const mockEvent = {
+        currentTarget: {
+          value: '',
+        },
+      };
 
-        const wrapper = shallow(<DummyComponentWithSearch {...props} />);
-        const wrapperProps = wrapper.props().search;
-        expect(wrapper.state().term).toBe(defaultState.term);
+      const wrapper = shallow(<DummyComponentWithSearch {...props} />);
+      const wrapperProps = wrapper.props().search;
+      expect(wrapper.state().term).toBe(defaultState.term);
 
-        wrapper.setState({ page: 2 });
-        wrapper.update();
-        wrapperProps.handleChange(mockEvent);
+      wrapper.setState({ page: 2 });
+      wrapper.update();
+      wrapperProps.handleChange(mockEvent);
 
-        wrapper.update();
-        expect(wrapper.state().term).toBe(mockEvent.currentTarget.value);
-        expect(wrapper.state().page).toBe(2);
-      });
-
-      test('state.term & state.page updated if state.term !== value', () => {
-        const mockEvent = {
-          currentTarget: {
-            value: 'elphaba',
-          },
-        };
-
-        const wrapper = shallow(<DummyComponentWithSearch {...props} />);
-        const wrapperProps = wrapper.props().search;
-        expect(wrapper.state().term).toBe(defaultState.term);
-
-        wrapper.setState({ page: 2 });
-        wrapper.update();
-        expect(wrapper.state().page).toBe(2);
-
-        wrapperProps.handleChange(mockEvent);
-        wrapper.update();
-        expect(wrapper.state().term).toBe(mockEvent.currentTarget.value);
-        expect(wrapper.state().page).toBe(1);
-      });
+      wrapper.update();
+      expect(wrapper.state().term).toBe(mockEvent.currentTarget.value);
+      expect(wrapper.state().page).toBe(2);
     });
 
-    describe('handleKeyUp function:', () => {
-      testFunctionIsInProps('handleKeyUp', props, DummyComponentWithSearch);
+    test('state.term & state.page updated if state.term !== value', () => {
+      const mockEvent = {
+        currentTarget: {
+          value: 'elphaba',
+        },
+      };
 
-      test('Does not call toggleVisibility() when key is not "Escape"', () => {
-        const mockEvent = {
-          key: 'a',
-        };
+      const wrapper = shallow(<DummyComponentWithSearch {...props} />);
+      const wrapperProps = wrapper.props().search;
+      expect(wrapper.state().term).toBe(defaultState.term);
 
-        const wrapper = shallow(<DummyComponentWithSearch {...props} />);
-        wrapper.instance().toggleVisibility = jest.fn();
-        const wrapperProps = wrapper.props().search;
-        wrapperProps.handleKeyUp(mockEvent);
-        expect(wrapper.instance().toggleVisibility).not.toHaveBeenCalled();
-      });
+      wrapper.setState({ page: 2 });
+      wrapper.update();
+      expect(wrapper.state().page).toBe(2);
 
-      test('Does call toggleVisibility() when key is "Escape"', () => {
-        const mockEvent = {
-          key: 'Escape',
-        };
+      wrapperProps.handleChange(mockEvent);
+      wrapper.update();
+      expect(wrapper.state().term).toBe(mockEvent.currentTarget.value);
+      expect(wrapper.state().page).toBe(1);
+    });
+  });
 
-        const wrapper = shallow(<DummyComponentWithSearch {...props} />);
-        wrapper.instance().toggleVisibility = jest.fn();
-        const wrapperProps = wrapper.props().search;
-        wrapperProps.handleKeyUp(mockEvent);
-        expect(wrapper.instance().toggleVisibility).toHaveBeenCalled();
-      });
+  describe('handleKeyUp function:', () => {
+    test('Does not call toggleVisibility() when key is not "Escape"', () => {
+      const mockEvent = {
+        key: 'a',
+      };
+
+      const wrapper = shallow(<DummyComponentWithSearch {...props} />);
+      wrapper.instance().toggleVisibility = jest.fn();
+      const wrapperProps = wrapper.props().search;
+      wrapperProps.handleKeyUp(mockEvent);
+      expect(wrapper.instance().toggleVisibility).not.toHaveBeenCalled();
     });
 
-    describe('handlePageChange function:', () => {
-      testFunctionIsInProps('handlePageChange', props, DummyComponentWithSearch);
+    test('Does call toggleVisibility() when key is "Escape"', () => {
+      const mockEvent = {
+        key: 'Escape',
+      };
 
-      test('Updates state.page correctly', () => {
-        const wrapper = shallow(<DummyComponentWithSearch {...props} />);
-        const wrapperProps = wrapper.props().search;
-        expect(wrapper.state().page).toBe(defaultState.page);
+      const wrapper = shallow(<DummyComponentWithSearch {...props} />);
+      wrapper.instance().toggleVisibility = jest.fn();
+      const wrapperProps = wrapper.props().search;
+      wrapperProps.handleKeyUp(mockEvent);
+      expect(wrapper.instance().toggleVisibility).toHaveBeenCalled();
+    });
+  });
 
-        wrapperProps.handlePageChange(2);
-        wrapper.update();
-        expect(wrapper.state().page).toBe(2);
+  describe('handlePageChange function:', () => {
+    test('Updates state.page correctly', () => {
+      const wrapper = shallow(<DummyComponentWithSearch {...props} />);
+      const wrapperProps = wrapper.props().search;
+      expect(wrapper.state().page).toBe(defaultState.page);
+
+      wrapperProps.handlePageChange(2);
+      wrapper.update();
+      expect(wrapper.state().page).toBe(2);
+    });
+  });
+
+  describe('handleReset function:', () => {
+    test('Resets state correctly to default', () => {
+      const wrapper = shallow(<DummyComponentWithSearch {...props} />);
+      const wrapperProps = wrapper.props().search;
+      wrapper.setState({
+        anywhere: true,
+        page: 2,
+        term: 'Oz',
       });
+      wrapper.update();
+      wrapperProps.handleReset();
+      wrapper.update();
+      expect(wrapper.state()).toEqual(defaultState);
     });
 
-    describe('handleReset function:', () => {
-      testFunctionIsInProps('handleReset', props, DummyComponentWithSearch);
-
-      test('Resets state correctly to default', () => {
-        const wrapper = shallow(<DummyComponentWithSearch {...props} />);
-        const wrapperProps = wrapper.props().search;
-        wrapper.setState({
-          anywhere: true,
-          page: 2,
-          term: 'Oz',
-        });
-        wrapper.update();
-        wrapperProps.handleReset();
-        wrapper.update();
-        expect(wrapper.state()).toEqual(defaultState);
+    test('Resets state correctly to default but uses newVisibility', () => {
+      const newVisibility: boolean = true;
+      const wrapper = shallow(<DummyComponentWithSearch {...props} />);
+      const wrapperProps = wrapper.props().search;
+      wrapper.setState({
+        anywhere: true,
+        page: 2,
+        term: 'Oz',
       });
+      wrapper.update();
+      wrapperProps.handleReset(newVisibility);
+      wrapper.update();
+      expect(wrapper.state()).toEqual({ ...defaultState, visible: newVisibility });
+    });
+  });
 
-      test('Resets state correctly to default but uses newVisibility', () => {
-        const newVisibility: boolean = true;
-        const wrapper = shallow(<DummyComponentWithSearch {...props} />);
-        const wrapperProps = wrapper.props().search;
-        wrapper.setState({
-          anywhere: true,
-          page: 2,
-          term: 'Oz',
-        });
-        wrapper.update();
-        wrapperProps.handleReset(newVisibility);
-        wrapper.update();
-        expect(wrapper.state()).toEqual({ ...defaultState, visible: newVisibility });
-      });
+  describe('handleToggleAnywhere function:', () => {
+    test('Inverts state.anywhere', () => {
+      const wrapper = shallow(<DummyComponentWithSearch {...props} />);
+      const wrapperProps = wrapper.props().search;
+      expect(wrapper.state().anywhere).toBe(false);
+
+      wrapperProps.handleToggleAnywhere({});
+      wrapper.update();
+      expect(wrapper.state().anywhere).toBe(true);
+
+      wrapperProps.handleToggleAnywhere({});
+      wrapper.update();
+      expect(wrapper.state().anywhere).toBe(false);
+    });
+  });
+
+  describe('handleToggleVisibility function:', () => {
+    test('Calls reset() if alwaysVisible', () => {
+      const AlwaysVisibleWithSearch: React.AbstractComponent<*> = withSearch(DummyComponent, true);
+      const wrapper = shallow(<AlwaysVisibleWithSearch {...props} />);
+      wrapper.instance().reset = jest.fn();
+      const wrapperProps = wrapper.props().search;
+      wrapperProps.handleToggleVisibility({});
+      expect(wrapper.instance().alwaysVisible).toBe(true);
+      expect(wrapper.instance().reset).toHaveBeenCalled();
     });
 
-    describe('handleToggleAnywhere function:', () => {
-      testFunctionIsInProps('handleToggleAnywhere', props, DummyComponentWithSearch);
-
-      test('Inverts state.anywhere', () => {
-        const wrapper = shallow(<DummyComponentWithSearch {...props} />);
-        const wrapperProps = wrapper.props().search;
-        expect(wrapper.state().anywhere).toBe(false);
-
-        wrapperProps.handleToggleAnywhere({});
-        wrapper.update();
-        expect(wrapper.state().anywhere).toBe(true);
-
-        wrapperProps.handleToggleAnywhere({});
-        wrapper.update();
-        expect(wrapper.state().anywhere).toBe(false);
-      });
+    test('Calls reset() if state.visible === true', () => {
+      const wrapper = shallow(<DummyComponentWithSearch {...props} />);
+      wrapper.instance().reset = jest.fn();
+      const wrapperProps = wrapper.props().search;
+      wrapper.setState({ visible: true });
+      wrapper.update();
+      wrapperProps.handleToggleVisibility({});
+      expect(wrapper.instance().reset).toHaveBeenCalled();
     });
 
-    describe('handleToggleVisibility function:', () => {
-      testFunctionIsInProps('handleToggleVisibility', props, DummyComponentWithSearch);
-
-      test('Calls reset() if alwaysVisible', () => {
-        const AlwaysVisibleWithSearch: React.AbstractComponent<*> = withSearch(DummyComponent, true);
-        const wrapper = shallow(<AlwaysVisibleWithSearch {...props} />);
-        wrapper.instance().reset = jest.fn();
-        const wrapperProps = wrapper.props().search;
-        wrapperProps.handleToggleVisibility({});
-        expect(wrapper.instance().alwaysVisible).toBe(true);
-        expect(wrapper.instance().reset).toHaveBeenCalled();
-      });
-
-      test('Calls reset() if state.visible === true', () => {
-        const wrapper = shallow(<DummyComponentWithSearch {...props} />);
-        wrapper.instance().reset = jest.fn();
-        const wrapperProps = wrapper.props().search;
-        wrapper.setState({ visible: true });
-        wrapper.update();
-        wrapperProps.handleToggleVisibility({});
-        expect(wrapper.instance().reset).toHaveBeenCalled();
-      });
-
-      test('Updates state.visible to true if state.visible === false', () => {
-        const wrapper = shallow(<DummyComponentWithSearch {...props} />);
-        const wrapperProps = wrapper.props().search;
-        wrapperProps.handleToggleVisibility({});
-        expect(wrapper.state().visible).toBe(true);
-      });
+    test('Updates state.visible to true if state.visible === false', () => {
+      const wrapper = shallow(<DummyComponentWithSearch {...props} />);
+      const wrapperProps = wrapper.props().search;
+      wrapperProps.handleToggleVisibility({});
+      expect(wrapper.state().visible).toBe(true);
     });
   });
 });
