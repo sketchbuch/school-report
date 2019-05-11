@@ -28,18 +28,20 @@ export type WithSearchProps = {
   search: SearchProps,
 };
 
+export const defaultState: State = {
+  anywhere: false,
+  page: 1,
+  term: '',
+  visible: false,
+};
+
 function withSearch<PassedProps: {}>(
   WrappedComponent: React.AbstractComponent<PassedProps>,
   alwaysVisible: boolean = false
 ): React.AbstractComponent<$Diff<PassedProps, WithSearchPropsDiff>> {
   class WithSearch extends React.Component<PassedProps, State> {
     props: $Diff<PassedProps, WithSearchPropsDiff>;
-    state: State = {
-      anywhere: false,
-      page: 1,
-      term: '',
-      visible: false,
-    };
+    state: State = { ...defaultState };
     alwaysVisible: boolean = alwaysVisible;
 
     change = (event: SyntheticKeyboardEvent<HTMLInputElement>): void => {
