@@ -140,14 +140,16 @@ export class TextsLayout extends React.Component<Props, State> {
             termAnywhere={search.anywhere}
             usePb
           >
-            <CatSelect
-              categories={categories}
-              onChange={this.handleFilterChanage}
-              option={this.state.option}
-              selectedCount={0}
-              texts={texts}
-              useSelected={false}
-            />
+            {categories.length > 0 && (
+              <CatSelect
+                categories={categories}
+                onChange={this.handleFilterChanage}
+                option={this.state.option}
+                selectedCount={0}
+                texts={texts}
+                useSelected={false}
+              />
+            )}
           </SidebarList>
           <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
         </Sidebar>
