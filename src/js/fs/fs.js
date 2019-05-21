@@ -11,9 +11,10 @@ if (window !== undefined && window.require) {
   fs = electron.remote.require('fs');
 }
 
-const APP_PATH = electron !== null ? electron.remote.app.getAppPath() : '';
-const DATA_PATH = electron !== null ? electron.remote.app.getPath('userData') : '';
-const FOLDER = window.location.hostname === 'localhost' ? 'public' : 'build';
+const APP_PATH: string = electron !== null ? electron.remote.app.getAppPath() : '';
+const DATA_PATH: string = electron !== null ? electron.remote.app.getPath('userData') : '';
+const FOLDER: string = window.location.hostname === 'localhost' ? 'public' : 'build';
+const DATA_FOLDER: string = `${DATA_PATH}${io.DATA_FOLDER}`;
 
 /**
  * Loads a file async. from the filesystem. callback receives a results object: {
@@ -73,28 +74,14 @@ export function readLangFile(lang: string, callback: Function) {
   readFile(getLanguagePath(lang), callback);
 }
 
-/**
- * Creates the data storage folder and all intermediate folders.
- *
- * @param string fileName The name of the file to create.
- */
-export function createDataFolder(fileName: string) {
-  const filePath = getDataPath(fileName);
+export function dataFolderExists(): boolean {
+  return fs.existsSync(DATA_FOLDER);
+}
 
-  if (!fs.existsSync(filePath)) {
-    let folders = filePath
-      .replace(DATA_PATH, '')
-      .split('/')
-      .filter(f => f !== '');
-    if (folders[folders.length - 1].indexOf('.') > -1) {
-      folders.pop();
-    }
-    let finalPath = DATA_PATH + '/' + (folders.length > 1 ? folders.join('/') : folders[0]);
-
-    try {
-      fs.mkdirSync(finalPath);
-    } catch (err) {}
-  }
+export function createDataFolder() {
+  try {
+    fs.mkdirSync(DATA_FOLDER);
+  } catch (err) {}
 }
 
 /**

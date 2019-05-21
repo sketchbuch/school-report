@@ -6,7 +6,7 @@ import persist from '../fs/persist';
 import type { ActionCreator } from '../types/action';
 import type { SettingsType } from '../types/settings';
 import { FILE_SETTINGS } from '../constants/io';
-import { createDataFolder, readDataFile } from '../fs/fs';
+import { createDataFolder, readDataFile, dataFolderExists } from '../fs/fs';
 
 export const update = (settings: SettingsType, loadLang: boolean, callback: Function): ActionCreator => {
   return (dispatch, getState) => {
@@ -26,7 +26,11 @@ export const update = (settings: SettingsType, loadLang: boolean, callback: Func
 export const load = (callback: Function): ActionCreator => {
   return (dispatch, getState) => {
     dispatch({ type: LOAD_SETTINGS });
-    createDataFolder(FILE_SETTINGS);
+
+    if (!dataFolderExists()) {
+      createDataFolder();
+    }
+
     readDataFile(FILE_SETTINGS, callback);
   };
 };

@@ -6,7 +6,7 @@ import * as settingsActions from '../settingsActions';
 import settingsDefault from '../../types/settings';
 import type { ActionObj } from '../../types/action';
 import type { SettingsType } from '../../types/settings';
-import { LOAD_SETTINGS, UPDATE_SETTINGS, SETTINGS_LOADED } from '../../constants/actionTypes';
+import { CHANGE_LANGUAGE, LOAD_SETTINGS, UPDATE_SETTINGS, SETTINGS_LOADED } from '../../constants/actionTypes';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -31,6 +31,18 @@ describe('Actions: settingsActions:', () => {
 
     expect.assertions(1);
     store.dispatch(settingsActions.update(testSettings, false, callback));
+    expect(store.getActions()).toEqual(expectedActions);
+    store.clearActions();
+  });
+
+  test('update() dispatches the correct actions if loadLang', () => {
+    const expectedActions: ActionObj[] = [
+      { type: UPDATE_SETTINGS, payload: { settings: testSettings } },
+      { type: CHANGE_LANGUAGE, payload: { lang: 'DE' } },
+    ];
+
+    expect.assertions(1);
+    store.dispatch(settingsActions.update(testSettings, true, callback));
     expect(store.getActions()).toEqual(expectedActions);
     store.clearActions();
   });

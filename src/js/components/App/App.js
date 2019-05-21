@@ -110,7 +110,7 @@ export class App extends Component<Props> {
 
   renderContent(): RenderHelperReturn {
     if (this.props.app.error === false && this.props.app.loaded === true) {
-      if (this.props.app.dataCreated || this.props.classes.length > 0) {
+      if ((this.props.app.dataCreated && this.props.classes.length > 0) || !this.props.app.dataCreated) {
         return <Panels />;
       } else {
         return <NoData />;

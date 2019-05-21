@@ -1,6 +1,6 @@
 // @flow
 
-import pupilDefault, { PupilFactory, getPupilIdStr } from '../pupil';
+import pupilDefault, { pupilSortLast, PupilFactory, getPupilIdStr } from '../pupil';
 import type { PupilType } from '../pupil';
 import { ICON_PUPILS_FEMALE, ICON_PUPILS_MALE } from '../../constants/icons';
 import { ROUTE_EDIT_BUILDER, ROUTE_DEL_PUPIL, ROUTE_EDIT_PUPIL } from '../../constants/routes';
@@ -60,6 +60,10 @@ describe('Types: Pupil', () => {
       expect(newPupilObj.getLabel()).toEqual(newPupilObj.firstname + ' ' + newPupilObj.lastname);
     });
 
+    test('getLabel() correctly returns the label - last name first', () => {
+      expect(newPupilObj.getLabel(pupilSortLast)).toEqual(newPupilObj.lastname + ', ' + newPupilObj.firstname);
+    });
+
     test('getTooltip() correctly returns the tooltip', () => {
       expect(newPupilObj.getTooltip()).toEqual(newPupilObj.getLabel() + ' - ' + newPupilObj.getDescription());
       newPupilObj.description = '';
@@ -84,10 +88,12 @@ describe('Types: Pupil', () => {
         expect(result).toBe(true);
       });
 
-      test('Returns true if the pupil object contains the search term.', () => {
+      test('Handles last name first correctly', () => {
         const term: string = 'Rimmer';
-        const result: boolean = newPupilObj.contains(term, true);
-        expect(result).toBe(true);
+        const resultLastFirst: boolean = newPupilObj.contains(term, false, pupilSortLast);
+        expect(resultLastFirst).toBe(true);
+        const resultFirstLast: boolean = newPupilObj.contains(term, false);
+        expect(resultFirstLast).toBe(false);
       });
     });
 

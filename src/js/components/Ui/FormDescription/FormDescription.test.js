@@ -33,10 +33,10 @@ describe('<FormDescription />', () => {
     expect(wrapper.text()).not.toBe(CHILDREN);
   });
 
-  test('compact prop adds class', () => {
+  test('inline prop adds class', () => {
     const CLASS: string = '.FormDescription--inline';
     const wrapper = shallow(<FormDescription {...props} />);
-    const wrapper2 = shallow(<FormDescription {...props} compact />);
+    const wrapper2 = shallow(<FormDescription {...props} inline />);
     expect(wrapper.find(CLASS)).toHaveLength(0);
     expect(wrapper2.find(CLASS)).toHaveLength(1);
   });

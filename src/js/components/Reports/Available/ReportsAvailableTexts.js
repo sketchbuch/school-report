@@ -173,23 +173,4 @@ export class ReportsAvailableTexts extends React.Component<Props> {
   }
 }
 
-/*} else if (this.props.term !== '' || this.props.filter !== '') {
-      let searchNone = 'NoneSearched-' + this.props.listType;
-
-      if (this.props.term === '' && this.props.filter !== '') {
-        searchNone = 'NoneCategory-' + this.props.listType;
-      } else if (this.props.term !== '' && this.props.termAnywhere) {
-        searchNone += '-anywhere';
-      }
-
-      return (
-        <React.Fragment>
-          {this.props.children && <SidebarSubheader>{this.props.children}</SidebarSubheader>}
-          <NoItems>
-            <Translation name={searchNone} ns="SidebarList" />
-          </NoItems>
-        </React.Fragment>
-      );
-    } */
-
 export default withSearch(ReportsAvailableTexts);

@@ -2,11 +2,11 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { CATEGORY_NONE, CATEGORY_SELECTED, CATEGORY_UNSELECTED } from '../../constants/misc';
 import CatSelect from './CatSelect';
 import categoryDefault from '../../types/category';
 import textDefault from '../../types/text';
 import type { Props } from './CatSelect';
+import type { SelectOption } from '../../types/ui';
 
 describe('<CatSelect />', () => {
   const props: Props = {
@@ -40,21 +40,23 @@ describe('<CatSelect />', () => {
   });
 
   test('Shows the selected option if useSelected and selectedCount > 0', () => {
-    const option = 'option[value="' + CATEGORY_SELECTED + '"]';
     const wrapper1 = shallow(<CatSelect {...props} />);
     const wrapper2 = shallow(<CatSelect {...props} selectedCount={3} />);
+    const options1 = wrapper1.find('Select').prop('options');
+    const options2 = wrapper2.find('Select').prop('options');
 
-    expect(wrapper1.find(option)).toHaveLength(0);
-    expect(wrapper2.find(option)).toHaveLength(1);
+    expect(options1.find((item: SelectOption) => item.value === 'category-selected')).toBeUndefined();
+    expect(options2.find((item: SelectOption) => item.value === 'category-selected')).not.toBeUndefined();
   });
 
   test('Shows the unselected option if useSelected and unselectedCount > 0', () => {
-    const option = 'option[value="' + CATEGORY_UNSELECTED + '"]';
     const wrapper1 = shallow(<CatSelect {...props} />);
     const wrapper2 = shallow(<CatSelect {...props} selectedCount={props.texts.length} />);
+    const options1 = wrapper1.find('Select').prop('options');
+    const options2 = wrapper2.find('Select').prop('options');
 
-    expect(wrapper1.find(option)).toHaveLength(1);
-    expect(wrapper2.find(option)).toHaveLength(0);
+    expect(options1.find((item: SelectOption) => item.value === 'category-unselected')).not.toBeUndefined();
+    expect(options2.find((item: SelectOption) => item.value === 'category-unselected')).toBeUndefined();
   });
 
   test('Shows the uncategorised option when needed', () => {
@@ -81,11 +83,12 @@ describe('<CatSelect />', () => {
       ],
     };
 
-    const option: string = 'option[value="' + CATEGORY_NONE + '"]';
     const wrapper1 = shallow(<CatSelect {...props} />);
     const wrapper2 = shallow(<CatSelect {...props2} />);
+    const options1 = wrapper1.find('Select').prop('options');
+    const options2 = wrapper2.find('Select').prop('options');
 
-    expect(wrapper1.find(option)).toHaveLength(1);
-    expect(wrapper2.find(option)).toHaveLength(0);
+    expect(options1.find((item: SelectOption) => item.value === 'category-nocat')).not.toBeUndefined();
+    expect(options2.find((item: SelectOption) => item.value === 'category-nocat')).toBeUndefined();
   });
 });

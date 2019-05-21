@@ -42,10 +42,10 @@ class Select extends React.PureComponent<Props> {
         classNamePrefix="Select__"
         disabled={disabled}
         id={id}
-        searchable={options.length > 10}
         name={name}
         onChange={onChange}
         options={options}
+        searchable={options.length > 10}
         title={title}
         value={options.find((opt: SelectOption) => {
           return opt.value === value;
