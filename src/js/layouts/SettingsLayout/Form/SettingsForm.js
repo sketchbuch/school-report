@@ -49,15 +49,13 @@ export class SettingsFrom extends Component<Props> {
                 name="language"
                 value={values.language}
                 onChange={this.handleSelectChange('language')}
-                options={this.props.languages.map(
-                  (lang: LangType): SelectOption => {
-                    return {
-                      ...defaultSelectOption,
-                      label: lang.label,
-                      value: lang.key,
-                    };
-                  }
-                )}
+                options={this.props.languages.map((lang: LangType): SelectOption => {
+                  return {
+                    ...defaultSelectOption,
+                    label: lang.label,
+                    value: lang.key,
+                  };
+                })}
               />
             </div>
           </div>
@@ -74,15 +72,13 @@ export class SettingsFrom extends Component<Props> {
                 name="pupilsSort"
                 value={values.pupilsSort}
                 onChange={this.handleSelectChange('pupilsSort')}
-                options={pupilSortOptions.map(
-                  (sortOpt: string): SelectOption => {
-                    return {
-                      ...defaultSelectOption,
-                      label: text('PupilsSort-' + sortOpt, 'Settings'),
-                      value: sortOpt,
-                    };
-                  }
-                )}
+                options={pupilSortOptions.map((sortOpt: string): SelectOption => {
+                  return {
+                    ...defaultSelectOption,
+                    label: text('PupilsSort-' + sortOpt, 'Settings'),
+                    value: sortOpt,
+                  };
+                })}
               />
             </div>
           </div>

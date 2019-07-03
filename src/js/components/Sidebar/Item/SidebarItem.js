@@ -58,7 +58,6 @@ class SidebarItem extends Component<Props, State> {
   componentDidMount() {
     if (this.props.isNew) {
       this.newTimer = setTimeout(() => {
-        console.log('this.props.item', this.props.item);
         this.props.updateExistingItems(this.props.item.id);
       }, this.props.itemDuration);
     }

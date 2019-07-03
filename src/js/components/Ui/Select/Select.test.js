@@ -37,12 +37,16 @@ describe('<Select />', () => {
 
   test('Renders a Select component', () => {
     const wrapper = shallow(<Select {...props} />);
-    expect(wrapper.find('Select')).toHaveLength(1);
+    const stateManager = wrapper.find('StateManager');
+    const select = stateManager.dive().find('Select');
+    expect(stateManager).toHaveLength(1);
+    expect(select).toHaveLength(1);
   });
 
   test('Renders the correct number of opions', () => {
     const wrapper = shallow(<Select {...props} />);
-    const select = wrapper.find('Select');
+    const stateManager = wrapper.find('StateManager');
+    const select = stateManager.dive().find('Select');
     expect(select.prop('options')).toHaveLength(props.options.length);
   });
 });

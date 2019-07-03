@@ -1,8 +1,10 @@
 // @flow
 
 import React, { Component } from 'react';
-import { toastr } from 'react-redux-toastr';
+import type { Dispatch } from 'redux';
 import { Link } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router';
+import { toastr } from 'react-redux-toastr';
 import * as categoryActions from '../../../actions/categoryActions';
 import { Button, FieldWrap, Form, FormCancel } from '../../../components/Ui';
 import EditPanel from '../../../components/EditPanel/EditPanel';
@@ -14,10 +16,8 @@ import type { FsObject } from '../../../types/fsObject';
 import { ROUTE_CATEGORIES } from '../../../constants/routes';
 
 export type Props = {
-  dispatch: Function,
-  history: Object,
-  location: Object,
-  match: Object,
+  ...RouteComponentProps,
+  dispatch: Dispatch,
 };
 
 type State = {

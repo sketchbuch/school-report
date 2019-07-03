@@ -47,6 +47,13 @@ describe('<ItemSelection />', () => {
 
   test('Renders the ItemList', () => {
     const wrapper = shallow(<ItemSelection {...props} items={items} />);
-    expect(wrapper.find('FieldArray')).toHaveLength(1);
+    const formikConnect = wrapper.find('FormikConnect(FieldArrayInner)');
+    expect(formikConnect).toHaveLength(1);
+
+    const itemList = formikConnect
+      .dive() // ContextConsumer
+      .dive() // FieldArrayInner
+      .dive(); // ItemList
+    expect(itemList).toHaveLength(1);
   });
 });

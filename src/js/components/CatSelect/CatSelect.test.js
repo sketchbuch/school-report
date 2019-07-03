@@ -32,7 +32,7 @@ describe('<CatSelect />', () => {
 
   test('Renders nothing if no categories', () => {
     const content = '.CatSelect';
-    const wrapper1 = shallow(<CatSelect />);
+    const wrapper1 = shallow(<CatSelect {...props} categories={[]} />);
     const wrapper2 = shallow(<CatSelect {...props} />);
 
     expect(wrapper1.find(content)).toHaveLength(0);
