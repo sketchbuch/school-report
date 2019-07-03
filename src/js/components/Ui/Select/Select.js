@@ -13,7 +13,7 @@ export type Props = {
   id?: string,
   isValid: boolean,
   name?: string,
-  onChange: ?(option: SelectOption) => void,
+  onChange: (option: any) => void,
   options: SelectOption[],
   title?: string,
   value?: string,
@@ -24,7 +24,6 @@ class Select extends React.PureComponent<Props> {
     className: '',
     disabled: false,
     isValid: true,
-    onChange: null,
     options: [],
   };
 

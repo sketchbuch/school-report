@@ -22,7 +22,7 @@ const NS: string = 'CatSelect';
 
 export type Props = {
   categories: CategoryType[],
-  onChange: ?(option: SelectOption) => void,
+  onChange: (option: SelectOption) => void,
   option: string,
   selectedCount: number,
   texts: TextType[],
@@ -32,7 +32,6 @@ export type Props = {
 export class CatSelect extends React.Component<Props> {
   static defaultProps = {
     categories: [],
-    onChange: null,
     option: '',
     selectedCount: 0,
     texts: [],

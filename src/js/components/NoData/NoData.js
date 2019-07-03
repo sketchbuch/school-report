@@ -20,7 +20,6 @@ import type { RenderHelperReturn } from '../../types/misc';
 import type { TextType } from '../../types/text';
 import { prefixedClassSchema, prefixedPupilSchema, prefixedTextSchema } from '../../validation/schemas';
 import { text } from '../Translation/Translation';
-import 'react-select/dist/react-select.css';
 import './NoData.css';
 
 export type Props = {

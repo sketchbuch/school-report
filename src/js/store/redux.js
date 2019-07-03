@@ -23,8 +23,8 @@ let reduxMiddleware = null;
 // If there are dev tools (i.e. not in electron) and not running in Jest, include dev tools.
 if (window && window.__REDUX_DEVTOOLS_EXTENSION__ && !navigator.userAgent.includes('Node.js')) {
   reduxMiddleware = compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    applyMiddleware(thunk)
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 } else {
   reduxMiddleware = applyMiddleware(thunk);
