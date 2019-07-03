@@ -18,12 +18,11 @@ export default function persist(
   immediate: boolean = false
 ) {
   let persistFiles = [];
-  let contentTosave = {};
+
   content.forEach(filePath => {
-    const STATE_KEY = filePath.toLowerCase();
+    const STATE_KEY: string = filePath.toLowerCase();
 
     if (getState()[STATE_KEY] !== undefined) {
-      contentTosave[filePath] = { [STATE_KEY]: getState()[STATE_KEY] };
       persistFiles.push(STATE_KEY);
     }
   });
@@ -32,7 +31,16 @@ export default function persist(
 
   if (persisters[PERSIST_TYPE] === undefined) {
     persisters[PERSIST_TYPE] = debounce(
-      () => {
+      callback => {
+        let contentTosave = {};
+        content.forEach(filePath => {
+          const STATE_KEY: string = filePath.toLowerCase();
+
+          if (getState()[STATE_KEY] !== undefined) {
+            contentTosave[filePath] = { [STATE_KEY]: getState()[STATE_KEY] };
+          }
+        });
+
         writeAppData(contentTosave, (ioResult: FsObject) => {
           if (ioResult.success) {
             dispatch(persistenceSuccess(PERSIST_TYPE));
@@ -43,10 +51,10 @@ export default function persist(
           callback(ioResult);
         });
       },
-      750,
+      500,
       immediate
     );
   }
 
-  persisters[PERSIST_TYPE]();
+  persisters[PERSIST_TYPE](callback);
 }
