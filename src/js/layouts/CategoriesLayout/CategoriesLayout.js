@@ -67,7 +67,7 @@ export class CategoriesLayout extends React.Component<Props> {
     };
   };
 
-  renderActionsLeft(): React.Node {
+  renderActionsLeft = (): React.Node => {
     return (
       <NavButtonCircular
         to={ROUTE_NEW_CATEGORY}
@@ -79,9 +79,9 @@ export class CategoriesLayout extends React.Component<Props> {
         <Icon type={ICON_ADD} />
       </NavButtonCircular>
     );
-  }
+  };
 
-  renderActionsRight(hasCategories: boolean): React.Node {
+  renderActionsRight = (hasCategories: boolean): React.Node => {
     return (
       <NavButtonCircular
         disabled={!hasCategories}
@@ -94,13 +94,13 @@ export class CategoriesLayout extends React.Component<Props> {
         <Icon type={ICON_DELETE} />
       </NavButtonCircular>
     );
-  }
+  };
 
-  renderDelete(routerProps: RouteChildrenProps): React.Node {
+  renderDelete = (routerProps: RouteChildrenProps): React.Node => {
     return <DeleteCategoriesLayout {...routerProps} dispatch={this.props.dispatch} />;
-  }
+  };
 
-  renderEdit(routerProps: RouteChildrenProps): React.Node {
+  renderEdit = (routerProps: RouteChildrenProps): React.Node => {
     const {
       categories,
       match: { params },
@@ -125,15 +125,15 @@ export class CategoriesLayout extends React.Component<Props> {
         schema={categorySchema}
       />
     );
-  }
+  };
 
-  renderInfo(routerProps: RouteChildrenProps): React.Node {
+  renderInfo = (routerProps: RouteChildrenProps): React.Node => {
     return (
       <InfoMsg {...routerProps} headine={text('Categories', 'InfoMsg')} subtext={text('CategoriesMsg', 'InfoMsg')} />
     );
-  }
+  };
 
-  renderNew(routerProps: RouteChildrenProps): React.Node {
+  renderNew = (routerProps: RouteChildrenProps): React.Node => {
     return (
       <Edit
         {...routerProps}
@@ -154,9 +154,9 @@ export class CategoriesLayout extends React.Component<Props> {
         schema={categorySchema}
       />
     );
-  }
+  };
 
-  renderSearchBox(hasCategories: boolean, search: SearchProps): React.Node {
+  renderSearchBox = (hasCategories: boolean, search: SearchProps): React.Node => {
     return hasCategories ? (
       <SearchField
         anywhere={search.anywhere}
@@ -170,7 +170,7 @@ export class CategoriesLayout extends React.Component<Props> {
         visible={search.visible}
       />
     ) : null;
-  }
+  };
 
   render() {
     const { categories, dispatch, search }: Props = this.props;
