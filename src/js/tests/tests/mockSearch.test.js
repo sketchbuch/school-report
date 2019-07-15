@@ -1,8 +1,8 @@
 // @flow
 
-import mockSearch from './mockSearch';
-import { defaultState } from '../hoc/withSearch';
-import type { WithSearchProps } from '../hoc/withSearch';
+import mockSearch from '../mockSearch';
+import { defaultState } from '../../hoc/withSearch';
+import type { WithSearchProps } from '../../hoc/withSearch';
 
 const testFunctionIsInProps = (functionName: string, props: WithSearchProps): void => {
   test(`Search props contains the function "${functionName}"`, () => {

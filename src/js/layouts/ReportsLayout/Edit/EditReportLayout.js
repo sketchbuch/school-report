@@ -12,7 +12,7 @@ import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeade
 import EditReportForm from '../Form/EditReportForm';
 import reportDefault from '../../../types/report';
 import reportSchema from '../../../validation/schemas/reports';
-import setTitle from '../../../utils/title';
+import setTitle from '../../../utils/setTitle';
 import type { ClassType } from '../../../types/class';
 import type { FsObject } from '../../../types/fsObject';
 import type { ReportType } from '../../../types/report';

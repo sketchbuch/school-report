@@ -15,7 +15,7 @@ import type { InsertDangerousHtmlObj } from '../../../types/misc';
 import type { ReportType } from '../../../types/report';
 import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
 import type { TextType } from '../../../types/text';
-import setTitle from '../../../utils/title';
+import setTitle from '../../../utils/setTitle';
 
 export type Props = {
   ...RouteComponentProps,

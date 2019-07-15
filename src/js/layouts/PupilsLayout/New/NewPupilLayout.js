@@ -11,7 +11,7 @@ import EditPanelContent from '../../../components/EditPanel/Content/EditPanelCon
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import EditPupilForm from '../Form/EditPupilForm';
 import pupilDefault, { PupilFactory } from '../../../types/pupil';
-import setTitle from '../../../utils/title';
+import setTitle from '../../../utils/setTitle';
 import type { ClassType } from '../../../types/class';
 import type { FsObject } from '../../../types/fsObject';
 import type { PupilType } from '../../../types/pupil';

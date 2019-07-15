@@ -18,7 +18,7 @@ import type { ReportType } from '../../../types/report';
 import type { TextType } from '../../../types/text';
 import type { SidebarBuilderItemType } from '../../../types/sidebarBuilderItem';
 import { exportWord, getContent, getDateFromTs } from '../../../fs/export';
-import setTitle from '../../../utils/title';
+import setTitle from '../../../utils/setTitle';
 import { TOASTR_DURATION_LONG } from '../../../constants/misc';
 
 export type Props = {

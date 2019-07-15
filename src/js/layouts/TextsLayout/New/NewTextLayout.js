@@ -19,7 +19,7 @@ import textDefault, { TextFactory } from '../../../types/text';
 import { ROUTE_TEXTS } from '../../../constants/routes';
 import { cropStr } from '../../../utils/strings';
 import { TEXT_CROP_LEN } from '../../../constants/misc';
-import setTitle from '../../../utils/title';
+import setTitle from '../../../utils/setTitle';
 
 export type Props = {
   ...RouteComponentProps,

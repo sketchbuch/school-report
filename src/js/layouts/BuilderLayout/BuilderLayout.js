@@ -28,7 +28,7 @@ import { getSelectedTexts } from '../../utils/redux';
 import { ICON_EXPORT } from '../../constants/icons';
 import { ROUTE_BUILDER, ROUTE_EDIT_BUILDER, ROUTE_EXPORT_BUILDER } from '../../constants/routes';
 import { getActiveReport } from '../../utils/redux';
-import setTitle from '../../utils/title';
+import setTitle from '../../utils/setTitle';
 
 export type Props = {
   ...RouteComponentProps,

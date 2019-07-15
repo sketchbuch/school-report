@@ -18,7 +18,7 @@ import type { TextType } from '../../../types/text';
 import textDefault from '../../../types/text';
 import { ROUTE_TEXTS } from '../../../constants/routes';
 import { getActiveText } from '../../../utils/redux';
-import setTitle from '../../../utils/title';
+import setTitle from '../../../utils/setTitle';
 
 export type Props = {
   ...RouteComponentProps,

@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { toastr } from 'react-redux-toastr';
 import * as settingsActions from '../../actions/settingsActions';
 import SettingsForm from './Form/SettingsForm';
-import setTitle from '../../utils/title';
+import setTitle from '../../utils/setTitle';
 import settingsDefault from '../../types/settings';
 import settingsSchema from '../../validation/schemas/settings';
 import type { FsObject } from '../../types/fsObject';

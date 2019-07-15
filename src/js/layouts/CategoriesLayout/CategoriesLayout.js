@@ -6,24 +6,19 @@ import { Route, Switch } from 'react-router-dom';
 import { RouteComponentProps, RouteChildrenProps } from 'react-router';
 import { connect } from 'react-redux';
 import * as categoryActions from '../../actions/categoryActions';
-import DeleteCategoriesLayout from './Delete/DeleteCategoriesLayout';
-import Edit from '../../components/Domain/Edit/Edit';
-import Icon from '../../components/Icon/Icon';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
-import categoryDefault from '../../types/category';
 import categorySchema from '../../validation/schemas/categories';
+import getDomainRec from '../../utils/domain';
 import type { CategoryType } from '../../types/category';
 import type { ReduxState } from '../../types/reduxstate';
-import type { SearchProps, WithSearchProps } from '../../hoc/withSearch';
+import type { WithSearchProps } from '../../hoc/withSearch';
 import withSearch from '../../hoc/withSearch';
-import { CategoryFactory, categorySort } from '../../types/category';
-import { ICON_ADD, ICON_DELETE } from '../../constants/icons';
-import { NavButtonCircular, SearchField } from '../../components/Ui';
-import { getActiveCategory } from '../../utils/redux';
+import { ActionButton, Delete, Edit, SearchBox } from '../../components/Domain';
+import categoryDefault, { CategoryFactory, categorySort } from '../../types/category';
 import { text } from '../../components/Translation/Translation';
 import {
   ROUTE_DEL_CATEGORIES,
@@ -31,11 +26,7 @@ import {
   ROUTE_NEW_CATEGORY,
   ROUTE_CATEGORIES,
 } from '../../constants/routes';
-import setTitle from '../../utils/title';
-
-const getActiveId = (params: { [key: string]: string }): string => {
-  return params !== undefined ? params.categoryId : '';
-};
+import setLayoutTitle from '../../utils/setLayoutTitle';
 
 export type Props = {
   ...RouteComponentProps,
@@ -51,62 +42,55 @@ export class CategoriesLayout extends React.Component<Props> {
   props: Props;
 
   componentDidMount() {
-    setTitle(text('WinTitle', 'Categories'));
+    setLayoutTitle(text('WinTitle', 'Categories'));
   }
 
   componentDidUpdate() {
-    if (window.location.pathname === ROUTE_CATEGORIES) {
-      setTitle(text('WinTitle', 'Categories'));
-    }
+    setLayoutTitle(text('WinTitle', 'Categories'), ROUTE_CATEGORIES);
   }
-
-  getDomainRec = (params: { [key: string]: string }) => {
-    return {
-      ...categoryDefault,
-      ...getActiveCategory(this.props.categories, getActiveId(params)),
-    };
-  };
 
   renderActionsLeft = (): React.Node => {
     return (
-      <NavButtonCircular
-        to={ROUTE_NEW_CATEGORY}
-        className="SidebarFooter__action"
-        buttontype="pos-rollover"
-        action="add-category"
-        title={text('CategoryAdd', 'Actions')}
-      >
-        <Icon type={ICON_ADD} />
-      </NavButtonCircular>
+      <ActionButton domainType="category" title={text('CategoryAdd', 'Actions')} to={ROUTE_NEW_CATEGORY} type="add" />
     );
   };
 
-  renderActionsRight = (hasCategories: boolean): React.Node => {
+  renderActionsRight = (disabled: boolean): React.Node => {
     return (
-      <NavButtonCircular
-        disabled={!hasCategories}
-        to={ROUTE_DEL_CATEGORIES}
-        className="SidebarFooter__action"
-        buttontype="neg-rollover"
-        action="delete-categories"
+      <ActionButton
+        disabled={!disabled}
+        domainType="category"
         title={text('CategoryDelete', 'Actions')}
-      >
-        <Icon type={ICON_DELETE} />
-      </NavButtonCircular>
+        to={ROUTE_DEL_CATEGORIES}
+        type="delete"
+      />
     );
   };
 
   renderDelete = (routerProps: RouteChildrenProps): React.Node => {
-    return <DeleteCategoriesLayout {...routerProps} dispatch={this.props.dispatch} />;
+    return (
+      <Delete
+        {...routerProps}
+        butCancelLabel={text('BackToCategories', 'Categories')}
+        butDeleteLabel={text('BtnLabel', 'DeleteCategoriesLayout')}
+        dispatch={this.props.dispatch}
+        domainType="category"
+        editPanelTitle={text('DeleteCategories', 'EditPanelHeader')}
+        formHeadline={text('Headline', 'DeleteCategoriesLayout')}
+        formHeadlineDeleting={text('HeadlineDeleting', 'DeleteCategoriesLayout')}
+        persistenceErrorMsg={text('PersistenceError', 'Categories')}
+        persistenceSuccessMsg={text('PersistenceDeleted', 'Categories')}
+        redirectRoute={ROUTE_CATEGORIES}
+      />
+    );
   };
 
   renderEdit = (routerProps: RouteChildrenProps): React.Node => {
     const {
-      categories,
       match: { params },
-    }: Props = routerProps;
-
-    const domainRec = this.getDomainRec(params);
+    }: RouteChildrenProps = routerProps;
+    const { categories }: Props = this.props;
+    const domainRec = getDomainRec(categoryDefault, categories, params, 'categoryId');
 
     return (
       <Edit
@@ -117,7 +101,7 @@ export class CategoriesLayout extends React.Component<Props> {
         domainObjects={categories}
         domainRec={domainRec}
         domainType="category"
-        editPanelHeader={text('EditCategory', 'EditPanelHeader', { CATEGORY_NAME: domainRec.getLabel() })}
+        editPanelTitle={text('EditCategory', 'EditPanelHeader', { CATEGORY_NAME: domainRec.getLabel() })}
         isNew={false}
         persistenceErrorMsg={text('PersistenceEditError', 'Categories')}
         persistenceSuccessMsg={text('PersistenceEdit', 'Categories')}
@@ -146,7 +130,7 @@ export class CategoriesLayout extends React.Component<Props> {
         domainObjects={this.props.categories}
         domainRec={{ ...categoryDefault }}
         domainType="category"
-        editPanelHeader={text('AddCategory', 'EditPanelHeader')}
+        editPanelTitle={text('AddCategory', 'EditPanelHeader')}
         isNew
         persistenceErrorMsg={text('PersistenceNewError', 'Categories')}
         persistenceSuccessMsg={text('PersistenceNew', 'Categories')}
@@ -156,28 +140,11 @@ export class CategoriesLayout extends React.Component<Props> {
     );
   };
 
-  renderSearchBox = (hasCategories: boolean, search: SearchProps): React.Node => {
-    return hasCategories ? (
-      <SearchField
-        anywhere={search.anywhere}
-        anywhereOnClick={search.handleToggleAnywhere}
-        clearOnClick={search.handleToggleVisibility}
-        iconOnClick={search.handleToggleVisibility}
-        onKeyUp={search.handleKeyUp}
-        onChange={search.handleChange}
-        placeholder={text('SearchPlaceholder-category', 'SidebarHeader')}
-        term={search.term}
-        visible={search.visible}
-      />
-    ) : null;
-  };
-
   render() {
     const { categories, dispatch, search }: Props = this.props;
     const HAS_CATGEORIES: boolean = categories.length > 0 ? true : false;
     const leftActions: React.Node = this.renderActionsLeft();
     const rightActions: React.Node = this.renderActionsRight(HAS_CATGEORIES);
-    const searchBox: React.Node = this.renderSearchBox(HAS_CATGEORIES, search);
 
     return (
       <div className="Panel">
@@ -189,7 +156,7 @@ export class CategoriesLayout extends React.Component<Props> {
               COUNT: categories.length,
             })}
           >
-            {searchBox}
+            <SearchBox domainType="category" hasSearch={HAS_CATGEORIES} search={search} />
           </SidebarHeader>
           <SidebarList
             curPage={search.page}

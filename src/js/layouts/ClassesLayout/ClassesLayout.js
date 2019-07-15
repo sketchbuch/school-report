@@ -14,7 +14,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
-import setTitle from '../../utils/title';
+import setTitle from '../../utils/setTitle';
 import type { ClassType } from '../../types/class';
 import type { DomainType } from '../../types/domain';
 import type { PupilType } from '../../types/pupil';
@@ -53,14 +53,12 @@ export class ClassesLayout extends React.Component<Props> {
   }
 
   getClasses(): DomainType[] {
-    return this.props.classes.map(
-      (item: ClassType): ClassType => {
-        return {
-          ...item,
-          pupilCount: this.props.pupils.filter((pupil: PupilType): boolean => pupil.classId === item.id).length,
-        };
-      }
-    );
+    return this.props.classes.map((item: ClassType): ClassType => {
+      return {
+        ...item,
+        pupilCount: this.props.pupils.filter((pupil: PupilType): boolean => pupil.classId === item.id).length,
+      };
+    });
   }
 
   render() {

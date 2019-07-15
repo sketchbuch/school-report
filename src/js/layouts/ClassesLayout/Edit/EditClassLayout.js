@@ -17,7 +17,7 @@ import type { ClassType } from '../../../types/class';
 import type { FsObject } from '../../../types/fsObject';
 import { ROUTE_CLASSES } from '../../../constants/routes';
 import { getActiveClass } from '../../../utils/redux';
-import setTitle from '../../../utils/title';
+import setTitle from '../../../utils/setTitle';
 
 export type Props = {
   ...RouteComponentProps,

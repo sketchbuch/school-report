@@ -15,7 +15,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
-import setTitle from '../../utils/title';
+import setTitle from '../../utils/setTitle';
 import type { CategoryType } from '../../types/category';
 import type { ReduxState } from '../../types/reduxstate';
 import type { SelectOption } from '../../types/ui';

@@ -14,7 +14,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
-import setTitle from '../../utils/title';
+import setTitle from '../../utils/setTitle';
 import type { ClassType } from '../../types/class';
 import type { ReduxState } from '../../types/reduxstate';
 import type { ReportType } from '../../types/report';

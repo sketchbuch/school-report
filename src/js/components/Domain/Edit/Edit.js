@@ -8,7 +8,7 @@ import { toastr } from 'react-redux-toastr';
 import EditPanel from '../../EditPanel/EditPanel';
 import EditPanelContent from '../../EditPanel/Content/EditPanelContent';
 import EditPanelHeader from '../../EditPanel/Header/EditPanelHeader';
-import setTitle from '../../../utils/title';
+import setTitle from '../../../utils/setTitle';
 import EditCategoryForm from '../../../layouts/CategoriesLayout/Form/EditCategoryForm';
 import type { ActionCreator } from '../../../types/action';
 import type { CategoryType } from '../../../types/category';
@@ -45,7 +45,7 @@ export type Props = {
   domainRec: DomainType,
   domainType: SidebarListTypes,
   isNew: boolean,
-  editPanelHeader: string,
+  editPanelTitle: string,
   persistenceErrorMsg: string,
   persistenceSuccessMsg: string,
   redirectRoute: string,
@@ -58,7 +58,7 @@ type State = {
   saving: boolean,
 };
 
-export class DomainEdit extends React.Component<Props, State> {
+export class Edit extends React.Component<Props, State> {
   static defaultProps = {
     domainObjects: [],
   };
@@ -101,6 +101,7 @@ export class DomainEdit extends React.Component<Props, State> {
       } else {
         dispatch(actionUpdate(domain, this.dataSaved));
       }
+
       this.setState({ saving: false });
     }
   }
@@ -135,13 +136,13 @@ export class DomainEdit extends React.Component<Props, State> {
   };
 
   render() {
-    const { domainRec, domainType, editPanelHeader, isNew, schema }: Props = this.props;
+    const { domainRec, domainType, editPanelTitle, isNew, schema }: Props = this.props;
     const { saving } = this.state;
     const FormComp = editForms[domainType];
 
     return (
       <EditPanel>
-        <EditPanelHeader title={editPanelHeader} />
+        <EditPanelHeader title={editPanelTitle} />
         <EditPanelContent>
           <Formik
             initialValues={{ ...domainRec }}
@@ -156,4 +157,4 @@ export class DomainEdit extends React.Component<Props, State> {
   }
 }
 
-export default DomainEdit;
+export default Edit;

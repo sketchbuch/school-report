@@ -1,14 +1,14 @@
 // @flow
 
-import setTitle, { titleSep } from '../title';
+import setTitle, { titleSep } from '../setTitle';
 
-describe('Util: Titles', () => {
-  test('setTitle() should set the default title if no prefix provided', () => {
+describe('Util: setTitle()', () => {
+  test('Should set the default title if no prefix provided', () => {
     setTitle();
     expect(window.document.title).toBe(window.reportr.translations.EN.App.Name);
   });
 
-  test('setTitle() handles suffix correctly', () => {
+  test('Handles suffix correctly', () => {
     setTitle('Test');
     expect(window.document.title).toBe(window.reportr.translations.EN.App.Name + titleSep + 'Test');
     setTitle(' ');

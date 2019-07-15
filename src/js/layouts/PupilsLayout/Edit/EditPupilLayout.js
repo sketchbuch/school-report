@@ -18,7 +18,7 @@ import type { FsObject } from '../../../types/fsObject';
 import type { PupilType } from '../../../types/pupil';
 import { ROUTE_PUPILS } from '../../../constants/routes';
 import { getActivePupil } from '../../../utils/redux';
-import setTitle from '../../../utils/title';
+import setTitle from '../../../utils/setTitle';
 
 export type Props = {
   ...RouteComponentProps,

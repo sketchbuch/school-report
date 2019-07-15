@@ -17,7 +17,7 @@ import type { ReportType } from '../../../types/report';
 import type { FsObject } from '../../../types/fsObject';
 import type { ClassType } from '../../../types/class';
 import { ROUTE_REPORTS } from '../../../constants/routes';
-import setTitle from '../../../utils/title';
+import setTitle from '../../../utils/setTitle';
 
 type Props = {
   ...RouteComponentProps,

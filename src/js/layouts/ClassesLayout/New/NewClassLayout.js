@@ -11,7 +11,7 @@ import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import classDefault, { ClassFactory } from '../../../types/class';
-import setTitle from '../../../utils/title';
+import setTitle from '../../../utils/setTitle';
 import type { ClassType } from '../../../types/class';
 import type { FsObject } from '../../../types/fsObject';
 import { ROUTE_CLASSES } from '../../../constants/routes';

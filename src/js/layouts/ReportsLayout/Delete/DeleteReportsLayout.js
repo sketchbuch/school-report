@@ -10,7 +10,7 @@ import EditPanel from '../../../components/EditPanel/EditPanel';
 import EditPanelContent from '../../../components/EditPanel/Content/EditPanelContent';
 import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeader';
 import Translation, { text } from '../../../components/Translation/Translation';
-import setTitle from '../../../utils/title';
+import setTitle from '../../../utils/setTitle';
 import type { FsObject } from '../../../types/fsObject';
 import { ROUTE_REPORTS } from '../../../constants/routes';
 
