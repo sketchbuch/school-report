@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, FieldError, FieldWrap, Form, FormCancel, TextInput } from '../../../components/Ui';
+import { Button, FieldError, FieldWrap, Form as FormComp, FormCancel, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
 import { ROUTE_CATEGORIES } from '../../../constants/routes';
@@ -21,7 +21,7 @@ export type Props = {
   values: Object,
 };
 
-export class EditCategoryForm extends Component<Props> {
+export class Form extends Component<Props> {
   static defaultProps = {
     dirty: false,
     isNew: false,
@@ -35,7 +35,7 @@ export class EditCategoryForm extends Component<Props> {
     const btnIsDisabled: boolean = !lValid || saving || !dirty;
 
     return (
-      <Form onSubmit={handleSubmit}>
+      <FormComp onSubmit={handleSubmit}>
         <FieldWrap>
           <TextInput
             onChange={handleChange}
@@ -64,9 +64,9 @@ export class EditCategoryForm extends Component<Props> {
             </Link>
           </FormCancel>
         )}
-      </Form>
+      </FormComp>
     );
   }
 }
 
-export default EditCategoryForm;
+export default Form;

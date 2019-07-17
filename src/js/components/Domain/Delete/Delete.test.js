@@ -4,17 +4,15 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { shallow } from 'enzyme';
 import { toastr } from 'react-redux-toastr';
-import Edit from './Edit';
-import categoryDefault, { CategoryFactory } from '../../../types/category';
+import Delete from './Delete';
 import setTitle from '../../../utils/setTitle';
 import type { FsObject } from '../../../types/fsObject';
-import type { Props } from './Edit';
+import type { Props } from './Delete';
 
 jest.mock('react-redux-toastr');
 jest.mock('../../../utils/setTitle');
 
-describe('<Edit />', () => {
-  const LABEL: string = 'Test Cat';
+describe('<Delete />', () => {
   const routerProps: RouteComponentProps = {
     history: {
       push: jest.fn(),
@@ -22,19 +20,17 @@ describe('<Edit />', () => {
   };
   const props: Props = {
     ...routerProps,
-    actionAdd: jest.fn(),
-    actionUpdate: jest.fn(),
-    createNew: jest.fn(values => values),
+    actionDeleteAll: jest.fn(),
+    butCancelLabel: 'Cancel',
+    butDeleteLabel: 'Delete',
     dispatch: jest.fn(),
-    domainObjects: [],
-    domainRec: CategoryFactory({ ...categoryDefault, label: LABEL, id: 'cat-1' }, Date.now()),
     domainType: 'catgeory',
-    isNew: true,
-    editPanelTitle: 'The EP Header',
+    editPanelTitle: 'Delete Records',
+    formHeadline: 'Headline',
+    formHeadlineDeleting: 'Headline Deleting',
     persistenceErrorMsg: 'Error',
     persistenceSuccessMsg: 'Success',
     redirectRoute: '/test',
-    schema: jest.fn(),
   };
 
   afterEach(() => {
@@ -42,20 +38,20 @@ describe('<Edit />', () => {
   });
 
   test('Renders without crashing', () => {
-    const wrapper = shallow(<Edit {...props} />);
+    const wrapper = shallow(<Delete {...props} />);
     expect(wrapper).toHaveLength(1);
   });
 
   describe('Lifecycle Methods:', () => {
     describe('componentDidMount():', () => {
       test('Calls setPageTitle()', () => {
-        shallow(<Edit {...props} />);
+        shallow(<Delete {...props} />);
         expect(setTitle).toHaveBeenCalledTimes(1);
       });
     });
 
     describe('componentDidUpdate():', () => {
-      const wrapper = shallow(<Edit {...props} />);
+      const wrapper = shallow(<Delete {...props} />);
 
       test('Calls setPageTitle()', () => {
         wrapper.instance().componentDidUpdate();
@@ -71,47 +67,29 @@ describe('<Edit />', () => {
         wrapper.setState({ error: false });
       });
 
-      test('Handles "state.saving: true" correctly when isNew', () => {
-        wrapper.setState({ saving: true });
+      test('Handles "state.deleting: true" correctly', () => {
+        wrapper.setState({ deleting: true });
         expect(props.dispatch).toHaveBeenCalledTimes(1);
-        expect(props.actionAdd).toHaveBeenCalledTimes(1);
-        expect(props.actionAdd.mock.calls[0][0]).toBe(wrapper.state().domain);
-        wrapper.setState({ saving: false });
-      });
-
-      test('Handles "state.saving: true" correctly when !isNew', () => {
-        const wrapperNotNew = shallow(<Edit {...props} isNew={false} />);
-        wrapperNotNew.setState({ saving: true });
-        expect(props.dispatch).toHaveBeenCalledTimes(1);
-        expect(props.actionUpdate).toHaveBeenCalledTimes(1);
-        expect(props.actionUpdate.mock.calls[0][0]).toBe(wrapperNotNew.state().domain);
-        expect(wrapperNotNew.state('saving')).toBe(false);
+        expect(props.actionDeleteAll).toHaveBeenCalledTimes(1);
+        wrapper.setState({ deleting: false });
       });
     });
   });
 
-  describe('handleSubmit():', () => {
-    const LABEL2: string = LABEL + ' 2';
-
-    test('Updates a new domain record correctly', () => {
-      const wrapper = shallow(<Edit {...props} />);
-      wrapper.instance().handleSubmit({ ...categoryDefault, label: LABEL2, id: 'cat-1' });
-      expect(props.createNew).toHaveBeenCalledTimes(1);
-      expect(wrapper.state('domain').label).toBe(LABEL2);
-    });
-
-    test('Updates a new domain record correctly if !isNew', () => {
-      const wrapper = shallow(<Edit {...props} isNew={false} />);
-      wrapper.instance().handleSubmit({ ...categoryDefault, label: LABEL2, id: 'cat-1' });
-      expect(props.createNew).not.toHaveBeenCalled();
-      expect(wrapper.state('domain').label).toBe(LABEL2);
-      expect(wrapper.state('domain').update).not.toBe(props.domainRec.updated);
+  describe('handleClick():', () => {
+    test.skip('Sets "state.deleting: true"', () => {
+      const mockPreventDefault = jest.fn();
+      const wrapper = shallow(<Delete {...props} />);
+      expect(wrapper.state('deleting')).toBe(false);
+      wrapper.instance().handleClick({ preventDefault: mockPreventDefault });
+      expect(mockPreventDefault).toHaveBeenCalledTimes(1);
+      // expect(wrapper.state('deleting')).toBe(true);
     });
   });
 
   describe('dataSaved():', () => {
     test('Handles ioResult.success correctly', () => {
-      const wrapper = shallow(<Edit {...props} />);
+      const wrapper = shallow(<Delete {...props} />);
       const ioResult: FsObject = {
         data: {},
         errorObj: null,
@@ -120,13 +98,12 @@ describe('<Edit />', () => {
       wrapper.instance().dataSaved(ioResult);
       expect(toastr.success).toHaveBeenCalledTimes(1);
       expect(toastr.success.mock.calls[0][0]).toBe(props.persistenceSuccessMsg);
-      expect(toastr.success.mock.calls[0][1]).toBe(LABEL);
       expect(routerProps.history.push).toHaveBeenCalledTimes(1);
       expect(routerProps.history.push).toHaveBeenCalledWith(props.redirectRoute);
     });
 
     test('Handles !ioResult.success correctly', () => {
-      const wrapper = shallow(<Edit {...props} />);
+      const wrapper = shallow(<Delete {...props} />);
       const ioResult: FsObject = {
         data: {},
         errorObj: null,
@@ -134,12 +111,12 @@ describe('<Edit />', () => {
       };
       wrapper.instance().dataSaved(ioResult);
       expect(wrapper.state('error')).toBe(true);
-      expect(wrapper.state('saving')).toBe(false);
+      expect(wrapper.state('deleting')).toBe(false);
     });
   });
 
   describe('render():', () => {
-    const wrapper = shallow(<Edit {...props} />);
+    const wrapper = shallow(<Delete {...props} />);
     let editPanel;
 
     test('Contains <Editpanel />', () => {
@@ -159,11 +136,11 @@ describe('<Edit />', () => {
       expect(editPanelContent).toHaveLength(1);
     });
 
-    test('Contains <Formik />', () => {
+    test('Contains <Form />', () => {
       const inEditPanel = wrapper.find('EditPanel').dive();
       const inEditPanelContent = inEditPanel.find('EditPanelContent').dive();
-      const formik = inEditPanelContent.find('Formik');
-      expect(formik).toHaveLength(1);
+      const form = inEditPanelContent.find('Form');
+      expect(form).toHaveLength(1);
     });
   });
 });

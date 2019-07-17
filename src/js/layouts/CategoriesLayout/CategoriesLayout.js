@@ -71,6 +71,7 @@ export class CategoriesLayout extends React.Component<Props> {
     return (
       <Delete
         {...routerProps}
+        actionDeleteAll={categoryActions.deleteAll}
         butCancelLabel={text('BackToCategories', 'Categories')}
         butDeleteLabel={text('BtnLabel', 'DeleteCategoriesLayout')}
         dispatch={this.props.dispatch}

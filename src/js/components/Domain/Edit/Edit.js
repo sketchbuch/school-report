@@ -9,7 +9,7 @@ import EditPanel from '../../EditPanel/EditPanel';
 import EditPanelContent from '../../EditPanel/Content/EditPanelContent';
 import EditPanelHeader from '../../EditPanel/Header/EditPanelHeader';
 import setTitle from '../../../utils/setTitle';
-import EditCategoryForm from '../../../layouts/CategoriesLayout/Form/EditCategoryForm';
+import { default as CategoryForm } from '../../../layouts/CategoriesLayout/Form/Form';
 import type { ActionCreator } from '../../../types/action';
 import type { CategoryType } from '../../../types/category';
 import type { DomainType } from '../../../types/domain';
@@ -20,7 +20,7 @@ import { text } from '../../Translation/Translation';
 import { ucFirst } from '../../../utils/strings';
 
 const editForms = {
-  category: EditCategoryForm,
+  category: CategoryForm,
 };
 
 const setPageTitle = (isNew: boolean, domainRec: DomainType, domainType: SidebarListTypes): void => {
