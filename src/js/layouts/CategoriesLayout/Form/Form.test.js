@@ -3,11 +3,11 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
-import EditCategoryForm from './EditCategoryForm';
-import type { Props } from './EditCategoryForm';
+import Form from './Form';
+import type { Props } from './Form';
 import { text } from '../../../components/Translation/Translation';
 
-describe('<EditCategoryForm />', () => {
+describe('<Form />', () => {
   const props: Props = {
     dirty: false,
     errors: {},
@@ -23,19 +23,19 @@ describe('<EditCategoryForm />', () => {
   };
 
   test('Renders without crashing', () => {
-    const wrapper = shallow(<EditCategoryForm {...props} />);
+    const wrapper = shallow(<Form {...props} />);
     expect(wrapper).toHaveLength(1);
   });
 
   test('Handles isNew prop correctly', () => {
     const wrapperNew = mount(
       <MemoryRouter>
-        <EditCategoryForm {...props} isNew={true} />
+        <Form {...props} isNew={true} />
       </MemoryRouter>
     );
     const wrapper = mount(
       <MemoryRouter>
-        <EditCategoryForm {...props} />
+        <Form {...props} />
       </MemoryRouter>
     );
     const btnTxtNew = wrapperNew.find('button[type="submit"]').text();

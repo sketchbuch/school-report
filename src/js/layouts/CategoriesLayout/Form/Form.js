@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, FieldError, FieldWrap, Form as FormComp, FormCancel, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
+import { Button, FieldError, FieldWrap, Form as FormComp, FormCancel, TextInput } from '../../../components/Ui';
 import { ROUTE_CATEGORIES } from '../../../constants/routes';
 
 // TODO - fix types

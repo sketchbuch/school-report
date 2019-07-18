@@ -4,20 +4,18 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import TextPreview from '../../../components/TextPreview/TextPreview';
 import Translation, { text } from '../../../components/Translation/Translation';
+import pupilDefault, { PupilFactory } from '../../../types/pupil';
 import type { CategoryType } from '../../../types/category';
 import type { DomainType } from '../../../types/domain';
 import type { PlaceHolderMapObject } from '../../../utils/html';
 import type { PupilType } from '../../../types/pupil';
-import pupilDefault, { PupilFactory } from '../../../types/pupil';
 import type { Tab, Tag, TabView } from '../../../types/ui';
 import validate from '../../../validation/validation';
-import { UI_VIEW_EDIT, UI_VIEW_PREVIEW } from '../../../constants/ui';
-import { defaultTag } from '../../../types/ui';
 import {
   Button,
   FieldError,
   FieldWrap,
-  Form,
+  Form as FormComp,
   FormDescription,
   FormCancel,
   ItemSelection,
@@ -26,7 +24,9 @@ import {
   Textarea,
 } from '../../../components/Ui';
 import { ROUTE_TEXTS } from '../../../constants/routes';
+import { UI_VIEW_EDIT, UI_VIEW_PREVIEW } from '../../../constants/ui';
 import { categorySort } from '../../../types/category';
+import { defaultTag } from '../../../types/ui';
 import { placeholderMap } from '../../../utils/html';
 import { sortObjectsAz } from '../../../utils/sort';
 import { wrapText } from '../../../utils/strings';
@@ -58,7 +58,7 @@ type State = {
   view: TabView,
 };
 
-export class EditTextForm extends React.Component<Props, State> {
+export class Form extends React.Component<Props, State> {
   static defaultProps = {
     categories: [],
     dirty: false,
@@ -154,7 +154,7 @@ export class EditTextForm extends React.Component<Props, State> {
     const selCount: number = categories.filter(c => values.categories.includes(c.id)).length;
 
     return (
-      <Form classes="EditTextForm" onSubmit={handleSubmit}>
+      <FormComp classes="EditTextForm" onSubmit={handleSubmit}>
         <FieldWrap>
           {this.renderTabs()}
           {this.state.view === UI_VIEW_EDIT ? this.renderEditor(btValid) : this.renderPreview()}
@@ -190,9 +190,9 @@ export class EditTextForm extends React.Component<Props, State> {
             </Link>
           </FormCancel>
         )}
-      </Form>
+      </FormComp>
     );
   }
 }
 
-export default EditTextForm;
+export default Form;

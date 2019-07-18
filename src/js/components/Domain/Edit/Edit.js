@@ -3,13 +3,13 @@
 import * as React from 'react';
 import type { Dispatch } from 'redux';
 import { Formik } from 'formik';
+import type { FormikProps } from 'formik';
 import { RouteComponentProps } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import EditPanel from '../../EditPanel/EditPanel';
 import EditPanelContent from '../../EditPanel/Content/EditPanelContent';
 import EditPanelHeader from '../../EditPanel/Header/EditPanelHeader';
 import setTitle from '../../../utils/setTitle';
-import { default as CategoryForm } from '../../../layouts/CategoriesLayout/Form/Form';
 import type { ActionCreator } from '../../../types/action';
 import type { CategoryType } from '../../../types/category';
 import type { DomainType } from '../../../types/domain';
@@ -19,17 +19,13 @@ import type { TranslationPaceholders } from '../../../types/lang';
 import { text } from '../../Translation/Translation';
 import { ucFirst } from '../../../utils/strings';
 
-const editForms = {
-  category: CategoryForm,
-};
-
 const setPageTitle = (isNew: boolean, domainRec: DomainType, domainType: SidebarListTypes): void => {
   const NS_TYPE: string = ucFirst(domainType);
   const NS_PREFIX: string = isNew ? 'New' : 'Edit';
   let placeholders: TranslationPaceholders = isNew
     ? {}
     : {
-        CAT: domainRec.getLabel(),
+        LABEL: domainRec.getLabel(),
       };
 
   setTitle(text('WinTitle', `${NS_PREFIX}${NS_TYPE}Layout`, placeholders));
@@ -44,8 +40,9 @@ export type Props = {
   domainObjects: DomainType[],
   domainRec: DomainType,
   domainType: SidebarListTypes,
-  isNew: boolean,
   editPanelTitle: string,
+  form: (formikProps: FormikProps, saving: boolean, isNew: boolean) => React.Node,
+  isNew: boolean,
   persistenceErrorMsg: string,
   persistenceSuccessMsg: string,
   redirectRoute: string,
@@ -136,9 +133,8 @@ export class Edit extends React.Component<Props, State> {
   };
 
   render() {
-    const { domainRec, domainType, editPanelTitle, isNew, schema }: Props = this.props;
+    const { domainRec, editPanelTitle, form, isNew, schema }: Props = this.props;
     const { saving } = this.state;
-    const FormComp = editForms[domainType];
 
     return (
       <EditPanel>
@@ -149,7 +145,9 @@ export class Edit extends React.Component<Props, State> {
             enableReinitialize={true}
             validationSchema={schema}
             onSubmit={this.handleSubmit}
-            render={formikProps => <FormComp {...formikProps} saving={saving} isNew={isNew} />}
+            render={(formikProps: FormikProps): React.Node => {
+              return form(formikProps, saving, isNew);
+            }}
           />
         </EditPanelContent>
       </EditPanel>

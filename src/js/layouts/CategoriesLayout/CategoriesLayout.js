@@ -2,37 +2,42 @@
 
 import * as React from 'react';
 import type { Dispatch } from 'redux';
+import type { FormikProps } from 'formik';
 import { Route, Switch } from 'react-router-dom';
 import { RouteComponentProps, RouteChildrenProps } from 'react-router';
 import { connect } from 'react-redux';
 import * as categoryActions from '../../actions/categoryActions';
+import Form from './Form/Form';
 import InfoMsg from '../../components/InfoMsg/InfoMsg';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarFooter from '../../components/Sidebar/Footer/SidebarFooter';
 import SidebarHeader from '../../components/Sidebar/Header/SidebarHeader';
 import SidebarList from '../../components/Sidebar/List/SidebarList';
+import categoryDefault, { CategoryFactory, categorySort } from '../../types/category';
 import categorySchema from '../../validation/schemas/categories';
 import getDomainRec from '../../utils/domain';
+import setLayoutTitle from '../../utils/setLayoutTitle';
 import type { CategoryType } from '../../types/category';
 import type { ReduxState } from '../../types/reduxstate';
+import type { SidebarListTypes } from '../../types/sidebarList';
 import type { WithSearchProps } from '../../hoc/withSearch';
 import withSearch from '../../hoc/withSearch';
 import { ActionButton, Delete, Edit, SearchBox } from '../../components/Domain';
-import categoryDefault, { CategoryFactory, categorySort } from '../../types/category';
-import { text } from '../../components/Translation/Translation';
 import {
   ROUTE_DEL_CATEGORIES,
   ROUTE_EDIT_CATEGORY,
   ROUTE_NEW_CATEGORY,
   ROUTE_CATEGORIES,
 } from '../../constants/routes';
-import setLayoutTitle from '../../utils/setLayoutTitle';
+import { text } from '../../components/Translation/Translation';
 
 export type Props = {
   ...RouteComponentProps,
   categories: CategoryType[],
   dispatch: Dispatch,
 } & WithSearchProps;
+
+const DOMAIN_TYPE: SidebarListTypes = 'category';
 
 export class CategoriesLayout extends React.Component<Props> {
   static defaultProps = {
@@ -51,7 +56,12 @@ export class CategoriesLayout extends React.Component<Props> {
 
   renderActionsLeft = (): React.Node => {
     return (
-      <ActionButton domainType="category" title={text('CategoryAdd', 'Actions')} to={ROUTE_NEW_CATEGORY} type="add" />
+      <ActionButton
+        domainType={DOMAIN_TYPE}
+        title={text('CategoryAdd', 'Actions')}
+        to={ROUTE_NEW_CATEGORY}
+        type="add"
+      />
     );
   };
 
@@ -59,7 +69,7 @@ export class CategoriesLayout extends React.Component<Props> {
     return (
       <ActionButton
         disabled={!disabled}
-        domainType="category"
+        domainType={DOMAIN_TYPE}
         title={text('CategoryDelete', 'Actions')}
         to={ROUTE_DEL_CATEGORIES}
         type="delete"
@@ -75,7 +85,7 @@ export class CategoriesLayout extends React.Component<Props> {
         butCancelLabel={text('BackToCategories', 'Categories')}
         butDeleteLabel={text('BtnLabel', 'DeleteCategoriesLayout')}
         dispatch={this.props.dispatch}
-        domainType="category"
+        domainType={DOMAIN_TYPE}
         editPanelTitle={text('DeleteCategories', 'EditPanelHeader')}
         formHeadline={text('Headline', 'DeleteCategoriesLayout')}
         formHeadlineDeleting={text('HeadlineDeleting', 'DeleteCategoriesLayout')}
@@ -90,7 +100,7 @@ export class CategoriesLayout extends React.Component<Props> {
     const {
       match: { params },
     }: RouteChildrenProps = routerProps;
-    const { categories }: Props = this.props;
+    const { categories, dispatch }: Props = this.props;
     const domainRec = getDomainRec(categoryDefault, categories, params, 'categoryId');
 
     return (
@@ -98,11 +108,12 @@ export class CategoriesLayout extends React.Component<Props> {
         {...routerProps}
         actionAdd={categoryActions.add}
         actionUpdate={categoryActions.update}
-        dispatch={this.props.dispatch}
+        dispatch={dispatch}
         domainObjects={categories}
         domainRec={domainRec}
-        domainType="category"
+        domainType={DOMAIN_TYPE}
         editPanelTitle={text('EditCategory', 'EditPanelHeader', { CATEGORY_NAME: domainRec.getLabel() })}
+        form={this.renderForm}
         isNew={false}
         persistenceErrorMsg={text('PersistenceEditError', 'Categories')}
         persistenceSuccessMsg={text('PersistenceEdit', 'Categories')}
@@ -110,6 +121,10 @@ export class CategoriesLayout extends React.Component<Props> {
         schema={categorySchema}
       />
     );
+  };
+
+  renderForm = (formikProps: FormikProps, saving: boolean, isNew: boolean): React.Node => {
+    return <Form {...formikProps} isNew={isNew} saving={saving} />;
   };
 
   renderInfo = (routerProps: RouteChildrenProps): React.Node => {
@@ -130,8 +145,9 @@ export class CategoriesLayout extends React.Component<Props> {
         dispatch={this.props.dispatch}
         domainObjects={this.props.categories}
         domainRec={{ ...categoryDefault }}
-        domainType="category"
+        domainType={DOMAIN_TYPE}
         editPanelTitle={text('AddCategory', 'EditPanelHeader')}
+        form={this.renderForm}
         isNew
         persistenceErrorMsg={text('PersistenceNewError', 'Categories')}
         persistenceSuccessMsg={text('PersistenceNew', 'Categories')}
@@ -144,26 +160,24 @@ export class CategoriesLayout extends React.Component<Props> {
   render() {
     const { categories, dispatch, search }: Props = this.props;
     const HAS_CATGEORIES: boolean = categories.length > 0 ? true : false;
-    const leftActions: React.Node = this.renderActionsLeft();
-    const rightActions: React.Node = this.renderActionsRight(HAS_CATGEORIES);
 
     return (
       <div className="Panel">
         <Sidebar>
           <SidebarHeader
             controlsExpanded={search.visible}
-            title={text('Header-category', 'SidebarHeader')}
+            title={text('Header-' + DOMAIN_TYPE, 'SidebarHeader')}
             subtitle={text('Subheader-count', 'SidebarHeader', {
               COUNT: categories.length,
             })}
           >
-            <SearchBox domainType="category" hasSearch={HAS_CATGEORIES} search={search} />
+            <SearchBox domainType={DOMAIN_TYPE} hasSearch={HAS_CATGEORIES} search={search} />
           </SidebarHeader>
           <SidebarList
             curPage={search.page}
             dispatch={dispatch}
             items={categories}
-            listType="category"
+            listType={DOMAIN_TYPE}
             noItemsTxt={text('Categories', 'SidebarNoItems')}
             onPbChange={search.handlePageChange}
             sortOrder={categorySort}
@@ -171,7 +185,10 @@ export class CategoriesLayout extends React.Component<Props> {
             termAnywhere={search.anywhere}
             usePb
           />
-          <SidebarFooter leftActions={leftActions} rightActions={rightActions} />
+          <SidebarFooter
+            leftActions={this.renderActionsLeft()}
+            rightActions={this.renderActionsRight(HAS_CATGEORIES)}
+          />
         </Sidebar>
         <Switch>
           <Route path={ROUTE_EDIT_CATEGORY} render={routerProps => this.renderEdit(routerProps)} />

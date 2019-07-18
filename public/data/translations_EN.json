@@ -121,19 +121,19 @@
       "Headline": "Save your report as a Word file."
     },
     "EditClassesLayout": {
-      "WinTitle": "Edit class '%CLASS_NAME%'"
+      "WinTitle": "Edit class '%LABEL%'"
     },
     "EditCategoryLayout": {
-      "WinTitle": "Edit category '%CAT%'"
+      "WinTitle": "Edit category '%LABEL%'"
     },
     "EditPupilLayout": {
-      "WinTitle": "Edit pupil '%PUPIL_NAME%'"
+      "WinTitle": "Edit pupil '%LABEL%'"
     },
     "EditReportsLayout": {
-      "WinTitle": "Edit report '%REPORT_NAME%'"
+      "WinTitle": "Edit report '%LABEL%'"
     },
     "EditTextLayout": {
-      "WinTitle": "Edit text '%TEXT%'"
+      "WinTitle": "Edit text '%LABEL%'"
     },
     "EditPanelHeader": {
       "AddCategory": "Add new category",
