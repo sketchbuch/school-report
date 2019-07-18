@@ -2,10 +2,10 @@
 
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { CategoriesLayout } from './CategoriesLayout';
-import mockSearch from '../../tests/mockSearch';
 import mockRouter from '../../tests/mockRouter';
+import mockSearch from '../../tests/mockSearch';
 import type { Props } from './CategoriesLayout';
+import { CategoriesLayout } from './CategoriesLayout';
 
 describe('<CategoriesLayout />:', () => {
   const props: Props = {
@@ -60,10 +60,10 @@ describe('<CategoriesLayout />:', () => {
     const wrapper = shallow(<CategoriesLayout {...props} />);
     const instance = wrapper.instance();
 
-    test('renderDelete() returns <DeleteCategoriesLayout />', () => {
+    test('renderDelete() returns <Delete />', () => {
       const RenderDelete = instance.renderDelete;
       const comp = shallow(<RenderDelete {...mockRouter} />);
-      expect(comp.find('DeleteCategoriesLayout')).toHaveLength(1);
+      expect(comp.find('Delete')).toHaveLength(1);
     });
 
     test('renderInfo() returns <InfoMsg />', () => {

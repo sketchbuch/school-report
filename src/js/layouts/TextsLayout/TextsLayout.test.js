@@ -1,26 +1,123 @@
 // @flow
 
-import React from 'react';
-import { Provider } from 'react-redux';
+import * as React from 'react';
 import { shallow } from 'enzyme';
-import TextsLayout from './TextsLayout';
+import mockRouter from '../../tests/mockRouter';
 import mockSearch from '../../tests/mockSearch';
-import store from '../../store/redux';
+import categoryDefault from '../../types/category';
+import type { CategoryType } from '../../types/category';
 import type { Props } from './TextsLayout';
+import { TextsLayout } from './TextsLayout';
 
 describe('<TextsLayout />:', () => {
   const props: Props = {
     ...mockSearch,
     categories: [],
-    texts: [],
   };
 
   test('Renders without crashing', () => {
-    const wrapper = shallow(
-      <Provider store={store}>
-        <TextsLayout {...props} />
-      </Provider>
-    );
+    const wrapper = shallow(<TextsLayout {...props} />);
     expect(wrapper).toHaveLength(1);
+  });
+
+  describe('render():', () => {
+    const wrapper = shallow(<TextsLayout {...props} />);
+
+    test('Renders .Panel', () => {
+      expect(wrapper.find('.Panel')).toHaveLength(1);
+    });
+
+    test('Renders <Switch />', () => {
+      expect(wrapper.find('Switch')).toHaveLength(1);
+    });
+
+    describe('Sidebar:', () => {
+      const sidebar = wrapper.find('Sidebar');
+
+      test('Renders <Sidebar />', () => {
+        expect(sidebar).toHaveLength(1);
+      });
+
+      test('Renders <SidebarHeader />', () => {
+        expect(sidebar.dive().find('SidebarHeader')).toHaveLength(1);
+      });
+
+      test('Renders <SearchBox />', () => {
+        expect(
+          sidebar
+            .dive()
+            .find('SidebarHeader')
+            .dive()
+            .find('SearchBox')
+        ).toHaveLength(1);
+      });
+
+      test('Renders <SidebarList />', () => {
+        expect(sidebar.dive().find('SidebarList')).toHaveLength(1);
+      });
+
+      test('Renders <CatSelect /> if there are categories', () => {
+        expect(
+          sidebar
+            .dive()
+            .find('SidebarList')
+            .dive()
+            .find('CatSelect')
+        ).toHaveLength(0);
+
+        const categories: CategoryType[] = [{ ...categoryDefault }];
+        const wrapperCats = shallow(<TextsLayout {...props} categories={categories} />);
+        const sidebarCats = wrapperCats.find('Sidebar');
+
+        expect(
+          sidebarCats
+            .dive()
+            .find('SidebarList')
+            .dive()
+            .find('CatSelect')
+        ).toHaveLength(1);
+      });
+    });
+  });
+
+  describe('Render helpers:', () => {
+    const wrapper = shallow(<TextsLayout {...props} />);
+    const instance = wrapper.instance();
+
+    test('renderDelete() returns <Delete />', () => {
+      const RenderDelete = instance.renderDelete;
+      const comp = shallow(<RenderDelete {...mockRouter} />);
+      expect(comp.find('Delete')).toHaveLength(1);
+    });
+
+    test('renderInfo() returns <InfoMsg />', () => {
+      const RenderInfo = instance.renderInfo;
+      const comp = shallow(<RenderInfo {...mockRouter} />);
+      expect(comp.find('InfoMsg')).toHaveLength(1);
+    });
+
+    test('renderActionsLeft() returns <ActionButton />', () => {
+      const RenderActionsLeft = instance.renderActionsLeft;
+      const comp = shallow(<RenderActionsLeft />);
+      expect(comp.find('ActionButton')).toHaveLength(1);
+    });
+
+    test('renderActionsRight() returns <ActionButton />', () => {
+      const RenderActionsRight = instance.renderActionsRight;
+      const comp = shallow(<RenderActionsRight />);
+      expect(comp.find('ActionButton')).toHaveLength(1);
+    });
+
+    test('renderNew() returns <Edit />', () => {
+      const RenderNew = instance.renderNew;
+      const comp = shallow(<RenderNew {...mockRouter} />);
+      expect(comp.find('Edit')).toHaveLength(1);
+    });
+
+    test('renderEdit() returns <Edit />', () => {
+      const RenderEdit = instance.renderEdit;
+      const comp = shallow(<RenderEdit {...mockRouter} />);
+      expect(comp.find('Edit')).toHaveLength(1);
+    });
   });
 });
