@@ -21,8 +21,7 @@
     "prettier": "prettier --config .prettierrc --write '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{js,json,jsx,md}'",
     "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
-    "test:c": "react-scripts test --env=jsdom --coverage",
-    "test:cw": "react-scripts test --env=jsdom --coverage --watch",
+    "test:c": "react-scripts test --env=jsdom --coverage --watchAll=false",
     "test:v": "react-scripts test --env=jsdom --verbose",
     "test:w": "react-scripts test --env=jsdom --watch",
     "test:wv": "react-scripts test --env=jsdom --watch --verbose"
@@ -75,7 +74,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
+      "src/**/*.js"
     ]
   },
   "build": {
