@@ -7,11 +7,13 @@ import defaultFormProps from '../../../types/forms';
 import formTests from '../../formTests';
 import type { Props } from './Form';
 
-describe('CategoriesLayout <Form />', () => {
-  const values = { label: '' };
+describe('PupilsLayout <Form />', () => {
+  const values = { firstname: '', lastname: '', description: '' };
   const fieldErrors = values;
   const props: Props = {
     ...defaultFormProps(jest),
+    classId: 'id-1',
+    isSubmitting: false,
     values,
   };
 
@@ -24,12 +26,16 @@ describe('CategoriesLayout <Form />', () => {
   describe('Render:', () => {
     const wrapper = shallow(renderer());
 
-    test('Renders 2 FieldWraps', () => {
-      expect(wrapper.find('FieldWrap')).toHaveLength(2);
+    test('Renders 5 FieldWraps', () => {
+      expect(wrapper.find('FieldWrap')).toHaveLength(5);
     });
 
-    test('Renders a TextInput', () => {
-      expect(wrapper.find('TextInput')).toHaveLength(1);
+    test('Renders 3 TextInputs', () => {
+      expect(wrapper.find('TextInput')).toHaveLength(3);
+    });
+
+    test('Renders a GenderSwitch', () => {
+      expect(wrapper.find('GenderSwitch')).toHaveLength(1);
     });
   });
 });

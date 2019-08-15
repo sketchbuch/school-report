@@ -21,7 +21,8 @@ describe('<Delete />', () => {
   const props: Props = {
     ...routerProps,
     actionDeleteAll: jest.fn(),
-    butCancelLabel: 'Cancel',
+    butCancelName: 'Name',
+    butCancelNs: 'Ns',
     butDeleteLabel: 'Delete',
     dispatch: jest.fn(),
     domainType: 'catgeory',

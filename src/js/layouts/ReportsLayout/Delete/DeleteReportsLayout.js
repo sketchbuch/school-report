@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import * as reportActions from '../../../actions/reportActions';
@@ -87,13 +86,7 @@ export class DeleteReportsLayout extends Component<Props, State> {
               </Button>
             </FieldWrap>
 
-            {!this.state.deleting && (
-              <FormCancel>
-                <Link to={ROUTE_REPORTS}>
-                  <Translation name="BackToReports" ns="Reports" />
-                </Link>
-              </FormCancel>
-            )}
+            {!this.state.deleting && <FormCancel name="BackToReports" ns="Reports" to={ROUTE_REPORTS} />}
           </Form>
         </EditPanelContent>
       </EditPanel>

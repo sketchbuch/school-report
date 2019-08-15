@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import type { Dispatch } from 'redux';
-import { Link } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import EditPanel from '../../../components/EditPanel/EditPanel';
@@ -24,7 +23,8 @@ const setPageTitle = (domainType: SidebarListTypes): void => {
 export type Props = {
   ...RouteComponentProps,
   actionDeleteAll: (callback: Function) => ActionCreator,
-  butCancelLabel: string,
+  butCancelName: string,
+  butCancelNs: string,
   butDeleteLabel: string,
   dispatch: Dispatch,
   domainType: SidebarListTypes,
@@ -86,7 +86,8 @@ export class Delete extends Component<Props, State> {
 
   render() {
     const {
-      butCancelLabel,
+      butCancelName,
+      butCancelNs,
       butDeleteLabel,
       editPanelTitle,
       formHeadline,
@@ -107,11 +108,7 @@ export class Delete extends Component<Props, State> {
               </Button>
             </FieldWrap>
 
-            {!deleting && (
-              <FormCancel>
-                <Link to={redirectRoute}>{butCancelLabel}</Link>
-              </FormCancel>
-            )}
+            {!deleting && <FormCancel name={butCancelName} ns={butCancelNs} to={redirectRoute} />}
           </Form>
         </EditPanelContent>
       </EditPanel>

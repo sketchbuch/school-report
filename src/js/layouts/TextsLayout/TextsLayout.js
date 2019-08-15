@@ -93,7 +93,8 @@ export class TextsLayout extends React.Component<Props, State> {
       <Delete
         {...routerProps}
         actionDeleteAll={textActions.deleteAll}
-        butCancelLabel={text('BackToTexts', 'Texts')}
+        butCancelName="BackToTexts"
+        butCancelNs="Texts"
         butDeleteLabel={text('BtnLabel', 'DeleteTextsLayout')}
         dispatch={this.props.dispatch}
         domainType={DOMAIN_TYPE}

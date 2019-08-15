@@ -1,16 +1,34 @@
 // @flow
 
 import React from 'react';
-import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
-import store from '../../store/redux';
-import HomeLayout from './HomeLayout';
+import { HomeLayout, menuTypes } from './HomeLayout';
 
-test('<HomeLayout />: Renders without crashing', () => {
-  const wrapper = shallow(
-    <Provider store={store}>
-      <HomeLayout />
-    </Provider>
-  );
-  expect(wrapper).toHaveLength(1);
+describe('<HomeLayout />', () => {
+  const wrapper = shallow(<HomeLayout />);
+  const LEN: number = menuTypes.length;
+
+  test('Renders without crashing', () => {
+    expect(wrapper).toHaveLength(1);
+  });
+
+  test('Renders a Link for each menu option', () => {
+    expect(wrapper.find('Link')).toHaveLength(LEN);
+  });
+
+  test('Renders a ButtonCircular for each menu option', () => {
+    expect(wrapper.find('ButtonCircular')).toHaveLength(LEN);
+  });
+
+  test('Renders a Icon for each menu option', () => {
+    expect(wrapper.find('Icon')).toHaveLength(LEN);
+  });
+
+  test('Renders a title for each menu option', () => {
+    expect(wrapper.find('.HomeLayout__title')).toHaveLength(LEN);
+  });
+
+  test('Renders a description for each menu option', () => {
+    expect(wrapper.find('.HomeLayout__description')).toHaveLength(LEN);
+  });
 });

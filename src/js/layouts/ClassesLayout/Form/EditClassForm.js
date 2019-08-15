@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Button, FieldError, FieldWrap, Form, FormCancel, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import validate from '../../../validation/validation';
@@ -57,13 +56,7 @@ export class EditClassForm extends Component<Props> {
           </Button>
         </FieldWrap>
 
-        {!saving && (
-          <FormCancel>
-            <Link to={ROUTE_CLASSES}>
-              <Translation name="BackToClasses" ns="Classes" />
-            </Link>
-          </FormCancel>
-        )}
+        {!saving && <FormCancel name="BackToClasses" ns="Classes" to={ROUTE_CLASSES} />}
       </Form>
     );
   }

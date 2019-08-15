@@ -1,12 +1,12 @@
 // @flow
 
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import TextPreview from '../../../components/TextPreview/TextPreview';
 import Translation, { text } from '../../../components/Translation/Translation';
 import pupilDefault, { PupilFactory } from '../../../types/pupil';
 import type { CategoryType } from '../../../types/category';
 import type { DomainType } from '../../../types/domain';
+import type { FormProps } from '../../../types/forms';
 import type { PlaceHolderMapObject } from '../../../utils/html';
 import type { PupilType } from '../../../types/pupil';
 import type { Tab, Tag, TabView } from '../../../types/ui';
@@ -41,18 +41,8 @@ const dummyPupil: PupilType = PupilFactory(
 // TODO - fix types
 export type Props = {
   categories: CategoryType[],
-  dirty: boolean,
-  errors: Object,
-  handleBlur: Function,
-  handleChange: Function,
-  handleSubmit: Function,
   setFieldValue: Function,
-  isNew: boolean,
-  isSubmitting: boolean,
-  saving: boolean,
-  touched: Object,
-  values: Object,
-};
+} & FormProps;
 
 type State = {
   view: TabView,
@@ -149,7 +139,7 @@ export class Form extends React.Component<Props, State> {
     const { categories, dirty, errors, handleSubmit, isNew, saving, touched, values } = this.props;
     const cValid: boolean = validate('categories', errors, touched);
     const btValid: boolean = validate('bodytext', errors, touched);
-    const btnIsDisabled: boolean = !cValid || !btValid || saving || !dirty ? true : false;
+    const btnIsDisabled: boolean = !cValid || !btValid || saving || !dirty;
     const sortedCategories: DomainType[] = sortObjectsAz(categories, categorySort);
     const selCount: number = categories.filter(c => values.categories.includes(c.id)).length;
 
@@ -183,13 +173,7 @@ export class Form extends React.Component<Props, State> {
           </Button>
         </FieldWrap>
 
-        {!saving && (
-          <FormCancel>
-            <Link to={ROUTE_TEXTS}>
-              <Translation name="BackToTexts" ns={NS} />
-            </Link>
-          </FormCancel>
-        )}
+        {!saving && <FormCancel name="BackToTexts" ns={NS} to={ROUTE_TEXTS} />}
       </FormComp>
     );
   }

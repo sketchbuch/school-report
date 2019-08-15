@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import type { Dispatch } from 'redux';
-import { Link } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import * as classActions from '../../../actions/classActions';
@@ -88,13 +87,7 @@ export class DeleteClassesLayout extends Component<Props, State> {
               </Button>
             </FieldWrap>
 
-            {!this.state.deleting && (
-              <FormCancel>
-                <Link to={ROUTE_CLASSES}>
-                  <Translation name="BackToClasses" ns="Classes" />
-                </Link>
-              </FormCancel>
-            )}
+            {!this.state.deleting && <FormCancel name="BackToClasses" ns="Classes" to={ROUTE_CLASSES} />}
           </Form>
         </EditPanelContent>
       </EditPanel>

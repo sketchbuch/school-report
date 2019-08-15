@@ -1,25 +1,13 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Translation, { text } from '../../../components/Translation/Translation';
+import type { FormProps } from '../../../types/forms';
 import validate from '../../../validation/validation';
 import { Button, FieldError, FieldWrap, Form as FormComp, FormCancel, TextInput } from '../../../components/Ui';
 import { ROUTE_CATEGORIES } from '../../../constants/routes';
 
-// TODO - fix types
-export type Props = {
-  dirty: boolean,
-  errors: Object,
-  handleBlur: Function,
-  handleChange: Function,
-  handleSubmit: Function,
-  isNew: boolean,
-  isSubmitting: boolean,
-  saving: boolean,
-  touched: Object,
-  values: Object,
-};
+export type Props = FormProps;
 
 export class Form extends Component<Props> {
   static defaultProps = {
@@ -57,13 +45,7 @@ export class Form extends Component<Props> {
           </Button>
         </FieldWrap>
 
-        {!saving && (
-          <FormCancel>
-            <Link to={ROUTE_CATEGORIES}>
-              <Translation name="BackToCategories" ns="Categories" />
-            </Link>
-          </FormCancel>
-        )}
+        {!saving && <FormCancel name="BackToCategories" ns="Categories" to={ROUTE_CATEGORIES} />}
       </FormComp>
     );
   }

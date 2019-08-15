@@ -1,10 +1,11 @@
 // @flow
 
 import * as React from 'react';
-import type { SidebarListTypes } from '../../../../types/sidebarList';
 import Icon from '../../../Icon/Icon';
-import { NavButtonCircular } from '../../../Ui';
+import type { ButtonType } from '../../../../types/button';
+import type { SidebarListTypes } from '../../../../types/sidebarList';
 import { ICON_ADD, ICON_DELETE } from '../../../../constants/icons';
+import { NavButtonCircular } from '../../../Ui';
 
 export type Props = {
   disabled?: boolean,
@@ -16,13 +17,14 @@ export type Props = {
 
 const ActionButton = ({ disabled = false, domainType, title, to, type }: Props): React.Node => {
   const iconType: string = type === 'add' ? ICON_ADD : ICON_DELETE;
+  const buttonType: ButtonType = type === 'add' ? 'pos-rollover' : 'neg-rollover';
 
   return (
     <NavButtonCircular
       disabled={disabled}
       to={to}
       className="SidebarFooter__action"
-      buttontype="pos-rollover"
+      buttontype={buttonType}
       action={`${type}-${domainType}`}
       title={title}
     >

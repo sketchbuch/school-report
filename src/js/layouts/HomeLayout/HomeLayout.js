@@ -9,7 +9,7 @@ import setTitle from '../../utils/setTitle';
 import type { MenuItemType } from '../../types/menuitem';
 import './HomeLayout.css';
 
-const menuTypes: string[] = ['classes', 'texts', 'categories', 'reports', 'settings'];
+export const menuTypes: string[] = ['classes', 'texts', 'categories', 'reports', 'settings'];
 
 export type Props = {};
 

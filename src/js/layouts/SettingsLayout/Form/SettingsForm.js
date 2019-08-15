@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Button, FieldWrap, Form, FormCancel, Select as ReactSelect, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
 import type { LangType } from '../../../types/lang';
@@ -117,13 +116,7 @@ export class SettingsFrom extends Component<Props> {
           </Button>
         </FieldWrap>
 
-        {!saving && (
-          <FormCancel>
-            <Link to={ROUTE_HOME}>
-              <Translation name="Cancel" ns="Settings" />
-            </Link>
-          </FormCancel>
-        )}
+        {!saving && <FormCancel name="Cancel" ns="Settings" to={ROUTE_HOME} />}
       </Form>
     );
   }

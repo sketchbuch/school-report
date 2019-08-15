@@ -1,28 +1,26 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, FieldError, FieldWrap, Form, FormCancel, GenderSwitch, TextInput } from '../../../components/Ui';
+import {
+  Button,
+  FieldError,
+  FieldWrap,
+  Form as FormComp,
+  FormCancel,
+  GenderSwitch,
+  TextInput,
+} from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
+import type { FormProps } from '../../../types/forms';
 import validate from '../../../validation/validation';
 import { ROUTE_PUPILS } from '../../../constants/routes';
 
-// TODO - fix types
 export type Props = {
   classId: string,
-  dirty: boolean,
-  errors: Object,
-  handleBlur: Function,
-  handleChange: Function,
-  handleSubmit: Function,
-  isNew: boolean,
   isSubmitting: boolean,
-  saving: boolean,
-  touched: Object,
-  values: Object,
-};
+} & FormProps;
 
-export class EditPupilForm extends Component<Props> {
+export class Form extends Component<Props> {
   static defaultProps = {
     dirty: false,
     isNew: false,
@@ -47,13 +45,10 @@ export class EditPupilForm extends Component<Props> {
     const fnValid: boolean = validate('firstname', errors, touched);
     const lnValid: boolean = validate('lastname', errors, touched);
     const dValid: boolean = validate('description', errors, touched);
-    const btnIsDisabled: boolean =
-      saving || !fnValid || !lnValid || !dValid || values.firstname === '' || values.lastname === '' || !dirty
-        ? true
-        : false;
+    const btnIsDisabled: boolean = !fnValid || !lnValid || !dValid || saving || !dirty;
 
     return (
-      <Form onSubmit={handleSubmit}>
+      <FormComp onSubmit={handleSubmit}>
         <FieldWrap>
           <TextInput
             onChange={handleChange}
@@ -80,6 +75,7 @@ export class EditPupilForm extends Component<Props> {
           <GenderSwitch
             large={true}
             onChange={handleChange}
+            classId
             onBlur={handleBlur}
             value={values.gender}
             name="gender"
@@ -108,16 +104,10 @@ export class EditPupilForm extends Component<Props> {
           </Button>
         </FieldWrap>
 
-        {!saving && (
-          <FormCancel>
-            <Link to={ROUTE_PUPILS.replace(':classId', classId)}>
-              <Translation name="BackToPupils" ns="Pupils" />
-            </Link>
-          </FormCancel>
-        )}
-      </Form>
+        {!saving && <FormCancel name="BackToPupils" ns="Pupils" to={ROUTE_PUPILS.replace(':classId', classId)} />}
+      </FormComp>
     );
   }
 }
 
-export default EditPupilForm;
+export default Form;
