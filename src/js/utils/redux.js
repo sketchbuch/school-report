@@ -74,12 +74,8 @@ const bcMap: { [key: string]: BreadcrumbMapObj } = {
   },
 };
 
-/**
- * Returns an array of objects with text and a link for use in a breadcrumb trail.
- */
-
 // TODO - fix types
-export function getBreadcrumbs(state: ReduxState, props: BreadcrumbProps): Breadcrumb[] {
+export const getBreadcrumbs = (state: ReduxState, props: BreadcrumbProps): Breadcrumb[] => {
   let activeElements: Breadcrumb[] = [];
 
   props.path.split('-').forEach(ele => {
@@ -109,20 +105,17 @@ export function getBreadcrumbs(state: ReduxState, props: BreadcrumbProps): Bread
   });
 
   return activeElements;
-}
+};
 
-/**
- * Returns the link for the breadcrumb element with path params replaced.
- */
-function getBreadcrumbLink(path: string, matchParams: Object) {
+const getBreadcrumbLink = (path: string, matchParams: Object) => {
   Object.keys(matchParams).forEach(param => {
     path = path.replace(`:${param}`, matchParams[param]);
   });
 
   return path;
-}
+};
 
-function getBreadcrumb(stateSlice: DomainType[], objId: string): DomainType | null {
+const getBreadcrumb = (stateSlice: DomainType[], objId: string): DomainType | null => {
   if (objId) {
     const neededObj = stateSlice.find((obj: DomainType) => obj.id === objId);
     if (neededObj !== undefined) {
@@ -131,39 +124,36 @@ function getBreadcrumb(stateSlice: DomainType[], objId: string): DomainType | nu
   }
 
   return null;
-}
+};
 
-// TODO - use one function
-export function getActiveClass(classes: ClassType[], classId: string): ClassType | Object {
+// TODO - use one const
+export const getActiveClass = (classes: ClassType[], classId: string): ClassType | Object => {
   return getItemById(classes, classId);
-}
+};
 
-export function getActivePupil(pupils: PupilType[], pupilId: string): PupilType | Object {
+export const getActivePupil = (pupils: PupilType[], pupilId: string): PupilType | Object => {
   return getItemById(pupils, pupilId);
-}
+};
 
-export function getActiveText(texts: TextType[], textId: string): TextType | Object {
+export const getActiveText = (texts: TextType[], textId: string): TextType | Object => {
   return getItemById(texts, textId);
-}
+};
 
-export function getActiveReport(reports: ReportType[], reportId: string): ReportType | Object {
+export const getActiveReport = (reports: ReportType[], reportId: string): ReportType | Object => {
   return getItemById(reports, reportId);
-}
+};
 
-export function getActiveCategory(categories: CategoryType[], categoryId: string): CategoryType | Object {
+export const getActiveCategory = (categories: CategoryType[], categoryId: string): CategoryType | Object => {
   return getItemById(categories, categoryId);
-}
+};
 
-export function getClassPupils(pupils: PupilType[], classId: string): PupilType[] {
+export const getClassPupils = (pupils: PupilType[], classId: string): PupilType[] => {
   if (classId !== '') {
     return pupils.filter((p: PupilType) => p.classId === classId);
   }
   return [];
-}
+};
 
-/**
- * Returns an array of text IDs that have been selected by a pupil.
- */
 // TODO - fix type
 export const getSelectedTexts = (
   builderData: Object,

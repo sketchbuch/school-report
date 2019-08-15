@@ -5,25 +5,15 @@ import { text } from '../components/Translation/Translation';
 
 export const CLASS_LABEL_MAX = 20;
 
-/**
-* Validation scheme for a class.
-
-* @return object
-*/
-export function classSchema(): Object {
+export const classSchema = (): Object => {
   return Yup.object().shape({
     label: Yup.string()
       .trim()
       .required(text('ClassLabel', 'Validation')),
   });
-}
+};
 
-/**
-* Validation scheme for a pupil.
-
-* @return object
-*/
-export function pupilSchema(): Object {
+export const pupilSchema = (): Object => {
   return Yup.object().shape({
     description: Yup.string().trim(),
     firstname: Yup.string()
@@ -33,14 +23,9 @@ export function pupilSchema(): Object {
       .trim()
       .required(text('PupilLastname', 'Validation')),
   });
-}
+};
 
-/**
-* Validation scheme for a text.
-
-* @return object
-*/
-export function textSchema(): Object {
+export const textSchema = (): Object => {
   return Yup.object().shape({
     bodytext: Yup.string()
       .trim()
@@ -49,37 +34,22 @@ export function textSchema(): Object {
       .of(Yup.string())
       .min(0),
   });
-}
+};
 
-/**
-* Validation scheme for a class with a prefix.
-
-* @return object
-*/
-export function prefixedClassSchema(): Object {
+export const prefixedClassSchema = (): Object => {
   return Yup.object().shape({
     class: classSchema(),
   });
-}
+};
 
-/**
-* Validation scheme for a pupil with a prefix.
-
-* @return object
-*/
-export function prefixedPupilSchema(): Object {
+export const prefixedPupilSchema = (): Object => {
   return Yup.object().shape({
     pupil: pupilSchema(),
   });
-}
+};
 
-/**
-* Validation scheme for a text with a prefix.
-
-* @return object
-*/
-export function prefixedTextSchema(): Object {
+export const prefixedTextSchema = (): Object => {
   return Yup.object().shape({
     text: textSchema(),
   });
-}
+};

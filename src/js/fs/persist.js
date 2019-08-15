@@ -7,16 +7,13 @@ import { writeAppData } from '../fs/fs';
 
 const persisters = {};
 
-/**
- * Wrapper for writeAppData for saving app json files.
- */
-export default function persist(
+const persist = (
   dispatch: Function,
   getState: Function,
   callback: Function,
   content: Array<string>,
   immediate: boolean = false
-) {
+): void => {
   let persistFiles = [];
 
   content.forEach(filePath => {
@@ -57,4 +54,6 @@ export default function persist(
   }
 
   persisters[PERSIST_TYPE](callback);
-}
+};
+
+export default persist;

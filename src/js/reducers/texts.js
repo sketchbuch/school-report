@@ -14,11 +14,7 @@ import { hydrateText } from '../types/text';
 import type { TextType } from '../types/text';
 import type { ActionObj } from '../types/action';
 
-/**
- * Texts Reducer.
- */
-
-export default function reducer(state: TextType[] = [], action: ActionObj): TextType[] {
+const reducer = (state: TextType[] = [], action: ActionObj): TextType[] => {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_DATA:
@@ -52,4 +48,6 @@ export default function reducer(state: TextType[] = [], action: ActionObj): Text
   }
 
   return state;
-}
+};
+
+export default reducer;

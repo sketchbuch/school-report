@@ -6,7 +6,7 @@ import type { ActionObj } from '../types/action';
 type BuilderType = {};
 const builderDefault = {};
 
-export default function reducer(state: BuilderType = builderDefault, action: ActionObj): BuilderType {
+const reducer = (state: BuilderType = builderDefault, action: ActionObj): BuilderType => {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_BUILDER:
@@ -72,4 +72,6 @@ export default function reducer(state: BuilderType = builderDefault, action: Act
   }
 
   return state;
-}
+};
+
+export default reducer;

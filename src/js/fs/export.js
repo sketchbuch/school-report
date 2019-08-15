@@ -2,10 +2,11 @@
 
 import JSZip from 'jszip';
 import Docxtemplater from 'docxtemplater';
-import { getPupilTextHtml } from '../utils/html';
-import type { ExportType } from '../types/export';
+import type { ExportContent, ExportType } from '../types/export';
 import type { SidebarBuilderItemType } from '../types/sidebarBuilderItem';
 import type { TextType } from '../types/text';
+import { exportContentDefault } from '../types/export';
+import { getPupilTextHtml } from '../utils/html';
 import { text } from '../components/Translation/Translation';
 
 let electron = null;
@@ -22,10 +23,7 @@ const APP_PATH = electron !== null ? electron.remote.app.getAppPath() : '';
 const HOME_PATH = electron !== null ? electron.remote.app.getPath('home') : '';
 const FOLDER = window.location.hostname === 'localhost' ? 'public' : 'build';
 
-/**
- * Saves a report as a word file.
- */
-export function exportWord(exportConfig: ExportType, callback: Function) {
+export const exportWord = (exportConfig: ExportType, callback: Function): void => {
   const filePath = `${APP_PATH}/${FOLDER}/data/template.docx`;
   const content = fs.readFileSync(filePath, 'binary');
   const zip = new JSZip(content);
@@ -60,15 +58,9 @@ export function exportWord(exportConfig: ExportType, callback: Function) {
       errorObj: error,
     });
   }
-}
+};
 
-/**
- * Returns the export date.
- *
- * @param {integer} ts The timestamp to get the formated date for.
- * @param {string} The Formated date.
- */
-export function getDateFromTs(ts: number): string {
+export const getDateFromTs = (ts: number): string => {
   const exportDate = new Date(ts);
   const exportDateYyyy = exportDate.getFullYear();
   let exportDateDd = exportDate.getDate();
@@ -86,21 +78,18 @@ export function getDateFromTs(ts: number): string {
     M: exportDateMm,
     Y: exportDateYyyy,
   });
-}
+};
 
 /**
  * Returns the content - a list of pupils and associated texts.
- *
- * @param {array} items The array of classes, as create for the edit builder layout sidebar.
- * @param {object} builderData The builder data.
- * @param {array} ittextsems The texts.
- * @param {object} content an object containing content data including an array of pupils and their selected texts.
  */
-export function getContent(items: Array<SidebarBuilderItemType>, builderData: Object, texts: Array<TextType>) {
-  const content = {
-    classCount: 0,
-    content: [],
-    pupilCount: 0,
+export const getContent = (
+  items: Array<SidebarBuilderItemType>,
+  builderData: Object,
+  texts: Array<TextType>
+): ExportContent => {
+  const content: ExportContent = {
+    ...exportContentDefault,
   };
 
   items.forEach(function(item) {
@@ -140,4 +129,4 @@ export function getContent(items: Array<SidebarBuilderItemType>, builderData: Ob
   });
 
   return content;
-}
+};

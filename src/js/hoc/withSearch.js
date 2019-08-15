@@ -35,10 +35,10 @@ export const defaultState: State = {
   visible: false,
 };
 
-function withSearch<PassedProps: {}>(
+const withSearch = <PassedProps: {}>(
   WrappedComponent: React.AbstractComponent<PassedProps>,
   alwaysVisible: boolean = false
-): React.AbstractComponent<$Diff<PassedProps, WithSearchPropsDiff>> {
+): React.AbstractComponent<$Diff<PassedProps, WithSearchPropsDiff>> => {
   class WithSearch extends React.Component<PassedProps, State> {
     props: $Diff<PassedProps, WithSearchPropsDiff>;
     state: State = { ...defaultState };
@@ -113,6 +113,6 @@ function withSearch<PassedProps: {}>(
   WithSearch.displayName = getDisplayName('WithSearch', WrappedComponent);
 
   return WithSearch;
-}
+};
 
 export default withSearch;

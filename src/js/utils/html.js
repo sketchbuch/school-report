@@ -19,11 +19,11 @@ export const placeholderMap: PlaceHolderMapObject[] = [
   { symbol: 'PP', function: 'getPronoun' },
 ];
 
-export function getPupilTextHtml(
+export const getPupilTextHtml = (
   text: string,
   pupil: PupilType | Object,
   highlight: boolean = true
-): InsertDangerousHtmlObj {
+): InsertDangerousHtmlObj => {
   const highlightStart: string = highlight ? '<strong>' : '';
   const highlightEnd: string = highlight ? '</strong>' : '';
   let newText: string = text;
@@ -54,4 +54,4 @@ export function getPupilTextHtml(
   });
 
   return { __html: newText };
-}
+};

@@ -1,6 +1,6 @@
 // @flow
 
-export function getCustomNumProp(prop: string, styleObj?: Object): number {
+export const getCustomNumProp = (prop: string, styleObj?: Object): number => {
   let val = 0;
 
   if (styleObj === undefined) {
@@ -10,4 +10,4 @@ export function getCustomNumProp(prop: string, styleObj?: Object): number {
   }
 
   return parseInt(val, 10);
-}
+};

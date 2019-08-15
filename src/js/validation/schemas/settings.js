@@ -2,13 +2,10 @@
 
 import Yup from 'yup';
 
-/**
-* Validation scheme for a class.
-
-* @return object
-*/
-export default function settingsSchema(): Object {
+const settingsSchema = (): Object => {
   return Yup.object().shape({
     language: Yup.string().required(),
   });
-}
+};
+
+export default settingsSchema;

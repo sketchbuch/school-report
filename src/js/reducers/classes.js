@@ -14,7 +14,7 @@ import { hydrateClass } from '../types/class';
 import type { ClassType } from '../types/class';
 import type { ActionObj } from '../types/action';
 
-export default function reducer(state: ClassType[] = [], action: ActionObj): ClassType[] {
+const reducer = (state: ClassType[] = [], action: ActionObj): ClassType[] => {
   switch (action.type) {
     case DATA_LOADED:
     case REPLACE_CLASSES:
@@ -48,4 +48,6 @@ export default function reducer(state: ClassType[] = [], action: ActionObj): Cla
   }
 
   return state;
-}
+};
+
+export default reducer;

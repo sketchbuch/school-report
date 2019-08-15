@@ -7,7 +7,7 @@ import { readLangFile } from '../fs/fs';
 
 export const change = (langKey: string, callback?: Function): ActionCreator => {
   return (dispatch, getState) => {
-    function langReady() {
+    const langReady = (): void => {
       window.reportr.curLang = langKey;
 
       dispatch({
@@ -18,7 +18,7 @@ export const change = (langKey: string, callback?: Function): ActionCreator => {
       if (callback) {
         callback();
       }
-    }
+    };
 
     if (window.reportr.translations[langKey] === undefined) {
       dispatch(

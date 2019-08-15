@@ -16,17 +16,7 @@ const DATA_PATH: string = electron !== null ? electron.remote.app.getPath('userD
 const FOLDER: string = window.location.hostname === 'localhost' ? 'public' : 'build';
 const DATA_FOLDER: string = `${DATA_PATH}${io.DATA_FOLDER}`;
 
-/**
- * Loads a file async. from the filesystem. callback receives a results object: {
- *   success: boolean ,
- *   errorObj: object | null,
- *   data: object,
- * }
- *
- * @param string fileName The full path to the file that should be loaded.
- * @param function callback The function to call with the results of the load attempt.
- */
-function readFile(filePath: string, callback: Function) {
+const readFile = (filePath: string, callback: Function): void => {
   fs.readFile(filePath, 'UTF-8', (err?: any, data?: string = '') => {
     callback({
       success: !err,
@@ -34,68 +24,36 @@ function readFile(filePath: string, callback: Function) {
       data: data ? JSON.parse(data) : {},
     });
   });
-}
+};
 
-/**
- * Returns the full filepath for a language file stored in the app installation folder.
- *
- * @param string lang The key of the language to load.
- */
-function getLanguagePath(lang: string): string {
+const getLanguagePath = (lang: string): string => {
   return `${APP_PATH}/${FOLDER}/data/translations_${lang}.${io.FILE_TYPE}`;
-}
+};
 
-/**
- * Returns the full filepath for a data file stored in the app config folder (OS dependent).
- *
- * @param string filePath The path for the file including filename.
- */
-function getDataPath(filePath: string): string {
+const getDataPath = (filePath: string): string => {
   return `${DATA_PATH}${io.DATA_FOLDER}${filePath.trim()}.${io.FILE_TYPE}`;
-}
+};
 
-/**
- * Wrapper that calls readFile to load a data file.
- *
- * @param string fileName The name of the file to load or a complete file path.
- * @param function callback The function to call with the results of the load attempt.
- */
-export function readDataFile(fileName: string, callback: Function) {
+export const readDataFile = (fileName: string, callback: Function): void => {
   readFile(getDataPath(fileName), callback);
-}
+};
 
-/**
- * Wrapper that calls readFile to load a language file.
- *
- * @param string lang The key of the language to load.
- * @param function callback The function to call with the results of the load attempt.
- */
-export function readLangFile(lang: string, callback: Function) {
+export const readLangFile = (lang: string, callback: Function): void => {
   readFile(getLanguagePath(lang), callback);
-}
+};
 
-export function dataFolderExists(): boolean {
+export const dataFolderExists = (): boolean => {
   return fs.existsSync(DATA_FOLDER);
-}
+};
 
-export function createDataFolder() {
+export const createDataFolder = (): void => {
   try {
     fs.mkdirSync(DATA_FOLDER);
   } catch (err) {}
-}
+};
 
-/**
- * Loads multiple app data files async. from the filesystem. callback receives a results object: {
- *   success: boolean ,
- *   errorObj: object | null,
- *   data: string,
- * }
- *
- * @param array fileNames An array of file names (without extension) to load.
- * @param function callback The function to call with the results of the load attempt.
- */
-export function readAppData(fileNames: Array<string>, callback: Function) {
-  let files = fileNames.map(filePath => {
+export const readAppData = (fileNames: Array<string>, callback: Function): void => {
+  let files: Array<Promise<{| data: string, path: string |}>> = fileNames.map((filePath: string) => {
     return new Promise((resolve, reject) => {
       const FILE_PATH = getDataPath(filePath);
 
@@ -142,19 +100,10 @@ export function readAppData(fileNames: Array<string>, callback: Function) {
         data: '',
       });
     });
-}
+};
 
-/**
- * Writes multiple app data files async. based on DATA_PATHS. callback receives a results object: {
- *   success: boolean ,
- *   errorObj: object | null,
- * }
- *
- * @param object content An object with string content, keyed by file name: { Classes: "{"classes":[]}" }
- * @param function callback The function to call with the results of the save attempt.
- */
-export function writeAppData(content: Object, callback: Function) {
-  let files = Object.keys(content).map(function(fileName, index) {
+export const writeAppData = (content: Object, callback: Function): void => {
+  let files: Array<Promise<string>> = Object.keys(content).map((fileName: string, index: number) => {
     return new Promise((resolve, reject) => {
       const FILE_PATH = getDataPath(fileName);
 
@@ -181,4 +130,4 @@ export function writeAppData(content: Object, callback: Function) {
         errorObj: err,
       });
     });
-}
+};

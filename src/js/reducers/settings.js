@@ -4,7 +4,7 @@ import settingsDefault from '../types/settings';
 import type { SettingsType } from '../types/settings';
 import { REPLACE_DATA, SETTINGS_LOADED, UPDATE_SETTINGS } from '../constants/actionTypes';
 
-export default function reducer(state: SettingsType = settingsDefault, action: Object): SettingsType {
+const reducer = (state: SettingsType = settingsDefault, action: Object): SettingsType => {
   switch (action.type) {
     case REPLACE_DATA:
     case UPDATE_SETTINGS:
@@ -19,4 +19,6 @@ export default function reducer(state: SettingsType = settingsDefault, action: O
   }
 
   return state;
-}
+};
+
+export default reducer;

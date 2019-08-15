@@ -3,12 +3,7 @@
 import Yup from 'yup';
 import { text } from '../../components/Translation/Translation';
 
-/**
-* Validation scheme for a report.
-
-* @return object
-*/
-export default function reportSchema(): Object {
+const reportSchema = (): Object => {
   return Yup.object().shape({
     label: Yup.string()
       .trim()
@@ -18,4 +13,6 @@ export default function reportSchema(): Object {
       .min(1, text('ReportClasses', 'Validation')),
     maxChars: Yup.number().integer(text('ReportMaxChars', 'Validation')),
   });
-}
+};
+
+export default reportSchema;

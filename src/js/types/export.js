@@ -12,21 +12,29 @@ type ClassEle = {
   pupils: PupilEle[],
 };
 
-export type ExportType = {
+export type ExportContent = {
   classCount: number,
   content: ClassEle[],
+  pupilCount: number,
+};
+
+export type ExportType = {
+  ...ExportContent,
   exported: string,
   name: string,
-  pupilCount: number,
   reportName: string,
 };
 
-const exportDefault: ExportType = {
-  classCount: -1,
+export const exportContentDefault: ExportContent = {
+  classCount: 0,
   content: [],
+  pupilCount: 0,
+};
+
+const exportDefault: ExportType = {
+  ...exportContentDefault,
   exported: '',
   name: '',
-  pupilCount: -1,
   reportName: '',
 };
 
