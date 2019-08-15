@@ -5,6 +5,6 @@ export type LangType = {
   label: string,
 };
 
-export type TranslationPaceholders = {
-  [key: string]: string,
+export type TranslationPaceholders = ?{
+  [key: string]: string | number,
 };

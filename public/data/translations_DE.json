@@ -84,33 +84,33 @@
       "UpdateClassBtnLabel": "DE - Update Class",
       "WinTitle": "DE - Classes"
     },
-    "DeleteCategoriesLayout": {
+    "DeleteCategoryLayout": {
       "BtnLabel": "DE - Delete all categories",
       "Headline": "DE - Are you sure you want to delete ALL categories?",
       "HeadlineDeleting": "DE - Deleting ALL categories",
       "WinTitle": "DE - Delete all categories"
     },
-    "DeleteClassesLayout": {
+    "DeleteClassLayout": {
       "BtnLabel": "DE - Delete all classes",
       "Headline": "DE - Are you sure you want to delete ALL classes?",
       "HeadlineDeleting": "DE - Deleting ALL classes",
       "WinTitle": "DE - Delete all classes"
     },
-    "DeletePupilsLayout": {
+    "DeletePupilLayout": {
       "Back": "DE - Back to pupils list",
       "BtnLabel": "DE - Delete all pupils",
       "Headline": "DE - Are you sure you want to delete ALL pupils from '%CLASS_NAME%'?",
       "HeadlineDeleting": "DE - Deleting ALL pupils",
       "WinTitle": "DE - Delete all pupils from '%CLASS_NAME%'"
     },
-    "DeleteReportsLayout": {
+    "DeleteReportLayout": {
       "Back": "DE - Back to reports list",
       "BtnLabel": "DE - Delete all reports",
       "Headline": "DE - Are you sure you want to delete ALL reports?",
       "HeadlineDeleting": "DE - Deleting ALL reports",
       "WinTitle": "DE - Delete all reports"
     },
-    "DeleteTextsLayout": {
+    "DeleteTextLayout": {
       "Back": "DE - Back to texts list",
       "BtnLabel": "DE - Delete all texts",
       "Headline": "DE - Are you sure you want to delete ALL texts?",
@@ -120,20 +120,20 @@
     "ExportBuilderForm": {
       "Headline": "DE - Save your report as a Word file."
     },
-    "EditClassesLayout": {
-      "WinTitle": "DE - Edit class '%LABEL%'"
+    "EditClassLayout": {
+      "WinTitle": "DE - Edit class '%CLASS%'"
     },
     "EditCategoryLayout": {
-      "WinTitle": "DE - Edit category '%LABEL%'"
+      "WinTitle": "DE - Edit category '%CATEGORY%'"
     },
     "EditPupilLayout": {
-      "WinTitle": "DE - Edit pupil '%LABEL%'"
+      "WinTitle": "DE - Edit pupil '%PUPIL%'"
     },
-    "EditReportsLayout": {
-      "WinTitle": "DE - Edit report '%LABEL%'"
+    "EditReportLayout": {
+      "WinTitle": "DE - Edit report '%REPORT%'"
     },
     "EditTextLayout": {
-      "WinTitle": "DE - Edit text '%LABEL%'"
+      "WinTitle": "DE - Edit text '%TEXT%'"
     },
     "EditPanelHeader": {
       "AddCategory": "DE - Add new category",
@@ -147,9 +147,9 @@
       "DeletePupils": "DE - Delete pupils",
       "DeleteReports": "DE - Delete reports",
       "DeleteTexts": "DE - Delete texts",
-      "EditCategory": "DE - Edit '%CATEGORY_NAME%'",
-      "EditClass": "DE - Edit '%CLASS_NAME%'",
-      "EditPupil": "DE - Edit '%PUPIL_NAME%'",
+      "EditCategory": "DE - Edit '%CATEGORY%'",
+      "EditClass": "DE - Edit '%CLASS%'",
+      "EditPupil": "DE - Edit '%PUPIL%'",
       "EditReport": "DE - Edit '%REPORT_NAME%'",
       "EditText": "DE - Edit '%TEXT%'",
       "ReportBuilder": "DE - Report for '%PUPIL_NAME%'",
@@ -191,20 +191,23 @@
       "BuilderNoTexts": "DE - You haven't created any texts",
       "BuilderNoTextsMsg": "DE - Before you can create a report you will first need to create at least one text",
       "Categories": "DE - Manage categories to organise and group your report texts",
-      "CategoriesMsg": "",
+      "CategoriesMsg": "DE - ",
       "Classes": "DE - Manage classes and pupils for use in your reports",
       "ClassesMsg": "DE - Select a class to view/edit its pupils",
       "Pupils": "DE - Manage pupils in %CLASS_NAME%",
-      "PupilsMsg": "",
+      "PupilsMsg": "DE - ",
       "Reports": "DE - Manage your reports",
-      "ReportsMsg": "",
+      "ReportsMsg": "DE - ",
       "ReportsNoneSel": "DE - No texts selected",
       "ReportsNoneSelMsg": "DE - Texts will appear after you select them from the list of available texts",
       "Texts": "DE - Manage your report texts",
-      "TextsMsg": ""
+      "TextsMsg": "DE - "
     },
     "ItemList": {
-      "NoItems": "DE - No items matched your search",
+      "NoItems": "DE - No %NAME% begin with your search term",
+      "NoItemsAnywhere": "DE - No %NAME% contain your search term",
+      "NoSelected": "DE - No %NAME% are selected",
+      "NoUnselected": "DE - All %NAME% are selected",
       "None": "DE - No %NAME% exist"
     },
     "ItemSelection": {
@@ -271,7 +274,7 @@
     "PupilForm": {
       "AddBtnLabel": "DE - Add Pupil",
       "FirstnamePlaceholder": "DE - First name...",
-      "DescriptionPlaceholder": "DE - Optional description...",
+      "DescriptionPlaceholder": "DE - Optional descriItemSelectionption...",
       "LastnamePlaceholder": "DE - Last name..."
     },
     "ReportPanel": {
@@ -279,7 +282,8 @@
     },
     "ReportsAvailableTexts": {
       "None": "DE - No texts available.",
-      "NoneSearched": "DE - No texts begin with your search term."
+      "NoneSearched": "DE - No texts begin with your search term.",
+      "NoneSearchedAnywhere": "DE - No texts contain your search term."
     },
     "Reports": {
       "BackToReports": "DE - Cancel",
@@ -360,18 +364,29 @@
       "Add": "DE - +",
       "Delete": "DE - -"
     },
+    "Tabs": {
+      "TabAll": "DE - All",
+      "TabEdit": "DE - Edit",
+      "TabPreview": "DE - Preview",
+      "TabSelected": "DE - Selected",
+      "TabUnselected": "DE - Unselected"
+    },
+    "TextPreview": {
+      "NoText": "DE - No text to preview"
+    },
     "Texts": {
       "BackToTexts": "DE - Cancel",
       "BodytextPlaceholder": "DE - Enter a text to be used in the report...",
       "Breadcrumb": "DE - Texts",
       "CreateTextBtnLabel": "DE - Create Text",
-      "PersistenceDeleted": "DE - All texts deleted",
       "PersistenceDeleteError": "DE - Unable to delete texts",
+      "PersistenceDeleted": "DE - All texts deleted",
       "PersistenceEdit": "DE - Text updated",
       "PersistenceEditError": "DE - Unable to save changes to text",
       "PersistenceNew": "DE - New text created",
       "PersistenceNewError": "DE - Unable to create new text",
       "ReportCategories": "DE - Text categories (%SELECTED%/%TOTAL%):",
+      "TextLabel": "DE - Text:",
       "UpdateTextBtnLabel": "DE - Update Text",
       "WinTitle": "DE - Texts"
     },

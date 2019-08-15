@@ -1,14 +1,15 @@
 // @flow
 
 import { Component } from 'react';
+import type { TranslationPaceholders } from '../../types/lang';
 
 type Props = {
   name: string,
   ns: string,
-  placeholders: ?Object,
+  placeholders: TranslationPaceholders,
 };
 
-export const text = (name: string, ns: string, placeholders: ?Object): string => {
+export const text = (name: string, ns: string, placeholders: TranslationPaceholders): string => {
   const { translations, curLang } = window.reportr;
 
   if (translations !== undefined) {

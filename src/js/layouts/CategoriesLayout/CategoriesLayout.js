@@ -20,6 +20,7 @@ import setLayoutTitle from '../../utils/setLayoutTitle';
 import type { CategoryType } from '../../types/category';
 import type { ReduxState } from '../../types/reduxstate';
 import type { SidebarListTypes } from '../../types/sidebarList';
+import type { TranslationPaceholders } from '../../types/lang';
 import type { WithSearchProps } from '../../hoc/withSearch';
 import withSearch from '../../hoc/withSearch';
 import { ActionButton, Delete, Edit, SearchBox } from '../../components/Domain';
@@ -84,12 +85,12 @@ export class CategoriesLayout extends React.Component<Props> {
         actionDeleteAll={categoryActions.deleteAll}
         butCancelName="BackToCategories"
         butCancelNs="Categories"
-        butDeleteLabel={text('BtnLabel', 'DeleteCategoriesLayout')}
+        butDeleteLabel={text('BtnLabel', 'DeleteCategoryLayout')}
         dispatch={this.props.dispatch}
         domainType={DOMAIN_TYPE}
         editPanelTitle={text('DeleteCategories', 'EditPanelHeader')}
-        formHeadline={text('Headline', 'DeleteCategoriesLayout')}
-        formHeadlineDeleting={text('HeadlineDeleting', 'DeleteCategoriesLayout')}
+        formHeadline={text('Headline', 'DeleteCategoryLayout')}
+        formHeadlineDeleting={text('HeadlineDeleting', 'DeleteCategoryLayout')}
         persistenceErrorMsg={text('PersistenceError', 'Categories')}
         persistenceSuccessMsg={text('PersistenceDeleted', 'Categories')}
         redirectRoute={ROUTE_CATEGORIES}
@@ -103,6 +104,7 @@ export class CategoriesLayout extends React.Component<Props> {
     }: RouteChildrenProps = routerProps;
     const { categories, dispatch }: Props = this.props;
     const domainRec = getDomainRec(categoryDefault, categories, params, 'categoryId');
+    const placeholders: TranslationPaceholders = { CATEGORY: domainRec.getLabel() };
 
     return (
       <Edit
@@ -113,13 +115,14 @@ export class CategoriesLayout extends React.Component<Props> {
         domainObjects={categories}
         domainRec={domainRec}
         domainType={DOMAIN_TYPE}
-        editPanelTitle={text('EditCategory', 'EditPanelHeader', { CATEGORY_NAME: domainRec.getLabel() })}
+        editPanelTitle={text('EditCategory', 'EditPanelHeader', placeholders)}
         form={this.renderForm}
         isNew={false}
         persistenceErrorMsg={text('PersistenceEditError', 'Categories')}
         persistenceSuccessMsg={text('PersistenceEdit', 'Categories')}
         redirectRoute={ROUTE_CATEGORIES}
         schema={categorySchema}
+        winTitlePlaceholders={placeholders}
       />
     );
   };

@@ -1,26 +1,15 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Button, FieldError, FieldWrap, Form, FormCancel, TextInput } from '../../../components/Ui';
 import Translation, { text } from '../../../components/Translation/Translation';
+import type { FormProps } from '../../../types/forms';
 import validate from '../../../validation/validation';
+import { Button, FieldError, FieldWrap, Form as FormComp, FormCancel, TextInput } from '../../../components/Ui';
 import { ROUTE_CLASSES } from '../../../constants/routes';
 
-// TODO - fix types
-type Props = {
-  dirty: boolean,
-  errors: Object,
-  handleBlur: Function,
-  handleChange: Function,
-  handleSubmit: Function,
-  isNew: boolean,
-  isSubmitting: boolean,
-  saving: boolean,
-  touched: Object,
-  values: Object,
-};
+export type Props = FormProps;
 
-export class EditClassForm extends Component<Props> {
+export class Form extends Component<Props> {
   static defaultProps = {
     dirty: false,
     isNew: false,
@@ -31,10 +20,10 @@ export class EditClassForm extends Component<Props> {
   render() {
     const { dirty, errors, handleBlur, handleChange, handleSubmit, isNew, saving, touched, values } = this.props;
     const clValid: boolean = validate('label', errors, touched);
-    const btnIsDisabled: boolean = !clValid || values.label === '' || saving || !dirty ? true : false;
+    const btnIsDisabled: boolean = !clValid || saving || !dirty;
 
     return (
-      <Form onSubmit={handleSubmit}>
+      <FormComp onSubmit={handleSubmit}>
         <FieldWrap>
           <TextInput
             onChange={handleChange}
@@ -57,9 +46,9 @@ export class EditClassForm extends Component<Props> {
         </FieldWrap>
 
         {!saving && <FormCancel name="BackToClasses" ns="Classes" to={ROUTE_CLASSES} />}
-      </Form>
+      </FormComp>
     );
   }
 }
 
-export default EditClassForm;
+export default Form;

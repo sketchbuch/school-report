@@ -20,6 +20,7 @@ import type { ClassType } from '../../types/class';
 import type { PupilSortOptions, PupilType } from '../../types/pupil';
 import type { ReduxState } from '../../types/reduxstate';
 import type { SidebarListTypes } from '../../types/sidebarList';
+import type { TranslationPaceholders } from '../../types/lang';
 import type { WithSearchProps } from '../../hoc/withSearch';
 import withSearch from '../../hoc/withSearch';
 import { ActionButton, Delete, Edit, SearchBox } from '../../components/Domain';
@@ -68,6 +69,7 @@ export class PupilsLayout extends React.Component<Props> {
         domainType={DOMAIN_TYPE}
         title={text('PupilAdd', 'Actions')}
         to={ROUTE_NEW_PUPIL.replace(':classId', this.props.match.params.classId)}
+        type="add"
       />
     );
   };
@@ -85,21 +87,24 @@ export class PupilsLayout extends React.Component<Props> {
   };
 
   renderDelete = (routerProps: RouteChildrenProps): React.Node => {
+    const classLabel: string = getClassLabel(this.props);
+
     return (
       <Delete
         {...routerProps}
         actionDeleteAll={pupilActions.deletePupils}
         butCancelName="BackToPupils"
         butCancelNs="Pupils"
-        butDeleteLabel={text('BtnLabel', 'DeletePupilsLayout')}
+        butDeleteLabel={text('BtnLabel', 'DeletePupilLayout')}
         dispatch={this.props.dispatch}
         domainType={DOMAIN_TYPE}
-        editPanelTitle={text('DeletePupils', 'EditPanelHeader')}
-        formHeadline={text('Headline', 'DeletePupilsLayout')}
-        formHeadlineDeleting={text('HeadlineDeleting', 'DeletePupilsLayout')}
+        editPanelTitle={text('DeletePupils', 'EditPanelHeader', { CLASS_NAME: classLabel })}
+        formHeadline={text('Headline', 'DeletePupilLayout', { CLASS_NAME: classLabel })}
+        formHeadlineDeleting={text('HeadlineDeleting', 'DeletePupilLayout')}
         persistenceErrorMsg={text('PersistenceError', 'Pupils')}
         persistenceSuccessMsg={text('PersistenceDeleted', 'Pupils')}
-        redirectRoute={ROUTE_PUPILS}
+        redirectRoute={ROUTE_PUPILS.replace(':classId', this.props.match.params.classId)}
+        winTitlePlaceholders={{ CLASS_NAME: classLabel }}
       />
     );
   };
@@ -110,6 +115,7 @@ export class PupilsLayout extends React.Component<Props> {
     }: RouteChildrenProps = routerProps;
     const { pupils, dispatch }: Props = this.props;
     const domainRec = getDomainRec(pupilDefault, pupils, params, 'pupilId');
+    const placeholders: TranslationPaceholders = { PUPIL: domainRec.getLabel() };
 
     return (
       <Edit
@@ -120,13 +126,14 @@ export class PupilsLayout extends React.Component<Props> {
         domainObjects={pupils}
         domainRec={domainRec}
         domainType={DOMAIN_TYPE}
-        editPanelTitle={text('EditPupil', 'EditPanelHeader', { PUPIL_NAME: domainRec.getLabel() })}
+        editPanelTitle={text('EditPupil', 'EditPanelHeader', placeholders)}
         form={this.renderForm}
         isNew={false}
         persistenceErrorMsg={text('PersistenceEditError', 'Pupils')}
         persistenceSuccessMsg={text('PersistenceEdit', 'Pupils')}
-        redirectRoute={ROUTE_PUPILS}
+        redirectRoute={ROUTE_PUPILS.replace(':classId', this.props.match.params.classId)}
         schema={pupilSchema}
+        winTitlePlaceholders={placeholders}
       />
     );
   };

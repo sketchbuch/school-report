@@ -22,6 +22,7 @@ import type { ReduxState } from '../../types/reduxstate';
 import type { SelectOption } from '../../types/ui';
 import type { SidebarListTypes } from '../../types/sidebarList';
 import type { TextType } from '../../types/text';
+import type { TranslationPaceholders } from '../../types/lang';
 import type { WithSearchProps } from '../../hoc/withSearch';
 import withSearch from '../../hoc/withSearch';
 import { ActionButton, Delete, Edit, SearchBox } from '../../components/Domain';
@@ -95,12 +96,12 @@ export class TextsLayout extends React.Component<Props, State> {
         actionDeleteAll={textActions.deleteAll}
         butCancelName="BackToTexts"
         butCancelNs="Texts"
-        butDeleteLabel={text('BtnLabel', 'DeleteTextsLayout')}
+        butDeleteLabel={text('BtnLabel', 'DeleteTextLayout')}
         dispatch={this.props.dispatch}
         domainType={DOMAIN_TYPE}
         editPanelTitle={text('DeleteTexts', 'EditPanelHeader')}
-        formHeadline={text('Headline', 'DeleteTextsLayout')}
-        formHeadlineDeleting={text('HeadlineDeleting', 'DeleteTextsLayout')}
+        formHeadline={text('Headline', 'DeleteTextLayout')}
+        formHeadlineDeleting={text('HeadlineDeleting', 'DeleteTextLayout')}
         persistenceErrorMsg={text('PersistenceError', 'Texts')}
         persistenceSuccessMsg={text('PersistenceDeleted', 'Texts')}
         redirectRoute={ROUTE_TEXTS}
@@ -114,6 +115,7 @@ export class TextsLayout extends React.Component<Props, State> {
     }: RouteChildrenProps = routerProps;
     const { dispatch, texts }: Props = this.props;
     const domainRec = getDomainRec(textDefault, texts, params, 'textId');
+    const placeholders: TranslationPaceholders = { TEXT: domainRec.getLabel() };
 
     return (
       <Edit
@@ -124,13 +126,14 @@ export class TextsLayout extends React.Component<Props, State> {
         domainObjects={texts}
         domainRec={domainRec}
         domainType={DOMAIN_TYPE}
-        editPanelTitle={text('EditText', 'EditPanelHeader', { TEXT: domainRec.getLabel() })}
+        editPanelTitle={text('EditText', 'EditPanelHeader', placeholders)}
         form={this.renderForm}
         isNew={false}
         persistenceErrorMsg={text('PersistenceEditError', 'Texts')}
         persistenceSuccessMsg={text('PersistenceEdit', 'Texts')}
         redirectRoute={ROUTE_TEXTS}
         schema={textSchema}
+        winTitlePlaceholders={placeholders}
       />
     );
   };

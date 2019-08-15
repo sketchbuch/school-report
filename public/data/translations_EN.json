@@ -84,33 +84,33 @@
       "UpdateClassBtnLabel": "Update Class",
       "WinTitle": "Classes"
     },
-    "DeleteCategoriesLayout": {
+    "DeleteCategoryLayout": {
       "BtnLabel": "Delete all categories",
       "Headline": "Are you sure you want to delete ALL categories?",
       "HeadlineDeleting": "Deleting ALL categories",
       "WinTitle": "Delete all categories"
     },
-    "DeleteClassesLayout": {
+    "DeleteClassLayout": {
       "BtnLabel": "Delete all classes",
       "Headline": "Are you sure you want to delete ALL classes?",
       "HeadlineDeleting": "Deleting ALL classes",
       "WinTitle": "Delete all classes"
     },
-    "DeletePupilsLayout": {
+    "DeletePupilLayout": {
       "Back": "Back to pupils list",
       "BtnLabel": "Delete all pupils",
       "Headline": "Are you sure you want to delete ALL pupils from '%CLASS_NAME%'?",
       "HeadlineDeleting": "Deleting ALL pupils",
       "WinTitle": "Delete all pupils from '%CLASS_NAME%'"
     },
-    "DeleteReportsLayout": {
+    "DeleteReportLayout": {
       "Back": "Back to reports list",
       "BtnLabel": "Delete all reports",
       "Headline": "Are you sure you want to delete ALL reports?",
       "HeadlineDeleting": "Deleting ALL reports",
       "WinTitle": "Delete all reports"
     },
-    "DeleteTextsLayout": {
+    "DeleteTextLayout": {
       "Back": "Back to texts list",
       "BtnLabel": "Delete all texts",
       "Headline": "Are you sure you want to delete ALL texts?",
@@ -120,20 +120,20 @@
     "ExportBuilderForm": {
       "Headline": "Save your report as a Word file."
     },
-    "EditClassesLayout": {
-      "WinTitle": "Edit class '%LABEL%'"
+    "EditClassLayout": {
+      "WinTitle": "Edit class '%CLASS%'"
     },
     "EditCategoryLayout": {
-      "WinTitle": "Edit category '%LABEL%'"
+      "WinTitle": "Edit category '%CATEGORY%'"
     },
     "EditPupilLayout": {
-      "WinTitle": "Edit pupil '%LABEL%'"
+      "WinTitle": "Edit pupil '%PUPIL%'"
     },
-    "EditReportsLayout": {
-      "WinTitle": "Edit report '%LABEL%'"
+    "EditReportLayout": {
+      "WinTitle": "Edit report '%REPORT%'"
     },
     "EditTextLayout": {
-      "WinTitle": "Edit text '%LABEL%'"
+      "WinTitle": "Edit text '%TEXT%'"
     },
     "EditPanelHeader": {
       "AddCategory": "Add new category",
@@ -147,9 +147,9 @@
       "DeletePupils": "Delete pupils",
       "DeleteReports": "Delete reports",
       "DeleteTexts": "Delete texts",
-      "EditCategory": "Edit '%CATEGORY_NAME%'",
-      "EditClass": "Edit '%CLASS_NAME%'",
-      "EditPupil": "Edit '%PUPIL_NAME%'",
+      "EditCategory": "Edit '%CATEGORY%'",
+      "EditClass": "Edit '%CLASS%'",
+      "EditPupil": "Edit '%PUPIL%'",
       "EditReport": "Edit '%REPORT_NAME%'",
       "EditText": "Edit '%TEXT%'",
       "ReportBuilder": "Report for '%PUPIL_NAME%'",

@@ -19,14 +19,13 @@ import type { TranslationPaceholders } from '../../../types/lang';
 import { text } from '../../Translation/Translation';
 import { ucFirst } from '../../../utils/strings';
 
-const setPageTitle = (isNew: boolean, domainRec: DomainType, domainType: SidebarListTypes): void => {
+const setPageTitle = (
+  isNew: boolean,
+  domainType: SidebarListTypes,
+  placeholders?: TranslationPaceholders = {}
+): void => {
   const NS_TYPE: string = ucFirst(domainType);
   const NS_PREFIX: string = isNew ? 'New' : 'Edit';
-  let placeholders: TranslationPaceholders = isNew
-    ? {}
-    : {
-        LABEL: domainRec.getLabel(),
-      };
 
   setTitle(text('WinTitle', `${NS_PREFIX}${NS_TYPE}Layout`, placeholders));
 };
@@ -47,6 +46,7 @@ export type Props = {
   persistenceSuccessMsg: string,
   redirectRoute: string,
   schema: any | (() => any),
+  winTitlePlaceholders?: TranslationPaceholders,
 };
 
 type State = {
@@ -70,7 +70,7 @@ export class Edit extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    setPageTitle(this.props.isNew, this.props.domainRec, this.props.domainType);
+    setPageTitle(this.props.isNew, this.props.domainType, this.props.winTitlePlaceholders);
   }
 
   componentDidUpdate() {
@@ -78,16 +78,16 @@ export class Edit extends React.Component<Props, State> {
       actionAdd,
       actionUpdate,
       dispatch,
-      domainRec,
       domainType,
       history,
       isNew,
       persistenceErrorMsg,
       redirectRoute,
+      winTitlePlaceholders,
     } = this.props;
     const { domain, error, saving } = this.state;
 
-    setPageTitle(isNew, domainRec, domainType);
+    setPageTitle(isNew, domainType, winTitlePlaceholders);
 
     if (error) {
       toastr.error(text('PersistenceError', 'Toastr'), persistenceErrorMsg);

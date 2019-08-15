@@ -10,14 +10,15 @@ import EditPanelHeader from '../../../components/EditPanel/Header/EditPanelHeade
 import setTitle from '../../../utils/setTitle';
 import type { ActionCreator } from '../../../types/action';
 import type { FsObject } from '../../../types/fsObject';
+import type { TranslationPaceholders } from '../../../types/lang';
 import type { SidebarListTypes } from '../../../types/sidebarList';
 import { Button, FormHeader, FieldWrap, Form, FormCancel } from '../../../components/Ui';
 import { text } from '../../Translation/Translation';
 import { ucFirst } from '../../../utils/strings';
 
-const setPageTitle = (domainType: SidebarListTypes): void => {
+const setPageTitle = (domainType: SidebarListTypes, placeholders?: TranslationPaceholders = {}): void => {
   const NS_TYPE: string = ucFirst(domainType);
-  setTitle(text('WinTitle', `Delete${NS_TYPE}Layout`));
+  setTitle(text('WinTitle', `Delete${NS_TYPE}Layout`, placeholders));
 };
 
 export type Props = {
@@ -34,6 +35,7 @@ export type Props = {
   persistenceErrorMsg: string,
   persistenceSuccessMsg: string,
   redirectRoute: string,
+  winTitlePlaceholders?: TranslationPaceholders,
 };
 
 type State = {
@@ -49,14 +51,22 @@ export class Delete extends Component<Props, State> {
   };
 
   componentDidMount() {
-    setPageTitle(this.props.domainType);
+    setPageTitle(this.props.domainType, this.props.winTitlePlaceholders);
   }
 
   componentDidUpdate(prevProps: Props, prevState: State) {
-    const { actionDeleteAll, dispatch, domainType, history, persistenceErrorMsg, redirectRoute } = this.props;
+    const {
+      actionDeleteAll,
+      dispatch,
+      domainType,
+      history,
+      persistenceErrorMsg,
+      redirectRoute,
+      winTitlePlaceholders,
+    } = this.props;
     const { deleting, error } = this.state;
 
-    setPageTitle(domainType);
+    setPageTitle(domainType, winTitlePlaceholders);
 
     if (error) {
       toastr.error(text('PersistenceError', 'Toastr'), persistenceErrorMsg);
