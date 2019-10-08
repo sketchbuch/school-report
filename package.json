@@ -32,7 +32,6 @@
     "prettier": "prettier --config .prettierrc --write '{,!(.vscode|build|coverage|dist|docs|flow-typed)/**/}*.{js,json,jsx,md}'",
     "start": "react-scripts start",
     "test": "jest",
-    "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "yarn-audit": "yarn audit --json | yarn-audit-html --output audit-report.html"
   },
