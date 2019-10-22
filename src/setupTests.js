@@ -2,8 +2,6 @@ import 'jest-localstorage-mock';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-console.log('####### setup');
-
 configure({ adapter: new Adapter() });
 
 window.reportr = {
