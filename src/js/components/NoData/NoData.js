@@ -36,7 +36,7 @@ type State = {
   text: TextType,
 };
 
-type ValuesObject = {
+export type ValuesObject = {
   class: ClassType,
   pupil: PupilType,
   text: TextType,
@@ -79,40 +79,46 @@ export class NoData extends Component<Props, State> {
   }
 
   handleSubmit = (values: ValuesObject): void => {
-    values.text.lang = this.props.curLang;
+    switch (this.state.step) {
+      case 'class':
+        const newClass = ClassFactory(values.class, Date.now());
 
-    const newText = TextFactory(values.text, Date.now(), this.props.curLang);
+        this.setState({
+          step: 'pupil',
+          class: newClass,
+        });
+        break;
 
-    this.setState({
-      saving: true,
-      step: 'save',
-      text: newText,
-    });
-  };
+      case 'pupil':
+        const newPupil = PupilFactory(values.pupil, Date.now(), this.state.class.id);
 
-  handleClick = (values: ValuesObject): void => {
-    if (this.state.step === 'pupil') {
-      const newPupil = PupilFactory(values.pupil, Date.now(), this.state.class.id);
+        this.setState({
+          step: 'text',
+          pupil: newPupil,
+        });
+        break;
 
-      this.setState({
-        step: 'text',
-        pupil: newPupil,
-      });
-    } else {
-      // Class
-      const newClass = ClassFactory(values.class, Date.now());
+      case 'text':
+        values.text.lang = this.props.curLang;
 
-      this.setState({
-        step: 'pupil',
-        class: newClass,
-      });
+        const newText = TextFactory(values.text, Date.now(), this.props.curLang);
+
+        this.setState({
+          saving: true,
+          step: 'save',
+          text: newText,
+        });
+        break;
+
+      default:
+        console.log(`<NoData /> handleSubmit() unknown step: ${this.state.step}`);
+        break;
     }
   };
 
   dataSaved = (ioResult: FsObject): void => {
     if (ioResult.success === true) {
       toastr.success(text('DataPersisted', 'NoData'));
-      //this.props.history.push(ROUTE_CLASSES);
     } else {
       this.setState({ error: true });
     }
@@ -130,7 +136,7 @@ export class NoData extends Component<Props, State> {
             enableReinitialize={false}
             validationSchema={prefixedTextSchema}
             onSubmit={this.handleSubmit}
-            render={formikProps => <TextForm {...formikProps} handleClick={this.handleClick} busy={busy} />}
+            render={formikProps => <TextForm {...formikProps} busy={busy} />}
           />
         );
 
@@ -141,7 +147,7 @@ export class NoData extends Component<Props, State> {
             enableReinitialize={false}
             validationSchema={prefixedPupilSchema}
             onSubmit={this.handleSubmit}
-            render={formikProps => <PupilForm {...formikProps} handleClick={this.handleClick} />}
+            render={formikProps => <PupilForm {...formikProps} />}
           />
         );
 
@@ -153,7 +159,7 @@ export class NoData extends Component<Props, State> {
             enableReinitialize={false}
             validationSchema={prefixedClassSchema}
             onSubmit={this.handleSubmit}
-            render={formikProps => <ClassForm {...formikProps} handleClick={this.handleClick} />}
+            render={formikProps => <ClassForm {...formikProps} />}
           />
         );
     }

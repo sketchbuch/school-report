@@ -1,20 +1,21 @@
 // @flow
 
 import React, { Component } from 'react';
-import { Button, FieldError, FieldWrap, Form, FormHeader, TextInput } from '../../Ui';
 import Translation, { text } from '../../Translation/Translation';
+import type { FormikErrors, FormikTouched } from 'formik';
+import type { ValuesObject } from '../NoData';
 import validate from '../../../validation/validation';
+import { Button, FieldError, FieldWrap, Form, FormHeader, TextInput } from '../../Ui';
 
 // TODO - fix types
 type Props = {
-  errors: Object,
+  errors: ValuesObject,
   handleBlur: Function,
   handleChange: Function,
-  handleClick: Function,
   handleSubmit: Function,
   isSubmitting: boolean,
-  touched: Object,
-  values: Object,
+  touched: FormikErrors<ValuesObject>,
+  values: FormikTouched<ValuesObject>,
 };
 
 export class ClassForm extends Component<Props> {
@@ -40,7 +41,7 @@ export class ClassForm extends Component<Props> {
           {!clValid && <FieldError errors={[errors.class.label]} />}
         </FieldWrap>
         <FieldWrap>
-          <Button type="button" disabled={btnIsDisabled} onClick={() => this.props.handleClick(values)}>
+          <Button type="submit" disabled={btnIsDisabled}>
             <Translation name="CreateClassBtnLabel" ns="Classes" />
           </Button>
         </FieldWrap>
