@@ -48,12 +48,7 @@ const textTarget = {
       return;
     }
 
-    const undecoratedComponent = component.getDecoratedComponentInstance();
-    if (!undecoratedComponent) {
-      return;
-    }
-
-    const hoverBoundingRect = undecoratedComponent.ele.getBoundingClientRect();
+    const hoverBoundingRect = component.ele.getBoundingClientRect();
     const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
     const hoverClientY = monitor.getClientOffset().y - hoverBoundingRect.top;
 
