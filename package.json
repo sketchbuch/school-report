@@ -40,7 +40,7 @@
     "docxtemplater": "^3.14.1",
     "electron-is-dev": "^1.1.0",
     "electron-storage": "^1.0.7",
-    "formik": "^1.5.8",
+    "formik": "^2.1.4",
     "jszip": "^3.2.2",
     "jszip-utils": "0.0.2",
     "md5": "^2.2.1",
