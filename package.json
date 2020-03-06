@@ -65,7 +65,7 @@
     "electron": "^5.0.9",
     "electron-builder": "^20.44.4",
     "electron-devtools-installer": "^2.2.4",
-    "enzyme": "^3.10.0",
+    "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-flowtype": "^3.13.0",
