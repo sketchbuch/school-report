@@ -80,7 +80,7 @@
     "stylelint": "^10.1.0",
     "stylelint-config-recommended": "^2.2.0",
     "wait-on": "^3.3.0",
-    "yarn-audit-html": "^1.1.0"
+    "yarn-audit-html": "^1.2.2"
   },
   "jest": {
     "collectCoverageFrom": [
