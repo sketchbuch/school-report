@@ -42,7 +42,7 @@
     "electron-storage": "^1.0.7",
     "formik": "^1.5.8",
     "jszip": "^3.2.2",
-    "jszip-utils": "0.0.2",
+    "jszip-utils": "0.1.0",
     "md5": "^2.2.1",
     "react": "^16.9.0",
     "react-dnd": "^7.7.0",
