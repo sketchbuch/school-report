@@ -78,7 +78,7 @@
     "prettier": "^1.18.2",
     "redux-mock-store": "^1.5.3",
     "stylelint": "^10.1.0",
-    "stylelint-config-recommended": "^2.2.0",
+    "stylelint-config-recommended": "^3.0.0",
     "wait-on": "^3.3.0",
     "yarn-audit-html": "^1.1.0"
   },
