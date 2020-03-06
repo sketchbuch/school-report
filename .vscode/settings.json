@@ -5,5 +5,8 @@
   "javascript.updateImportsOnFileMove.enabled": "always",
   "prettier.printWidth": 120,
   "prettier.trailingComma": "es5",
-  "eslint.autoFixOnSave": true
+  "eslint.autoFixOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
