@@ -44,7 +44,7 @@
     "jszip": "^3.2.2",
     "jszip-utils": "0.0.2",
     "md5": "^2.2.1",
-    "react": "^16.9.0",
+    "react": "^16.13.1",
     "react-dnd": "^7.7.0",
     "react-dnd-html5-backend": "^7.7.0",
     "react-dom": "^16.9.0",
